@@ -169,7 +169,8 @@ void RideObject::Load()
             // RCT2 calculates num_vertical_frames and num_horizontal_frames and overwrites these properties on the vehicle
             // entry. Immediately afterwards, the two were multiplied in order to calculate base_num_frames and were never used
             // again. This has been changed to use the calculation results directly - num_vertical_frames and
-            // num_horizontal_frames are no longer set on the vehicle entry. 0x6DE946
+            // num_horizontal_frames are no longer set on the vehicle entry.
+            // 0x6DE946
             vehicleEntry->base_num_frames
                 = CalculateNumVerticalFrames(vehicleEntry) * CalculateNumHorizontalFrames(vehicleEntry);
             vehicleEntry->base_image_id = cur_vehicle_images_offset;
@@ -628,18 +629,20 @@ void RideObject::ReadJson(IReadObjectContext* context, const json_t* root)
 
     _legacyType.flags |= ObjectJsonHelpers::GetFlags<uint32_t>(
         properties,
-        { { "noInversions", RIDE_ENTRY_FLAG_NO_INVERSIONS },
-          { "noBanking", RIDE_ENTRY_FLAG_NO_BANKED_TRACK },
-          { "playDepartSound", RIDE_ENTRY_FLAG_PLAY_DEPART_SOUND },
-          { "RIDE_ENTRY_FLAG_7", RIDE_ENTRY_FLAG_7 },
-          { "playSplashSound", RIDE_ENTRY_FLAG_PLAY_SPLASH_SOUND },
-          { "playSplashSoundSlide", RIDE_ENTRY_FLAG_PLAY_SPLASH_SOUND_SLIDE },
-          { "hasShelter", RIDE_ENTRY_FLAG_COVERED_RIDE },
-          { "limitAirTimeBonus", RIDE_ENTRY_FLAG_LIMIT_AIRTIME_BONUS },
-          { "disableBreakdown", RIDE_ENTRY_FLAG_CANNOT_BREAK_DOWN },
-          { "RIDE_ENTRY_FLAG_16", RIDE_ENTRY_FLAG_16 },
-          { "RIDE_ENTRY_FLAG_18", RIDE_ENTRY_FLAG_18 },
-          { "disablePainting", RIDE_ENTRY_FLAG_DISABLE_COLOUR_TAB } });
+        {
+            { "noInversions", RIDE_ENTRY_FLAG_NO_INVERSIONS },
+            { "noBanking", RIDE_ENTRY_FLAG_NO_BANKED_TRACK },
+            { "playDepartSound", RIDE_ENTRY_FLAG_PLAY_DEPART_SOUND },
+            { "RIDE_ENTRY_FLAG_7", RIDE_ENTRY_FLAG_7 },
+            { "playSplashSound", RIDE_ENTRY_FLAG_PLAY_SPLASH_SOUND },
+            { "playSplashSoundSlide", RIDE_ENTRY_FLAG_PLAY_SPLASH_SOUND_SLIDE },
+            { "hasShelter", RIDE_ENTRY_FLAG_COVERED_RIDE },
+            { "limitAirTimeBonus", RIDE_ENTRY_FLAG_LIMIT_AIRTIME_BONUS },
+            { "disableBreakdown", RIDE_ENTRY_FLAG_CANNOT_BREAK_DOWN },
+            { "RIDE_ENTRY_FLAG_16", RIDE_ENTRY_FLAG_16 },
+            { "RIDE_ENTRY_FLAG_18", RIDE_ENTRY_FLAG_18 },
+            { "disablePainting", RIDE_ENTRY_FLAG_DISABLE_COLOUR_TAB },
+        });
 
     ObjectJsonHelpers::LoadStrings(root, GetStringTable());
     ObjectJsonHelpers::LoadImages(context, root, GetImageTable());
@@ -806,56 +809,60 @@ rct_ride_entry_vehicle RideObject::ReadJsonCar(const json_t* jCar)
     auto jFrames = json_object_get(jCar, "frames");
     car.sprite_flags = ObjectJsonHelpers::GetFlags<uint16_t>(
         jFrames,
-        { { "flat", VEHICLE_SPRITE_FLAG_FLAT },
-          { "gentleSlopes", VEHICLE_SPRITE_FLAG_GENTLE_SLOPES },
-          { "steepSlopes", VEHICLE_SPRITE_FLAG_STEEP_SLOPES },
-          { "verticalSlopes", VEHICLE_SPRITE_FLAG_VERTICAL_SLOPES },
-          { "diagonalSlopes", VEHICLE_SPRITE_FLAG_DIAGONAL_SLOPES },
-          { "flatBanked", VEHICLE_SPRITE_FLAG_FLAT_BANKED },
-          { "inlineTwists", VEHICLE_SPRITE_FLAG_INLINE_TWISTS },
-          { "flatToGentleSlopeBankedTransitions", VEHICLE_SPRITE_FLAG_FLAT_TO_GENTLE_SLOPE_BANKED_TRANSITIONS },
-          { "diagonalGentleSlopeBankedTransitions", VEHICLE_SPRITE_FLAG_DIAGONAL_GENTLE_SLOPE_BANKED_TRANSITIONS },
-          { "gentleSlopeBankedTransitions", VEHICLE_SPRITE_FLAG_GENTLE_SLOPE_BANKED_TRANSITIONS },
-          { "gentleSlopeBankedTurns", VEHICLE_SPRITE_FLAG_GENTLE_SLOPE_BANKED_TURNS },
-          { "flatToGentleSlopeWhileBankedTransitions", VEHICLE_SPRITE_FLAG_FLAT_TO_GENTLE_SLOPE_WHILE_BANKED_TRANSITIONS },
-          { "corkscrews", VEHICLE_SPRITE_FLAG_CORKSCREWS },
-          { "restraintAnimation", VEHICLE_SPRITE_FLAG_RESTRAINT_ANIMATION },
-          { "curvedLiftHill", VEHICLE_SPRITE_FLAG_CURVED_LIFT_HILL },
-          { "VEHICLE_SPRITE_FLAG_15", VEHICLE_SPRITE_FLAG_15 } });
+        {
+            { "flat", VEHICLE_SPRITE_FLAG_FLAT },
+            { "gentleSlopes", VEHICLE_SPRITE_FLAG_GENTLE_SLOPES },
+            { "steepSlopes", VEHICLE_SPRITE_FLAG_STEEP_SLOPES },
+            { "verticalSlopes", VEHICLE_SPRITE_FLAG_VERTICAL_SLOPES },
+            { "diagonalSlopes", VEHICLE_SPRITE_FLAG_DIAGONAL_SLOPES },
+            { "flatBanked", VEHICLE_SPRITE_FLAG_FLAT_BANKED },
+            { "inlineTwists", VEHICLE_SPRITE_FLAG_INLINE_TWISTS },
+            { "flatToGentleSlopeBankedTransitions", VEHICLE_SPRITE_FLAG_FLAT_TO_GENTLE_SLOPE_BANKED_TRANSITIONS },
+            { "diagonalGentleSlopeBankedTransitions", VEHICLE_SPRITE_FLAG_DIAGONAL_GENTLE_SLOPE_BANKED_TRANSITIONS },
+            { "gentleSlopeBankedTransitions", VEHICLE_SPRITE_FLAG_GENTLE_SLOPE_BANKED_TRANSITIONS },
+            { "gentleSlopeBankedTurns", VEHICLE_SPRITE_FLAG_GENTLE_SLOPE_BANKED_TURNS },
+            { "flatToGentleSlopeWhileBankedTransitions", VEHICLE_SPRITE_FLAG_FLAT_TO_GENTLE_SLOPE_WHILE_BANKED_TRANSITIONS },
+            { "corkscrews", VEHICLE_SPRITE_FLAG_CORKSCREWS },
+            { "restraintAnimation", VEHICLE_SPRITE_FLAG_RESTRAINT_ANIMATION },
+            { "curvedLiftHill", VEHICLE_SPRITE_FLAG_CURVED_LIFT_HILL },
+            { "VEHICLE_SPRITE_FLAG_15", VEHICLE_SPRITE_FLAG_15 },
+        });
 
     car.flags |= ObjectJsonHelpers::GetFlags<uint32_t>(
         jCar,
-        { { "VEHICLE_ENTRY_FLAG_POWERED_RIDE_UNRESTRICTED_GRAVITY", VEHICLE_ENTRY_FLAG_POWERED_RIDE_UNRESTRICTED_GRAVITY },
-          { "VEHICLE_ENTRY_FLAG_NO_UPSTOP_WHEELS", VEHICLE_ENTRY_FLAG_NO_UPSTOP_WHEELS },
-          { "VEHICLE_ENTRY_FLAG_NO_UPSTOP_BOBSLEIGH", VEHICLE_ENTRY_FLAG_NO_UPSTOP_BOBSLEIGH },
-          { "VEHICLE_ENTRY_FLAG_MINI_GOLF", VEHICLE_ENTRY_FLAG_MINI_GOLF },
-          { "VEHICLE_ENTRY_FLAG_4", VEHICLE_ENTRY_FLAG_4 },
-          { "VEHICLE_ENTRY_FLAG_5", VEHICLE_ENTRY_FLAG_5 },
-          { "VEHICLE_ENTRY_FLAG_HAS_INVERTED_SPRITE_SET", VEHICLE_ENTRY_FLAG_HAS_INVERTED_SPRITE_SET },
-          { "VEHICLE_ENTRY_FLAG_DODGEM_INUSE_LIGHTS", VEHICLE_ENTRY_FLAG_DODGEM_INUSE_LIGHTS },
-          { "VEHICLE_ENTRY_FLAG_ALLOW_DOORS_DEPRECATED", VEHICLE_ENTRY_FLAG_ALLOW_DOORS_DEPRECATED },
-          { "VEHICLE_ENTRY_FLAG_ENABLE_ADDITIONAL_COLOUR_2", VEHICLE_ENTRY_FLAG_ENABLE_ADDITIONAL_COLOUR_2 },
-          { "VEHICLE_ENTRY_FLAG_10", VEHICLE_ENTRY_FLAG_10 },
-          { "VEHICLE_ENTRY_FLAG_11", VEHICLE_ENTRY_FLAG_11 },
-          { "VEHICLE_ENTRY_FLAG_OVERRIDE_NUM_VERTICAL_FRAMES", VEHICLE_ENTRY_FLAG_OVERRIDE_NUM_VERTICAL_FRAMES },
-          { "VEHICLE_ENTRY_FLAG_13", VEHICLE_ENTRY_FLAG_13 },
-          { "VEHICLE_ENTRY_FLAG_SPINNING_ADDITIONAL_FRAMES", VEHICLE_ENTRY_FLAG_SPINNING_ADDITIONAL_FRAMES },
-          { "VEHICLE_ENTRY_FLAG_15", VEHICLE_ENTRY_FLAG_15 },
-          { "VEHICLE_ENTRY_FLAG_ENABLE_ADDITIONAL_COLOUR_1", VEHICLE_ENTRY_FLAG_ENABLE_ADDITIONAL_COLOUR_1 },
-          { "VEHICLE_ENTRY_FLAG_SWINGING", VEHICLE_ENTRY_FLAG_SWINGING },
-          { "VEHICLE_ENTRY_FLAG_SPINNING", VEHICLE_ENTRY_FLAG_SPINNING },
-          { "VEHICLE_ENTRY_FLAG_POWERED", VEHICLE_ENTRY_FLAG_POWERED },
-          { "VEHICLE_ENTRY_FLAG_RIDERS_SCREAM", VEHICLE_ENTRY_FLAG_RIDERS_SCREAM },
-          { "VEHICLE_ENTRY_FLAG_21", VEHICLE_ENTRY_FLAG_21 },
-          { "VEHICLE_ENTRY_FLAG_BOAT_HIRE_COLLISION_DETECTION", VEHICLE_ENTRY_FLAG_BOAT_HIRE_COLLISION_DETECTION },
-          { "VEHICLE_ENTRY_FLAG_VEHICLE_ANIMATION", VEHICLE_ENTRY_FLAG_VEHICLE_ANIMATION },
-          { "VEHICLE_ENTRY_FLAG_RIDER_ANIMATION", VEHICLE_ENTRY_FLAG_RIDER_ANIMATION },
-          { "VEHICLE_ENTRY_FLAG_25", VEHICLE_ENTRY_FLAG_25 },
-          { "VEHICLE_ENTRY_FLAG_SLIDE_SWING", VEHICLE_ENTRY_FLAG_SLIDE_SWING },
-          { "VEHICLE_ENTRY_FLAG_CHAIRLIFT", VEHICLE_ENTRY_FLAG_CHAIRLIFT },
-          { "VEHICLE_ENTRY_FLAG_WATER_RIDE", VEHICLE_ENTRY_FLAG_WATER_RIDE },
-          { "VEHICLE_ENTRY_FLAG_GO_KART", VEHICLE_ENTRY_FLAG_GO_KART },
-          { "VEHICLE_ENTRY_FLAG_DODGEM_CAR_PLACEMENT", VEHICLE_ENTRY_FLAG_DODGEM_CAR_PLACEMENT } });
+        {
+            { "VEHICLE_ENTRY_FLAG_POWERED_RIDE_UNRESTRICTED_GRAVITY", VEHICLE_ENTRY_FLAG_POWERED_RIDE_UNRESTRICTED_GRAVITY },
+            { "VEHICLE_ENTRY_FLAG_NO_UPSTOP_WHEELS", VEHICLE_ENTRY_FLAG_NO_UPSTOP_WHEELS },
+            { "VEHICLE_ENTRY_FLAG_NO_UPSTOP_BOBSLEIGH", VEHICLE_ENTRY_FLAG_NO_UPSTOP_BOBSLEIGH },
+            { "VEHICLE_ENTRY_FLAG_MINI_GOLF", VEHICLE_ENTRY_FLAG_MINI_GOLF },
+            { "VEHICLE_ENTRY_FLAG_4", VEHICLE_ENTRY_FLAG_4 },
+            { "VEHICLE_ENTRY_FLAG_5", VEHICLE_ENTRY_FLAG_5 },
+            { "VEHICLE_ENTRY_FLAG_HAS_INVERTED_SPRITE_SET", VEHICLE_ENTRY_FLAG_HAS_INVERTED_SPRITE_SET },
+            { "VEHICLE_ENTRY_FLAG_DODGEM_INUSE_LIGHTS", VEHICLE_ENTRY_FLAG_DODGEM_INUSE_LIGHTS },
+            { "VEHICLE_ENTRY_FLAG_ALLOW_DOORS_DEPRECATED", VEHICLE_ENTRY_FLAG_ALLOW_DOORS_DEPRECATED },
+            { "VEHICLE_ENTRY_FLAG_ENABLE_ADDITIONAL_COLOUR_2", VEHICLE_ENTRY_FLAG_ENABLE_ADDITIONAL_COLOUR_2 },
+            { "VEHICLE_ENTRY_FLAG_10", VEHICLE_ENTRY_FLAG_10 },
+            { "VEHICLE_ENTRY_FLAG_11", VEHICLE_ENTRY_FLAG_11 },
+            { "VEHICLE_ENTRY_FLAG_OVERRIDE_NUM_VERTICAL_FRAMES", VEHICLE_ENTRY_FLAG_OVERRIDE_NUM_VERTICAL_FRAMES },
+            { "VEHICLE_ENTRY_FLAG_13", VEHICLE_ENTRY_FLAG_13 },
+            { "VEHICLE_ENTRY_FLAG_SPINNING_ADDITIONAL_FRAMES", VEHICLE_ENTRY_FLAG_SPINNING_ADDITIONAL_FRAMES },
+            { "VEHICLE_ENTRY_FLAG_15", VEHICLE_ENTRY_FLAG_15 },
+            { "VEHICLE_ENTRY_FLAG_ENABLE_ADDITIONAL_COLOUR_1", VEHICLE_ENTRY_FLAG_ENABLE_ADDITIONAL_COLOUR_1 },
+            { "VEHICLE_ENTRY_FLAG_SWINGING", VEHICLE_ENTRY_FLAG_SWINGING },
+            { "VEHICLE_ENTRY_FLAG_SPINNING", VEHICLE_ENTRY_FLAG_SPINNING },
+            { "VEHICLE_ENTRY_FLAG_POWERED", VEHICLE_ENTRY_FLAG_POWERED },
+            { "VEHICLE_ENTRY_FLAG_RIDERS_SCREAM", VEHICLE_ENTRY_FLAG_RIDERS_SCREAM },
+            { "VEHICLE_ENTRY_FLAG_21", VEHICLE_ENTRY_FLAG_21 },
+            { "VEHICLE_ENTRY_FLAG_BOAT_HIRE_COLLISION_DETECTION", VEHICLE_ENTRY_FLAG_BOAT_HIRE_COLLISION_DETECTION },
+            { "VEHICLE_ENTRY_FLAG_VEHICLE_ANIMATION", VEHICLE_ENTRY_FLAG_VEHICLE_ANIMATION },
+            { "VEHICLE_ENTRY_FLAG_RIDER_ANIMATION", VEHICLE_ENTRY_FLAG_RIDER_ANIMATION },
+            { "VEHICLE_ENTRY_FLAG_25", VEHICLE_ENTRY_FLAG_25 },
+            { "VEHICLE_ENTRY_FLAG_SLIDE_SWING", VEHICLE_ENTRY_FLAG_SLIDE_SWING },
+            { "VEHICLE_ENTRY_FLAG_CHAIRLIFT", VEHICLE_ENTRY_FLAG_CHAIRLIFT },
+            { "VEHICLE_ENTRY_FLAG_WATER_RIDE", VEHICLE_ENTRY_FLAG_WATER_RIDE },
+            { "VEHICLE_ENTRY_FLAG_GO_KART", VEHICLE_ENTRY_FLAG_GO_KART },
+            { "VEHICLE_ENTRY_FLAG_DODGEM_CAR_PLACEMENT", VEHICLE_ENTRY_FLAG_DODGEM_CAR_PLACEMENT },
+        });
     return car;
 }
 
