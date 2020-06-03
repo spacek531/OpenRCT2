@@ -1532,6 +1532,22 @@ bool Vehicle::OpenRestraints()
             restraintsOpen = false;
             continue;
         }
+        if (vehicleEntry->animation == VEHICLE_ENTRY_ANIMATION_DISKO && vehicle->animation_frame != 0)
+        {
+            if (var_C8 <= 0xCCCC)
+            {
+                var_C8 += 0x3333;
+            }
+            else
+            {
+                var_C8 += 0x3333;
+                animation_frame += 1;
+                animation_frame &= 32;
+                Invalidate();
+            }
+            restraintsOpen = false;
+            continue;
+        }
 
         if (vehicle->UpdateFlag(VEHICLE_UPDATE_FLAG_BROKEN_CAR) && vehicle->restraints_position != 0xFF
             && (curRide->breakdown_reason_pending == BREAKDOWN_RESTRAINTS_STUCK_CLOSED
@@ -7411,6 +7427,22 @@ void Vehicle::UpdateAdditionalAnimation()
                 }
             }
             break;
+        case VEHICLE_ENTRY_ANIMATION_DISKO:
+            if (status != VEHICLE_STATUS_MOVING_TO_END_OF_STATION || animation_frame != 0)
+            {
+                if (var_C8 <= 0xCCCC)
+                {
+                    var_C8 += 0x3333;
+                }
+                else
+                {
+                    var_C8 += 0x3333;
+                    animation_frame += 1;
+                    animation_frame &= 31;
+                    Invalidate();
+                }
+                break;
+            }
     }
 }
 
