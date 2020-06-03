@@ -691,6 +691,7 @@
     <ClCompile Include="ride\shops\Shop.cpp" />
     <ClCompile Include="ride\Station.cpp" />
     <ClCompile Include="ride\thrill\3dCinema.cpp" />
+    <ClCompile Include="ride\thrill\Disko.cpp" />
     <ClCompile Include="ride\thrill\Enterprise.cpp" />
     <ClCompile Include="ride\thrill\GoKarts.cpp" />
     <ClCompile Include="ride\thrill\LaunchedFreefall.cpp" />

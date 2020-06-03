@@ -35,7 +35,7 @@ void vehicle_visual_disko(
     {
         return;
     }
-    vehicle_boundbox bb = VehicleBoundboxes[vehicleEntry->draw_order][ecx];
+    vehicle_boundbox bb = VehicleBoundboxes[vehicleEntry->draw_order][0];
 
     image_id = baseImage_id | SPRITE_ID_PALETTE_COLOUR_2(vehicle->colours.body_colour, vehicle->colours.trim_colour);
     if (vehicle->IsGhost())
@@ -43,8 +43,8 @@ void vehicle_visual_disko(
         image_id &= 0x7FFFF;
         image_id |= CONSTRUCTION_MARKER;
     }
-    sub_98197C(
-        session, image_id, 0, 0, bb->length_x, bb->length_y, bb->length_z, z, bb->offset_x, bb->offset_y, bb->offset_z + z);
+    paint_struct* ps = sub_98197C(
+        session, image_id, 0, 0, bb.length_x, bb.length_y, bb.length_z, z, bb.offset_x, bb.offset_y, bb.offset_z + z);
     if (ps != nullptr)
     {
         ps->tertiary_colour = vehicle->colours_extended;
