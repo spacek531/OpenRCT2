@@ -3230,6 +3230,47 @@ void Vehicle::UpdateDepartingBoatHire()
     UpdateTravellingBoatHireSetup();
 }
 
+void Vehicle::UpdateSequentialLaunch(int8_t lap_adjuster)
+{
+    auto curRide = get_ride(ride);
+    if (curRide == nullptr)
+        return;
+
+    int8_t target_speed;
+    if (velocity >= 0)
+    {
+        if (num_laps + lap_adjuster < (curRide->num_circuits + 1) / 2)
+        { // first half of cycle
+            target_speed = curRide->launch_speed * (num_laps + 1 + lap_adjuster) / ((curRide->num_circuits + 1) / 2);
+            if (velocity < (target_speed << 16))
+                acceleration = ((curRide->launch_speed + 1) / 2) << 12;
+        }
+        else if (num_laps < curRide->num_circuits) // second half of cycle
+        {
+            target_speed = curRide->launch_speed * (curRide->num_circuits - num_laps - lap_adjuster)
+                / ((curRide->num_circuits + 1) / 2);
+            if (velocity > (target_speed << 16))
+                acceleration = -(((curRide->launch_speed + 1) / 2) << 12);
+        }
+    }
+    else if (velocity < 0)
+    {
+        if (num_laps + lap_adjuster < (curRide->num_circuits + 1) / 2)
+        { // first half of cycle
+            target_speed = curRide->launch_speed * (num_laps + 1 + lap_adjuster) / ((curRide->num_circuits + 1) / 2);
+            if (-velocity < (target_speed << 16))
+                acceleration = -(((curRide->launch_speed + 1) / 2) << 12);
+        }
+        else // second half of cycle
+        {
+            target_speed = curRide->launch_speed * (curRide->num_circuits - num_laps - lap_adjuster)
+                / ((curRide->num_circuits + 1) / 2);
+            if (-velocity > (target_speed << 16))
+                acceleration = ((curRide->launch_speed + 1) / 2) << 12;
+        }
+    }
+}
+
 /**
  *
  *  rct2: 0x006D845B
@@ -3306,6 +3347,9 @@ void Vehicle::UpdateDeparting()
         case RIDE_MODE_REVERSE_INCLINE_LAUNCHED_SHUTTLE:
             if (velocity >= -131940)
                 acceleration = -3298;
+            break;
+        case RIDE_MODE_POWERED_LAUNCH_SEQUENTIAL:
+            UpdateSequentialLaunch(0);
             break;
         case RIDE_MODE_POWERED_LAUNCH_PASSTROUGH:
         case RIDE_MODE_POWERED_LAUNCH:
@@ -3887,6 +3931,8 @@ void Vehicle::UpdateTravelling()
     }
 
     if (curRide->mode == RIDE_MODE_POWERED_LAUNCH_PASSTROUGH && velocity < 0)
+        return;
+    if (curRide->mode == RIDE_MODE_POWERED_LAUNCH_SEQUENTIAL && velocity < 0)
         return;
 
     SetState(VEHICLE_STATUS_ARRIVING);

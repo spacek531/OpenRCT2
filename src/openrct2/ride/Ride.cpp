@@ -879,7 +879,7 @@ bool Ride::CanHaveMultipleCircuits() const
 
     // Only allow circuit or launch modes
     if (mode != RIDE_MODE_CONTINUOUS_CIRCUIT && mode != RIDE_MODE_REVERSE_INCLINE_LAUNCHED_SHUTTLE
-        && mode != RIDE_MODE_POWERED_LAUNCH_PASSTROUGH)
+         && mode != RIDE_MODE_POWERED_LAUNCH_SEQUENTIAL)
     {
         return false;
     }
@@ -3756,6 +3756,7 @@ static StationIndex ride_mode_check_valid_station_numbers(Ride* ride)
         case RIDE_MODE_REVERSE_INCLINE_LAUNCHED_SHUTTLE:
         case RIDE_MODE_POWERED_LAUNCH_PASSTROUGH:
         case RIDE_MODE_POWERED_LAUNCH:
+        case RIDE_MODE_POWERED_LAUNCH_SEQUENTIAL:
         case RIDE_MODE_LIM_POWERED_LAUNCH:
             if (numStations <= 1)
                 return 1;
@@ -5895,7 +5896,7 @@ uint8_t ride_get_helix_sections(Ride* ride)
 bool Ride::IsPoweredLaunched() const
 {
     return mode == RIDE_MODE_POWERED_LAUNCH_PASSTROUGH || mode == RIDE_MODE_POWERED_LAUNCH
-        || mode == RIDE_MODE_POWERED_LAUNCH_BLOCK_SECTIONED;
+        || mode == RIDE_MODE_POWERED_LAUNCH_BLOCK_SECTIONED || mode == RIDE_MODE_POWERED_LAUNCH_SEQUENTIAL;
 }
 
 bool Ride::IsBlockSectioned() const
@@ -6731,6 +6732,7 @@ void Ride::UpdateMaxVehicles()
             case RIDE_MODE_POWERED_LAUNCH_PASSTROUGH:
             case RIDE_MODE_SHUTTLE:
             case RIDE_MODE_LIM_POWERED_LAUNCH:
+            case RIDE_MODE_POWERED_LAUNCH_SEQUENTIAL:
             case RIDE_MODE_POWERED_LAUNCH:
                 maxNumTrains = 1;
                 break;

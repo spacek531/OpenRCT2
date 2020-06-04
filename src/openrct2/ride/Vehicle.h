@@ -352,6 +352,7 @@ private:
     void UpdateHauntedHouseOperating();
     void UpdateCrookedHouseOperating();
     void UpdateRotating();
+    void UpdateSequentialLaunch(int8_t lap_adjuster);
     void UpdateDeparting();
     void FinishDeparting();
     void UpdateTravelling();
