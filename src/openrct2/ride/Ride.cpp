@@ -879,7 +879,7 @@ bool Ride::CanHaveMultipleCircuits() const
 
     // Only allow circuit or launch modes
     if (mode != RIDE_MODE_CONTINUOUS_CIRCUIT && mode != RIDE_MODE_REVERSE_INCLINE_LAUNCHED_SHUTTLE
-         && mode != RIDE_MODE_POWERED_LAUNCH_SEQUENTIAL)
+        && mode != RIDE_MODE_POWERED_LAUNCH_SEQUENTIAL)
     {
         return false;
     }

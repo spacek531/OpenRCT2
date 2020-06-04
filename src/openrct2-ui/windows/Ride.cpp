@@ -3786,6 +3786,7 @@ static void window_ride_operating_invalidate(rct_window* w)
         case RIDE_MODE_POWERED_LAUNCH_PASSTROUGH:
         case RIDE_MODE_POWERED_LAUNCH:
         case RIDE_MODE_UPWARD_LAUNCH:
+        case RIDE_MODE_POWERED_LAUNCH_SEQUENTIAL:
         case RIDE_MODE_POWERED_LAUNCH_BLOCK_SECTIONED:
             set_format_arg(18, uint16_t, (ride->launch_speed * 9) / 4);
             format = STR_RIDE_MODE_SPEED_VALUE;
