@@ -3201,8 +3201,5 @@ void vehicle_paint(paint_session* session, const Vehicle* vehicle, int32_t image
         case VEHICLE_VISUAL_SUBMARINE:
             vehicle_visual_submarine(session, x, imageDirection, y, z, vehicle, vehicleEntry);
             break;
-        case VEHICLE_VISUAL_DISKO:
-            vehicle_visual_disko(session, x, imageDirection, y, z, vehicle, vehicleEntry);
-            break;
     }
 }

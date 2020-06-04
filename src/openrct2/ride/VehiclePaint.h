@@ -63,8 +63,5 @@ void vehicle_visual_mini_golf_player(
     paint_session* session, int32_t x, int32_t imageDirection, int32_t y, int32_t z, const Vehicle* vehicle);
 void vehicle_visual_mini_golf_ball(
     paint_session* session, int32_t x, int32_t imageDirection, int32_t y, int32_t z, const Vehicle* vehicle);
-void vehicle_visual_disko(
-    paint_session* session, int32_t x, int32_t imageDirection, int32_t y, int32_t z, const Vehicle* vehicle,
-    const rct_ride_entry_vehicle* vehicleEntry);
 
 #endif
