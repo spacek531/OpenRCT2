@@ -108,7 +108,7 @@ enum
     STR_RIDE_NAME_INVERTED_IMPULSE_COASTER = 88,
     STR_RIDE_NAME_MINI_ROLLER_COASTER = 89,
     STR_RIDE_NAME_MINE_RIDE = 90,
-    STR_RIDE_NAME_59 = 91,
+    STR_RIDE_NAME_DISKO_COASTER = 91,
     STR_RIDE_NAME_LIM_LAUNCHED_ROLLER_COASTER = 92,
 
     STR_RIDE_DESCRIPTION_SPIRAL_ROLLER_COASTER = 512,
@@ -3910,6 +3910,7 @@ enum
     STR_OVERLAY_CLEARANCE_CHECKS_DISABLED = 6374,
 
     STR_RIDE_MODE_POWERED_LAUNCH_SEQUENTIAL = 6375,
+    STR_RIDE_DESCRIPTION_DISKO_COASTER = 6376,
 
     // Have to include resource strings (from scenarios and objects) for the time being now that language is partially working
     /* MAX_STR_COUNT = 32768 */ // MAX_STR_COUNT - upper limit for number of strings, not the current count strings
