@@ -358,6 +358,7 @@
     <ClInclude Include="ride\shops\meta\Toilets.h" />
     <ClInclude Include="ride\Station.h" />
     <ClInclude Include="ride\thrill\meta\3DCinema.h" />
+    <ClInclude Include="ride\thrill\meta\Disko.h" />
     <ClInclude Include="ride\thrill\meta\Enterprise.h" />
     <ClInclude Include="ride\thrill\meta\GoKarts.h" />
     <ClInclude Include="ride\thrill\meta\LaunchedFreefall.h" />

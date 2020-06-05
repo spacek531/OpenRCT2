@@ -2555,21 +2555,9 @@
         "palette": "keep"
     },
     {
-        "path": "track/disko/quarter_loop_up_1_5.png",
-        "x_offset": -26,
-        "y_offset": -20,
-        "palette": "keep"
-    },
-    {
         "path": "track/disko/quarter_loop_up_1_6.png",
         "x_offset": -26,
         "y_offset": -20,
-        "palette": "keep"
-    },
-    {
-        "path": "track/disko/quarter_loop_up_2_1.png",
-        "x_offset": -90,
-        "y_offset": -157,
         "palette": "keep"
     },
     {
@@ -2579,21 +2567,9 @@
         "palette": "keep"
     },
     {
-        "path": "track/disko/quarter_loop_up_2_3.png",
-        "x_offset": -58,
-        "y_offset": -85,
-        "palette": "keep"
-    },
-    {
         "path": "track/disko/quarter_loop_up_2_4.png",
         "x_offset": -58,
         "y_offset": -85,
-        "palette": "keep"
-    },
-    {
-        "path": "track/disko/quarter_loop_up_2_5.png",
-        "x_offset": -26,
-        "y_offset": -29,
         "palette": "keep"
     },
     {
@@ -2603,33 +2579,15 @@
         "palette": "keep"
     },
     {
-        "path": "track/disko/quarter_loop_up_3_1.png",
-        "x_offset": -14,
-        "y_offset": -157,
-        "palette": "keep"
-    },
-    {
         "path": "track/disko/quarter_loop_up_3_2.png",
         "x_offset": -14,
         "y_offset": -157,
         "palette": "keep"
     },
     {
-        "path": "track/disko/quarter_loop_up_3_3.png",
-        "x_offset": -46,
-        "y_offset": -85,
-        "palette": "keep"
-    },
-    {
         "path": "track/disko/quarter_loop_up_3_4.png",
         "x_offset": -46,
         "y_offset": -85,
-        "palette": "keep"
-    },
-    {
-        "path": "track/disko/quarter_loop_up_3_5.png",
-        "x_offset": -78,
-        "y_offset": -29,
         "palette": "keep"
     },
     {
@@ -2660,12 +2618,6 @@
         "path": "track/disko/quarter_loop_up_4_4.png",
         "x_offset": -46,
         "y_offset": -44,
-        "palette": "keep"
-    },
-    {
-        "path": "track/disko/quarter_loop_up_4_5.png",
-        "x_offset": -78,
-        "y_offset": -20,
         "palette": "keep"
     },
     {
