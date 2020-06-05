@@ -3243,14 +3243,14 @@ void Vehicle::UpdateSequentialLaunch(int8_t lap_adjuster)
         { // first half of cycle
             target_speed = curRide->launch_speed * (num_laps + 1 + lap_adjuster) / ((curRide->num_circuits + 1) / 2);
             if (velocity < (target_speed << 16))
-                acceleration = ((curRide->launch_speed + 1) / 2) << 12;
+                acceleration = curRide->launch_speed << 12;
         }
         else if (num_laps < curRide->num_circuits) // second half of cycle
         {
             target_speed = curRide->launch_speed * (curRide->num_circuits - num_laps - lap_adjuster)
                 / ((curRide->num_circuits + 1) / 2);
             if (velocity > (target_speed << 16))
-                acceleration = -(((curRide->launch_speed + 1) / 2) << 12);
+                acceleration = -(curRide->launch_speed << 12);
         }
     }
     else if (velocity < 0)
@@ -3259,14 +3259,14 @@ void Vehicle::UpdateSequentialLaunch(int8_t lap_adjuster)
         { // first half of cycle
             target_speed = curRide->launch_speed * (num_laps + 1 + lap_adjuster) / ((curRide->num_circuits + 1) / 2);
             if (-velocity < (target_speed << 16))
-                acceleration = -(((curRide->launch_speed + 1) / 2) << 12);
+                acceleration = -(curRide->launch_speed << 12);
         }
         else // second half of cycle
         {
             target_speed = curRide->launch_speed * (curRide->num_circuits - num_laps - lap_adjuster)
                 / ((curRide->num_circuits + 1) / 2);
             if (-velocity > (target_speed << 16))
-                acceleration = ((curRide->launch_speed + 1) / 2) << 12;
+                acceleration = curRide->launch_speed << 12;
         }
     }
 }

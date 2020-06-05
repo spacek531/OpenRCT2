@@ -465,6 +465,7 @@ TRACK_PAINT_FUNCTION get_track_paint_function_enterprise(int32_t trackType, int3
 TRACK_PAINT_FUNCTION get_track_paint_function_inverted_impulse_rc(int32_t trackType, int32_t direction);
 TRACK_PAINT_FUNCTION get_track_paint_function_mini_rc(int32_t trackType, int32_t direction);
 TRACK_PAINT_FUNCTION get_track_paint_function_mine_ride(int32_t trackType, int32_t direction);
+TRACK_PAINT_FUNCTION get_track_paint_function_disko_coaster(int32_t trackType, int32_t direction);
 TRACK_PAINT_FUNCTION get_track_paint_function_lim_launched_rc(int32_t trackType, int32_t direction);
 
 #endif
