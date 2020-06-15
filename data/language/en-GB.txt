@@ -92,7 +92,7 @@ STR_0087    :Unknown Ride (55)
 STR_0088    :Inverted Impulse Coaster
 STR_0089    :Mini Roller Coaster
 STR_0090    :Mine Ride
-STR_0091    :Disko Coaster
+STR_0091    :Unknown Ride (59)
 STR_0092    :LIM Launched Roller Coaster
 STR_0512    :A compact roller coaster with a spiral lift hill and smooth, twisting drops.
 STR_0513    :A looping roller coaster where the riders ride in a standing position
@@ -3671,6 +3671,7 @@ STR_6373    :Toggle clearance checks
 STR_6374    :C
 STR_6375    :Powered Launch (sequential)
 STR_6376    :Disko Coaster Description
+STR_6377    :Disko Coaster
 
 #############
 # Scenarios #

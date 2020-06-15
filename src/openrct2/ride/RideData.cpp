@@ -202,8 +202,9 @@ const uint8_t rideBonusValue[RIDE_TYPE_COUNT] = {
     75,  // 56 Inverted Impulse Coaster
     60,  // 57 Mini Roller Coaster
     70,  // 58 Mine Ride
-    55,  // 59 Disko Coaster
+    55,  // 59 (none)
     55,  // 5a LIM Launched Roller Coaster
+    55,  // 59 Disko Coaster
 };
 
 const rct_ride_name RideNaming[] =  {
@@ -296,8 +297,9 @@ const rct_ride_name RideNaming[] =  {
     { STR_RIDE_NAME_INVERTED_IMPULSE_COASTER,       STR_RIDE_DESCRIPTION_INVERTED_IMPULSE_COASTER       }, // RIDE_TYPE_INVERTED_IMPULSE_COASTER
     { STR_RIDE_NAME_MINI_ROLLER_COASTER,            STR_RIDE_DESCRIPTION_MINI_ROLLER_COASTER            }, // RIDE_TYPE_MINI_ROLLER_COASTER
     { STR_RIDE_NAME_MINE_RIDE,                      STR_RIDE_DESCRIPTION_MINE_RIDE                      }, // RIDE_TYPE_MINE_RIDE
-    { STR_RIDE_NAME_DISKO_COASTER,                  STR_RIDE_DESCRIPTION_DISKO_COASTER                  }, // RIDE_TYPE_DISKO_COASTER
+    { STR_RIDE_NAME_59,                             STR_RIDE_DESCRIPTION_UNKNOWN                        }, // RIDE_TYPE_59
     { STR_RIDE_NAME_LIM_LAUNCHED_ROLLER_COASTER,    STR_RIDE_DESCRIPTION_LIM_LAUNCHED_ROLLER_COASTER    }, // RIDE_TYPE_LIM_LAUNCHED_ROLLER_COASTER
+    { STR_RIDE_NAME_DISKO_COASTER,                  STR_RIDE_DESCRIPTION_DISKO_COASTER                  }, // RIDE_TYPE_DISKO_COASTER
 };
 
 // rct2: 0x0097D4F0,  0x0097D4F1,  0x0097D4F2, 0x0097D4F4, 0x0097D4F5
@@ -391,8 +393,9 @@ const rct_ride_data_4 RideData4[RIDE_TYPE_COUNT] = {
     {   20, 20, MUSIC_STYLE_ROCK,              },  // RIDE_TYPE_INVERTED_IMPULSE_COASTER
     {   20, 20, MUSIC_STYLE_SUMMER,            },  // RIDE_TYPE_MINI_ROLLER_COASTER
     {   20, 20, MUSIC_STYLE_WILD_WEST,         },  // RIDE_TYPE_MINE_RIDE
-    {   20, 20, MUSIC_STYLE_ROCK_STYLE_2,      },  // RIDE_TYPE_DISKO_COASTER
+    {   20, 20, MUSIC_STYLE_ROCK_STYLE_2,      },  // RIDE_TYPE_59
     {   20, 20, MUSIC_STYLE_ROCK,              },  // RIDE_TYPE_LIM_LAUNCHED_ROLLER_COASTER
+    {   20, 20, MUSIC_STYLE_TECHNO,      },  // RIDE_TYPE_DISKO_COASTER
 };
 
 // rct2: 0x0097DD78
@@ -486,8 +489,9 @@ const ride_cost RideTrackCosts[RIDE_TYPE_COUNT] =   {
     {   125,    5   },  // RIDE_TYPE_INVERTED_IMPULSE_COASTER
     {   65,     4   },  // RIDE_TYPE_MINI_ROLLER_COASTER
     {   85,     4   },  // RIDE_TYPE_MINE_RIDE
-    {   75,     5   },  // RIDE_TYPE_DISKO_COASTER
+    {   55,     4   },  // RIDE_TYPE_59
     {   95,     5   },  // RIDE_TYPE_LIM_LAUNCHED_ROLLER_COASTER
+    {   75,     5   },  // RIDE_TYPE_DISKO_COASTER
 };
 
 // 0x0097D218
@@ -581,8 +585,9 @@ const rct_ride_data_5 RideData5[RIDE_TYPE_COUNT] = {
     {   45,     40,     29,     23,     8,      25,  },  // RIDE_TYPE_INVERTED_IMPULSE_COASTER
     {   16,     24,     9,      10,     11,     40,  },  // RIDE_TYPE_MINI_ROLLER_COASTER
     {   13,     24,     9,      27,     11,     40,  },  // RIDE_TYPE_MINE_RIDE
-    {   14,     32,     9,      18,     11,      40,  },  // RIDE_TYPE_DISKO_COASTER
+    {   16,     24,     4,      4,      7,      40,  },  // RIDE_TYPE_59
     {   35,     24,     5,      18,     7,      50,  },  // RIDE_TYPE_LIM_LAUNCHED_ROLLER_COASTER
+    {   14,     32,     9,      18,     11,     40,  },  // RIDE_TYPE_DISKO_COASTER
 };
 
 const rct_ride_entry_vehicle CableLiftVehicle = {
@@ -729,8 +734,9 @@ const rating_tuple RideRatings[RIDE_TYPE_COUNT] = {
     {   50,     30, 10  },  // RIDE_TYPE_INVERTED_IMPULSE_COASTER
     {   50,     30, 10  },  // RIDE_TYPE_MINI_ROLLER_COASTER
     {   60,     20, 10  },  // RIDE_TYPE_MINE_RIDE
-    {   50,     30, 30  },  // RIDE_TYPE_DISKO_COASTER
+    {   50,     30, 30  },  // RIDE_TYPE_59
     {   50,     30, 10  },  // RIDE_TYPE_LIM_LAUNCHED_ROLLER_COASTER
+    {   50,     30, 30  },  // RIDE_TYPE_DISKO_COASTER
 };
 
 // rct2: 0x0097CF40
@@ -824,8 +830,9 @@ const rct_ride_properties RideProperties[RIDE_TYPE_COUNT] = {
         { 10, 33,  30, 25,  25, 0 },  // RIDE_TYPE_INVERTED_IMPULSE_COASTER
         { 0,  0,   0,  0,  68, 1 },  // RIDE_TYPE_MINI_ROLLER_COASTER
         { 0,  0,   0,  0,  0, 0 },  // RIDE_TYPE_MINE_RIDE
-        { 10, 27,  30, 17,  68, 0 },  // RIDE_TYPE_DISKO_COASTER
+        { 0,  0,   0,  0,  0, 0 },  // RIDE_TYPE_59
         { 10, 31,  26, 18,  18, 0 },  // RIDE_TYPE_LIM_LAUNCHED_ROLLER_COASTER
+        { 10, 27,  30, 17,  68, 0 },  // RIDE_TYPE_DISKO_COASTER
 };
 
 #define TRACK_COLOUR_PRESETS(...)       {static_cast<uint8_t>(std::size<TrackColour>({__VA_ARGS__})), {__VA_ARGS__}}
@@ -1371,7 +1378,7 @@ const track_colour_preset_list RideColourPresets[] = {
         { COLOUR_BORDEAUX_RED, COLOUR_BORDEAUX_RED, COLOUR_DARK_BROWN },
     ),
 
-    // RIDE_TYPE_DISKO_COASTER
+    // RIDE_TYPE_59
     TRACK_COLOUR_PRESETS(
         { COLOUR_LIGHT_BLUE, COLOUR_LIGHT_BLUE, COLOUR_YELLOW },
     ),
@@ -1381,6 +1388,11 @@ const track_colour_preset_list RideColourPresets[] = {
         { COLOUR_BRIGHT_GREEN, COLOUR_BRIGHT_GREEN, COLOUR_WHITE },
         { COLOUR_BRIGHT_RED, COLOUR_BRIGHT_RED, COLOUR_DARK_BROWN },
         { COLOUR_YELLOW, COLOUR_YELLOW, COLOUR_SATURATED_GREEN },
+    ),
+
+    // RIDE_TYPE_DISKO_COASTER
+    TRACK_COLOUR_PRESETS(
+        { COLOUR_LIGHT_BLUE, COLOUR_LIGHT_BLUE, COLOUR_YELLOW },
     ),
 };
 
@@ -1516,8 +1528,9 @@ constexpr const RideTypeDescriptor RideTypeDescriptors[RIDE_TYPE_COUNT] = {
     /* RIDE_TYPE_INVERTED_IMPULSE_COASTER           */ InvertedImpulseCoasterRTD,
     /* RIDE_TYPE_MINI_ROLLER_COASTER                */ MiniRollerCoasterRTD,
     /* RIDE_TYPE_MINE_RIDE                          */ MineRideRTD,
-    /* RIDE_TYPE_DISKO_COASTER                      */ DiskoCoasterRTD,
+    /* RIDE_TYPE_59                                 */ DummyRTD,
     /* RIDE_TYPE_LIM_LAUNCHED_ROLLER_COASTER        */ LIMLaunchedRollerCoasterRTD,
+    /* RIDE_TYPE_DISKO_COASTER                      */ DiskoCoasterRTD,
 };
 
 bool RideTypeDescriptor::HasFlag(uint64_t flag) const
