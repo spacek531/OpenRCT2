@@ -358,6 +358,7 @@
     <ClInclude Include="ride\shops\meta\Toilets.h" />
     <ClInclude Include="ride\Station.h" />
     <ClInclude Include="ride\thrill\meta\3DCinema.h" />
+    <ClInclude Include="ride\coaster\meta\Disko.h" />
     <ClInclude Include="ride\thrill\meta\Enterprise.h" />
     <ClInclude Include="ride\thrill\meta\GoKarts.h" />
     <ClInclude Include="ride\thrill\meta\LaunchedFreefall.h" />
@@ -638,6 +639,7 @@
     <ClCompile Include="ride\coaster\BolligerMabillardTrack.cpp" />
     <ClCompile Include="ride\coaster\CompactInvertedCoaster.cpp" />
     <ClCompile Include="ride\coaster\CorkscrewRollerCoaster.cpp" />
+    <ClCompile Include="ride\coaster\Disko.cpp" />
     <ClCompile Include="ride\coaster\FlyingRollerCoaster.cpp" />
     <ClCompile Include="ride\coaster\GigaCoaster.cpp" />
     <ClCompile Include="ride\coaster\HeartlineTwisterCoaster.cpp" />
@@ -698,7 +700,6 @@
     <ClCompile Include="ride\thrill\MotionSimulator.cpp" />
     <ClCompile Include="ride\thrill\PirateShip.cpp" />
     <ClCompile Include="ride\thrill\RotoDrop.cpp" />
-    <ClCompile Include="ride\thrill\Disko.cpp" />
     <ClCompile Include="ride\thrill\SwingingInverterShip.cpp" />
     <ClCompile Include="ride\thrill\TopSpin.cpp" />
     <ClCompile Include="ride\thrill\Twist.cpp" />

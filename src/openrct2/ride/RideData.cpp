@@ -31,6 +31,7 @@
 #include "coaster/meta/BobsleighCoaster.h"
 #include "coaster/meta/CompactInvertedCoaster.h"
 #include "coaster/meta/CorkscrewRollerCoaster.h"
+#include "coaster/meta/Disko.h"
 #include "coaster/meta/FlyingRollerCoaster.h"
 #include "coaster/meta/GigaCoaster.h"
 #include "coaster/meta/HeartlineTwisterCoaster.h"
@@ -297,6 +298,7 @@ constexpr const RideTypeDescriptor RideTypeDescriptors[RIDE_TYPE_COUNT] = {
     /* RIDE_TYPE_MINE_RIDE                          */ MineRideRTD,
     /* RIDE_TYPE_59                                 */ DummyRTD,
     /* RIDE_TYPE_LIM_LAUNCHED_ROLLER_COASTER        */ LIMLaunchedRollerCoasterRTD,
+    /* RIDE_TYPE_DISKO_COASTER                      */ DiskoCoasterRTD,
 };
 
 bool RideTypeDescriptor::HasFlag(uint64_t flag) const

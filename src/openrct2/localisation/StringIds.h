@@ -3914,6 +3914,10 @@ enum
     STR_RESEARCH_VEHICLE_LABEL = 6376,
     STR_RESEARCH_TYPE_LABEL_VEHICLE = 6377,
 
+    STR_RIDE_MODE_POWERED_LAUNCH_SEQUENTIAL = 6378,
+    STR_RIDE_DESCRIPTION_DISKO_COASTER = 6379,
+    STR_RIDE_NAME_DISKO_COASTER = 6380,
+
     // Have to include resource strings (from scenarios and objects) for the time being now that language is partially working
     /* MAX_STR_COUNT = 32768 */ // MAX_STR_COUNT - upper limit for number of strings, not the current count strings
 };

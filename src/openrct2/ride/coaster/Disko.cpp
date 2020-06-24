@@ -26,7 +26,7 @@
 int8_t support_locations_60_deg_up[4][2] = { { 32, 32 }, { 32, 30 }, { 32, 28 }, { 32, 32 } };
 int8_t support_locations_60_deg_up_to_90_deg_up[4][2] = { { 34, 34 }, { 34, 30 }, { 34, 28 }, { 34, 34 } };
 int8_t support_locations_flat_to_60_deg_up_long_base[4][4][2] = {
-    { // sequence 0
+    { // sequecce 0
       { 6, 6 },
       { 6, 6 },
       { 6, 6 },
