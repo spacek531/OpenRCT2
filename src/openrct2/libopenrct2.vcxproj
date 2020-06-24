@@ -698,6 +698,7 @@
     <ClCompile Include="ride\thrill\MotionSimulator.cpp" />
     <ClCompile Include="ride\thrill\PirateShip.cpp" />
     <ClCompile Include="ride\thrill\RotoDrop.cpp" />
+    <ClCompile Include="ride\thrill\Disko.cpp" />
     <ClCompile Include="ride\thrill\SwingingInverterShip.cpp" />
     <ClCompile Include="ride\thrill\TopSpin.cpp" />
     <ClCompile Include="ride\thrill\Twist.cpp" />
