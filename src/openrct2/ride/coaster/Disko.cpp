@@ -79,13 +79,13 @@ static void disko_coaster_track_flat(
         case 0:
         case 2:
             sub_98197C_rotated(
-                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT + 0), 0, 0, 32, 32, 3,
+                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT + 0), 0, 0, 20, 32, 3,
                 height, 0, 6, height);
             break;
         case 1:
         case 3:
             sub_98197C_rotated(
-                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT + 1), 0, 0, 32, 32, 3,
+                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT + 1), 0, 0, 20, 32, 3,
                 height, 0, 6, height);
             break;
     };
@@ -150,22 +150,22 @@ static void disko_coaster_track_flat_to_25_deg_up(
     {
         case 0:
             sub_98197C_rotated(
-                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_GENTLE + 0), 0, 0, 32, 32, 3,
+                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_GENTLE + 0), 0, 0, 20, 32, 3,
                 height, 0, 6, height);
             break;
         case 1:
             sub_98197C_rotated(
-                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_GENTLE + 1), 0, 0, 32, 32, 3,
+                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_GENTLE + 1), 0, 0, 20, 32, 3,
                 height, 0, 6, height);
             break;
         case 2:
             sub_98197C_rotated(
-                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_GENTLE + 2), 0, 0, 32, 32, 3,
+                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_GENTLE + 2), 0, 0, 20, 32, 3,
                 height, 0, 6, height);
             break;
         case 3:
             sub_98197C_rotated(
-                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_GENTLE + 3), 0, 0, 32, 32, 3,
+                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_GENTLE + 3), 0, 0, 20, 32, 3,
                 height, 0, 6, height);
             break;
     }
@@ -203,22 +203,22 @@ static void disko_coaster_track_25_deg_up_to_flat(
     {
         case 0:
             sub_98197C_rotated(
-                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_GENTLE + 4), 0, 0, 32, 32, 3,
+                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_GENTLE + 4), 0, 0, 20, 32, 3,
                 height, 0, 6, height);
             break;
         case 1:
             sub_98197C_rotated(
-                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_GENTLE + 5), 0, 0, 32, 32, 3,
+                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_GENTLE + 5), 0, 0, 20, 32, 3,
                 height, 0, 6, height);
             break;
         case 2:
             sub_98197C_rotated(
-                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_GENTLE + 6), 0, 0, 32, 32, 3,
+                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_GENTLE + 6), 0, 0, 20, 32, 3,
                 height, 0, 6, height);
             break;
         case 3:
             sub_98197C_rotated(
-                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_GENTLE + 7), 0, 0, 32, 32, 3,
+                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_GENTLE + 7), 0, 0, 20, 32, 3,
                 height, 0, 6, height);
             break;
     }
@@ -255,22 +255,22 @@ static void disko_coaster_track_25_deg_up(
     {
         case 0:
             sub_98197C_rotated(
-                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_GENTLE + 8), 0, 0, 32, 32, 3,
+                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_GENTLE + 8), 0, 0, 20, 32, 3,
                 height, 0, 6, height);
             break;
         case 1:
             sub_98197C_rotated(
-                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_GENTLE + 9), 0, 0, 32, 32, 3,
+                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_GENTLE + 9), 0, 0, 20, 32, 3,
                 height, 0, 6, height);
             break;
         case 2:
             sub_98197C_rotated(
-                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_GENTLE + 10), 0, 0, 32, 32, 3,
+                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_GENTLE + 10), 0, 0, 20, 32, 3,
                 height, 0, 6, height);
             break;
         case 3:
             sub_98197C_rotated(
-                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_GENTLE + 11), 0, 0, 32, 32, 3,
+                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_GENTLE + 11), 0, 0, 20, 32, 3,
                 height, 0, 6, height);
             break;
     }
@@ -308,12 +308,12 @@ static void disko_coaster_track_25_deg_up_to_60_deg_up(
     {
         case 0:
             sub_98197C_rotated(
-                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_STEEP + 0), 0, 0, 32, 32, 3,
+                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_STEEP + 0), 0, 0, 20, 32, 3,
                 height, 0, 6, height);
             break;
         case 1:
             sub_98197C_rotated(
-                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_STEEP + 1), 0, 0, 32, 20, 3,
+                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_STEEP + 1), 0, 0, 20, 32, 3,
                 height, 0, 6, height);
             sub_98197C_rotated(
                 session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_STEEP + 2), 0, 0, 32, 1, 66,
@@ -321,7 +321,7 @@ static void disko_coaster_track_25_deg_up_to_60_deg_up(
             break;
         case 2:
             sub_98197C_rotated(
-                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_STEEP + 3), 0, 0, 32, 20, 3,
+                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_STEEP + 3), 0, 0, 20, 32, 3,
                 height, 0, 6, height);
             sub_98197C_rotated(
                 session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_STEEP + 4), 0, 0, 32, 1, 66,
@@ -329,7 +329,7 @@ static void disko_coaster_track_25_deg_up_to_60_deg_up(
             break;
         case 3:
             sub_98197C_rotated(
-                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_STEEP + 5), 0, 0, 32, 32, 3,
+                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_STEEP + 5), 0, 0, 20, 32, 3,
                 height, 0, 6, height);
             break;
     }
@@ -367,12 +367,12 @@ static void disko_coaster_track_60_deg_up_to_25_deg_up(
     {
         case 0:
             sub_98197C_rotated(
-                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_STEEP + 6), 0, 0, 32, 20, 3,
+                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_STEEP + 6), 0, 0, 20, 32, 3,
                 height, 0, 6, height);
             break;
         case 1:
             sub_98197C_rotated(
-                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_STEEP + 7), 0, 0, 32, 20, 3,
+                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_STEEP + 7), 0, 0, 20, 32, 3,
                 height, 0, 6, height);
             sub_98197C_rotated(
                 session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_STEEP + 8), 0, 0, 32, 1, 66,
@@ -380,7 +380,7 @@ static void disko_coaster_track_60_deg_up_to_25_deg_up(
             break;
         case 2:
             sub_98197C_rotated(
-                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_STEEP + 9), 0, 0, 32, 20, 3,
+                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_STEEP + 9), 0, 0, 20, 32, 3,
                 height, 0, 6, height);
             sub_98197C_rotated(
                 session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_STEEP + 10), 0, 0, 32, 1, 66,
@@ -388,7 +388,7 @@ static void disko_coaster_track_60_deg_up_to_25_deg_up(
             break;
         case 3:
             sub_98197C_rotated(
-                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_STEEP + 11), 0, 0, 32, 20, 3,
+                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_STEEP + 11), 0, 0, 20, 32, 3,
                 height, 0, 6, height);
             break;
     }
@@ -424,7 +424,7 @@ static void disko_coaster_track_60_deg_up(
     {
         case 0:
             sub_98197C_rotated(
-                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_STEEP + 12), 0, 0, 32, 20, 3,
+                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_STEEP + 12), 0, 0, 20, 32, 3,
                 height, 0, 6, height);
             break;
         case 1:
@@ -439,7 +439,7 @@ static void disko_coaster_track_60_deg_up(
             break;
         case 3:
             sub_98197C_rotated(
-                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_STEEP + 15), 0, 0, 32, 20, 3,
+                session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_STEEP + 15), 0, 0, 20, 32, 3,
                 height, 0, 6, height);
             break;
     }
@@ -487,8 +487,8 @@ static void disko_coaster_track_60_deg_up_to_90_deg_up(
             {
                 case 0:
                     sub_98197C_rotated(
-                        session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_VERTICAL + 0), 0, 0, 32,
-                        20, 3, height, 0, 6, height);
+                        session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_VERTICAL + 0), 0, 0, 20,// TODO: fix BB on these so it draws above supports
+                        32, 3, height, 0, 6, height);
                     break;
                 case 1:
                     sub_98197C_rotated(
@@ -502,8 +502,8 @@ static void disko_coaster_track_60_deg_up_to_90_deg_up(
                     break;
                 case 3:
                     sub_98197C_rotated(
-                        session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_VERTICAL + 3), 0, 0, 32,
-                        20, 3, height, 0, 6, height);
+                        session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_VERTICAL + 3), 0, 0, 20,
+                        32, 3, height, 0, 6, height);
                     break;
             }
             metal_a_supports_paint_setup(
@@ -587,13 +587,13 @@ static void disko_coaster_track_60_deg_down_to_90_deg_down(
                     break;
                 case 1:
                     sub_98197C_rotated(
-                        session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_VERTICAL + 7), 0, 0, 32,
-                        20, 3, height, 0, 6, height + 8);
+                        session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_VERTICAL + 7), 0, 0, 20,
+                        32, 3, height, 0, 6, height + 8);
                     break;
                 case 2:
                     sub_98197C_rotated(
-                        session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_VERTICAL + 4), 0, 0, 32,
-                        20, 3, height, 0, 6, height + 8);
+                        session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_VERTICAL + 4), 0, 0, 20,
+                        32, 3, height, 0, 6, height + 8);
                     break;
                 case 3:
                     sub_98197C_rotated(
@@ -667,22 +667,22 @@ static void disko_coaster_track_flat_to_60_deg_up_long_base(
                 case 0:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 0), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
                 case 1:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 4), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
                 case 2:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 8), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
                 case 3:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 12), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
             }
             metal_a_supports_paint_setup(
@@ -704,22 +704,22 @@ static void disko_coaster_track_flat_to_60_deg_up_long_base(
                 case 0:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 1), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
                 case 1:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 5), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
                 case 2:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 9), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
                 case 3:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 13), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
             }
             break;
@@ -729,22 +729,22 @@ static void disko_coaster_track_flat_to_60_deg_up_long_base(
                 case 0:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 2), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
                 case 1:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 6), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
                 case 2:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 10), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
                 case 3:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 14), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
             }
             break;
@@ -754,7 +754,7 @@ static void disko_coaster_track_flat_to_60_deg_up_long_base(
                 case 0:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 3), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
                 case 1:
                     sub_98197C_rotated(
@@ -769,7 +769,7 @@ static void disko_coaster_track_flat_to_60_deg_up_long_base(
                 case 3:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 15), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        32, 32, 3, height, 0, 6, height);
                     break;
             }
 
@@ -829,7 +829,7 @@ static void disko_coaster_track_60_deg_up_to_flat_long_base(
                 case 0:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 16), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
                 case 1:
                     sub_98197C_rotated(
@@ -844,7 +844,7 @@ static void disko_coaster_track_60_deg_up_to_flat_long_base(
                 case 3:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 28), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
             }
             metal_a_supports_paint_setup(
@@ -866,22 +866,22 @@ static void disko_coaster_track_60_deg_up_to_flat_long_base(
                 case 0:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 17), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
                 case 1:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 21), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
                 case 2:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 25), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
                 case 3:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 29), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
             }
             break;
@@ -891,22 +891,22 @@ static void disko_coaster_track_60_deg_up_to_flat_long_base(
                 case 0:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 18), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
                 case 1:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 22), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
                 case 2:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 26), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
                 case 3:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 30), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
             }
             break;
@@ -916,22 +916,22 @@ static void disko_coaster_track_60_deg_up_to_flat_long_base(
                 case 0:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 19), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
                 case 1:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 23), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
                 case 2:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 27), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
                 case 3:
                     sub_98197C_rotated(
                         session, direction, session->TrackColours[SCHEME_TRACK] | (SPR_G2_DISKO_TRACK_FLAT_TO_STEEP + 31), 0, 0,
-                        32, 20, 3, height, 0, 6, height);
+                        20, 32, 3, height, 0, 6, height);
                     break;
             }
             metal_a_supports_paint_setup(

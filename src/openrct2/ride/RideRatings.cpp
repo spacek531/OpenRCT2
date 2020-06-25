@@ -4369,6 +4369,41 @@ void ride_ratings_calculate_lim_launched_roller_coaster(Ride* ride)
     ride->sheltered_eighths = get_num_of_sheltered_eighths(ride).TotalShelteredEighths;
 }
 
+
+void ride_ratings_calculate_disko_coaster(Ride* ride)
+{
+    if (!(ride->lifecycle_flags & RIDE_LIFECYCLE_TESTED))
+        return;
+
+    ride->unreliability_factor = 14;
+    set_unreliability_factor(ride);
+
+    RatingTuple ratings;
+    ride_ratings_set(&ratings, RIDE_RATING(2, 70), RIDE_RATING(2, 80), RIDE_RATING(2, 10));
+    ride_ratings_apply_length(&ratings, ride, 3000, 764);
+    ride_ratings_apply_train_length(&ratings, ride, 187245);
+    ride_ratings_apply_max_speed(&ratings, ride, 44281, 88562, 35424);
+    ride_ratings_apply_average_speed(&ratings, ride, 291271, 436906);
+    ride_ratings_apply_duration(&ratings, ride, 150, 26214);
+    ride_ratings_apply_gforces(&ratings, ride, 20480, 23831, 49648);
+    ride_ratings_apply_turns(&ratings, ride, 4000, 10000, 45749);
+    ride_ratings_apply_drops(&ratings, ride, 29127, 46811, 49152);
+    ride_ratings_apply_proximity(&ratings, 20130);
+    ride_ratings_apply_scenery(&ratings, ride, 9760);
+    ride_ratings_apply_max_speed_penalty(&ratings, ride, 0x50000, 2, 2, 1);
+    ride_ratings_apply_excessive_lateral_g_penalty(&ratings, ride, 20480, 23831, 49648);
+    ride_ratings_apply_intensity_penalty(&ratings);
+    ride_ratings_apply_adjustments(ride, &ratings);
+
+    ride->ratings = ratings;
+
+    ride->upkeep_cost = ride_compute_upkeep(ride);
+    ride->window_invalidate_flags |= RIDE_INVALIDATE_RIDE_INCOME;
+
+    ride->sheltered_eighths = 0;
+}
+
+
 #pragma endregion
 
 #pragma region Ride rating calculation function table
