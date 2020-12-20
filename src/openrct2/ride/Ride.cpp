@@ -4340,8 +4340,8 @@ static Vehicle* vehicle_create_car(
     auto rideEntry = ride->GetRideEntry();
     if (rideEntry == nullptr)
         return nullptr;
-
-    auto vehicleEntry = &rideEntry->vehicles[vehicleEntryIndex];
+    int32_t subtype = carIndex == 0 ? 3 : 120;
+    rct_ride_entry_vehicle* vehicleEntry = &get_ride_entry(subtype)->vehicles[vehicleEntryIndex];
     auto vehicle = &create_sprite(SPRITE_IDENTIFIER_VEHICLE, carIndex == 0 ? SPRITE_LIST_TRAIN_HEAD : SPRITE_LIST_VEHICLE)
                         ->vehicle;
     if (vehicle == nullptr)
@@ -4349,7 +4349,7 @@ static Vehicle* vehicle_create_car(
 
     vehicle->sprite_identifier = SPRITE_IDENTIFIER_VEHICLE;
     vehicle->ride = rideIndex;
-    vehicle->ride_subtype = ride->subtype;
+    vehicle->ride_subtype = subtype;
 
     vehicle->vehicle_type = vehicleEntryIndex;
     vehicle->type = carIndex == 0 ? VEHICLE_TYPE_HEAD : VEHICLE_TYPE_TAIL;
