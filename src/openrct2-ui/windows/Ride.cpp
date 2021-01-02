@@ -3577,6 +3577,7 @@ static void window_ride_operating_invalidate(rct_window* w)
         case RideMode::PoweredLaunch:
         case RideMode::UpwardLaunch:
         case RideMode::PoweredLaunchBlockSectioned:
+        case RideMode::PoweredLaunchSequential:
             ft.Rewind();
             ft.Increment(18);
             ft.Add<uint16_t>((ride->launch_speed * 9) / 4);

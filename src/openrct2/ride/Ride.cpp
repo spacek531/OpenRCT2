@@ -889,7 +889,7 @@ bool Ride::CanHaveMultipleCircuits() const
 
     // Only allow circuit or launch modes
     if (mode != RideMode::ContinuousCircuit && mode != RideMode::ReverseInclineLaunchedShuttle
-        && mode != RideMode::PoweredLaunchPasstrough)
+        && mode != RideMode::PoweredLaunchPasstrough && mode != RideMode::PoweredLaunchSequential)
     {
         return false;
     }
@@ -3815,6 +3815,7 @@ static StationIndex ride_mode_check_valid_station_numbers(Ride* ride)
         case RideMode::PoweredLaunchPasstrough:
         case RideMode::PoweredLaunch:
         case RideMode::LimPoweredLaunch:
+        case RideMode::PoweredLaunchSequential:
             if (numStations <= 1)
                 return 1;
             gGameCommandErrorText = STR_UNABLE_TO_OPERATE_WITH_MORE_THAN_ONE_STATION_IN_THIS_MODE;
@@ -5911,7 +5912,7 @@ uint8_t ride_get_helix_sections(Ride* ride)
 bool Ride::IsPoweredLaunched() const
 {
     return mode == RideMode::PoweredLaunchPasstrough || mode == RideMode::PoweredLaunch
-        || mode == RideMode::PoweredLaunchBlockSectioned;
+        || mode == RideMode::PoweredLaunchBlockSectioned || mode == RideMode::PoweredLaunchSequential;
 }
 
 bool Ride::IsBlockSectioned() const
@@ -6736,6 +6737,7 @@ void Ride::UpdateMaxVehicles()
             case RideMode::Shuttle:
             case RideMode::LimPoweredLaunch:
             case RideMode::PoweredLaunch:
+            case RideMode::PoweredLaunchSequential:
                 maxNumTrains = 1;
                 break;
             default:
