@@ -3288,7 +3288,6 @@ void Vehicle::UpdateDeparting()
                 acceleration = curRide->launch_speed << 12;
             break;
         case RideMode::PoweredLaunchSequential:
-            UpdateSequentialLaunchForwards();
             break;
         case RideMode::DownwardLaunch:
             if (var_CE >= 1)
@@ -3720,12 +3719,13 @@ void Vehicle::UpdateSequentialLaunchForwards()
     if (curRide == nullptr)
         return;
 
-    int32_t targetAcceleration = (curRide->launch_speed << 12) / (curRide->num_circuits / 2 + 1);
+    int32_t targetAcceleration = curRide->launch_speed << 14;
     int32_t targetSpeed;
 
     if (curRide->num_circuits > 1)
     {
         // if the ride has multiple circuits
+        // note: num_laps starts at 0, but num_circuits starts at 1
         if (num_laps <= 1 && num_laps <= (curRide->num_circuits - 2) / 2)
         {
             // increase the speed over the first few half-circuits
@@ -3734,7 +3734,7 @@ void Vehicle::UpdateSequentialLaunchForwards()
             if (targetSpeed > velocity)
                 acceleration = targetAcceleration;
         }
-        else if (curRide->num_circuits - num_laps < 1 && curRide->num_circuits - 1 - num_laps <= (curRide->num_circuits - 2) / 2)
+        else if (curRide->num_circuits - num_laps <= 2 && curRide->num_circuits - 1 - num_laps <= (curRide->num_circuits - 2) / 2)
         {
             // second half of ride cycle, decrease the speed over successive half-circuits
             targetSpeed = (curRide->launch_speed << 16) * (2 + 2 * (curRide->num_circuits - 1 - num_laps))
@@ -3743,7 +3743,7 @@ void Vehicle::UpdateSequentialLaunchForwards()
             if (targetSpeed < velocity)
                 acceleration = -targetAcceleration;
         }
-        else
+        else if (num_laps < curRide->num_circuits)
         {
             // cruising speed in the middle of the cycle
             if (curRide->launch_speed << 16 > velocity)
@@ -3766,7 +3766,7 @@ void Vehicle::UpdateSequentialLaunchBackwards()
     if (curRide == nullptr)
         return;
 
-    int32_t targetAcceleration = (curRide->launch_speed << 12) / (curRide->num_circuits / 2 + 1);
+    int32_t targetAcceleration = curRide->launch_speed << 14;
     int32_t targetSpeed;
 
     if (curRide->num_circuits > 1)
@@ -3780,7 +3780,7 @@ void Vehicle::UpdateSequentialLaunchBackwards()
             if (targetSpeed > -velocity)
                 acceleration = -targetAcceleration;
         }
-        else if (curRide->num_circuits - num_laps < 1 && curRide->num_circuits - 1 - num_laps <= (curRide->num_circuits - 2) / 2)
+        else if (curRide->num_circuits - num_laps <= 2 && curRide->num_circuits - 1 - num_laps <= (curRide->num_circuits - 2) / 2)
         {
             // second half of ride cycle, decrease the speed over successive half-circuits
             targetSpeed = (curRide->launch_speed << 16) * (1 + 2 * (curRide->num_circuits - 1 - num_laps))
@@ -3789,7 +3789,7 @@ void Vehicle::UpdateSequentialLaunchBackwards()
             if (targetSpeed < -velocity)
                 acceleration = targetAcceleration;
         }
-        else
+        else if (num_laps < curRide->num_circuits)
         {
             // cruising speed in the middle of the cycle
             if (curRide->launch_speed << 16 > -velocity)
@@ -3971,7 +3971,7 @@ void Vehicle::UpdateTravelling()
         return;
     }
 
-    if (curRide->mode == RideMode::PoweredLaunchPasstrough && velocity < 0)
+    if (curRide->mode == RideMode::PoweredLaunchPasstrough && velocity < 0 || curRide->mode == RideMode::PoweredLaunchSequential && velocity < 0)
         return;
 
     SetState(Vehicle::Status::Arriving);
@@ -8283,7 +8283,9 @@ loc_6DAEB9:
                 << 16; //_vehicleVelocityF64E08 * 1.2;
         }
     }
-    else if (track_type_is_station(trackType) && curRide->mode == RideMode::PoweredLaunchSequential)
+
+    if (track_type_is_station(trackType)
+        || TrackTypeIsBooster(curRide->type, trackType) && curRide->mode == RideMode::PoweredLaunchSequential)
     {
         UpdateSequentialLaunchForwards();
     }
@@ -8659,10 +8661,6 @@ loc_6DBA33:;
             acceleration = regs.eax;
         }
     }
-    else if (track_type_is_station(trackType) && curRide->mode == RideMode::PoweredLaunchSequential)
-    {
-        UpdateSequentialLaunchBackwards();
-    }
 
     if (TrackTypeIsBooster(curRide->type, trackType))
     {
@@ -8673,6 +8671,12 @@ loc_6DBA33:;
             regs.eax = RideTypeDescriptors[curRide->type].OperatingSettings.BoosterAcceleration << 16;
             acceleration = regs.eax;
         }
+    }
+
+    if (track_type_is_station(trackType)
+        || TrackTypeIsBooster(curRide->type, trackType) && curRide->mode == RideMode::PoweredLaunchSequential)
+    {
+        UpdateSequentialLaunchBackwards();
     }
 
     regs.ax = track_progress - 1;
