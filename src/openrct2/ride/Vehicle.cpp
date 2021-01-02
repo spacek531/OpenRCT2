@@ -3287,6 +3287,9 @@ void Vehicle::UpdateDeparting()
             if ((curRide->launch_speed << 16) > velocity)
                 acceleration = curRide->launch_speed << 12;
             break;
+        case RideMode::PoweredLaunchSequential:
+            UpdateSequentialLaunchForwards();
+            break;
         case RideMode::DownwardLaunch:
             if (var_CE >= 1)
             {
@@ -3707,6 +3710,98 @@ void Vehicle::UpdateCrashSetup()
         nextTrain->prev_vehicle_on_ride = prev_vehicle_on_ride;
     }
     velocity = 0;
+}
+
+void Vehicle::UpdateSequentialLaunchForwards()
+{
+    CheckIfMissing();
+
+    auto curRide = GetRide();
+    if (curRide == nullptr)
+        return;
+
+    int32_t targetAcceleration = (curRide->launch_speed << 12) / (curRide->num_circuits / 2 + 1);
+    int32_t targetSpeed;
+
+    if (curRide->num_circuits > 1)
+    {
+        // if the ride has multiple circuits
+        if (num_laps <= 1 && num_laps <= (curRide->num_circuits - 2) / 2)
+        {
+            // increase the speed over the first few half-circuits
+            targetSpeed = (curRide->launch_speed << 16) * (1 + 2 * num_laps) / (curRide->num_circuits + 1);
+
+            if (targetSpeed > velocity)
+                acceleration = targetAcceleration;
+        }
+        else if (curRide->num_circuits - num_laps < 1 && curRide->num_circuits - 1 - num_laps <= (curRide->num_circuits - 2) / 2)
+        {
+            // second half of ride cycle, decrease the speed over successive half-circuits
+            targetSpeed = (curRide->launch_speed << 16) * (2 + 2 * (curRide->num_circuits - 1 - num_laps))
+                / curRide->num_circuits;
+
+            if (targetSpeed < velocity)
+                acceleration = -targetAcceleration;
+        }
+        else
+        {
+            // cruising speed in the middle of the cycle
+            if (curRide->launch_speed << 16 > velocity)
+                acceleration = targetAcceleration;
+        }
+    }
+    else
+    {
+        // if the ride has a single circuit, go full speed immediately
+        if (curRide->launch_speed << 16 > velocity)
+            acceleration = targetAcceleration;
+    }
+}
+
+void Vehicle::UpdateSequentialLaunchBackwards()
+{
+    CheckIfMissing();
+
+    auto curRide = GetRide();
+    if (curRide == nullptr)
+        return;
+
+    int32_t targetAcceleration = (curRide->launch_speed << 12) / (curRide->num_circuits / 2 + 1);
+    int32_t targetSpeed;
+
+    if (curRide->num_circuits > 1)
+    {
+        // if the ride has multiple circuits
+        if (num_laps <= 1 && num_laps <= (curRide->num_circuits - 2) / 2)
+        {
+            // increase the speed over the first few half-circuits
+            targetSpeed = (curRide->launch_speed << 16) * (2 + 2 * num_laps) / (curRide->num_circuits + 1);
+
+            if (targetSpeed > -velocity)
+                acceleration = -targetAcceleration;
+        }
+        else if (curRide->num_circuits - num_laps < 1 && curRide->num_circuits - 1 - num_laps <= (curRide->num_circuits - 2) / 2)
+        {
+            // second half of ride cycle, decrease the speed over successive half-circuits
+            targetSpeed = (curRide->launch_speed << 16) * (1 + 2 * (curRide->num_circuits - 1 - num_laps))
+                / curRide->num_circuits;
+
+            if (targetSpeed < -velocity)
+                acceleration = targetAcceleration;
+        }
+        else
+        {
+            // cruising speed in the middle of the cycle
+            if (curRide->launch_speed << 16 > -velocity)
+                acceleration = -targetAcceleration;
+        }
+    }
+    else
+    {
+        // if the ride has a single circuit, go full speed immediately
+        if (curRide->launch_speed << 16 > -velocity)
+            acceleration = -targetAcceleration;
+    }
 }
 
 /**
@@ -8188,6 +8283,10 @@ loc_6DAEB9:
                 << 16; //_vehicleVelocityF64E08 * 1.2;
         }
     }
+    else if (track_type_is_station(trackType) && curRide->mode == RideMode::PoweredLaunchSequential)
+    {
+        UpdateSequentialLaunchForwards();
+    }
 
     if ((trackType == TrackElemType::Flat && curRide->type == RIDE_TYPE_REVERSE_FREEFALL_COASTER)
         || (trackType == TrackElemType::PoweredLift))
@@ -8559,6 +8658,10 @@ loc_6DBA33:;
             regs.eax = _vehicleVelocityF64E08 * -16;
             acceleration = regs.eax;
         }
+    }
+    else if (track_type_is_station(trackType) && curRide->mode == RideMode::PoweredLaunchSequential)
+    {
+        UpdateSequentialLaunchBackwards();
     }
 
     if (TrackTypeIsBooster(curRide->type, trackType))

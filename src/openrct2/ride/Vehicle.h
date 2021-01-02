@@ -388,6 +388,8 @@ private:
     void UpdateRotating();
     void UpdateDeparting();
     void FinishDeparting();
+    void UpdateSequentialLaunchForwards();
+    void UpdateSequentialLaunchBackwards();
     void UpdateTravelling();
     void UpdateTravellingCableLift();
     void UpdateTravellingBoat();
