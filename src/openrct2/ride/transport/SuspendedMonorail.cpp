@@ -1882,6 +1882,7 @@ TRACK_PAINT_FUNCTION get_track_paint_function_suspended_monorail(int32_t trackTy
 {
     switch (trackType)
     {
+        case TrackElemType::SpeedControl:
         case TrackElemType::Flat:
             return suspended_monorail_track_flat;
         case TrackElemType::EndStation:

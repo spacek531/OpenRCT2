@@ -2253,7 +2253,13 @@ static void window_ride_construction_invalidate(rct_window* w)
             stringId == STR_SPINNING_CONTROL_TOGGLE_TRACK && ride->type != RIDE_TYPE_SPINNING_WILD_MOUSE
             && ride->type != RIDE_TYPE_STEEL_WILD_MOUSE)
         {
-            stringId = STR_BOOSTER;
+            if (ride->type == RIDE_TYPE_MINIATURE_RAILWAY || ride->type == RIDE_TYPE_CAR_RIDE
+                || ride->type == RIDE_TYPE_MONSTER_TRUCKS || ride->type == RIDE_TYPE_GHOST_TRAIN
+                || ride->type == RIDE_TYPE_MONORAIL
+                || ride->type == RIDE_TYPE_SUSPENDED_MONORAIL || ride->type == RIDE_TYPE_SUBMARINE_RIDE)
+                stringId = STR_SPEED_CONTROL;
+            else
+                stringId = STR_BOOSTER;
         }
     }
     auto ft = Formatter::Common();
@@ -3065,8 +3071,13 @@ static void window_ride_construction_update_widgets(rct_window* w)
     _boosterTrackSelected = TrackTypeIsBooster(ride->type, _selectedTrackType)
         || (ride->type != RIDE_TYPE_SPINNING_WILD_MOUSE && ride->type != RIDE_TYPE_STEEL_WILD_MOUSE
             && _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster));
+    bool speedControlSelected = TrackTypeIsSpeedControl(ride->type, _selectedTrackType)
+        || ((ride->type == RIDE_TYPE_MINIATURE_RAILWAY || ride->type == RIDE_TYPE_CAR_RIDE || ride->type == RIDE_TYPE_MONSTER_TRUCKS || ride->type == RIDE_TYPE_GHOST_TRAIN
+            || ride->type == RIDE_TYPE_MONORAIL
+            || ride->type == RIDE_TYPE_SUSPENDED_MONORAIL || ride->type == RIDE_TYPE_SUBMARINE_RIDE)
+            && _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::SpeedControl));
 
-    if (!brakesSelected && !_boosterTrackSelected)
+    if (!brakesSelected && !_boosterTrackSelected && !speedControlSelected)
     {
         if (is_track_enabled(TRACK_FLAT_ROLL_BANKING))
         {
@@ -3112,6 +3123,13 @@ static void window_ride_construction_update_widgets(rct_window* w)
             window_ride_construction_widgets[WIDX_BANK_LEFT].tooltip = STR_RIDE_CONSTRUCTION_BRAKE_SPEED_LIMIT_TIP;
             window_ride_construction_widgets[WIDX_BANK_STRAIGHT].tooltip = STR_RIDE_CONSTRUCTION_BRAKE_SPEED_LIMIT_TIP;
             window_ride_construction_widgets[WIDX_BANK_RIGHT].tooltip = STR_RIDE_CONSTRUCTION_BRAKE_SPEED_LIMIT_TIP;
+        }
+        else if (speedControlSelected)
+        {
+            window_ride_construction_widgets[WIDX_BANKING_GROUPBOX].text = STR_RIDE_CONSTRUCTION_SPEED_CONTROL;
+            window_ride_construction_widgets[WIDX_BANK_LEFT].tooltip = STR_RIDE_CONSTRUCTION_SPEED_CONTROL_TIP;
+            window_ride_construction_widgets[WIDX_BANK_STRAIGHT].tooltip = STR_RIDE_CONSTRUCTION_SPEED_CONTROL_TIP;
+            window_ride_construction_widgets[WIDX_BANK_RIGHT].tooltip = STR_RIDE_CONSTRUCTION_SPEED_CONTROL_TIP;
         }
         else
         {
@@ -3355,7 +3373,16 @@ static void window_ride_construction_show_special_track_dropdown(rct_window* w, 
         {
             auto ride = get_ride(_currentRideIndex);
             if (ride != nullptr && ride->type != RIDE_TYPE_SPINNING_WILD_MOUSE && ride->type != RIDE_TYPE_STEEL_WILD_MOUSE)
-                trackPieceStringId = STR_BOOSTER;
+            {
+                if (ride != nullptr
+                    && (ride->type == RIDE_TYPE_MINIATURE_RAILWAY || ride->type == RIDE_TYPE_CAR_RIDE
+                        || ride->type == RIDE_TYPE_MONSTER_TRUCKS || ride->type == RIDE_TYPE_GHOST_TRAIN
+                        || ride->type == RIDE_TYPE_MONORAIL
+                        || ride->type == RIDE_TYPE_SUSPENDED_MONORAIL || ride->type == RIDE_TYPE_SUBMARINE_RIDE))
+                    trackPieceStringId = STR_SPEED_CONTROL;
+                else
+                    trackPieceStringId = STR_BOOSTER;
+            }
         }
         gDropdownItemsFormat[i] = trackPieceStringId;
         if ((trackPiece | RideConstructionSpecialPieceSelected) == _currentTrackCurve)

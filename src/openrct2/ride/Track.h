@@ -163,6 +163,7 @@ enum
     TRACK_SPINNING_TUNNEL,
     TRACK_ROTATION_CONTROL_TOGGLE,
     TRACK_BOOSTER = TRACK_ROTATION_CONTROL_TOGGLE,
+    TRACK_SPEED_CONTROL = TRACK_ROTATION_CONTROL_TOGGLE,
     TRACK_INLINE_TWIST_UNINVERTED,
     TRACK_INLINE_TWIST_INVERTED,
     TRACK_QUARTER_LOOP_UNINVERTED,
@@ -343,6 +344,7 @@ namespace TrackElemType
     constexpr uint16_t Brakes = 99;
     constexpr uint16_t RotationControlToggle = 100;
     constexpr uint16_t Booster = 100;
+    constexpr uint16_t SpeedControl = 100;
     constexpr uint16_t Maze = 101;
     // Used by the multi-dimension coaster, as TD6 cannot handle index 255.
     constexpr uint16_t InvertedUp90ToFlatQuarterLoopAlias = 101;
@@ -581,4 +583,5 @@ money32 maze_set_track(
     uint8_t mode);
 
 bool TrackTypeIsBooster(uint8_t rideType, track_type_t trackType);
+bool TrackTypeIsSpeedControl(uint8_t rideType, track_type_t trackType);
 bool TrackTypeHasSpeedSetting(track_type_t trackType);

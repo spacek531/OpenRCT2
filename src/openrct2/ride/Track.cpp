@@ -1197,9 +1197,18 @@ bool track_element_is_covered(track_type_t trackElementType)
 
 bool TrackTypeIsBooster(uint8_t rideType, track_type_t trackType)
 {
-    // Boosters share their ID with the Spinning Control track.
+    // Boosters share their ID with the Spinning Control track and Speed Control track.
     return rideType != RIDE_TYPE_SPINNING_WILD_MOUSE && rideType != RIDE_TYPE_STEEL_WILD_MOUSE
         && trackType == TrackElemType::Booster;
+}
+
+bool TrackTypeIsSpeedControl(uint8_t rideType, track_type_t trackType)
+{
+    // Speed Control track share their ID with the Spinning Control track and Boosters.
+    return (rideType == RIDE_TYPE_MINIATURE_RAILWAY || rideType == RIDE_TYPE_CAR_RIDE || rideType == RIDE_TYPE_MONSTER_TRUCKS || rideType == RIDE_TYPE_GHOST_TRAIN
+            || rideType == RIDE_TYPE_MONORAIL || rideType == RIDE_TYPE_SUSPENDED_MONORAIL
+            || rideType == RIDE_TYPE_SUBMARINE_RIDE)
+        && trackType == TrackElemType::SpeedControl;
 }
 
 bool TrackTypeHasSpeedSetting(track_type_t trackType)
