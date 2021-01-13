@@ -8158,6 +8158,13 @@ bool Vehicle::UpdateTrackMotionForwardsGetNewTrack(uint16_t trackType, Ride* cur
     {
         update_flags ^= VEHICLE_UPDATE_FLAG_ROTATION_OFF_WILD_MOUSE;
     }
+    if (trackType == TrackElemType::Booster && (vehicleEntry->flags & VEHICLE_ENTRY_FLAG_POWERED))
+    {
+        // change the powered speed
+        uint8_t targetSpeed = get_booster_speed(curRide->type, (brake_speed << 2));
+        if (speed != targetSpeed)
+            speed = targetSpeed;
+    }
     // Change from original: this used to check if the vehicle allowed doors.
     UpdateSceneryDoorBackwards();
     UpdateLandscapeDoorBackwards();
@@ -8551,6 +8558,18 @@ bool Vehicle::UpdateTrackMotionBackwardsGetNewTrack(uint16_t trackType, Ride* cu
     track_type = trackType << 2;
     track_direction |= direction;
     brake_speed = tileElement->AsTrack()->GetBrakeBoosterSpeed();
+
+    rct_ride_entry_vehicle* vehicleEntry = Entry();
+    if (vehicleEntry != nullptr)
+    {
+        if (trackType == TrackElemType::Booster && (vehicleEntry->flags & VEHICLE_ENTRY_FLAG_POWERED))
+        {
+            // change the powered speed
+            uint8_t targetSpeed = get_booster_speed(curRide->type, (brake_speed << 2));
+            if (speed != targetSpeed)
+                speed = targetSpeed;
+        }
+    }
 
     // There are two bytes before the move info list
     uint16_t trackTotalProgress = GetTrackProgress();
