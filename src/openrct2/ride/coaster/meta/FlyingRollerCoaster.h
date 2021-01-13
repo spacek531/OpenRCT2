@@ -94,5 +94,6 @@ constexpr const RideTypeDescriptor FlyingRollerCoasterAltRTD =
     )),
     SET_FIELD(ColourPreview, { SPR_RIDE_DESIGN_PREVIEW_FLYING_ROLLER_COASTER_TRACK, SPR_RIDE_DESIGN_PREVIEW_FLYING_ROLLER_COASTER_SUPPORTS }),
     SET_FIELD(ColourKey, RideColourKey::Ride),
+    SET_FIELD(BoosterBehavior,RideBoosterBehaviour::Booster),
 };
 // clang-format on

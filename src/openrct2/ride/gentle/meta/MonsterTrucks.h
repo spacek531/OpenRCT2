@@ -56,5 +56,7 @@ constexpr const RideTypeDescriptor MonsterTrucksRTD =
     )),
     SET_FIELD(ColourPreview, { SPR_RIDE_DESIGN_PREVIEW_CAR_RIDE_TRACK, SPR_RIDE_DESIGN_PREVIEW_CAR_RIDE_SUPPORTS }),
     SET_FIELD(ColourKey, RideColourKey::Ride),
+    SET_FIELD(BoosterBehavior,RideBoosterBehaviour::SpeedController),
+    SET_FIELD(RapidsBehaviour,RideRapidsBehaviour::LogBumps),
 };
 // clang-format on

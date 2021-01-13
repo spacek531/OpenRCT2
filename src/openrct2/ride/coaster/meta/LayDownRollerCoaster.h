@@ -90,5 +90,6 @@ constexpr const RideTypeDescriptor LayDownRollerCoasterAltRTD =
     )),
     SET_FIELD(ColourPreview, { SPR_RIDE_DESIGN_PREVIEW_LAY_DOWN_ROLLER_COASTER_TRACK, SPR_RIDE_DESIGN_PREVIEW_LAY_DOWN_ROLLER_COASTER_SUPPORTS }),
     SET_FIELD(ColourKey, RideColourKey::Ride),
+    SET_FIELD(BoosterBehavior,RideBoosterBehaviour::Booster),
 };
 // clang-format on
