@@ -8164,7 +8164,7 @@ bool Vehicle::UpdateTrackMotionForwardsGetNewTrack(uint16_t trackType, Ride* cur
             {
                 update_flags ^= VEHICLE_UPDATE_FLAG_ROTATION_OFF_WILD_MOUSE;
             }
-            else if (TrackTypeIsSpeedControl(rideType, trackType) && (vehicleEntry->flags & VEHICLE_ENTRY_FLAG_POWERED))
+            else if (TrackTypeIsBooster(rideType, trackType) && (vehicleEntry->flags & VEHICLE_ENTRY_FLAG_POWERED))
             {
                 // change the powered speed
                 uint8_t targetSpeed = brake_speed << 2;
@@ -8572,7 +8572,7 @@ bool Vehicle::UpdateTrackMotionBackwardsGetNewTrack(uint16_t trackType, Ride* cu
     if (vehicleEntry != nullptr && curRide != nullptr)
     {
         uint16_t rideType = curRide->type;
-        if (TrackTypeIsSpeedControl(rideType, trackType) && (vehicleEntry->flags & VEHICLE_ENTRY_FLAG_POWERED))
+        if (TrackTypeIsBooster(rideType, trackType) && (vehicleEntry->flags & VEHICLE_ENTRY_FLAG_POWERED))
         {
             // change the powered speed
             uint8_t targetSpeed = brake_speed << 2;

@@ -2255,8 +2255,8 @@ static void window_ride_construction_invalidate(rct_window* w)
         {
             if (ride->type == RIDE_TYPE_MINIATURE_RAILWAY || ride->type == RIDE_TYPE_CAR_RIDE
                 || ride->type == RIDE_TYPE_MONSTER_TRUCKS || ride->type == RIDE_TYPE_GHOST_TRAIN
-                || ride->type == RIDE_TYPE_MONORAIL
-                || ride->type == RIDE_TYPE_SUSPENDED_MONORAIL || ride->type == RIDE_TYPE_SUBMARINE_RIDE)
+                || ride->type == RIDE_TYPE_MONORAIL || ride->type == RIDE_TYPE_SUSPENDED_MONORAIL
+                || ride->type == RIDE_TYPE_SUBMARINE_RIDE || ride->type == RIDE_TYPE_MINE_RIDE)
                 stringId = STR_SPEED_CONTROL;
             else
                 stringId = STR_BOOSTER;
@@ -3073,9 +3073,9 @@ static void window_ride_construction_update_widgets(rct_window* w)
             && _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster));
     bool speedControlSelected = TrackTypeIsSpeedControl(ride->type, _selectedTrackType)
         || ((ride->type == RIDE_TYPE_MINIATURE_RAILWAY || ride->type == RIDE_TYPE_CAR_RIDE || ride->type == RIDE_TYPE_MONSTER_TRUCKS || ride->type == RIDE_TYPE_GHOST_TRAIN
-            || ride->type == RIDE_TYPE_MONORAIL
-            || ride->type == RIDE_TYPE_SUSPENDED_MONORAIL || ride->type == RIDE_TYPE_SUBMARINE_RIDE)
-            && _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::SpeedControl));
+            || ride->type == RIDE_TYPE_MONORAIL || ride->type == RIDE_TYPE_SUSPENDED_MONORAIL
+             || ride->type == RIDE_TYPE_SUBMARINE_RIDE || ride->type == RIDE_TYPE_MINE_RIDE)
+            && _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster));
 
     if (!brakesSelected && !_boosterTrackSelected && !speedControlSelected)
     {
@@ -3377,8 +3377,8 @@ static void window_ride_construction_show_special_track_dropdown(rct_window* w, 
                 if (ride != nullptr
                     && (ride->type == RIDE_TYPE_MINIATURE_RAILWAY || ride->type == RIDE_TYPE_CAR_RIDE
                         || ride->type == RIDE_TYPE_MONSTER_TRUCKS || ride->type == RIDE_TYPE_GHOST_TRAIN
-                        || ride->type == RIDE_TYPE_MONORAIL
-                        || ride->type == RIDE_TYPE_SUSPENDED_MONORAIL || ride->type == RIDE_TYPE_SUBMARINE_RIDE))
+                        || ride->type == RIDE_TYPE_MONORAIL || ride->type == RIDE_TYPE_SUSPENDED_MONORAIL
+                        || ride->type == RIDE_TYPE_SUBMARINE_RIDE || ride->type == RIDE_TYPE_MINE_RIDE))
                     trackPieceStringId = STR_SPEED_CONTROL;
                 else
                     trackPieceStringId = STR_BOOSTER;

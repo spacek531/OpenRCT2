@@ -7303,6 +7303,7 @@ TRACK_PAINT_FUNCTION get_track_paint_function_mine_train_rc(int32_t trackType)
 {
     switch (trackType)
     {
+        case TrackElemType::Booster:
         case TrackElemType::Flat:
             return mine_train_rc_track_flat;
         case TrackElemType::EndStation:
