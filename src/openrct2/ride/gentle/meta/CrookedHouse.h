@@ -51,5 +51,7 @@ constexpr const RideTypeDescriptor CrookedHouseRTD =
     )),
     SET_FIELD(ColourPreview, { 0, 0 }),
     SET_FIELD(ColourKey, RideColourKey::Ride),
+    SET_FIELD(BoosterBehaviour,RideBoosterBehaviour::SpeedController),
+    SET_FIELD(RapidsBehaviour,RideRapidsBehaviour::LogBumps),
 };
 // clang-format on

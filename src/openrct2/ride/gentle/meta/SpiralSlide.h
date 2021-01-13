@@ -52,5 +52,7 @@ constexpr const RideTypeDescriptor SpiralSlideRTD =
     )),
     SET_FIELD(ColourPreview, { SPR_RIDE_DESIGN_PREVIEW_SPIRAL_SLIDE_TRACK, 0 }),
     SET_FIELD(ColourKey, RideColourKey::Ride),
+    SET_FIELD(BoosterBehaviour,RideBoosterBehaviour::SpeedController),
+    SET_FIELD(RapidsBehaviour,RideRapidsBehaviour::LogBumps),
 };
 // clang-format on

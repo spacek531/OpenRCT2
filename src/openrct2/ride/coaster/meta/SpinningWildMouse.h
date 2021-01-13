@@ -53,6 +53,7 @@ constexpr const RideTypeDescriptor SpinningWildMouseRTD =
     )),
     SET_FIELD(ColourPreview, { SPR_RIDE_DESIGN_PREVIEW_WILD_MOUSE_TRACK, SPR_RIDE_DESIGN_PREVIEW_WILD_MOUSE_SUPPORTS }),
     SET_FIELD(ColourKey, RideColourKey::Ride),
-    SET_FIELD(BoosterBehavior,RideBoosterBehaviour::SpinningToggle),
+    SET_FIELD(BoosterBehaviour,RideBoosterBehaviour::SpinningToggle),
+    SET_FIELD(RapidsBehaviour,RideRapidsBehaviour::LogBumps),
 };
 // clang-format on

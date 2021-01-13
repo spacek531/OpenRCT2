@@ -54,6 +54,7 @@ constexpr const RideTypeDescriptor WoodenRollerCoasterRTD =
     )),
     SET_FIELD(ColourPreview, { SPR_RIDE_DESIGN_PREVIEW_WOODEN_ROLLER_COASTER_TRACK, SPR_RIDE_DESIGN_PREVIEW_WOODEN_ROLLER_COASTER_SUPPORTS }),
     SET_FIELD(ColourKey, RideColourKey::Ride),
-    SET_FIELD(BoosterBehavior,RideBoosterBehaviour::Booster),
+    SET_FIELD(BoosterBehaviour,RideBoosterBehaviour::Booster),
+    SET_FIELD(RapidsBehaviour,RideRapidsBehaviour::LogBumps),
 };
 // clang-format on

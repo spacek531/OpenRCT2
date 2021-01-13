@@ -46,5 +46,7 @@ constexpr const RideTypeDescriptor CashMachineRTD =
     SET_FIELD(ColourPresets, DEFAULT_FLAT_RIDE_COLOUR_PRESET),
     SET_FIELD(ColourPreview, { 0, 0 }),
     SET_FIELD(ColourKey, RideColourKey::CashMachine),
+    SET_FIELD(BoosterBehaviour,RideBoosterBehaviour::SpeedController),
+    SET_FIELD(RapidsBehaviour,RideRapidsBehaviour::LogBumps),
 };
 // clang-format on
