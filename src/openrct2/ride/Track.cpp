@@ -1206,7 +1206,45 @@ bool TrackTypeHasSpeedSetting(track_type_t trackType)
 {
     // This does not check if the element is really a Spinning Control track instead of a booster,
     // but this does not cause problems.
-    return trackType == TrackElemType::Brakes || trackType == TrackElemType::Booster;
+    switch (trackType)
+    {
+        case TrackElemType::Brakes:
+        case TrackElemType::Booster:
+        case TrackElemType::Flat:
+        case TrackElemType::FlatToDown25:
+        case TrackElemType::Down25:
+        case TrackElemType::Down25ToFlat:
+        case TrackElemType::FlatToUp25:
+        case TrackElemType::Up25:
+        case TrackElemType::Up25ToFlat:
+        case TrackElemType::Down25ToDown60:
+        case TrackElemType::Down60:
+        case TrackElemType::Down60ToDown25:
+        case TrackElemType::Up25ToUp60:
+        case TrackElemType::Up60:
+        case TrackElemType::Up60ToUp25:
+        case TrackElemType::RightQuarterTurn3Tiles:
+        case TrackElemType::LeftQuarterTurn3Tiles:
+        case TrackElemType::RightQuarterTurn5Tiles:
+        case TrackElemType::LeftQuarterTurn5Tiles:
+        case TrackElemType::RightEighthToDiag:
+        case TrackElemType::RightEighthToOrthogonal:
+        case TrackElemType::LeftEighthToDiag:
+        case TrackElemType::LeftEighthToOrthogonal:
+        case TrackElemType::DiagFlat:
+        case TrackElemType::DiagFlatToDown25:
+        case TrackElemType::DiagDown25:
+        case TrackElemType::DiagDown25ToFlat:
+        case TrackElemType::DiagDown25ToDown60:
+        case TrackElemType::DiagDown60:
+        case TrackElemType::DiagDown60ToDown25:
+        case TrackElemType::DiagUp25ToUp60:
+        case TrackElemType::DiagUp60:
+        case TrackElemType::DiagUp60ToUp25:
+            return true;
+        default:
+            return false;
+    }
 }
 
 uint8_t TrackElement::GetSeatRotation() const

@@ -534,6 +534,7 @@ enum
     RIDE_ENTRY_FLAG_DISABLE_COLOUR_TAB = 1 << 19,
     // Must be set with swing mode 1 as well.
     RIDE_ENTRY_FLAG_ALTERNATIVE_SWING_MODE_2 = 1 << 20,
+    RIDE_ENTRY_FLAG_BRAKEMAN_CONTROLS_TRAINS = 1 << 21,
 };
 
 enum
