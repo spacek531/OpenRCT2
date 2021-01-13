@@ -547,6 +547,8 @@ rct_window* window_ride_construction_open()
 
     _currentTrackPrice = MONEY32_UNDEFINED;
     _currentBrakeSpeed2 = 8;
+    if (ride->type == RIDE_TYPE_SCENIC_RAILWAY_COASTER)
+        _currentBrakeSpeed2 = 16;
     _currentSeatRotationAngle = 4;
 
     _currentTrackCurve = RideTypeDescriptors[ride->type].StartTrackPiece | RideConstructionSpecialPieceSelected;
@@ -2485,6 +2487,10 @@ void window_ride_construction_update_active_elements_impl()
     rct_window* w;
     TileElement* tileElement;
 
+    auto ride = get_ride(_currentRideIndex);
+    if (ride == nullptr)
+        return;
+
     window_ride_construction_update_enabled_track_pieces();
     w = window_find_by_class(WC_RIDE_CONSTRUCTION);
     if (w == nullptr)
@@ -2501,7 +2507,7 @@ void window_ride_construction_update_active_elements_impl()
             != std::nullopt)
         {
             _selectedTrackType = tileElement->AsTrack()->GetTrackType();
-            if (TrackTypeHasSpeedSetting(tileElement->AsTrack()->GetTrackType()))
+            if (ride->type == RIDE_TYPE_SCENIC_RAILWAY_COASTER || TrackTypeHasSpeedSetting(tileElement->AsTrack()->GetTrackType()))
                 _currentBrakeSpeed2 = tileElement->AsTrack()->GetBrakeBoosterSpeed();
             _currentSeatRotationAngle = tileElement->AsTrack()->GetSeatRotation();
         }
@@ -3066,7 +3072,13 @@ static void window_ride_construction_update_widgets(rct_window* w)
         || (ride->type != RIDE_TYPE_SPINNING_WILD_MOUSE && ride->type != RIDE_TYPE_STEEL_WILD_MOUSE
             && _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster));
 
-    if (!brakesSelected && !_boosterTrackSelected)
+    bool trackSpeedControl = ride->type == RIDE_TYPE_SCENIC_RAILWAY_COASTER
+        && !((_currentTrackLiftHill & CONSTRUCTION_LIFT_HILL_SELECTED) || _selectedTrackType == TrackElemType::BeginStation
+             || _selectedTrackType == TrackElemType::MiddleStation || _selectedTrackType == TrackElemType::EndStation
+             || _currentTrackCurve == TrackElemType::BeginStation || _currentTrackCurve == TrackElemType::MiddleStation
+             || _currentTrackCurve == TrackElemType::EndStation);
+
+    if (!brakesSelected && !_boosterTrackSelected && !trackSpeedControl)
     {
         if (is_track_enabled(TRACK_FLAT_ROLL_BANKING))
         {
@@ -3112,6 +3124,13 @@ static void window_ride_construction_update_widgets(rct_window* w)
             window_ride_construction_widgets[WIDX_BANK_LEFT].tooltip = STR_RIDE_CONSTRUCTION_BRAKE_SPEED_LIMIT_TIP;
             window_ride_construction_widgets[WIDX_BANK_STRAIGHT].tooltip = STR_RIDE_CONSTRUCTION_BRAKE_SPEED_LIMIT_TIP;
             window_ride_construction_widgets[WIDX_BANK_RIGHT].tooltip = STR_RIDE_CONSTRUCTION_BRAKE_SPEED_LIMIT_TIP;
+        }
+        else if (trackSpeedControl)
+        {
+            window_ride_construction_widgets[WIDX_BANKING_GROUPBOX].text = STR_RIDE_CONSTRUCTION_TRACK_SPEED;
+            window_ride_construction_widgets[WIDX_BANK_LEFT].tooltip = STR_RIDE_CONSTRUCTION_TRACK_SPEED_LIMIT_TIP;
+            window_ride_construction_widgets[WIDX_BANK_STRAIGHT].tooltip = STR_RIDE_CONSTRUCTION_TRACK_SPEED_LIMIT_TIP;
+            window_ride_construction_widgets[WIDX_BANK_RIGHT].tooltip = STR_RIDE_CONSTRUCTION_TRACK_SPEED_LIMIT_TIP;
         }
         else
         {

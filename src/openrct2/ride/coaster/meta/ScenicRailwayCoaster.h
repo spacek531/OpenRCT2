@@ -23,7 +23,7 @@ constexpr const RideTypeDescriptor ScenicRailwayCoasterRTD =
     SET_FIELD(ExtraTrackPieces, (1ULL << TRACK_BRAKES)),
     SET_FIELD(CoveredTrackPieces, 0),
     SET_FIELD(StartTrackPiece, TrackElemType::EndStation),
-    SET_FIELD(TrackPaintFunction, get_track_paint_function_side_friction_rc),
+    SET_FIELD(TrackPaintFunction, get_track_paint_function_scenic_railway_rc),
     SET_FIELD(Flags, RIDE_TYPE_FLAGS_TRACK_HAS_3_COLOURS | RIDE_TYPE_FLAG_HAS_LEAVE_WHEN_ANOTHER_VEHICLE_ARRIVES_AT_STATION |
                      RIDE_TYPE_FLAGS_COMMON_COASTER | RIDE_TYPE_FLAGS_COMMON_COASTER_NON_ALT | RIDE_TYPE_FLAG_HAS_LARGE_CURVES |
                      RIDE_TYPE_FLAG_PEEP_CHECK_GFORCES | RIDE_TYPE_FLAG_ALLOW_MULTIPLE_CIRCUITS),
@@ -36,7 +36,7 @@ constexpr const RideTypeDescriptor ScenicRailwayCoasterRTD =
     SET_FIELD(AvailableBreakdowns, (1 << BREAKDOWN_SAFETY_CUT_OUT) | (1 << BREAKDOWN_VEHICLE_MALFUNCTION)),
     SET_FIELD(Heights, { 15, 24, 4, 11, }),
     SET_FIELD(MaxMass, 15),
-    SET_FIELD(LiftData, { OpenRCT2::Audio::SoundId::Null, 5, 7 }),
+    SET_FIELD(LiftData, { OpenRCT2::Audio::SoundId::Null, 5, 10 }),
     SET_FIELD(RatingsCalculationFunction, ride_ratings_calculate_side_friction_roller_coaster),
     SET_FIELD(RatingsMultipliers, { 48, 28, 7 }),
     SET_FIELD(UpkeepCosts, { 39, 20, 80, 10, 3, 10 }),

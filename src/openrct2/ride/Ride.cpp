@@ -1624,6 +1624,7 @@ void ride_select_next_section()
             _currentTrackBegin = *newCoords;
             _currentTrackPieceDirection = tileElement->GetDirection();
             _currentTrackPieceType = tileElement->AsTrack()->GetTrackType();
+            _currentTrackLiftHill = tileElement->AsTrack()->HasChain();
             _currentTrackSelectionFlags = 0;
             window_ride_construction_update_active_elements();
         }
@@ -1633,6 +1634,7 @@ void ride_select_next_section()
             _currentTrackBegin = { outputElement, newCoords->z };
             _currentTrackPieceDirection = direction;
             _currentTrackPieceType = tileElement->AsTrack()->GetTrackType();
+            _currentTrackLiftHill = tileElement->AsTrack()->HasChain();
             _currentTrackSelectionFlags = 0;
             ride_construction_set_default_next_piece();
             window_ride_construction_update_active_elements();
@@ -1680,6 +1682,7 @@ void ride_select_previous_section()
             _currentTrackBegin.z = trackBeginEnd.begin_z;
             _currentTrackPieceDirection = trackBeginEnd.begin_direction;
             _currentTrackPieceType = trackBeginEnd.begin_element->AsTrack()->GetTrackType();
+            _currentTrackLiftHill = trackBeginEnd.begin_element->AsTrack()->HasChain();
             _currentTrackSelectionFlags = 0;
             if (!scenery_tool_is_active())
             {
@@ -1696,6 +1699,7 @@ void ride_select_previous_section()
             _currentTrackBegin.z = trackBeginEnd.begin_z;
             _currentTrackPieceDirection = trackBeginEnd.end_direction;
             _currentTrackPieceType = tileElement->AsTrack()->GetTrackType();
+            _currentTrackLiftHill = tileElement->AsTrack()->HasChain();
             _currentTrackSelectionFlags = 0;
             ride_construction_set_default_next_piece();
             window_ride_construction_update_active_elements();
