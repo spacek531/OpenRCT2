@@ -8167,7 +8167,7 @@ bool Vehicle::UpdateTrackMotionForwardsGetNewTrack(uint16_t trackType, Ride* cur
             else if (TrackTypeIsBooster(rideType, trackType) && (vehicleEntry->flags & VEHICLE_ENTRY_FLAG_POWERED))
             {
                 // change the powered speed
-                uint8_t targetSpeed = brake_speed << 2;
+                uint8_t targetSpeed = get_booster_speed(curRide->type, (brake_speed << 2));
                 if (speed != targetSpeed)
                     speed = targetSpeed;
             }
@@ -8569,13 +8569,12 @@ bool Vehicle::UpdateTrackMotionBackwardsGetNewTrack(uint16_t trackType, Ride* cu
     brake_speed = tileElement->AsTrack()->GetBrakeBoosterSpeed();
 
     rct_ride_entry_vehicle* vehicleEntry = Entry();
-    if (vehicleEntry != nullptr && curRide != nullptr)
+    if (vehicleEntry != nullptr)
     {
-        uint16_t rideType = curRide->type;
-        if (TrackTypeIsBooster(rideType, trackType) && (vehicleEntry->flags & VEHICLE_ENTRY_FLAG_POWERED))
+        if (TrackTypeIsBooster(curRide->type, trackType) && (vehicleEntry->flags & VEHICLE_ENTRY_FLAG_POWERED))
         {
             // change the powered speed
-            uint8_t targetSpeed = brake_speed << 2;
+            uint8_t targetSpeed = get_booster_speed(curRide->type, (brake_speed << 2));
             if (speed != targetSpeed)
                 speed = targetSpeed;
         }

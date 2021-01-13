@@ -581,5 +581,4 @@ money32 maze_set_track(
     uint8_t mode);
 
 bool TrackTypeIsBooster(uint8_t rideType, track_type_t trackType);
-bool TrackTypeIsSpeedControl(uint8_t rideType, track_type_t trackType);
 bool TrackTypeHasSpeedSetting(track_type_t trackType);

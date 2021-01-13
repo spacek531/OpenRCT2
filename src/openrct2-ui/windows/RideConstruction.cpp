@@ -3071,7 +3071,7 @@ static void window_ride_construction_update_widgets(rct_window* w)
     _boosterTrackSelected = TrackTypeIsBooster(ride->type, _selectedTrackType)
         || (ride->type != RIDE_TYPE_SPINNING_WILD_MOUSE && ride->type != RIDE_TYPE_STEEL_WILD_MOUSE
             && _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster));
-    bool speedControlSelected = TrackTypeIsSpeedControl(ride->type, _selectedTrackType)
+    bool speedControlSelected = TrackTypeIsBooster(ride->type, _selectedTrackType)
         || ((ride->type == RIDE_TYPE_MINIATURE_RAILWAY || ride->type == RIDE_TYPE_CAR_RIDE || ride->type == RIDE_TYPE_MONSTER_TRUCKS || ride->type == RIDE_TYPE_GHOST_TRAIN
             || ride->type == RIDE_TYPE_MONORAIL || ride->type == RIDE_TYPE_SUSPENDED_MONORAIL
              || ride->type == RIDE_TYPE_SUBMARINE_RIDE || ride->type == RIDE_TYPE_MINE_RIDE)
