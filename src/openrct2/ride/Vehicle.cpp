@@ -8562,7 +8562,6 @@ bool Vehicle::UpdateTrackMotionBackwardsGetNewTrack(uint16_t trackType, Ride* cu
     {
         target_seat_rotation = tileElement->AsTrack()->GetSeatRotation();
     }
-
     direction &= 3;
     track_type = trackType << 2;
     track_direction |= direction;
