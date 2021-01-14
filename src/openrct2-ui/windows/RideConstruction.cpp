@@ -3082,7 +3082,8 @@ static void window_ride_construction_update_widgets(rct_window* w)
     _boosterTrackSelected = TrackTypeIsBooster(ride->type, _selectedTrackType)
         || (RideTypeDescriptors[ride->type].TrackBehaviours.BoosterBehaviour == RideTrackBehaviour::Booster
             && _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster));
-    bool speedControlSelected = RideTypeDescriptors[ride->type].TrackBehaviours.BoosterBehaviour == RideTrackBehaviour::SpeedController
+    bool speedControlSelected = RideTypeDescriptors[ride->type].TrackBehaviours.BoosterBehaviour
+            == RideTrackBehaviour::SpeedController
         && (TrackTypeIsBooster(ride->type, _selectedTrackType)
             || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster));
 
