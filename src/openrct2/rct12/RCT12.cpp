@@ -250,7 +250,12 @@ uint8_t RCT12TrackElement::GetBrakeBoosterSpeed() const
 {
     if (TrackTypeHasSpeedSetting(GetTrackType()))
     {
-        return (sequence >> 4) << 1;
+        uint8_t speed = (sequence >> 4) << 1;
+        if (trackType == TrackElemType::BlockBrakes && speed == 0)
+        {
+            return 1 << 1;
+        }
+        return speed;
     }
     return 0;
 }
