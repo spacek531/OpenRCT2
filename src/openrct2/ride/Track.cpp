@@ -1417,7 +1417,7 @@ void TrackElement::SetBrakeBoosterSpeed(uint8_t speed)
 
 bool TrackElement::BrakeOpen() const
 {
-    return (Flags2 & TRACK_ELEMENT_FLAGS2_BRAKE_OPEN) == 0;
+    return (Flags2 & TRACK_ELEMENT_FLAGS2_BRAKE_OPEN) != 0;
 }
 
 void TrackElement::SetBrakeOpen(bool isOpen)

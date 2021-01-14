@@ -4299,23 +4299,14 @@ static void ride_set_maze_entrance_exit_points(Ride* ride)
 static void RideOpenBlockBrakes(CoordsXYE* startElement)
 {
     CoordsXYE currentElement = *startElement;
-    CoordsXYE previousElement;
-    CoordsXYE previousElement2;
     do
     {
         int32_t trackType = currentElement.element->AsTrack()->GetTrackType();
         switch (trackType)
         {
             case TrackElemType::BlockBrakes:
-                /*
-                previousElement = currentElement;
-                while (track_block_get_previous(&previousElement, nullptr)
-                       && previousElement.element != startElement->element)
-                {
-
-                }
-                */
-                [[fallthrough]]
+                block_brakes_set_linked_brakes_open(
+                    CoordsXYZ(currentElement.x, currentElement.y, currentElement.element->GetBaseZ()),currentElement.element,true);
             case TrackElemType::EndStation:
             case TrackElemType::CableLiftHill:
             case TrackElemType::Up25ToFlat:
@@ -4327,6 +4318,63 @@ static void RideOpenBlockBrakes(CoordsXYE* startElement)
         }
     } while (track_block_get_next(&currentElement, &currentElement, nullptr, nullptr)
              && currentElement.element != startElement->element);
+}
+
+
+void block_brakes_set_linked_brakes_open(const CoordsXYZ& vehicleTrackLocation, TileElement* tileElement, bool isOpen)
+{
+    TrackElement* blockBrake = tileElement->AsTrack();
+    if (blockBrake->GetTrackType() != TrackElemType::BlockBrakes)
+    {
+        return;
+    }
+    TrackElement* currentTrack;
+
+    auto location = vehicleTrackLocation;
+    track_begin_end trackBeginEnd, slowTrackBeginEnd;
+    TileElement slowTileElement = *tileElement;
+    bool counter = true;
+    CoordsXY slowLocation = location;
+    do
+    {
+        if (!track_block_get_previous({ location, tileElement }, &trackBeginEnd))
+        {
+            return;
+        }
+        if (trackBeginEnd.begin_x == vehicleTrackLocation.x && trackBeginEnd.begin_y == vehicleTrackLocation.y
+            && tileElement == trackBeginEnd.begin_element)
+        {
+            return;
+        }
+
+        location.x = trackBeginEnd.end_x;
+        location.y = trackBeginEnd.end_y;
+        location.z = trackBeginEnd.begin_z;
+        tileElement = trackBeginEnd.begin_element;
+
+        currentTrack = trackBeginEnd.begin_element->AsTrack();
+
+        if (currentTrack->GetTrackType() == TrackElemType::Brakes)
+        {
+            currentTrack->SetBrakeOpen(currentTrack->GetBrakeBoosterSpeed() < blockBrake->GetBrakeBoosterSpeed() && isOpen);
+        }
+
+        // prevent infinite loop
+        counter = !counter;
+        if (counter)
+        {
+            track_block_get_previous({ slowLocation, &slowTileElement }, &slowTrackBeginEnd);
+            slowLocation.x = slowTrackBeginEnd.end_x;
+            slowLocation.y = slowTrackBeginEnd.end_y;
+            slowTileElement = *(slowTrackBeginEnd.begin_element);
+            if (slowLocation == location && slowTileElement.GetBaseZ() == tileElement->GetBaseZ()
+                && slowTileElement.GetType() == tileElement->GetType()
+                && slowTileElement.GetDirection() == tileElement->GetDirection())
+            {
+                return;
+            }
+        }
+    } while (trackBeginEnd.begin_element->AsTrack()->GetTrackType() == TrackElemType::Brakes);
 }
 
 /**
@@ -4789,7 +4837,7 @@ bool Ride::CreateVehicles(const CoordsXYE& element, bool isApplying)
         {
             CoordsXYE firstBlock{};
             ride_create_vehicles_find_first_block(this, &firstBlock);
-            MoveTrainsToBlockBrakes(firstBlock.element->AsTrack());
+            MoveTrainsToBlockBrakes(&firstBlock);
         }
         else
         {
@@ -4822,8 +4870,9 @@ bool Ride::CreateVehicles(const CoordsXYE& element, bool isApplying)
  * preceding that block.
  *  rct2: 0x006DDF9C
  */
-void Ride::MoveTrainsToBlockBrakes(TrackElement* firstBlock)
+void Ride::MoveTrainsToBlockBrakes(CoordsXYE* currentElement)
 {
+    TrackElement* firstBlock = currentElement->element->AsTrack();
     for (int32_t i = 0; i < num_vehicles; i++)
     {
         auto train = GetEntity<Vehicle>(vehicles[i]);
@@ -4841,6 +4890,10 @@ void Ride::MoveTrainsToBlockBrakes(TrackElement* firstBlock)
         do
         {
             firstBlock->SetBlockBrakeClosed(true);
+
+            block_brakes_set_linked_brakes_open(
+                CoordsXYZ(currentElement->x, currentElement->y, currentElement->element->GetBaseZ()), currentElement->element,
+                true);
             for (Vehicle* car = train; car != nullptr; car = GetEntity<Vehicle>(car->next_vehicle_on_train))
             {
                 car->velocity = 0;
