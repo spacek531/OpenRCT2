@@ -882,7 +882,7 @@ static void window_tile_inspector_mouseup(rct_window* w, rct_widgetindex widgetI
                 }
                 case WIDX_TRACK_CHECK_BLOCK_BRAKE_CLOSED:
                     window_tile_inspector_track_set_block_brake(
-                        windowTileInspectorSelectedIndex, !tileElement->AsTrack()->BlockBrakeClosed());
+                        windowTileInspectorSelectedIndex, !tileElement->AsTrack()->GetBrakeClosed());
                     break;
                 case WIDX_TRACK_CHECK_IS_INDESTRUCTIBLE:
                     window_tile_inspector_track_set_indestructible(
@@ -1557,7 +1557,7 @@ static void window_tile_inspector_invalidate(rct_window* w)
             w->widgets[WIDX_TRACK_CHECK_IS_INDESTRUCTIBLE].bottom = GBBB(propertiesAnchor, 4);
             WidgetSetCheckboxValue(w, WIDX_TRACK_CHECK_APPLY_TO_ALL, windowTileInspectorApplyToAll);
             WidgetSetCheckboxValue(w, WIDX_TRACK_CHECK_CHAIN_LIFT, tileElement->AsTrack()->HasChain());
-            WidgetSetCheckboxValue(w, WIDX_TRACK_CHECK_BLOCK_BRAKE_CLOSED, tileElement->AsTrack()->BlockBrakeClosed());
+            WidgetSetCheckboxValue(w, WIDX_TRACK_CHECK_BLOCK_BRAKE_CLOSED, tileElement->AsTrack()->GetBrakeClosed());
             WidgetSetCheckboxValue(w, WIDX_TRACK_CHECK_IS_INDESTRUCTIBLE, tileElement->AsTrack()->IsIndestructible());
             break;
         case TileInspectorPage::Scenery:
