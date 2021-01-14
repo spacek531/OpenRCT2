@@ -2255,6 +2255,10 @@ static void window_ride_construction_invalidate(rct_window* w)
                 case RideTrackBehaviour::LogBumps:
                     stringId = STR_LOG_BUMPS;
                     break;
+                default:
+                {
+                    // to make the build systems happy
+                }
             }
         }
         else if (stringId == STR_SPINNING_CONTROL_TOGGLE_TRACK)
@@ -2270,6 +2274,10 @@ static void window_ride_construction_invalidate(rct_window* w)
                 case RideTrackBehaviour::SpinningToggle:
                     stringId = STR_SPINNING_CONTROL_TOGGLE_TRACK;
                     break;
+                default:
+                {
+                    // to make the build systems happy
+                }
             }
         }
     }
@@ -3384,6 +3392,10 @@ static void window_ride_construction_show_special_track_dropdown(rct_window* w, 
                 case RideTrackBehaviour::LogBumps:
                     trackPieceStringId = STR_LOG_BUMPS;
                     break;
+                default:
+                {
+                    // to make the build systems happy
+                }
             }
         }
         if (trackPieceStringId == STR_SPINNING_CONTROL_TOGGLE_TRACK && ride != nullptr)
@@ -3399,6 +3411,10 @@ static void window_ride_construction_show_special_track_dropdown(rct_window* w, 
                 case RideTrackBehaviour::SpinningToggle:
                     trackPieceStringId = STR_SPINNING_CONTROL_TOGGLE_TRACK;
                     break;
+                default:
+                {
+                    // to make the build systems happy
+                }
             }
         }
         gDropdownItemsFormat[i] = trackPieceStringId;
