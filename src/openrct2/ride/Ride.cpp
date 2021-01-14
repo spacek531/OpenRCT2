@@ -4327,18 +4327,29 @@ static void ride_set_maze_entrance_exit_points(Ride* ride)
 static void RideOpenBlockBrakes(CoordsXYE* startElement)
 {
     CoordsXYE currentElement = *startElement;
+    CoordsXYE previousElement;
+    CoordsXYE previousElement2;
     do
     {
         auto trackType = currentElement.element->AsTrack()->GetTrackType();
         switch (trackType)
         {
+            case TrackElemType::BlockBrakes:
+                /*
+                previousElement = currentElement;
+                while (track_block_get_previous(&previousElement, nullptr)
+                       && previousElement.element != startElement->element)
+                {
+
+                }
+                */
+                [[fallthrough]]
             case TrackElemType::EndStation:
             case TrackElemType::CableLiftHill:
             case TrackElemType::Up25ToFlat:
             case TrackElemType::Up60ToFlat:
             case TrackElemType::DiagUp25ToFlat:
             case TrackElemType::DiagUp60ToFlat:
-            case TrackElemType::BlockBrakes:
                 currentElement.element->AsTrack()->SetBlockBrakeClosed(false);
                 break;
         }

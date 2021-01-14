@@ -1206,7 +1206,7 @@ bool TrackTypeHasSpeedSetting(track_type_t trackType)
 {
     // This does not check if the element is really a Spinning Control track instead of a booster,
     // but this does not cause problems.
-    return trackType == TrackElemType::Brakes || trackType == TrackElemType::Booster;
+    return trackType == TrackElemType::Brakes || trackType == TrackElemType::Booster || trackType == TrackElemType::BlockBrakes;
 }
 
 uint8_t TrackElement::GetSeatRotation() const
@@ -1413,6 +1413,20 @@ uint8_t TrackElement::GetBrakeBoosterSpeed() const
 void TrackElement::SetBrakeBoosterSpeed(uint8_t speed)
 {
     BrakeBoosterSpeed = (speed >> 1);
+}
+
+bool TrackElement::BrakeOpen() const
+{
+    return (Flags2 & TRACK_ELEMENT_FLAGS2_BRAKE_OPEN) == 0;
+}
+
+void TrackElement::SetBrakeOpen(bool isOpen)
+{
+    Flags2 &= ~TRACK_ELEMENT_FLAGS2_BRAKE_OPEN;
+    if (isOpen)
+    {
+        Flags2 |= TRACK_ELEMENT_FLAGS2_BRAKE_OPEN;
+    }
 }
 
 bool TrackElement::HasGreenLight() const

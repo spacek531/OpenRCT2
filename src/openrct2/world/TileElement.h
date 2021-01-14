@@ -389,6 +389,9 @@ public:
     uint8_t GetBrakeBoosterSpeed() const;
     void SetBrakeBoosterSpeed(uint8_t speed);
 
+    bool BrakeOpen() const;
+    void SetBrakeOpen(bool isOpen);
+
     bool HasGreenLight() const;
     void SetHasGreenLight(bool on);
 
@@ -669,6 +672,7 @@ enum
 enum
 {
     MAP_ELEM_TRACK_SEQUENCE_GREEN_LIGHT = (1 << 7),
+    MAP_ELEM_TRACK_SEQUENCE_BRAKE_OPEN = (1 << 7),
 };
 
 #define TILE_ELEMENT_QUADRANT_MASK 0b11000000

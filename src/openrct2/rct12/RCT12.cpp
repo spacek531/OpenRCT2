@@ -828,6 +828,23 @@ void RCT12TrackElement::SetBlockBrakeClosed(bool isClosed)
     }
 }
 
+bool RCT12TrackElement::BrakeOpen() const
+{
+    return (flags & MAP_ELEM_TRACK_SEQUENCE_BRAKE_OPEN) != 0;
+}
+
+void RCT12TrackElement::SetBrakeOpen(bool isOpen)
+{
+    if (trackType == TrackElemType::Brakes)
+    {
+        sequence &= ~MAP_ELEM_TRACK_SEQUENCE_BRAKE_OPEN;
+        if (isOpen)
+        {
+            sequence |= MAP_ELEM_TRACK_SEQUENCE_BRAKE_OPEN;
+        }
+    }
+}
+
 void RCT12TrackElement::SetHasGreenLight(uint8_t greenLight)
 {
     if (track_type_is_station(trackType))
