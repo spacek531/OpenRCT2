@@ -1397,6 +1397,9 @@ public:
                 _currentTrackBankEnd = TRACK_BANK_NONE;
                 _currentTrackLiftHill &= ~CONSTRUCTION_LIFT_HILL_SELECTED;
                 break;
+            case TrackElemType::BlockBrakes:
+                _currentBrakeSpeed2 = 2;
+                break;
         }
         _currentTrackCurve = trackPiece | RideConstructionSpecialPieceSelected;
         window_ride_construction_update_active_elements();
@@ -2726,7 +2729,7 @@ static void WindowRideConstructionUpdateDisabledPieces(ObjectEntryIndex rideType
     const auto& rtd = GetRideTypeDescriptor(rideType);
     if (rtd.HasFlag(RIDE_TYPE_FLAG_HAS_TRACK))
     {
-        // Set all pieces as “disabled”. When looping over the ride entries,
+        // Set all pieces as �disabled�. When looping over the ride entries,
         // pieces will be re-enabled as soon as a single entry supports it.
         disabledPieces.flip();
 

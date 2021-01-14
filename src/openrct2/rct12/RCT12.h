@@ -464,7 +464,7 @@ private:
         struct
         {
             // The lower 4 bits are the track sequence.
-            // The upper 4 bits are either station bits or on-ride photo bits.
+            // The upper 4 bits are either station bits, brake speed bits, or on-ride photo bits.
             //
             // Station bits:
             // - Bit 8 marks green light
@@ -498,7 +498,7 @@ public:
     uint8_t GetDoorAState() const;
     uint8_t GetDoorBState() const;
 
-    bool BlockBrakeClosed() const;
+    bool GetBrakeClosed() const;
     bool IsIndestructible() const;
 };
 assert_struct_size(RCT12TrackElement, 8);

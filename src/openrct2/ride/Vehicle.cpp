@@ -6067,9 +6067,10 @@ void Vehicle::ApplyNonStopBlockBrake()
             velocity = BLOCK_BRAKE_BASE_SPEED;
             acceleration = 0;
         }
-        else
+        // the 868 offset is to make the min speed equal to
+        // BLOCK_BRAKE_BASE_SPEED to keep existing behaviour
+        else if (velocity > (brake_speed << 16) + 868)
         {
-            // Slow it down till the fixed block brake speed
             velocity -= velocity >> 4;
             acceleration = 0;
         }
@@ -6129,14 +6130,14 @@ void Vehicle::CheckAndApplyBlockSectionStopSite()
     switch (trackType)
     {
         case TrackElemType::BlockBrakes:
-            if (curRide->IsBlockSectioned() && trackElement->AsTrack()->BlockBrakeClosed())
+            if (curRide->IsBlockSectioned() && trackElement->AsTrack()->GetBrakeClosed())
                 ApplyStopBlockBrake();
             else
                 ApplyNonStopBlockBrake();
 
             break;
         case TrackElemType::EndStation:
-            if (trackElement->AsTrack()->BlockBrakeClosed())
+            if (trackElement->AsTrack()->GetBrakeClosed())
                 _vehicleMotionTrackFlags |= VEHICLE_UPDATE_MOTION_TRACK_FLAG_VEHICLE_AT_BLOCK_BRAKE;
 
             break;
@@ -6149,7 +6150,7 @@ void Vehicle::CheckAndApplyBlockSectionStopSite()
             {
                 if (trackType == TrackElemType::CableLiftHill || trackElement->AsTrack()->HasChain())
                 {
-                    if (trackElement->AsTrack()->BlockBrakeClosed())
+                    if (trackElement->AsTrack()->GetBrakeClosed())
                     {
                         ApplyStopBlockBrake();
                     }
@@ -6237,8 +6238,10 @@ static void block_brakes_open_previous_section(Ride& ride, const CoordsXYZ& vehi
     {
         return;
     }
-    trackElement->SetBlockBrakeClosed(false);
+    trackElement->SetBrakeClosed(false);
     MapInvalidateElement(location, reinterpret_cast<TileElement*>(trackElement));
+    if (ride.mode == RideMode::ContinuousCircuitBlockSectioned || ride.mode == RideMode::PoweredLaunchBlockSectioned)
+        blockBrakeSetLinkedBrakesClosed(location, reinterpret_cast<TileElement*>(trackElement), false);
 
     auto trackType = trackElement->GetTrackType();
     if (trackType == TrackElemType::BlockBrakes || trackType == TrackElemType::EndStation)
@@ -7407,7 +7410,8 @@ bool Vehicle::UpdateTrackMotionForwardsGetNewTrack(uint16_t trackType, Ride* cur
     {
         if (next_vehicle_on_train.IsNull())
         {
-            tileElement->AsTrack()->SetBlockBrakeClosed(true);
+            tileElement->AsTrack()->SetBrakeClosed(true);
+
             if (trackType == TrackElemType::BlockBrakes || trackType == TrackElemType::EndStation)
             {
                 if (!(rideEntry->Cars[0].flags & CAR_ENTRY_FLAG_POWERED))
@@ -7417,6 +7421,7 @@ bool Vehicle::UpdateTrackMotionForwardsGetNewTrack(uint16_t trackType, Ride* cur
             }
             MapInvalidateElement(TrackLocation, tileElement);
             block_brakes_open_previous_section(*curRide, TrackLocation, tileElement);
+            blockBrakeSetLinkedBrakesClosed(TrackLocation, tileElement, true);
         }
     }
 
@@ -7540,7 +7545,7 @@ bool Vehicle::UpdateTrackMotionForwardsGetNewTrack(uint16_t trackType, Ride* cur
     }
 
     trackType = tileElement->AsTrack()->GetTrackType();
-    if (trackType != TrackElemType::Brakes)
+    if (trackType != TrackElemType::Brakes && trackType != TrackElemType::BlockBrakes)
     {
         target_seat_rotation = tileElement->AsTrack()->GetSeatRotation();
     }
@@ -7596,7 +7601,9 @@ loc_6DAEB9:
             auto brakeSpeed = brake_speed << 16;
             if (brakeSpeed < _vehicleVelocityF64E08)
             {
-                acceleration = -_vehicleVelocityF64E08 * 16;
+                auto trackElement = MapGetTrackElementAtOfTypeSeq(TrackLocation, trackType, 0);
+                if ((trackElement != nullptr && trackElement->AsTrack()->GetBrakeClosed()) || trackElement == nullptr)
+                    acceleration = -_vehicleVelocityF64E08 * 16;
             }
             else if (!(gCurrentTicks & 0x0F))
             {
@@ -7945,7 +7952,7 @@ bool Vehicle::UpdateTrackMotionBackwardsGetNewTrack(uint16_t trackType, Ride* cu
     }
 
     trackType = tileElement->AsTrack()->GetTrackType();
-    if (trackType != TrackElemType::Brakes)
+    if (trackType != TrackElemType::Brakes && trackType != TrackElemType::BlockBrakes)
     {
         target_seat_rotation = tileElement->AsTrack()->GetSeatRotation();
     }
@@ -7983,12 +7990,16 @@ bool Vehicle::UpdateTrackMotionBackwards(CarEntry* carEntry, Ride* curRide, rct_
 
         if (trackType == TrackElemType::Brakes)
         {
-            if (-(brake_speed << 16) > _vehicleVelocityF64E08)
+            auto trackElement = MapGetTrackElementAtOfTypeSeq(TrackLocation, trackType, 0);
+            if (((trackElement != nullptr && trackElement->AsTrack()->GetBrakeClosed()) || trackElement == nullptr)
+                && -(brake_speed << 16) > _vehicleVelocityF64E08)
             {
-                acceleration = _vehicleVelocityF64E08 * -16;
+                if (-(brake_speed << 16) > _vehicleVelocityF64E08)
+                {
+                    acceleration = _vehicleVelocityF64E08 * -16;
+                }
             }
         }
-
         if (trackType == TrackElemType::Booster)
         {
             auto boosterSpeed = get_booster_speed(curRide->type, (brake_speed << 16));

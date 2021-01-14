@@ -205,7 +205,7 @@ static void wild_mouse_track_station(
         { 32, 28, 2 }, { 0, 2, height });
     if (trackType == TrackElemType::EndStation)
     {
-        bool isClosed = trackElement.BlockBrakeClosed();
+        bool isClosed = trackElement.GetBrakeClosed();
         PaintAddImageAsChildRotated(
             session, direction,
             session.TrackColours[SCHEME_TRACK].WithIndex(_wild_mouse_block_brakes_image_ids[direction][isClosed]),
