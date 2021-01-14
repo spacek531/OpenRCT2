@@ -1241,6 +1241,8 @@ bool TrackTypeHasSpeedSetting(track_type_t trackType)
         case TrackElemType::DiagUp25ToUp60:
         case TrackElemType::DiagUp60:
         case TrackElemType::DiagUp60ToUp25:
+        case TrackElemType::SBendLeft:
+        case TrackElemType::SBendRight:
             return true;
         default:
             return false;

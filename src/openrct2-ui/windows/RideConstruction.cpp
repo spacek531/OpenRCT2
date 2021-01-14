@@ -3071,14 +3071,10 @@ static void window_ride_construction_update_widgets(rct_window* w)
     _boosterTrackSelected = TrackTypeIsBooster(ride->type, _selectedTrackType)
         || (ride->type != RIDE_TYPE_SPINNING_WILD_MOUSE && ride->type != RIDE_TYPE_STEEL_WILD_MOUSE
             && _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster));
+    bool brakemanControl = (ride->GetRideEntry()->flags & RIDE_ENTRY_FLAG_BRAKEMAN_CONTROLS_TRAINS)
+        && !(_currentTrackLiftHill & CONSTRUCTION_LIFT_HILL_SELECTED) && TrackTypeHasSpeedSetting(_selectedTrackType);
 
-    bool trackSpeedControl = ride->type == RIDE_TYPE_SCENIC_RAILWAY_COASTER
-        && !((_currentTrackLiftHill & CONSTRUCTION_LIFT_HILL_SELECTED) || _selectedTrackType == TrackElemType::BeginStation
-             || _selectedTrackType == TrackElemType::MiddleStation || _selectedTrackType == TrackElemType::EndStation
-             || _currentTrackCurve == TrackElemType::BeginStation || _currentTrackCurve == TrackElemType::MiddleStation
-             || _currentTrackCurve == TrackElemType::EndStation);
-
-    if (!brakesSelected && !_boosterTrackSelected && !trackSpeedControl)
+    if (!brakesSelected && !_boosterTrackSelected && !brakemanControl)
     {
         if (is_track_enabled(TRACK_FLAT_ROLL_BANKING))
         {
@@ -3125,7 +3121,7 @@ static void window_ride_construction_update_widgets(rct_window* w)
             window_ride_construction_widgets[WIDX_BANK_STRAIGHT].tooltip = STR_RIDE_CONSTRUCTION_BRAKE_SPEED_LIMIT_TIP;
             window_ride_construction_widgets[WIDX_BANK_RIGHT].tooltip = STR_RIDE_CONSTRUCTION_BRAKE_SPEED_LIMIT_TIP;
         }
-        else if (trackSpeedControl)
+        else if (brakemanControl)
         {
             window_ride_construction_widgets[WIDX_BANKING_GROUPBOX].text = STR_RIDE_CONSTRUCTION_TRACK_SPEED;
             window_ride_construction_widgets[WIDX_BANK_LEFT].tooltip = STR_RIDE_CONSTRUCTION_TRACK_SPEED_LIMIT_TIP;

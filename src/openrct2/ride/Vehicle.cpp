@@ -3298,7 +3298,9 @@ void Vehicle::UpdateDeparting()
             if (vehicleEntry->flags & VEHICLE_ENTRY_FLAG_POWERED)
                 break;
 
-            if (velocity <= 131940)
+            if (velocity <= 131940 && (rideEntry->flags & RIDE_ENTRY_FLAG_BRAKEMAN_CONTROLS_TRAINS))
+                acceleration = 720;
+            else if (velocity <= 131940)
                 acceleration = 3298;
             break;
         default:
@@ -6613,7 +6615,13 @@ void Vehicle::UpdateTrackMotionUpStopCheck() const
  */
 void Vehicle::ApplyNonStopBlockBrake()
 {
-    if (velocity >= 0)
+    // if the vehicle is a scenic railway, give it a small boost
+    if (GetRideEntry()->flags & RIDE_ENTRY_FLAG_BRAKEMAN_CONTROLS_TRAINS)
+    {
+        if (velocity <= 131940)
+            acceleration = 720;
+    }
+    else if (velocity >= 0)
     {
         // If the vehicle is below the speed limit
         if (velocity <= BLOCK_BRAKE_BASE_SPEED)
@@ -8184,6 +8192,42 @@ bool Vehicle::UpdateTrackMotionForwards(rct_ride_entry_vehicle* vehicleEntry, Ri
 loc_6DAEB9:
     regs.cx = GetTrackType();
     int32_t trackType = GetTrackType();
+
+    if (rideEntry->flags & RIDE_ENTRY_FLAG_BRAKEMAN_CONTROLS_TRAINS)
+    {
+        switch (trackType)
+        {
+            case TrackElemType::Brakes:
+            case TrackElemType::Flat:
+            case TrackElemType::LeftQuarterTurn3Tiles:
+            case TrackElemType::RightQuarterTurn3Tiles:
+            case TrackElemType::LeftQuarterTurn5Tiles:
+            case TrackElemType::RightQuarterTurn5Tiles:
+            case TrackElemType::DiagFlat:
+            case TrackElemType::RightEighthToDiag:
+            case TrackElemType::RightEighthToOrthogonal:
+            case TrackElemType::LeftEighthToDiag:
+            case TrackElemType::LeftEighthToOrthogonal:
+            case TrackElemType::SBendLeft:
+            case TrackElemType::SBendRight:
+                // if the track is flat, accelerate slowly, as if the track is on a very gentle slope
+                if (_vehicleVelocityF64E08 <= 131940)
+                    acceleration = 720 << 2;
+            default:
+            {
+                // do nothing to the acceleration if the track is not flat
+            }
+        }
+        if (TrackTypeHasSpeedSetting(trackType))
+        {
+            regs.eax = brake_speed << 16;
+            if (regs.eax < _vehicleVelocityF64E08)
+            {
+                acceleration = -_vehicleVelocityF64E08 * 4;
+            }
+        }
+    }
+
     if (trackType == TrackElemType::HeartLineTransferUp || trackType == TrackElemType::HeartLineTransferDown)
     {
         if (track_progress == 80)
@@ -8591,6 +8635,41 @@ loc_6DBA33:;
         {
             unkVelocity = abs(unkVelocity);
             acceleration = unkVelocity * 2;
+        }
+    }
+
+    if (rideEntry->flags & RIDE_ENTRY_FLAG_BRAKEMAN_CONTROLS_TRAINS)
+    {
+        switch (trackType)
+        {
+            case TrackElemType::Brakes:
+            case TrackElemType::Flat:
+            case TrackElemType::LeftQuarterTurn3Tiles:
+            case TrackElemType::RightQuarterTurn3Tiles:
+            case TrackElemType::LeftQuarterTurn5Tiles:
+            case TrackElemType::RightQuarterTurn5Tiles:
+            case TrackElemType::DiagFlat:
+            case TrackElemType::RightEighthToDiag:
+            case TrackElemType::RightEighthToOrthogonal:
+            case TrackElemType::LeftEighthToDiag:
+            case TrackElemType::LeftEighthToOrthogonal:
+            case TrackElemType::SBendLeft:
+            case TrackElemType::SBendRight:
+                // if the track is flat, accelerate slowly, as if the track is on a very gentle slope
+                if (-_vehicleVelocityF64E08 <= 131940)
+                    acceleration = -(720 << 2);
+            default:
+            {
+                // do nothing to the acceleration if the track is not flat
+            }
+        }
+        if (TrackTypeHasSpeedSetting(trackType))
+        {
+            regs.eax = brake_speed << 16;
+            if (regs.eax < -_vehicleVelocityF64E08)
+            {
+                acceleration = -_vehicleVelocityF64E08 * 4;
+            }
         }
     }
 
