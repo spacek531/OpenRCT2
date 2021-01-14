@@ -64,7 +64,6 @@ constexpr const RideTypeDescriptor DinghySlideRTD =
     )),
     SET_FIELD(ColourPreview, { SPR_RIDE_DESIGN_PREVIEW_DINGHY_SLIDE_TRACK, SPR_RIDE_DESIGN_PREVIEW_DINGHY_SLIDE_SUPPORTS }),
     SET_FIELD(ColourKey, RideColourKey::Ride),
-    SET_FIELD(BoosterBehaviour,RideBoosterBehaviour::Booster),
-    SET_FIELD(RapidsBehaviour,RideRapidsBehaviour::Rapids),
+    SET_FIELD(TrackBehaviours,{RideTrackBehaviour::Booster,RideTrackBehaviour::Rapids})
 };
 // clang-format on

@@ -53,8 +53,7 @@ constexpr const RideTypeDescriptor MultiDimensionRollerCoasterRTD =
     )),
     SET_FIELD(ColourPreview, { SPR_RIDE_DESIGN_PREVIEW_MULTI_DIMENSION_ROLLER_COASTER_TRACK, SPR_RIDE_DESIGN_PREVIEW_MULTI_DIMENSION_ROLLER_COASTER_SUPPORTS }),
     SET_FIELD(ColourKey, RideColourKey::Ride),
-    SET_FIELD(BoosterBehaviour,RideBoosterBehaviour::Booster),
-    SET_FIELD(RapidsBehaviour,RideRapidsBehaviour::LogBumps),
+    SET_FIELD(TrackBehaviours,{RideTrackBehaviour::Booster,RideTrackBehaviour::LogBumps})
 };
 
 constexpr const RideTypeDescriptor MultiDimensionRollerCoasterAltRTD =
@@ -93,7 +92,6 @@ constexpr const RideTypeDescriptor MultiDimensionRollerCoasterAltRTD =
     )),
     SET_FIELD(ColourPreview, { SPR_RIDE_DESIGN_PREVIEW_MULTI_DIMENSION_ROLLER_COASTER_TRACK, SPR_RIDE_DESIGN_PREVIEW_MULTI_DIMENSION_ROLLER_COASTER_SUPPORTS }),
     SET_FIELD(ColourKey, RideColourKey::Ride),
-    SET_FIELD(BoosterBehaviour,RideBoosterBehaviour::Booster),
-    SET_FIELD(RapidsBehaviour,RideRapidsBehaviour::LogBumps),
+    SET_FIELD(TrackBehaviours,{RideTrackBehaviour::Booster,RideTrackBehaviour::LogBumps})
 };
 // clang-format on

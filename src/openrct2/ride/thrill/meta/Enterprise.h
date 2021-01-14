@@ -49,7 +49,6 @@ constexpr const RideTypeDescriptor EnterpriseRTD =
     SET_FIELD(ColourPresets, DEFAULT_FLAT_RIDE_COLOUR_PRESET),
     SET_FIELD(ColourPreview, { 0, 0 }),
     SET_FIELD(ColourKey, RideColourKey::Ride),
-    SET_FIELD(BoosterBehaviour,RideBoosterBehaviour::SpeedController),
-    SET_FIELD(RapidsBehaviour,RideRapidsBehaviour::LogBumps),
+    SET_FIELD(TrackBehaviours,{RideTrackBehaviour::SpeedController,RideTrackBehaviour::LogBumps})
 };
 // clang-format on

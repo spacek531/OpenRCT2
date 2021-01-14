@@ -51,7 +51,6 @@ constexpr const RideTypeDescriptor VirginiaReelRTD =
     )),
     SET_FIELD(ColourPreview, { SPR_RIDE_DESIGN_PREVIEW_VIRGINIA_REEL_TRACK, SPR_RIDE_DESIGN_PREVIEW_VIRGINIA_REEL_SUPPORTS }),
     SET_FIELD(ColourKey, RideColourKey::Ride),
-    SET_FIELD(BoosterBehaviour,RideBoosterBehaviour::Booster),
-    SET_FIELD(RapidsBehaviour,RideRapidsBehaviour::LogBumps),
+    SET_FIELD(TrackBehaviours,{RideTrackBehaviour::Booster,RideTrackBehaviour::LogBumps})
 };
 // clang-format on

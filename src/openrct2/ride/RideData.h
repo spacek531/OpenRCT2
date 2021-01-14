@@ -74,15 +74,11 @@ enum class RideColourKey : uint8_t
     Toilets
 };
 
-enum class RideBoosterBehaviour : uint8_t
+enum class RideTrackBehaviour : uint8_t
 {
+    SpinningToggle,
     Booster,
     SpeedController,
-    SpinningToggle
-};
-
-enum class RideRapidsBehaviour : uint8_t
-{
     Rapids,
     LogBumps
 };
@@ -120,6 +116,12 @@ struct RideColourPreview
 {
     uint32_t Track;
     uint32_t Supports;
+};
+
+struct RideTrackBehaviours
+{
+    RideTrackBehaviour BoosterBehaviour;
+    RideTrackBehaviour RapidsBehaviour;
 };
 
 struct UpkeepCostsDescriptor
@@ -187,8 +189,7 @@ struct RideTypeDescriptor
     track_colour_preset_list ColourPresets;
     RideColourPreview ColourPreview;
     RideColourKey ColourKey;
-    RideBoosterBehaviour BoosterBehaviour;
-    RideRapidsBehaviour RapidsBehaviour;
+    RideTrackBehaviours TrackBehaviours;
 
     bool HasFlag(uint64_t flag) const;
     uint64_t GetAvailableTrackPieces() const;
@@ -363,8 +364,7 @@ constexpr const RideTypeDescriptor DummyRTD =
     SET_FIELD(ColourPresets, DEFAULT_FLAT_RIDE_COLOUR_PRESET),
     SET_FIELD(ColourPreview, { static_cast<uint32_t>(SPR_NONE), static_cast<uint32_t>(SPR_NONE) }),
     SET_FIELD(ColourKey, RideColourKey::Ride),
-    SET_FIELD(BoosterBehaviour,RideBoosterBehaviour::Booster),
-    SET_FIELD(RapidsBehaviour,RideRapidsBehaviour::LogBumps)
+    SET_FIELD(TrackBehaviours,{RideTrackBehaviour::Booster,RideTrackBehaviour::LogBumps})
 };
 // clang-format on
 

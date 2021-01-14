@@ -53,7 +53,6 @@ constexpr const RideTypeDescriptor MonorailCyclesRTD =
     )),
     SET_FIELD(ColourPreview, { SPR_RIDE_DESIGN_PREVIEW_MONORAIL_CYCLES_TRACK, SPR_RIDE_DESIGN_PREVIEW_MONORAIL_CYCLES_SUPPORTS }),
     SET_FIELD(ColourKey, RideColourKey::Ride),
-    SET_FIELD(BoosterBehaviour,RideBoosterBehaviour::SpeedController),
-    SET_FIELD(RapidsBehaviour,RideRapidsBehaviour::LogBumps),
+    SET_FIELD(TrackBehaviours,{RideTrackBehaviour::SpeedController,RideTrackBehaviour::LogBumps})
 };
 // clang-format on

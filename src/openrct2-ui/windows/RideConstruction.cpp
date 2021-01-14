@@ -2247,27 +2247,27 @@ static void window_ride_construction_invalidate(rct_window* w)
         stringId = RideConfigurationStringIds[_currentTrackCurve & ~RideConstructionSpecialPieceSelected];
         if (stringId == STR_RAPIDS)
         {
-            switch (RideTypeDescriptors[ride->type].RapidsBehaviour)
+            switch (RideTypeDescriptors[ride->type].TrackBehaviours.RapidsBehaviour)
             {
-                case RideRapidsBehaviour::Rapids:
+                case RideTrackBehaviour::Rapids:
                     stringId = STR_RAPIDS;
                     break;
-                case RideRapidsBehaviour::LogBumps:
+                case RideTrackBehaviour::LogBumps:
                     stringId = STR_LOG_BUMPS;
                     break;
             }
         }
         else if (stringId == STR_SPINNING_CONTROL_TOGGLE_TRACK)
         {
-            switch (RideTypeDescriptors[ride->type].BoosterBehaviour)
+            switch (RideTypeDescriptors[ride->type].TrackBehaviours.BoosterBehaviour)
             {
-                case RideBoosterBehaviour::Booster:
+                case RideTrackBehaviour::Booster:
                     stringId = STR_BOOSTER;
                     break;
-                case RideBoosterBehaviour::SpeedController:
+                case RideTrackBehaviour::SpeedController:
                     stringId = STR_SPEED_CONTROL;
                     break;
-                case RideBoosterBehaviour::SpinningToggle:
+                case RideTrackBehaviour::SpinningToggle:
                     stringId = STR_SPINNING_CONTROL_TOGGLE_TRACK;
                     break;
             }
@@ -3080,9 +3080,9 @@ static void window_ride_construction_update_widgets(rct_window* w)
     bool brakesSelected = _selectedTrackType == TrackElemType::Brakes
         || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Brakes);
     _boosterTrackSelected = TrackTypeIsBooster(ride->type, _selectedTrackType)
-        || (RideTypeDescriptors[ride->type].BoosterBehaviour == RideBoosterBehaviour::Booster
+        || (RideTypeDescriptors[ride->type].TrackBehaviours.BoosterBehaviour == RideTrackBehaviour::Booster
             && _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster));
-    bool speedControlSelected = RideTypeDescriptors[ride->type].BoosterBehaviour == RideBoosterBehaviour::SpeedController
+    bool speedControlSelected = RideTypeDescriptors[ride->type].TrackBehaviours.BoosterBehaviour == RideTrackBehaviour::SpeedController
         && (TrackTypeIsBooster(ride->type, _selectedTrackType)
             || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster));
 
@@ -3375,27 +3375,27 @@ static void window_ride_construction_show_special_track_dropdown(rct_window* w, 
         auto ride = get_ride(_currentRideIndex);
         if (trackPieceStringId == STR_RAPIDS && ride != nullptr)
         {
-            switch (RideTypeDescriptors[ride->type].RapidsBehaviour)
+            switch (RideTypeDescriptors[ride->type].TrackBehaviours.RapidsBehaviour)
             {
-                case RideRapidsBehaviour::Rapids:
+                case RideTrackBehaviour::Rapids:
                     trackPieceStringId = STR_RAPIDS;
                     break;
-                case RideRapidsBehaviour::LogBumps:
+                case RideTrackBehaviour::LogBumps:
                     trackPieceStringId = STR_LOG_BUMPS;
                     break;
             }
         }
         if (trackPieceStringId == STR_SPINNING_CONTROL_TOGGLE_TRACK && ride != nullptr)
         {
-            switch (RideTypeDescriptors[ride->type].BoosterBehaviour)
+            switch (RideTypeDescriptors[ride->type].TrackBehaviours.BoosterBehaviour)
             {
-                case RideBoosterBehaviour::Booster:
+                case RideTrackBehaviour::Booster:
                     trackPieceStringId = STR_BOOSTER;
                     break;
-                case RideBoosterBehaviour::SpeedController:
+                case RideTrackBehaviour::SpeedController:
                     trackPieceStringId = STR_SPEED_CONTROL;
                     break;
-                case RideBoosterBehaviour::SpinningToggle:
+                case RideTrackBehaviour::SpinningToggle:
                     trackPieceStringId = STR_SPINNING_CONTROL_TOGGLE_TRACK;
                     break;
             }
