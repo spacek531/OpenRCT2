@@ -1558,14 +1558,12 @@ void S6Exporter::ExportTileElement(RCT12TileElement* dst, TileElement* src)
             dst2->SetColourScheme(src2->GetColourScheme());
             dst2->SetStationIndex(src2->GetStationIndex());
             dst2->SetHasGreenLight(src2->HasGreenLight());
-            // this is more-or-less the same as the above
-            dst2->SetBrakeOpen(src2->BrakeOpen());
             dst2->SetHasChain(src2->HasChain());
             dst2->SetHasCableLift(src2->HasCableLift());
             dst2->SetInverted(src2->IsInverted());
             dst2->SetBrakeBoosterSpeed(src2->GetBrakeBoosterSpeed());
             dst2->SetPhotoTimeout(src2->GetPhotoTimeout());
-            dst2->SetBlockBrakeClosed(src2->BlockBrakeClosed());
+            dst2->SetBrakeClosed(src2->GetBrakeClosed());
             dst2->SetIsIndestructible(src2->IsIndestructible());
 
             // Skipping IsHighlighted()

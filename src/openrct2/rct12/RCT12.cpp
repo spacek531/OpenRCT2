@@ -250,7 +250,12 @@ uint8_t RCT12TrackElement::GetBrakeBoosterSpeed() const
 {
     if (TrackTypeHasSpeedSetting(GetTrackType()))
     {
-        return (sequence >> 4) << 1;
+        uint8_t speed = (sequence >> 4) << 1;
+        if (trackType == TrackElemType::BlockBrakes && speed == 0)
+        {
+            return 1 << 1;
+        }
+        return speed;
     }
     return 0;
 }
@@ -811,36 +816,39 @@ void RCT12TrackElement::SetBrakeBoosterSpeed(uint8_t speed)
     }
 }
 
-bool RCT12TrackElement::BlockBrakeClosed() const
-{
-    return (flags & RCT12_TILE_ELEMENT_FLAG_BLOCK_BRAKE_CLOSED) != 0;
-}
-
-void RCT12TrackElement::SetBlockBrakeClosed(bool isClosed)
-{
-    if (isClosed)
-    {
-        flags |= RCT12_TILE_ELEMENT_FLAG_BLOCK_BRAKE_CLOSED;
-    }
-    else
-    {
-        flags &= ~RCT12_TILE_ELEMENT_FLAG_BLOCK_BRAKE_CLOSED;
-    }
-}
-
-bool RCT12TrackElement::BrakeOpen() const
-{
-    return (flags & MAP_ELEM_TRACK_SEQUENCE_BRAKE_OPEN) != 0;
-}
-
-void RCT12TrackElement::SetBrakeOpen(bool isOpen)
+bool RCT12TrackElement::GetBrakeClosed() const
 {
     if (trackType == TrackElemType::Brakes)
     {
-        sequence &= ~MAP_ELEM_TRACK_SEQUENCE_BRAKE_OPEN;
-        if (isOpen)
+        // brakes have the opposite polarity of block brake: closed is 0, open is 1
+        return !((flags & RCT12_TILE_ELEMENT_FLAG_BRAKE_OPEN) != 0);
+    }
+    return (flags & RCT12_TILE_ELEMENT_FLAG_BLOCK_BRAKE_CLOSED) != 0;
+}
+
+void RCT12TrackElement::SetBrakeClosed(bool isClosed)
+{
+    if (trackType == TrackElemType::Brakes)
+    {
+        // brakes have the opposite polarity of block brake: closed is 0, open is 1
+        if (isClosed)
         {
-            sequence |= MAP_ELEM_TRACK_SEQUENCE_BRAKE_OPEN;
+            flags &= ~RCT12_TILE_ELEMENT_FLAG_BRAKE_OPEN;
+        }
+        else
+        {
+            flags |= RCT12_TILE_ELEMENT_FLAG_BRAKE_OPEN;
+        }
+    }
+    else
+    {
+        if (isClosed)
+        {
+            flags |= RCT12_TILE_ELEMENT_FLAG_BLOCK_BRAKE_CLOSED;
+        }
+        else
+        {
+            flags &= ~RCT12_TILE_ELEMENT_FLAG_BLOCK_BRAKE_CLOSED;
         }
     }
 }
