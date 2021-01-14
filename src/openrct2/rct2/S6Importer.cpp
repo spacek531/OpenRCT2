@@ -1346,7 +1346,6 @@ namespace RCT2
                     auto src2 = src->AsSurface();
 
                     dst2->SetSlope(src2->GetSlope());
-
                     dst2->SetSurfaceStyle(src2->GetSurfaceStyle());
                     dst2->SetEdgeStyle(src2->GetEdgeStyle());
 

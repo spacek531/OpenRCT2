@@ -3695,7 +3695,7 @@ void Ride::MoveTrainsToBlockBrakes(CoordsXYE* currentElement)
         } while (!(train->UpdateTrackMotion(nullptr) & VEHICLE_UPDATE_MOTION_TRACK_FLAG_VEHICLE_AT_BLOCK_BRAKE));
 
         firstBlock->SetBrakeClosed(true);
-        if (firstBlock->GetTrackType() == TrackElemType::BlockBrakes)
+        if (TrackTypeIsBlockBrake(firstBlock->GetTrackType()))
         {
             BlockBrakeSetLinkedBrakesClosed(
                 CoordsXYZ(currentElement->x, currentElement->y, currentElement->element->GetBaseZ()), currentElement->element,

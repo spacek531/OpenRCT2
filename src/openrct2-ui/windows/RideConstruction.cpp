@@ -2753,7 +2753,7 @@ static void WindowRideConstructionUpdateDisabledPieces(ObjectEntryIndex rideType
     const auto& rtd = GetRideTypeDescriptor(rideType);
     if (rtd.HasFlag(RIDE_TYPE_FLAG_HAS_TRACK))
     {
-        // Set all pieces as “disabled”. When looping over the ride entries,
+        // Set all pieces as �disabled�. When looping over the ride entries,
         // pieces will be re-enabled as soon as a single entry supports it.
         disabledPieces.flip();
 

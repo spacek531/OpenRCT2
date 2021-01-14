@@ -576,6 +576,9 @@ GameActions::Result TrackPlaceAction::Execute() const
             case TrackElemType::Brakes:
                 trackElement->SetBrakeClosed(true);
                 break;
+            case TrackElemType::Brakes:
+                tileElement->AsTrack()->SetBrakeClosed(true);
+                break;
         }
 
         if (TrackTypeHasSpeedSetting(_trackType))
