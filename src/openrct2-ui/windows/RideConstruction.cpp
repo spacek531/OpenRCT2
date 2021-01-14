@@ -3060,8 +3060,9 @@ static void window_ride_construction_update_widgets(rct_window* w)
     window_ride_construction_widgets[WIDX_U_TRACK].type = WindowWidgetType::Empty;
     window_ride_construction_widgets[WIDX_O_TRACK].type = WindowWidgetType::Empty;
 
-    bool brakesSelected = _selectedTrackType == TrackElemType::Brakes
-        || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Brakes);
+    bool brakesSelected = _selectedTrackType == TrackElemType::Brakes || _selectedTrackType == TrackElemType::BlockBrakes
+        || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Brakes)
+        || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::BlockBrakes);
     _boosterTrackSelected = TrackTypeIsBooster(ride->type, _selectedTrackType)
         || (ride->type != RIDE_TYPE_SPINNING_WILD_MOUSE && ride->type != RIDE_TYPE_STEEL_WILD_MOUSE
             && _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster));
