@@ -818,7 +818,7 @@ bool RCT12TrackElement::BrakeClosed() const
     if (trackType == TrackElemType::Brakes)
     {
         // opposite polarity of block brake: closed is 0
-        return (sequence & MAP_ELEM_TRACK_SEQUENCE_BRAKE_OPEN) == 0;
+        return !((sequence & MAP_ELEM_TRACK_SEQUENCE_BRAKE_OPEN) != 0);
     }
     return (flags & RCT12_TILE_ELEMENT_FLAG_BLOCK_BRAKE_CLOSED) != 0;
 }
@@ -828,8 +828,11 @@ void RCT12TrackElement::SetBrakeClosed(bool isClosed)
     if (trackType == TrackElemType::Brakes)
     {
         // opposite polarity of block brake: closed is 0
-        sequence &= ~MAP_ELEM_TRACK_SEQUENCE_BRAKE_OPEN;
         if (isClosed)
+        {
+            sequence &= ~MAP_ELEM_TRACK_SEQUENCE_BRAKE_OPEN;
+        }
+        else
         {
             sequence |= MAP_ELEM_TRACK_SEQUENCE_BRAKE_OPEN;
         }

@@ -1174,6 +1174,8 @@ void ride_clear_blocked_tiles(Ride* ride)
                 {
                     if (element->GetType() == TILE_ELEMENT_TYPE_TRACK && element->AsTrack()->GetRideIndex() == ride->id)
                     {
+                        if (element->AsTrack()->GetTrackType() == TrackElemType::Brakes)
+                            element->AsTrack()->SetBrakeClosed(true);
                         // Unblock footpath element that is at same position
                         auto footpathElement = map_get_footpath_element(
                             TileCoordsXYZ{ x, y, element->base_height }.ToCoordsXYZ());
@@ -4229,9 +4231,9 @@ static void ride_set_boat_hire_return_point(Ride* ride, CoordsXYE* startElement)
         auto trackCoords = CoordsXYZ{ trackBeginEnd.begin_x, trackBeginEnd.begin_y, trackBeginEnd.begin_z };
         int32_t direction = trackBeginEnd.begin_direction;
         trackType = trackBeginEnd.begin_element->AsTrack()->GetTrackType();
-auto newCoords = sub_6C683D({ trackCoords, static_cast<Direction>(direction) }, trackType, 0, &returnPos.element, 0);
-returnPos = newCoords == std::nullopt ? CoordsXYE{ trackCoords, returnPos.element }
-: CoordsXYE{ *newCoords, returnPos.element };
+        auto newCoords = sub_6C683D({ trackCoords, static_cast<Direction>(direction) }, trackType, 0, &returnPos.element, 0);
+        returnPos = newCoords == std::nullopt ? CoordsXYE{ trackCoords, returnPos.element }
+                                              : CoordsXYE{ *newCoords, returnPos.element };
     };
 
     trackType = returnPos.element->AsTrack()->GetTrackType();
@@ -4304,27 +4306,22 @@ static void RideOpenBlockBrakes(CoordsXYE* startElement)
         int32_t trackType = currentElement.element->AsTrack()->GetTrackType();
         switch (trackType)
         {
-        case TrackElemType::BlockBrakes:
-            block_brakes_set_linked_brakes_closed(
-                CoordsXYZ(currentElement.x, currentElement.y, currentElement.element->GetBaseZ()), currentElement.element,
-                true);
-            [[fallthrough]];
-        case TrackElemType::EndStation:
-        case TrackElemType::CableLiftHill:
-        case TrackElemType::Up25ToFlat:
-        case TrackElemType::Up60ToFlat:
-        case TrackElemType::DiagUp25ToFlat:
-        case TrackElemType::DiagUp60ToFlat:
-            currentElement.element->AsTrack()->SetBrakeClosed(false);
-            break;
+            case TrackElemType::BlockBrakes:
+                block_brakes_set_linked_brakes_closed(
+                    CoordsXYZ(currentElement.x, currentElement.y, currentElement.element->GetBaseZ()), currentElement.element,
+                    false);
+                [[fallthrough]];
+            case TrackElemType::EndStation:
+            case TrackElemType::CableLiftHill:
+            case TrackElemType::Up25ToFlat:
+            case TrackElemType::Up60ToFlat:
+            case TrackElemType::DiagUp25ToFlat:
+            case TrackElemType::DiagUp60ToFlat:
+                currentElement.element->AsTrack()->SetBrakeClosed(false);
+                break;
         }
     } while (track_block_get_next(&currentElement, &currentElement, nullptr, nullptr)
-        && currentElement.element != startElement->element);
-}
-
-static void RideCloseBrakes()
-{
-    // sets all brake pieces Closed to true
+             && currentElement.element != startElement->element);
 }
 
 void block_brakes_set_linked_brakes_closed(const CoordsXYZ& vehicleTrackLocation, TileElement* tileElement, bool isClosed)
