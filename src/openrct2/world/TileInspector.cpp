@@ -1044,8 +1044,7 @@ GameActionResultPtr tile_inspector_track_set_chain(
     return std::make_unique<GameActions::Result>();
 }
 
-GameActionResultPtr tile_inspector_track_set_brake(
-    const CoordsXY& loc, int32_t elementIndex, bool isClosed, bool isExecuting)
+GameActionResultPtr tile_inspector_track_set_brake(const CoordsXY& loc, int32_t elementIndex, bool isClosed, bool isExecuting)
 {
     TileElement* const trackElement = map_get_nth_element_at(loc, elementIndex);
 
