@@ -1054,7 +1054,7 @@ GameActionResultPtr tile_inspector_track_set_block_brake(
 
     if (isExecuting)
     {
-        trackElement->AsTrack()->SetBlockBrakeClosed(blockBrake);
+        trackElement->AsTrack()->SetBrakeClosed(blockBrake);
 
         map_invalidate_tile_full(loc);
 

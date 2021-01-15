@@ -525,11 +525,9 @@ public:
     void SetHasChain(bool on);
     void SetHasCableLift(bool on);
     void SetInverted(bool inverted);
-    bool BlockBrakeClosed() const;
-    void SetBlockBrakeClosed(bool isClosed);
     void SetBrakeBoosterSpeed(uint8_t speed);
-    bool BrakeOpen() const;
-    void SetBrakeOpen(bool isClosed);
+    bool BrakeClosed() const;
+    void SetBrakeClosed(bool isClosed);
     void SetHasGreenLight(uint8_t greenLight);
     void SetSeatRotation(uint8_t newSeatRotation);
     void SetMazeEntry(uint16_t newMazeEntry);
