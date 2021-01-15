@@ -8214,7 +8214,7 @@ loc_6DAEB9:
             if (regs.eax < _vehicleVelocityF64E08)
             {
                 TrackElement* trackElement = map_get_track_element_at_of_type_seq(TrackLocation, trackType, 0)->AsTrack();
-                if ((trackElement != nullptr) && trackElement->GetBrakeClosed() || trackElement == nullptr)
+                if ((trackElement != nullptr && trackElement->GetBrakeClosed()) || trackElement == nullptr)
                 {
                     acceleration = -_vehicleVelocityF64E08 * 16;
                 }
@@ -8610,7 +8610,7 @@ loc_6DBA33:;
     {
         regs.eax = -(brake_speed << 16);
         TrackElement* trackElement = map_get_track_element_at_of_type_seq(TrackLocation, trackType, 0)->AsTrack();
-        if (((trackElement != nullptr) && trackElement->GetBrakeClosed() || trackElement == nullptr)
+        if (((trackElement != nullptr && trackElement->GetBrakeClosed()) || trackElement == nullptr)
             && (regs.eax > _vehicleVelocityF64E08))
         {
             regs.eax = _vehicleVelocityF64E08 * -16;
