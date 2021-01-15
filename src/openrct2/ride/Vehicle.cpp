@@ -6626,8 +6626,8 @@ void Vehicle::ApplyNonStopBlockBrake()
         // BLOCK_BRAKE_BASE_SPEED to keep existing behaviour
         else if (velocity > (brake_speed << 16) + 868)
         {
-                velocity -= velocity >> 4;
-                acceleration = 0;
+            velocity -= velocity >> 4;
+            acceleration = 0;
         }
     }
 }
@@ -8204,31 +8204,23 @@ loc_6DAEB9:
     }
     else if (trackType == TrackElemType::Brakes)
     {
-        TrackElement* trackElement = map_get_track_element_at_of_type_seq(TrackLocation, trackType, 0)->AsTrack();
+        bool hasBrakesFailure = curRide->lifecycle_flags & RIDE_LIFECYCLE_BROKEN_DOWN
+            && curRide->breakdown_reason_pending == BREAKDOWN_BRAKES_FAILURE;
+        if (!hasBrakesFailure || curRide->mechanic_status == RIDE_MECHANIC_STATUS_HAS_FIXED_STATION_BRAKES)
         {
-            bool hasBrakesFailure = curRide->lifecycle_flags & RIDE_LIFECYCLE_BROKEN_DOWN
-                && curRide->breakdown_reason_pending == BREAKDOWN_BRAKES_FAILURE;
-            if (!hasBrakesFailure || curRide->mechanic_status == RIDE_MECHANIC_STATUS_HAS_FIXED_STATION_BRAKES)
+            auto brakeSpeed = brake_speed << 16;
+            TrackElement* trackElement = map_get_track_element_at_of_type_seq(TrackLocation, trackType, 0)->AsTrack();
+            if (((trackElement != nullptr) && trackElement->GetBrakeClosed() || trackElement == nullptr)
+                && brakeSpeed < _vehicleVelocityF64E08)
             {
-                auto brakeSpeed = brake_speed << 16;
-                if (brakeSpeed < _vehicleVelocityF64E08)
+                acceleration = -_vehicleVelocityF64E08 * 16;
+            }
+            else if (!(gCurrentTicks & 0x0F))
+            {
+                if (_vehicleF64E2C == 0)
                 {
-                    if ((trackElement != nullptr) && trackElement->GetBrakeClosed() || trackElement == nullptr)
-                    {
-                        acceleration = -_vehicleVelocityF64E08 * 16;
-                    }
-                    else
-                    {
-                        acceleration += 0;
-                    }
-                }
-                else if (!(gCurrentTicks & 0x0F))
-                {
-                    if (_vehicleF64E2C == 0)
-                    {
-                        _vehicleF64E2C++;
-                        OpenRCT2::Audio::Play3D(OpenRCT2::Audio::SoundId::BrakeRelease, { x, y, z });
-                    }
+                    _vehicleF64E2C++;
+                    OpenRCT2::Audio::Play3D(OpenRCT2::Audio::SoundId::BrakeRelease, { x, y, z });
                 }
             }
         }
