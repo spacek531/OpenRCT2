@@ -380,7 +380,7 @@ public:
     bool IsInverted() const;
     void SetInverted(bool inverted);
 
-    bool BrakeClosed() const;
+    bool GetBrakeClosed() const;
     void SetBrakeClosed(bool isClosed);
 
     bool IsIndestructible() const;
@@ -664,12 +664,6 @@ enum
     ELEMENT_IS_ABOVE_GROUND = 1 << 0,
     ELEMENT_IS_UNDERGROUND = 1 << 1,
     ELEMENT_IS_UNDERWATER = 1 << 2,
-};
-
-enum
-{
-    MAP_ELEM_TRACK_SEQUENCE_GREEN_LIGHT = (1 << 7),
-    MAP_ELEM_TRACK_SEQUENCE_BRAKE_OPEN = (1 << 7),
 };
 
 #define TILE_ELEMENT_QUADRANT_MASK 0b11000000
