@@ -4335,6 +4335,7 @@ static void RideOpenBlockBrakes(CoordsXYE* startElement)
                 block_brakes_set_linked_brakes_open(
                     CoordsXYZ(currentElement.x, currentElement.y, currentElement.element->GetBaseZ()), currentElement.element,
                     true);
+                [[fallthrough]];
             case TrackElemType::EndStation:
             case TrackElemType::CableLiftHill:
             case TrackElemType::Up25ToFlat:

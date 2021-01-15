@@ -8208,7 +8208,7 @@ loc_6DAEB9:
     else if (trackType == TrackElemType::Brakes)
     {
         TrackElement* trackElement = map_get_track_element_at_of_type_seq(TrackLocation, trackType, 0)->AsTrack();
-        if (trackElement != nullptr && !trackElement->BrakeOpen() || trackElement == nullptr)
+        if ((trackElement != nullptr && !trackElement->BrakeOpen()) || trackElement == nullptr)
         {
             bool hasBrakesFailure = curRide->lifecycle_flags & RIDE_LIFECYCLE_BROKEN_DOWN
                 && curRide->breakdown_reason_pending == BREAKDOWN_BRAKES_FAILURE;
@@ -8600,12 +8600,10 @@ loc_6DBA33:;
     if (trackType == TrackElemType::Brakes)
     {
         TrackElement* trackElement = map_get_track_element_at_of_type_seq(TrackLocation, trackType, 0)->AsTrack();
-        if (trackElement != nullptr && !trackElement->BrakeOpen() || trackElement == nullptr)
+        if (((trackElement != nullptr && !trackElement->BrakeOpen()) || trackElement == nullptr)
+            && -(brake_speed << 16) > _vehicleVelocityF64E08)
         {
-            if (-(brake_speed << 16) > _vehicleVelocityF64E08)
-            {
-                acceleration = _vehicleVelocityF64E08 * -16;
-            }
+            acceleration = _vehicleVelocityF64E08 * -16;
         }
     }
 
