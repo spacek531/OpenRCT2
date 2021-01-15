@@ -100,10 +100,16 @@ enum
     RCT12_TILE_ELEMENT_FLAG_GHOST = (1 << 4),
     RCT12_TILE_ELEMENT_FLAG_BROKEN = (1 << 5),
     RCT12_TILE_ELEMENT_FLAG_BLOCK_BRAKE_CLOSED = (1 << 5),
+    RCT12_TILE_ELEMENT_FLAG_BRAKE_OPEN = (1 << 5),
     RCT12_TILE_ELEMENT_FLAG_INDESTRUCTIBLE_TRACK_PIECE = (1 << 6),
     RCT12_TILE_ELEMENT_FLAG_BLOCKED_BY_VEHICLE = (1 << 6),
     RCT12_TILE_ELEMENT_FLAG_LARGE_SCENERY_ACCOUNTED = (1 << 6),
-    RCT12_TILE_ELEMENT_FLAG_LAST_TILE = (1 << 7)
+    RCT12_TILE_ELEMENT_FLAG_LAST_TILE = (1 << 7),
+};
+
+enum
+{
+    RCT12_TILE_ELEMENT_SEQUENCE_GREEN_LIGHT = (1 << 7),
 };
 
 enum
@@ -116,6 +122,7 @@ enum
     RCT12_TRACK_ELEMENT_SEQUENCE_STATION_INDEX_MASK = 0b01110000,
     RCT12_TRACK_ELEMENT_SEQUENCE_SEQUENCE_MASK = 0b00001111,
     RCT12_TRACK_ELEMENT_SEQUENCE_TAKING_PHOTO_MASK = 0b11110000,
+    RCT12_TRACK_ELEMENT_SEQUENCE_BRAKESPEED_MASK = 0b11110000,
 };
 
 enum
@@ -481,7 +488,7 @@ private:
         struct
         {
             // The lower 4 bits are the track sequence.
-            // The upper 4 bits are either station bits or on-ride photo bits.
+            // The upper 4 bits are either station bits, brake speed bits, or on-ride photo bits.
             //
             // Station bits:
             // - Bit 8 marks green light
@@ -507,6 +514,7 @@ public:
     bool HasCableLift() const;
     bool IsInverted() const;
     uint8_t GetBrakeBoosterSpeed() const;
+    bool GetBrakeClosed() const;
     bool HasGreenLight() const;
     uint8_t GetSeatRotation() const;
     uint16_t GetMazeEntry() const;
@@ -526,7 +534,6 @@ public:
     void SetHasCableLift(bool on);
     void SetInverted(bool inverted);
     void SetBrakeBoosterSpeed(uint8_t speed);
-    bool BrakeClosed() const;
     void SetBrakeClosed(bool isClosed);
     void SetHasGreenLight(uint8_t greenLight);
     void SetSeatRotation(uint8_t newSeatRotation);

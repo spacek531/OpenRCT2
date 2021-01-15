@@ -1509,7 +1509,7 @@ void S6Exporter::ExportTileElement(RCT12TileElement* dst, TileElement* src)
             dst2->SetInverted(src2->IsInverted());
             dst2->SetBrakeBoosterSpeed(src2->GetBrakeBoosterSpeed());
             dst2->SetPhotoTimeout(src2->GetPhotoTimeout());
-            dst2->SetBrakeClosed(src2->BrakeClosed());
+            dst2->SetBrakeClosed(src2->GetBrakeClosed());
             dst2->SetIsIndestructible(src2->IsIndestructible());
 
             // Skipping IsHighlighted()
