@@ -4306,7 +4306,8 @@ static void RideOpenBlockBrakes(CoordsXYE* startElement)
         {
             case TrackElemType::BlockBrakes:
                 block_brakes_set_linked_brakes_open(
-                    CoordsXYZ(currentElement.x, currentElement.y, currentElement.element->GetBaseZ()),currentElement.element,true);
+                    CoordsXYZ(currentElement.x, currentElement.y, currentElement.element->GetBaseZ()), currentElement.element,
+                    true);
             case TrackElemType::EndStation:
             case TrackElemType::CableLiftHill:
             case TrackElemType::Up25ToFlat:
@@ -4320,7 +4321,6 @@ static void RideOpenBlockBrakes(CoordsXYE* startElement)
              && currentElement.element != startElement->element);
 }
 
-
 void block_brakes_set_linked_brakes_open(const CoordsXYZ& vehicleTrackLocation, TileElement* tileElement, bool isOpen)
 {
     TrackElement* blockBrake = tileElement->AsTrack();
@@ -4328,7 +4328,6 @@ void block_brakes_set_linked_brakes_open(const CoordsXYZ& vehicleTrackLocation, 
     {
         return;
     }
-    TrackElement* currentTrack;
 
     auto location = vehicleTrackLocation;
     track_begin_end trackBeginEnd, slowTrackBeginEnd;
@@ -4352,11 +4351,10 @@ void block_brakes_set_linked_brakes_open(const CoordsXYZ& vehicleTrackLocation, 
         location.z = trackBeginEnd.begin_z;
         tileElement = trackBeginEnd.begin_element;
 
-        currentTrack = trackBeginEnd.begin_element->AsTrack();
-
-        if (currentTrack->GetTrackType() == TrackElemType::Brakes)
+        if (trackBeginEnd.begin_element->AsTrack()->GetTrackType() == TrackElemType::Brakes)
         {
-            currentTrack->SetBrakeOpen(currentTrack->GetBrakeBoosterSpeed() < blockBrake->GetBrakeBoosterSpeed() && isOpen);
+            trackBeginEnd.begin_element->AsTrack()->SetBrakeOpen(
+                trackBeginEnd.begin_element->AsTrack()->GetBrakeBoosterSpeed() < blockBrake->GetBrakeBoosterSpeed() && isOpen);
         }
 
         // prevent infinite loop
