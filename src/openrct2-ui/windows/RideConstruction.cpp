@@ -3155,8 +3155,14 @@ static void window_ride_construction_update_widgets(rct_window* w)
     window_ride_construction_widgets[WIDX_SEAT_ROTATION_ANGLE_SPINNER_DOWN].type = WindowWidgetType::Empty;
 
     rct_ride_entry* rideEntry = ride->GetRideEntry();
+    bool canRotate = rideEntry != nullptr
+        && rideEntry
+                ->vehicles[ride_entry_get_vehicle_at_position(ride->subtype, ride->num_cars_per_train, rideEntry->tab_vehicle)]
+                .animation
+            == VEHICLE_ENTRY_ANIMATION_MULTI_DIM_COASTER
+        && !ride->GetRideTypeDescriptor().HasFlag(RIDE_TYPE_FLAG_HAS_LANDSCAPE_DOORS);
     if (rideType == RIDE_TYPE_MULTI_DIMENSION_ROLLER_COASTER || rideType == RIDE_TYPE_MULTI_DIMENSION_ROLLER_COASTER_ALT
-        || (rideEntry != nullptr && rideEntry->vehicles[rideEntry->tab_vehicle].animation == VEHICLE_ENTRY_ANIMATION_MULTI_DIM_COASTER))
+        || canRotate)
     {
         if (!brakesSelected && !_boosterTrackSelected)
         {
