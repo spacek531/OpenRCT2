@@ -637,10 +637,8 @@ GameActions::Result::Ptr TrackPlaceAction::Execute() const
             tileElement->AsTrack()->SetDoorAState(LANDSCAPE_DOOR_CLOSED);
             tileElement->AsTrack()->SetDoorBState(LANDSCAPE_DOOR_CLOSED);
         }
-        else
-        {
+        if (!ride->GetRideTypeDescriptor().HasFlag(RIDE_TYPE_FLAG_HAS_LANDSCAPE_DOORS))
             tileElement->AsTrack()->SetSeatRotation(_seatRotation);
-        }
 
         if (_trackPlaceFlags & RIDE_TYPE_ALTERNATIVE_TRACK_TYPE)
         {
