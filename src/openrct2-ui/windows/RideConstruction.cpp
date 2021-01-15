@@ -1657,6 +1657,9 @@ static void window_ride_construction_dropdown(rct_window* w, rct_widgetindex wid
             _currentTrackBankEnd = TRACK_BANK_NONE;
             _currentTrackLiftHill &= ~CONSTRUCTION_LIFT_HILL_SELECTED;
             break;
+        case TrackElemType::BlockBrakes:
+            _currentBrakeSpeed2 = 2;
+            break;
     }
     _currentTrackCurve = trackPiece | RideConstructionSpecialPieceSelected;
     window_ride_construction_update_active_elements();
