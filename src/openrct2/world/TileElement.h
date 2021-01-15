@@ -380,17 +380,14 @@ public:
     bool IsInverted() const;
     void SetInverted(bool inverted);
 
-    bool BlockBrakeClosed() const;
-    void SetBlockBrakeClosed(bool isClosed);
+    bool BrakeClosed() const;
+    void SetBrakeClosed(bool isClosed);
 
     bool IsIndestructible() const;
     void SetIsIndestructible(bool isIndestructible);
 
     uint8_t GetBrakeBoosterSpeed() const;
     void SetBrakeBoosterSpeed(uint8_t speed);
-
-    bool BrakeOpen() const;
-    void SetBrakeOpen(bool isOpen);
 
     bool HasGreenLight() const;
     void SetHasGreenLight(bool on);

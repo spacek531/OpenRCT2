@@ -816,36 +816,36 @@ void RCT12TrackElement::SetBrakeBoosterSpeed(uint8_t speed)
     }
 }
 
-bool RCT12TrackElement::BlockBrakeClosed() const
-{
-    return (flags & RCT12_TILE_ELEMENT_FLAG_BLOCK_BRAKE_CLOSED) != 0;
-}
-
-void RCT12TrackElement::SetBlockBrakeClosed(bool isClosed)
-{
-    if (isClosed)
-    {
-        flags |= RCT12_TILE_ELEMENT_FLAG_BLOCK_BRAKE_CLOSED;
-    }
-    else
-    {
-        flags &= ~RCT12_TILE_ELEMENT_FLAG_BLOCK_BRAKE_CLOSED;
-    }
-}
-
-bool RCT12TrackElement::BrakeOpen() const
-{
-    return (flags & MAP_ELEM_TRACK_SEQUENCE_BRAKE_OPEN) != 0;
-}
-
-void RCT12TrackElement::SetBrakeOpen(bool isOpen)
+bool RCT12TrackElement::BrakeClosed() const
 {
     if (trackType == TrackElemType::Brakes)
     {
+        // opposite polarity of block brake: closed is 0
+        return (sequence & MAP_ELEM_TRACK_SEQUENCE_BRAKE_OPEN) == 0;
+    }
+    return (flags & RCT12_TILE_ELEMENT_FLAG_BLOCK_BRAKE_CLOSED) != 0;
+}
+
+void RCT12TrackElement::SetBrakeClosed(bool isClosed)
+{
+    if (trackType == TrackElemType::Brakes)
+    {
+        // opposite polarity of block brake: closed is 0
         sequence &= ~MAP_ELEM_TRACK_SEQUENCE_BRAKE_OPEN;
-        if (isOpen)
+        if (isClosed)
         {
             sequence |= MAP_ELEM_TRACK_SEQUENCE_BRAKE_OPEN;
+        }
+    }
+    else
+    {
+        if (isClosed)
+        {
+            flags |= RCT12_TILE_ELEMENT_FLAG_BLOCK_BRAKE_CLOSED;
+        }
+        else
+        {
+            flags &= ~RCT12_TILE_ELEMENT_FLAG_BLOCK_BRAKE_CLOSED;
         }
     }
 }
