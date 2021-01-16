@@ -13,7 +13,14 @@
 #include "../object/Object.h"
 #include "Ride.h"
 
-constexpr const track_type_t RideConstructionSpecialPieceSelected = TrackElemType::None;
+struct currentlySelectedTrack
+{
+    track_type_t trackType;
+    int8_t curvature;
+    uint8_t flags;
+};
+
+constexpr const uint16_t RideConstructionSpecialPieceSelected = 0x1;
 
 constexpr const int32_t BLOCK_BRAKE_BASE_SPEED = 0x20364;
 
@@ -162,7 +169,6 @@ enum
     TRACK_QUARTER_LOOP,
     TRACK_SPINNING_TUNNEL,
     TRACK_ROTATION_CONTROL_TOGGLE,
-    TRACK_BOOSTER = TRACK_ROTATION_CONTROL_TOGGLE,
     TRACK_INLINE_TWIST_UNINVERTED,
     TRACK_INLINE_TWIST_INVERTED,
     TRACK_QUARTER_LOOP_UNINVERTED,
@@ -179,6 +185,8 @@ enum
     TRACK_HEARTLINE_TRANSFER,
     TRACK_MINI_GOLF_HOLE,
 
+    TRACK_BOOSTER,
+
     TRACK_GROUP_COUNT,
 };
 
@@ -192,7 +200,7 @@ enum
     TRACK_CURVE_RIGHT_LARGE = 8,
     TRACK_CURVE_RIGHT = 2,
     TRACK_CURVE_RIGHT_SMALL = 4,
-    TRACK_CURVE_RIGHT_VERY_SMALL = 6
+    TRACK_CURVE_RIGHT_VERY_SMALL = 6,
 };
 
 enum
@@ -365,8 +373,8 @@ namespace TrackElemType
     constexpr uint16_t FlatToUp60LongBase = 118;
     constexpr uint16_t Up60ToFlatLongBase = 119;
     constexpr uint16_t Whirlpool = 120;
-    constexpr uint16_t Down60ToFlatLongBase = 121;
-    constexpr uint16_t FlatToDown60LongBase = 122;
+    constexpr uint16_t Down60ToFlatLongBase = 121; // are these reversed?
+    constexpr uint16_t FlatToDown60LongBase = 122; // are these reversed?
     constexpr uint16_t CableLiftHill = 123;
     constexpr uint16_t ReverseFreefallSlope = 124;
     constexpr uint16_t ReverseFreefallVertical = 125;
@@ -503,7 +511,6 @@ namespace TrackElemType
     constexpr uint16_t Booster = 256;
 
     constexpr uint16_t Count = 257;
-
     constexpr uint16_t None = 65535;
 }; // namespace TrackElemType
 
@@ -583,5 +590,6 @@ money32 maze_set_track(
     uint16_t x, uint16_t y, uint16_t z, uint8_t flags, bool initialPlacement, uint8_t direction, ride_id_t rideIndex,
     uint8_t mode);
 
+bool TrackElemIsSpecial(track_type_t trackType);
 bool TrackElemIsBooster(uint8_t rideType, track_type_t trackType);
 bool TrackTypeHasSpeedSetting(track_type_t trackType);
