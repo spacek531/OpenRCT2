@@ -4350,6 +4350,36 @@ static void RideOpenBlockBrakes(CoordsXYE* startElement)
     } while (track_block_get_next(&currentElement, &currentElement, nullptr, nullptr)
              && currentElement.element != startElement->element);
 }
+void brakes_link_to_block_brake(const CoordsXYZ& vehicleTrackLocation, TileElement* tileElement)
+{
+    TrackElement* brake = tileElement->AsTrack();
+    if (brake->GetTrackType() != TrackElemType::Brakes)
+    {
+        return;
+    }
+
+    CoordsXYE output = CoordsXYE(vehicleTrackLocation.x, vehicleTrackLocation.y, tileElement);
+    int32_t outputZ = vehicleTrackLocation.z;
+    do
+    {
+        if (output.element->AsTrack()->GetTrackType() == TrackElemType::BlockBrakes)
+        {
+            brake->SetBrakeClosed(
+                !(brake->GetBrakeBoosterSpeed() < output.element->AsTrack()->GetBrakeBoosterSpeed()
+                  || output.element->AsTrack()->GetBrakeClosed()));
+            break;
+        }
+        else if (output.element->AsTrack()->GetTrackType() == TrackElemType::Brakes)
+        {
+            continue;
+        }
+        else
+        {
+            brake->SetBrakeClosed(true);
+            break;
+        }
+    } while (track_block_get_next(&output, &output, &outputZ, nullptr));
+}
 
 void block_brakes_set_linked_brakes_closed(const CoordsXYZ& vehicleTrackLocation, TileElement* tileElement, bool isClosed)
 {
