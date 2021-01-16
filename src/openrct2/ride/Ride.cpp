@@ -92,7 +92,7 @@ money32 _currentTrackPrice;
 uint16_t _numCurrentPossibleRideConfigurations;
 uint16_t _numCurrentPossibleSpecialTrackPieces;
 
-uint16_t _currentTrackCurve;
+uint32_t _currentTrackCurve;
 uint8_t _rideConstructionState;
 ride_id_t _currentRideIndex;
 

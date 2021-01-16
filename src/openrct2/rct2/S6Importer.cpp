@@ -1114,7 +1114,13 @@ public:
                 auto dst2 = dst->AsTrack();
                 auto src2 = src->AsTrack();
 
-                dst2->SetTrackType(src2->GetTrackType());
+                track_type_t trackType = src2->GetTrackType();
+                auto rideType = _s6.rides[src2->GetRideIndex()].type;
+
+                if (RCT12TrackTypeIsBooster(rideType, trackType))
+                    trackType = TrackElemType::Booster;
+
+                dst2->SetTrackType(trackType);
                 dst2->SetSequenceIndex(src2->GetSequenceIndex());
                 dst2->SetRideIndex(src2->GetRideIndex());
                 dst2->SetColourScheme(src2->GetColourScheme());
@@ -1127,7 +1133,6 @@ public:
                 dst2->SetIsIndestructible(src2->IsIndestructible());
                 // Skipping IsHighlighted()
 
-                auto trackType = dst2->GetTrackType();
                 if (TrackTypeHasSpeedSetting(trackType))
                 {
                     dst2->SetBrakeBoosterSpeed(src2->GetBrakeBoosterSpeed());
@@ -1138,7 +1143,6 @@ public:
                 }
 
                 // This has to be done last, since the maze entry shares fields with the colour and sequence fields.
-                auto rideType = _s6.rides[src2->GetRideIndex()].type;
                 if (rideType == RIDE_TYPE_MAZE)
                 {
                     dst2->SetMazeEntry(src2->GetMazeEntry());

@@ -1497,7 +1497,10 @@ void S6Exporter::ExportTileElement(RCT12TileElement* dst, TileElement* src)
             auto dst2 = dst->AsTrack();
             auto src2 = src->AsTrack();
 
-            dst2->SetTrackType(src2->GetTrackType());
+            auto trackType = src2->GetTrackType();
+            if (trackType == TrackElemType::Booster)
+                trackType = TrackElemType::BoosterAlias;
+            dst2->SetTrackType(trackType);
             dst2->SetSequenceIndex(src2->GetSequenceIndex());
             dst2->SetRideIndex(src2->GetRideIndex());
             dst2->SetColourScheme(src2->GetColourScheme());
