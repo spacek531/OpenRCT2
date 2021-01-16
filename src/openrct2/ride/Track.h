@@ -162,7 +162,6 @@ enum
     TRACK_QUARTER_LOOP,
     TRACK_SPINNING_TUNNEL,
     TRACK_ROTATION_CONTROL_TOGGLE,
-    TRACK_BOOSTER = TRACK_ROTATION_CONTROL_TOGGLE,
     TRACK_INLINE_TWIST_UNINVERTED,
     TRACK_INLINE_TWIST_INVERTED,
     TRACK_QUARTER_LOOP_UNINVERTED,
@@ -178,6 +177,8 @@ enum
     TRACK_CORKSCREW_INVERTED,
     TRACK_HEARTLINE_TRANSFER,
     TRACK_MINI_GOLF_HOLE,
+
+    TRACK_BOOSTER,
 
     TRACK_GROUP_COUNT,
 };
@@ -342,7 +343,8 @@ namespace TrackElemType
     constexpr uint16_t RightQuarterTurn1TileDown60 = 98;
     constexpr uint16_t Brakes = 99;
     constexpr uint16_t RotationControlToggle = 100;
-    constexpr uint16_t Booster = 100;
+    constexpr uint16_t BoosterAlias = 100;
+    // Used by boosters, as SV6 & TD6 cannot save Boosters as a separate piece
     constexpr uint16_t Maze = 101;
     // Used by the multi-dimension coaster, as TD6 cannot handle index 255.
     constexpr uint16_t InvertedUp90ToFlatQuarterLoopAlias = 101;
@@ -500,8 +502,9 @@ namespace TrackElemType
     constexpr uint16_t MultiDimUp90ToInvertedFlatQuarterLoop = 253;
     constexpr uint16_t MultiDimFlatToDown90QuarterLoop = 254;
     constexpr uint16_t MultiDimInvertedUp90ToFlatQuarterLoop = 255;
+    constexpr uint16_t Booster = 256;
 
-    constexpr uint16_t Count = 256;
+    constexpr uint16_t Count = 257;
 }; // namespace TrackElemType
 
 enum
@@ -546,8 +549,8 @@ struct track_circuit_iterator
     bool looped;
 };
 
-extern const rct_trackdefinition FlatRideTrackDefinitions[256];
-extern const rct_trackdefinition TrackDefinitions[256];
+extern const rct_trackdefinition FlatRideTrackDefinitions[257];
+extern const rct_trackdefinition TrackDefinitions[257];
 
 PitchAndRoll TrackPitchAndRollStart(track_type_t trackType);
 PitchAndRoll TrackPitchAndRollEnd(track_type_t trackType);

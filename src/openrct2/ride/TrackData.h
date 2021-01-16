@@ -50,10 +50,10 @@ struct track_descriptor
 
 extern const track_descriptor gTrackDescriptors[142];
 
-extern const int16_t AlternativeTrackTypes[256];
+extern const int16_t AlternativeTrackTypes[257];
 
-extern const money32 TrackPricing[256];
-extern const money32 FlatRideTrackPricing[256];
+extern const money32 TrackPricing[257];
+extern const money32 FlatRideTrackPricing[257];
 
 struct dodgems_track_size
 {
@@ -63,14 +63,14 @@ struct dodgems_track_size
     uint8_t bottom;
 };
 
-extern const dodgems_track_size DodgemsTrackSize[256];
+extern const dodgems_track_size DodgemsTrackSize[257];
 
-extern const uint8_t TrackElementMirrorMap[256];
+extern const uint8_t TrackElementMirrorMap[257];
 
-extern const uint32_t TrackHeightMarkerPositions[256];
+extern const uint32_t TrackHeightMarkerPositions[257];
 
-extern const uint8_t TrackSequenceElementAllowedWallEdges[256][16];
-extern const uint8_t FlatRideTrackSequenceElementAllowedWallEdges[256][16];
+extern const uint8_t TrackSequenceElementAllowedWallEdges[257][16];
+extern const uint8_t FlatRideTrackSequenceElementAllowedWallEdges[257][16];
 
-extern const uint16_t FlatTrackFlags[256];
-extern const uint16_t TrackFlags[256];
+extern const uint16_t FlatTrackFlags[257];
+extern const uint16_t TrackFlags[257];

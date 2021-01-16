@@ -424,7 +424,8 @@ static constexpr const rct_string_id RideConfigurationStringIds[] = {
     0,                                      // 252
     STR_QUARTER_LOOP,                       // 253
     STR_QUARTER_LOOP,                       // 254
-    STR_QUARTER_LOOP                        // 255
+    STR_QUARTER_LOOP,                       // 255
+    STR_BOOSTER                             // 256
 };
 // clang-format on
 
@@ -2249,30 +2250,23 @@ static void window_ride_construction_invalidate(rct_window* w)
         {
             switch (RideTypeDescriptors[ride->type].TrackBehaviours.RapidsBehaviour)
             {
-                case RideTrackBehaviour::Rapids:
+                case RideRapidsBehaviour::Rapids:
                     stringId = STR_RAPIDS;
                     break;
-                case RideTrackBehaviour::LogBumps:
+                case RideRapidsBehaviour::LogBumps:
                     stringId = STR_LOG_BUMPS;
                     break;
-                default:
-                {
-                    // to make the build systems happy
-                }
             }
         }
-        else if (stringId == STR_SPINNING_CONTROL_TOGGLE_TRACK)
+        else if (stringId == STR_BOOSTER)
         {
             switch (RideTypeDescriptors[ride->type].TrackBehaviours.BoosterBehaviour)
             {
-                case RideTrackBehaviour::Booster:
+                case RideBoosterBehaviour::Booster:
                     stringId = STR_BOOSTER;
                     break;
-                case RideTrackBehaviour::SpeedController:
+                case RideBoosterBehaviour::SpeedController:
                     stringId = STR_SPEED_CONTROL;
-                    break;
-                case RideTrackBehaviour::SpinningToggle:
-                    stringId = STR_SPINNING_CONTROL_TOGGLE_TRACK;
                     break;
                 default:
                 {
@@ -3087,15 +3081,11 @@ static void window_ride_construction_update_widgets(rct_window* w)
 
     bool brakesSelected = _selectedTrackType == TrackElemType::Brakes
         || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Brakes);
-    _boosterTrackSelected = TrackTypeIsBooster(ride->type, _selectedTrackType)
-        || (RideTypeDescriptors[ride->type].TrackBehaviours.BoosterBehaviour == RideTrackBehaviour::Booster
-            && _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster));
-    bool speedControlSelected = RideTypeDescriptors[ride->type].TrackBehaviours.BoosterBehaviour
-            == RideTrackBehaviour::SpeedController
-        && (TrackTypeIsBooster(ride->type, _selectedTrackType)
-            || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster));
 
-    if (!brakesSelected && !_boosterTrackSelected && !speedControlSelected)
+    _boosterTrackSelected = TrackTypeIsBooster(ride->type, _selectedTrackType)
+        || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster);
+
+    if (!brakesSelected && !_boosterTrackSelected)
     {
         if (is_track_enabled(TRACK_FLAT_ROLL_BANKING))
         {
@@ -3142,14 +3132,14 @@ static void window_ride_construction_update_widgets(rct_window* w)
             window_ride_construction_widgets[WIDX_BANK_STRAIGHT].tooltip = STR_RIDE_CONSTRUCTION_BRAKE_SPEED_LIMIT_TIP;
             window_ride_construction_widgets[WIDX_BANK_RIGHT].tooltip = STR_RIDE_CONSTRUCTION_BRAKE_SPEED_LIMIT_TIP;
         }
-        else if (speedControlSelected)
+        else if (_boosterTrackSelected && ride->GetRideTypeDescriptor().TrackBehaviours.BoosterBehaviour == RideBoosterBehaviour::SpeedController)
         {
             window_ride_construction_widgets[WIDX_BANKING_GROUPBOX].text = STR_RIDE_CONSTRUCTION_SPEED_CONTROL;
             window_ride_construction_widgets[WIDX_BANK_LEFT].tooltip = STR_RIDE_CONSTRUCTION_SPEED_CONTROL_TIP;
             window_ride_construction_widgets[WIDX_BANK_STRAIGHT].tooltip = STR_RIDE_CONSTRUCTION_SPEED_CONTROL_TIP;
             window_ride_construction_widgets[WIDX_BANK_RIGHT].tooltip = STR_RIDE_CONSTRUCTION_SPEED_CONTROL_TIP;
         }
-        else // _boosterTrackSelected
+        else
         {
             window_ride_construction_widgets[WIDX_BANKING_GROUPBOX].text = STR_RIDE_CONSTRUCTION_BOOSTER_SPEED;
             window_ride_construction_widgets[WIDX_BANK_LEFT].tooltip = STR_RIDE_CONSTRUCTION_BOOSTER_SPEED_LIMIT_TIP;
@@ -3386,35 +3376,24 @@ static void window_ride_construction_show_special_track_dropdown(rct_window* w, 
         {
             switch (RideTypeDescriptors[ride->type].TrackBehaviours.RapidsBehaviour)
             {
-                case RideTrackBehaviour::Rapids:
+                case RideRapidsBehaviour::Rapids:
                     trackPieceStringId = STR_RAPIDS;
                     break;
-                case RideTrackBehaviour::LogBumps:
+                case RideRapidsBehaviour::LogBumps:
                     trackPieceStringId = STR_LOG_BUMPS;
                     break;
-                default:
-                {
-                    // to make the build systems happy
-                }
             }
         }
-        if (trackPieceStringId == STR_SPINNING_CONTROL_TOGGLE_TRACK && ride != nullptr)
+        if (trackPieceStringId == STR_BOOSTER && ride != nullptr)
         {
             switch (RideTypeDescriptors[ride->type].TrackBehaviours.BoosterBehaviour)
             {
-                case RideTrackBehaviour::Booster:
+                case RideBoosterBehaviour::Booster:
                     trackPieceStringId = STR_BOOSTER;
                     break;
-                case RideTrackBehaviour::SpeedController:
+                case RideBoosterBehaviour::SpeedController:
                     trackPieceStringId = STR_SPEED_CONTROL;
                     break;
-                case RideTrackBehaviour::SpinningToggle:
-                    trackPieceStringId = STR_SPINNING_CONTROL_TOGGLE_TRACK;
-                    break;
-                default:
-                {
-                    // to make the build systems happy
-                }
             }
         }
         gDropdownItemsFormat[i] = trackPieceStringId;

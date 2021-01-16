@@ -57,6 +57,6 @@ constexpr const RideTypeDescriptor GhostTrainRTD =
     )),
     SET_FIELD(ColourPreview, { SPR_RIDE_DESIGN_PREVIEW_GHOST_TRAIN_TRACK, SPR_RIDE_DESIGN_PREVIEW_GHOST_TRAIN_SUPPORTS }),
     SET_FIELD(ColourKey, RideColourKey::Ride),
-    SET_FIELD(TrackBehaviours,{RideTrackBehaviour::SpeedController,RideTrackBehaviour::LogBumps})
+    SET_FIELD(TrackBehaviours,{RideBoosterBehaviour::SpeedController,RideRapidsBehaviour::LogBumps})
 };
 // clang-format on

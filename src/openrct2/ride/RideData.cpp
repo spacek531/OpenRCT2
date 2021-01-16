@@ -333,6 +333,11 @@ bool RideTypeDescriptor::SupportsTrackPiece(const uint64_t trackPiece) const
     return GetAvailableTrackPieces() & (1ULL << trackPiece);
 }
 
+bool RideTypeDescriptor::TrackPieceAllowed(const uint64_t trackPiece) const
+{
+    return (EnabledTrackPieces | ExtraTrackPieces) & (1ULL << trackPiece);
+}
+
 ResearchCategory RideTypeDescriptor::GetResearchCategory() const
 {
     switch (Category)

@@ -5745,6 +5745,7 @@ GForces Vehicle::GetGForces() const
         case TrackElemType::Down60Covered:
         case TrackElemType::Brakes:
         case TrackElemType::RotationControlToggle:
+        case TrackElemType::Booster:
         case TrackElemType::Maze:
         case TrackElemType::Up25LeftBanked:
         case TrackElemType::Up25RightBanked:
@@ -8159,8 +8160,7 @@ bool Vehicle::UpdateTrackMotionForwardsGetNewTrack(uint16_t trackType, Ride* cur
         if (curRide != nullptr)
         {
             uint16_t rideType = curRide->type;
-            if (trackType == TrackElemType::RotationControlToggle
-                && (rideType == RIDE_TYPE_SPINNING_WILD_MOUSE || rideType == RIDE_TYPE_STEEL_WILD_MOUSE))
+            if (trackType == TrackElemType::RotationControlToggle)
             {
                 update_flags ^= VEHICLE_UPDATE_FLAG_ROTATION_OFF_WILD_MOUSE;
             }

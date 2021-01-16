@@ -217,6 +217,10 @@ rct_string_id TrackDesign::CreateTrackDesignTrack(const Ride& ride)
         {
             track.type = TrackElemType::InvertedUp90ToFlatQuarterLoopAlias;
         }
+        if (track.type == TrackElemType::Booster)
+        {
+            track.type = TrackElemType::BoosterAlias;
+        }
 
         uint8_t trackFlags;
         if (TrackTypeHasSpeedSetting(track.type))
@@ -1530,10 +1534,14 @@ static bool track_design_place_ride(TrackDesign* td6, const CoordsXYZ& origin, R
     auto newCoords = origin;
     for (const auto& track : td6->track_elements)
     {
-        uint8_t trackType = track.type;
+        uint16_t trackType = track.type;
         if (trackType == TrackElemType::InvertedUp90ToFlatQuarterLoopAlias)
         {
             trackType = TrackElemType::MultiDimInvertedUp90ToFlatQuarterLoop;
+        }
+        else if (trackType == TrackElemType::BoosterAlias && ride->GetRideTypeDescriptor().TrackPieceAllowed(TrackElemType::Booster))
+        {
+            trackType = TrackElemType::Booster;
         }
 
         track_design_update_max_min_coordinates(newCoords);
