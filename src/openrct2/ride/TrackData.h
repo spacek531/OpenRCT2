@@ -50,7 +50,7 @@ struct track_descriptor
 
 extern const track_descriptor gTrackDescriptors[142];
 
-extern const int16_t AlternativeTrackTypes[256];
+extern const track_type_t AlternativeTrackTypes[257];
 
 extern const money32 TrackPricing[256];
 extern const money32 FlatRideTrackPricing[256];
@@ -65,7 +65,11 @@ struct dodgems_track_size
 
 extern const dodgems_track_size DodgemsTrackSize[256];
 
+<<<<<<< HEAD
 extern const uint8_t TrackElementMirrorMap[256];
+=======
+extern const track_type_t TrackElementMirrorMap[257];
+>>>>>>> What did I break I don't even
 
 extern const uint32_t TrackHeightMarkerPositions[256];
 
