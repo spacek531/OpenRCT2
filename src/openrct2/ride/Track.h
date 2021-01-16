@@ -13,7 +13,7 @@
 #include "../object/Object.h"
 #include "Ride.h"
 
-constexpr const uint16_t RideConstructionSpecialPieceSelected = 0x100;
+constexpr const track_type_t RideConstructionSpecialPieceSelected = TrackElemType::None;
 
 constexpr const int32_t BLOCK_BRAKE_BASE_SPEED = 0x20364;
 
@@ -342,7 +342,7 @@ namespace TrackElemType
     constexpr uint16_t RightQuarterTurn1TileDown60 = 98;
     constexpr uint16_t Brakes = 99;
     constexpr uint16_t RotationControlToggle = 100;
-    constexpr uint16_t Booster = 100;
+    constexpr uint16_t BoosterAlias = 100;
     constexpr uint16_t Maze = 101;
     // Used by the multi-dimension coaster, as TD6 cannot handle index 255.
     constexpr uint16_t InvertedUp90ToFlatQuarterLoopAlias = 101;
@@ -500,8 +500,11 @@ namespace TrackElemType
     constexpr uint16_t MultiDimUp90ToInvertedFlatQuarterLoop = 253;
     constexpr uint16_t MultiDimFlatToDown90QuarterLoop = 254;
     constexpr uint16_t MultiDimInvertedUp90ToFlatQuarterLoop = 255;
+    constexpr uint16_t Booster = 256;
 
-    constexpr uint16_t Count = 256;
+    constexpr uint16_t Count = 257;
+
+    constexpr uint16_t None = 65535;
 }; // namespace TrackElemType
 
 enum

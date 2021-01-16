@@ -1484,14 +1484,7 @@ void ride_construction_set_default_next_piece()
             }
             else
             {
-                if (TrackTypeIsBooster(ride->type, trackType))
-                {
-                    curve = RideConstructionSpecialPieceSelected | TrackElemType::Booster;
-                }
-                else
-                {
-                    curve = gTrackCurveChain[trackType].next;
-                }
+                curve = gTrackCurveChain[trackType].next;
                 bank = TrackDefinitions[trackType].bank_end;
                 slope = TrackDefinitions[trackType].vangle_end;
             }
@@ -1545,14 +1538,7 @@ void ride_construction_set_default_next_piece()
             }
             else
             {
-                if (TrackTypeIsBooster(ride->type, trackType))
-                {
-                    curve = RideConstructionSpecialPieceSelected | TrackElemType::Booster;
-                }
-                else
-                {
-                    curve = gTrackCurveChain[trackType].previous;
-                }
+                curve = gTrackCurveChain[trackType].previous;
                 bank = TrackDefinitions[trackType].bank_start;
                 slope = TrackDefinitions[trackType].vangle_start;
             }

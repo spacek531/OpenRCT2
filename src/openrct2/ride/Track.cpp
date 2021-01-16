@@ -1195,7 +1195,7 @@ bool track_element_is_covered(track_type_t trackElementType)
     }
 }
 
-bool TrackTypeIsBooster(uint8_t rideType, track_type_t trackType)
+bool TrackTypeIsBooster(uint8_t rideType, track_type_t trackType) // TODO: delete this
 {
     // Boosters share their ID with the Spinning Control track.
     return rideType != RIDE_TYPE_SPINNING_WILD_MOUSE && rideType != RIDE_TYPE_STEEL_WILD_MOUSE

@@ -199,6 +199,13 @@ uint8_t RCT12PathElement::GetRCT1SupportType() const
     return (flags & 0b01100000) >> 5;
 }
 
+bool TrackTypeIsBooster(uint8_t rideType, track_type_t trackType)
+{
+    // Boosters share their ID with the Spinning Control track.
+    return rideType != RIDE_TYPE_SPINNING_WILD_MOUSE && rideType != RIDE_TYPE_STEEL_WILD_MOUSE
+        && trackType == TrackElemType::BoosterAlias;
+}
+
 uint8_t RCT12TrackElement::GetTrackType() const
 {
     return trackType;

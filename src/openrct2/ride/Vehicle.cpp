@@ -8221,7 +8221,7 @@ loc_6DAEB9:
             }
         }
     }
-    else if (TrackTypeIsBooster(curRide->type, trackType))
+    else if (trackType == TrackElemType::Booster)
     {
         regs.eax = get_booster_speed(curRide->type, (brake_speed << 16));
 
@@ -8604,7 +8604,7 @@ loc_6DBA33:;
         }
     }
 
-    if (TrackTypeIsBooster(curRide->type, trackType))
+    if (trackType == TrackElemType::Booster)
     {
         regs.eax = get_booster_speed(curRide->type, (brake_speed << 16));
 
