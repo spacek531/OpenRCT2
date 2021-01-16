@@ -870,6 +870,7 @@ assert_struct_size(RCT12ResearchItem, 5);
 
 #pragma pack(pop)
 
+bool RCT12TrackTypeIsBooster(uint8_t rideType, uint8_t trackType);
 ObjectEntryIndex RCTEntryIndexToOpenRCT2EntryIndex(const RCT12ObjectEntryIndex index);
 RCT12ObjectEntryIndex OpenRCT2EntryIndexToRCTEntryIndex(const ObjectEntryIndex index);
 ride_id_t RCT12RideIdToOpenRCT2RideId(const RCT12RideId rideId);

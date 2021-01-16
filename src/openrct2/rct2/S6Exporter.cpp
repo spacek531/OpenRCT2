@@ -1497,7 +1497,10 @@ void S6Exporter::ExportTileElement(RCT12TileElement* dst, TileElement* src)
             auto dst2 = dst->AsTrack();
             auto src2 = src->AsTrack();
 
-            dst2->SetTrackType(src2->GetTrackType());
+            auto trackType = src2->GetTrackType();
+            if (trackType == TrackElemType::Booster)
+                trackType = TrackElemType::BoosterAlias;
+            dst2->SetTrackType(trackType);
             dst2->SetSequenceIndex(src2->GetSequenceIndex());
             dst2->SetRideIndex(src2->GetRideIndex());
             dst2->SetColourScheme(src2->GetColourScheme());
@@ -1515,7 +1518,7 @@ void S6Exporter::ExportTileElement(RCT12TileElement* dst, TileElement* src)
 
             // This has to be done last, since the maze entry shares fields with the colour and sequence fields.
             auto ride = get_ride(dst2->GetRideIndex());
-            if (ride)
+            if (ride) // is there a chance ride fails???
             {
                 if (ride->type == RIDE_TYPE_MAZE)
                 {
@@ -1536,6 +1539,7 @@ void S6Exporter::ExportTileElement(RCT12TileElement* dst, TileElement* src)
             {
                 dst2->SetSeatRotation(src2->GetSeatRotation());
             }
+
 
             break;
         }
