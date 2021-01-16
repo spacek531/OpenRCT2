@@ -75,7 +75,7 @@ GameActions::Result::Ptr TrackSetBrakeSpeedAction::QueryExecute(bool isExecuting
         {
             brakes_link_to_block_brake(_loc, tileElement);
         }
-        else if(tileElement->AsTrack()->GetTrackType() == TrackElemType::BlockBrakes)
+        else if (tileElement->AsTrack()->GetTrackType() == TrackElemType::BlockBrakes)
         {
             block_brakes_set_linked_brakes_closed(_loc, tileElement, tileElement->AsTrack()->GetBrakeClosed());
         }
