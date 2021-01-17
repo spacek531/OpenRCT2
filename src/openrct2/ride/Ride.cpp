@@ -116,7 +116,7 @@ CoordsXYZ _previousTrackPiece;
 uint8_t _currentBrakeSpeed2;
 uint8_t _currentSeatRotationAngle;
 
-CoordsXYZD _unkF440C5;
+CoordsXYZD _provisionalTrackLocation;
 
 uint8_t gRideEntranceExitPlaceType;
 ride_id_t gRideEntranceExitPlaceRideIndex;
@@ -1307,9 +1307,9 @@ void ride_remove_provisional_track_piece()
         return;
     }
 
-    int32_t x = _unkF440C5.x;
-    int32_t y = _unkF440C5.y;
-    int32_t z = _unkF440C5.z;
+    int32_t x = _provisionalTrackLocation.x;
+    int32_t y = _provisionalTrackLocation.y;
+    int32_t z = _provisionalTrackLocation.z;
     if (ride->type == RIDE_TYPE_MAZE)
     {
         int32_t flags = GAME_COMMAND_FLAG_APPLY | GAME_COMMAND_FLAG_ALLOW_DURING_PAUSED | GAME_COMMAND_FLAG_NO_SPEND
@@ -1321,7 +1321,7 @@ void ride_remove_provisional_track_piece()
     }
     else
     {
-        int32_t direction = _unkF440C5.direction;
+        int32_t direction = _provisionalTrackLocation.direction;
         if (!(direction & 4))
         {
             x -= CoordsDirectionDelta[direction].x;

@@ -59,7 +59,7 @@ money32 place_provisional_track_piece(
         if (result == MONEY32_UNDEFINED)
             return result;
 
-        _unkF440C5 = { trackPos, static_cast<Direction>(trackDirection) };
+        _provisionalTrackLocation = { trackPos, static_cast<Direction>(trackDirection) };
         _currentTrackSelectionFlags |= TRACK_SELECTION_FLAG_TRACK;
         viewport_set_visibility(3);
         if (_currentTrackSlopeEnd != 0)
@@ -101,7 +101,7 @@ money32 place_provisional_track_piece(
             z_end = z_begin = coords->z_begin;
         }
 
-        _unkF440C5 = { trackPos.x, trackPos.y, trackPos.z + z_begin, static_cast<Direction>(trackDirection) };
+        _provisionalTrackLocation = { trackPos.x, trackPos.y, trackPos.z + z_begin, static_cast<Direction>(trackDirection) };
         _currentTrackSelectionFlags |= TRACK_SELECTION_FLAG_TRACK;
         if (tpar != nullptr)
         {

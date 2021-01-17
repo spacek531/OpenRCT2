@@ -501,7 +501,6 @@ namespace TrackElemType
     constexpr uint16_t MultiDimUp90ToInvertedFlatQuarterLoop = 253;
     constexpr uint16_t MultiDimFlatToDown90QuarterLoop = 254;
     constexpr uint16_t MultiDimInvertedUp90ToFlatQuarterLoop = 255;
-
     constexpr uint16_t Booster = 256;
 
     constexpr uint16_t Count = 257;

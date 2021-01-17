@@ -269,7 +269,7 @@ const rct_track_coordinates FlatTrackCoordinates[TrackElemType::Count] = {
     {    0,    1,    0,   96,    0,  -32 },
     {    0,    3,   96,    0,    0,   32 },
     {    0,    1,   96,    0,    0,  -32 },
-    {    0,    0,    8,    0,    0,    0 },
+    {    0,    0,    0,    0,    0,    0 },
 };
 
 const rct_track_coordinates TrackCoordinates[TrackElemType::Count] = {
@@ -529,7 +529,7 @@ const rct_track_coordinates TrackCoordinates[TrackElemType::Count] = {
         { 0, 2, 0, 96, 64, 0 },
         { 0, 2, 0, -128, -96, 0 },
         { 0, 2, 0, 128, 64, 0 },
-        { 0, 0, 0, 8, 0, 0 },  // booster
+        { 0, 0, 0, 0, 0, 0 },  // booster
 };
 
 /** rct2: 0x0099BA64 */
