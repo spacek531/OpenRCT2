@@ -36,7 +36,6 @@ uint8_t _rideConstructionState2;
 // This variable is updated separately from ride->num_stations because the latter
 // is unreliable if currently in station construction mode
 bool _stationConstructed;
-bool _deferClose;
 
 /**
  *
@@ -408,10 +407,6 @@ void window_ride_construction_do_entrance_exit_check()
             if (!ride_are_all_possible_entrances_and_exits_built(ride))
             {
                 window_event_mouse_up_call(w, WC_RIDE_CONSTRUCTION__WIDX_ENTRANCE);
-            }
-            else
-            {
-                _deferClose = true;
             }
         }
     }

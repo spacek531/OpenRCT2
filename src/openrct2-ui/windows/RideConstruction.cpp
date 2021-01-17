@@ -514,7 +514,6 @@ rct_window* window_ride_construction_open()
         return nullptr;
 
     _stationConstructed = ride->num_stations != 0;
-    _deferClose = false;
 
     if (ride->type == RIDE_TYPE_MAZE)
     {

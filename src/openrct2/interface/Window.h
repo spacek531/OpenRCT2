@@ -853,7 +853,6 @@ money32 place_provisional_track_piece(
 extern uint64_t _enabledRidePieces;
 extern uint8_t _rideConstructionState2;
 extern bool _stationConstructed;
-extern bool _deferClose;
 
 rct_window* window_get_listening();
 rct_windowclass window_get_classification(rct_window* window);
