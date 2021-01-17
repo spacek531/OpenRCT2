@@ -590,7 +590,7 @@ int32_t track_is_connected_by_shape(TileElement* a, TileElement* b)
     return aBank == bBank && aAngle == bAngle;
 }
 
-const rct_preview_track* get_track_def_from_ride(Ride* ride, int32_t trackType)
+const track_build_sequence* get_track_def_from_ride(Ride* ride, int32_t trackType)
 {
     return ride_type_has_flag(ride->type, RIDE_TYPE_FLAG_FLAT_RIDE) ? FlatRideTrackBlocks[trackType] : TrackBlocks[trackType];
 }
@@ -601,7 +601,7 @@ const rct_track_coordinates* get_track_coord_from_ride(Ride* ride, int32_t track
                                                                     : &TrackCoordinates[trackType];
 }
 
-const rct_preview_track* get_track_def_from_ride_index(ride_id_t rideIndex, int32_t trackType)
+const track_build_sequence* get_track_def_from_ride_index(ride_id_t rideIndex, int32_t trackType)
 {
     return get_track_def_from_ride(get_ride(rideIndex), trackType);
 }

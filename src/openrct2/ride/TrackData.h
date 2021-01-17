@@ -23,8 +23,8 @@ extern const rct_track_coordinates FlatTrackCoordinates[TrackElemType::Count];
 extern const uint8_t TrackSequenceProperties[TrackElemType::Count][MaxSequencesPerPiece];
 extern const uint8_t FlatRideTrackSequenceProperties[TrackElemType::Count][MaxSequencesPerPiece];
 
-extern const rct_preview_track* TrackBlocks[TrackElemType::Count];
-extern const rct_preview_track* FlatRideTrackBlocks[TrackElemType::Count];
+extern const track_build_sequence* TrackBlocks[TrackElemType::Count];
+extern const track_build_sequence* FlatRideTrackBlocks[TrackElemType::Count];
 
 extern const uint8_t TrackPieceLengths[TrackElemType::Count];
 

@@ -50,7 +50,7 @@ constexpr bool operator!=(const PitchAndRoll& vb1, const PitchAndRoll& vb2)
 }
 
 /* size 0x0A */
-struct rct_preview_track
+struct track_build_sequence
 {
     uint8_t index; // 0x00
     int16_t x;     // 0x01
@@ -358,11 +358,11 @@ namespace TrackElemType
     constexpr uint16_t Up25LeftBanked = 110;
     constexpr uint16_t Up25RightBanked = 111;
     constexpr uint16_t Waterfall = 112;
-    constexpr uint16_t Rapids = 113;
+    constexpr uint16_t Rapids = 113; // also known as Log Bumps
     constexpr uint16_t OnRidePhoto = 114;
     constexpr uint16_t Down25LeftBanked = 115;
     constexpr uint16_t Down25RightBanked = 116;
-    constexpr uint16_t Watersplash = 117;
+    constexpr uint16_t Watersplash = 117; // wooden coaster water splash
     constexpr uint16_t FlatToUp60LongBase = 118;
     constexpr uint16_t Up60ToFlatLongBase = 119;
     constexpr uint16_t Whirlpool = 120;
@@ -506,6 +506,22 @@ namespace TrackElemType
     constexpr uint16_t None = 65535;
 }; // namespace TrackElemType
 
+
+namespace FlatElemType
+{
+    constexpr uint16_t TowerBase = 66;
+    constexpr uint16_t MagicCarpet = 95;
+    constexpr uint16_t Maze = 101;
+    constexpr uint16_t Flat2x2 = 110;
+    constexpr uint16_t Flat4x4 = 110;
+    constexpr uint16_t SwingingShip = 116;
+    constexpr uint16_t ShopOneEntrance = 118;
+    constexpr uint16_t SwingingInvertingShip = 119;
+    constexpr uint16_t ShopFourEntrances = 121;
+    constexpr uint16_t FerrisWheel = 122;
+    constexpr uint16_t Flat3x3 = 123;
+}; // namespace FlatElemType
+
 enum
 {
     FLAT_TRACK_ELEM_1_X_4_A = 95,
@@ -556,8 +572,8 @@ PitchAndRoll TrackPitchAndRollEnd(track_type_t trackType);
 
 int32_t track_is_connected_by_shape(TileElement* a, TileElement* b);
 
-const rct_preview_track* get_track_def_from_ride(Ride* ride, int32_t trackType);
-const rct_preview_track* get_track_def_from_ride_index(ride_id_t rideIndex, int32_t trackType);
+const track_build_sequence* get_track_def_from_ride(Ride* ride, int32_t trackType);
+const track_build_sequence* get_track_def_from_ride_index(ride_id_t rideIndex, int32_t trackType);
 const rct_track_coordinates* get_track_coord_from_ride(Ride* ride, int32_t trackType);
 
 void track_circuit_iterator_begin(track_circuit_iterator* it, CoordsXYE first);

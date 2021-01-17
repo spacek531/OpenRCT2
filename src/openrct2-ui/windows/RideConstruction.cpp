@@ -1923,7 +1923,7 @@ static void window_ride_construction_mouseup_demolish(rct_window* w)
             return;
         }
 
-        const rct_preview_track* trackBlock = get_track_def_from_ride_index(
+        const track_build_sequence* trackBlock = get_track_def_from_ride_index(
             _currentRideIndex, tileElement->AsTrack()->GetTrackType());
         newCoords->z = (tileElement->GetBaseZ()) - trackBlock->z;
         gGotoStartPlacementMode = true;
@@ -3348,7 +3348,7 @@ static void window_ride_construction_select_map_tiles(
         return;
     }
 
-    const rct_preview_track* trackBlock;
+    const track_build_sequence* trackBlock;
 
     trackBlock = get_track_def_from_ride(ride, trackType);
     trackDirection &= 3;
@@ -3484,7 +3484,7 @@ static void ride_construction_set_brakes_speed(int32_t brakesSpeed)
 void ride_construction_toolupdate_construct(const ScreenCoordsXY& screenCoords)
 {
     int32_t z;
-    const rct_preview_track* trackBlock;
+    const track_build_sequence* trackBlock;
 
     map_invalidate_map_selection_tiles();
     gMapSelectFlags &= ~MAP_SELECT_FLAG_ENABLE;
@@ -3780,7 +3780,7 @@ void ride_construction_tooldown_construct(const ScreenCoordsXY& screenCoords)
 
     if (_trackPlaceZ == 0)
     {
-        const rct_preview_track* trackBlock = get_track_def_from_ride(ride, _currentTrackPieceType);
+        const track_build_sequence* trackBlock = get_track_def_from_ride(ride, _currentTrackPieceType);
         int32_t bx = 0;
         do
         {
