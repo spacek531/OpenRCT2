@@ -38,6 +38,7 @@
 #include "../rct12/SawyerEncoding.h"
 #include "../rct2/RCT2.h"
 #include "../ride/Ride.h"
+#include "../ride/RideData.h"
 #include "../ride/RideRatings.h"
 #include "../ride/ShopItem.h"
 #include "../ride/Station.h"
@@ -1146,7 +1147,13 @@ public:
                 auto dst2 = dst->AsTrack();
                 auto src2 = src->AsTrack();
 
-                dst2->SetTrackType(src2->GetTrackType());
+                auto rideType = _s6.rides[src2->GetRideIndex()].type;
+                RideTypeDescriptor rtd = RideTypeDescriptors[rideType];
+                uint16_t trackType = src2->GetTrackType();
+
+                if (trackType == TrackElemType::RotationControlToggle && !rtd.SupportsTrackPiece(TRACK_ROTATION_CONTROL_TOGGLE))
+                    trackType = TrackElemType::Booster;
+                dst2->SetTrackType(trackType);
                 dst2->SetSequenceIndex(src2->GetSequenceIndex());
                 dst2->SetRideIndex(src2->GetRideIndex());
                 dst2->SetColourScheme(src2->GetColourScheme());
