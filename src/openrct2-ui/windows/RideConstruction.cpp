@@ -2242,7 +2242,7 @@ static void window_ride_construction_invalidate(rct_window* w)
     }
 
     rct_string_id stringId = STR_RIDE_CONSTRUCTION_SPECIAL;
-    if (_currentTrackCurve & RideConstructionSpecialPieceSelected)
+    if (_currentTrackCurve != 0xFFFFFFFF && _currentTrackCurve & RideConstructionSpecialPieceSelected)
     {
         stringId = RideConfigurationStringIds[_currentTrackCurve & ~RideConstructionSpecialPieceSelected];
         if (stringId == STR_RAPIDS && (ride->type == RIDE_TYPE_MONSTER_TRUCKS || ride->type == RIDE_TYPE_CAR_RIDE))
@@ -3842,7 +3842,7 @@ void ride_construction_tooldown_construct(const ScreenCoordsXY& screenCoords)
                 || z < 0)
             {
                 int32_t saveTrackDirection = _currentTrackPieceDirection;
-                int32_t saveCurrentTrackCurve = _currentTrackCurve;
+                int64_t saveCurrentTrackCurve = _currentTrackCurve;
                 int32_t savePreviousTrackSlopeEnd = _previousTrackSlopeEnd;
                 int32_t saveCurrentTrackSlopeEnd = _currentTrackSlopeEnd;
                 int32_t savePreviousTrackBankEnd = _previousTrackBankEnd;
