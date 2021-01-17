@@ -92,7 +92,7 @@ money32 _currentTrackPrice;
 uint16_t _numCurrentPossibleRideConfigurations;
 uint16_t _numCurrentPossibleSpecialTrackPieces;
 
-uint32_t _currentTrackCurve;
+uint64_t _currentTrackCurve;
 uint8_t _rideConstructionState;
 ride_id_t _currentRideIndex;
 
@@ -1425,7 +1425,7 @@ static void ride_construction_reset_current_piece()
     }
     else
     {
-        _currentTrackCurve = 0xFFFF;
+        _currentTrackCurve = 0xFFFFFFFF;
         _rideConstructionState = RIDE_CONSTRUCTION_STATE_0;
     }
 }
@@ -1659,7 +1659,7 @@ void ride_select_previous_section()
     {
         ride_construction_invalidate_current_track();
         int32_t direction = _currentTrackPieceDirection;
-        int32_t type = _currentTrackPieceType;
+        track_type_t type = _currentTrackPieceType;
         TileElement* tileElement;
         auto newCoords = sub_6C683D({ _currentTrackBegin, static_cast<Direction>(direction & 3) }, type, 0, &tileElement, 0);
         if (newCoords == std::nullopt)
@@ -6906,7 +6906,7 @@ void sub_6CB945(Ride* ride)
                 continue;
             }
 
-            const rct_preview_track* trackBlock = get_track_def_from_ride(ride, tileElement->AsTrack()->GetTrackType());
+            const rct_track_sequence* trackBlock = get_track_def_from_ride(ride, tileElement->AsTrack()->GetTrackType());
             while ((++trackBlock)->index != 0xFF)
             {
                 CoordsXYZ blockLocation = location + CoordsXYZ{ CoordsXY{ trackBlock->x, trackBlock->y }.Rotate(direction), 0 };

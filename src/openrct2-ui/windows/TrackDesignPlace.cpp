@@ -537,7 +537,7 @@ static void window_track_place_draw_mini_preview_track(
 {
     const uint8_t rotation = (_currentTrackPieceDirection + get_current_rotation()) & 3;
 
-    const rct_preview_track** trackBlockArray = (ride_type_has_flag(td6->type, RIDE_TYPE_FLAG_HAS_TRACK)) ? TrackBlocks
+    const rct_track_sequence** trackBlockArray = (ride_type_has_flag(td6->type, RIDE_TYPE_FLAG_HAS_TRACK)) ? TrackBlocks
                                                                                                           : FlatRideTrackBlocks;
     CoordsXY curTrackStart = origin;
     uint8_t curTrackRotation = rotation;
@@ -550,7 +550,7 @@ static void window_track_place_draw_mini_preview_track(
         }
 
         // Follow a single track piece shape
-        const rct_preview_track* trackBlock = trackBlockArray[trackType];
+        const rct_track_sequence* trackBlock = trackBlockArray[trackType];
         while (trackBlock->index != 255)
         {
             auto rotatedAndOffsetTrackBlock = curTrackStart + CoordsXY{ trackBlock->x, trackBlock->y }.Rotate(curTrackRotation);

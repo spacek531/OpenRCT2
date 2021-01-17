@@ -134,7 +134,7 @@ GameActions::Result::Ptr TrackRemoveAction::Query() const
         log_warning("Ride type not found. ride type = %d.", ride->type);
         return MakeResult(GameActions::Status::InvalidParameters, STR_RIDE_CONSTRUCTION_CANT_REMOVE_THIS);
     }
-    const rct_preview_track* trackBlock = get_track_def_from_ride(ride, trackType);
+    const rct_track_sequence* trackBlock = get_track_def_from_ride(ride, trackType);
     trackBlock += tileElement->AsTrack()->GetSequenceIndex();
 
     auto startLoc = _origin;
@@ -330,7 +330,7 @@ GameActions::Result::Ptr TrackRemoveAction::Execute() const
         log_warning("Ride not found. ride index = %d.", rideIndex);
         return MakeResult(GameActions::Status::InvalidParameters, STR_RIDE_CONSTRUCTION_CANT_REMOVE_THIS);
     }
-    const rct_preview_track* trackBlock = get_track_def_from_ride(ride, trackType);
+    const rct_track_sequence* trackBlock = get_track_def_from_ride(ride, trackType);
     trackBlock += tileElement->AsTrack()->GetSequenceIndex();
 
     auto startLoc = _origin;
