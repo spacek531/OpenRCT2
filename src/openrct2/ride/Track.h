@@ -521,7 +521,7 @@ namespace FlatTrackElemType
     constexpr uint16_t SwingingInverterShip = 119; // swinging inverting ship
     constexpr uint16_t ShopFourEntrances = 121; // information kiosk
     constexpr uint16_t FerrisWheel = 122; // ferris wheel
-    constexpr uint16_t Flat3x3 = 123; // twist, carousel, circus, 3D cinema, haunted house, crooked house, etc.
+    constexpr uint16_t Flat3x3 = 123; // twist, merry-go-round, circus, 3D cinema, haunted house, crooked house, etc.
     constexpr uint16_t None = 65535;
 }; // namespace FlatTrackElemType
 

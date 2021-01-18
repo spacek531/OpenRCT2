@@ -87,7 +87,7 @@ TRACK_PAINT_FUNCTION get_track_paint_function_facility(int32_t trackType)
 {
     switch (trackType)
     {
-        case FLAT_TRACK_ELEM_1_X_1_A:
+        case FlatTrackElemType::ShopOneEntrance:
             return facility_paint_setup;
     }
     return nullptr;

@@ -35,11 +35,7 @@
 #include "TrackDesign.h"
 
 // clang-format off
-<<<<<<< HEAD
-const rct_trackdefinition TrackDefinitions[256] =
-=======
 const rct_trackdefinition TrackDefinitions[TrackElemType::Count] =
->>>>>>> finish implementing FlatTrackElemType
 {
     // TYPE                         VANGLE END                  VANGLE START                BANK END                BANK START              PREVIEW Z OFFSET
     { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_FLAT

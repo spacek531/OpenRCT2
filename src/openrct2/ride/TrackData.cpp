@@ -1309,7 +1309,7 @@ const rct_trackdefinition TrackDefinitions[TrackElemType::Count] =
 };
 
 /**　rct2: 0x0099849D */
-const rct_trackdefinition FlatRideTrackDefinitions[257] =
+const rct_trackdefinition FlatRideTrackDefinitions[TrackElemType::Count] =
 {
     // TYPE                         VANGLE END                  VANGLE START                BANK END                BANK START              PREVIEW Z OFFSET
     { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 0
@@ -7274,7 +7274,7 @@ static constexpr const track_build_sequence FlatRideTrackBlocksFlat4x4[] = {
     TRACK_BLOCK_END
 };
 
-static constexpr const track_build_sequence FlatRideTrackBlocks115[] = {
+static constexpr const track_build_sequence FlatRideTrackBlocksFlat2x4[] = {
     { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
     { 1, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
     { 2, 0, 64, 0, 0, { 0b1111, 0 }, 0 },
@@ -7455,7 +7455,7 @@ const track_build_sequence *FlatRideTrackBlocks[TrackElemType::Count] = {
     TrackBlocksWaterfall,
     TrackBlocksRapids,
     TrackBlocksOnRidePhoto,
-    FlatRideTrackBlocks115,
+    FlatRideTrackBlocksFlat2x4,
     FlatRideTrackBlocksSwingingShip,
     TrackBlocksWatersplash,
     FlatRideTrackBlocksShopOneEntrance,
