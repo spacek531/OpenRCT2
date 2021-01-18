@@ -1,13 +1,14 @@
 
+#include "RideConstructionHelpers.h"
+
 #include "../Context.h"
+#include "../Game.h"
 #include "../actions/TrackPlaceAction.h"
 #include "../paint/VirtualFloor.h"
-#include "../Game.h"
 #include "../ride/RideData.h"
 #include "../ride/Track.h"
 #include "../ride/TrackData.h"
 #include "Intent.h"
-#include "RideConstructionHelpers.h"
 
 uint64_t _enabledRidePieces;
 uint8_t _rideConstructionState2;

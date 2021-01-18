@@ -1511,8 +1511,9 @@ static int32_t track_design_place_maze(TrackDesign* td6, const CoordsXYZ& coords
 
 static bool track_design_place_ride(TrackDesign* td6, const CoordsXYZ& origin, Ride* ride)
 {
-    const track_build_sequence** trackBlockArray = (ride_type_has_flag(td6->type, RIDE_TYPE_FLAG_HAS_TRACK)) ? TrackBlocks
-                                                                                                          : FlatRideTrackBlocks;
+    const track_build_sequence** trackBlockArray = (ride_type_has_flag(td6->type, RIDE_TYPE_FLAG_HAS_TRACK))
+        ? TrackBlocks
+        : FlatRideTrackBlocks;
 
     _trackPreviewOrigin = origin;
     if (_trackDesignPlaceOperation == PTD_OPERATION_DRAW_OUTLINES)
@@ -1535,13 +1536,19 @@ static bool track_design_place_ride(TrackDesign* td6, const CoordsXYZ& origin, R
         {
             trackType = TrackElemType::MultiDimInvertedUp90ToFlatQuarterLoop;
         }
+        else if (
+            trackType == TrackElemType::BoosterAlias && ride->GetRideTypeDescriptor().TrackPieceAllowed(TrackElemType::Booster))
+        {
+            trackType = TrackElemType::Booster;
+        }
 
         track_design_update_max_min_coordinates(newCoords);
 
         switch (_trackDesignPlaceOperation)
         {
             case PTD_OPERATION_DRAW_OUTLINES:
-                for (const track_build_sequence* trackBlock = trackBlockArray[trackType]; trackBlock->index != 0xFF; trackBlock++)
+                for (const track_build_sequence* trackBlock = trackBlockArray[trackType]; trackBlock->index != 0xFF;
+                     trackBlock++)
                 {
                     auto tile = CoordsXY{ newCoords } + CoordsXY{ trackBlock->x, trackBlock->y }.Rotate(rotation);
                     track_design_update_max_min_coordinates({ tile, newCoords.z });
@@ -1624,7 +1631,8 @@ static bool track_design_place_ride(TrackDesign* td6, const CoordsXYZ& origin, R
             case PTD_OPERATION_GET_PLACE_Z:
             {
                 int32_t tempZ = newCoords.z - TrackCoordinates[trackType].z_begin;
-                for (const track_build_sequence* trackBlock = trackBlockArray[trackType]; trackBlock->index != 0xFF; trackBlock++)
+                for (const track_build_sequence* trackBlock = trackBlockArray[trackType]; trackBlock->index != 0xFF;
+                     trackBlock++)
                 {
                     auto tile = CoordsXY{ newCoords } + CoordsXY{ trackBlock->x, trackBlock->y }.Rotate(rotation);
                     if (!map_is_location_valid(tile))

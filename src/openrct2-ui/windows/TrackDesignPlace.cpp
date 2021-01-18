@@ -537,8 +537,9 @@ static void window_track_place_draw_mini_preview_track(
 {
     const uint8_t rotation = (_currentTrackPieceDirection + get_current_rotation()) & 3;
 
-    const track_build_sequence** trackBlockArray = (ride_type_has_flag(td6->type, RIDE_TYPE_FLAG_HAS_TRACK)) ? TrackBlocks
-                                                                                                          : FlatRideTrackBlocks;
+    const track_build_sequence** trackBlockArray = (ride_type_has_flag(td6->type, RIDE_TYPE_FLAG_HAS_TRACK))
+        ? TrackBlocks
+        : FlatRideTrackBlocks;
     CoordsXY curTrackStart = origin;
     uint8_t curTrackRotation = rotation;
     for (const auto& trackElement : td6->track_elements)

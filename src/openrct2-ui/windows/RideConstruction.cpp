@@ -31,8 +31,8 @@
 #include <openrct2/ride/Track.h>
 #include <openrct2/ride/TrackData.h>
 #include <openrct2/sprites.h>
-#include <openrct2/windows/RideConstructionHelpers.h>
 #include <openrct2/windows/Intent.h>
+#include <openrct2/windows/RideConstructionHelpers.h>
 #include <openrct2/world/Entrance.h>
 #include <openrct2/world/Footpath.h>
 #include <openrct2/world/Park.h>
@@ -3141,7 +3141,9 @@ static void window_ride_construction_update_widgets(rct_window* w)
             window_ride_construction_widgets[WIDX_BANK_STRAIGHT].tooltip = STR_RIDE_CONSTRUCTION_BRAKE_SPEED_LIMIT_TIP;
             window_ride_construction_widgets[WIDX_BANK_RIGHT].tooltip = STR_RIDE_CONSTRUCTION_BRAKE_SPEED_LIMIT_TIP;
         }
-        else if (speedControlSelected)
+        else if (
+            _boosterTrackSelected
+            && ride->GetRideTypeDescriptor().TrackBehaviours.BoosterBehaviour == RideBoosterBehaviour::SpeedController)
         {
             window_ride_construction_widgets[WIDX_BANKING_GROUPBOX].text = STR_RIDE_CONSTRUCTION_SPEED_CONTROL;
             window_ride_construction_widgets[WIDX_BANK_LEFT].tooltip = STR_RIDE_CONSTRUCTION_SPEED_CONTROL_TIP;

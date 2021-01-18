@@ -1,8 +1,8 @@
 #ifndef _RIDECONSTRUCTIONHELPER_
 #define _RIDECONSTRUCTIONHELPER_
 
-#include "../ride/track.h"
 #include "../ride/RideTypes.h"
+#include "../ride/track.h"
 
 money32 place_provisional_track_piece(
     ride_id_t rideIndex, track_type_t trackType, int32_t trackDirection, int32_t liftHillAndAlternativeState,
