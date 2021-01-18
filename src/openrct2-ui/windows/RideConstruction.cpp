@@ -1644,7 +1644,7 @@ static void window_ride_construction_dropdown(rct_window* w, rct_widgetindex wid
 
     ride_construction_invalidate_current_track();
     _currentTrackPrice = MONEY32_UNDEFINED;
-    int32_t trackPiece = _currentPossibleRideConfigurations[dropdownIndex];
+    track_type_t trackPiece = _currentPossibleRideConfigurations[dropdownIndex];
     switch (trackPiece)
     {
         case TrackElemType::EndStation:
@@ -3372,7 +3372,7 @@ static void window_ride_construction_show_special_track_dropdown(rct_window* w, 
     int32_t defaultIndex = -1;
     for (int32_t i = 0; i < _numCurrentPossibleRideConfigurations; i++)
     {
-        uint8_t trackPiece = _currentPossibleRideConfigurations[i];
+        track_type_t trackPiece = _currentPossibleRideConfigurations[i];
         rct_string_id trackPieceStringId = RideConfigurationStringIds[trackPiece];
         auto ride = get_ride(_currentRideIndex);
         if (trackPieceStringId == STR_RAPIDS && ride != nullptr)
