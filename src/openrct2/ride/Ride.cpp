@@ -4524,9 +4524,9 @@ static Vehicle* vehicle_create_car(
         {
             if (ride_type_has_flag(ride->type, RIDE_TYPE_FLAG_VEHICLE_IS_INTEGRAL))
             {
-                if (RideTypeDescriptors[ride->type].StartTrackPiece != FLAT_TRACK_ELEM_1_X_4_B)
+                if (RideTypeDescriptors[ride->type].StartTrackPiece != FlatTrackElemType::SwingingInverterShip)
                 {
-                    if (RideTypeDescriptors[ride->type].StartTrackPiece != FLAT_TRACK_ELEM_1_X_4_A)
+                    if (RideTypeDescriptors[ride->type].StartTrackPiece != FlatTrackElemType::MagicCarpet)
                     {
                         if (ride->type == RIDE_TYPE_ENTERPRISE)
                         {

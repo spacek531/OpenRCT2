@@ -15,16 +15,11 @@
 
 constexpr const uint8_t MaxSequencesPerPiece = 16;
 
-// 0x009968BB, 0x009968BC, 0x009968BD, 0x009968BF, 0x009968C1, 0x009968C3
 extern const rct_track_coordinates TrackCoordinates[TrackElemType::Count];
-// 0x009972BB, 0x009972BC, 0x009972BD, 0x009972BF, 0x009972C1, 0x009972C3
 extern const rct_track_coordinates FlatTrackCoordinates[TrackElemType::Count];
 
 extern const uint8_t TrackSequenceProperties[TrackElemType::Count][MaxSequencesPerPiece];
 extern const uint8_t FlatRideTrackSequenceProperties[TrackElemType::Count][MaxSequencesPerPiece];
-
-extern const track_build_sequence* TrackBlocks[TrackElemType::Count];
-extern const track_build_sequence* FlatRideTrackBlocks[TrackElemType::Count];
 
 extern const uint8_t TrackPieceLengths[TrackElemType::Count];
 
@@ -33,6 +28,9 @@ struct track_curve_chain
     uint64_t next;
     uint64_t previous;
 };
+
+extern const rct_trackdefinition FlatRideTrackDefinitions[TrackElemType::Count];
+extern const rct_trackdefinition TrackDefinitions[TrackElemType::Count];
 
 extern const track_curve_chain gTrackCurveChain[TrackElemType::Count];
 extern const track_curve_chain gFlatRideTrackCurveChain[TrackElemType::Count];
@@ -50,10 +48,10 @@ struct track_descriptor
 
 extern const track_descriptor gTrackDescriptors[142];
 
-extern const track_type_t AlternativeTrackTypes[257];
+extern const track_type_t AlternativeTrackTypes[TrackElemType::Count];
 
-extern const money32 TrackPricing[256];
-extern const money32 FlatRideTrackPricing[256];
+extern const money32 TrackPricing[TrackElemType::Count];
+extern const money32 FlatRideTrackPricing[TrackElemType::Count];
 
 struct dodgems_track_size
 {
@@ -63,18 +61,17 @@ struct dodgems_track_size
     uint8_t bottom;
 };
 
-extern const dodgems_track_size DodgemsTrackSize[256];
+extern const dodgems_track_size DodgemsTrackSize[TrackElemType::Count];
 
-<<<<<<< HEAD
-extern const uint8_t TrackElementMirrorMap[256];
-=======
-extern const track_type_t TrackElementMirrorMap[257];
->>>>>>> What did I break I don't even
+extern const track_type_t TrackElementMirrorMap[TrackElemType::Count];
 
-extern const uint32_t TrackHeightMarkerPositions[256];
+extern const uint32_t TrackHeightMarkerPositions[TrackElemType::Count];
 
-extern const uint8_t TrackSequenceElementAllowedWallEdges[256][16];
-extern const uint8_t FlatRideTrackSequenceElementAllowedWallEdges[256][16];
+extern const uint8_t TrackSequenceElementAllowedWallEdges[TrackElemType::Count][16];
+extern const uint8_t FlatRideTrackSequenceElementAllowedWallEdges[TrackElemType::Count][16];
 
-extern const uint16_t FlatTrackFlags[256];
-extern const uint16_t TrackFlags[256];
+extern const uint16_t FlatTrackFlags[TrackElemType::Count];
+extern const uint16_t TrackFlags[TrackElemType::Count];
+
+extern const track_build_sequence* TrackBlocks[TrackElemType::Count];
+extern const track_build_sequence* FlatRideTrackBlocks[TrackElemType::Count];

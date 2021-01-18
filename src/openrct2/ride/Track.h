@@ -507,34 +507,23 @@ namespace TrackElemType
 }; // namespace TrackElemType
 
 
-namespace FlatElemType
+namespace FlatTrackElemType
 {
-    constexpr uint16_t TowerBase = 66;
-    constexpr uint16_t MagicCarpet = 95;
-    constexpr uint16_t Maze = 101;
-    constexpr uint16_t Flat2x2 = 110;
-    constexpr uint16_t Flat4x4 = 111;
-    constexpr uint16_t SwingingShip = 116;
-    constexpr uint16_t ShopOneEntrance = 118;
-    constexpr uint16_t SwingingInvertingShip = 119;
-    constexpr uint16_t ShopFourEntrances = 121;
-    constexpr uint16_t FerrisWheel = 122;
-    constexpr uint16_t Flat3x3 = 123;
+    constexpr uint16_t TowerBase = 66; // tower rides
+    constexpr uint16_t TowerSection = 67; // tower rides
+    constexpr uint16_t MagicCarpet = 95; // magic carpet ride
+    constexpr uint16_t Maze = 101; // maze
+    constexpr uint16_t Flat2x2 = 110; // spiral slide, motion simulator
+    constexpr uint16_t Flat4x4 = 111; // enterprise, dodgems, flying saucers
+    constexpr uint16_t Flat2x4 = 115; // unused?
+    constexpr uint16_t SwingingShip = 116; // swinging ship
+    constexpr uint16_t ShopOneEntrance = 118; // food stall, drink stall, restroom, first aid, ATM
+    constexpr uint16_t SwingingInverterShip = 119; // swinging inverting ship
+    constexpr uint16_t ShopFourEntrances = 121; // information kiosk
+    constexpr uint16_t FerrisWheel = 122; // ferris wheel
+    constexpr uint16_t Flat3x3 = 123; // twist, carousel, circus, 3D cinema, haunted house, crooked house, etc.
     constexpr uint16_t None = 65535;
-}; // namespace FlatElemType
-
-enum
-{
-    FLAT_TRACK_ELEM_1_X_4_A = 95,
-    FLAT_TRACK_ELEM_2_X_2 = 110,
-    FLAT_TRACK_ELEM_4_X_4 = 111,
-    FLAT_TRACK_ELEM_1_X_5 = 116,
-    FLAT_TRACK_ELEM_1_X_1_A = 118,
-    FLAT_TRACK_ELEM_1_X_4_B = 119,
-    FLAT_TRACK_ELEM_1_X_1_B = 121,
-    FLAT_TRACK_ELEM_1_X_4_C = 122,
-    FLAT_TRACK_ELEM_3_X_3 = 123,
-};
+}; // namespace FlatTrackElemType
 
 enum
 {
@@ -565,9 +554,12 @@ struct track_circuit_iterator
     bool looped;
 };
 
+<<<<<<< HEAD
 extern const rct_trackdefinition FlatRideTrackDefinitions[256];
 extern const rct_trackdefinition TrackDefinitions[256];
 
+=======
+>>>>>>> finish implementing FlatTrackElemType
 PitchAndRoll TrackPitchAndRollStart(track_type_t trackType);
 PitchAndRoll TrackPitchAndRollEnd(track_type_t trackType);
 

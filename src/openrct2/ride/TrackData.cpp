@@ -787,9 +787,9 @@ const uint8_t TrackSequenceProperties[][MaxSequencesPerPiece] = {
 /** rct2: 0x0099CA64 */
 const uint8_t FlatRideTrackSequenceProperties[][MaxSequencesPerPiece] = {
     { 0 },
-    /* 1 */ { TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    /* 2 */ { TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    /* 3 */ { TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    /* TrackElemType::EndStation    */ { TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    /* TrackElemType::BeginStation  */ { TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    /* TrackElemType::MiddleStation */ { TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { 0 }, // 4
     { 0 }, // 5
     { 0 }, // 6
@@ -852,8 +852,8 @@ const uint8_t FlatRideTrackSequenceProperties[][MaxSequencesPerPiece] = {
     { 0 }, // 63
     { 0 }, // 64
     { 0 }, // 65
-    /* FlatElemType::TowerBase */    { TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_0, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1, TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1, TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2, TRACK_SEQUENCE_FLAG_DIRECTION_2, 0, 0, 0, 0, 0, 0, 0 },
-    { 0 }, // 67
+    /* FlatTrackElemType::TowerBase    */ { TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_0, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1, TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1, TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2, TRACK_SEQUENCE_FLAG_DIRECTION_2, 0, 0, 0, 0, 0, 0, 0 },
+    /* FlatTrackElemType::TowerSection */ { 0 },
     { 0 }, // 68
     { 0 }, // 69
     { 0 }, // 70
@@ -881,13 +881,13 @@ const uint8_t FlatRideTrackSequenceProperties[][MaxSequencesPerPiece] = {
     { 0 }, // 92
     { 0 }, // 93
     { 0 }, // 94
-    /* FlatElemType::MagicCarpet */ { TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, 0, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    /* FlatTrackElemType::MagicCarpet */ { TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, 0, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { 0 }, // 95
     { 0 }, // 96
     { 0 }, // 97
     { 0 }, // 98
     { 0 }, // 99
-    /* FlatElemType::Maze */ { TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN },
+    /* FlatTrackElemType::Maze */ { TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN },
     { 0 }, // 102
     { 0 }, // 103
     { 0 }, // 104
@@ -896,20 +896,20 @@ const uint8_t FlatRideTrackSequenceProperties[][MaxSequencesPerPiece] = {
     { 0 }, // 107
     { 0 }, // 108
     { 0 }, // 109
-    /* FlatElemType::Flat2x2 */ { TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1, TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    /* FlatElemType::Flat4x4 */ { TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0, TRACK_SEQUENCE_FLAG_DIRECTION_0, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1, TRACK_SEQUENCE_FLAG_DIRECTION_3, 0, 0, TRACK_SEQUENCE_FLAG_DIRECTION_1, TRACK_SEQUENCE_FLAG_DIRECTION_3, 0, 0, TRACK_SEQUENCE_FLAG_DIRECTION_1, TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_2, TRACK_SEQUENCE_FLAG_DIRECTION_2, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 },
+    /* FlatTrackElemType::Flat2x2 */ { TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1, TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    /* FlatTrackElemType::Flat4x4 */ { TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0, TRACK_SEQUENCE_FLAG_DIRECTION_0, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1, TRACK_SEQUENCE_FLAG_DIRECTION_3, 0, 0, TRACK_SEQUENCE_FLAG_DIRECTION_1, TRACK_SEQUENCE_FLAG_DIRECTION_3, 0, 0, TRACK_SEQUENCE_FLAG_DIRECTION_1, TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_2, TRACK_SEQUENCE_FLAG_DIRECTION_2, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 },
     { 0 }, // 112
     { 0 }, // 113
     { 0 }, // 114
-    /* 115 */   { TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0, TRACK_SEQUENCE_FLAG_DIRECTION_0, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1, TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_2, TRACK_SEQUENCE_FLAG_DIRECTION_2, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2, 0, 0, 0, 0, 0, 0, 0, 0 },
-    /* FlatElemType::SwingingShip */ { TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, 0, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    /* FlatTrackElemType::Flat2x4      */ { TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0, TRACK_SEQUENCE_FLAG_DIRECTION_0, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1, TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_2, TRACK_SEQUENCE_FLAG_DIRECTION_2, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2, 0, 0, 0, 0, 0, 0, 0, 0 },
+    /* FlatTrackElemType::SwingingShip */ { TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, 0, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { 0 }, // 117
-    /* FlatElemType::ShopOneEntrance */ { TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_ORIGIN | TRACK_SEQUENCE_FLAG_CONNECTS_TO_PATH, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    /* FlatElemType::SwingingInvertingShip */ { TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_ORIGIN, 0, TRACK_SEQUENCE_FLAG_DIRECTION_1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    /* FlatTrackElemType::ShopOneEntrance */         { TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_ORIGIN | TRACK_SEQUENCE_FLAG_CONNECTS_TO_PATH, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    /* FlatTrackElemType::SwingingInvertingShip */   { TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_ORIGIN, 0, TRACK_SEQUENCE_FLAG_DIRECTION_1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { 0 }, // 120
-    /* FlatElemType::ShopFourEntrances */ { TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN | TRACK_SEQUENCE_FLAG_CONNECTS_TO_PATH, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    /* FlatElemType::FerrisWheel */ { TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    /* FlatElemType::Flat3x3 */ { TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_0, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1, TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1, TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2, TRACK_SEQUENCE_FLAG_DIRECTION_2, 0, 0, 0, 0, 0, 0, 0 },
+    /* FlatTrackElemType::ShopFourEntrances */       { TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN | TRACK_SEQUENCE_FLAG_CONNECTS_TO_PATH, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    /* FlatTrackElemType::FerrisWheel */             { TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    /* FlatTrackElemType::Flat3x3 */                 { TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_0, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1, TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1, TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2, TRACK_SEQUENCE_FLAG_DIRECTION_2, 0, 0, 0, 0, 0, 0, 0 },
     { 0 }, // 124
     { 0 }, // 125
     { 0 }, // 126
@@ -1045,2516 +1045,530 @@ const uint8_t FlatRideTrackSequenceProperties[][MaxSequencesPerPiece] = {
     { 0 }, // 256
 };
 
-#define TRACK_BLOCK_END { 255, 255, 255, 255, 255, {255, 255}, 255 }
-
-static constexpr const track_build_sequence TrackBlocksFlat[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksEndStation[] = {
-    { 0, 0, 0, 0, 0,{ 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksBeginStation[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksMiddleStation[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksUp60[] = {
-    { 0, 0, 0, 0, 64, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksFlatToUp25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksUp25ToUp60[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksUp60ToUp25[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksUp25ToFlat[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDown25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDown60[] = {
-    { 0, 0, 0, 0, 64, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksFlatToDown25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDown25ToDown60[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDown60ToDown25[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDown25ToFlat[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn5Tiles[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 0, 0, { 0b0111, 0 }, 0 },
-    { 6, -64, -64, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightQuarterTurn5Tiles[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 0, 0, { 0b1011, 0 }, 0 },
-    { 6, -64, 64, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksFlatToLeftBank[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksFlatToRightBank[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftBankToFlat[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightBankToFlat[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksBankedLeftQuarterTurn5Tiles[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 0, 0, { 0b0111, 0 }, 0 },
-    { 6, -64, -64, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksBankedRightQuarterTurn5Tiles[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 0, 0, { 0b1011, 0 }, 0 },
-    { 6, -64, 64, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftBankToUp25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightBankToUp25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksUp25ToLeftBank[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksUp25ToRightBank[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftBankToDown25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightBankToDown25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDown25ToLeftBank[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDown25ToRightBank[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftBank[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightBank[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn5TilesUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    { 1, 0, -32, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 16, 16, { 0b0111, 0b0100 }, 0 },
-    { 3, -32, -32, 24, 16, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 48, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 32, 16, { 0b0111, 0b0100 }, 0 },
-    { 6, -64, -64, 48, 16, { 0b1111, 0b0110 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightQuarterTurn5TilesUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    { 1, 0, 32, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 16, 16, { 0b1011, 0b1000 }, 0 },
-    { 3, -32, 32, 24, 16, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 48, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 32, 16, { 0b1011, 0b1000 }, 0 },
-    { 6, -64, 64, 48, 16, { 0b1111, 0b1001 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn5TilesDown25[] = {
-    { 0, 0, 0, 48, 16, { 0b1111, 0b0011 }, 0 },
-    { 1, 0, -32, 48, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 32, 16, { 0b0111, 0b0001 }, 0 },
-    { 3, -32, -32, 24, 16, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 16, 16, { 0b0111, 0b0001 }, 0 },
-    { 6, -64, -64, 0, 16, { 0b1111, 0b1001 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightQuarterTurn5TilesDown25[] = {
-    { 0, 0, 0, 48, 16, { 0b1111, 0b0011 }, 0 },
-    { 1, 0, 32, 48, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 32, 16, { 0b1011, 0b0010 }, 0 },
-    { 3, -32, 32, 24, 16, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 16, 16, { 0b1011, 0b0010 }, 0 },
-    { 6, -64, 64, 0, 16, { 0b1111, 0b0110 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksSBendLeft[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 2, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
-    { 3, -64, -32, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksSBendRight[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 2, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
-    { 3, -64, 32, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftVerticalLoop[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    { 1, -32, 0, 16, 16, { 0b1111, 0b1100 }, 0 },
-    { 2, -64, 0, 32, 96, { 0b0010, 0 }, 0 },
-    { 3, -32, 0, 120, 16, { 0b0110, 0 }, 0 },
-    { 4, -32, -32, 120, 0, { 0b0001, 0 }, 0 },
-    { 5, 0, 0, 120, 0, { 0b0100, 0 }, 0 },
-    { 6, 0, -32, 120, 16, { 0b1001, 0 }, 0 },
-    { 7, 32, -32, 32, 96, { 0b1000, 0 }, 0 },
-    { 8, 0, -32, 16, 16, { 0b1111, 0b0011 }, 0 },
-    { 9, -32, -32, 0, 16, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightVerticalLoop[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    { 1, -32, 0, 16, 16, { 0b1111, 0b1100 }, 0 },
-    { 2, -64, 0, 32, 96, { 0b0001, 0 }, 0 },
-    { 3, -32, 0, 120, 16, { 0b1001, 0 }, 0 },
-    { 4, -32, 32, 120, 0, { 0b0010, 0 }, 0 },
-    { 5, 0, 0, 120, 0, { 0b1000, 0 }, 0 },
-    { 6, 0, 32, 120, 16, { 0b0110, 0 }, 0 },
-    { 7, 32, 32, 32, 96, { 0b0100, 0 }, 0 },
-    { 8, 0, 32, 16, 16, { 0b1111, 0b0011 }, 0 },
-    { 9, -32, 32, 0, 16, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn3Tiles[] = {
-    { 0, 0, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0010, 0 }, 0 },
-    { 3, -32, -32, 0, 0, { 0b0111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightQuarterTurn3Tiles[] = {
-    { 0, 0, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0001, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1011, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftBankedQuarterTurn3Tiles[] = {
-    { 0, 0, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0010, 0 }, 0 },
-    { 3, -32, -32, 0, 0, { 0b0111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightBankedQuarterTurn3Tiles[] = {
-    { 0, 0, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0001, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1011, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn3TilesUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b0111, 0b0100 }, 0 },
-    { 1, 0, -32, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 16, 0, { 0b0010, 0 }, 0 },
-    { 3, -32, -32, 16, 16,{ 0b0111, 0b0110 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightQuarterTurn3TilesUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1011, 0b1000 }, 0 },
-    { 1, 0, 32, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 16, 0, { 0b0001, 0 }, 0 },
-    { 3, -32, 32, 16, 16,{ 0b1011, 0b1001 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn3TilesDown25[] = {
-    { 0, 0, 0, 16, 16,{ 0b0111, 0b0011 }, 0 },
-    { 1, 0, -32, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 16, 0, { 0b0010, 0 }, 0 },
-    { 3, -32, -32, 0, 16, { 0b0111, 0b0001 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightQuarterTurn3TilesDown25[] = {
-    { 0, 0, 0, 16, 16, { 0b1011, 0b0011 }, 0 },
-    { 1, 0, 32, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 16, 0, { 0b0001, 0 }, 0 },
-    { 3, -32, 32, 0, 16, { 0b1011, 0b0010 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn1Tile[] = {
-    { 0, 0, 0, 0, 0, { 0b0111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightQuarterTurn1Tile[] = {
-    { 0, 0, 0, 0, 0, { 0b1011, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftTwistDownToUp[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 16, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightTwistDownToUp[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 16, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftTwistUpToDown[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -16, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, -16, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightTwistUpToDown[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -16, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, -16, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksHalfLoopUp[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, 0 },
-    { 1, -32, 0, 16, 16, { 0b1111, 0b1100 }, 0 },
-    { 2, -64, 0, 32, 96,{ 0b0011, 0 }, 0 },
-    { 3, -32, 0, 120, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksHalfLoopDown[] = {
-    { 0, 0, 0, -32, 32, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -120, 96,{ 0b0011, 0 }, 0 },
-    { 2, 0, 0, -136, 16, { 0b1111, 0b1100 }, 0 },
-    { 3, 32, 0, -152, 16, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftCorkscrewUp[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 24, 32, { 0b0111, 0 }, 0 },
-    { 2, -32, -32, 48, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightCorkscrewUp[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 24, 32, { 0b1011, 0 }, 0 },
-    { 2, -32, 32, 48, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftCorkscrewDown[] = {
-    { 0, 0, 0, -32, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -56, 32, { 0b0111, 0 }, 0 },
-    { 2, -32, -32, -80, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightCorkscrewDown[] = {
-    { 0, 0, 0, -32, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -56, 32, { 0b1011, 0 }, 0 },
-    { 2, -32, 32, -80, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksFlatToUp60[] = {
-    { 0, 0, 0, 0, 24, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksUp60ToFlat[] = {
-    { 0, 0, 0, 0, 24, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksFlatToDown60[] = {
-    { 0, 0, 0, 0, 24, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDown60ToFlat[] = {
-    { 0, 0, 0, 0, 24, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksTowerBase[] = {
-    { 0, 0, 0, 0, 64, { 0b1111, 0 }, 0 },
-    { 1, -32, -32, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, 0, -32, 0, 0, { 0b1111, 0 }, 0 },
-    { 5, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 6, 32, -32, 0, 0, { 0b1111, 0 }, 0 },
-    { 7, 32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 8, 32, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksTowerSection[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 32, 0, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_1 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksFlatCovered[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksUp25Covered[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksUp60Covered[] = {
-    { 0, 0, 0, 0, 64, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksFlatToUp25Covered[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksUp25ToUp60Covered[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksUp60ToUp25Covered[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksUp25ToFlatCovered[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDown25Covered[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDown60Covered[] = {
-    { 0, 0, 0, 0, 64, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksFlatToDown25Covered[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDown25ToDown60Covered[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDown60ToDown25Covered[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDown25ToFlatCovered[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn5TilesCovered[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 0, 0, { 0b0111, 0 }, 0 },
-    { 6, -64, -64, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightQuarterTurn5TilesCovered[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 0, 0, { 0b1011, 0 }, 0 },
-    { 6, -64, 64, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksSBendLeftCovered[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 2, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
-    { 3, -64, -32, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksSBendRightCovered[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 2, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
-    { 3, -64, 32, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn3TilesCovered[] = {
-    { 0, 0, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0010, 0 }, 0 },
-    { 3, -32, -32, 0, 0, { 0b0111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightQuarterTurn3TilesCovered[] = {
-    { 0, 0, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0001, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1011, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftHalfBankedHelixUpSmall[] = {
-    { 0, 0, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 4, { 0b0010, 0 }, 0 },
-    { 3, -32, -32, 0, 4, { 0b0111, 0 }, 0 },
-    { 4, -32, -64, 8, 0, { 0b1011, 0 }, 0 },
-    { 5, 0, -64, 8, 0, { 0b0100, 0b0000 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 6, -32, -96, 8, 4, { 0b0001, 0 }, 0 },
-    { 7, 0, -96, 8, 4, { 0b1011, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightHalfBankedHelixUpSmall[] = {
-    { 0, 0, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0b0000 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 4, { 0b0001, 0 }, 0 },
-    { 3, -32, 32, 0, 4, { 0b1011, 0 }, 0 },
-    { 4, -32, 64, 8, 0, { 0b0111, 0 }, 0 },
-    { 5, 0, 64, 8, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 6, -32, 96, 8, 4, { 0b0010, 0 }, 0 },
-    { 7, 0, 96, 8, 4, { 0b0111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftHalfBankedHelixDownSmall[] = {
-    { 0, 0, 0, 8, 4, { 0b0111, 0 }, 0 },
-    { 1, 0, -32, 8, 4, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 8, 0, { 0b0010, 0 }, 0 },
-    { 3, -32, -32, 8, 0, { 0b0111, 0 }, 0 },
-    { 4, -32, -64, 0, 4, { 0b1011, 0 }, 0 },
-    { 5, 0, -64, 0, 4, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 6, -32, -96, 0, 0, { 0b0001, 0 }, 0 },
-    { 7, 0, -96, 0, 0, { 0b1011, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightHalfBankedHelixDownSmall[] = {
-    { 0, 0, 0, 8, 4, { 0b1011, 0 }, 0 },
-    { 1, 0, 32, 8, 4, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 8, 0, { 0b0001, 0 }, 0 },
-    { 3, -32, 32, 8, 0, { 0b1011, 0 }, 0 },
-    { 4, -32, 64, 0, 4, { 0b0111, 0 }, 0 },
-    { 5, 0, 64, 0, 4, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 6, -32, 96, 0, 0, { 0b0010, 0 }, 0 },
-    { 7, 0, 96, 0, 0, { 0b0111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftHalfBankedHelixUpLarge[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 0, 4, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 0, 4, { 0b0111, 0 }, 0 },
-    { 6, -64, -64, 0, 4, { 0b1111, 0 }, 0 },
-    { 7, -64, -96, 8, 0, { 0b1111, 0 }, 0 },
-    { 8, -32, -96, 8, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 9, -64, -128, 8, 0, { 0b1011, 0 }, 0 },
-    { 10, -32, -128, 8, 0, { 0b1110, 0 }, 0 },
-    { 11, 0, -128, 8, 4, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 12, -32, -160, 8, 4, { 0b1011, 0 }, 0 },
-    { 13, 0, -160, 8, 4, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightHalfBankedHelixUpLarge[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 0, 4, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 0, 4, { 0b1011, 0 }, 0 },
-    { 6, -64, 64, 0, 4, { 0b1111, 0 }, 0 },
-    { 7, -64, 96, 8, 0, { 0b1111, 0 }, 0 },
-    { 8, -32, 96, 8, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 9, -64, 128, 8, 0, { 0b0111, 0 }, 0 },
-    { 10, -32, 128, 8, 0, { 0b1101, 0 }, 0 },
-    { 11, 0, 128, 8, 4, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 12, -32, 160, 8, 4, { 0b0111, 0 }, 0 },
-    { 13, 0, 160, 8, 4, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftHalfBankedHelixDownLarge[] = {
-    { 0, 0, 0, 8, 4, { 0b1111, 0 }, 0 },
-    { 1, 0, -32, 8, 4, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 8, 4, { 0b0111, 0 }, 0 },
-    { 3, -32, -32, 8, 0, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 8, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 8, 0, { 0b0111, 0 }, 0 },
-    { 6, -64, -64, 8, 0, { 0b1111, 0 }, 0 },
-    { 7, -64, -96, 0, 4, { 0b1111, 0 }, 0 },
-    { 8, -32, -96, 0, 4, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 9, -64, -128, 0, 4, { 0b1011, 0 }, 0 },
-    { 10, -32, -128, 0, 0, { 0b1110, 0 }, 0 },
-    { 11, 0, -128, 0, 0, { 0b0100, 0b0000 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 12, -32, -160, 0, 0, { 0b1011, 0 }, 0 },
-    { 13, 0, -160, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightHalfBankedHelixDownLarge[] = {
-    { 0, 0, 0, 8, 4, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 8, 4, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 8, 4, { 0b1011, 0 }, 0 },
-    { 3, -32, 32, 8, 0, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 8, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 8, 0, { 0b1011, 0 }, 0 },
-    { 6, -64, 64, 8, 0, { 0b1111, 0 }, 0 },
-    { 7, -64, 96, 0, 4, { 0b1111, 0 }, 0 },
-    { 8, -32, 96, 0, 4, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 9, -64, 128, 0, 4, { 0b0111, 0 }, 0 },
-    { 10, -32, 128, 0, 0, { 0b1101, 0 }, 0 },
-    { 11, 0, 128, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 12, -32, 160, 0, 0, { 0b0111, 0 }, 0 },
-    { 13, 0, 160, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn1TileUp60[] = {
-    { 0, 0, 0, 0, 64, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightQuarterTurn1TileUp60[] = {
-    { 0, 0, 0, 0, 64, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn1TileDown60[] = {
-    { 0, 0, 0, 0, 64, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftRightQuarterTurn1TileDown60[] = {
-    { 0, 0, 0, 0, 64, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksBrakes[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRotationControlToggle[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksMaze[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftQuarterBankedHelixLargeUp[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 0, 12, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 0, 12, { 0b0111, 0 }, 0 },
-    { 6, -64, -64, 0, 12, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightQuarterBankedHelixLargeUp[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 0, 12, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 0, 12, { 0b1011, 0 }, 0 },
-    { 6, -64, 64, 0, 12, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftQuarterBankedHelixLargeDown[] = {
-    { 0, 0, 0, 0, 12, { 0b1111, 0 }, 0 },
-    { 1, 0, -32, 0, 12, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 12, { 0b0111, 0 }, 0 },
-    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 0, 0, { 0b0111, 0 }, 0 },
-    { 6, -64, -64, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightQuarterBankedHelixLargeDown[] = {
-    { 0, 0, 0, 0, 12, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 0, 12, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 12, { 0b1011, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 0, 0, { 0b1011, 0 }, 0 },
-    { 6, -64, 64, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftQuarterHelixLargeUp[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 0, 12, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 0, 12, { 0b0111, 0 }, 0 },
-    { 6, -64, -64, 0, 12, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightQuarterHelixLargeUp[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 0, 12, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 0, 12, { 0b1011, 0 }, 0 },
-    { 6, -64, 64, 0, 12, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftQuarterHelixLargeDown[] = {
-    { 0, 0, 0, 0, 12, { 0b1111, 0 }, 0 },
-    { 1, 0, -32, 0, 12, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 12, { 0b0111, 0 }, 0 },
-    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 0, 0, { 0b0111, 0 }, 0 },
-    { 6, -64, -64, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightQuarterHelixLargeDown[] = {
-    { 0, 0, 0, 0, 12, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 0, 12, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 12, { 0b1011, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 0, 0, { 0b1011, 0 }, 0 },
-    { 6, -64, 64, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksUp25LeftBanked[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksUp25RightBanked[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksWaterfall[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRapids[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksOnRidePhoto[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDown25LeftBanked[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDown25RightBanked[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksWatersplash[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 3, -96, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 4, -128, 0, 0, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksFlatToUp60LongBase[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 16, 24, { 0b1111, 0 }, 0 },
-    { 3, -96, 0, 40, 48, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksUp60ToFlatLongBase[] = {
-    { 0, 0, 0, 0, 48, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 40, 48, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 64, 24, { 0b1111, 0 }, 0 },
-    { 3, -96, 0, 80, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksWhirlpool[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDown60ToFlatLongBase[] = {
-    { 0, 0, 0, 40, 48, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 16, 24, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 3, -96, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksFlatToDown60LongBase[] = {
-    { 0, 0, 0, 80, 8, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 64, 24, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 40, 48, { 0b1111, 0 }, 0 },
-    { 3, -96, 0, 0, 48, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksCableLiftHill[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
-    { 1, -32, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
-    { 2, -64, 0, -32, 32, { 0b1111, 0b0011 }, 0 },
-    { 3, -96, 0, -96, 64, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksReverseFreefallSlope[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 32, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 0, 48, { 0b1111, 0 }, 0 },
-    { 3, -96, 0, 0, 80, { 0b1111, 0 }, 0 },
-    { 4, -128, 0, 0, 160, { 0b1111, 0 }, 0 },
-    { 5, -192, 0, 0, 208, { 0b1111, 0 }, 0 },
-    { 6, -160, 0, 0, 208, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksReverseFreefallVertical[] = {
-    { 0, 0, 0, 0, 48, { 0b1111, 0 }, 0 },
-    { 1, 32, 0, 0, 48, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksUp90[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, 32, 0, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDown90[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, 32, 0, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksUp60ToUp90[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, 32, 0, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDown90ToDown60[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0b0011 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksUp90ToUp60[] = {
-    { 0, 0, 0, 0, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDown60ToDown90[] = {
-    { 0, 0, 0, 0, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, 32, 0, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksBrakeForDrop[] = {
-    { 0, 0, 0, 0, 24, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftEighthToDiag[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, -32, 0, 0, { 0b1000, 0 }, 0 },
-    { 3, -64, 0, 0, 0, { 0b0010, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 4, -64, -32, 0, 0, { 0b0001, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightEighthToDiag[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, 32, 0, 0, { 0b0100, 0 }, 0 },
-    { 3, -64, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 4, -64, 32, 0, 0, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftEighthToOrthogonal[] = {
-    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b0001, 0 }, 0 },
-    { 2, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, -64, 32, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightEighthToOrthogonal[] = {
-    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, 0 },
-    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, -32, 64, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftEighthBankToDiag[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, -32, 0, 0, { 0b1000, 0 }, 0 },
-    { 3, -64, 0, 0, 0, { 0b0010, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 4, -64, -32, 0, 0, { 0b0001, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightEighthBankToDiag[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, 32, 0, 0, { 0b0100, 0 }, 0 },
-    { 3, -64, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 4, -64, 32, 0, 0, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftEighthBankToOrthogonal[] = {
-    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b0001, 0 }, 0 },
-    { 2, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, -64, 32, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightEighthBankToOrthogonal[] = {
-    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, 0 },
-    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, -32, 64, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagFlat[] = {
-    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 16, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 16, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 16, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagUp60[] = {
-    { 0, 0, 0, 0, 64, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 64, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 64, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 64, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagFlatToUp25[] = {
-    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagUp25ToUp60[] = {
-    { 0, 0, 0, 0, 32, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 32, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 32, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 32, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagUp60ToUp25[] = {
-    { 0, 0, 0, 0, 32, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 32, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 32, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 32, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagUp25ToFlat[] = {
-    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagDown25[] = {
-    { 0, 0, 0, 0, 16, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 16, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 16, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 16, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagDown60[] = {
-    { 0, 0, 0, 0, 64, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 64, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 64, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 64, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagFlatToDown25[] = {
-    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagDown25ToDown60[] = {
-    { 0, 0, 0, 0, 32, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 32, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 32, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 32, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagDown60ToDown25[] = {
-    { 0, 0, 0, 0, 32, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 32, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 32, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 32, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagDown25ToFlat[] = {
-    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagFlatToUp60[] = {
-    { 0, 0, 0, 0, 24, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 24, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 24, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 24, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagUp60ToFlat[] = {
-    { 0, 0, 0, 0, 24, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 24, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 24, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 24, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagFlatToDown60[] = {
-    { 0, 0, 0, 0, 24, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 24, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 24, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 24, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagDown60ToFlat[] = {
-    { 0, 0, 0, 0, 24, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 24, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 24, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 24, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagFlatToLeftBank[] = {
-    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagFlatToRightBank[] = {
-    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagLeftBankToFlat[] = {
-    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagRightBankToFlat[] = {
-    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagLeftBankToUp25[] = {
-    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagRightBankToUp25[] = {
-    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagUp25ToLeftBank[] = {
-    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagUp25ToRightBank[] = {
-    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagLeftBankToDown25[] = {
-    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagRightBankToDown25[] = {
-    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagDown25ToLeftBank[] = {
-    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagDown25ToRightBank[] = {
-    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagLeftBank[] = {
-    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDiagRightBank[] = {
-    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLogFlumeReverser[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksSpinningTunnel[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftBarrelRollUpToDown[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 0, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightBarrelRollUpToDown[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 0, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftBarrelRollDownToUp[] = {
-    { 0, 0, 0, -32, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -32, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, -32, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightBarrelRollDownToUp[] = {
-    { 0, 0, 0, -32, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -32, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, -32, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftBankToLeftQuarterTurn3TilesUp25[] = {
-    { 0, 0, 0, 0, 0, { 0b0111, 0b0100 }, 0 },
-    { 1, 0, -32, 0, 16, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 16, { 0b0010, 0 }, 0 },
-    { 3, -32, -32, 16, 16,{ 0b0111, 0b0110 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightBankToRightQuarterTurn3TilesUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1011, 0b1000 }, 0 },
-    { 1, 0, 32, 0, 16, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 16, { 0b0001, 0 }, 0 },
-    { 3, -32, 32, 16, 16,{ 0b1011, 0b1001 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn3TilesDown25ToLeftBank[] = {
-    { 0, 0, 0, 16, 16,{ 0b0111, 0b0011 }, 0 },
-    { 1, 0, -32, 0, 16, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 16, { 0b0010, 0 }, 0 },
-    { 3, -32, -32, 0, 0, { 0b0111, 0b0001 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightQuarterTurn3TilesDown25ToRightBank[] = {
-    { 0, 0, 0, 16, 16, { 0b1011, 0b0011 }, 0 },
-    { 1, 0, 32, 0, 16, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 16, { 0b0001, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1011, 0b0010 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksPoweredLift[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftLargeHalfLoopUp[] = {
-    { 0, 0, 0, 0, 24, { 0b1111, 0b1100 }, 0 },
-    { 1, -32, 0, 16, 40, { 0b1111, 0b1100 }, 0 },
-    { 2, -64, 0, 32, 56, { 0b1111, 0 }, 0 },
-    { 3, -96, 0, 64, 192, { 0b1111, 0 }, 0 },
-    { 4, -128, -32, 120, 96, { 0b1111, 0 }, 0 },
-    { 5, -96, -32, 64, 192, { 0b1111, 0 }, 0 },
-    { 6, -64, -32, 248, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightLargeHalfLoopUp[] = {
-    { 0, 0, 0, 0, 24, { 0b1111, 0b1100 }, 0 },
-    { 1, -32, 0, 16, 40, { 0b1111, 0b1100 }, 0 },
-    { 2, -64, 0, 32, 56, { 0b1111, 0 }, 0 },
-    { 3, -96, 0, 64, 192, { 0b1111, 0 }, 0 },
-    { 4, -128, 32, 120, 96, { 0b1111, 0 }, 0 },
-    { 5, -96, 32, 64, 192, { 0b1111, 0 }, 0 },
-    { 6, -64, 32, 248, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightLargeHalfLoopDown[] = {
-    { 0, 0, 0, -32, 24, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -216, 192, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, -160, 96, { 0b1111, 0 }, 0 },
-    { 3, -32, -32, -216, 192, { 0b1111, 0 }, 0 },
-    { 4, 0, -32, -248, 56, { 0b1111, 0 }, 0 },
-    { 5, 32, -32, -264, 40, { 0b1111, 0b1100 }, 0 },
-    { 6, 64, -32, -280, 24, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftLargeHalfLoopDown[] = {
-    { 0, 0, 0, -32, 24, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -216, 192, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, -160, 96, { 0b1111, 0 }, 0 },
-    { 3, -32, 32, -216, 192, { 0b1111, 0 }, 0 },
-    { 4, 0, 32, -248, 56, { 0b1111, 0 }, 0 },
-    { 5, 32, 32, -264, 40, { 0b1111, 0b1100 }, 0 },
-    { 6, 64, 32, -280, 24, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftFlyerTwistUp[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -16, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, -16, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightFlyerTwistUp[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -16, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, -16, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftFlyerTwistDown[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 16, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightFlyerTwistDown[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 16, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksFlyerHalfLoopUp[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, 0 },
-    { 1, -32, 0, 16, 16, { 0b1111, 0b1100 }, 0 },
-    { 2, -64, 0, 32, 96,{ 0b0011, 0 }, 0 },
-    { 3, -32, 0, 120, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksFlyerHalfLoopDown[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -88, 96,{ 0b0011, 0 }, 0 },
-    { 2, 0, 0, -104, 16, { 0b1111, 0b1100 }, 0 },
-    { 3, 32, 0, -120, 16, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftFlyerCorkscrewUp[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 24, 32, { 0b0111, 0 }, 0 },
-    { 2, -32, -32, 48, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightFlyerCorkscrewUp[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 24, 32, { 0b1011, 0 }, 0 },
-    { 2, -32, 32, 48, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftFlyerCorkscrewDown[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -24, 32, { 0b0111, 0 }, 0 },
-    { 2, -32, -32, -48, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightFlyerCorkscrewDown[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -24, 32, { 0b1011, 0 }, 0 },
-    { 2, -32, 32, -48, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksHeartLineTransferUp[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 32, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 16, 0, { 0b1111, 0 }, 0 },
-    { 3, 0, 0, 32, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksHeartLineTransferDown[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -32, 32, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, -16, 0, { 0b1111, 0 }, 0 },
-    { 3, 0, 0, -32, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftHeartLineRoll[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, -96, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, -128, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 5, -160, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightHeartLineRoll[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, -96, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, -128, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 5, -160, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksMinigolfHoleA[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksMinigolfHoleB[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksMinigolfHoleC[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksMinigolfHoleD[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksMinigolfHoleE[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, -32, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksMultiDimInvertedFlatToDown90QuarterLoop[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, -32, 0, -40, 32, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 2, -64, 0, -96, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 3, -96, 0, -96, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksUp90ToInvertedFlatQuarterLoop[] = {
-    { 0, 0, 0, 0, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, 32, 0, 56, 32, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 2, 64, 0, 96, 16, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksInvertedFlatToDown90QuarterLoop[] = {
-    { 0, 0, 0, -32, 16, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, -32, 0, -72, 32, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 2, -64, 0, -128, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 3, -96, 0, -128, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftCurvedLiftHill[] = {
-    { 0, 0, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0010, 0 }, 0 },
-    { 3, -32, -32, 0, 8, { 0b0111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightCurvedLiftHill[] = {
-    { 0, 0, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, 0 },
-    { 3, -32, 32, 0, 8, { 0b1011, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftReverser[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, -32, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, -32, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, -64, -32, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 5, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightReverser[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, -64, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 5, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksAirThrustTopCap[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0 }, 0 },
-    { 1, 32, 0, 0, 32, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 0, 32, { 0b1111, 0 }, 0 },
-    { 3, -32, 0, 0, 32, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksAirThrustVerticalDown[] = {
-    { 0, 0, 0, 0, 48, { 0b1111, 0 }, 0 },
-    { 1, 32, 0, 0, 48, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksAirThrustVerticalDownToLevel[] = {
-    { 0, 0, 0, 0, 208, { 0b1111, 0 }, 0 },
-    { 1, 32, 0, 0, 208, { 0b1111, 0 }, 0 },
-    { 2, -32, 0, 0, 160, { 0b1111, 0 }, 0 },
-    { 3, -64, 0, 0, 80, { 0b1111, 0 }, 0 },
-    { 4, -96, 0, 0, 48, { 0b1111, 0 }, 0 },
-    { 5, -128, 0, 0, 32, { 0b1111, 0 }, 0 },
-    { 6, -160, 0, 0, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksBlockBrakes[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftBankedQuarterTurn3TileUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b0111, 0b0100 }, 0 },
-    { 1, 0, -32, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 16, 0, { 0b0010, 0 }, 0 },
-    { 3, -32, -32, 16, 16,{ 0b0111, 0b0110 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightBankedQuarterTurn3TileUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1011, 0b1000 }, 0 },
-    { 1, 0, 32, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 16, 0, { 0b0001, 0 }, 0 },
-    { 3, -32, 32, 16, 16,{ 0b1011, 0b1001 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftBankedQuarterTurn3TileDown25[] = {
-    { 0, 0, 0, 16, 16,{ 0b0111, 0b0011 }, 0 },
-    { 1, 0, -32, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 16, 0, { 0b0010, 0 }, 0 },
-    { 3, -32, -32, 0, 16, { 0b0111, 0b0001 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightBankedQuarterTurn3TileDown25[] = {
-    { 0, 0, 0, 16, 16, { 0b1011, 0b0011 }, 0 },
-    { 1, 0, 32, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 16, 0, { 0b0001, 0 }, 0 },
-    { 3, -32, 32, 0, 16, { 0b1011, 0b0010 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftBankedQuarterTurn5TileUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    { 1, 0, -32, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 16, 16, { 0b0111, 0b0100 }, 0 },
-    { 3, -32, -32, 24, 16, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 48, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 32, 16, { 0b0111, 0b0100 }, 0 },
-    { 6, -64, -64, 48, 16, { 0b1111, 0b0110 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightBankedQuarterTurn5TileUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    { 1, 0, 32, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 16, 16, { 0b1011, 0b1000 }, 0 },
-    { 3, -32, 32, 24, 16, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 48, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 32, 16, { 0b1011, 0b1000 }, 0 },
-    { 6, -64, 64, 48, 16, { 0b1111, 0b1001 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftBankedQuarterTurn5TileDown25[] = {
-    { 0, 0, 0, 48, 16, { 0b1111, 0b0011 }, 0 },
-    { 1, 0, -32, 48, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 32, 16, { 0b0111, 0b0001 }, 0 },
-    { 3, -32, -32, 24, 16, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 16, 16, { 0b0111, 0b0001 }, 0 },
-    { 6, -64, -64, 0, 16, { 0b1111, 0b1001 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightBankedQuarterTurn5TileDown25[] = {
-    { 0, 0, 0, 48, 16, { 0b1111, 0b0011 }, 0 },
-    { 1, 0, 32, 48, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 32, 16, { 0b1011, 0b0010 }, 0 },
-    { 3, -32, 32, 24, 16, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 16, 16, { 0b1011, 0b0010 }, 0 },
-    { 6, -64, 64, 0, 16, { 0b1111, 0b0110 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksUp25ToLeftBankedUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksUp25ToRightBankedUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftBankedUp25ToUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightBankedUp25ToUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDown25ToLeftBankedDown25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksDown25ToRightBankedDown25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftBankedDown25ToDown25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightBankedDown25ToDown25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftBankedFlatToLeftBankedUp25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightBankedFlatToRightBankedUp25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftBankedUp25ToLeftBankedFlat[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightBankedUp25ToRightBankedFlat[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftBankedFlatToLeftBankedDown25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightBankedFlatToRightBankedDown25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftBankedDown25ToLeftBankedFlat[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightBankedDown25ToRightBankedFlat[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlockFlatToLeftBankedUp25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlockFlatToRightBankedUp25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftBankedUp25ToFlat[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightBankedUp25ToFlat[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksFlatToLeftBankedDown25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksFlatToRightBankedDown25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftBankedDown25ToFlat[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightBankedDown25ToFlat[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn1TileUp90[] = {
-    { 0, 0, 0, 0, 72, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, 0, 32, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightQuarterTurn1TileUp90[] = {
-    { 0, 0, 0, 0, 72, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, 0, -32, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn1TileDown90[] = {
-    { 0, 0, 0, 0, 72, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, 0, 32, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksRightQuarterTurn1TileDown90[] = {
-    { 0, 0, 0, 0, 72, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, 0, -32, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksMultiDimUp90ToInvertedFlatQuarterLoop[] = {
-    { 0, 0, 0, 0, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, 32, 0, 56, 32, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 2, 64, 0, 96, 16, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksMultiDimFlatToDown90QuarterLoop[] = {
-    { 0, 0, 0, -32, 16, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, -32, 0, -72, 32, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 2, -64, 0, -128, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 3, -96, 0, -128, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksMultiDimInvertedUp90ToFlatQuarterLoop[] = {
-    { 0, 0, 0, 32, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, 32, 0, 88, 32, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 2, 64, 0, 128, 16, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence TrackBlocksBooster[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-// rct2: 0x00994638
-const track_build_sequence *TrackBlocks[TrackElemType::Count] = {
-    TrackBlocksFlat,
-    TrackBlocksEndStation,
-    TrackBlocksBeginStation,
-    TrackBlocksMiddleStation,
-    TrackBlocksUp25,
-    TrackBlocksUp60,
-    TrackBlocksFlatToUp25,
-    TrackBlocksUp25ToUp60,
-    TrackBlocksUp60ToUp25,
-    TrackBlocksUp25ToFlat,
-    TrackBlocksDown25,
-    TrackBlocksDown60,
-    TrackBlocksFlatToDown25,
-    TrackBlocksDown25ToDown60,
-    TrackBlocksDown60ToDown25,
-    TrackBlocksDown25ToFlat,
-    TrackBlocksLeftQuarterTurn5Tiles,
-    TrackBlocksRightQuarterTurn5Tiles,
-    TrackBlocksFlatToLeftBank,
-    TrackBlocksFlatToRightBank,
-    TrackBlocksLeftBankToFlat,
-    TrackBlocksRightBankToFlat,
-    TrackBlocksBankedLeftQuarterTurn5Tiles,
-    TrackBlocksBankedRightQuarterTurn5Tiles,
-    TrackBlocksLeftBankToUp25,
-    TrackBlocksRightBankToUp25,
-    TrackBlocksUp25ToLeftBank,
-    TrackBlocksUp25ToRightBank,
-    TrackBlocksLeftBankToDown25,
-    TrackBlocksRightBankToDown25,
-    TrackBlocksDown25ToLeftBank,
-    TrackBlocksDown25ToRightBank,
-    TrackBlocksLeftBank,
-    TrackBlocksRightBank,
-    TrackBlocksLeftQuarterTurn5TilesUp25,
-    TrackBlocksRightQuarterTurn5TilesUp25,
-    TrackBlocksLeftQuarterTurn5TilesDown25,
-    TrackBlocksRightQuarterTurn5TilesDown25,
-    TrackBlocksSBendLeft,
-    TrackBlocksSBendRight,
-    TrackBlocksLeftVerticalLoop,
-    TrackBlocksRightVerticalLoop,
-    TrackBlocksLeftQuarterTurn3Tiles,
-    TrackBlocksRightQuarterTurn3Tiles,
-    TrackBlocksLeftBankedQuarterTurn3Tiles,
-    TrackBlocksRightBankedQuarterTurn3Tiles,
-    TrackBlocksLeftQuarterTurn3TilesUp25,
-    TrackBlocksRightQuarterTurn3TilesUp25,
-    TrackBlocksLeftQuarterTurn3TilesDown25,
-    TrackBlocksRightQuarterTurn3TilesDown25,
-    TrackBlocksLeftQuarterTurn1Tile,
-    TrackBlocksRightQuarterTurn1Tile,
-    TrackBlocksLeftTwistDownToUp,
-    TrackBlocksRightTwistDownToUp,
-    TrackBlocksLeftTwistUpToDown,
-    TrackBlocksRightTwistUpToDown,
-    TrackBlocksHalfLoopUp,
-    TrackBlocksHalfLoopDown,
-    TrackBlocksLeftCorkscrewUp,
-    TrackBlocksRightCorkscrewUp,
-    TrackBlocksLeftCorkscrewDown,
-    TrackBlocksRightCorkscrewDown,
-    TrackBlocksFlatToUp60,
-    TrackBlocksUp60ToFlat,
-    TrackBlocksFlatToDown60,
-    TrackBlocksDown60ToFlat,
-    TrackBlocksTowerBase,
-    TrackBlocksTowerSection,
-    TrackBlocksFlatCovered,
-    TrackBlocksUp25Covered,
-    TrackBlocksUp60Covered,
-    TrackBlocksFlatToUp25Covered,
-    TrackBlocksUp25ToUp60Covered,
-    TrackBlocksUp60ToUp25Covered,
-    TrackBlocksUp25ToFlatCovered,
-    TrackBlocksDown25Covered,
-    TrackBlocksDown60Covered,
-    TrackBlocksFlatToDown25Covered,
-    TrackBlocksDown25ToDown60Covered,
-    TrackBlocksDown60ToDown25Covered,
-    TrackBlocksDown25ToFlatCovered,
-    TrackBlocksLeftQuarterTurn5TilesCovered,
-    TrackBlocksRightQuarterTurn5TilesCovered,
-    TrackBlocksSBendLeftCovered,
-    TrackBlocksSBendRightCovered,
-    TrackBlocksLeftQuarterTurn3TilesCovered,
-    TrackBlocksRightQuarterTurn3TilesCovered,
-    TrackBlocksLeftHalfBankedHelixUpSmall,
-    TrackBlocksRightHalfBankedHelixUpSmall,
-    TrackBlocksLeftHalfBankedHelixDownSmall,
-    TrackBlocksRightHalfBankedHelixDownSmall,
-    TrackBlocksLeftHalfBankedHelixUpLarge,
-    TrackBlocksRightHalfBankedHelixUpLarge,
-    TrackBlocksLeftHalfBankedHelixDownLarge,
-    TrackBlocksRightHalfBankedHelixDownLarge,
-    TrackBlocksLeftQuarterTurn1TileUp60,
-    TrackBlocksRightQuarterTurn1TileUp60,
-    TrackBlocksLeftQuarterTurn1TileDown60,
-    TrackBlocksLeftRightQuarterTurn1TileDown60,
-    TrackBlocksBrakes,
-    TrackBlocksRotationControlToggle,
-    TrackBlocksMaze,
-    TrackBlocksLeftQuarterBankedHelixLargeUp,
-    TrackBlocksRightQuarterBankedHelixLargeUp,
-    TrackBlocksLeftQuarterBankedHelixLargeDown,
-    TrackBlocksRightQuarterBankedHelixLargeDown,
-    TrackBlocksLeftQuarterHelixLargeUp,
-    TrackBlocksRightQuarterHelixLargeUp,
-    TrackBlocksLeftQuarterHelixLargeDown,
-    TrackBlocksRightQuarterHelixLargeDown,
-    TrackBlocksUp25LeftBanked,
-    TrackBlocksUp25RightBanked,
-    TrackBlocksWaterfall,
-    TrackBlocksRapids,
-    TrackBlocksOnRidePhoto,
-    TrackBlocksDown25LeftBanked,
-    TrackBlocksDown25RightBanked,
-    TrackBlocksWatersplash,
-    TrackBlocksFlatToUp60LongBase,
-    TrackBlocksUp60ToFlatLongBase,
-    TrackBlocksWhirlpool,
-    TrackBlocksDown60ToFlatLongBase,
-    TrackBlocksFlatToDown60LongBase,
-    TrackBlocksCableLiftHill,
-    TrackBlocksReverseFreefallSlope,
-    TrackBlocksReverseFreefallVertical,
-    TrackBlocksUp90,
-    TrackBlocksDown90,
-    TrackBlocksUp60ToUp90,
-    TrackBlocksDown90ToDown60,
-    TrackBlocksUp90ToUp60,
-    TrackBlocksDown60ToDown90,
-    TrackBlocksBrakeForDrop,
-    TrackBlocksLeftEighthToDiag,
-    TrackBlocksRightEighthToDiag,
-    TrackBlocksLeftEighthToOrthogonal,
-    TrackBlocksRightEighthToOrthogonal,
-    TrackBlocksLeftEighthBankToDiag,
-    TrackBlocksRightEighthBankToDiag,
-    TrackBlocksLeftEighthBankToOrthogonal,
-    TrackBlocksRightEighthBankToOrthogonal,
-    TrackBlocksDiagFlat,
-    TrackBlocksDiagUp25,
-    TrackBlocksDiagUp60,
-    TrackBlocksDiagFlatToUp25,
-    TrackBlocksDiagUp25ToUp60,
-    TrackBlocksDiagUp60ToUp25,
-    TrackBlocksDiagUp25ToFlat,
-    TrackBlocksDiagDown25,
-    TrackBlocksDiagDown60,
-    TrackBlocksDiagFlatToDown25,
-    TrackBlocksDiagDown25ToDown60,
-    TrackBlocksDiagDown60ToDown25,
-    TrackBlocksDiagDown25ToFlat,
-    TrackBlocksDiagFlatToUp60,
-    TrackBlocksDiagUp60ToFlat,
-    TrackBlocksDiagFlatToDown60,
-    TrackBlocksDiagDown60ToFlat,
-    TrackBlocksDiagFlatToLeftBank,
-    TrackBlocksDiagFlatToRightBank,
-    TrackBlocksDiagLeftBankToFlat,
-    TrackBlocksDiagRightBankToFlat,
-    TrackBlocksDiagLeftBankToUp25,
-    TrackBlocksDiagRightBankToUp25,
-    TrackBlocksDiagUp25ToLeftBank,
-    TrackBlocksDiagUp25ToRightBank,
-    TrackBlocksDiagLeftBankToDown25,
-    TrackBlocksDiagRightBankToDown25,
-    TrackBlocksDiagDown25ToLeftBank,
-    TrackBlocksDiagDown25ToRightBank,
-    TrackBlocksDiagLeftBank,
-    TrackBlocksDiagRightBank,
-    TrackBlocksLogFlumeReverser,
-    TrackBlocksSpinningTunnel,
-    TrackBlocksLeftBarrelRollUpToDown,
-    TrackBlocksRightBarrelRollUpToDown,
-    TrackBlocksLeftBarrelRollDownToUp,
-    TrackBlocksRightBarrelRollDownToUp,
-    TrackBlocksLeftBankToLeftQuarterTurn3TilesUp25,
-    TrackBlocksRightBankToRightQuarterTurn3TilesUp25,
-    TrackBlocksLeftQuarterTurn3TilesDown25ToLeftBank,
-    TrackBlocksRightQuarterTurn3TilesDown25ToRightBank,
-    TrackBlocksPoweredLift,
-    TrackBlocksLeftLargeHalfLoopUp,
-    TrackBlocksRightLargeHalfLoopUp,
-    TrackBlocksRightLargeHalfLoopDown,
-    TrackBlocksLeftLargeHalfLoopDown,
-    TrackBlocksLeftFlyerTwistUp,
-    TrackBlocksRightFlyerTwistUp,
-    TrackBlocksLeftFlyerTwistDown,
-    TrackBlocksRightFlyerTwistDown,
-    TrackBlocksFlyerHalfLoopUp,
-    TrackBlocksFlyerHalfLoopDown,
-    TrackBlocksLeftFlyerCorkscrewUp,
-    TrackBlocksRightFlyerCorkscrewUp,
-    TrackBlocksLeftFlyerCorkscrewDown,
-    TrackBlocksRightFlyerCorkscrewDown,
-    TrackBlocksHeartLineTransferUp,
-    TrackBlocksHeartLineTransferDown,
-    TrackBlocksLeftHeartLineRoll,
-    TrackBlocksRightHeartLineRoll,
-    TrackBlocksMinigolfHoleA,
-    TrackBlocksMinigolfHoleB,
-    TrackBlocksMinigolfHoleC,
-    TrackBlocksMinigolfHoleD,
-    TrackBlocksMinigolfHoleE,
-    TrackBlocksMultiDimInvertedFlatToDown90QuarterLoop,
-    TrackBlocksUp90ToInvertedFlatQuarterLoop,
-    TrackBlocksInvertedFlatToDown90QuarterLoop,
-    TrackBlocksLeftCurvedLiftHill,
-    TrackBlocksRightCurvedLiftHill,
-    TrackBlocksLeftReverser,
-    TrackBlocksRightReverser,
-    TrackBlocksAirThrustTopCap,
-    TrackBlocksAirThrustVerticalDown,
-    TrackBlocksAirThrustVerticalDownToLevel,
-    TrackBlocksBlockBrakes,
-    TrackBlocksLeftBankedQuarterTurn3TileUp25,
-    TrackBlocksRightBankedQuarterTurn3TileUp25,
-    TrackBlocksLeftBankedQuarterTurn3TileDown25,
-    TrackBlocksRightBankedQuarterTurn3TileDown25,
-    TrackBlocksLeftBankedQuarterTurn5TileUp25,
-    TrackBlocksRightBankedQuarterTurn5TileUp25,
-    TrackBlocksLeftBankedQuarterTurn5TileDown25,
-    TrackBlocksRightBankedQuarterTurn5TileDown25,
-    TrackBlocksUp25ToLeftBankedUp25,
-    TrackBlocksUp25ToRightBankedUp25,
-    TrackBlocksLeftBankedUp25ToUp25,
-    TrackBlocksRightBankedUp25ToUp25,
-    TrackBlocksDown25ToLeftBankedDown25,
-    TrackBlocksDown25ToRightBankedDown25,
-    TrackBlocksLeftBankedDown25ToDown25,
-    TrackBlocksRightBankedDown25ToDown25,
-    TrackBlocksLeftBankedFlatToLeftBankedUp25,
-    TrackBlocksRightBankedFlatToRightBankedUp25,
-    TrackBlocksLeftBankedUp25ToLeftBankedFlat,
-    TrackBlocksRightBankedUp25ToRightBankedFlat,
-    TrackBlocksLeftBankedFlatToLeftBankedDown25,
-    TrackBlocksRightBankedFlatToRightBankedDown25,
-    TrackBlocksLeftBankedDown25ToLeftBankedFlat,
-    TrackBlocksRightBankedDown25ToRightBankedFlat,
-    TrackBlockFlatToLeftBankedUp25,
-    TrackBlockFlatToRightBankedUp25,
-    TrackBlocksLeftBankedUp25ToFlat,
-    TrackBlocksRightBankedUp25ToFlat,
-    TrackBlocksFlatToLeftBankedDown25,
-    TrackBlocksFlatToRightBankedDown25,
-    TrackBlocksLeftBankedDown25ToFlat,
-    TrackBlocksRightBankedDown25ToFlat,
-    TrackBlocksLeftQuarterTurn1TileUp90,
-    TrackBlocksRightQuarterTurn1TileUp90,
-    TrackBlocksLeftQuarterTurn1TileDown90,
-    TrackBlocksRightQuarterTurn1TileDown90,
-    TrackBlocksMultiDimUp90ToInvertedFlatQuarterLoop,
-    TrackBlocksMultiDimFlatToDown90QuarterLoop,
-    TrackBlocksMultiDimInvertedUp90ToFlatQuarterLoop
-};
-
-static constexpr const track_build_sequence FlatRideTrackBlocksMagicCarpet[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, 32, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence FlatRideTrackBlocksFlat2x2[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, 32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, 32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence FlatRideTrackBlocksFlat4x4[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, 0, 64, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, 0, 96, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, 32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 5, 32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 6, 32, 64, 0, 0, { 0b1111, 0 }, 0 },
-    { 7, 32, 96, 0, 0, { 0b1111, 0 }, 0 },
-    { 8, 64, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 9, 64, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 10, 64, 64, 0, 0, { 0b1111, 0 }, 0 },
-    { 11, 64, 96, 0, 0, { 0b1111, 0 }, 0 },
-    { 12, 96, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 13, 96, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 14, 96, 64, 0, 0, { 0b1111, 0 }, 0 },
-    { 15, 96, 96, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence FlatRideTrackBlocks115[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, 0, 64, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, 0, 96, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, 32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 5, 32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 6, 32, 64, 0, 0, { 0b1111, 0 }, 0 },
-    { 7, 32, 96, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence FlatRideTrackBlocksSwingingShip[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, 32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, 64, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence FlatRideTrackBlocksShopOneEntrance[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence FlatRideTrackBlocksSwingingInvertingShip[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, 32, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence FlatRideTrackBlocksShopFourEntrances[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence FlatRideTrackBlocksFerrisWheel[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, 32, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence FlatRideTrackBlocksFlat3x3[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, -32, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, 0, -32, 0, 0, { 0b1111, 0 }, 0 },
-    { 5, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 6, 32, -32, 0, 0, { 0b1111, 0 }, 0 },
-    { 7, 32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 8, 32, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence FlatRideTrackBlocks255[] = {
-    TRACK_BLOCK_END
-};
-
-// rct2: 0x00994A38
-const track_build_sequence *FlatRideTrackBlocks[TrackElemType::Count] = {
-    TrackBlocksFlat,
-    TrackBlocksEndStation,
-    TrackBlocksBeginStation,
-    TrackBlocksMiddleStation,
-    TrackBlocksUp25,
-    TrackBlocksUp60,
-    TrackBlocksFlatToUp25,
-    TrackBlocksUp25ToUp60,
-    TrackBlocksUp60ToUp25,
-    TrackBlocksUp25ToFlat,
-    TrackBlocksDown25,
-    TrackBlocksDown60,
-    TrackBlocksFlatToDown25,
-    TrackBlocksDown25ToDown60,
-    TrackBlocksDown60ToDown25,
-    TrackBlocksDown25ToFlat,
-    TrackBlocksLeftQuarterTurn5Tiles,
-    TrackBlocksRightQuarterTurn5Tiles,
-    TrackBlocksFlatToLeftBank,
-    TrackBlocksFlatToRightBank,
-    TrackBlocksLeftBankToFlat,
-    TrackBlocksRightBankToFlat,
-    TrackBlocksBankedLeftQuarterTurn5Tiles,
-    TrackBlocksBankedRightQuarterTurn5Tiles,
-    TrackBlocksLeftBankToUp25,
-    TrackBlocksRightBankToUp25,
-    TrackBlocksUp25ToLeftBank,
-    TrackBlocksUp25ToRightBank,
-    TrackBlocksLeftBankToDown25,
-    TrackBlocksRightBankToDown25,
-    TrackBlocksDown25ToLeftBank,
-    TrackBlocksDown25ToRightBank,
-    TrackBlocksLeftBank,
-    TrackBlocksRightBank,
-    TrackBlocksLeftQuarterTurn5TilesUp25,
-    TrackBlocksRightQuarterTurn5TilesUp25,
-    TrackBlocksLeftQuarterTurn5TilesDown25,
-    TrackBlocksRightQuarterTurn5TilesDown25,
-    TrackBlocksSBendLeft,
-    TrackBlocksSBendRight,
-    TrackBlocksLeftVerticalLoop,
-    TrackBlocksRightVerticalLoop,
-    TrackBlocksLeftQuarterTurn3Tiles,
-    TrackBlocksRightQuarterTurn3Tiles,
-    TrackBlocksLeftBankedQuarterTurn3Tiles,
-    TrackBlocksRightBankedQuarterTurn3Tiles,
-    TrackBlocksLeftQuarterTurn3TilesUp25,
-    TrackBlocksRightQuarterTurn3TilesUp25,
-    TrackBlocksLeftQuarterTurn3TilesDown25,
-    TrackBlocksRightQuarterTurn3TilesDown25,
-    TrackBlocksLeftQuarterTurn1Tile,
-    TrackBlocksRightQuarterTurn1Tile,
-    TrackBlocksLeftTwistDownToUp,
-    TrackBlocksRightTwistDownToUp,
-    TrackBlocksLeftTwistUpToDown,
-    TrackBlocksRightTwistUpToDown,
-    TrackBlocksHalfLoopUp,
-    TrackBlocksHalfLoopDown,
-    TrackBlocksLeftCorkscrewUp,
-    TrackBlocksRightCorkscrewUp,
-    TrackBlocksLeftCorkscrewDown,
-    TrackBlocksRightCorkscrewDown,
-    TrackBlocksFlatToUp60,
-    TrackBlocksUp60ToFlat,
-    TrackBlocksFlatToDown60,
-    TrackBlocksDown60ToFlat,
-    TrackBlocksTowerBase,
-    TrackBlocksTowerSection,
-    TrackBlocksFlatCovered,
-    TrackBlocksUp25Covered,
-    TrackBlocksUp60Covered,
-    TrackBlocksFlatToUp25Covered,
-    TrackBlocksUp25ToUp60Covered,
-    TrackBlocksUp60ToUp25Covered,
-    TrackBlocksUp25ToFlatCovered,
-    TrackBlocksDown25Covered,
-    TrackBlocksDown60Covered,
-    TrackBlocksFlatToDown25Covered,
-    TrackBlocksDown25ToDown60Covered,
-    TrackBlocksDown60ToDown25Covered,
-    TrackBlocksDown25ToFlatCovered,
-    TrackBlocksLeftQuarterTurn5TilesCovered,
-    TrackBlocksRightQuarterTurn5TilesCovered,
-    TrackBlocksSBendLeftCovered,
-    TrackBlocksSBendRightCovered,
-    TrackBlocksLeftQuarterTurn3TilesCovered,
-    TrackBlocksRightQuarterTurn3TilesCovered,
-    TrackBlocksLeftHalfBankedHelixUpSmall,
-    TrackBlocksRightHalfBankedHelixUpSmall,
-    TrackBlocksLeftHalfBankedHelixDownSmall,
-    TrackBlocksRightHalfBankedHelixDownSmall,
-    TrackBlocksLeftHalfBankedHelixUpLarge,
-    TrackBlocksRightHalfBankedHelixUpLarge,
-    TrackBlocksLeftHalfBankedHelixDownLarge,
-    TrackBlocksRightHalfBankedHelixDownLarge,
-    FlatRideTrackBlocksMagicCarpet,
-    TrackBlocksRightQuarterTurn1TileUp60,
-    TrackBlocksLeftQuarterTurn1TileDown60,
-    TrackBlocksLeftRightQuarterTurn1TileDown60,
-    TrackBlocksBrakes,
-    TrackBlocksRotationControlToggle,
-    TrackBlocksMaze,
-    TrackBlocksLeftQuarterBankedHelixLargeUp,
-    TrackBlocksRightQuarterBankedHelixLargeUp,
-    TrackBlocksLeftQuarterBankedHelixLargeDown,
-    TrackBlocksRightQuarterBankedHelixLargeDown,
-    TrackBlocksLeftQuarterHelixLargeUp,
-    TrackBlocksRightQuarterHelixLargeUp,
-    TrackBlocksLeftQuarterHelixLargeDown,
-    TrackBlocksRightQuarterHelixLargeDown,
-    FlatRideTrackBlocksFlat2x2,
-    FlatRideTrackBlocksFlat4x4,
-    TrackBlocksWaterfall,
-    TrackBlocksRapids,
-    TrackBlocksOnRidePhoto,
-    FlatRideTrackBlocks115,
-    FlatRideTrackBlocksSwingingShip,
-    TrackBlocksWatersplash,
-    FlatRideTrackBlocksShopOneEntrance,
-    FlatRideTrackBlocksSwingingInvertingShip,
-    TrackBlocksWhirlpool,
-    FlatRideTrackBlocksShopFourEntrances,
-    FlatRideTrackBlocksFerrisWheel,
-    FlatRideTrackBlocksFlat3x3,
-    TrackBlocksReverseFreefallSlope,
-    TrackBlocksReverseFreefallVertical,
-    TrackBlocksUp90,
-    TrackBlocksDown90,
-    TrackBlocksUp60ToUp90,
-    TrackBlocksDown90ToDown60,
-    TrackBlocksUp90ToUp60,
-    TrackBlocksDown60ToDown90,
-    TrackBlocksBrakeForDrop,
-    TrackBlocksLeftEighthToDiag,
-    TrackBlocksRightEighthToDiag,
-    TrackBlocksLeftEighthToOrthogonal,
-    TrackBlocksRightEighthToOrthogonal,
-    TrackBlocksLeftEighthBankToDiag,
-    TrackBlocksRightEighthBankToDiag,
-    TrackBlocksLeftEighthBankToOrthogonal,
-    TrackBlocksRightEighthBankToOrthogonal,
-    TrackBlocksDiagFlat,
-    TrackBlocksDiagUp25,
-    TrackBlocksDiagUp60,
-    TrackBlocksDiagFlatToUp25,
-    TrackBlocksDiagUp25ToUp60,
-    TrackBlocksDiagUp60ToUp25,
-    TrackBlocksDiagUp25ToFlat,
-    TrackBlocksDiagDown25,
-    TrackBlocksDiagDown60,
-    TrackBlocksDiagFlatToDown25,
-    TrackBlocksDiagDown25ToDown60,
-    TrackBlocksDiagDown60ToDown25,
-    TrackBlocksDiagDown25ToFlat,
-    TrackBlocksDiagFlatToUp60,
-    TrackBlocksDiagUp60ToFlat,
-    TrackBlocksDiagFlatToDown60,
-    TrackBlocksDiagDown60ToFlat,
-    TrackBlocksDiagFlatToLeftBank,
-    TrackBlocksDiagFlatToRightBank,
-    TrackBlocksDiagLeftBankToFlat,
-    TrackBlocksDiagRightBankToFlat,
-    TrackBlocksDiagLeftBankToUp25,
-    TrackBlocksDiagRightBankToUp25,
-    TrackBlocksDiagUp25ToLeftBank,
-    TrackBlocksDiagUp25ToRightBank,
-    TrackBlocksDiagLeftBankToDown25,
-    TrackBlocksDiagRightBankToDown25,
-    TrackBlocksDiagDown25ToLeftBank,
-    TrackBlocksDiagDown25ToRightBank,
-    TrackBlocksDiagLeftBank,
-    TrackBlocksDiagRightBank,
-    TrackBlocksLogFlumeReverser,
-    TrackBlocksSpinningTunnel,
-    TrackBlocksLeftBarrelRollUpToDown,
-    TrackBlocksRightBarrelRollUpToDown,
-    TrackBlocksLeftBarrelRollDownToUp,
-    TrackBlocksRightBarrelRollDownToUp,
-    TrackBlocksLeftBankToLeftQuarterTurn3TilesUp25,
-    TrackBlocksRightBankToRightQuarterTurn3TilesUp25,
-    TrackBlocksLeftQuarterTurn3TilesDown25ToLeftBank,
-    TrackBlocksRightQuarterTurn3TilesDown25ToRightBank,
-    TrackBlocksPoweredLift,
-    TrackBlocksLeftLargeHalfLoopUp,
-    TrackBlocksRightLargeHalfLoopUp,
-    TrackBlocksRightLargeHalfLoopDown,
-    TrackBlocksLeftLargeHalfLoopDown,
-    TrackBlocksLeftFlyerTwistUp,
-    TrackBlocksRightFlyerTwistUp,
-    TrackBlocksLeftFlyerTwistDown,
-    TrackBlocksRightFlyerTwistDown,
-    TrackBlocksFlyerHalfLoopUp,
-    TrackBlocksFlyerHalfLoopDown,
-    TrackBlocksLeftFlyerCorkscrewUp,
-    TrackBlocksRightFlyerCorkscrewUp,
-    TrackBlocksLeftFlyerCorkscrewDown,
-    TrackBlocksRightFlyerCorkscrewDown,
-    TrackBlocksHeartLineTransferUp,
-    TrackBlocksHeartLineTransferDown,
-    TrackBlocksLeftHeartLineRoll,
-    TrackBlocksRightHeartLineRoll,
-    TrackBlocksMinigolfHoleA,
-    TrackBlocksMinigolfHoleB,
-    TrackBlocksMinigolfHoleC,
-    TrackBlocksMinigolfHoleD,
-    TrackBlocksMinigolfHoleE,
-    TrackBlocksMultiDimInvertedFlatToDown90QuarterLoop,
-    TrackBlocksUp90ToInvertedFlatQuarterLoop,
-    TrackBlocksInvertedFlatToDown90QuarterLoop,
-    TrackBlocksLeftCurvedLiftHill,
-    TrackBlocksRightCurvedLiftHill,
-    TrackBlocksLeftReverser,
-    TrackBlocksRightReverser,
-    TrackBlocksAirThrustTopCap,
-    TrackBlocksAirThrustVerticalDown,
-    TrackBlocksAirThrustVerticalDownToLevel,
-    TrackBlocksBlockBrakes,
-    TrackBlocksLeftBankedQuarterTurn3TileUp25,
-    TrackBlocksRightBankedQuarterTurn3TileUp25,
-    TrackBlocksLeftBankedQuarterTurn3TileDown25,
-    TrackBlocksRightBankedQuarterTurn3TileDown25,
-    TrackBlocksLeftBankedQuarterTurn5TileUp25,
-    TrackBlocksRightBankedQuarterTurn5TileUp25,
-    TrackBlocksLeftBankedQuarterTurn5TileDown25,
-    TrackBlocksRightBankedQuarterTurn5TileDown25,
-    TrackBlocksUp25ToLeftBankedUp25,
-    TrackBlocksUp25ToRightBankedUp25,
-    TrackBlocksLeftBankedUp25ToUp25,
-    TrackBlocksRightBankedUp25ToUp25,
-    TrackBlocksDown25ToLeftBankedDown25,
-    TrackBlocksDown25ToRightBankedDown25,
-    TrackBlocksLeftBankedDown25ToDown25,
-    TrackBlocksRightBankedDown25ToDown25,
-    TrackBlocksLeftBankedFlatToLeftBankedUp25,
-    TrackBlocksRightBankedFlatToRightBankedUp25,
-    TrackBlocksLeftBankedUp25ToLeftBankedFlat,
-    TrackBlocksRightBankedUp25ToRightBankedFlat,
-    TrackBlocksLeftBankedFlatToLeftBankedDown25,
-    TrackBlocksRightBankedFlatToRightBankedDown25,
-    TrackBlocksLeftBankedDown25ToLeftBankedFlat,
-    TrackBlocksRightBankedDown25ToRightBankedFlat,
-    TrackBlockFlatToLeftBankedUp25,
-    TrackBlockFlatToRightBankedUp25,
-    TrackBlocksLeftBankedUp25ToFlat,
-    TrackBlocksRightBankedUp25ToFlat,
-    TrackBlocksFlatToLeftBankedDown25,
-    TrackBlocksFlatToRightBankedDown25,
-    TrackBlocksLeftBankedDown25ToFlat,
-    TrackBlocksRightBankedDown25ToFlat,
-    TrackBlocksLeftQuarterTurn1TileUp90,
-    TrackBlocksRightQuarterTurn1TileUp90,
-    TrackBlocksLeftQuarterTurn1TileDown90,
-    TrackBlocksRightQuarterTurn1TileDown90,
-    TrackBlocksMultiDimUp90ToInvertedFlatQuarterLoop,
-    TrackBlocksMultiDimFlatToDown90QuarterLoop,
-    FlatRideTrackBlocks255,
-    TrackBlocksBooster
+/**  rct2: 0x00997C9D */
+const rct_trackdefinition TrackDefinitions[TrackElemType::Count] =
+{
+    // TYPE                         VANGLE END                  VANGLE START                BANK END                BANK START              PREVIEW Z OFFSET
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_FLAT
+    { TRACK_STATION_END,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_END_STATION
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_BEGIN_STATION
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_MIDDLE_STATION
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_60,          TRACK_SLOPE_UP_60,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_60_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_FLAT_TO_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_60,          TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_25_DEG_UP_TO_60_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_60,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_60_DEG_UP_TO_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_25_DEG_UP_TO_FLAT
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_25_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_DOWN_60,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_60_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_FLAT_TO_25_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_25_DEG_DOWN_TO_60_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_60,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_60_DEG_DOWN_TO_25_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_25_DEG_DOWN_TO_FLAT
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_QUARTER_TURN_5_TILES
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_QUARTER_TURN_5_TILES
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_NONE,        0                  },  // ELEM_FLAT_TO_LEFT_BANK
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_NONE,        0                  },  // ELEM_FLAT_TO_RIGHT_BANK
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_BANK_TO_FLAT
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_BANK_TO_FLAT
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                  },  // ELEM_BANKED_LEFT_QUARTER_TURN_5_TILES
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                  },  // ELEM_BANKED_RIGHT_QUARTER_TURN_5_TILES
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_BANK_TO_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_BANK_TO_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_25,          TRACK_BANK_LEFT,        TRACK_BANK_NONE,        0                  },  // ELEM_25_DEG_UP_TO_LEFT_BANK
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_25,          TRACK_BANK_RIGHT,       TRACK_BANK_NONE,        0                  },  // ELEM_25_DEG_UP_TO_RIGHT_BANK
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_BANK_TO_25_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_BANK_TO_25_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_25,        TRACK_BANK_LEFT,        TRACK_BANK_NONE,        0                  },  // ELEM_25_DEG_DOWN_TO_LEFT_BANK
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_25,        TRACK_BANK_RIGHT,       TRACK_BANK_NONE,        0                  },  // ELEM_25_DEG_DOWN_TO_RIGHT_BANK
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_BANK
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_BANK
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_QUARTER_TURN_5_TILES_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_QUARTER_TURN_5_TILES_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_QUARTER_TURN_5_TILES_25_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_QUARTER_TURN_5_TILES_25_DEG_DOWN
+    { TRACK_S_BEND,                 TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_S_BEND_LEFT
+    { TRACK_S_BEND,                 TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_S_BEND_RIGHT
+    { TRACK_VERTICAL_LOOP,          TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        -48                },  // ELEM_LEFT_VERTICAL_LOOP
+    { TRACK_VERTICAL_LOOP,          TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        -48                },  // ELEM_RIGHT_VERTICAL_LOOP
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_QUARTER_TURN_3_TILES
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_QUARTER_TURN_3_TILES
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_QUARTER_TURN_3_TILES_BANK
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_QUARTER_TURN_3_TILES_BANK
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_QUARTER_TURN_3_TILES_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_QUARTER_TURN_3_TILES_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_QUARTER_TURN_3_TILES_25_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_QUARTER_TURN_3_TILES_25_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_QUARTER_TURN_1_TILE
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_QUARTER_TURN_1_TILE
+    { TRACK_TWIST,                  TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_TWIST_DOWN_TO_UP
+    { TRACK_TWIST,                  TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_TWIST_DOWN_TO_UP
+    { TRACK_TWIST,                  TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_UPSIDE_DOWN, 0                  },  // ELEM_LEFT_TWIST_UP_TO_DOWN
+    { TRACK_TWIST,                  TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_UPSIDE_DOWN, 0                  },  // ELEM_RIGHT_TWIST_UP_TO_DOWN
+    { TRACK_HALF_LOOP,              TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_25,          TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        64                 },  // ELEM_HALF_LOOP_UP
+    { TRACK_HALF_LOOP,              TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_UPSIDE_DOWN, -64                },  // ELEM_HALF_LOOP_DOWN
+    { TRACK_CORKSCREW,              TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_CORKSCREW_UP
+    { TRACK_CORKSCREW,              TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_CORKSCREW_UP
+    { TRACK_CORKSCREW,              TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_UPSIDE_DOWN, -32                },  // ELEM_LEFT_CORKSCREW_DOWN
+    { TRACK_CORKSCREW,              TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_UPSIDE_DOWN, -32                },  // ELEM_RIGHT_CORKSCREW_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_60,          TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_FLAT_TO_60_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_60,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_60_DEG_UP_TO_FLAT
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_FLAT_TO_60_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_60,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_60_DEG_DOWN_TO_FLAT
+    { TRACK_TOWER_BASE,             TRACK_VANGLE_TOWER,         TRACK_VANGLE_TOWER,         TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_TOWER_BASE
+    { TRACK_TOWER_BASE,             TRACK_VANGLE_TOWER,         TRACK_VANGLE_TOWER,         TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_TOWER_SECTION
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_FLAT_COVERED
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_25_DEG_UP_COVERED
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_60,          TRACK_SLOPE_UP_60,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_60_DEG_UP_COVERED
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_FLAT_TO_25_DEG_UP_COVERED
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_60,          TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_25_DEG_UP_TO_60_DEG_UP_COVERED
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_60,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_60_DEG_UP_TO_25_DEG_UP_COVERED
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_25_DEG_UP_TO_FLAT_COVERED
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_25_DEG_DOWN_COVERED
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_DOWN_60,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_60_DEG_DOWN_COVERED
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_FLAT_TO_25_DEG_DOWN_COVERED
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_25_DEG_DOWN_TO_60_DEG_DOWN_COVERED
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_60,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_60_DEG_DOWN_TO_25_DEG_DOWN_COVERED
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_25_DEG_DOWN_TO_FLAT_COVERED
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_QUARTER_TURN_5_TILES_COVERED
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_QUARTER_TURN_5_TILES_COVERED
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_S_BEND_LEFT_COVERED
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_S_BEND_RIGHT_COVERED
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_QUARTER_TURN_3_TILES_COVERED
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_QUARTER_TURN_3_TILES_COVERED
+    { TRACK_HELIX_SMALL,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_HALF_BANKED_HELIX_UP_SMALL
+    { TRACK_HELIX_SMALL,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_HALF_BANKED_HELIX_UP_SMALL
+    { TRACK_HELIX_SMALL,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_HALF_BANKED_HELIX_DOWN_SMALL
+    { TRACK_HELIX_SMALL,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_HALF_BANKED_HELIX_DOWN_SMALL
+    { TRACK_HELIX_SMALL,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_HALF_BANKED_HELIX_UP_LARGE
+    { TRACK_HELIX_SMALL,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_HALF_BANKED_HELIX_UP_LARGE
+    { TRACK_HELIX_SMALL,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_HALF_BANKED_HELIX_DOWN_LARGE
+    { TRACK_HELIX_SMALL,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_HALF_BANKED_HELIX_DOWN_LARGE
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_60,          TRACK_SLOPE_UP_60,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_QUARTER_TURN_1_TILE_60_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_60,          TRACK_SLOPE_UP_60,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_QUARTER_TURN_1_TILE_60_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_DOWN_60,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_QUARTER_TURN_1_TILE_60_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_DOWN_60,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_QUARTER_TURN_1_TILE_60_DEG_DOWN
+    { TRACK_BRAKES,                 TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_BRAKES
+    { TRACK_ROTATION_CONTROL_TOGGLE,TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_ROTATION_CONTROL_TOGGLE
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_INVERTED_90_DEG_UP_TO_FLAT_QUARTER_LOOP
+    { TRACK_HELIX_LARGE,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_QUARTER_BANKED_HELIX_LARGE_UP
+    { TRACK_HELIX_LARGE,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_QUARTER_BANKED_HELIX_LARGE_UP
+    { TRACK_HELIX_LARGE,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_QUARTER_BANKED_HELIX_LARGE_DOWN
+    { TRACK_HELIX_LARGE,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_QUARTER_BANKED_HELIX_LARGE_DOWN
+    { TRACK_HELIX_LARGE_UNBANKED,   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_QUARTER_HELIX_LARGE_UP
+    { TRACK_HELIX_LARGE_UNBANKED,   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_QUARTER_HELIX_LARGE_UP
+    { TRACK_HELIX_LARGE_UNBANKED,   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_QUARTER_HELIX_LARGE_DOWN
+    { TRACK_HELIX_LARGE_UNBANKED,   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_QUARTER_HELIX_LARGE_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                  },  // ELEM_25_DEG_UP_LEFT_BANKED
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                  },  // ELEM_25_DEG_UP_RIGHT_BANKED
+    { TRACK_WATERFALL,              TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_WATERFALL
+    { TRACK_RAPIDS,                 TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_RAPIDS
+    { TRACK_ON_RIDE_PHOTO,          TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_ON_RIDE_PHOTO
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                  },  // ELEM_25_DEG_DOWN_LEFT_BANKED
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                  },  // ELEM_25_DEG_DOWN_RIGHT_BANKED
+    { TRACK_WATER_SPLASH,           TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_WATER_SPLASH
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_60,          TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_FLAT_TO_60_DEG_UP_LONG_BASE
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_60,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_60_DEG_UP_TO_FLAT_LONG_BASE
+    { TRACK_WHIRLPOOL,              TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_WHIRLPOOL
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_60,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_FLAT_TO_60_DEG_DOWN_LONG_BASE
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_60_DEG_UP_TO_FLAT_LONG_BASE_122
+    { TRACK_LIFT_HILL_CABLE,        TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_CABLE_LIFT_HILL
+    { TRACK_REVERSE_FREEFALL,       TRACK_VANGLE_REVERSE_FREEFALL,  TRACK_SLOPE_NONE,       TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_REVERSE_FREEFALL_SLOPE
+    { TRACK_REVERSE_FREEFALL,       TRACK_VANGLE_REVERSE_FREEFALL,  TRACK_VANGLE_REVERSE_FREEFALL,  TRACK_BANK_NONE,TRACK_BANK_NONE,        0                  },  // ELEM_REVERSE_FREEFALL_VERTICAL
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_90,          TRACK_SLOPE_UP_90,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_90_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_90,        TRACK_SLOPE_DOWN_90,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_90_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_90,          TRACK_SLOPE_UP_60,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_60_DEG_UP_TO_90_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_DOWN_90,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_90_DEG_DOWN_TO_60_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_60,          TRACK_SLOPE_UP_90,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_90_DEG_UP_TO_60_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_90,        TRACK_SLOPE_DOWN_60,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_60_DEG_DOWN_TO_90_DEG_DOWN
+    { TRACK_BRAKE_FOR_DROP,         TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_BRAKE_FOR_DROP
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_EIGHTH_TO_DIAG
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_EIGHTH_TO_DIAG
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_EIGHTH_TO_ORTHOGONAL
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_EIGHTH_TO_ORTHOGONAL
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_EIGHTH_BANK_TO_DIAG
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_EIGHTH_BANK_TO_DIAG
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_EIGHTH_BANK_TO_ORTHOGONAL
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_EIGHTH_BANK_TO_ORTHOGONAL
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_DIAG_FLAT
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_DIAG_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_60,          TRACK_SLOPE_UP_60,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_DIAG_60_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_DIAG_FLAT_TO_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_60,          TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_DIAG_25_DEG_UP_TO_60_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_60,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_DIAG_60_DEG_UP_TO_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_DIAG_25_DEG_UP_TO_FLAT
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_DIAG_25_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_DOWN_60,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_DIAG_60_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_DIAG_FLAT_TO_25_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_DIAG_25_DEG_DOWN_TO_60_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_60,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_DIAG_60_DEG_DOWN_TO_25_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_DIAG_25_DEG_DOWN_TO_FLAT
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_60,          TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_DIAG_FLAT_TO_60_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_60,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_DIAG_60_DEG_UP_TO_FLAT
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_DIAG_FLAT_TO_60_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_60,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_DIAG_60_DEG_DOWN_TO_FLAT
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_NONE,        0                  },  // ELEM_DIAG_FLAT_TO_LEFT_BANK
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_NONE,        0                  },  // ELEM_DIAG_FLAT_TO_RIGHT_BANK
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_LEFT,        0                  },  // ELEM_DIAG_LEFT_BANK_TO_FLAT
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_RIGHT,       0                  },  // ELEM_DIAG_RIGHT_BANK_TO_FLAT
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_LEFT,        0                  },  // ELEM_DIAG_LEFT_BANK_TO_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_RIGHT,       0                  },  // ELEM_DIAG_RIGHT_BANK_TO_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_25,          TRACK_BANK_LEFT,        TRACK_BANK_NONE,        0                  },  // ELEM_DIAG_25_DEG_UP_TO_LEFT_BANK
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_25,          TRACK_BANK_RIGHT,       TRACK_BANK_NONE,        0                  },  // ELEM_DIAG_25_DEG_UP_TO_RIGHT_BANK
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_LEFT,        0                  },  // ELEM_DIAG_LEFT_BANK_TO_25_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_RIGHT,       0                  },  // ELEM_DIAG_RIGHT_BANK_TO_25_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_25,        TRACK_BANK_LEFT,        TRACK_BANK_NONE,        0                  },  // ELEM_DIAG_25_DEG_DOWN_TO_LEFT_BANK
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_25,        TRACK_BANK_RIGHT,       TRACK_BANK_NONE,        0                  },  // ELEM_DIAG_25_DEG_DOWN_TO_RIGHT_BANK
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                  },  // ELEM_DIAG_LEFT_BANK
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                  },  // ELEM_DIAG_RIGHT_BANK
+    { TRACK_LOG_FLUME_REVERSER,     TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_LOG_FLUME_REVERSER
+    { TRACK_SPINNING_TUNNEL,        TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_SPINNING_TUNNEL
+    { TRACK_BARREL_ROLL,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_BARREL_ROLL_UP_TO_DOWN
+    { TRACK_BARREL_ROLL,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_BARREL_ROLL_UP_TO_DOWN
+    { TRACK_BARREL_ROLL,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_UPSIDE_DOWN, 0                  },  // ELEM_LEFT_BARREL_ROLL_DOWN_TO_UP
+    { TRACK_BARREL_ROLL,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_UPSIDE_DOWN, 0                  },  // ELEM_RIGHT_BARREL_ROLL_DOWN_TO_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_BANK_TO_LEFT_QUARTER_TURN_3_TILES_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_BANK_TO_RIGHT_QUARTER_TURN_3_TILES_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_25,        TRACK_BANK_LEFT,        TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_QUARTER_TURN_3_TILES_25_DEG_DOWN_TO_LEFT_BANK
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_25,        TRACK_BANK_RIGHT,       TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_QUARTER_TURN_3_TILES_25_DEG_DOWN_TO_RIGHT_BANK
+    { TRACK_POWERED_LIFT,           TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_POWERED_LIFT
+    {TRACK_HALF_LOOP_LARGE,         TRACK_SLOPE_NONE,    TRACK_SLOPE_UP_25, TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        64                 },  // ELEM_LEFT_LARGE_HALF_LOOP_UP
+    {TRACK_HALF_LOOP_LARGE,         TRACK_SLOPE_NONE,    TRACK_SLOPE_UP_25, TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        64                 },  // ELEM_RIGHT_LARGE_HALF_LOOP_UP
+    {TRACK_HALF_LOOP_LARGE,         TRACK_SLOPE_DOWN_25, TRACK_SLOPE_NONE,  TRACK_BANK_NONE,        TRACK_BANK_UPSIDE_DOWN, -64                },  // ELEM_RIGHT_LARGE_HALF_LOOP_DOWN
+    {TRACK_HALF_LOOP_LARGE,         TRACK_SLOPE_DOWN_25, TRACK_SLOPE_NONE,  TRACK_BANK_NONE,        TRACK_BANK_UPSIDE_DOWN, -64                },  // ELEM_LEFT_LARGE_HALF_LOOP_DOWN
+    {TRACK_INLINE_TWIST_UNINVERTED, TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_FLYER_TWIST_UP
+    {TRACK_INLINE_TWIST_UNINVERTED, TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_FLYER_TWIST_UP
+    {TRACK_INLINE_TWIST_INVERTED,   TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_FLYER_TWIST_DOWN
+    {TRACK_INLINE_TWIST_INVERTED,   TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_FLYER_TWIST_DOWN
+    {TRACK_HALF_LOOP_UNINVERTED,    TRACK_SLOPE_NONE,    TRACK_SLOPE_UP_25, TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        64                 },  // ELEM_FLYER_HALF_LOOP_UP
+    {TRACK_HALF_LOOP_INVERTED,      TRACK_SLOPE_DOWN_25, TRACK_SLOPE_NONE,  TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        -64                },  // ELEM_FLYER_HALF_LOOP_DOWN
+    {TRACK_CORKSCREW_UNINVERTED,    TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_FLYER_CORKSCREW_UP
+    {TRACK_CORKSCREW_UNINVERTED,    TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_FLYER_CORKSCREW_UP
+    {TRACK_CORKSCREW_INVERTED,      TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        -32                },  // ELEM_LEFT_FLYER_CORKSCREW_DOWN
+    {TRACK_CORKSCREW_INVERTED,      TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        -32                },  // ELEM_RIGHT_FLYER_CORKSCREW_DOWN
+    {TRACK_HEARTLINE_TRANSFER,      TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_HEARTLINE_TRANSFER_UP
+    {TRACK_HEARTLINE_TRANSFER,      TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_HEARTLINE_TRANSFER_DOWN
+    {TRACK_HEARTLINE_ROLL,          TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_HEARTLINE_ROLL
+    {TRACK_HEARTLINE_ROLL,          TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_HEARTLINE_ROLL
+    {TRACK_MINI_GOLF_HOLE,          TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_MINI_GOLF_HOLE_A
+    {TRACK_MINI_GOLF_HOLE,          TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_MINI_GOLF_HOLE_B
+    {TRACK_MINI_GOLF_HOLE,          TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_MINI_GOLF_HOLE_C
+    {TRACK_MINI_GOLF_HOLE,          TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_MINI_GOLF_HOLE_D
+    {TRACK_MINI_GOLF_HOLE,          TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_MINI_GOLF_HOLE_E
+    {TRACK_QUARTER_LOOP_INVERTED,   TRACK_SLOPE_DOWN_90, TRACK_SLOPE_NONE,  TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                  },  // ELEM_MULTIDIM_INVERTED_FLAT_TO_90_DEG_QUARTER_LOOP_DOWN
+    {TRACK_QUARTER_LOOP,            TRACK_SLOPE_NONE,    TRACK_SLOPE_UP_90, TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                  },  // ELEM_90_DEG_TO_INVERTED_FLAT_QUARTER_LOOP_UP
+    {TRACK_QUARTER_LOOP,            TRACK_SLOPE_DOWN_90, TRACK_SLOPE_NONE,  TRACK_BANK_NONE,        TRACK_BANK_UPSIDE_DOWN, 0                  },  // ELEM_INVERTED_FLAT_TO_90_DEG_QUARTER_LOOP_DOWN
+    { TRACK_LIFT_HILL_CURVED,       TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_CURVED_LIFT_HILL
+    { TRACK_LIFT_HILL_CURVED,       TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_CURVED_LIFT_HILL
+    { TRACK_REVERSER,               TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_REVERSER
+    { TRACK_REVERSER,               TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_REVERSER
+    { TRACK_SLOPE_TO_FLAT,          TRACK_SLOPE_DOWN_90,        TRACK_SLOPE_UP_90,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_AIR_THRUST_TOP_CAP
+    { TRACK_SLOPE_TO_FLAT,          TRACK_SLOPE_DOWN_90,        TRACK_SLOPE_DOWN_90,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_AIR_THRUST_VERTICAL_DOWN
+    { TRACK_SLOPE_TO_FLAT,          TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_90,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_AIR_THRUST_VERTICAL_DOWN_TO_LEVEL
+    { TRACK_BLOCK_BRAKES,           TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_BLOCK_BRAKES
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_BANKED_QUARTER_TURN_3_TILE_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_BANKED_QUARTER_TURN_3_TILE_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_BANKED_QUARTER_TURN_3_TILE_25_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_BANKED_QUARTER_TURN_3_TILE_25_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_BANKED_QUARTER_TURN_5_TILE_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_BANKED_QUARTER_TURN_5_TILE_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_BANKED_QUARTER_TURN_5_TILE_25_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_BANKED_QUARTER_TURN_5_TILE_25_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_LEFT,        TRACK_BANK_NONE,        0                  },  // ELEM_25_DEG_UP_TO_LEFT_BANKED_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_RIGHT,       TRACK_BANK_NONE,        0                  },  // ELEM_25_DEG_UP_TO_RIGHT_BANKED_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_BANKED_25_DEG_UP_TO_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_BANKED_25_DEG_UP_TO_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_LEFT,        TRACK_BANK_NONE,        0                  },  // ELEM_25_DEG_DOWN_TO_LEFT_BANKED_25_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_RIGHT,       TRACK_BANK_NONE,        0                  },  // ELEM_25_DEG_DOWN_TO_RIGHT_BANKED_25_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_BANKED_25_DEG_DOWN_TO_25_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_BANKED_25_DEG_DOWN_TO_25_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_BANKED_FLAT_TO_LEFT_BANKED_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_BANKED_FLAT_TO_RIGHT_BANKED_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_25,          TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_BANKED_25_DEG_UP_TO_LEFT_BANKED_FLAT
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_25,          TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_BANKED_25_DEG_UP_TO_RIGHT_BANKED_FLAT
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_BANKED_FLAT_TO_LEFT_BANKED_25_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_BANKED_FLAT_TO_RIGHT_BANKED_25_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_25,        TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_BANKED_25_DEG_DOWN_TO_LEFT_BANKED_FLAT
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_25,        TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_BANKED_25_DEG_DOWN_TO_RIGHT_BANKED_FLAT
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_NONE,        0                  },  // ELEM_FLAT_TO_LEFT_BANKED_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_NONE,        0                  },  // ELEM_FLAT_TO_RIGHT_BANKED_25_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_BANKED_25_DEG_UP_TO_FLAT
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_BANKED_25_DEG_UP_TO_FLAT
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_NONE,        0                  },  // ELEM_FLAT_TO_LEFT_BANKED_25_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_NONE,        0                  },  // ELEM_FLAT_TO_RIGHT_BANKED_25_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_LEFT,        0                  },  // ELEM_LEFT_BANKED_25_DEG_DOWN_TO_FLAT
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_RIGHT,       0                  },  // ELEM_RIGHT_BANKED_25_DEG_DOWN_TO_FLAT
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_90,          TRACK_SLOPE_UP_90,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_QUARTER_TURN_1_TILE_90_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_90,          TRACK_SLOPE_UP_90,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_QUARTER_TURN_1_TILE_90_DEG_UP
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_90,        TRACK_SLOPE_DOWN_90,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_LEFT_QUARTER_TURN_1_TILE_90_DEG_DOWN
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_90,        TRACK_SLOPE_DOWN_90,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_RIGHT_QUARTER_TURN_1_TILE_90_DEG_DOWN
+    { TRACK_QUARTER_LOOP_UNINVERTED,TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_90,          TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                  },  // ELEM_MULTIDIM_90_DEG_UP_TO_INVERTED_FLAT_QUARTER_LOOP
+    { TRACK_QUARTER_LOOP_UNINVERTED,TRACK_SLOPE_DOWN_90,        TRACK_SLOPE_NONE,           TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                  },  // ELEM_MULTIDIM_FLAT_TO_90_DEG_DOWN_QUARTER_LOOP
+    { TRACK_QUARTER_LOOP_INVERTED,  TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_90,          TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                  },  // 255
+    { TRACK_BOOSTER,                TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_BOOSTER
+};
+
+/**　rct2: 0x0099849D */
+const rct_trackdefinition FlatRideTrackDefinitions[257] =
+{
+    // TYPE                         VANGLE END                  VANGLE START                BANK END                BANK START              PREVIEW Z OFFSET
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 0
+    { TRACK_STATION_END,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 1
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 2
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 3
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 4
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_60,          TRACK_SLOPE_UP_60,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 5
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 6
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_60,          TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 7
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_60,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 8
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 9
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 10
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_DOWN_60,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 11
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 12
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 13
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_60,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 14
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 15
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 16
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 17
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_NONE,        0                           },  // 18
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_NONE,        0                           },  // 19
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_LEFT,        0                           },  // 20
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_RIGHT,       0                           },  // 21
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                           },  // 22
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                           },  // 23
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_LEFT,        0                           },  // 24
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_RIGHT,       0                           },  // 25
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_25,          TRACK_BANK_LEFT,        TRACK_BANK_NONE,        0                           },  // 26
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_25,          TRACK_BANK_RIGHT,       TRACK_BANK_NONE,        0                           },  // 27
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_LEFT,        0                           },  // 28
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_RIGHT,       0                           },  // 29
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_25,        TRACK_BANK_LEFT,        TRACK_BANK_NONE,        0                           },  // 30
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_25,        TRACK_BANK_RIGHT,       TRACK_BANK_NONE,        0                           },  // 31
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                           },  // 32
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                           },  // 33
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 34
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 35
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 36
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 37
+    { TRACK_S_BEND,                 TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 38
+    { TRACK_S_BEND,                 TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 39
+    { TRACK_VERTICAL_LOOP,          TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        -48                         },  // 40
+    { TRACK_VERTICAL_LOOP,          TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        -48                         },  // 41
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 42
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 43
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                           },  // 44
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                           },  // 45
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 46
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 47
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 48
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 49
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 50
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 51
+    { TRACK_TWIST,                  TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                           },  // 52
+    { TRACK_TWIST,                  TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                           },  // 53
+    { TRACK_TWIST,                  TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_UPSIDE_DOWN, 0                           },  // 54
+    { TRACK_TWIST,                  TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_UPSIDE_DOWN, 0                           },  // 55
+    { TRACK_HALF_LOOP,              TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_25,          TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        64                          },  // 56
+    { TRACK_HALF_LOOP,              TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_UPSIDE_DOWN, -64                         },  // 57
+    { TRACK_CORKSCREW,              TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                           },  // 58
+    { TRACK_CORKSCREW,              TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                           },  // 59
+    { TRACK_CORKSCREW,              TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_UPSIDE_DOWN, -32                         },  // 60
+    { TRACK_CORKSCREW,              TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_UPSIDE_DOWN, -32                         },  // 61
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_60,          TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 62
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_60,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 63
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 64
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_60,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 65
+    { TRACK_TOWER_BASE,             TRACK_SLOPE_UP_90,          TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 66
+    { TRACK_TOWER_BASE,             TRACK_SLOPE_UP_90,          TRACK_SLOPE_UP_90,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 67
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 68
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 69
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_60,          TRACK_SLOPE_UP_60,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 70
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 71
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_60,          TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 72
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_60,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 73
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 74
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 75
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_DOWN_60,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 76
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 77
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 78
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_60,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 79
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 80
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 81
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 82
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 83
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 84
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 85
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 86
+    { TRACK_HELIX_SMALL,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                           },  // 87
+    { TRACK_HELIX_SMALL,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                           },  // 88
+    { TRACK_HELIX_SMALL,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                           },  // 89
+    { TRACK_HELIX_SMALL,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                           },  // 90
+    { TRACK_HELIX_SMALL,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                           },  // 91
+    { TRACK_HELIX_SMALL,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                           },  // 92
+    { TRACK_HELIX_SMALL,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                           },  // 93
+    { TRACK_HELIX_SMALL,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                           },  // 94
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // FLAT_TRACK_ELEM_1_X_4_A
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_60,          TRACK_SLOPE_UP_60,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 96
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_DOWN_60,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 97
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_DOWN_60,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 98
+    { TRACK_BRAKES,                 TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 99
+    { TRACK_ROTATION_CONTROL_TOGGLE,TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 100
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 101
+    { TRACK_HELIX_LARGE,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                           },  // 102
+    { TRACK_HELIX_LARGE,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                           },  // 103
+    { TRACK_HELIX_LARGE,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                           },  // 104
+    { TRACK_HELIX_LARGE,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                           },  // 105
+    { TRACK_HELIX_LARGE_UNBANKED,   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 106
+    { TRACK_HELIX_LARGE_UNBANKED,   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 107
+    { TRACK_HELIX_LARGE_UNBANKED,   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 108
+    { TRACK_HELIX_LARGE_UNBANKED,   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 109
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // FLAT_TRACK_ELEM_2_X_2
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // FLAT_TRACK_ELEM_4_X_4
+    { TRACK_WHIRLPOOL,              TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 112
+    { TRACK_WHIRLPOOL,              TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 113
+    { TRACK_ON_RIDE_PHOTO,          TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 114
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 115
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // FLAT_TRACK_ELEM_1_X_5
+    { TRACK_WATER_SPLASH,           TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 117
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // FLAT_TRACK_ELEM_1_X_1_A
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // FLAT_TRACK_ELEM_1_X_4_B
+    { TRACK_WHIRLPOOL,              TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 120
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // FLAT_TRACK_ELEM_1_X_1_B
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        -40                         },  // FLAT_TRACK_ELEM_1_X_4_C
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // FLAT_TRACK_ELEM_3_X_3
+    { TRACK_REVERSE_FREEFALL,       TRACK_SLOPE_UP_90,          TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 124
+    { TRACK_REVERSE_FREEFALL,       TRACK_SLOPE_UP_90,          TRACK_SLOPE_UP_90,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 125
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_90,          TRACK_SLOPE_UP_90,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 126
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_90,        TRACK_SLOPE_DOWN_90,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 127
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_90,          TRACK_SLOPE_UP_60,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 128
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_DOWN_90,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 129
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_60,          TRACK_SLOPE_UP_90,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 130
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_90,        TRACK_SLOPE_DOWN_60,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 131
+    { TRACK_BRAKE_FOR_DROP,         TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 132
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 133
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 134
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 135
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 136
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                           },  // 137
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                           },  // 138
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                           },  // 139
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                           },  // 140
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 141
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 142
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_60,          TRACK_SLOPE_UP_60,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 143
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 144
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_60,          TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 145
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_60,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 146
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 147
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 148
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_DOWN_60,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 149
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 150
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 151
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_60,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 152
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 153
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_60,          TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 154
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_60,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 155
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_60,        TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 156
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_60,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 157
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_NONE,        0                           },  // 158
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_NONE,        0                           },  // 159
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_LEFT,        0                           },  // 160
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_RIGHT,       0                           },  // 161
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_LEFT,        0                           },  // 162
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_RIGHT,       0                           },  // 163
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_25,          TRACK_BANK_LEFT,        TRACK_BANK_NONE,        0                           },  // 164
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_25,          TRACK_BANK_RIGHT,       TRACK_BANK_NONE,        0                           },  // 165
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_LEFT,        0                           },  // 166
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_RIGHT,       0                           },  // 167
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_25,        TRACK_BANK_LEFT,        TRACK_BANK_NONE,        0                           },  // 168
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_25,        TRACK_BANK_RIGHT,       TRACK_BANK_NONE,        0                           },  // 169
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                           },  // 170
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                           },  // 171
+    { TRACK_LOG_FLUME_REVERSER,     TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 172
+    { TRACK_SPINNING_TUNNEL,        TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 173
+    { TRACK_BARREL_ROLL,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_UPSIDE_DOWN,TRACK_BANK_NONE,         0                           },  // 174
+    { TRACK_BARREL_ROLL,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_UPSIDE_DOWN,TRACK_BANK_NONE,         0                           },  // 175
+    { TRACK_BARREL_ROLL,            TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_UPSIDE_DOWN, 0                           },  // 176
+    {TRACK_BARREL_ROLL,          TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,    TRACK_BANK_NONE,        TRACK_BANK_UPSIDE_DOWN, 0                           },  // 177
+    {TRACK_FLAT,                 TRACK_SLOPE_UP_25,   TRACK_SLOPE_NONE,    TRACK_BANK_NONE,        TRACK_BANK_LEFT,        0                           },  // 178
+    {TRACK_FLAT,                 TRACK_SLOPE_UP_25,   TRACK_SLOPE_NONE,    TRACK_BANK_NONE,        TRACK_BANK_RIGHT,       0                           },  // 179
+    {TRACK_FLAT,                 TRACK_SLOPE_NONE,    TRACK_SLOPE_DOWN_25, TRACK_BANK_LEFT,        TRACK_BANK_NONE,        0                           },  // 180
+    {TRACK_FLAT,                 TRACK_SLOPE_NONE,    TRACK_SLOPE_DOWN_25, TRACK_BANK_RIGHT,       TRACK_BANK_NONE,        0                           },  // 181
+    {TRACK_POWERED_LIFT,         TRACK_SLOPE_UP_25,   TRACK_SLOPE_UP_25,   TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 182
+    {TRACK_HALF_LOOP_LARGE,      TRACK_SLOPE_NONE,    TRACK_SLOPE_UP_25,   TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        64                          },  // 183
+    {TRACK_HALF_LOOP_LARGE,      TRACK_SLOPE_NONE,    TRACK_SLOPE_UP_25,   TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        64                          },  // 184
+    {TRACK_HALF_LOOP_LARGE,      TRACK_SLOPE_DOWN_25, TRACK_SLOPE_NONE,    TRACK_BANK_NONE,        TRACK_BANK_UPSIDE_DOWN, -64                         },  // 185
+    {TRACK_HALF_LOOP_LARGE,      TRACK_SLOPE_DOWN_25, TRACK_SLOPE_NONE,    TRACK_BANK_NONE,        TRACK_BANK_UPSIDE_DOWN, -64                         },  // 186
+    {TRACK_CORKSCREW_UNINVERTED, TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE, 0                           },  // 187
+    {TRACK_CORKSCREW_UNINVERTED, TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE, 0                           },  // 188
+    {TRACK_CORKSCREW_INVERTED,   TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE, 0                           },  // 189
+    {TRACK_CORKSCREW_INVERTED,   TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE, 0                           },  // 190
+    {TRACK_CORKSCREW_UNINVERTED, TRACK_SLOPE_NONE,    TRACK_SLOPE_UP_25, TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE, 64                          },  // 191
+    {TRACK_CORKSCREW_INVERTED,   TRACK_SLOPE_DOWN_25, TRACK_SLOPE_NONE,  TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE, -64                         },  // 192
+    {TRACK_CORKSCREW_UNINVERTED, TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE, 0                           },  // 193
+    {TRACK_CORKSCREW_UNINVERTED, TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE, 0                           },  // 194
+    {TRACK_CORKSCREW_INVERTED,   TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE, -32                         },  // 195
+    {TRACK_CORKSCREW_INVERTED,   TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE, -32                         },  // 196
+    {TRACK_HEARTLINE_TRANSFER,   TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_NONE,        TRACK_BANK_NONE, 0                           },  // 197
+    {TRACK_HEARTLINE_TRANSFER,   TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_NONE,        TRACK_BANK_NONE, 0                           },  // 198
+    {TRACK_HEARTLINE_ROLL,       TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_NONE,        TRACK_BANK_NONE, 0                           },  // 199
+    {TRACK_HEARTLINE_ROLL,       TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_NONE,        TRACK_BANK_NONE, 0                           },  // 200
+    {TRACK_MINI_GOLF_HOLE,       TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_NONE,        TRACK_BANK_NONE, 0                           },  // 201
+    {TRACK_MINI_GOLF_HOLE,       TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_NONE,        TRACK_BANK_NONE, 0                           },  // 202
+    {TRACK_MINI_GOLF_HOLE,       TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_NONE,        TRACK_BANK_NONE, 0                           },  // 203
+    {TRACK_MINI_GOLF_HOLE,       TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_NONE,        TRACK_BANK_NONE, 0                           },  // 204
+    {TRACK_MINI_GOLF_HOLE,       TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_NONE,        TRACK_BANK_NONE, 0                           },  // 205
+    {TRACK_FLAT,                 TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_NONE,        TRACK_BANK_NONE, 0                           },  // 206
+    {TRACK_FLAT,                 TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_NONE,        TRACK_BANK_NONE, 0                           },  // 207
+    {TRACK_FLAT,                 TRACK_SLOPE_NONE,    TRACK_SLOPE_NONE,  TRACK_BANK_NONE,        TRACK_BANK_NONE, 0                           },  // 208
+    { TRACK_LIFT_HILL_CURVED,       TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 209
+    { TRACK_LIFT_HILL_CURVED,       TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 210
+    { TRACK_REVERSER,               TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 211
+    { TRACK_REVERSER,               TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 212
+    { TRACK_SLOPE_TO_FLAT,          TRACK_SLOPE_DOWN_90,        TRACK_SLOPE_UP_90,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 213
+    { TRACK_SLOPE_TO_FLAT,          TRACK_SLOPE_DOWN_90,        TRACK_SLOPE_DOWN_90,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 214
+    { TRACK_SLOPE_TO_FLAT,          TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_90,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 215
+    { TRACK_BLOCK_BRAKES,           TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 216
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                           },  // 217
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                           },  // 218
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                           },  // 219
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                           },  // 220
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                           },  // 221
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                           },  // 222
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                           },  // 223
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                           },  // 224
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_LEFT,        TRACK_BANK_NONE,        0                           },  // 225
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_RIGHT,       TRACK_BANK_NONE,        0                           },  // 226
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_LEFT,        0                           },  // 227
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_RIGHT,       0                           },  // 228
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_LEFT,        TRACK_BANK_NONE,        0                           },  // 229
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_RIGHT,       TRACK_BANK_NONE,        0                           },  // 230
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_LEFT,        0                           },  // 231
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_RIGHT,       0                           },  // 232
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                           },  // 233
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                           },  // 234
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_25,          TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                           },  // 235
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_25,          TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                           },  // 236
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                           },  // 237
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                           },  // 238
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_25,        TRACK_BANK_LEFT,        TRACK_BANK_LEFT,        0                           },  // 239
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_25,        TRACK_BANK_RIGHT,       TRACK_BANK_RIGHT,       0                           },  // 240
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_NONE,        0                           },  // 241
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_25,          TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_NONE,        0                           },  // 242
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_LEFT,        0                           },  // 243
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_25,          TRACK_BANK_NONE,        TRACK_BANK_RIGHT,       0                           },  // 244
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_NONE,           TRACK_BANK_LEFT,        TRACK_BANK_NONE,        0                           },  // 245
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_25,        TRACK_SLOPE_NONE,           TRACK_BANK_RIGHT,       TRACK_BANK_NONE,        0                           },  // 246
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_LEFT,        0                           },  // 247
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_DOWN_25,        TRACK_BANK_NONE,        TRACK_BANK_RIGHT,       0                           },  // 248
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_90,          TRACK_SLOPE_UP_90,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 249
+    { TRACK_FLAT,                   TRACK_SLOPE_UP_90,          TRACK_SLOPE_UP_90,          TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 250
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_90,        TRACK_SLOPE_DOWN_90,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 251
+    { TRACK_FLAT,                   TRACK_SLOPE_DOWN_90,        TRACK_SLOPE_DOWN_90,        TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 252
+    { TRACK_QUARTER_LOOP_UNINVERTED,TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_90,          TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                           },  // 253
+    { TRACK_QUARTER_LOOP_UNINVERTED,TRACK_SLOPE_DOWN_90,        TRACK_SLOPE_NONE,           TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                           },  // 254
+    { TRACK_QUARTER_LOOP_INVERTED,  TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_90,          TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                           },  // 255
+    { TRACK_BOOSTER,                TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 256
 };
 
 const uint8_t TrackPieceLengths[TrackElemType::Count] = {
@@ -7070,5 +5084,2518 @@ const uint16_t TrackFlags[] = {
     /* TrackElemType::MultiDimUp90ToInvertedFlatQuarterLoop         */   TRACK_ELEM_FLAG_UP | TRACK_ELEM_FLAG_NORMAL_TO_INVERSION | TRACK_ELEM_FLAG_INVERSION_TO_NORMAL,
     /* TrackElemType::MultiDimFlatToDown90QuarterLoop               */   TRACK_ELEM_FLAG_DOWN | TRACK_ELEM_FLAG_INVERSION_TO_NORMAL,
     /*                                                              */   TRACK_ELEM_FLAG_UP | TRACK_ELEM_FLAG_NORMAL_TO_INVERSION | TRACK_ELEM_FLAG_INVERSION_TO_NORMAL,
+};
+
+
+#define TRACK_BLOCK_END { 255, 255, 255, 255, 255, {255, 255}, 255 }
+
+static constexpr const track_build_sequence TrackBlocksFlat[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksEndStation[] = {
+    { 0, 0, 0, 0, 0,{ 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksBeginStation[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksMiddleStation[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksUp60[] = {
+    { 0, 0, 0, 0, 64, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksFlatToUp25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksUp25ToUp60[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksUp60ToUp25[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksUp25ToFlat[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDown25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDown60[] = {
+    { 0, 0, 0, 0, 64, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksFlatToDown25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDown25ToDown60[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDown60ToDown25[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDown25ToFlat[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn5Tiles[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 0, 0, { 0b0111, 0 }, 0 },
+    { 6, -64, -64, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightQuarterTurn5Tiles[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 0, 0, { 0b1011, 0 }, 0 },
+    { 6, -64, 64, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksFlatToLeftBank[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksFlatToRightBank[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftBankToFlat[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightBankToFlat[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksBankedLeftQuarterTurn5Tiles[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 0, 0, { 0b0111, 0 }, 0 },
+    { 6, -64, -64, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksBankedRightQuarterTurn5Tiles[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 0, 0, { 0b1011, 0 }, 0 },
+    { 6, -64, 64, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftBankToUp25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightBankToUp25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksUp25ToLeftBank[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksUp25ToRightBank[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftBankToDown25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightBankToDown25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDown25ToLeftBank[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDown25ToRightBank[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftBank[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightBank[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn5TilesUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    { 1, 0, -32, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 16, 16, { 0b0111, 0b0100 }, 0 },
+    { 3, -32, -32, 24, 16, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 48, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 32, 16, { 0b0111, 0b0100 }, 0 },
+    { 6, -64, -64, 48, 16, { 0b1111, 0b0110 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightQuarterTurn5TilesUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    { 1, 0, 32, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 16, 16, { 0b1011, 0b1000 }, 0 },
+    { 3, -32, 32, 24, 16, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 48, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 32, 16, { 0b1011, 0b1000 }, 0 },
+    { 6, -64, 64, 48, 16, { 0b1111, 0b1001 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn5TilesDown25[] = {
+    { 0, 0, 0, 48, 16, { 0b1111, 0b0011 }, 0 },
+    { 1, 0, -32, 48, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 32, 16, { 0b0111, 0b0001 }, 0 },
+    { 3, -32, -32, 24, 16, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 16, 16, { 0b0111, 0b0001 }, 0 },
+    { 6, -64, -64, 0, 16, { 0b1111, 0b1001 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightQuarterTurn5TilesDown25[] = {
+    { 0, 0, 0, 48, 16, { 0b1111, 0b0011 }, 0 },
+    { 1, 0, 32, 48, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 32, 16, { 0b1011, 0b0010 }, 0 },
+    { 3, -32, 32, 24, 16, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 16, 16, { 0b1011, 0b0010 }, 0 },
+    { 6, -64, 64, 0, 16, { 0b1111, 0b0110 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksSBendLeft[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 2, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
+    { 3, -64, -32, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksSBendRight[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 2, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
+    { 3, -64, 32, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftVerticalLoop[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    { 1, -32, 0, 16, 16, { 0b1111, 0b1100 }, 0 },
+    { 2, -64, 0, 32, 96, { 0b0010, 0 }, 0 },
+    { 3, -32, 0, 120, 16, { 0b0110, 0 }, 0 },
+    { 4, -32, -32, 120, 0, { 0b0001, 0 }, 0 },
+    { 5, 0, 0, 120, 0, { 0b0100, 0 }, 0 },
+    { 6, 0, -32, 120, 16, { 0b1001, 0 }, 0 },
+    { 7, 32, -32, 32, 96, { 0b1000, 0 }, 0 },
+    { 8, 0, -32, 16, 16, { 0b1111, 0b0011 }, 0 },
+    { 9, -32, -32, 0, 16, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightVerticalLoop[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    { 1, -32, 0, 16, 16, { 0b1111, 0b1100 }, 0 },
+    { 2, -64, 0, 32, 96, { 0b0001, 0 }, 0 },
+    { 3, -32, 0, 120, 16, { 0b1001, 0 }, 0 },
+    { 4, -32, 32, 120, 0, { 0b0010, 0 }, 0 },
+    { 5, 0, 0, 120, 0, { 0b1000, 0 }, 0 },
+    { 6, 0, 32, 120, 16, { 0b0110, 0 }, 0 },
+    { 7, 32, 32, 32, 96, { 0b0100, 0 }, 0 },
+    { 8, 0, 32, 16, 16, { 0b1111, 0b0011 }, 0 },
+    { 9, -32, 32, 0, 16, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn3Tiles[] = {
+    { 0, 0, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0010, 0 }, 0 },
+    { 3, -32, -32, 0, 0, { 0b0111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightQuarterTurn3Tiles[] = {
+    { 0, 0, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0001, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1011, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftBankedQuarterTurn3Tiles[] = {
+    { 0, 0, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0010, 0 }, 0 },
+    { 3, -32, -32, 0, 0, { 0b0111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightBankedQuarterTurn3Tiles[] = {
+    { 0, 0, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0001, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1011, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn3TilesUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b0111, 0b0100 }, 0 },
+    { 1, 0, -32, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 16, 0, { 0b0010, 0 }, 0 },
+    { 3, -32, -32, 16, 16,{ 0b0111, 0b0110 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightQuarterTurn3TilesUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1011, 0b1000 }, 0 },
+    { 1, 0, 32, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 16, 0, { 0b0001, 0 }, 0 },
+    { 3, -32, 32, 16, 16,{ 0b1011, 0b1001 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn3TilesDown25[] = {
+    { 0, 0, 0, 16, 16,{ 0b0111, 0b0011 }, 0 },
+    { 1, 0, -32, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 16, 0, { 0b0010, 0 }, 0 },
+    { 3, -32, -32, 0, 16, { 0b0111, 0b0001 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightQuarterTurn3TilesDown25[] = {
+    { 0, 0, 0, 16, 16, { 0b1011, 0b0011 }, 0 },
+    { 1, 0, 32, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 16, 0, { 0b0001, 0 }, 0 },
+    { 3, -32, 32, 0, 16, { 0b1011, 0b0010 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn1Tile[] = {
+    { 0, 0, 0, 0, 0, { 0b0111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightQuarterTurn1Tile[] = {
+    { 0, 0, 0, 0, 0, { 0b1011, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftTwistDownToUp[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 16, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightTwistDownToUp[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 16, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftTwistUpToDown[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -16, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, -16, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightTwistUpToDown[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -16, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, -16, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksHalfLoopUp[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, 0 },
+    { 1, -32, 0, 16, 16, { 0b1111, 0b1100 }, 0 },
+    { 2, -64, 0, 32, 96,{ 0b0011, 0 }, 0 },
+    { 3, -32, 0, 120, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksHalfLoopDown[] = {
+    { 0, 0, 0, -32, 32, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -120, 96,{ 0b0011, 0 }, 0 },
+    { 2, 0, 0, -136, 16, { 0b1111, 0b1100 }, 0 },
+    { 3, 32, 0, -152, 16, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftCorkscrewUp[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 24, 32, { 0b0111, 0 }, 0 },
+    { 2, -32, -32, 48, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightCorkscrewUp[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 24, 32, { 0b1011, 0 }, 0 },
+    { 2, -32, 32, 48, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftCorkscrewDown[] = {
+    { 0, 0, 0, -32, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -56, 32, { 0b0111, 0 }, 0 },
+    { 2, -32, -32, -80, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightCorkscrewDown[] = {
+    { 0, 0, 0, -32, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -56, 32, { 0b1011, 0 }, 0 },
+    { 2, -32, 32, -80, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksFlatToUp60[] = {
+    { 0, 0, 0, 0, 24, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksUp60ToFlat[] = {
+    { 0, 0, 0, 0, 24, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksFlatToDown60[] = {
+    { 0, 0, 0, 0, 24, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDown60ToFlat[] = {
+    { 0, 0, 0, 0, 24, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksTowerBase[] = {
+    { 0, 0, 0, 0, 64, { 0b1111, 0 }, 0 },
+    { 1, -32, -32, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, 0, -32, 0, 0, { 0b1111, 0 }, 0 },
+    { 5, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 6, 32, -32, 0, 0, { 0b1111, 0 }, 0 },
+    { 7, 32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 8, 32, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksTowerSection[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 32, 0, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_1 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksFlatCovered[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksUp25Covered[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksUp60Covered[] = {
+    { 0, 0, 0, 0, 64, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksFlatToUp25Covered[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksUp25ToUp60Covered[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksUp60ToUp25Covered[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksUp25ToFlatCovered[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDown25Covered[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDown60Covered[] = {
+    { 0, 0, 0, 0, 64, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksFlatToDown25Covered[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDown25ToDown60Covered[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDown60ToDown25Covered[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDown25ToFlatCovered[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn5TilesCovered[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 0, 0, { 0b0111, 0 }, 0 },
+    { 6, -64, -64, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightQuarterTurn5TilesCovered[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 0, 0, { 0b1011, 0 }, 0 },
+    { 6, -64, 64, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksSBendLeftCovered[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 2, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
+    { 3, -64, -32, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksSBendRightCovered[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 2, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
+    { 3, -64, 32, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn3TilesCovered[] = {
+    { 0, 0, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0010, 0 }, 0 },
+    { 3, -32, -32, 0, 0, { 0b0111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightQuarterTurn3TilesCovered[] = {
+    { 0, 0, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0001, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1011, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftHalfBankedHelixUpSmall[] = {
+    { 0, 0, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 4, { 0b0010, 0 }, 0 },
+    { 3, -32, -32, 0, 4, { 0b0111, 0 }, 0 },
+    { 4, -32, -64, 8, 0, { 0b1011, 0 }, 0 },
+    { 5, 0, -64, 8, 0, { 0b0100, 0b0000 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 6, -32, -96, 8, 4, { 0b0001, 0 }, 0 },
+    { 7, 0, -96, 8, 4, { 0b1011, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightHalfBankedHelixUpSmall[] = {
+    { 0, 0, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0b0000 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 4, { 0b0001, 0 }, 0 },
+    { 3, -32, 32, 0, 4, { 0b1011, 0 }, 0 },
+    { 4, -32, 64, 8, 0, { 0b0111, 0 }, 0 },
+    { 5, 0, 64, 8, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 6, -32, 96, 8, 4, { 0b0010, 0 }, 0 },
+    { 7, 0, 96, 8, 4, { 0b0111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftHalfBankedHelixDownSmall[] = {
+    { 0, 0, 0, 8, 4, { 0b0111, 0 }, 0 },
+    { 1, 0, -32, 8, 4, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 8, 0, { 0b0010, 0 }, 0 },
+    { 3, -32, -32, 8, 0, { 0b0111, 0 }, 0 },
+    { 4, -32, -64, 0, 4, { 0b1011, 0 }, 0 },
+    { 5, 0, -64, 0, 4, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 6, -32, -96, 0, 0, { 0b0001, 0 }, 0 },
+    { 7, 0, -96, 0, 0, { 0b1011, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightHalfBankedHelixDownSmall[] = {
+    { 0, 0, 0, 8, 4, { 0b1011, 0 }, 0 },
+    { 1, 0, 32, 8, 4, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 8, 0, { 0b0001, 0 }, 0 },
+    { 3, -32, 32, 8, 0, { 0b1011, 0 }, 0 },
+    { 4, -32, 64, 0, 4, { 0b0111, 0 }, 0 },
+    { 5, 0, 64, 0, 4, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 6, -32, 96, 0, 0, { 0b0010, 0 }, 0 },
+    { 7, 0, 96, 0, 0, { 0b0111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftHalfBankedHelixUpLarge[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 0, 4, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 0, 4, { 0b0111, 0 }, 0 },
+    { 6, -64, -64, 0, 4, { 0b1111, 0 }, 0 },
+    { 7, -64, -96, 8, 0, { 0b1111, 0 }, 0 },
+    { 8, -32, -96, 8, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 9, -64, -128, 8, 0, { 0b1011, 0 }, 0 },
+    { 10, -32, -128, 8, 0, { 0b1110, 0 }, 0 },
+    { 11, 0, -128, 8, 4, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 12, -32, -160, 8, 4, { 0b1011, 0 }, 0 },
+    { 13, 0, -160, 8, 4, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightHalfBankedHelixUpLarge[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 0, 4, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 0, 4, { 0b1011, 0 }, 0 },
+    { 6, -64, 64, 0, 4, { 0b1111, 0 }, 0 },
+    { 7, -64, 96, 8, 0, { 0b1111, 0 }, 0 },
+    { 8, -32, 96, 8, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 9, -64, 128, 8, 0, { 0b0111, 0 }, 0 },
+    { 10, -32, 128, 8, 0, { 0b1101, 0 }, 0 },
+    { 11, 0, 128, 8, 4, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 12, -32, 160, 8, 4, { 0b0111, 0 }, 0 },
+    { 13, 0, 160, 8, 4, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftHalfBankedHelixDownLarge[] = {
+    { 0, 0, 0, 8, 4, { 0b1111, 0 }, 0 },
+    { 1, 0, -32, 8, 4, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 8, 4, { 0b0111, 0 }, 0 },
+    { 3, -32, -32, 8, 0, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 8, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 8, 0, { 0b0111, 0 }, 0 },
+    { 6, -64, -64, 8, 0, { 0b1111, 0 }, 0 },
+    { 7, -64, -96, 0, 4, { 0b1111, 0 }, 0 },
+    { 8, -32, -96, 0, 4, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 9, -64, -128, 0, 4, { 0b1011, 0 }, 0 },
+    { 10, -32, -128, 0, 0, { 0b1110, 0 }, 0 },
+    { 11, 0, -128, 0, 0, { 0b0100, 0b0000 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 12, -32, -160, 0, 0, { 0b1011, 0 }, 0 },
+    { 13, 0, -160, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightHalfBankedHelixDownLarge[] = {
+    { 0, 0, 0, 8, 4, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 8, 4, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 8, 4, { 0b1011, 0 }, 0 },
+    { 3, -32, 32, 8, 0, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 8, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 8, 0, { 0b1011, 0 }, 0 },
+    { 6, -64, 64, 8, 0, { 0b1111, 0 }, 0 },
+    { 7, -64, 96, 0, 4, { 0b1111, 0 }, 0 },
+    { 8, -32, 96, 0, 4, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 9, -64, 128, 0, 4, { 0b0111, 0 }, 0 },
+    { 10, -32, 128, 0, 0, { 0b1101, 0 }, 0 },
+    { 11, 0, 128, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 12, -32, 160, 0, 0, { 0b0111, 0 }, 0 },
+    { 13, 0, 160, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn1TileUp60[] = {
+    { 0, 0, 0, 0, 64, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightQuarterTurn1TileUp60[] = {
+    { 0, 0, 0, 0, 64, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn1TileDown60[] = {
+    { 0, 0, 0, 0, 64, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftRightQuarterTurn1TileDown60[] = {
+    { 0, 0, 0, 0, 64, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksBrakes[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRotationControlToggle[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksMaze[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftQuarterBankedHelixLargeUp[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 0, 12, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 0, 12, { 0b0111, 0 }, 0 },
+    { 6, -64, -64, 0, 12, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightQuarterBankedHelixLargeUp[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 0, 12, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 0, 12, { 0b1011, 0 }, 0 },
+    { 6, -64, 64, 0, 12, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftQuarterBankedHelixLargeDown[] = {
+    { 0, 0, 0, 0, 12, { 0b1111, 0 }, 0 },
+    { 1, 0, -32, 0, 12, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 12, { 0b0111, 0 }, 0 },
+    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 0, 0, { 0b0111, 0 }, 0 },
+    { 6, -64, -64, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightQuarterBankedHelixLargeDown[] = {
+    { 0, 0, 0, 0, 12, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 0, 12, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 12, { 0b1011, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 0, 0, { 0b1011, 0 }, 0 },
+    { 6, -64, 64, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftQuarterHelixLargeUp[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 0, 12, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 0, 12, { 0b0111, 0 }, 0 },
+    { 6, -64, -64, 0, 12, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightQuarterHelixLargeUp[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 0, 12, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 0, 12, { 0b1011, 0 }, 0 },
+    { 6, -64, 64, 0, 12, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftQuarterHelixLargeDown[] = {
+    { 0, 0, 0, 0, 12, { 0b1111, 0 }, 0 },
+    { 1, 0, -32, 0, 12, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 12, { 0b0111, 0 }, 0 },
+    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 0, 0, { 0b0111, 0 }, 0 },
+    { 6, -64, -64, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightQuarterHelixLargeDown[] = {
+    { 0, 0, 0, 0, 12, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 0, 12, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 12, { 0b1011, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 0, 0, { 0b1011, 0 }, 0 },
+    { 6, -64, 64, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksUp25LeftBanked[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksUp25RightBanked[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksWaterfall[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRapids[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksOnRidePhoto[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDown25LeftBanked[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDown25RightBanked[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksWatersplash[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 3, -96, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 4, -128, 0, 0, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksFlatToUp60LongBase[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 16, 24, { 0b1111, 0 }, 0 },
+    { 3, -96, 0, 40, 48, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksUp60ToFlatLongBase[] = {
+    { 0, 0, 0, 0, 48, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 40, 48, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 64, 24, { 0b1111, 0 }, 0 },
+    { 3, -96, 0, 80, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksWhirlpool[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDown60ToFlatLongBase[] = {
+    { 0, 0, 0, 40, 48, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 16, 24, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 3, -96, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksFlatToDown60LongBase[] = {
+    { 0, 0, 0, 80, 8, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 64, 24, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 40, 48, { 0b1111, 0 }, 0 },
+    { 3, -96, 0, 0, 48, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksCableLiftHill[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
+    { 1, -32, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
+    { 2, -64, 0, -32, 32, { 0b1111, 0b0011 }, 0 },
+    { 3, -96, 0, -96, 64, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksReverseFreefallSlope[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 32, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 0, 48, { 0b1111, 0 }, 0 },
+    { 3, -96, 0, 0, 80, { 0b1111, 0 }, 0 },
+    { 4, -128, 0, 0, 160, { 0b1111, 0 }, 0 },
+    { 5, -192, 0, 0, 208, { 0b1111, 0 }, 0 },
+    { 6, -160, 0, 0, 208, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksReverseFreefallVertical[] = {
+    { 0, 0, 0, 0, 48, { 0b1111, 0 }, 0 },
+    { 1, 32, 0, 0, 48, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksUp90[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, 32, 0, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDown90[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, 32, 0, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksUp60ToUp90[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, 32, 0, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDown90ToDown60[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0b0011 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksUp90ToUp60[] = {
+    { 0, 0, 0, 0, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDown60ToDown90[] = {
+    { 0, 0, 0, 0, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, 32, 0, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksBrakeForDrop[] = {
+    { 0, 0, 0, 0, 24, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftEighthToDiag[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, -32, 0, 0, { 0b1000, 0 }, 0 },
+    { 3, -64, 0, 0, 0, { 0b0010, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 4, -64, -32, 0, 0, { 0b0001, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightEighthToDiag[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, 32, 0, 0, { 0b0100, 0 }, 0 },
+    { 3, -64, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 4, -64, 32, 0, 0, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftEighthToOrthogonal[] = {
+    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b0001, 0 }, 0 },
+    { 2, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, -64, 32, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightEighthToOrthogonal[] = {
+    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, 0 },
+    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, -32, 64, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftEighthBankToDiag[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, -32, 0, 0, { 0b1000, 0 }, 0 },
+    { 3, -64, 0, 0, 0, { 0b0010, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 4, -64, -32, 0, 0, { 0b0001, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightEighthBankToDiag[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, 32, 0, 0, { 0b0100, 0 }, 0 },
+    { 3, -64, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 4, -64, 32, 0, 0, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftEighthBankToOrthogonal[] = {
+    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b0001, 0 }, 0 },
+    { 2, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, -64, 32, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightEighthBankToOrthogonal[] = {
+    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, 0 },
+    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, -32, 64, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagFlat[] = {
+    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 16, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 16, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 16, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagUp60[] = {
+    { 0, 0, 0, 0, 64, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 64, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 64, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 64, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagFlatToUp25[] = {
+    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagUp25ToUp60[] = {
+    { 0, 0, 0, 0, 32, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 32, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 32, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 32, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagUp60ToUp25[] = {
+    { 0, 0, 0, 0, 32, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 32, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 32, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 32, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagUp25ToFlat[] = {
+    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagDown25[] = {
+    { 0, 0, 0, 0, 16, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 16, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 16, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 16, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagDown60[] = {
+    { 0, 0, 0, 0, 64, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 64, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 64, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 64, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagFlatToDown25[] = {
+    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagDown25ToDown60[] = {
+    { 0, 0, 0, 0, 32, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 32, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 32, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 32, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagDown60ToDown25[] = {
+    { 0, 0, 0, 0, 32, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 32, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 32, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 32, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagDown25ToFlat[] = {
+    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagFlatToUp60[] = {
+    { 0, 0, 0, 0, 24, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 24, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 24, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 24, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagUp60ToFlat[] = {
+    { 0, 0, 0, 0, 24, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 24, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 24, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 24, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagFlatToDown60[] = {
+    { 0, 0, 0, 0, 24, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 24, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 24, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 24, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagDown60ToFlat[] = {
+    { 0, 0, 0, 0, 24, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 24, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 24, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 24, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagFlatToLeftBank[] = {
+    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagFlatToRightBank[] = {
+    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagLeftBankToFlat[] = {
+    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagRightBankToFlat[] = {
+    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagLeftBankToUp25[] = {
+    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagRightBankToUp25[] = {
+    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagUp25ToLeftBank[] = {
+    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagUp25ToRightBank[] = {
+    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagLeftBankToDown25[] = {
+    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagRightBankToDown25[] = {
+    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagDown25ToLeftBank[] = {
+    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagDown25ToRightBank[] = {
+    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagLeftBank[] = {
+    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDiagRightBank[] = {
+    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLogFlumeReverser[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksSpinningTunnel[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftBarrelRollUpToDown[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 0, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightBarrelRollUpToDown[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 0, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftBarrelRollDownToUp[] = {
+    { 0, 0, 0, -32, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -32, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, -32, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightBarrelRollDownToUp[] = {
+    { 0, 0, 0, -32, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -32, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, -32, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftBankToLeftQuarterTurn3TilesUp25[] = {
+    { 0, 0, 0, 0, 0, { 0b0111, 0b0100 }, 0 },
+    { 1, 0, -32, 0, 16, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 16, { 0b0010, 0 }, 0 },
+    { 3, -32, -32, 16, 16,{ 0b0111, 0b0110 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightBankToRightQuarterTurn3TilesUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1011, 0b1000 }, 0 },
+    { 1, 0, 32, 0, 16, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 16, { 0b0001, 0 }, 0 },
+    { 3, -32, 32, 16, 16,{ 0b1011, 0b1001 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn3TilesDown25ToLeftBank[] = {
+    { 0, 0, 0, 16, 16,{ 0b0111, 0b0011 }, 0 },
+    { 1, 0, -32, 0, 16, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 16, { 0b0010, 0 }, 0 },
+    { 3, -32, -32, 0, 0, { 0b0111, 0b0001 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightQuarterTurn3TilesDown25ToRightBank[] = {
+    { 0, 0, 0, 16, 16, { 0b1011, 0b0011 }, 0 },
+    { 1, 0, 32, 0, 16, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 16, { 0b0001, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1011, 0b0010 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksPoweredLift[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftLargeHalfLoopUp[] = {
+    { 0, 0, 0, 0, 24, { 0b1111, 0b1100 }, 0 },
+    { 1, -32, 0, 16, 40, { 0b1111, 0b1100 }, 0 },
+    { 2, -64, 0, 32, 56, { 0b1111, 0 }, 0 },
+    { 3, -96, 0, 64, 192, { 0b1111, 0 }, 0 },
+    { 4, -128, -32, 120, 96, { 0b1111, 0 }, 0 },
+    { 5, -96, -32, 64, 192, { 0b1111, 0 }, 0 },
+    { 6, -64, -32, 248, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightLargeHalfLoopUp[] = {
+    { 0, 0, 0, 0, 24, { 0b1111, 0b1100 }, 0 },
+    { 1, -32, 0, 16, 40, { 0b1111, 0b1100 }, 0 },
+    { 2, -64, 0, 32, 56, { 0b1111, 0 }, 0 },
+    { 3, -96, 0, 64, 192, { 0b1111, 0 }, 0 },
+    { 4, -128, 32, 120, 96, { 0b1111, 0 }, 0 },
+    { 5, -96, 32, 64, 192, { 0b1111, 0 }, 0 },
+    { 6, -64, 32, 248, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightLargeHalfLoopDown[] = {
+    { 0, 0, 0, -32, 24, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -216, 192, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, -160, 96, { 0b1111, 0 }, 0 },
+    { 3, -32, -32, -216, 192, { 0b1111, 0 }, 0 },
+    { 4, 0, -32, -248, 56, { 0b1111, 0 }, 0 },
+    { 5, 32, -32, -264, 40, { 0b1111, 0b1100 }, 0 },
+    { 6, 64, -32, -280, 24, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftLargeHalfLoopDown[] = {
+    { 0, 0, 0, -32, 24, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -216, 192, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, -160, 96, { 0b1111, 0 }, 0 },
+    { 3, -32, 32, -216, 192, { 0b1111, 0 }, 0 },
+    { 4, 0, 32, -248, 56, { 0b1111, 0 }, 0 },
+    { 5, 32, 32, -264, 40, { 0b1111, 0b1100 }, 0 },
+    { 6, 64, 32, -280, 24, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftFlyerTwistUp[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -16, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, -16, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightFlyerTwistUp[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -16, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, -16, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftFlyerTwistDown[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 16, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightFlyerTwistDown[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 16, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksFlyerHalfLoopUp[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, 0 },
+    { 1, -32, 0, 16, 16, { 0b1111, 0b1100 }, 0 },
+    { 2, -64, 0, 32, 96,{ 0b0011, 0 }, 0 },
+    { 3, -32, 0, 120, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksFlyerHalfLoopDown[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -88, 96,{ 0b0011, 0 }, 0 },
+    { 2, 0, 0, -104, 16, { 0b1111, 0b1100 }, 0 },
+    { 3, 32, 0, -120, 16, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftFlyerCorkscrewUp[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 24, 32, { 0b0111, 0 }, 0 },
+    { 2, -32, -32, 48, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightFlyerCorkscrewUp[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 24, 32, { 0b1011, 0 }, 0 },
+    { 2, -32, 32, 48, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftFlyerCorkscrewDown[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -24, 32, { 0b0111, 0 }, 0 },
+    { 2, -32, -32, -48, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightFlyerCorkscrewDown[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -24, 32, { 0b1011, 0 }, 0 },
+    { 2, -32, 32, -48, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksHeartLineTransferUp[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 32, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 16, 0, { 0b1111, 0 }, 0 },
+    { 3, 0, 0, 32, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksHeartLineTransferDown[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -32, 32, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, -16, 0, { 0b1111, 0 }, 0 },
+    { 3, 0, 0, -32, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftHeartLineRoll[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, -96, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, -128, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 5, -160, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightHeartLineRoll[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, -96, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, -128, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 5, -160, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksMinigolfHoleA[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksMinigolfHoleB[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksMinigolfHoleC[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksMinigolfHoleD[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksMinigolfHoleE[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, -32, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksMultiDimInvertedFlatToDown90QuarterLoop[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, -32, 0, -40, 32, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 2, -64, 0, -96, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 3, -96, 0, -96, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksUp90ToInvertedFlatQuarterLoop[] = {
+    { 0, 0, 0, 0, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, 32, 0, 56, 32, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 2, 64, 0, 96, 16, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksInvertedFlatToDown90QuarterLoop[] = {
+    { 0, 0, 0, -32, 16, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, -32, 0, -72, 32, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 2, -64, 0, -128, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 3, -96, 0, -128, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftCurvedLiftHill[] = {
+    { 0, 0, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0010, 0 }, 0 },
+    { 3, -32, -32, 0, 8, { 0b0111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightCurvedLiftHill[] = {
+    { 0, 0, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, 0 },
+    { 3, -32, 32, 0, 8, { 0b1011, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftReverser[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, -32, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, -32, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, -64, -32, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 5, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightReverser[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, -64, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 5, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksAirThrustTopCap[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0 }, 0 },
+    { 1, 32, 0, 0, 32, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 0, 32, { 0b1111, 0 }, 0 },
+    { 3, -32, 0, 0, 32, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksAirThrustVerticalDown[] = {
+    { 0, 0, 0, 0, 48, { 0b1111, 0 }, 0 },
+    { 1, 32, 0, 0, 48, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksAirThrustVerticalDownToLevel[] = {
+    { 0, 0, 0, 0, 208, { 0b1111, 0 }, 0 },
+    { 1, 32, 0, 0, 208, { 0b1111, 0 }, 0 },
+    { 2, -32, 0, 0, 160, { 0b1111, 0 }, 0 },
+    { 3, -64, 0, 0, 80, { 0b1111, 0 }, 0 },
+    { 4, -96, 0, 0, 48, { 0b1111, 0 }, 0 },
+    { 5, -128, 0, 0, 32, { 0b1111, 0 }, 0 },
+    { 6, -160, 0, 0, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksBlockBrakes[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftBankedQuarterTurn3TileUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b0111, 0b0100 }, 0 },
+    { 1, 0, -32, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 16, 0, { 0b0010, 0 }, 0 },
+    { 3, -32, -32, 16, 16,{ 0b0111, 0b0110 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightBankedQuarterTurn3TileUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1011, 0b1000 }, 0 },
+    { 1, 0, 32, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 16, 0, { 0b0001, 0 }, 0 },
+    { 3, -32, 32, 16, 16,{ 0b1011, 0b1001 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftBankedQuarterTurn3TileDown25[] = {
+    { 0, 0, 0, 16, 16,{ 0b0111, 0b0011 }, 0 },
+    { 1, 0, -32, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 16, 0, { 0b0010, 0 }, 0 },
+    { 3, -32, -32, 0, 16, { 0b0111, 0b0001 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightBankedQuarterTurn3TileDown25[] = {
+    { 0, 0, 0, 16, 16, { 0b1011, 0b0011 }, 0 },
+    { 1, 0, 32, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 16, 0, { 0b0001, 0 }, 0 },
+    { 3, -32, 32, 0, 16, { 0b1011, 0b0010 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftBankedQuarterTurn5TileUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    { 1, 0, -32, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 16, 16, { 0b0111, 0b0100 }, 0 },
+    { 3, -32, -32, 24, 16, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 48, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 32, 16, { 0b0111, 0b0100 }, 0 },
+    { 6, -64, -64, 48, 16, { 0b1111, 0b0110 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightBankedQuarterTurn5TileUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    { 1, 0, 32, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 16, 16, { 0b1011, 0b1000 }, 0 },
+    { 3, -32, 32, 24, 16, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 48, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 32, 16, { 0b1011, 0b1000 }, 0 },
+    { 6, -64, 64, 48, 16, { 0b1111, 0b1001 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftBankedQuarterTurn5TileDown25[] = {
+    { 0, 0, 0, 48, 16, { 0b1111, 0b0011 }, 0 },
+    { 1, 0, -32, 48, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 32, 16, { 0b0111, 0b0001 }, 0 },
+    { 3, -32, -32, 24, 16, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 16, 16, { 0b0111, 0b0001 }, 0 },
+    { 6, -64, -64, 0, 16, { 0b1111, 0b1001 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightBankedQuarterTurn5TileDown25[] = {
+    { 0, 0, 0, 48, 16, { 0b1111, 0b0011 }, 0 },
+    { 1, 0, 32, 48, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 32, 16, { 0b1011, 0b0010 }, 0 },
+    { 3, -32, 32, 24, 16, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 16, 16, { 0b1011, 0b0010 }, 0 },
+    { 6, -64, 64, 0, 16, { 0b1111, 0b0110 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksUp25ToLeftBankedUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksUp25ToRightBankedUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftBankedUp25ToUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightBankedUp25ToUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDown25ToLeftBankedDown25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksDown25ToRightBankedDown25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftBankedDown25ToDown25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightBankedDown25ToDown25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftBankedFlatToLeftBankedUp25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightBankedFlatToRightBankedUp25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftBankedUp25ToLeftBankedFlat[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightBankedUp25ToRightBankedFlat[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftBankedFlatToLeftBankedDown25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightBankedFlatToRightBankedDown25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftBankedDown25ToLeftBankedFlat[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightBankedDown25ToRightBankedFlat[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlockFlatToLeftBankedUp25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlockFlatToRightBankedUp25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftBankedUp25ToFlat[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightBankedUp25ToFlat[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksFlatToLeftBankedDown25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksFlatToRightBankedDown25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftBankedDown25ToFlat[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightBankedDown25ToFlat[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn1TileUp90[] = {
+    { 0, 0, 0, 0, 72, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, 0, 32, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightQuarterTurn1TileUp90[] = {
+    { 0, 0, 0, 0, 72, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, 0, -32, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksLeftQuarterTurn1TileDown90[] = {
+    { 0, 0, 0, 0, 72, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, 0, 32, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksRightQuarterTurn1TileDown90[] = {
+    { 0, 0, 0, 0, 72, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, 0, -32, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksMultiDimUp90ToInvertedFlatQuarterLoop[] = {
+    { 0, 0, 0, 0, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, 32, 0, 56, 32, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 2, 64, 0, 96, 16, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksMultiDimFlatToDown90QuarterLoop[] = {
+    { 0, 0, 0, -32, 16, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, -32, 0, -72, 32, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 2, -64, 0, -128, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 3, -96, 0, -128, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksMultiDimInvertedUp90ToFlatQuarterLoop[] = {
+    { 0, 0, 0, 32, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, 32, 0, 88, 32, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 2, 64, 0, 128, 16, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence TrackBlocksBooster[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+// rct2: 0x00994638
+const track_build_sequence *TrackBlocks[TrackElemType::Count] = {
+    TrackBlocksFlat,
+    TrackBlocksEndStation,
+    TrackBlocksBeginStation,
+    TrackBlocksMiddleStation,
+    TrackBlocksUp25,
+    TrackBlocksUp60,
+    TrackBlocksFlatToUp25,
+    TrackBlocksUp25ToUp60,
+    TrackBlocksUp60ToUp25,
+    TrackBlocksUp25ToFlat,
+    TrackBlocksDown25,
+    TrackBlocksDown60,
+    TrackBlocksFlatToDown25,
+    TrackBlocksDown25ToDown60,
+    TrackBlocksDown60ToDown25,
+    TrackBlocksDown25ToFlat,
+    TrackBlocksLeftQuarterTurn5Tiles,
+    TrackBlocksRightQuarterTurn5Tiles,
+    TrackBlocksFlatToLeftBank,
+    TrackBlocksFlatToRightBank,
+    TrackBlocksLeftBankToFlat,
+    TrackBlocksRightBankToFlat,
+    TrackBlocksBankedLeftQuarterTurn5Tiles,
+    TrackBlocksBankedRightQuarterTurn5Tiles,
+    TrackBlocksLeftBankToUp25,
+    TrackBlocksRightBankToUp25,
+    TrackBlocksUp25ToLeftBank,
+    TrackBlocksUp25ToRightBank,
+    TrackBlocksLeftBankToDown25,
+    TrackBlocksRightBankToDown25,
+    TrackBlocksDown25ToLeftBank,
+    TrackBlocksDown25ToRightBank,
+    TrackBlocksLeftBank,
+    TrackBlocksRightBank,
+    TrackBlocksLeftQuarterTurn5TilesUp25,
+    TrackBlocksRightQuarterTurn5TilesUp25,
+    TrackBlocksLeftQuarterTurn5TilesDown25,
+    TrackBlocksRightQuarterTurn5TilesDown25,
+    TrackBlocksSBendLeft,
+    TrackBlocksSBendRight,
+    TrackBlocksLeftVerticalLoop,
+    TrackBlocksRightVerticalLoop,
+    TrackBlocksLeftQuarterTurn3Tiles,
+    TrackBlocksRightQuarterTurn3Tiles,
+    TrackBlocksLeftBankedQuarterTurn3Tiles,
+    TrackBlocksRightBankedQuarterTurn3Tiles,
+    TrackBlocksLeftQuarterTurn3TilesUp25,
+    TrackBlocksRightQuarterTurn3TilesUp25,
+    TrackBlocksLeftQuarterTurn3TilesDown25,
+    TrackBlocksRightQuarterTurn3TilesDown25,
+    TrackBlocksLeftQuarterTurn1Tile,
+    TrackBlocksRightQuarterTurn1Tile,
+    TrackBlocksLeftTwistDownToUp,
+    TrackBlocksRightTwistDownToUp,
+    TrackBlocksLeftTwistUpToDown,
+    TrackBlocksRightTwistUpToDown,
+    TrackBlocksHalfLoopUp,
+    TrackBlocksHalfLoopDown,
+    TrackBlocksLeftCorkscrewUp,
+    TrackBlocksRightCorkscrewUp,
+    TrackBlocksLeftCorkscrewDown,
+    TrackBlocksRightCorkscrewDown,
+    TrackBlocksFlatToUp60,
+    TrackBlocksUp60ToFlat,
+    TrackBlocksFlatToDown60,
+    TrackBlocksDown60ToFlat,
+    TrackBlocksTowerBase,
+    TrackBlocksTowerSection,
+    TrackBlocksFlatCovered,
+    TrackBlocksUp25Covered,
+    TrackBlocksUp60Covered,
+    TrackBlocksFlatToUp25Covered,
+    TrackBlocksUp25ToUp60Covered,
+    TrackBlocksUp60ToUp25Covered,
+    TrackBlocksUp25ToFlatCovered,
+    TrackBlocksDown25Covered,
+    TrackBlocksDown60Covered,
+    TrackBlocksFlatToDown25Covered,
+    TrackBlocksDown25ToDown60Covered,
+    TrackBlocksDown60ToDown25Covered,
+    TrackBlocksDown25ToFlatCovered,
+    TrackBlocksLeftQuarterTurn5TilesCovered,
+    TrackBlocksRightQuarterTurn5TilesCovered,
+    TrackBlocksSBendLeftCovered,
+    TrackBlocksSBendRightCovered,
+    TrackBlocksLeftQuarterTurn3TilesCovered,
+    TrackBlocksRightQuarterTurn3TilesCovered,
+    TrackBlocksLeftHalfBankedHelixUpSmall,
+    TrackBlocksRightHalfBankedHelixUpSmall,
+    TrackBlocksLeftHalfBankedHelixDownSmall,
+    TrackBlocksRightHalfBankedHelixDownSmall,
+    TrackBlocksLeftHalfBankedHelixUpLarge,
+    TrackBlocksRightHalfBankedHelixUpLarge,
+    TrackBlocksLeftHalfBankedHelixDownLarge,
+    TrackBlocksRightHalfBankedHelixDownLarge,
+    TrackBlocksLeftQuarterTurn1TileUp60,
+    TrackBlocksRightQuarterTurn1TileUp60,
+    TrackBlocksLeftQuarterTurn1TileDown60,
+    TrackBlocksLeftRightQuarterTurn1TileDown60,
+    TrackBlocksBrakes,
+    TrackBlocksRotationControlToggle,
+    TrackBlocksMaze,
+    TrackBlocksLeftQuarterBankedHelixLargeUp,
+    TrackBlocksRightQuarterBankedHelixLargeUp,
+    TrackBlocksLeftQuarterBankedHelixLargeDown,
+    TrackBlocksRightQuarterBankedHelixLargeDown,
+    TrackBlocksLeftQuarterHelixLargeUp,
+    TrackBlocksRightQuarterHelixLargeUp,
+    TrackBlocksLeftQuarterHelixLargeDown,
+    TrackBlocksRightQuarterHelixLargeDown,
+    TrackBlocksUp25LeftBanked,
+    TrackBlocksUp25RightBanked,
+    TrackBlocksWaterfall,
+    TrackBlocksRapids,
+    TrackBlocksOnRidePhoto,
+    TrackBlocksDown25LeftBanked,
+    TrackBlocksDown25RightBanked,
+    TrackBlocksWatersplash,
+    TrackBlocksFlatToUp60LongBase,
+    TrackBlocksUp60ToFlatLongBase,
+    TrackBlocksWhirlpool,
+    TrackBlocksDown60ToFlatLongBase,
+    TrackBlocksFlatToDown60LongBase,
+    TrackBlocksCableLiftHill,
+    TrackBlocksReverseFreefallSlope,
+    TrackBlocksReverseFreefallVertical,
+    TrackBlocksUp90,
+    TrackBlocksDown90,
+    TrackBlocksUp60ToUp90,
+    TrackBlocksDown90ToDown60,
+    TrackBlocksUp90ToUp60,
+    TrackBlocksDown60ToDown90,
+    TrackBlocksBrakeForDrop,
+    TrackBlocksLeftEighthToDiag,
+    TrackBlocksRightEighthToDiag,
+    TrackBlocksLeftEighthToOrthogonal,
+    TrackBlocksRightEighthToOrthogonal,
+    TrackBlocksLeftEighthBankToDiag,
+    TrackBlocksRightEighthBankToDiag,
+    TrackBlocksLeftEighthBankToOrthogonal,
+    TrackBlocksRightEighthBankToOrthogonal,
+    TrackBlocksDiagFlat,
+    TrackBlocksDiagUp25,
+    TrackBlocksDiagUp60,
+    TrackBlocksDiagFlatToUp25,
+    TrackBlocksDiagUp25ToUp60,
+    TrackBlocksDiagUp60ToUp25,
+    TrackBlocksDiagUp25ToFlat,
+    TrackBlocksDiagDown25,
+    TrackBlocksDiagDown60,
+    TrackBlocksDiagFlatToDown25,
+    TrackBlocksDiagDown25ToDown60,
+    TrackBlocksDiagDown60ToDown25,
+    TrackBlocksDiagDown25ToFlat,
+    TrackBlocksDiagFlatToUp60,
+    TrackBlocksDiagUp60ToFlat,
+    TrackBlocksDiagFlatToDown60,
+    TrackBlocksDiagDown60ToFlat,
+    TrackBlocksDiagFlatToLeftBank,
+    TrackBlocksDiagFlatToRightBank,
+    TrackBlocksDiagLeftBankToFlat,
+    TrackBlocksDiagRightBankToFlat,
+    TrackBlocksDiagLeftBankToUp25,
+    TrackBlocksDiagRightBankToUp25,
+    TrackBlocksDiagUp25ToLeftBank,
+    TrackBlocksDiagUp25ToRightBank,
+    TrackBlocksDiagLeftBankToDown25,
+    TrackBlocksDiagRightBankToDown25,
+    TrackBlocksDiagDown25ToLeftBank,
+    TrackBlocksDiagDown25ToRightBank,
+    TrackBlocksDiagLeftBank,
+    TrackBlocksDiagRightBank,
+    TrackBlocksLogFlumeReverser,
+    TrackBlocksSpinningTunnel,
+    TrackBlocksLeftBarrelRollUpToDown,
+    TrackBlocksRightBarrelRollUpToDown,
+    TrackBlocksLeftBarrelRollDownToUp,
+    TrackBlocksRightBarrelRollDownToUp,
+    TrackBlocksLeftBankToLeftQuarterTurn3TilesUp25,
+    TrackBlocksRightBankToRightQuarterTurn3TilesUp25,
+    TrackBlocksLeftQuarterTurn3TilesDown25ToLeftBank,
+    TrackBlocksRightQuarterTurn3TilesDown25ToRightBank,
+    TrackBlocksPoweredLift,
+    TrackBlocksLeftLargeHalfLoopUp,
+    TrackBlocksRightLargeHalfLoopUp,
+    TrackBlocksRightLargeHalfLoopDown,
+    TrackBlocksLeftLargeHalfLoopDown,
+    TrackBlocksLeftFlyerTwistUp,
+    TrackBlocksRightFlyerTwistUp,
+    TrackBlocksLeftFlyerTwistDown,
+    TrackBlocksRightFlyerTwistDown,
+    TrackBlocksFlyerHalfLoopUp,
+    TrackBlocksFlyerHalfLoopDown,
+    TrackBlocksLeftFlyerCorkscrewUp,
+    TrackBlocksRightFlyerCorkscrewUp,
+    TrackBlocksLeftFlyerCorkscrewDown,
+    TrackBlocksRightFlyerCorkscrewDown,
+    TrackBlocksHeartLineTransferUp,
+    TrackBlocksHeartLineTransferDown,
+    TrackBlocksLeftHeartLineRoll,
+    TrackBlocksRightHeartLineRoll,
+    TrackBlocksMinigolfHoleA,
+    TrackBlocksMinigolfHoleB,
+    TrackBlocksMinigolfHoleC,
+    TrackBlocksMinigolfHoleD,
+    TrackBlocksMinigolfHoleE,
+    TrackBlocksMultiDimInvertedFlatToDown90QuarterLoop,
+    TrackBlocksUp90ToInvertedFlatQuarterLoop,
+    TrackBlocksInvertedFlatToDown90QuarterLoop,
+    TrackBlocksLeftCurvedLiftHill,
+    TrackBlocksRightCurvedLiftHill,
+    TrackBlocksLeftReverser,
+    TrackBlocksRightReverser,
+    TrackBlocksAirThrustTopCap,
+    TrackBlocksAirThrustVerticalDown,
+    TrackBlocksAirThrustVerticalDownToLevel,
+    TrackBlocksBlockBrakes,
+    TrackBlocksLeftBankedQuarterTurn3TileUp25,
+    TrackBlocksRightBankedQuarterTurn3TileUp25,
+    TrackBlocksLeftBankedQuarterTurn3TileDown25,
+    TrackBlocksRightBankedQuarterTurn3TileDown25,
+    TrackBlocksLeftBankedQuarterTurn5TileUp25,
+    TrackBlocksRightBankedQuarterTurn5TileUp25,
+    TrackBlocksLeftBankedQuarterTurn5TileDown25,
+    TrackBlocksRightBankedQuarterTurn5TileDown25,
+    TrackBlocksUp25ToLeftBankedUp25,
+    TrackBlocksUp25ToRightBankedUp25,
+    TrackBlocksLeftBankedUp25ToUp25,
+    TrackBlocksRightBankedUp25ToUp25,
+    TrackBlocksDown25ToLeftBankedDown25,
+    TrackBlocksDown25ToRightBankedDown25,
+    TrackBlocksLeftBankedDown25ToDown25,
+    TrackBlocksRightBankedDown25ToDown25,
+    TrackBlocksLeftBankedFlatToLeftBankedUp25,
+    TrackBlocksRightBankedFlatToRightBankedUp25,
+    TrackBlocksLeftBankedUp25ToLeftBankedFlat,
+    TrackBlocksRightBankedUp25ToRightBankedFlat,
+    TrackBlocksLeftBankedFlatToLeftBankedDown25,
+    TrackBlocksRightBankedFlatToRightBankedDown25,
+    TrackBlocksLeftBankedDown25ToLeftBankedFlat,
+    TrackBlocksRightBankedDown25ToRightBankedFlat,
+    TrackBlockFlatToLeftBankedUp25,
+    TrackBlockFlatToRightBankedUp25,
+    TrackBlocksLeftBankedUp25ToFlat,
+    TrackBlocksRightBankedUp25ToFlat,
+    TrackBlocksFlatToLeftBankedDown25,
+    TrackBlocksFlatToRightBankedDown25,
+    TrackBlocksLeftBankedDown25ToFlat,
+    TrackBlocksRightBankedDown25ToFlat,
+    TrackBlocksLeftQuarterTurn1TileUp90,
+    TrackBlocksRightQuarterTurn1TileUp90,
+    TrackBlocksLeftQuarterTurn1TileDown90,
+    TrackBlocksRightQuarterTurn1TileDown90,
+    TrackBlocksMultiDimUp90ToInvertedFlatQuarterLoop,
+    TrackBlocksMultiDimFlatToDown90QuarterLoop,
+    TrackBlocksMultiDimInvertedUp90ToFlatQuarterLoop
+};
+
+static constexpr const track_build_sequence FlatRideTrackBlocksMagicCarpet[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, 32, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence FlatRideTrackBlocksFlat2x2[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, 32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, 32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence FlatRideTrackBlocksFlat4x4[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, 0, 64, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, 0, 96, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, 32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 5, 32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 6, 32, 64, 0, 0, { 0b1111, 0 }, 0 },
+    { 7, 32, 96, 0, 0, { 0b1111, 0 }, 0 },
+    { 8, 64, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 9, 64, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 10, 64, 64, 0, 0, { 0b1111, 0 }, 0 },
+    { 11, 64, 96, 0, 0, { 0b1111, 0 }, 0 },
+    { 12, 96, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 13, 96, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 14, 96, 64, 0, 0, { 0b1111, 0 }, 0 },
+    { 15, 96, 96, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence FlatRideTrackBlocks115[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, 0, 64, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, 0, 96, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, 32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 5, 32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 6, 32, 64, 0, 0, { 0b1111, 0 }, 0 },
+    { 7, 32, 96, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence FlatRideTrackBlocksSwingingShip[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, 32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, 64, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence FlatRideTrackBlocksShopOneEntrance[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence FlatRideTrackBlocksSwingingInvertingShip[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, 32, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence FlatRideTrackBlocksShopFourEntrances[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence FlatRideTrackBlocksFerrisWheel[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, 32, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence FlatRideTrackBlocksFlat3x3[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, -32, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, 0, -32, 0, 0, { 0b1111, 0 }, 0 },
+    { 5, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 6, 32, -32, 0, 0, { 0b1111, 0 }, 0 },
+    { 7, 32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 8, 32, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence FlatRideTrackBlocks255[] = {
+    TRACK_BLOCK_END
+};
+
+// rct2: 0x00994A38
+const track_build_sequence *FlatRideTrackBlocks[TrackElemType::Count] = {
+    TrackBlocksFlat,
+    TrackBlocksEndStation,
+    TrackBlocksBeginStation,
+    TrackBlocksMiddleStation,
+    TrackBlocksUp25,
+    TrackBlocksUp60,
+    TrackBlocksFlatToUp25,
+    TrackBlocksUp25ToUp60,
+    TrackBlocksUp60ToUp25,
+    TrackBlocksUp25ToFlat,
+    TrackBlocksDown25,
+    TrackBlocksDown60,
+    TrackBlocksFlatToDown25,
+    TrackBlocksDown25ToDown60,
+    TrackBlocksDown60ToDown25,
+    TrackBlocksDown25ToFlat,
+    TrackBlocksLeftQuarterTurn5Tiles,
+    TrackBlocksRightQuarterTurn5Tiles,
+    TrackBlocksFlatToLeftBank,
+    TrackBlocksFlatToRightBank,
+    TrackBlocksLeftBankToFlat,
+    TrackBlocksRightBankToFlat,
+    TrackBlocksBankedLeftQuarterTurn5Tiles,
+    TrackBlocksBankedRightQuarterTurn5Tiles,
+    TrackBlocksLeftBankToUp25,
+    TrackBlocksRightBankToUp25,
+    TrackBlocksUp25ToLeftBank,
+    TrackBlocksUp25ToRightBank,
+    TrackBlocksLeftBankToDown25,
+    TrackBlocksRightBankToDown25,
+    TrackBlocksDown25ToLeftBank,
+    TrackBlocksDown25ToRightBank,
+    TrackBlocksLeftBank,
+    TrackBlocksRightBank,
+    TrackBlocksLeftQuarterTurn5TilesUp25,
+    TrackBlocksRightQuarterTurn5TilesUp25,
+    TrackBlocksLeftQuarterTurn5TilesDown25,
+    TrackBlocksRightQuarterTurn5TilesDown25,
+    TrackBlocksSBendLeft,
+    TrackBlocksSBendRight,
+    TrackBlocksLeftVerticalLoop,
+    TrackBlocksRightVerticalLoop,
+    TrackBlocksLeftQuarterTurn3Tiles,
+    TrackBlocksRightQuarterTurn3Tiles,
+    TrackBlocksLeftBankedQuarterTurn3Tiles,
+    TrackBlocksRightBankedQuarterTurn3Tiles,
+    TrackBlocksLeftQuarterTurn3TilesUp25,
+    TrackBlocksRightQuarterTurn3TilesUp25,
+    TrackBlocksLeftQuarterTurn3TilesDown25,
+    TrackBlocksRightQuarterTurn3TilesDown25,
+    TrackBlocksLeftQuarterTurn1Tile,
+    TrackBlocksRightQuarterTurn1Tile,
+    TrackBlocksLeftTwistDownToUp,
+    TrackBlocksRightTwistDownToUp,
+    TrackBlocksLeftTwistUpToDown,
+    TrackBlocksRightTwistUpToDown,
+    TrackBlocksHalfLoopUp,
+    TrackBlocksHalfLoopDown,
+    TrackBlocksLeftCorkscrewUp,
+    TrackBlocksRightCorkscrewUp,
+    TrackBlocksLeftCorkscrewDown,
+    TrackBlocksRightCorkscrewDown,
+    TrackBlocksFlatToUp60,
+    TrackBlocksUp60ToFlat,
+    TrackBlocksFlatToDown60,
+    TrackBlocksDown60ToFlat,
+    TrackBlocksTowerBase,
+    TrackBlocksTowerSection,
+    TrackBlocksFlatCovered,
+    TrackBlocksUp25Covered,
+    TrackBlocksUp60Covered,
+    TrackBlocksFlatToUp25Covered,
+    TrackBlocksUp25ToUp60Covered,
+    TrackBlocksUp60ToUp25Covered,
+    TrackBlocksUp25ToFlatCovered,
+    TrackBlocksDown25Covered,
+    TrackBlocksDown60Covered,
+    TrackBlocksFlatToDown25Covered,
+    TrackBlocksDown25ToDown60Covered,
+    TrackBlocksDown60ToDown25Covered,
+    TrackBlocksDown25ToFlatCovered,
+    TrackBlocksLeftQuarterTurn5TilesCovered,
+    TrackBlocksRightQuarterTurn5TilesCovered,
+    TrackBlocksSBendLeftCovered,
+    TrackBlocksSBendRightCovered,
+    TrackBlocksLeftQuarterTurn3TilesCovered,
+    TrackBlocksRightQuarterTurn3TilesCovered,
+    TrackBlocksLeftHalfBankedHelixUpSmall,
+    TrackBlocksRightHalfBankedHelixUpSmall,
+    TrackBlocksLeftHalfBankedHelixDownSmall,
+    TrackBlocksRightHalfBankedHelixDownSmall,
+    TrackBlocksLeftHalfBankedHelixUpLarge,
+    TrackBlocksRightHalfBankedHelixUpLarge,
+    TrackBlocksLeftHalfBankedHelixDownLarge,
+    TrackBlocksRightHalfBankedHelixDownLarge,
+    FlatRideTrackBlocksMagicCarpet,
+    TrackBlocksRightQuarterTurn1TileUp60,
+    TrackBlocksLeftQuarterTurn1TileDown60,
+    TrackBlocksLeftRightQuarterTurn1TileDown60,
+    TrackBlocksBrakes,
+    TrackBlocksRotationControlToggle,
+    TrackBlocksMaze,
+    TrackBlocksLeftQuarterBankedHelixLargeUp,
+    TrackBlocksRightQuarterBankedHelixLargeUp,
+    TrackBlocksLeftQuarterBankedHelixLargeDown,
+    TrackBlocksRightQuarterBankedHelixLargeDown,
+    TrackBlocksLeftQuarterHelixLargeUp,
+    TrackBlocksRightQuarterHelixLargeUp,
+    TrackBlocksLeftQuarterHelixLargeDown,
+    TrackBlocksRightQuarterHelixLargeDown,
+    FlatRideTrackBlocksFlat2x2,
+    FlatRideTrackBlocksFlat4x4,
+    TrackBlocksWaterfall,
+    TrackBlocksRapids,
+    TrackBlocksOnRidePhoto,
+    FlatRideTrackBlocks115,
+    FlatRideTrackBlocksSwingingShip,
+    TrackBlocksWatersplash,
+    FlatRideTrackBlocksShopOneEntrance,
+    FlatRideTrackBlocksSwingingInvertingShip,
+    TrackBlocksWhirlpool,
+    FlatRideTrackBlocksShopFourEntrances,
+    FlatRideTrackBlocksFerrisWheel,
+    FlatRideTrackBlocksFlat3x3,
+    TrackBlocksReverseFreefallSlope,
+    TrackBlocksReverseFreefallVertical,
+    TrackBlocksUp90,
+    TrackBlocksDown90,
+    TrackBlocksUp60ToUp90,
+    TrackBlocksDown90ToDown60,
+    TrackBlocksUp90ToUp60,
+    TrackBlocksDown60ToDown90,
+    TrackBlocksBrakeForDrop,
+    TrackBlocksLeftEighthToDiag,
+    TrackBlocksRightEighthToDiag,
+    TrackBlocksLeftEighthToOrthogonal,
+    TrackBlocksRightEighthToOrthogonal,
+    TrackBlocksLeftEighthBankToDiag,
+    TrackBlocksRightEighthBankToDiag,
+    TrackBlocksLeftEighthBankToOrthogonal,
+    TrackBlocksRightEighthBankToOrthogonal,
+    TrackBlocksDiagFlat,
+    TrackBlocksDiagUp25,
+    TrackBlocksDiagUp60,
+    TrackBlocksDiagFlatToUp25,
+    TrackBlocksDiagUp25ToUp60,
+    TrackBlocksDiagUp60ToUp25,
+    TrackBlocksDiagUp25ToFlat,
+    TrackBlocksDiagDown25,
+    TrackBlocksDiagDown60,
+    TrackBlocksDiagFlatToDown25,
+    TrackBlocksDiagDown25ToDown60,
+    TrackBlocksDiagDown60ToDown25,
+    TrackBlocksDiagDown25ToFlat,
+    TrackBlocksDiagFlatToUp60,
+    TrackBlocksDiagUp60ToFlat,
+    TrackBlocksDiagFlatToDown60,
+    TrackBlocksDiagDown60ToFlat,
+    TrackBlocksDiagFlatToLeftBank,
+    TrackBlocksDiagFlatToRightBank,
+    TrackBlocksDiagLeftBankToFlat,
+    TrackBlocksDiagRightBankToFlat,
+    TrackBlocksDiagLeftBankToUp25,
+    TrackBlocksDiagRightBankToUp25,
+    TrackBlocksDiagUp25ToLeftBank,
+    TrackBlocksDiagUp25ToRightBank,
+    TrackBlocksDiagLeftBankToDown25,
+    TrackBlocksDiagRightBankToDown25,
+    TrackBlocksDiagDown25ToLeftBank,
+    TrackBlocksDiagDown25ToRightBank,
+    TrackBlocksDiagLeftBank,
+    TrackBlocksDiagRightBank,
+    TrackBlocksLogFlumeReverser,
+    TrackBlocksSpinningTunnel,
+    TrackBlocksLeftBarrelRollUpToDown,
+    TrackBlocksRightBarrelRollUpToDown,
+    TrackBlocksLeftBarrelRollDownToUp,
+    TrackBlocksRightBarrelRollDownToUp,
+    TrackBlocksLeftBankToLeftQuarterTurn3TilesUp25,
+    TrackBlocksRightBankToRightQuarterTurn3TilesUp25,
+    TrackBlocksLeftQuarterTurn3TilesDown25ToLeftBank,
+    TrackBlocksRightQuarterTurn3TilesDown25ToRightBank,
+    TrackBlocksPoweredLift,
+    TrackBlocksLeftLargeHalfLoopUp,
+    TrackBlocksRightLargeHalfLoopUp,
+    TrackBlocksRightLargeHalfLoopDown,
+    TrackBlocksLeftLargeHalfLoopDown,
+    TrackBlocksLeftFlyerTwistUp,
+    TrackBlocksRightFlyerTwistUp,
+    TrackBlocksLeftFlyerTwistDown,
+    TrackBlocksRightFlyerTwistDown,
+    TrackBlocksFlyerHalfLoopUp,
+    TrackBlocksFlyerHalfLoopDown,
+    TrackBlocksLeftFlyerCorkscrewUp,
+    TrackBlocksRightFlyerCorkscrewUp,
+    TrackBlocksLeftFlyerCorkscrewDown,
+    TrackBlocksRightFlyerCorkscrewDown,
+    TrackBlocksHeartLineTransferUp,
+    TrackBlocksHeartLineTransferDown,
+    TrackBlocksLeftHeartLineRoll,
+    TrackBlocksRightHeartLineRoll,
+    TrackBlocksMinigolfHoleA,
+    TrackBlocksMinigolfHoleB,
+    TrackBlocksMinigolfHoleC,
+    TrackBlocksMinigolfHoleD,
+    TrackBlocksMinigolfHoleE,
+    TrackBlocksMultiDimInvertedFlatToDown90QuarterLoop,
+    TrackBlocksUp90ToInvertedFlatQuarterLoop,
+    TrackBlocksInvertedFlatToDown90QuarterLoop,
+    TrackBlocksLeftCurvedLiftHill,
+    TrackBlocksRightCurvedLiftHill,
+    TrackBlocksLeftReverser,
+    TrackBlocksRightReverser,
+    TrackBlocksAirThrustTopCap,
+    TrackBlocksAirThrustVerticalDown,
+    TrackBlocksAirThrustVerticalDownToLevel,
+    TrackBlocksBlockBrakes,
+    TrackBlocksLeftBankedQuarterTurn3TileUp25,
+    TrackBlocksRightBankedQuarterTurn3TileUp25,
+    TrackBlocksLeftBankedQuarterTurn3TileDown25,
+    TrackBlocksRightBankedQuarterTurn3TileDown25,
+    TrackBlocksLeftBankedQuarterTurn5TileUp25,
+    TrackBlocksRightBankedQuarterTurn5TileUp25,
+    TrackBlocksLeftBankedQuarterTurn5TileDown25,
+    TrackBlocksRightBankedQuarterTurn5TileDown25,
+    TrackBlocksUp25ToLeftBankedUp25,
+    TrackBlocksUp25ToRightBankedUp25,
+    TrackBlocksLeftBankedUp25ToUp25,
+    TrackBlocksRightBankedUp25ToUp25,
+    TrackBlocksDown25ToLeftBankedDown25,
+    TrackBlocksDown25ToRightBankedDown25,
+    TrackBlocksLeftBankedDown25ToDown25,
+    TrackBlocksRightBankedDown25ToDown25,
+    TrackBlocksLeftBankedFlatToLeftBankedUp25,
+    TrackBlocksRightBankedFlatToRightBankedUp25,
+    TrackBlocksLeftBankedUp25ToLeftBankedFlat,
+    TrackBlocksRightBankedUp25ToRightBankedFlat,
+    TrackBlocksLeftBankedFlatToLeftBankedDown25,
+    TrackBlocksRightBankedFlatToRightBankedDown25,
+    TrackBlocksLeftBankedDown25ToLeftBankedFlat,
+    TrackBlocksRightBankedDown25ToRightBankedFlat,
+    TrackBlockFlatToLeftBankedUp25,
+    TrackBlockFlatToRightBankedUp25,
+    TrackBlocksLeftBankedUp25ToFlat,
+    TrackBlocksRightBankedUp25ToFlat,
+    TrackBlocksFlatToLeftBankedDown25,
+    TrackBlocksFlatToRightBankedDown25,
+    TrackBlocksLeftBankedDown25ToFlat,
+    TrackBlocksRightBankedDown25ToFlat,
+    TrackBlocksLeftQuarterTurn1TileUp90,
+    TrackBlocksRightQuarterTurn1TileUp90,
+    TrackBlocksLeftQuarterTurn1TileDown90,
+    TrackBlocksRightQuarterTurn1TileDown90,
+    TrackBlocksMultiDimUp90ToInvertedFlatQuarterLoop,
+    TrackBlocksMultiDimFlatToDown90QuarterLoop,
+    FlatRideTrackBlocks255,
+    TrackBlocksBooster
 };
 // clang-format on
