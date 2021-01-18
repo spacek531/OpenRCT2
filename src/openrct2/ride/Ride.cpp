@@ -44,6 +44,7 @@
 #include "../ui/WindowManager.h"
 #include "../util/Util.h"
 #include "../windows/Intent.h"
+#include "../windows/RideConstructionHelpers.h"
 #include "../world/Banner.h"
 #include "../world/Climate.h"
 #include "../world/Footpath.h"
@@ -1282,17 +1283,18 @@ void ride_restore_provisional_track_piece()
     if (_currentTrackSelectionFlags & TRACK_SELECTION_FLAG_TRACK)
     {
         ride_id_t rideIndex;
-        int32_t direction, type, liftHillAndAlternativeState;
+        track_type_t trackType;
+        int32_t direction, liftHillAndAlternativeState;
         CoordsXYZ trackPos;
         if (window_ride_construction_update_state(
-                &type, &direction, &rideIndex, &liftHillAndAlternativeState, &trackPos, nullptr))
+                &trackType, &direction, &rideIndex, &liftHillAndAlternativeState, &trackPos, nullptr))
         {
             ride_construction_remove_ghosts();
         }
         else
         {
             _currentTrackPrice = place_provisional_track_piece(
-                rideIndex, type, direction, liftHillAndAlternativeState, trackPos);
+                rideIndex, trackType, direction, liftHillAndAlternativeState, trackPos);
             window_ride_construction_update_active_elements();
         }
     }
@@ -1794,6 +1796,13 @@ static bool ride_modify_entrance_or_exit(const CoordsXYE& tileElement)
  *
  *  rct2: 0x006CC287
  */
+
+void ride_broadcast_modify_maze_intent()
+{
+    auto intent = Intent(INTENT_ACTION_UPDATE_MAZE_CONSTRUCTION);
+    context_broadcast_intent(&intent);
+}
+
 static bool ride_modify_maze(const CoordsXYE& tileElement)
 {
     if (tileElement.element != nullptr)
@@ -1810,8 +1819,6 @@ static bool ride_modify_maze(const CoordsXYE& tileElement)
             _rideConstructionNextArrowPulse = 0;
             gMapSelectFlags &= ~MAP_SELECT_FLAG_ENABLE_ARROW;
 
-            auto intent = Intent(INTENT_ACTION_UPDATE_MAZE_CONSTRUCTION);
-            context_broadcast_intent(&intent);
             return true;
         }
     }

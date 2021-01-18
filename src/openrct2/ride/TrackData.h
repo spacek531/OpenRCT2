@@ -43,7 +43,7 @@ struct track_descriptor
     uint8_t track_curve;
     uint8_t slope_end;
     uint8_t bank_end;
-    uint8_t track_element;
+    track_type_t track_element;
 };
 
 extern const track_descriptor gTrackDescriptors[142];

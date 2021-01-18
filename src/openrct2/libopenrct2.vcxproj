@@ -430,6 +430,7 @@
     <ClInclude Include="util\SawyerCoding.h" />
     <ClInclude Include="util\Util.h" />
     <ClInclude Include="Version.h" />
+    <ClInclude Include="windows\RideConstructionHelpers.h" />
     <ClInclude Include="windows\Intent.h" />
     <ClInclude Include="windows\tile_inspector.h" />
     <ClInclude Include="world\Banner.h" />
@@ -843,6 +844,7 @@
     <ClCompile Include="util\Util.cpp" />
     <ClCompile Include="Version.cpp" />
     <ClCompile Include="windows\Intent.cpp" />
+    <ClCompile Include="windows\RideConstructionHelpers.cpp" />
     <ClCompile Include="windows\_legacy.cpp" />
     <ClCompile Include="world\Balloon.cpp" />
     <ClCompile Include="world\Banner.cpp" />

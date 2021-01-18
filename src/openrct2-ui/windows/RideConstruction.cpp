@@ -31,6 +31,7 @@
 #include <openrct2/ride/Track.h>
 #include <openrct2/ride/TrackData.h>
 #include <openrct2/sprites.h>
+#include <openrct2/windows/RideConstructionHelpers.h>
 #include <openrct2/windows/Intent.h>
 #include <openrct2/world/Entrance.h>
 #include <openrct2/world/Footpath.h>
@@ -1779,7 +1780,8 @@ static void RideConstructPlacedBackwardGameActionCallback(const GameAction* ga, 
 static void window_ride_construction_construct(rct_window* w)
 {
     ride_id_t rideIndex;
-    int32_t trackType, trackDirection, liftHillAndAlternativeState, properties;
+    track_type_t trackType;
+    int32_t trackDirection, liftHillAndAlternativeState, properties;
     CoordsXYZ trackPos{};
 
     _currentTrackPrice = MONEY32_UNDEFINED;
@@ -2329,7 +2331,8 @@ static void window_ride_construction_paint(rct_window* w, rct_drawpixelinfo* dpi
         return;
 
     ride_id_t rideIndex;
-    int32_t trackType, trackDirection, liftHillAndInvertedState;
+    track_type_t trackType;
+    int32_t trackDirection, liftHillAndInvertedState;
     if (window_ride_construction_update_state(
             &trackType, &trackDirection, &rideIndex, &liftHillAndInvertedState, nullptr, nullptr))
         return;
@@ -2554,7 +2557,8 @@ void window_ride_construction_update_enabled_track_pieces()
 void sub_6C94D8()
 {
     ride_id_t rideIndex;
-    int32_t direction, type, liftHillAndAlternativeState;
+    track_type_t trackType;
+    int32_t direction, liftHillAndAlternativeState;
     CoordsXYZ trackPos{};
 
     if (_currentTrackSelectionFlags & TRACK_SELECTION_FLAG_TRACK_PLACE_ACTION_QUEUED)
@@ -2578,14 +2582,14 @@ void sub_6C94D8()
             if (!(_currentTrackSelectionFlags & TRACK_SELECTION_FLAG_TRACK))
             {
                 if (window_ride_construction_update_state(
-                        &type, &direction, &rideIndex, &liftHillAndAlternativeState, &trackPos, nullptr))
+                        &trackType, &direction, &rideIndex, &liftHillAndAlternativeState, &trackPos, nullptr))
                 {
                     ride_construction_remove_ghosts();
                 }
                 else
                 {
                     _currentTrackPrice = place_provisional_track_piece(
-                        rideIndex, type, direction, liftHillAndAlternativeState, trackPos);
+                        rideIndex, trackType, direction, liftHillAndAlternativeState, trackPos);
                     window_ride_construction_update_active_elements();
                 }
             }
@@ -2598,7 +2602,7 @@ void sub_6C94D8()
             _currentTrackSelectionFlags ^= TRACK_SELECTION_FLAG_ARROW;
             trackPos = _currentTrackBegin;
             direction = _currentTrackPieceDirection;
-            type = _currentTrackPieceType;
+            trackType = _currentTrackPieceType;
             if (direction >= 4)
                 direction += 4;
             if (_rideConstructionState == RIDE_CONSTRUCTION_STATE_BACK)
@@ -2620,10 +2624,11 @@ void sub_6C94D8()
 
             _currentTrackSelectionFlags ^= TRACK_SELECTION_FLAG_ARROW;
             direction = _currentTrackPieceDirection & 3;
-            type = _currentTrackPieceType;
+            trackType = _currentTrackPieceType;
             uint16_t flags = _currentTrackSelectionFlags & TRACK_SELECTION_FLAG_ARROW ? TRACK_ELEMENT_SET_HIGHLIGHT_TRUE
                                                                                       : TRACK_ELEMENT_SET_HIGHLIGHT_FALSE;
-            auto newCoords = sub_6C683D({ _currentTrackBegin, static_cast<Direction>(direction) }, type, 0, nullptr, flags);
+            auto newCoords = sub_6C683D(
+                { _currentTrackBegin, static_cast<Direction>(direction) }, trackType, 0, nullptr, flags);
             if (newCoords == std::nullopt)
             {
                 ride_construction_remove_ghosts();
@@ -2669,7 +2674,8 @@ void sub_6C94D8()
  */
 static void window_ride_construction_update_map_selection()
 {
-    int32_t trackType, trackDirection;
+    track_type_t trackType;
+    int32_t trackDirection;
     CoordsXYZ trackPos{};
 
     map_invalidate_map_selection_tiles();
@@ -3511,7 +3517,8 @@ void ride_construction_toolupdate_construct(const ScreenCoordsXY& screenCoords)
     gMapSelectionTiles.push_back(*mapCoords);
 
     ride_id_t rideIndex;
-    int32_t trackType, trackDirection, liftHillAndAlternativeState;
+    track_type_t trackType;
+    int32_t trackDirection, liftHillAndAlternativeState;
     if (window_ride_construction_update_state(
             &trackType, &trackDirection, &rideIndex, &liftHillAndAlternativeState, nullptr, nullptr))
     {
@@ -3730,7 +3737,8 @@ void ride_construction_tooldown_construct(const ScreenCoordsXY& screenCoords)
 {
     const CursorState* state = context_get_cursor_state();
     ride_id_t rideIndex;
-    int32_t trackType, trackDirection, liftHillAndAlternativeState, z, properties, highestZ;
+    track_type_t trackType;
+    int32_t trackDirection, liftHillAndAlternativeState, z, properties, highestZ;
     rct_window* w;
 
     map_invalidate_map_selection_tiles();

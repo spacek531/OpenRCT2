@@ -565,9 +565,9 @@ PitchAndRoll TrackPitchAndRollEnd(track_type_t trackType);
 
 int32_t track_is_connected_by_shape(TileElement* a, TileElement* b);
 
-const track_build_sequence* get_track_def_from_ride(Ride* ride, int32_t trackType);
-const track_build_sequence* get_track_def_from_ride_index(ride_id_t rideIndex, int32_t trackType);
-const rct_track_coordinates* get_track_coord_from_ride(Ride* ride, int32_t trackType);
+const track_build_sequence* get_track_def_from_ride(Ride* ride, track_type_t trackType);
+const track_build_sequence* get_track_def_from_ride_index(ride_id_t rideIndex, track_type_t trackType);
+const rct_track_coordinates* get_track_coord_from_ride(Ride* ride, track_type_t trackType);
 
 void track_circuit_iterator_begin(track_circuit_iterator* it, CoordsXYE first);
 bool track_circuit_iterator_previous(track_circuit_iterator* it);

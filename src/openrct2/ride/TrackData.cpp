@@ -7235,7 +7235,8 @@ const track_build_sequence *TrackBlocks[TrackElemType::Count] = {
     TrackBlocksRightQuarterTurn1TileDown90,
     TrackBlocksMultiDimUp90ToInvertedFlatQuarterLoop,
     TrackBlocksMultiDimFlatToDown90QuarterLoop,
-    TrackBlocksMultiDimInvertedUp90ToFlatQuarterLoop
+    TrackBlocksMultiDimInvertedUp90ToFlatQuarterLoop,
+    TrackBlocksBooster
 };
 
 static constexpr const track_build_sequence FlatRideTrackBlocksMagicCarpet[] = {
