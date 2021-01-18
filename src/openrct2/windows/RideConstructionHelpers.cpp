@@ -128,7 +128,7 @@ static bool window_ride_construction_update_state_get_track_element(track_type_t
         return false;
     }
 
-    bool startsDiagonal = (_currentTrackPieceDirection & (1 << 4)) != 0;
+    bool startsDiagonal = (_currentTrackPieceDirection & (1 << 2)) != 0;
     if (curve == TRACK_CURVE_LEFT_LARGE || curve == TRACK_CURVE_RIGHT_LARGE)
     {
         if (_rideConstructionState == RIDE_CONSTRUCTION_STATE_BACK)
