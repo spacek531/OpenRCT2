@@ -38,7 +38,6 @@
 #include "../rct12/SawyerEncoding.h"
 #include "../rct2/RCT2.h"
 #include "../ride/Ride.h"
-#include "../ride/RideData.h"
 #include "../ride/RideRatings.h"
 #include "../ride/ShopItem.h"
 #include "../ride/Station.h"
@@ -1147,13 +1146,7 @@ public:
                 auto dst2 = dst->AsTrack();
                 auto src2 = src->AsTrack();
 
-                auto rideType = _s6.rides[src2->GetRideIndex()].type;
-                RideTypeDescriptor rtd = RideTypeDescriptors[rideType];
-                uint16_t trackType = dst2->GetTrackType();
-
-                if (trackType == TrackElemType::RotationControlToggle && !rtd.TrackPieceAllowed(TRACK_ROTATION_CONTROL_TOGGLE))
-                    trackType = TrackElemType::Booster;
-                dst2->SetTrackType(trackType);
+                dst2->SetTrackType(src2->GetTrackType());
                 dst2->SetSequenceIndex(src2->GetSequenceIndex());
                 dst2->SetRideIndex(src2->GetRideIndex());
                 dst2->SetColourScheme(src2->GetColourScheme());
@@ -1166,6 +1159,7 @@ public:
                 dst2->SetIsIndestructible(src2->IsIndestructible());
                 // Skipping IsHighlighted()
 
+                auto trackType = dst2->GetTrackType();
                 if (TrackTypeHasSpeedSetting(trackType))
                 {
                     dst2->SetBrakeBoosterSpeed(src2->GetBrakeBoosterSpeed());
@@ -1176,11 +1170,12 @@ public:
                 }
 
                 // This has to be done last, since the maze entry shares fields with the colour and sequence fields.
+                auto rideType = _s6.rides[src2->GetRideIndex()].type;
                 if (rideType == RIDE_TYPE_MAZE)
                 {
                     dst2->SetMazeEntry(src2->GetMazeEntry());
                 }
-                else if (rtd.HasFlag(RIDE_TYPE_FLAG_HAS_LANDSCAPE_DOORS))
+                else if (rideType == RIDE_TYPE_GHOST_TRAIN)
                 {
                     dst2->SetDoorAState(src2->GetDoorAState());
                     dst2->SetDoorBState(src2->GetDoorBState());

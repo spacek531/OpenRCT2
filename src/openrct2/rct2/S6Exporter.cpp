@@ -1497,14 +1497,8 @@ void S6Exporter::ExportTileElement(RCT12TileElement* dst, TileElement* src)
         {
             auto dst2 = dst->AsTrack();
             auto src2 = src->AsTrack();
-            uint8_t rideType = get_ride(dst2->GetRideIndex())->type;
-            RideTypeDescriptor rtd = get_ride(dst2->GetRideIndex())->GetRideTypeDescriptor();
 
-            uint16_t trackType = src2->GetTrackType();
-            if (trackType == TrackElemType::Booster)
-                trackType = TrackElemType::RotationControlToggle;
-
-            dst2->SetTrackType(trackType);
+            dst2->SetTrackType(src2->GetTrackType());
             dst2->SetSequenceIndex(src2->GetSequenceIndex());
             dst2->SetRideIndex(src2->GetRideIndex());
             dst2->SetColourScheme(src2->GetColourScheme());
@@ -1524,11 +1518,11 @@ void S6Exporter::ExportTileElement(RCT12TileElement* dst, TileElement* src)
             auto ride = get_ride(dst2->GetRideIndex());
             if (ride)
             {
-                if (rideType == RIDE_TYPE_MAZE)
+                if (ride->type == RIDE_TYPE_MAZE)
                 {
                     dst2->SetMazeEntry(src2->GetMazeEntry());
                 }
-                else if (rtd.HasFlag(RIDE_TYPE_FLAG_HAS_LANDSCAPE_DOORS))
+                else if (ride->type == RIDE_TYPE_GHOST_TRAIN)
                 {
                     dst2->SetDoorAState(src2->GetDoorAState());
                     dst2->SetDoorBState(src2->GetDoorBState());

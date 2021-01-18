@@ -197,7 +197,6 @@ struct RideTypeDescriptor
     bool HasFlag(uint64_t flag) const;
     uint64_t GetAvailableTrackPieces() const;
     bool SupportsTrackPiece(const uint64_t trackPiece) const;
-    bool TrackPieceAllowed(const uint64_t trackPiece) const;
     ResearchCategory GetResearchCategory() const;
 };
 

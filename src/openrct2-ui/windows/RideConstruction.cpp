@@ -424,8 +424,7 @@ static constexpr const rct_string_id RideConfigurationStringIds[] = {
     0,                                      // 252
     STR_QUARTER_LOOP,                       // 253
     STR_QUARTER_LOOP,                       // 254
-    STR_QUARTER_LOOP,                       // 255
-    STR_BOOSTER                             // 256
+    STR_QUARTER_LOOP                        // 255
 };
 // clang-format on
 
@@ -2258,7 +2257,7 @@ static void window_ride_construction_invalidate(rct_window* w)
                     break;
             }
         }
-        else if (stringId == STR_BOOSTER)
+        else if (stringId == STR_SPINNING_CONTROL_TOGGLE_TRACK)
         {
             switch (RideTypeDescriptors[ride->type].TrackBehaviours.BoosterBehaviour)
             {
@@ -3081,11 +3080,15 @@ static void window_ride_construction_update_widgets(rct_window* w)
 
     bool brakesSelected = _selectedTrackType == TrackElemType::Brakes
         || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Brakes);
+    _boosterTrackSelected = RideTypeDescriptors[ride->type].TrackBehaviours.BoosterBehaviour == RideBoosterBehaviour::Booster
+        && (TrackTypeIsBooster(ride->type, _selectedTrackType)
+            || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster));
+    bool speedControlSelected = RideTypeDescriptors[ride->type].TrackBehaviours.BoosterBehaviour
+            == RideBoosterBehaviour::SpeedController
+        && (TrackTypeIsBooster(ride->type, _selectedTrackType)
+            || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster));
 
-    _boosterTrackSelected = TrackTypeIsBooster(ride->type, _selectedTrackType)
-        || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster);
-
-    if (!brakesSelected && !_boosterTrackSelected)
+    if (!brakesSelected && !_boosterTrackSelected && !speedControlSelected)
     {
         if (is_track_enabled(TRACK_FLAT_ROLL_BANKING))
         {
@@ -3132,7 +3135,7 @@ static void window_ride_construction_update_widgets(rct_window* w)
             window_ride_construction_widgets[WIDX_BANK_STRAIGHT].tooltip = STR_RIDE_CONSTRUCTION_BRAKE_SPEED_LIMIT_TIP;
             window_ride_construction_widgets[WIDX_BANK_RIGHT].tooltip = STR_RIDE_CONSTRUCTION_BRAKE_SPEED_LIMIT_TIP;
         }
-        else if (_boosterTrackSelected && ride->GetRideTypeDescriptor().TrackBehaviours.BoosterBehaviour == RideBoosterBehaviour::SpeedController)
+        else if (speedControlSelected)
         {
             window_ride_construction_widgets[WIDX_BANKING_GROUPBOX].text = STR_RIDE_CONSTRUCTION_SPEED_CONTROL;
             window_ride_construction_widgets[WIDX_BANK_LEFT].tooltip = STR_RIDE_CONSTRUCTION_SPEED_CONTROL_TIP;
@@ -3384,7 +3387,7 @@ static void window_ride_construction_show_special_track_dropdown(rct_window* w, 
                     break;
             }
         }
-        if (trackPieceStringId == STR_BOOSTER && ride != nullptr)
+        if (trackPieceStringId == STR_SPINNING_CONTROL_TOGGLE_TRACK && ride != nullptr)
         {
             switch (RideTypeDescriptors[ride->type].TrackBehaviours.BoosterBehaviour)
             {
@@ -3394,6 +3397,10 @@ static void window_ride_construction_show_special_track_dropdown(rct_window* w, 
                 case RideBoosterBehaviour::SpeedController:
                     trackPieceStringId = STR_SPEED_CONTROL;
                     break;
+                default:
+                {
+                    // to make build systems happy
+                }
             }
         }
         gDropdownItemsFormat[i] = trackPieceStringId;

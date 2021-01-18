@@ -528,8 +528,7 @@ const rct_track_coordinates TrackCoordinates[TrackElemType::Count] = {
         { 0, 1, 96, 0, 0, -32 },    // RightQuarterTurn1TileDown90
         { 0, 2, 0, 96, 64, 0 },     // MultiDimUp90ToInvertedFlatQuarterLoop
         { 0, 2, 0, -128, -96, 0 },  // MultiDimFlatToDown90QuarterLoop
-        { 0, 2, 0, 128, 64, 0 } ,   // MultiDimInvertedUp90ToFlatQuarterLoop
-        { 0, 0, 0, 0, 0, 0 }        // Booster
+        { 0, 2, 0, 128, 64, 0 }     // MultiDimInvertedUp90ToFlatQuarterLoop
 };
 
 /** rct2: 0x0099BA64 */
@@ -790,7 +789,6 @@ const uint8_t TrackSequenceProperties[][MaxSequencesPerPiece] = {
     { 0 },
     { 0 },
     { 0 },
-    { 0 },
 };
 
 /** rct2: 0x0099CA64 */
@@ -919,7 +917,6 @@ const uint8_t FlatRideTrackSequenceProperties[][MaxSequencesPerPiece] = {
     /* FLAT_TRACK_ELEM_1_X_1_B */   { TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN | TRACK_SEQUENCE_FLAG_CONNECTS_TO_PATH, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     /* FLAT_TRACK_ELEM_1_X_4_C */   { TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     /* FLAT_TRACK_ELEM_3_X_3 */ { TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_0, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1, TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1, TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2, TRACK_SEQUENCE_FLAG_DIRECTION_2, 0, 0, 0, 0, 0, 0, 0 },
-    { 0 },
     { 0 },
     { 0 },
     { 0 },
@@ -2939,11 +2936,6 @@ static constexpr const rct_preview_track TrackBlocksMultiDimInvertedUp90ToFlatQu
     TRACK_BLOCK_END
 };
 
-static constexpr const rct_preview_track TrackBlocksBooster[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
 // rct2: 0x00994638
 const rct_preview_track *TrackBlocks[TrackElemType::Count] = {
     TrackBlocksFlat,
@@ -3821,7 +3813,6 @@ const uint8_t TrackPieceLengths[TrackElemType::Count] = {
     80,     // TrackElemType::MultiDimUp90ToInvertedFlatQuarterLoop
     80,     // TrackElemType::MultiDimFlatToDown90QuarterLoop
     80,     // TrackElemType::MultiDimInvertedUp90ToFlatQuarterLoop
-    32,     // TrackElemType::Booster
 };
 
 // rct2: 0x00998C95
@@ -4082,7 +4073,6 @@ const track_curve_chain gTrackCurveChain[TrackElemType::Count] = {
     { TRACK_CURVE_NONE, TRACK_CURVE_NONE },
     { TRACK_CURVE_NONE, TRACK_CURVE_NONE },
     { TRACK_CURVE_NONE, TRACK_CURVE_NONE },
-    { RideConstructionSpecialPieceSelected | TrackElemType::Booster, RideConstructionSpecialPieceSelected | TrackElemType::Booster },
 };
 
 // rct2: 0x00999095
@@ -4343,7 +4333,6 @@ const track_curve_chain gFlatRideTrackCurveChain[TrackElemType::Count] = {
     { 0, 0 },
     { 0, 0 },
     { 0, 57088 },
-    { 0, 0 },
 };
 
 const track_descriptor gTrackDescriptors[142] = {
@@ -4537,7 +4526,6 @@ const int16_t AlternativeTrackTypes[TrackElemType::Count] = {
     -1,
     TrackElemType::LeftQuarterTurn3TilesCovered,   // TrackElemType::LeftQuarterTurn3Tiles
     TrackElemType::RightQuarterTurn3TilesCovered,  // TrackElemType::RightQuarterTurn3Tiles
-    -1,
     -1,
     -1,
     -1,
@@ -5010,7 +4998,6 @@ const money32 TrackPricing[] = {
     360448, // TrackElemType::MultiDimUp90ToInvertedFlatQuarterLoop
     360448, // TrackElemType::MultiDimFlatToDown90QuarterLoop
     360448, // 255
-    77824,  // TrackElemType::Booster
 };
 
 /** rct2: 0x0099DE34 */
@@ -5525,11 +5512,10 @@ const dodgems_track_size DodgemsTrackSize[] = {
     { 0,    0,  0,      0 },
     { 0,    0,  0,      0 },
     { 0,    0,  0,      0 },
-    { 0,    0,  0,      0 },
 };
 
 /** rct2: 0x0099EA1C */
-const track_type_t TrackElementMirrorMap[] = {
+const uint8_t TrackElementMirrorMap[] = {
     TrackElemType::Flat,
     TrackElemType::EndStation,
     TrackElemType::BeginStation,
@@ -5786,7 +5772,6 @@ const track_type_t TrackElementMirrorMap[] = {
     TrackElemType::MultiDimUp90ToInvertedFlatQuarterLoop,
     TrackElemType::MultiDimFlatToDown90QuarterLoop,
     255,
-    TrackElemType::Booster,
 };
 
 /** rct2: 0x00999694 */
@@ -6047,7 +6032,6 @@ const uint32_t TrackHeightMarkerPositions[TrackElemType::Count] = {
     (1 << 0) | (1 << 2), // TrackElemType::MultiDimUp90ToInvertedFlatQuarterLoop
     (1 << 0) | (1 << 2), // TrackElemType::MultiDimFlatToDown90QuarterLoop
     (1 << 0) | (1 << 2), // 255
-    (1 << 0), // TrackElemType::Booster
 };
 
 /** rct2: 0x00999A94 */
@@ -6308,7 +6292,6 @@ const uint8_t TrackSequenceElementAllowedWallEdges[][MaxSequencesPerPiece] = {
     { 0b1010, 0b1010, 0b1010,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0 }, // TrackElemType::MultiDimUp90ToInvertedFlatQuarterLoop
     { 0b1010, 0b1010, 0b1010,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0 }, // TrackElemType::MultiDimFlatToDown90QuarterLoop
     { 0b1010, 0b1010, 0b1010,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0 }, // 255
-    { 0b1010,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0 }, // TrackElemType::Booster
 };
 
 /** rct2: 0x0099AA94 */
@@ -6566,7 +6549,6 @@ const uint8_t FlatRideTrackSequenceElementAllowedWallEdges[][MaxSequencesPerPiec
     { 0b1111,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0 },
     { 0b1111,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0 },
     { 0b1111,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0 },
-    { 0b1010,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0 }, // TrackElemType::RotationControlToggle
 };
 
 /** rct2: 0x0099443C */
@@ -7085,6 +7067,5 @@ const uint16_t TrackFlags[] = {
     /* TrackElemType::MultiDimUp90ToInvertedFlatQuarterLoop         */   TRACK_ELEM_FLAG_UP | TRACK_ELEM_FLAG_NORMAL_TO_INVERSION | TRACK_ELEM_FLAG_INVERSION_TO_NORMAL,
     /* TrackElemType::MultiDimFlatToDown90QuarterLoop               */   TRACK_ELEM_FLAG_DOWN | TRACK_ELEM_FLAG_INVERSION_TO_NORMAL,
     /*                                                              */   TRACK_ELEM_FLAG_UP | TRACK_ELEM_FLAG_NORMAL_TO_INVERSION | TRACK_ELEM_FLAG_INVERSION_TO_NORMAL,
-    /* TrackElemType::Booster                                       */   0,
 };
 // clang-format on

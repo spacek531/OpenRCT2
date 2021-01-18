@@ -36,7 +36,7 @@
 
 /**  rct2: 0x00997C9D */
 // clang-format off
-const rct_trackdefinition TrackDefinitions[257] =
+const rct_trackdefinition TrackDefinitions[256] =
 {
     // TYPE                         VANGLE END                  VANGLE START                BANK END                BANK START              PREVIEW Z OFFSET
     { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_FLAT
@@ -295,11 +295,10 @@ const rct_trackdefinition TrackDefinitions[257] =
     { TRACK_QUARTER_LOOP_UNINVERTED,TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_90,          TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                  },  // ELEM_MULTIDIM_90_DEG_UP_TO_INVERTED_FLAT_QUARTER_LOOP
     { TRACK_QUARTER_LOOP_UNINVERTED,TRACK_SLOPE_DOWN_90,        TRACK_SLOPE_NONE,           TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                  },  // ELEM_MULTIDIM_FLAT_TO_90_DEG_DOWN_QUARTER_LOOP
     { TRACK_QUARTER_LOOP_INVERTED,  TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_90,          TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                  },  // 255
-    { TRACK_BOOSTER,                TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_BOOSTER
 };
 
 /**　rct2: 0x0099849D */
-const rct_trackdefinition FlatRideTrackDefinitions[257] =
+const rct_trackdefinition FlatRideTrackDefinitions[256] =
 {
     // TYPE                         VANGLE END                  VANGLE START                BANK END                BANK START              PREVIEW Z OFFSET
     { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 0
@@ -558,7 +557,6 @@ const rct_trackdefinition FlatRideTrackDefinitions[257] =
     { TRACK_QUARTER_LOOP_UNINVERTED,TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_90,          TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                           },  // 253
     { TRACK_QUARTER_LOOP_UNINVERTED,TRACK_SLOPE_DOWN_90,        TRACK_SLOPE_NONE,           TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                           },  // 254
     { TRACK_QUARTER_LOOP_INVERTED,  TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_90,          TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                           },  // 255
-    { TRACK_BOOSTER,                TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 256
 };
 // clang-format on
 
@@ -1201,7 +1199,8 @@ bool track_element_is_covered(track_type_t trackElementType)
 bool TrackTypeIsBooster(uint8_t rideType, track_type_t trackType)
 {
     // Boosters share their ID with the Spinning Control track and Speed Control track.
-    return trackType == TrackElemType::Booster;
+    return trackType == TrackElemType::Booster && rideType != RIDE_TYPE_SPINNING_WILD_MOUSE
+        && rideType != RIDE_TYPE_STEEL_WILD_MOUSE;
 }
 
 bool TrackTypeHasSpeedSetting(track_type_t trackType)
@@ -1273,10 +1272,6 @@ void TrackElement::MazeEntrySubtract(uint16_t subVal)
 
 uint16_t TrackElement::GetTrackType() const
 {
-    if (TrackType == TrackElemType::Booster)
-    {
-        return TrackElemType::RotationControlToggle;
-    }
     return TrackType;
 }
 
