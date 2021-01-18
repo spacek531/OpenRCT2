@@ -1697,9 +1697,9 @@ static void RideConstructPlacedForwardGameActionCallback(const GameAction* ga, c
     {
         int32_t trackDirection = _currentTrackPieceDirection;
         auto trackPos = _currentTrackBegin;
-        if (!(trackDirection & 4))
+        if (!(trackDirection & TRACK_BLOCK_2)) // if the track is diagonal
         {
-            trackPos -= CoordsDirectionDelta[trackDirection];
+            trackPos -= CoordsDirectionDelta[trackDirection]; // offset by this much
         }
 
         CoordsXYE next_track;
@@ -1742,7 +1742,7 @@ static void RideConstructPlacedBackwardGameActionCallback(const GameAction* ga, 
     {
         auto trackDirection = direction_reverse(_currentTrackPieceDirection);
         auto trackPos = _currentTrackBegin;
-        if (!(trackDirection & 4))
+        if (!(trackDirection & TRACK_BLOCK_2))
         {
             trackPos += CoordsDirectionDelta[trackDirection];
         }
