@@ -843,7 +843,6 @@ void window_ride_construction_keyboard_shortcut_demolish_current();
 void window_follow_sprite(rct_window* w, size_t spriteIndex);
 void window_unfollow_sprite(rct_window* w);
 
-
 extern uint64_t _enabledRidePieces;
 extern uint8_t _rideConstructionState2;
 extern bool _stationConstructed;

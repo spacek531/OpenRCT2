@@ -506,21 +506,20 @@ namespace TrackElemType
     constexpr uint16_t None = 65535;
 }; // namespace TrackElemType
 
-
 namespace FlatTrackElemType
 {
-    constexpr uint16_t TowerBase = 66; // tower rides
-    constexpr uint16_t TowerSection = 67; // tower rides
-    constexpr uint16_t MagicCarpet = 95; // magic carpet ride
-    constexpr uint16_t Maze = 101; // maze
-    constexpr uint16_t Flat2x2 = 110; // spiral slide, motion simulator
-    constexpr uint16_t Flat4x4 = 111; // enterprise, dodgems, flying saucers
-    constexpr uint16_t Flat2x4 = 115; // unused?
-    constexpr uint16_t SwingingShip = 116; // swinging ship
-    constexpr uint16_t ShopOneEntrance = 118; // food stall, drink stall, restroom, first aid, ATM
+    constexpr uint16_t TowerBase = 66;             // tower rides
+    constexpr uint16_t TowerSection = 67;          // tower rides
+    constexpr uint16_t MagicCarpet = 95;           // magic carpet ride
+    constexpr uint16_t Maze = 101;                 // maze
+    constexpr uint16_t Flat2x2 = 110;              // spiral slide, motion simulator
+    constexpr uint16_t Flat4x4 = 111;              // enterprise, dodgems, flying saucers
+    constexpr uint16_t Flat2x4 = 115;              // unused?
+    constexpr uint16_t SwingingShip = 116;         // swinging ship
+    constexpr uint16_t ShopOneEntrance = 118;      // food stall, drink stall, restroom, first aid, ATM
     constexpr uint16_t SwingingInverterShip = 119; // swinging inverting ship
-    constexpr uint16_t ShopFourEntrances = 121; // information kiosk
-    constexpr uint16_t FerrisWheel = 122; // ferris wheel
+    constexpr uint16_t ShopFourEntrances = 121;    // information kiosk
+    constexpr uint16_t FerrisWheel = 122;          // ferris wheel
     constexpr uint16_t Flat3x3 = 123; // twist, merry-go-round, circus, 3D cinema, haunted house, crooked house, etc.
     constexpr uint16_t None = 65535;
 }; // namespace FlatTrackElemType
