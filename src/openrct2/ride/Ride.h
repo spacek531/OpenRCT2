@@ -1070,7 +1070,7 @@ extern money32 _currentTrackPrice;
 extern uint16_t _numCurrentPossibleRideConfigurations;
 extern uint16_t _numCurrentPossibleSpecialTrackPieces;
 
-extern uint16_t _currentTrackCurve;
+extern uint64_t _currentTrackCurve;
 extern uint8_t _rideConstructionState;
 extern ride_id_t _currentRideIndex;
 

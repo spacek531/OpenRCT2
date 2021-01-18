@@ -168,7 +168,7 @@ static rct_window_event_list window_ride_construction_events([](auto& events)
 #pragma region RideConfigurationStringIds
 
 // rct2: 0x00999492
-static constexpr const rct_string_id RideConfigurationStringIds[] = {
+static constexpr const rct_string_id RideConfigurationStringIds[TrackElemType::Count] = {
     0,                                      // 0
     STR_STATION_PLATFORM,                   // 1
     0,                                      // 2
@@ -442,7 +442,7 @@ static bool _autoRotatingShop;
 static uint8_t _currentlyShowingBrakeOrBoosterSpeed;
 static bool _boosterTrackSelected;
 
-static uint32_t _currentDisabledSpecialTrackPieces;
+static uint64_t _currentDisabledSpecialTrackPieces;
 
 static void window_ride_construction_construct(rct_window* w);
 static void window_ride_construction_mouseup_demolish(rct_window* w);
@@ -467,7 +467,7 @@ static void loc_6C7502(int32_t al);
 static void ride_construction_set_brakes_speed(int32_t brakesSpeed);
 static void ride_construction_tooldown_entrance_exit(const ScreenCoordsXY& screenCoords);
 
-static uint8_t _currentPossibleRideConfigurations[32];
+static track_type_t _currentPossibleRideConfigurations[64];
 
 static constexpr const rct_string_id RideConstructionSeatAngleRotationStrings[] = {
     STR_RIDE_CONSTRUCTION_SEAT_ROTATION_ANGLE_NEG_180, STR_RIDE_CONSTRUCTION_SEAT_ROTATION_ANGLE_NEG_135,
@@ -2790,12 +2790,12 @@ static void window_ride_construction_update_possible_ride_configurations()
             continue;
 
         _currentPossibleRideConfigurations[currentPossibleRideConfigurationIndex] = trackType;
-        _currentDisabledSpecialTrackPieces |= (1 << currentPossibleRideConfigurationIndex);
+        _currentDisabledSpecialTrackPieces |= ((uint64_t)1 << currentPossibleRideConfigurationIndex);
         if (_currentTrackPieceDirection < 4 && slope == _previousTrackSlopeEnd && bank == _previousTrackBankEnd
             && (trackType != TrackElemType::TowerBase
                 || ride_type_has_flag(ride->type, RIDE_TYPE_FLAG_ALLOW_EXTRA_TOWER_BASES)))
         {
-            _currentDisabledSpecialTrackPieces &= ~(1 << currentPossibleRideConfigurationIndex);
+            _currentDisabledSpecialTrackPieces &= ~((uint64_t)1 << currentPossibleRideConfigurationIndex);
             _numCurrentPossibleSpecialTrackPieces++;
         }
         currentPossibleRideConfigurationIndex++;
@@ -3414,9 +3414,9 @@ static void window_ride_construction_show_special_track_dropdown(rct_window* w, 
         { w->windowPos.x + widget->left, w->windowPos.y + widget->top }, widget->height() + 1, w->colours[1], 0, 0,
         _numCurrentPossibleRideConfigurations, widget->width());
 
-    for (int32_t i = 0; i < 32; i++)
+    for (int32_t i = 0; i < 64; i++)
     {
-        if (_currentDisabledSpecialTrackPieces & (1 << i))
+        if (_currentDisabledSpecialTrackPieces & ((uint64_t)1 << i))
         {
             Dropdown::SetDisabled(i, true);
         }
@@ -3888,7 +3888,7 @@ void ride_construction_tooldown_construct(const ScreenCoordsXY& screenCoords)
                 || z < 0)
             {
                 int32_t saveTrackDirection = _currentTrackPieceDirection;
-                int32_t saveCurrentTrackCurve = _currentTrackCurve;
+                int64_t saveCurrentTrackCurve = _currentTrackCurve;
                 int32_t savePreviousTrackSlopeEnd = _previousTrackSlopeEnd;
                 int32_t saveCurrentTrackSlopeEnd = _currentTrackSlopeEnd;
                 int32_t savePreviousTrackBankEnd = _previousTrackBankEnd;

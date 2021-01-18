@@ -3196,7 +3196,7 @@ const track_build_sequence *TrackBlocks[TrackElemType::Count] = {
     TrackBlocksMultiDimInvertedUp90ToFlatQuarterLoop
 };
 
-static constexpr const track_build_sequence FlatRideTrackBlocksLeftQuarterTurn1TileUp60[] = {
+static constexpr const track_build_sequence FlatRideTrackBlocksMagicCarpet[] = {
     { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
     { 1, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
     { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
@@ -3204,7 +3204,7 @@ static constexpr const track_build_sequence FlatRideTrackBlocksLeftQuarterTurn1T
     TRACK_BLOCK_END
 };
 
-static constexpr const track_build_sequence FlatRideTrackBlocksUp25LeftBanked[] = {
+static constexpr const track_build_sequence FlatRideTrackBlocksFlat2x2[] = {
     { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
     { 1, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
     { 2, 32, 0, 0, 0, { 0b1111, 0 }, 0 },
@@ -3212,7 +3212,7 @@ static constexpr const track_build_sequence FlatRideTrackBlocksUp25LeftBanked[] 
     TRACK_BLOCK_END
 };
 
-static constexpr const track_build_sequence FlatRideTrackBlocksUp25RightBanked[] = {
+static constexpr const track_build_sequence FlatRideTrackBlocksFlat4x4[] = {
     { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
     { 1, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
     { 2, 0, 64, 0, 0, { 0b1111, 0 }, 0 },
@@ -3232,7 +3232,7 @@ static constexpr const track_build_sequence FlatRideTrackBlocksUp25RightBanked[]
     TRACK_BLOCK_END
 };
 
-static constexpr const track_build_sequence FlatRideTrackBlocksDown25LeftBanked[] = {
+static constexpr const track_build_sequence FlatRideTrackBlocks115[] = {
     { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
     { 1, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
     { 2, 0, 64, 0, 0, { 0b1111, 0 }, 0 },
@@ -3244,7 +3244,7 @@ static constexpr const track_build_sequence FlatRideTrackBlocksDown25LeftBanked[
     TRACK_BLOCK_END
 };
 
-static constexpr const track_build_sequence FlatRideTrackBlocksDown25RightBanked[] = {
+static constexpr const track_build_sequence FlatRideTrackBlocksSwingingShip[] = {
     { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
     { 1, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
     { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
@@ -3253,25 +3253,12 @@ static constexpr const track_build_sequence FlatRideTrackBlocksDown25RightBanked
     TRACK_BLOCK_END
 };
 
-static constexpr const track_build_sequence FlatRideTrackBlocksFlatToUp60LongBase[] = {
+static constexpr const track_build_sequence FlatRideTrackBlocksShopOneEntrance[] = {
     { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
     TRACK_BLOCK_END
 };
 
-static constexpr const track_build_sequence FlatRideTrackBlocksUp60ToFlatLongBase[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, 32, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence FlatRideTrackBlocksDown60ToFlatLongBase[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const track_build_sequence FlatRideTrackBlocksFlatToDown60LongBase[] = {
+static constexpr const track_build_sequence FlatRideTrackBlocksSwingingInvertingShip[] = {
     { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
     { 1, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
     { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
@@ -3279,7 +3266,20 @@ static constexpr const track_build_sequence FlatRideTrackBlocksFlatToDown60LongB
     TRACK_BLOCK_END
 };
 
-static constexpr const track_build_sequence FlatRideTrackBlocksCableLiftHill[] = {
+static constexpr const track_build_sequence FlatRideTrackBlocksShopFourEntrances[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence FlatRideTrackBlocksFerrisWheel[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, 32, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const track_build_sequence FlatRideTrackBlocksFlat3x3[] = {
     { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
     { 1, -32, -32, 0, 0, { 0b1111, 0 }, 0 },
     { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
@@ -3292,7 +3292,7 @@ static constexpr const track_build_sequence FlatRideTrackBlocksCableLiftHill[] =
     TRACK_BLOCK_END
 };
 
-static constexpr const track_build_sequence FlatRideTrackBlocksMultiDimInvertedUp90ToFlatQuarterLoop[] = {
+static constexpr const track_build_sequence FlatRideTrackBlocks255[] = {
     TRACK_BLOCK_END
 };
 
@@ -3393,7 +3393,7 @@ const track_build_sequence *FlatRideTrackBlocks[TrackElemType::Count] = {
     TrackBlocksRightHalfBankedHelixUpLarge,
     TrackBlocksLeftHalfBankedHelixDownLarge,
     TrackBlocksRightHalfBankedHelixDownLarge,
-    FlatRideTrackBlocksLeftQuarterTurn1TileUp60,
+    FlatRideTrackBlocksMagicCarpet,
     TrackBlocksRightQuarterTurn1TileUp60,
     TrackBlocksLeftQuarterTurn1TileDown60,
     TrackBlocksLeftRightQuarterTurn1TileDown60,
@@ -3408,20 +3408,20 @@ const track_build_sequence *FlatRideTrackBlocks[TrackElemType::Count] = {
     TrackBlocksRightQuarterHelixLargeUp,
     TrackBlocksLeftQuarterHelixLargeDown,
     TrackBlocksRightQuarterHelixLargeDown,
-    FlatRideTrackBlocksUp25LeftBanked,
-    FlatRideTrackBlocksUp25RightBanked,
+    FlatRideTrackBlocksFlat2x2,
+    FlatRideTrackBlocksFlat4x4,
     TrackBlocksWaterfall,
     TrackBlocksRapids,
     TrackBlocksOnRidePhoto,
-    FlatRideTrackBlocksDown25LeftBanked,
-    FlatRideTrackBlocksDown25RightBanked,
+    FlatRideTrackBlocks115,
+    FlatRideTrackBlocksSwingingShip,
     TrackBlocksWatersplash,
-    FlatRideTrackBlocksFlatToUp60LongBase,
-    FlatRideTrackBlocksUp60ToFlatLongBase,
+    FlatRideTrackBlocksShopOneEntrance,
+    FlatRideTrackBlocksSwingingInvertingShip,
     TrackBlocksWhirlpool,
-    FlatRideTrackBlocksDown60ToFlatLongBase,
-    FlatRideTrackBlocksFlatToDown60LongBase,
-    FlatRideTrackBlocksCableLiftHill,
+    FlatRideTrackBlocksShopFourEntrances,
+    FlatRideTrackBlocksFerrisWheel,
+    FlatRideTrackBlocksFlat3x3,
     TrackBlocksReverseFreefallSlope,
     TrackBlocksReverseFreefallVertical,
     TrackBlocksUp90,
@@ -3553,7 +3553,8 @@ const track_build_sequence *FlatRideTrackBlocks[TrackElemType::Count] = {
     TrackBlocksRightQuarterTurn1TileDown90,
     TrackBlocksMultiDimUp90ToInvertedFlatQuarterLoop,
     TrackBlocksMultiDimFlatToDown90QuarterLoop,
-    FlatRideTrackBlocksMultiDimInvertedUp90ToFlatQuarterLoop
+    FlatRideTrackBlocks255,
+    TrackBlocksBooster
 };
 
 const uint8_t TrackPieceLengths[TrackElemType::Count] = {

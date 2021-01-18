@@ -30,8 +30,8 @@ extern const uint8_t TrackPieceLengths[TrackElemType::Count];
 
 struct track_curve_chain
 {
-    uint16_t next;
-    uint16_t previous;
+    uint64_t next;
+    uint64_t previous;
 };
 
 extern const track_curve_chain gTrackCurveChain[TrackElemType::Count];

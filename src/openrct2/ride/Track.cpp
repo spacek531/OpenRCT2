@@ -1275,7 +1275,7 @@ uint16_t TrackElement::GetTrackType() const
     return TrackType;
 }
 
-void TrackElement::SetTrackType(uint16_t newType)
+void TrackElement::SetTrackType(track_type_t newType)
 {
     TrackType = newType;
 }

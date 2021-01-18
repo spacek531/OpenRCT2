@@ -143,7 +143,7 @@ static std::tuple<bool, uint8_t> window_ride_construction_update_state_get_track
     }
 
     uint16_t curve = _currentTrackCurve;
-    if (curve == 0xFFFF)
+    if (curve == TrackElemType::None)
     {
         return std::make_tuple(false, 0);
     }
@@ -436,7 +436,7 @@ void window_ride_construction_mouseup_demolish_next_piece(const CoordsXYZD& piec
         _rideConstructionState = RIDE_CONSTRUCTION_STATE_FRONT;
         _currentTrackSelectionFlags = 0;
         _currentTrackPieceDirection = piecePos.direction & 3;
-        int32_t savedCurrentTrackCurve = _currentTrackCurve;
+        int64_t savedCurrentTrackCurve = _currentTrackCurve;
         int32_t savedPreviousTrackSlopeEnd = _previousTrackSlopeEnd;
         int32_t savedCurrentTrackSlopeEnd = _currentTrackSlopeEnd;
         int32_t savedPreviousTrackBankEnd = _previousTrackBankEnd;

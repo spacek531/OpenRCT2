@@ -13,7 +13,7 @@
 #include "../object/Object.h"
 #include "Ride.h"
 
-constexpr const uint16_t RideConstructionSpecialPieceSelected = 0x100;
+constexpr const uint64_t RideConstructionSpecialPieceSelected = 0x10000;
 
 constexpr const int32_t BLOCK_BRAKE_BASE_SPEED = 0x20364;
 
@@ -24,13 +24,13 @@ using pitch_type_t = uint8_t;
 #pragma pack(push, 1)
 struct rct_trackdefinition
 {
-    uint8_t type;
+    track_type_t type;
     pitch_type_t vangle_end;
     pitch_type_t vangle_start;
     roll_type_t bank_end;
     roll_type_t bank_start;
     int8_t preview_z_offset;
-    uint8_t pad[2] = {};
+    uint8_t pad[1] = {};
 };
 assert_struct_size(rct_trackdefinition, 8);
 #pragma pack(pop)
@@ -513,13 +513,14 @@ namespace FlatElemType
     constexpr uint16_t MagicCarpet = 95;
     constexpr uint16_t Maze = 101;
     constexpr uint16_t Flat2x2 = 110;
-    constexpr uint16_t Flat4x4 = 110;
+    constexpr uint16_t Flat4x4 = 111;
     constexpr uint16_t SwingingShip = 116;
     constexpr uint16_t ShopOneEntrance = 118;
     constexpr uint16_t SwingingInvertingShip = 119;
     constexpr uint16_t ShopFourEntrances = 121;
     constexpr uint16_t FerrisWheel = 122;
     constexpr uint16_t Flat3x3 = 123;
+    constexpr uint16_t None = 65535;
 }; // namespace FlatElemType
 
 enum
