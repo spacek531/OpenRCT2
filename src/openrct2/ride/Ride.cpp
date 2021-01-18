@@ -1593,7 +1593,7 @@ void ride_select_next_section()
     {
         ride_construction_invalidate_current_track();
         int32_t direction = _currentTrackPieceDirection;
-        int32_t type = _currentTrackPieceType;
+        track_type_t type = _currentTrackPieceType;
         TileElement* tileElement;
         auto newCoords = sub_6C683D({ _currentTrackBegin, static_cast<Direction>(direction & 3) }, type, 0, &tileElement, 0);
         if (newCoords == std::nullopt)
@@ -1658,7 +1658,7 @@ void ride_select_previous_section()
     if (_rideConstructionState == RIDE_CONSTRUCTION_STATE_SELECTED)
     {
         ride_construction_invalidate_current_track();
-        int32_t direction = _currentTrackPieceDirection;
+        track_type_t direction = _currentTrackPieceDirection;
         int32_t type = _currentTrackPieceType;
         TileElement* tileElement;
         auto newCoords = sub_6C683D({ _currentTrackBegin, static_cast<Direction>(direction & 3) }, type, 0, &tileElement, 0);
