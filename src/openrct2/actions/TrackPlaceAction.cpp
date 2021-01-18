@@ -40,7 +40,7 @@ TrackPlaceActionResult::TrackPlaceActionResult(GameActions::Status error, rct_st
 }
 
 TrackPlaceAction::TrackPlaceAction(
-    NetworkRideId_t rideIndex, int32_t trackType, const CoordsXYZD& origin, int32_t brakeSpeed, int32_t colour,
+    NetworkRideId_t rideIndex, track_type_t trackType, const CoordsXYZD& origin, int32_t brakeSpeed, int32_t colour,
     int32_t seatRotation, int32_t liftHillAndAlternativeState, bool fromTrackDesign)
     : _rideIndex(rideIndex)
     , _trackType(trackType)
