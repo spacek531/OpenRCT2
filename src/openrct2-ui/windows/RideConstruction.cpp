@@ -464,7 +464,7 @@ static void window_ride_construction_select_map_tiles(
     Ride* ride, int32_t trackType, int32_t trackDirection, const CoordsXY& tileCoords);
 static void window_ride_construction_show_special_track_dropdown(rct_window* w, rct_widget* widget);
 static void ride_selected_track_set_seat_rotation(int32_t seatRotation);
-static void ride_construction_set_slope_steepness(int32_t al);
+static void loc_6C7502(int32_t al);
 static void ride_construction_set_brakes_speed(int32_t brakesSpeed);
 static void ride_construction_tooldown_entrance_exit(const ScreenCoordsXY& screenCoords);
 
@@ -1374,11 +1374,11 @@ static void window_ride_construction_mousedown(rct_window* w, rct_widgetindex wi
             }
             if (w->widgets[WIDX_SLOPE_DOWN_STEEP].tooltip == STR_RIDE_CONSTRUCTION_STEEP_SLOPE_DOWN_TIP)
             {
-                ride_construction_set_slope_steepness(8);
+                loc_6C7502(8);
             }
             else
             {
-                ride_construction_set_slope_steepness(10);
+                loc_6C7502(10);
             }
             break;
         case WIDX_SLOPE_DOWN:
@@ -1387,7 +1387,7 @@ static void window_ride_construction_mousedown(rct_window* w, rct_widgetindex wi
             {
                 _currentTrackBankEnd = TRACK_BANK_NONE;
             }
-            ride_construction_set_slope_steepness(6);
+            loc_6C7502(6);
             break;
         case WIDX_LEVEL:
             ride_construction_invalidate_current_track();
@@ -1413,7 +1413,7 @@ static void window_ride_construction_mousedown(rct_window* w, rct_widgetindex wi
                     _currentTrackBankEnd = TRACK_BANK_RIGHT;
                 }
             }
-            ride_construction_set_slope_steepness(0);
+            loc_6C7502(0);
             break;
         case WIDX_SLOPE_UP:
             ride_construction_invalidate_current_track();
@@ -1431,7 +1431,7 @@ static void window_ride_construction_mousedown(rct_window* w, rct_widgetindex wi
             }
             else
             {
-                ride_construction_set_slope_steepness(2);
+                loc_6C7502(2);
             }
             break;
         case WIDX_SLOPE_UP_STEEP:
@@ -1506,11 +1506,11 @@ static void window_ride_construction_mousedown(rct_window* w, rct_widgetindex wi
             }
             if (w->widgets[WIDX_SLOPE_UP_STEEP].tooltip == STR_RIDE_CONSTRUCTION_STEEP_SLOPE_UP_TIP)
             {
-                ride_construction_set_slope_steepness(4);
+                loc_6C7502(4);
             }
             else
             {
-                ride_construction_set_slope_steepness(18);
+                loc_6C7502(18);
             }
             break;
         case WIDX_CHAIN_LIFT:
@@ -3446,7 +3446,7 @@ static void ride_selected_track_set_seat_rotation(int32_t seatRotation)
  *
  *  rct2: 0x006C7502
  */
-static void ride_construction_set_slope_steepness(int32_t slope)
+static void loc_6C7502(int32_t slope)
 {
     _currentTrackSlopeEnd = slope;
     _currentTrackPrice = MONEY32_UNDEFINED;
