@@ -1038,9 +1038,11 @@ void S6Exporter::ExportSpriteVehicle(RCT2SpriteVehicle* dst, const Vehicle* src)
     }
     else
     {
-        // Track direction and type are in the same field
-        dst->track_direction = src->track_direction;
-        // dst->track_type = src->track_type;
+        uint32_t trackType = src->GetTrackType();
+        int8_t trackDirection = src->GetTrackDirection();
+        if (trackType == TrackElemType::Booster)
+            trackType = TrackElemType::BoosterAlias;
+        dst->track_type = (trackType << 2) | (trackDirection & 3);
     }
     dst->track_x = src->TrackLocation.x;
     dst->track_y = src->TrackLocation.y;

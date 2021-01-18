@@ -1537,7 +1537,7 @@ static bool track_design_place_ride(TrackDesign* td6, const CoordsXYZ& origin, R
             trackType = TrackElemType::MultiDimInvertedUp90ToFlatQuarterLoop;
         }
         else if (
-            trackType == TrackElemType::BoosterAlias && ride->GetRideTypeDescriptor().TrackPieceAllowed(TrackElemType::Booster))
+            trackType == TrackElemType::BoosterAlias && !ride->GetRideTypeDescriptor().TrackPieceAllowed(TrackElemType::RotationControlToggle))
         {
             trackType = TrackElemType::Booster;
         }
