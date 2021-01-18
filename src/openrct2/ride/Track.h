@@ -503,6 +503,9 @@ namespace TrackElemType
     constexpr uint16_t MultiDimInvertedUp90ToFlatQuarterLoop = 255;
 
     constexpr uint16_t Count = 257;
+    constexpr uint16_t Max = 16383; // vehicles use the bottom 4 bits of a 16-bit field to store track direction and the upper
+                                    // 14 bits to store track piece. This is the largest tracktype that can be stored in 14
+                                    // bits.
     constexpr uint16_t None = 65535;
 }; // namespace TrackElemType
 
@@ -521,6 +524,9 @@ namespace FlatTrackElemType
     constexpr uint16_t ShopFourEntrances = 121;    // information kiosk
     constexpr uint16_t FerrisWheel = 122;          // ferris wheel
     constexpr uint16_t Flat3x3 = 123; // twist, merry-go-round, circus, 3D cinema, haunted house, crooked house, etc.
+    constexpr uint16_t Max = 16384;   // vehicles use the bottom 4 bits of a 16-bit field to store track direction and the upper
+                                      // 14 bits to store track piece. This is the largest tracktype that can be stored in 14
+                                      // bits.
     constexpr uint16_t None = 65535;
 }; // namespace FlatTrackElemType
 
