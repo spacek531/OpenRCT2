@@ -206,6 +206,12 @@ bool RCT12TrackTypeIsBooster(uint8_t rideType, uint8_t trackType)
         && trackType == TrackElemType::BoosterAlias;
 }
 
+bool RCT12TrackTypeHasSpeedSetting(track_type_t trackType)
+{
+    // Boosters share their ID with the Spinning Control track.
+    return trackType == TrackElemType::Brakes || trackType == TrackElemType::BoosterAlias;
+}
+
 uint8_t RCT12TrackElement::GetTrackType() const
 {
     return trackType;
@@ -252,7 +258,7 @@ bool RCT12TrackElement::IsInverted() const
 
 uint8_t RCT12TrackElement::GetBrakeBoosterSpeed() const
 {
-    if (TrackTypeHasSpeedSetting(GetTrackType()))
+    if (RCT12TrackTypeHasSpeedSetting(GetTrackType()))
     {
         return (sequence >> 4) << 1;
     }
@@ -808,7 +814,7 @@ void RCT12TrackElement::SetInverted(bool inverted)
 
 void RCT12TrackElement::SetBrakeBoosterSpeed(uint8_t speed)
 {
-    if (TrackTypeHasSpeedSetting(GetTrackType()))
+    if (RCT12TrackTypeHasSpeedSetting(GetTrackType()))
     {
         sequence &= ~0b11110000;
         sequence |= ((speed >> 1) << 4);
