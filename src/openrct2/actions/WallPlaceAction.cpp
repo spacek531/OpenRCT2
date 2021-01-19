@@ -491,7 +491,7 @@ bool WallPlaceAction::WallCheckObstructionWithTrack(
                 direction = direction_reverse(trackElement->GetDirection());
                 if (direction == _edge)
                 {
-                    const track_build_sequence* trackBlock = &TrackBlocks[trackType][sequence];
+                    const rct_preview_track* trackBlock = &TrackBlocks[trackType][sequence];
                     z = TrackCoordinates[trackType].z_begin;
                     z = trackElement->base_height + ((z - trackBlock->z) * 8);
                     if (z == z0)
@@ -503,7 +503,7 @@ bool WallPlaceAction::WallCheckObstructionWithTrack(
         }
     }
 
-    const track_build_sequence* trackBlock = &TrackBlocks[trackType][sequence + 1];
+    const rct_preview_track* trackBlock = &TrackBlocks[trackType][sequence + 1];
     if (trackBlock->index != 0xFF)
     {
         return false;

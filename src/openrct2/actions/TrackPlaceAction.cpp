@@ -154,7 +154,7 @@ GameActions::Result::Ptr TrackPlaceAction::Query() const
     }
 
     money32 cost = 0;
-    const track_build_sequence* trackBlock = get_track_def_from_ride(ride, _trackType);
+    const rct_preview_track* trackBlock = get_track_def_from_ride(ride, _trackType);
     uint32_t numElements = 0;
     // First check if any of the track pieces are outside the park
     for (; trackBlock->index != 0xFF; trackBlock++)
@@ -442,7 +442,7 @@ GameActions::Result::Ptr TrackPlaceAction::Execute() const
     }
 
     money32 cost = 0;
-    const track_build_sequence* trackBlock = get_track_def_from_ride(ride, _trackType);
+    const rct_preview_track* trackBlock = get_track_def_from_ride(ride, _trackType);
 
     trackBlock = get_track_def_from_ride(ride, _trackType);
     for (int32_t blockIndex = 0; trackBlock->index != 0xFF; trackBlock++, blockIndex++)

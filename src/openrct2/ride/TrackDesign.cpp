@@ -1511,7 +1511,7 @@ static int32_t track_design_place_maze(TrackDesign* td6, const CoordsXYZ& coords
 
 static bool track_design_place_ride(TrackDesign* td6, const CoordsXYZ& origin, Ride* ride)
 {
-    const track_build_sequence** trackBlockArray = (ride_type_has_flag(td6->type, RIDE_TYPE_FLAG_HAS_TRACK))
+    const rct_preview_track** trackBlockArray = (ride_type_has_flag(td6->type, RIDE_TYPE_FLAG_HAS_TRACK))
         ? TrackBlocks
         : FlatRideTrackBlocks;
 
@@ -1547,7 +1547,7 @@ static bool track_design_place_ride(TrackDesign* td6, const CoordsXYZ& origin, R
         switch (_trackDesignPlaceOperation)
         {
             case PTD_OPERATION_DRAW_OUTLINES:
-                for (const track_build_sequence* trackBlock = trackBlockArray[trackType]; trackBlock->index != 0xFF;
+                for (const rct_preview_track* trackBlock = trackBlockArray[trackType]; trackBlock->index != 0xFF;
                      trackBlock++)
                 {
                     auto tile = CoordsXY{ newCoords } + CoordsXY{ trackBlock->x, trackBlock->y }.Rotate(rotation);
@@ -1558,7 +1558,7 @@ static bool track_design_place_ride(TrackDesign* td6, const CoordsXYZ& origin, R
             case PTD_OPERATION_REMOVE_GHOST:
             {
                 const rct_track_coordinates* trackCoordinates = &TrackCoordinates[trackType];
-                const track_build_sequence* trackBlock = trackBlockArray[trackType];
+                const rct_preview_track* trackBlock = trackBlockArray[trackType];
                 int32_t tempZ = newCoords.z - trackCoordinates->z_begin + trackBlock->z;
                 auto trackRemoveAction = TrackRemoveAction(
                     trackType, 0, { newCoords, tempZ, static_cast<Direction>(rotation & 3) });
@@ -1631,7 +1631,7 @@ static bool track_design_place_ride(TrackDesign* td6, const CoordsXYZ& origin, R
             case PTD_OPERATION_GET_PLACE_Z:
             {
                 int32_t tempZ = newCoords.z - TrackCoordinates[trackType].z_begin;
-                for (const track_build_sequence* trackBlock = trackBlockArray[trackType]; trackBlock->index != 0xFF;
+                for (const rct_preview_track* trackBlock = trackBlockArray[trackType]; trackBlock->index != 0xFF;
                      trackBlock++)
                 {
                     auto tile = CoordsXY{ newCoords } + CoordsXY{ trackBlock->x, trackBlock->y }.Rotate(rotation);

@@ -7470,7 +7470,7 @@ static void AnimateSceneryDoor(const CoordsXYZD& doorLocation, const CoordsXYZ& 
 void Vehicle::UpdateSceneryDoor() const
 {
     int32_t trackType = GetTrackType();
-    const track_build_sequence* trackBlock = TrackBlocks[trackType];
+    const rct_preview_track* trackBlock = TrackBlocks[trackType];
     while ((trackBlock + 1)->index != 255)
     {
         trackBlock++;
@@ -7567,7 +7567,7 @@ static void trigger_on_ride_photo(const CoordsXYZ& loc, TileElement* tileElement
 void Vehicle::UpdateSceneryDoorBackwards() const
 {
     int32_t trackType = GetTrackType();
-    const track_build_sequence* trackBlock = TrackBlocks[trackType];
+    const rct_preview_track* trackBlock = TrackBlocks[trackType];
     const rct_track_coordinates* trackCoordinates = &TrackCoordinates[trackType];
     auto wallCoords = CoordsXYZ{ TrackLocation, TrackLocation.z - trackBlock->z + trackCoordinates->z_begin };
     int32_t direction = (track_direction + trackCoordinates->rotation_begin) & 3;

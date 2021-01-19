@@ -73,5 +73,5 @@ extern const uint8_t FlatRideTrackSequenceElementAllowedWallEdges[TrackElemType:
 extern const uint16_t FlatTrackFlags[TrackElemType::Count];
 extern const uint16_t TrackFlags[TrackElemType::Count];
 
-extern const track_build_sequence* TrackBlocks[TrackElemType::Count];
-extern const track_build_sequence* FlatRideTrackBlocks[TrackElemType::Count];
+extern const rct_preview_track* TrackBlocks[TrackElemType::Count];
+extern const rct_preview_track* FlatRideTrackBlocks[TrackElemType::Count];
