@@ -1038,7 +1038,7 @@ void S6Exporter::ExportSpriteVehicle(RCT2SpriteVehicle* dst, const Vehicle* src)
     }
     else
     {
-        uint32_t trackType = src->GetTrackType();
+        uint16_t trackType = src->GetTrackType();
         int8_t trackDirection = src->GetTrackDirection();
         if (trackType == TrackElemType::Booster)
             trackType = TrackElemType::BoosterAlias;
@@ -1502,7 +1502,11 @@ void S6Exporter::ExportTileElement(RCT12TileElement* dst, TileElement* src)
 
             RideTypeDescriptor rtd = get_ride(src2->GetRideIndex())->GetRideTypeDescriptor();
 
-            dst2->SetTrackType(src2->GetTrackType());
+            uint16_t trackType = src2->GetTrackType();
+            if (trackType == TrackElemType::Booster)
+                trackType = TrackElemType::RotationControlToggle;
+
+            dst2->SetTrackType(trackType);
             dst2->SetSequenceIndex(src2->GetSequenceIndex());
             dst2->SetRideIndex(src2->GetRideIndex());
             dst2->SetColourScheme(src2->GetColourScheme());
