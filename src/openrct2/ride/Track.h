@@ -197,6 +197,9 @@ enum
     TRACK_FLYING_HALF_LOOP_UNINVERTED_DOWN,
     TRACK_FLYING_HALF_LOOP_INVERTED_UP,
 
+    TRACK_DIAG_BRAKES,
+    TRACK_DIAG_BLOCK_BRAKES,
+
     TRACK_GROUP_COUNT,
 };
 
@@ -374,7 +377,9 @@ namespace TrackElemType
     constexpr track_type_t Up25RightBanked = 111;
     constexpr track_type_t Waterfall = 112;
     constexpr track_type_t Rapids = 113;
+    constexpr track_type_t DiagBrakesAlias = 113;
     constexpr track_type_t OnRidePhoto = 114;
+    constexpr track_type_t DiagBlockBrakesAlias = 114;
     constexpr track_type_t Down25LeftBanked = 115;
     constexpr track_type_t Down25RightBanked = 116;
     constexpr track_type_t Watersplash = 117;
@@ -575,7 +580,10 @@ namespace TrackElemType
     constexpr track_type_t FlyerHalfLoopInvertedUp = 291;
     constexpr track_type_t FlyerHalfLoopUninvertedDown = 292;
 
-    constexpr track_type_t Count = 293;
+    constexpr track_type_t DiagBrakes = 293;
+    constexpr track_type_t DiagBlockBrakes = 294;
+
+    constexpr track_type_t Count = 295;
     constexpr track_type_t None = 65535;
 
 }; // namespace TrackElemType
@@ -633,4 +641,7 @@ ResultWithMessage track_add_station_element(CoordsXYZD loc, RideId rideIndex, in
 ResultWithMessage track_remove_station_element(const CoordsXYZD& loc, RideId rideIndex, int32_t flags);
 
 bool TrackTypeHasSpeedSetting(track_type_t trackType);
+bool TrackTypeIsBrakes(track_type_t trackType);
+bool TrackTypeIsBlockBrakes(track_type_t trackType);
+bool TrackTypeIsBrakesOrBlockBrakes(track_type_t trackType);
 std::optional<CoordsXYZD> GetTrackSegmentOrigin(const CoordsXYE& posEl);

@@ -1719,7 +1719,7 @@ static void WindowRideMainResize(rct_window* w)
 
     w->flags |= WF_RESIZABLE;
     window_set_resize(*w, 316, minHeight, 500, 450);
-    // Unlike with other windows, the focus needs to be recentred so it’s best to just reset it.
+    // Unlike with other windows, the focus needs to be recentred so it�s best to just reset it.
     w->focus = std::nullopt;
     WindowRideInitViewport(w);
 }
@@ -2453,9 +2453,7 @@ static StringId WindowRideGetStatusVehicle(rct_window* w, Formatter& ft)
     if (vehicle->status != Vehicle::Status::Crashing && vehicle->status != Vehicle::Status::Crashed)
     {
         auto trackType = vehicle->GetTrackType();
-        if (trackType == TrackElemType::BlockBrakes || trackType == TrackElemType::CableLiftHill
-            || trackType == TrackElemType::Up25ToFlat || trackType == TrackElemType::Up60ToFlat
-            || trackType == TrackElemType::DiagUp25ToFlat || trackType == TrackElemType::DiagUp60ToFlat)
+        switch (trackType)
         {
             if (ride->GetRideTypeDescriptor().SupportsTrackPiece(TRACK_BLOCK_BRAKES) && vehicle->velocity == 0)
             {

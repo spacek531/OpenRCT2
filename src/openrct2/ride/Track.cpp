@@ -549,6 +549,7 @@ bool TrackElement::IsBlockStart() const
         case TrackElemType::EndStation:
         case TrackElemType::CableLiftHill:
         case TrackElemType::BlockBrakes:
+        case TrackElemType::DiagBlockBrakes:
             return true;
         case TrackElemType::Up25ToFlat:
         case TrackElemType::Up60ToFlat:
@@ -624,6 +625,21 @@ bool track_type_is_station(track_type_t trackType)
     }
 }
 
+bool TrackTypeIsBrakes(track_type_t trackType)
+{
+    return trackType == TrackElemType::Brakes || trackType == TrackElemType::DiagBrakes;
+}
+
+bool TrackTypeIsBlockBrakes(track_type_t trackType)
+{
+    return trackType == TrackElemType::BlockBrakes || trackType == TrackElemType::DiagBlockBrakes;
+}
+
+bool TrackTypeIsBrakesOrBlockBrakes(track_type_t trackType)
+{
+    return TrackTypeIsBrakes(trackType) || TrackTypeIsBlockBrakes(trackType);
+}
+
 bool track_element_is_covered(track_type_t trackElementType)
 {
     switch (trackElementType)
@@ -655,7 +671,7 @@ bool track_element_is_covered(track_type_t trackElementType)
 
 bool TrackTypeHasSpeedSetting(track_type_t trackType)
 {
-    return trackType == TrackElemType::Brakes || trackType == TrackElemType::Booster || trackType == TrackElemType::BlockBrakes;
+    return trackType == TrackElemType::Booster || TrackTypeIsBrakesOrBlockBrakes(trackType)
 }
 
 std::optional<CoordsXYZD> GetTrackSegmentOrigin(const CoordsXYE& posEl)

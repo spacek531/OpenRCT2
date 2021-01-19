@@ -61,7 +61,7 @@ GameActions::Result TrackSetBrakeSpeedAction::QueryExecute(bool isExecuting) con
         return GameActions::Result(GameActions::Status::NotOwned, STR_NONE, STR_NONE);
     }
 
-    TileElement* tileElement = MapGetTrackElementAtOfType(_loc, _trackType);
+    TileElement* tileElement = MapGetTrackElementAtOfTypeSeq(_loc, _trackType, 0);
     if (tileElement == nullptr)
     {
         log_warning("Invalid game command for setting brakes speed. x = %d, y = %d", _loc.x, _loc.y);
@@ -71,11 +71,11 @@ GameActions::Result TrackSetBrakeSpeedAction::QueryExecute(bool isExecuting) con
     if (isExecuting)
     {
         tileElement->AsTrack()->SetBrakeBoosterSpeed(_brakeSpeed);
-        if (tileElement->AsTrack()->GetTrackType() == TrackElemType::Brakes)
+        if (TrackTypeIsBrakes(tileElement->AsTrack()->GetTrackType()))
         {
             BrakeLinkToBlockBrake(_loc, tileElement);
         }
-        else if (tileElement->AsTrack()->GetTrackType() == TrackElemType::BlockBrakes)
+        else if (TrackTypeIsBlockBrakes(tileElement->AsTrack()->GetTrackType()))
         {
             BlockBrakeSetLinkedBrakesClosed(_loc, tileElement, tileElement->AsTrack()->GetBrakeClosed());
         }

@@ -666,6 +666,7 @@ GameActions::Result TrackPlaceAction::Execute() const
                 ride->lifecycle_flags |= RIDE_LIFECYCLE_CABLE_LIFT_HILL_COMPONENT_USED;
                 ride->CableLiftLoc = originLocation;
                 break;
+            case TrackElemType::DiagBlockBrakes:
             case TrackElemType::BlockBrakes:
             {
                 ride->num_block_brakes++;

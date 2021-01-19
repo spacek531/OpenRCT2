@@ -90,6 +90,7 @@ enum
     RCT12_TILE_ELEMENT_FLAG_GHOST = (1 << 4),
     RCT12_TILE_ELEMENT_FLAG_BROKEN = (1 << 5),
     RCT12_TILE_ELEMENT_FLAG_BLOCK_BRAKE_CLOSED = (1 << 5),
+    RCT12_TILE_ELEMENT_FLAG_BRAKE_OPEN = (1 << 5),
     RCT12_TILE_ELEMENT_FLAG_INDESTRUCTIBLE_TRACK_PIECE = (1 << 6),
     RCT12_TILE_ELEMENT_FLAG_BLOCKED_BY_VEHICLE = (1 << 6),
     RCT12_TILE_ELEMENT_FLAG_LARGE_SCENERY_ACCOUNTED = (1 << 6),
@@ -118,6 +119,9 @@ enum
 
     // Used for giga coaster
     RCT12_TRACK_ELEMENT_COLOUR_FLAG_CABLE_LIFT = (1 << 3),
+
+    // Used with additional track elements
+    RCT12_TRACK_ELEMENT_COLOUR_ADDITIONAL_TRACK_ELEMENT = (1 << 3),
 
     RCT12_TRACK_ELEMENT_DOOR_A_MASK = 0b00011100,
     RCT12_TRACK_ELEMENT_DOOR_B_MASK = 0b11100000,
@@ -481,6 +485,7 @@ private:
     };
     uint8_t rideIndex; // 7
 public:
+    uint16_t ReadTrackType(uint8_t rideType) const;
     uint8_t GetTrackType() const;
     uint8_t GetSequenceIndex() const;
     uint8_t GetRideIndex() const;
