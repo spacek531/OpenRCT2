@@ -228,7 +228,7 @@ bool window_ride_construction_update_state(
     CoordsXYZ* _trackPos, int32_t* _properties)
 {
     ride_id_t rideIndex;
-    track_type_t trackType;
+    track_type_t trackType = TrackElemType::None;
     uint8_t trackDirection;
     uint16_t x, y, liftHillAndInvertedState, properties;
     if (!window_ride_construction_update_state_get_track_element(&trackType))
@@ -286,9 +286,9 @@ bool window_ride_construction_update_state(
     {
         auto availablePieces = rtd.CoveredTrackPieces;
         auto alternativeType = AlternativeTrackTypes[trackType];
-        if (alternativeType != -1 && availablePieces & (1ULL << trackType))
+        if (alternativeType != TrackElemType::None && availablePieces & (1ULL << trackType))
         {
-            trackType = static_cast<uint8_t>(alternativeType);
+            trackType = alternativeType;
             liftHillAndInvertedState &= ~CONSTRUCTION_LIFT_HILL_SELECTED;
         }
     }
