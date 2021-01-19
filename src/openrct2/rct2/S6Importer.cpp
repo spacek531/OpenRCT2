@@ -1166,7 +1166,6 @@ public:
                 dst2->SetIsIndestructible(src2->IsIndestructible());
                 // Skipping IsHighlighted()
 
-                auto trackType = dst2->GetTrackType();
                 if (TrackTypeHasSpeedSetting(trackType))
                 {
                     dst2->SetBrakeBoosterSpeed(src2->GetBrakeBoosterSpeed());
@@ -1177,7 +1176,6 @@ public:
                 }
 
                 // This has to be done last, since the maze entry shares fields with the colour and sequence fields.
-                auto rideType = _s6.rides[src2->GetRideIndex()].type;
                 if (rideType == RIDE_TYPE_MAZE)
                 {
                     dst2->SetMazeEntry(src2->GetMazeEntry());

@@ -1500,7 +1500,6 @@ void S6Exporter::ExportTileElement(RCT12TileElement* dst, TileElement* src)
             auto dst2 = dst->AsTrack();
             auto src2 = src->AsTrack();
 
-            uint8_t rideType = get_ride(src2->GetRideIndex())->type;
             RideTypeDescriptor rtd = get_ride(src2->GetRideIndex())->GetRideTypeDescriptor();
 
             dst2->SetTrackType(src2->GetTrackType());

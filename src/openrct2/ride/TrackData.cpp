@@ -3531,7 +3531,7 @@ const dodgems_track_size DodgemsTrackSize[] = {
 };
 
 /** rct2: 0x0099EA1C */
-const uint8_t TrackElementMirrorMap[] = {
+const track_type_t TrackElementMirrorMap[] = {
     TrackElemType::Flat,
     TrackElemType::EndStation,
     TrackElemType::BeginStation,
@@ -3787,7 +3787,8 @@ const uint8_t TrackElementMirrorMap[] = {
     TrackElemType::LeftQuarterTurn1TileDown90, // TrackElemType::RightQuarterTurn1TileDown90
     TrackElemType::MultiDimUp90ToInvertedFlatQuarterLoop,
     TrackElemType::MultiDimFlatToDown90QuarterLoop,
-    255,
+    TrackElemType::MultiDimInvertedUp90ToFlatQuarterLoop,
+    TrackElemType::Booster,
 };
 
 /** rct2: 0x00999694 */

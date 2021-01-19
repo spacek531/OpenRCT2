@@ -342,7 +342,7 @@ namespace TrackElemType
     constexpr uint16_t RightQuarterTurn1TileDown60 = 98;
     constexpr uint16_t Brakes = 99;
     constexpr uint16_t RotationControlToggle = 100;
-    constexpr uint16_t Booster = 100;
+    constexpr uint16_t BoosterAlias = 100;
     // Used by boosters, as SV6 & TD6 cannot save Boosters as a separate piece
     constexpr uint16_t Maze = 101;
     // Used by the multi-dimension coaster, as TD6 cannot handle index 255.
@@ -501,6 +501,7 @@ namespace TrackElemType
     constexpr uint16_t MultiDimUp90ToInvertedFlatQuarterLoop = 253;
     constexpr uint16_t MultiDimFlatToDown90QuarterLoop = 254;
     constexpr uint16_t MultiDimInvertedUp90ToFlatQuarterLoop = 255;
+    constexpr uint16_t Booster = 256;
 
     constexpr uint16_t Count = 257;
     constexpr uint16_t Max = 16383; // vehicles use the bottom 4 bits of a 16-bit field to store track direction and the upper
@@ -559,12 +560,6 @@ struct track_circuit_iterator
     bool looped;
 };
 
-<<<<<<< HEAD
-extern const rct_trackdefinition FlatRideTrackDefinitions[256];
-extern const rct_trackdefinition TrackDefinitions[256];
-
-=======
->>>>>>> finish implementing FlatTrackElemType
 PitchAndRoll TrackPitchAndRollStart(track_type_t trackType);
 PitchAndRoll TrackPitchAndRollEnd(track_type_t trackType);
 
