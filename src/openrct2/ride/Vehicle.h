@@ -343,20 +343,6 @@ struct Vehicle : SpriteBase
     {
         return track_type >> 2;
     }
-    void SetTrackType(uint32_t trackType)
-    {
-        track_type &= 3;
-        track_type |= trackType << 2;
-    }
-    int8_t GetTrackDirection() const
-    {
-        return track_direction & 3;
-    }
-    void SetTrackDirection(int8_t direction)
-    {
-        track_direction &= ~(uint16_t)3;
-        track_direction |= direction & 3;
-    }
     bool HasUpdateFlag(uint32_t flag) const
     {
         return (update_flags & flag) != 0;
