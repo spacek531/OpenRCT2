@@ -15,11 +15,16 @@
 
 constexpr const uint8_t MaxSequencesPerPiece = 16;
 
+// 0x009968BB, 0x009968BC, 0x009968BD, 0x009968BF, 0x009968C1, 0x009968C3
 extern const rct_track_coordinates TrackCoordinates[TrackElemType::Count];
+// 0x009972BB, 0x009972BC, 0x009972BD, 0x009972BF, 0x009972C1, 0x009972C3
 extern const rct_track_coordinates FlatTrackCoordinates[TrackElemType::Count];
 
 extern const uint8_t TrackSequenceProperties[TrackElemType::Count][MaxSequencesPerPiece];
 extern const uint8_t FlatRideTrackSequenceProperties[TrackElemType::Count][MaxSequencesPerPiece];
+
+extern const rct_preview_track* TrackBlocks[TrackElemType::Count];
+extern const rct_preview_track* FlatRideTrackBlocks[TrackElemType::Count];
 
 extern const uint8_t TrackPieceLengths[TrackElemType::Count];
 
@@ -64,7 +69,6 @@ struct dodgems_track_size
 extern const dodgems_track_size DodgemsTrackSize[TrackElemType::Count];
 
 extern const track_type_t TrackElementMirrorMap[TrackElemType::Count];
-
 extern const uint32_t TrackHeightMarkerPositions[TrackElemType::Count];
 
 extern const uint8_t TrackSequenceElementAllowedWallEdges[TrackElemType::Count][16];
