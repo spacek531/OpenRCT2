@@ -1620,7 +1620,7 @@ void Vehicle::UpdateMeasurements()
         if (ride_get_entrance_location(curRide, curRide->current_test_station).isNull())
             return;
 
-        uint16_t trackElemType = GetTrackType();
+        uint32_t trackElemType = GetTrackType();
         if (trackElemType == TrackElemType::PoweredLift || HasUpdateFlag(VEHICLE_UPDATE_FLAG_ON_LIFT_HILL))
         {
             if (!(curRide->testing_flags & RIDE_TESTING_POWERED_LIFT))

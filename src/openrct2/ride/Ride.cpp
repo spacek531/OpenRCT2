@@ -2927,7 +2927,7 @@ static void ride_measurement_update(Ride& ride, RideMeasurement& measurement)
         return;
     }
 
-    uint8_t trackType = (vehicle->GetTrackType()) & 0xFF;
+    uint16_t trackType = vehicle->GetTrackType();
     if (trackType == TrackElemType::BlockBrakes || trackType == TrackElemType::CableLiftHill
         || trackType == TrackElemType::Up25ToFlat || trackType == TrackElemType::Up60ToFlat
         || trackType == TrackElemType::DiagUp25ToFlat || trackType == TrackElemType::DiagUp60ToFlat)

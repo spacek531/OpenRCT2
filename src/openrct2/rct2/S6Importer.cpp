@@ -1411,7 +1411,7 @@ public:
             TileElement* tileElement2 = map_get_track_element_at_of_type_seq(dst->TrackLocation, TrackElemType::Booster, 0);
 
             if (tileElement2 != nullptr)
-                dst->track_type = (TrackElemType::Booster << 2) | (src->track_type & 3);
+                dst->track_type = (TrackElemType::Booster << 2) | (src->track_direction & 3);
         }
         dst->next_vehicle_on_train = src->next_vehicle_on_train;
         dst->prev_vehicle_on_ride = src->prev_vehicle_on_ride;
