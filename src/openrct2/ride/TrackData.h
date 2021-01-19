@@ -25,8 +25,8 @@ extern const uint8_t TrackPieceLengths[TrackElemType::Count];
 
 struct track_curve_chain
 {
-    uint64_t next;
-    uint64_t previous;
+    uint32_t next;
+    uint32_t previous;
 };
 
 extern const rct_trackdefinition FlatRideTrackDefinitions[TrackElemType::Count];

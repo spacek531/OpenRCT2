@@ -2088,6 +2088,7 @@ const track_curve_chain gTrackCurveChain[TrackElemType::Count] = {
     { TRACK_CURVE_NONE, TRACK_CURVE_NONE },
     { TRACK_CURVE_NONE, TRACK_CURVE_NONE },
     { TRACK_CURVE_NONE, TRACK_CURVE_NONE },
+    { RideConstructionSpecialPieceSelected | TrackElemType::Booster, RideConstructionSpecialPieceSelected | TrackElemType::Booster },
 };
 
 // rct2: 0x00999095
@@ -2348,6 +2349,7 @@ const track_curve_chain gFlatRideTrackCurveChain[TrackElemType::Count] = {
     { 0, 0 },
     { 0, 0 },
     { 0, 57088 },
+    { 0, 0 },
 };
 
 const track_descriptor gTrackDescriptors[142] = {

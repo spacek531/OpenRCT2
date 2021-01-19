@@ -425,7 +425,8 @@ static constexpr const rct_string_id RideConfigurationStringIds[TrackElemType::C
     0,                                      // 252
     STR_QUARTER_LOOP,                       // 253
     STR_QUARTER_LOOP,                       // 254
-    STR_QUARTER_LOOP                        // 255
+    STR_QUARTER_LOOP,                       // 255
+    STR_BOOSTER,                            // TrackElemType::Booster
 };
 // clang-format on
 
@@ -2513,7 +2514,7 @@ void window_ride_construction_update_active_elements_impl()
 
     window_ride_construction_update_map_selection();
 
-    _selectedTrackType = 255;
+    _selectedTrackType = TrackElemType::None;
     if (_rideConstructionState == RIDE_CONSTRUCTION_STATE_SELECTED)
     {
         if (sub_6C683D(
@@ -3898,7 +3899,7 @@ void ride_construction_tooldown_construct(const ScreenCoordsXY& screenCoords)
                 || z < 0)
             {
                 int32_t saveTrackDirection = _currentTrackPieceDirection;
-                int64_t saveCurrentTrackCurve = _currentTrackCurve;
+                int32_t saveCurrentTrackCurve = _currentTrackCurve;
                 int32_t savePreviousTrackSlopeEnd = _previousTrackSlopeEnd;
                 int32_t saveCurrentTrackSlopeEnd = _currentTrackSlopeEnd;
                 int32_t savePreviousTrackBankEnd = _previousTrackBankEnd;

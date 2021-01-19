@@ -13,7 +13,7 @@
 #include "../object/Object.h"
 #include "Ride.h"
 
-constexpr const uint64_t RideConstructionSpecialPieceSelected = 0x10000;
+constexpr const uint32_t RideConstructionSpecialPieceSelected = (1 << 16);
 
 constexpr const int32_t BLOCK_BRAKE_BASE_SPEED = 0x20364;
 

@@ -93,7 +93,7 @@ money32 _currentTrackPrice;
 uint16_t _numCurrentPossibleRideConfigurations;
 uint16_t _numCurrentPossibleSpecialTrackPieces;
 
-uint64_t _currentTrackCurve;
+uint32_t _currentTrackCurve;
 uint8_t _rideConstructionState;
 ride_id_t _currentRideIndex;
 
@@ -106,7 +106,7 @@ uint32_t _rideConstructionNextArrowPulse = 0;
 uint8_t _currentTrackSlopeEnd;
 uint8_t _currentTrackBankEnd;
 uint8_t _currentTrackLiftHill;
-uint8_t _currentTrackAlternative;
+track_type_t _currentTrackAlternative;
 track_type_t _selectedTrackType;
 
 uint8_t _previousTrackBankEnd;
@@ -1445,7 +1445,8 @@ void ride_construction_set_default_next_piece()
 
     const auto& rtd = ride->GetRideTypeDescriptor();
 
-    int32_t z, direction, trackType, curve, bank, slope;
+    track_type_t trackType;
+    int32_t z, direction, curve, bank, slope;
     track_begin_end trackBeginEnd;
     CoordsXYE xyElement;
     TileElement* tileElement;
@@ -1486,14 +1487,7 @@ void ride_construction_set_default_next_piece()
             }
             else
             {
-                if (TrackTypeIsBooster(ride->type, trackType))
-                {
-                    curve = RideConstructionSpecialPieceSelected | TrackElemType::Booster;
-                }
-                else
-                {
-                    curve = gTrackCurveChain[trackType].next;
-                }
+                curve = gTrackCurveChain[trackType].next;
                 bank = TrackDefinitions[trackType].bank_end;
                 slope = TrackDefinitions[trackType].vangle_end;
             }

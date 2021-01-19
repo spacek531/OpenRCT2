@@ -123,7 +123,7 @@ static bool window_ride_construction_update_state_get_track_element(track_type_t
         endBank = _previousTrackBankEnd;
     }
 
-    uint16_t curve = _currentTrackCurve;
+    uint32_t curve = _currentTrackCurve;
     if (curve == TrackElemType::None)
     {
         return false;
