@@ -34,9 +34,6 @@ struct track_curve_chain
     uint32_t previous;
 };
 
-extern const rct_trackdefinition FlatRideTrackDefinitions[TrackElemType::Count];
-extern const rct_trackdefinition TrackDefinitions[TrackElemType::Count];
-
 extern const track_curve_chain gTrackCurveChain[TrackElemType::Count];
 extern const track_curve_chain gFlatRideTrackCurveChain[TrackElemType::Count];
 
