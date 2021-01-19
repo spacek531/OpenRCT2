@@ -1403,6 +1403,16 @@ public:
         }
 
         dst->TrackLocation = { src->track_x, src->track_y, src->track_z };
+        if (dst->track_type && (src->track_type) >> 2 == TrackElemType::BoosterAlias)
+        {
+            // Merging hacks mean the track type that's appropriate for the ride type is not necessarily the track type the ride
+            // is on. It's possible to create unwanted behavior if a user layers booster track on top of spinning control track
+            // but this is unlikely since only two rides have spinning control track - by default they load as booster
+            TileElement* tileElement2 = map_get_track_element_at_of_type_seq(dst->TrackLocation, TrackElemType::Booster, 0);
+
+            if (tileElement2 != nullptr)
+                dst->track_type = (TrackElemType::Booster << 2) | (src->track_type & 3);
+        }
         dst->next_vehicle_on_train = src->next_vehicle_on_train;
         dst->prev_vehicle_on_ride = src->prev_vehicle_on_ride;
         dst->next_vehicle_on_ride = src->next_vehicle_on_ride;
