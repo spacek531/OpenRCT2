@@ -536,7 +536,7 @@ namespace RCT2
         {
             // Checking _s6.scenario_filename is generally more reliable as it survives renaming.
             // However, some WW/TT scenarios have this incorrectly set to "Six Flags Magic Mountain.SC6",
-            // so for those cases (as well as for SFMM proper, we’ll have to check the filename.
+            // so for those cases (as well as for SFMM proper, we�ll have to check the filename.
             if (String::Equals(_s6.scenario_filename, "Europe - European Cultural Festival.SC6"))
             {
                 // This scenario breaks pathfinding. Create passages between the worlds. (List is grouped by neighbouring
@@ -731,7 +731,7 @@ namespace RCT2
 
                 auto subtype = RCTEntryIndexToOpenRCT2EntryIndex(src->subtype);
                 auto* rideEntry = get_ride_entry(subtype);
-                // If the ride is tracked, we don’t need to check the vehicle any more.
+                // If the ride is tracked, we don�t need to check the vehicle any more.
                 if (!GetRideTypeDescriptor(src->type).HasFlag(RIDE_TYPE_FLAG_FLAT_RIDE))
                 {
                     _isFlatRide[index] = false;

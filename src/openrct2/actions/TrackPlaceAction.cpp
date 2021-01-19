@@ -539,6 +539,11 @@ GameActions::Result TrackPlaceAction::Execute() const
                     ride->lifecycle_flags |= RIDE_LIFECYCLE_CABLE_LIFT_HILL_COMPONENT_USED;
                     ride->CableLiftLoc = mapLoc;
                     break;
+                case TrackElemType::DiagBlockBrakes:
+                    if (trackBlock->index != 0)
+                    {
+                        break;
+                    }
                 case TrackElemType::BlockBrakes:
                 {
                     ride->num_block_brakes++;
@@ -627,6 +632,14 @@ GameActions::Result TrackPlaceAction::Execute() const
                 break;
             case TrackElemType::Brakes:
                 trackElement->SetBrakeClosed(true);
+                break;
+            case TrackElemType::DiagBrakes:
+                if (trackBlock->index != 0)
+                {
+                    break;
+                }
+            case TrackElemType::Brakes:
+                tileElement->AsTrack()->SetBrakeClosed(true);
                 break;
         }
 

@@ -378,7 +378,7 @@ public:
     void RemoveVehicles();
     /**
      * Updates all pieces of the ride to match the internal ride type. (Track pieces can have different ride types from the ride
-     * they belong to, to enable “merging”.)
+     * they belong to, to enable �merging�.)
      */
     void UpdateRideTypeForAllPieces();
 
