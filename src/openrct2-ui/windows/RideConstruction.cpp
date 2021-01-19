@@ -269,7 +269,7 @@ static constexpr const rct_string_id RideConfigurationStringIds[] = {
     0,                                      // 97
     0,                                      // 98
     STR_BRAKES,                             // 99
-    STR_SPINNING_CONTROL_TOGGLE_TRACK,      // 100
+    STR_BOOSTER,                            // 100
     0,                                      // 101
     STR_HELIX_UP_LARGE,                     // 102
     STR_HELIX_UP_LARGE,                     // 103
@@ -424,7 +424,8 @@ static constexpr const rct_string_id RideConfigurationStringIds[] = {
     0,                                      // 252
     STR_QUARTER_LOOP,                       // 253
     STR_QUARTER_LOOP,                       // 254
-    STR_QUARTER_LOOP                        // 255
+    STR_QUARTER_LOOP,                       // 255
+    STR_SPINNING_CONTROL_TOGGLE_TRACK,      // 256
 };
 // clang-format on
 
@@ -3842,7 +3843,7 @@ void ride_construction_tooldown_construct(const ScreenCoordsXY& screenCoords)
                 || z < 0)
             {
                 int32_t saveTrackDirection = _currentTrackPieceDirection;
-                int32_t saveCurrentTrackCurve = _currentTrackCurve;
+                auto saveCurrentTrackCurve = _currentTrackCurve;
                 int32_t savePreviousTrackSlopeEnd = _previousTrackSlopeEnd;
                 int32_t saveCurrentTrackSlopeEnd = _currentTrackSlopeEnd;
                 int32_t savePreviousTrackBankEnd = _previousTrackBankEnd;
