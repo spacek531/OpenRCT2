@@ -1045,6 +1045,2512 @@ const uint8_t FlatRideTrackSequenceProperties[][MaxSequencesPerPiece] = {
     { 0 }, // 256
 };
 
+#define TRACK_BLOCK_END { 255, 255, 255, 255, 255, {255, 255}, 255 }
+
+static constexpr const rct_preview_track TrackBlocksFlat[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksEndStation[] = {
+    { 0, 0, 0, 0, 0,{ 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksBeginStation[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksMiddleStation[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksUp60[] = {
+    { 0, 0, 0, 0, 64, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksFlatToUp25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksUp25ToUp60[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksUp60ToUp25[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksUp25ToFlat[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDown25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDown60[] = {
+    { 0, 0, 0, 0, 64, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksFlatToDown25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDown25ToDown60[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDown60ToDown25[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDown25ToFlat[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn5Tiles[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 0, 0, { 0b0111, 0 }, 0 },
+    { 6, -64, -64, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightQuarterTurn5Tiles[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 0, 0, { 0b1011, 0 }, 0 },
+    { 6, -64, 64, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksFlatToLeftBank[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksFlatToRightBank[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftBankToFlat[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightBankToFlat[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksBankedLeftQuarterTurn5Tiles[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 0, 0, { 0b0111, 0 }, 0 },
+    { 6, -64, -64, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksBankedRightQuarterTurn5Tiles[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 0, 0, { 0b1011, 0 }, 0 },
+    { 6, -64, 64, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftBankToUp25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightBankToUp25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksUp25ToLeftBank[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksUp25ToRightBank[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftBankToDown25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightBankToDown25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDown25ToLeftBank[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDown25ToRightBank[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftBank[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightBank[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn5TilesUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    { 1, 0, -32, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 16, 16, { 0b0111, 0b0100 }, 0 },
+    { 3, -32, -32, 24, 16, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 48, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 32, 16, { 0b0111, 0b0100 }, 0 },
+    { 6, -64, -64, 48, 16, { 0b1111, 0b0110 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightQuarterTurn5TilesUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    { 1, 0, 32, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 16, 16, { 0b1011, 0b1000 }, 0 },
+    { 3, -32, 32, 24, 16, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 48, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 32, 16, { 0b1011, 0b1000 }, 0 },
+    { 6, -64, 64, 48, 16, { 0b1111, 0b1001 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn5TilesDown25[] = {
+    { 0, 0, 0, 48, 16, { 0b1111, 0b0011 }, 0 },
+    { 1, 0, -32, 48, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 32, 16, { 0b0111, 0b0001 }, 0 },
+    { 3, -32, -32, 24, 16, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 16, 16, { 0b0111, 0b0001 }, 0 },
+    { 6, -64, -64, 0, 16, { 0b1111, 0b1001 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightQuarterTurn5TilesDown25[] = {
+    { 0, 0, 0, 48, 16, { 0b1111, 0b0011 }, 0 },
+    { 1, 0, 32, 48, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 32, 16, { 0b1011, 0b0010 }, 0 },
+    { 3, -32, 32, 24, 16, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 16, 16, { 0b1011, 0b0010 }, 0 },
+    { 6, -64, 64, 0, 16, { 0b1111, 0b0110 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksSBendLeft[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 2, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
+    { 3, -64, -32, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksSBendRight[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 2, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
+    { 3, -64, 32, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftVerticalLoop[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    { 1, -32, 0, 16, 16, { 0b1111, 0b1100 }, 0 },
+    { 2, -64, 0, 32, 96, { 0b0010, 0 }, 0 },
+    { 3, -32, 0, 120, 16, { 0b0110, 0 }, 0 },
+    { 4, -32, -32, 120, 0, { 0b0001, 0 }, 0 },
+    { 5, 0, 0, 120, 0, { 0b0100, 0 }, 0 },
+    { 6, 0, -32, 120, 16, { 0b1001, 0 }, 0 },
+    { 7, 32, -32, 32, 96, { 0b1000, 0 }, 0 },
+    { 8, 0, -32, 16, 16, { 0b1111, 0b0011 }, 0 },
+    { 9, -32, -32, 0, 16, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightVerticalLoop[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    { 1, -32, 0, 16, 16, { 0b1111, 0b1100 }, 0 },
+    { 2, -64, 0, 32, 96, { 0b0001, 0 }, 0 },
+    { 3, -32, 0, 120, 16, { 0b1001, 0 }, 0 },
+    { 4, -32, 32, 120, 0, { 0b0010, 0 }, 0 },
+    { 5, 0, 0, 120, 0, { 0b1000, 0 }, 0 },
+    { 6, 0, 32, 120, 16, { 0b0110, 0 }, 0 },
+    { 7, 32, 32, 32, 96, { 0b0100, 0 }, 0 },
+    { 8, 0, 32, 16, 16, { 0b1111, 0b0011 }, 0 },
+    { 9, -32, 32, 0, 16, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn3Tiles[] = {
+    { 0, 0, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0010, 0 }, 0 },
+    { 3, -32, -32, 0, 0, { 0b0111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightQuarterTurn3Tiles[] = {
+    { 0, 0, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0001, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1011, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftBankedQuarterTurn3Tiles[] = {
+    { 0, 0, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0010, 0 }, 0 },
+    { 3, -32, -32, 0, 0, { 0b0111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightBankedQuarterTurn3Tiles[] = {
+    { 0, 0, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0001, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1011, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn3TilesUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b0111, 0b0100 }, 0 },
+    { 1, 0, -32, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 16, 0, { 0b0010, 0 }, 0 },
+    { 3, -32, -32, 16, 16,{ 0b0111, 0b0110 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightQuarterTurn3TilesUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1011, 0b1000 }, 0 },
+    { 1, 0, 32, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 16, 0, { 0b0001, 0 }, 0 },
+    { 3, -32, 32, 16, 16,{ 0b1011, 0b1001 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn3TilesDown25[] = {
+    { 0, 0, 0, 16, 16,{ 0b0111, 0b0011 }, 0 },
+    { 1, 0, -32, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 16, 0, { 0b0010, 0 }, 0 },
+    { 3, -32, -32, 0, 16, { 0b0111, 0b0001 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightQuarterTurn3TilesDown25[] = {
+    { 0, 0, 0, 16, 16, { 0b1011, 0b0011 }, 0 },
+    { 1, 0, 32, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 16, 0, { 0b0001, 0 }, 0 },
+    { 3, -32, 32, 0, 16, { 0b1011, 0b0010 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn1Tile[] = {
+    { 0, 0, 0, 0, 0, { 0b0111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightQuarterTurn1Tile[] = {
+    { 0, 0, 0, 0, 0, { 0b1011, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftTwistDownToUp[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 16, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightTwistDownToUp[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 16, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftTwistUpToDown[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -16, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, -16, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightTwistUpToDown[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -16, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, -16, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksHalfLoopUp[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, 0 },
+    { 1, -32, 0, 16, 16, { 0b1111, 0b1100 }, 0 },
+    { 2, -64, 0, 32, 96,{ 0b0011, 0 }, 0 },
+    { 3, -32, 0, 120, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksHalfLoopDown[] = {
+    { 0, 0, 0, -32, 32, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -120, 96,{ 0b0011, 0 }, 0 },
+    { 2, 0, 0, -136, 16, { 0b1111, 0b1100 }, 0 },
+    { 3, 32, 0, -152, 16, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftCorkscrewUp[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 24, 32, { 0b0111, 0 }, 0 },
+    { 2, -32, -32, 48, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightCorkscrewUp[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 24, 32, { 0b1011, 0 }, 0 },
+    { 2, -32, 32, 48, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftCorkscrewDown[] = {
+    { 0, 0, 0, -32, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -56, 32, { 0b0111, 0 }, 0 },
+    { 2, -32, -32, -80, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightCorkscrewDown[] = {
+    { 0, 0, 0, -32, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -56, 32, { 0b1011, 0 }, 0 },
+    { 2, -32, 32, -80, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksFlatToUp60[] = {
+    { 0, 0, 0, 0, 24, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksUp60ToFlat[] = {
+    { 0, 0, 0, 0, 24, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksFlatToDown60[] = {
+    { 0, 0, 0, 0, 24, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDown60ToFlat[] = {
+    { 0, 0, 0, 0, 24, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksTowerBase[] = {
+    { 0, 0, 0, 0, 64, { 0b1111, 0 }, 0 },
+    { 1, -32, -32, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, 0, -32, 0, 0, { 0b1111, 0 }, 0 },
+    { 5, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 6, 32, -32, 0, 0, { 0b1111, 0 }, 0 },
+    { 7, 32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 8, 32, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksTowerSection[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 32, 0, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_1 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksFlatCovered[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksUp25Covered[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksUp60Covered[] = {
+    { 0, 0, 0, 0, 64, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksFlatToUp25Covered[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksUp25ToUp60Covered[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksUp60ToUp25Covered[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksUp25ToFlatCovered[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDown25Covered[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDown60Covered[] = {
+    { 0, 0, 0, 0, 64, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksFlatToDown25Covered[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDown25ToDown60Covered[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDown60ToDown25Covered[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDown25ToFlatCovered[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn5TilesCovered[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 0, 0, { 0b0111, 0 }, 0 },
+    { 6, -64, -64, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightQuarterTurn5TilesCovered[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 0, 0, { 0b1011, 0 }, 0 },
+    { 6, -64, 64, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksSBendLeftCovered[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 2, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
+    { 3, -64, -32, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksSBendRightCovered[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 2, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
+    { 3, -64, 32, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn3TilesCovered[] = {
+    { 0, 0, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0010, 0 }, 0 },
+    { 3, -32, -32, 0, 0, { 0b0111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightQuarterTurn3TilesCovered[] = {
+    { 0, 0, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0001, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1011, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftHalfBankedHelixUpSmall[] = {
+    { 0, 0, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 4, { 0b0010, 0 }, 0 },
+    { 3, -32, -32, 0, 4, { 0b0111, 0 }, 0 },
+    { 4, -32, -64, 8, 0, { 0b1011, 0 }, 0 },
+    { 5, 0, -64, 8, 0, { 0b0100, 0b0000 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 6, -32, -96, 8, 4, { 0b0001, 0 }, 0 },
+    { 7, 0, -96, 8, 4, { 0b1011, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightHalfBankedHelixUpSmall[] = {
+    { 0, 0, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0b0000 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 4, { 0b0001, 0 }, 0 },
+    { 3, -32, 32, 0, 4, { 0b1011, 0 }, 0 },
+    { 4, -32, 64, 8, 0, { 0b0111, 0 }, 0 },
+    { 5, 0, 64, 8, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 6, -32, 96, 8, 4, { 0b0010, 0 }, 0 },
+    { 7, 0, 96, 8, 4, { 0b0111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftHalfBankedHelixDownSmall[] = {
+    { 0, 0, 0, 8, 4, { 0b0111, 0 }, 0 },
+    { 1, 0, -32, 8, 4, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 8, 0, { 0b0010, 0 }, 0 },
+    { 3, -32, -32, 8, 0, { 0b0111, 0 }, 0 },
+    { 4, -32, -64, 0, 4, { 0b1011, 0 }, 0 },
+    { 5, 0, -64, 0, 4, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 6, -32, -96, 0, 0, { 0b0001, 0 }, 0 },
+    { 7, 0, -96, 0, 0, { 0b1011, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightHalfBankedHelixDownSmall[] = {
+    { 0, 0, 0, 8, 4, { 0b1011, 0 }, 0 },
+    { 1, 0, 32, 8, 4, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 8, 0, { 0b0001, 0 }, 0 },
+    { 3, -32, 32, 8, 0, { 0b1011, 0 }, 0 },
+    { 4, -32, 64, 0, 4, { 0b0111, 0 }, 0 },
+    { 5, 0, 64, 0, 4, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 6, -32, 96, 0, 0, { 0b0010, 0 }, 0 },
+    { 7, 0, 96, 0, 0, { 0b0111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftHalfBankedHelixUpLarge[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 0, 4, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 0, 4, { 0b0111, 0 }, 0 },
+    { 6, -64, -64, 0, 4, { 0b1111, 0 }, 0 },
+    { 7, -64, -96, 8, 0, { 0b1111, 0 }, 0 },
+    { 8, -32, -96, 8, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 9, -64, -128, 8, 0, { 0b1011, 0 }, 0 },
+    { 10, -32, -128, 8, 0, { 0b1110, 0 }, 0 },
+    { 11, 0, -128, 8, 4, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 12, -32, -160, 8, 4, { 0b1011, 0 }, 0 },
+    { 13, 0, -160, 8, 4, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightHalfBankedHelixUpLarge[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 0, 4, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 0, 4, { 0b1011, 0 }, 0 },
+    { 6, -64, 64, 0, 4, { 0b1111, 0 }, 0 },
+    { 7, -64, 96, 8, 0, { 0b1111, 0 }, 0 },
+    { 8, -32, 96, 8, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 9, -64, 128, 8, 0, { 0b0111, 0 }, 0 },
+    { 10, -32, 128, 8, 0, { 0b1101, 0 }, 0 },
+    { 11, 0, 128, 8, 4, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 12, -32, 160, 8, 4, { 0b0111, 0 }, 0 },
+    { 13, 0, 160, 8, 4, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftHalfBankedHelixDownLarge[] = {
+    { 0, 0, 0, 8, 4, { 0b1111, 0 }, 0 },
+    { 1, 0, -32, 8, 4, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 8, 4, { 0b0111, 0 }, 0 },
+    { 3, -32, -32, 8, 0, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 8, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 8, 0, { 0b0111, 0 }, 0 },
+    { 6, -64, -64, 8, 0, { 0b1111, 0 }, 0 },
+    { 7, -64, -96, 0, 4, { 0b1111, 0 }, 0 },
+    { 8, -32, -96, 0, 4, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 9, -64, -128, 0, 4, { 0b1011, 0 }, 0 },
+    { 10, -32, -128, 0, 0, { 0b1110, 0 }, 0 },
+    { 11, 0, -128, 0, 0, { 0b0100, 0b0000 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 12, -32, -160, 0, 0, { 0b1011, 0 }, 0 },
+    { 13, 0, -160, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightHalfBankedHelixDownLarge[] = {
+    { 0, 0, 0, 8, 4, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 8, 4, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 8, 4, { 0b1011, 0 }, 0 },
+    { 3, -32, 32, 8, 0, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 8, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 8, 0, { 0b1011, 0 }, 0 },
+    { 6, -64, 64, 8, 0, { 0b1111, 0 }, 0 },
+    { 7, -64, 96, 0, 4, { 0b1111, 0 }, 0 },
+    { 8, -32, 96, 0, 4, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 9, -64, 128, 0, 4, { 0b0111, 0 }, 0 },
+    { 10, -32, 128, 0, 0, { 0b1101, 0 }, 0 },
+    { 11, 0, 128, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 12, -32, 160, 0, 0, { 0b0111, 0 }, 0 },
+    { 13, 0, 160, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn1TileUp60[] = {
+    { 0, 0, 0, 0, 64, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightQuarterTurn1TileUp60[] = {
+    { 0, 0, 0, 0, 64, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn1TileDown60[] = {
+    { 0, 0, 0, 0, 64, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftRightQuarterTurn1TileDown60[] = {
+    { 0, 0, 0, 0, 64, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksBrakes[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRotationControlToggle[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksMaze[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftQuarterBankedHelixLargeUp[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 0, 12, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 0, 12, { 0b0111, 0 }, 0 },
+    { 6, -64, -64, 0, 12, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightQuarterBankedHelixLargeUp[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 0, 12, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 0, 12, { 0b1011, 0 }, 0 },
+    { 6, -64, 64, 0, 12, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftQuarterBankedHelixLargeDown[] = {
+    { 0, 0, 0, 0, 12, { 0b1111, 0 }, 0 },
+    { 1, 0, -32, 0, 12, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 12, { 0b0111, 0 }, 0 },
+    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 0, 0, { 0b0111, 0 }, 0 },
+    { 6, -64, -64, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightQuarterBankedHelixLargeDown[] = {
+    { 0, 0, 0, 0, 12, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 0, 12, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 12, { 0b1011, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 0, 0, { 0b1011, 0 }, 0 },
+    { 6, -64, 64, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftQuarterHelixLargeUp[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 0, 12, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 0, 12, { 0b0111, 0 }, 0 },
+    { 6, -64, -64, 0, 12, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightQuarterHelixLargeUp[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 0, 12, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 0, 12, { 0b1011, 0 }, 0 },
+    { 6, -64, 64, 0, 12, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftQuarterHelixLargeDown[] = {
+    { 0, 0, 0, 0, 12, { 0b1111, 0 }, 0 },
+    { 1, 0, -32, 0, 12, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 12, { 0b0111, 0 }, 0 },
+    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 0, 0, { 0b0111, 0 }, 0 },
+    { 6, -64, -64, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightQuarterHelixLargeDown[] = {
+    { 0, 0, 0, 0, 12, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 0, 12, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 12, { 0b1011, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 0, 0, { 0b1011, 0 }, 0 },
+    { 6, -64, 64, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksUp25LeftBanked[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksUp25RightBanked[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksWaterfall[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRapids[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksOnRidePhoto[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDown25LeftBanked[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDown25RightBanked[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksWatersplash[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 3, -96, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 4, -128, 0, 0, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksFlatToUp60LongBase[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 16, 24, { 0b1111, 0 }, 0 },
+    { 3, -96, 0, 40, 48, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksUp60ToFlatLongBase[] = {
+    { 0, 0, 0, 0, 48, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 40, 48, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 64, 24, { 0b1111, 0 }, 0 },
+    { 3, -96, 0, 80, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksWhirlpool[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDown60ToFlatLongBase[] = {
+    { 0, 0, 0, 40, 48, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 16, 24, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 3, -96, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksFlatToDown60LongBase[] = {
+    { 0, 0, 0, 80, 8, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 64, 24, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 40, 48, { 0b1111, 0 }, 0 },
+    { 3, -96, 0, 0, 48, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksCableLiftHill[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
+    { 1, -32, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
+    { 2, -64, 0, -32, 32, { 0b1111, 0b0011 }, 0 },
+    { 3, -96, 0, -96, 64, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksReverseFreefallSlope[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 32, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 0, 48, { 0b1111, 0 }, 0 },
+    { 3, -96, 0, 0, 80, { 0b1111, 0 }, 0 },
+    { 4, -128, 0, 0, 160, { 0b1111, 0 }, 0 },
+    { 5, -192, 0, 0, 208, { 0b1111, 0 }, 0 },
+    { 6, -160, 0, 0, 208, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksReverseFreefallVertical[] = {
+    { 0, 0, 0, 0, 48, { 0b1111, 0 }, 0 },
+    { 1, 32, 0, 0, 48, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksUp90[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, 32, 0, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDown90[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, 32, 0, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksUp60ToUp90[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, 32, 0, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDown90ToDown60[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0b0011 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksUp90ToUp60[] = {
+    { 0, 0, 0, 0, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDown60ToDown90[] = {
+    { 0, 0, 0, 0, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, 32, 0, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksBrakeForDrop[] = {
+    { 0, 0, 0, 0, 24, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftEighthToDiag[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, -32, 0, 0, { 0b1000, 0 }, 0 },
+    { 3, -64, 0, 0, 0, { 0b0010, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 4, -64, -32, 0, 0, { 0b0001, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightEighthToDiag[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, 32, 0, 0, { 0b0100, 0 }, 0 },
+    { 3, -64, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 4, -64, 32, 0, 0, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftEighthToOrthogonal[] = {
+    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b0001, 0 }, 0 },
+    { 2, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, -64, 32, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightEighthToOrthogonal[] = {
+    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, 0 },
+    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, -32, 64, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftEighthBankToDiag[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, -32, 0, 0, { 0b1000, 0 }, 0 },
+    { 3, -64, 0, 0, 0, { 0b0010, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 4, -64, -32, 0, 0, { 0b0001, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightEighthBankToDiag[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, 32, 0, 0, { 0b0100, 0 }, 0 },
+    { 3, -64, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 4, -64, 32, 0, 0, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftEighthBankToOrthogonal[] = {
+    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b0001, 0 }, 0 },
+    { 2, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, -64, 32, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightEighthBankToOrthogonal[] = {
+    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, 0 },
+    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, -32, 64, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagFlat[] = {
+    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 16, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 16, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 16, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagUp60[] = {
+    { 0, 0, 0, 0, 64, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 64, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 64, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 64, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagFlatToUp25[] = {
+    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagUp25ToUp60[] = {
+    { 0, 0, 0, 0, 32, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 32, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 32, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 32, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagUp60ToUp25[] = {
+    { 0, 0, 0, 0, 32, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 32, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 32, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 32, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagUp25ToFlat[] = {
+    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagDown25[] = {
+    { 0, 0, 0, 0, 16, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 16, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 16, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 16, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagDown60[] = {
+    { 0, 0, 0, 0, 64, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 64, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 64, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 64, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagFlatToDown25[] = {
+    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagDown25ToDown60[] = {
+    { 0, 0, 0, 0, 32, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 32, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 32, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 32, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagDown60ToDown25[] = {
+    { 0, 0, 0, 0, 32, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 32, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 32, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 32, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagDown25ToFlat[] = {
+    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagFlatToUp60[] = {
+    { 0, 0, 0, 0, 24, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 24, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 24, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 24, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagUp60ToFlat[] = {
+    { 0, 0, 0, 0, 24, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 24, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 24, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 24, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagFlatToDown60[] = {
+    { 0, 0, 0, 0, 24, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 24, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 24, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 24, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagDown60ToFlat[] = {
+    { 0, 0, 0, 0, 24, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 24, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 24, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 24, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagFlatToLeftBank[] = {
+    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagFlatToRightBank[] = {
+    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagLeftBankToFlat[] = {
+    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagRightBankToFlat[] = {
+    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagLeftBankToUp25[] = {
+    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagRightBankToUp25[] = {
+    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagUp25ToLeftBank[] = {
+    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagUp25ToRightBank[] = {
+    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagLeftBankToDown25[] = {
+    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagRightBankToDown25[] = {
+    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagDown25ToLeftBank[] = {
+    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagDown25ToRightBank[] = {
+    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagLeftBank[] = {
+    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDiagRightBank[] = {
+    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLogFlumeReverser[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksSpinningTunnel[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftBarrelRollUpToDown[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 0, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightBarrelRollUpToDown[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 0, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftBarrelRollDownToUp[] = {
+    { 0, 0, 0, -32, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -32, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, -32, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightBarrelRollDownToUp[] = {
+    { 0, 0, 0, -32, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -32, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, -32, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftBankToLeftQuarterTurn3TilesUp25[] = {
+    { 0, 0, 0, 0, 0, { 0b0111, 0b0100 }, 0 },
+    { 1, 0, -32, 0, 16, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 16, { 0b0010, 0 }, 0 },
+    { 3, -32, -32, 16, 16,{ 0b0111, 0b0110 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightBankToRightQuarterTurn3TilesUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1011, 0b1000 }, 0 },
+    { 1, 0, 32, 0, 16, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 16, { 0b0001, 0 }, 0 },
+    { 3, -32, 32, 16, 16,{ 0b1011, 0b1001 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn3TilesDown25ToLeftBank[] = {
+    { 0, 0, 0, 16, 16,{ 0b0111, 0b0011 }, 0 },
+    { 1, 0, -32, 0, 16, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 16, { 0b0010, 0 }, 0 },
+    { 3, -32, -32, 0, 0, { 0b0111, 0b0001 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightQuarterTurn3TilesDown25ToRightBank[] = {
+    { 0, 0, 0, 16, 16, { 0b1011, 0b0011 }, 0 },
+    { 1, 0, 32, 0, 16, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 16, { 0b0001, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1011, 0b0010 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksPoweredLift[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftLargeHalfLoopUp[] = {
+    { 0, 0, 0, 0, 24, { 0b1111, 0b1100 }, 0 },
+    { 1, -32, 0, 16, 40, { 0b1111, 0b1100 }, 0 },
+    { 2, -64, 0, 32, 56, { 0b1111, 0 }, 0 },
+    { 3, -96, 0, 64, 192, { 0b1111, 0 }, 0 },
+    { 4, -128, -32, 120, 96, { 0b1111, 0 }, 0 },
+    { 5, -96, -32, 64, 192, { 0b1111, 0 }, 0 },
+    { 6, -64, -32, 248, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightLargeHalfLoopUp[] = {
+    { 0, 0, 0, 0, 24, { 0b1111, 0b1100 }, 0 },
+    { 1, -32, 0, 16, 40, { 0b1111, 0b1100 }, 0 },
+    { 2, -64, 0, 32, 56, { 0b1111, 0 }, 0 },
+    { 3, -96, 0, 64, 192, { 0b1111, 0 }, 0 },
+    { 4, -128, 32, 120, 96, { 0b1111, 0 }, 0 },
+    { 5, -96, 32, 64, 192, { 0b1111, 0 }, 0 },
+    { 6, -64, 32, 248, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightLargeHalfLoopDown[] = {
+    { 0, 0, 0, -32, 24, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -216, 192, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, -160, 96, { 0b1111, 0 }, 0 },
+    { 3, -32, -32, -216, 192, { 0b1111, 0 }, 0 },
+    { 4, 0, -32, -248, 56, { 0b1111, 0 }, 0 },
+    { 5, 32, -32, -264, 40, { 0b1111, 0b1100 }, 0 },
+    { 6, 64, -32, -280, 24, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftLargeHalfLoopDown[] = {
+    { 0, 0, 0, -32, 24, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -216, 192, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, -160, 96, { 0b1111, 0 }, 0 },
+    { 3, -32, 32, -216, 192, { 0b1111, 0 }, 0 },
+    { 4, 0, 32, -248, 56, { 0b1111, 0 }, 0 },
+    { 5, 32, 32, -264, 40, { 0b1111, 0b1100 }, 0 },
+    { 6, 64, 32, -280, 24, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftFlyerTwistUp[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -16, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, -16, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightFlyerTwistUp[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -16, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, -16, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftFlyerTwistDown[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 16, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightFlyerTwistDown[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 16, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksFlyerHalfLoopUp[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, 0 },
+    { 1, -32, 0, 16, 16, { 0b1111, 0b1100 }, 0 },
+    { 2, -64, 0, 32, 96,{ 0b0011, 0 }, 0 },
+    { 3, -32, 0, 120, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksFlyerHalfLoopDown[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -88, 96,{ 0b0011, 0 }, 0 },
+    { 2, 0, 0, -104, 16, { 0b1111, 0b1100 }, 0 },
+    { 3, 32, 0, -120, 16, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftFlyerCorkscrewUp[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 24, 32, { 0b0111, 0 }, 0 },
+    { 2, -32, -32, 48, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightFlyerCorkscrewUp[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 24, 32, { 0b1011, 0 }, 0 },
+    { 2, -32, 32, 48, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftFlyerCorkscrewDown[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -24, 32, { 0b0111, 0 }, 0 },
+    { 2, -32, -32, -48, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightFlyerCorkscrewDown[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -24, 32, { 0b1011, 0 }, 0 },
+    { 2, -32, 32, -48, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksHeartLineTransferUp[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 32, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 16, 0, { 0b1111, 0 }, 0 },
+    { 3, 0, 0, 32, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksHeartLineTransferDown[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, -32, 32, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, -16, 0, { 0b1111, 0 }, 0 },
+    { 3, 0, 0, -32, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftHeartLineRoll[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, -96, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, -128, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 5, -160, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightHeartLineRoll[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, -96, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, -128, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 5, -160, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksMinigolfHoleA[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksMinigolfHoleB[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksMinigolfHoleC[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksMinigolfHoleD[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksMinigolfHoleE[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, -32, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksMultiDimInvertedFlatToDown90QuarterLoop[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, -32, 0, -40, 32, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 2, -64, 0, -96, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 3, -96, 0, -96, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksUp90ToInvertedFlatQuarterLoop[] = {
+    { 0, 0, 0, 0, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, 32, 0, 56, 32, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 2, 64, 0, 96, 16, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksInvertedFlatToDown90QuarterLoop[] = {
+    { 0, 0, 0, -32, 16, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, -32, 0, -72, 32, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 2, -64, 0, -128, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 3, -96, 0, -128, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftCurvedLiftHill[] = {
+    { 0, 0, 0, 0, 0, { 0b0111, 0 }, 0 },
+    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0010, 0 }, 0 },
+    { 3, -32, -32, 0, 8, { 0b0111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightCurvedLiftHill[] = {
+    { 0, 0, 0, 0, 0, { 0b1011, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 0, 8, { 0b0001, 0 }, 0 },
+    { 3, -32, 32, 0, 8, { 0b1011, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftReverser[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, -32, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, -32, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, -64, -32, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 5, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightReverser[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, -64, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 5, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksAirThrustTopCap[] = {
+    { 0, 0, 0, 0, 32, { 0b1111, 0 }, 0 },
+    { 1, 32, 0, 0, 32, { 0b1111, 0 }, 0 },
+    { 2, -64, 0, 0, 32, { 0b1111, 0 }, 0 },
+    { 3, -32, 0, 0, 32, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksAirThrustVerticalDown[] = {
+    { 0, 0, 0, 0, 48, { 0b1111, 0 }, 0 },
+    { 1, 32, 0, 0, 48, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksAirThrustVerticalDownToLevel[] = {
+    { 0, 0, 0, 0, 208, { 0b1111, 0 }, 0 },
+    { 1, 32, 0, 0, 208, { 0b1111, 0 }, 0 },
+    { 2, -32, 0, 0, 160, { 0b1111, 0 }, 0 },
+    { 3, -64, 0, 0, 80, { 0b1111, 0 }, 0 },
+    { 4, -96, 0, 0, 48, { 0b1111, 0 }, 0 },
+    { 5, -128, 0, 0, 32, { 0b1111, 0 }, 0 },
+    { 6, -160, 0, 0, 16, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksBlockBrakes[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftBankedQuarterTurn3TileUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b0111, 0b0100 }, 0 },
+    { 1, 0, -32, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 16, 0, { 0b0010, 0 }, 0 },
+    { 3, -32, -32, 16, 16,{ 0b0111, 0b0110 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightBankedQuarterTurn3TileUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1011, 0b1000 }, 0 },
+    { 1, 0, 32, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 16, 0, { 0b0001, 0 }, 0 },
+    { 3, -32, 32, 16, 16,{ 0b1011, 0b1001 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftBankedQuarterTurn3TileDown25[] = {
+    { 0, 0, 0, 16, 16,{ 0b0111, 0b0011 }, 0 },
+    { 1, 0, -32, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 16, 0, { 0b0010, 0 }, 0 },
+    { 3, -32, -32, 0, 16, { 0b0111, 0b0001 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightBankedQuarterTurn3TileDown25[] = {
+    { 0, 0, 0, 16, 16, { 0b1011, 0b0011 }, 0 },
+    { 1, 0, 32, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 16, 0, { 0b0001, 0 }, 0 },
+    { 3, -32, 32, 0, 16, { 0b1011, 0b0010 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftBankedQuarterTurn5TileUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    { 1, 0, -32, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 16, 16, { 0b0111, 0b0100 }, 0 },
+    { 3, -32, -32, 24, 16, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 48, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 32, 16, { 0b0111, 0b0100 }, 0 },
+    { 6, -64, -64, 48, 16, { 0b1111, 0b0110 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightBankedQuarterTurn5TileUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    { 1, 0, 32, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 16, 16, { 0b1011, 0b1000 }, 0 },
+    { 3, -32, 32, 24, 16, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 48, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 32, 16, { 0b1011, 0b1000 }, 0 },
+    { 6, -64, 64, 48, 16, { 0b1111, 0b1001 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftBankedQuarterTurn5TileDown25[] = {
+    { 0, 0, 0, 48, 16, { 0b1111, 0b0011 }, 0 },
+    { 1, 0, -32, 48, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 32, 16, { 0b0111, 0b0001 }, 0 },
+    { 3, -32, -32, 24, 16, { 0b1101, 0 }, 0 },
+    { 4, -32, -64, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, -32, 16, 16, { 0b0111, 0b0001 }, 0 },
+    { 6, -64, -64, 0, 16, { 0b1111, 0b1001 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightBankedQuarterTurn5TileDown25[] = {
+    { 0, 0, 0, 48, 16, { 0b1111, 0b0011 }, 0 },
+    { 1, 0, 32, 48, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 2, -32, 0, 32, 16, { 0b1011, 0b0010 }, 0 },
+    { 3, -32, 32, 24, 16, { 0b1110, 0 }, 0 },
+    { 4, -32, 64, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
+    { 5, -64, 32, 16, 16, { 0b1011, 0b0010 }, 0 },
+    { 6, -64, 64, 0, 16, { 0b1111, 0b0110 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksUp25ToLeftBankedUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksUp25ToRightBankedUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftBankedUp25ToUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightBankedUp25ToUp25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDown25ToLeftBankedDown25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksDown25ToRightBankedDown25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftBankedDown25ToDown25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightBankedDown25ToDown25[] = {
+    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftBankedFlatToLeftBankedUp25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightBankedFlatToRightBankedUp25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftBankedUp25ToLeftBankedFlat[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightBankedUp25ToRightBankedFlat[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftBankedFlatToLeftBankedDown25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightBankedFlatToRightBankedDown25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftBankedDown25ToLeftBankedFlat[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightBankedDown25ToRightBankedFlat[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlockFlatToLeftBankedUp25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlockFlatToRightBankedUp25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftBankedUp25ToFlat[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightBankedUp25ToFlat[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksFlatToLeftBankedDown25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksFlatToRightBankedDown25[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftBankedDown25ToFlat[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightBankedDown25ToFlat[] = {
+    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn1TileUp90[] = {
+    { 0, 0, 0, 0, 72, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, 0, 32, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightQuarterTurn1TileUp90[] = {
+    { 0, 0, 0, 0, 72, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, 0, -32, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn1TileDown90[] = {
+    { 0, 0, 0, 0, 72, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, 0, 32, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksRightQuarterTurn1TileDown90[] = {
+    { 0, 0, 0, 0, 72, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, 0, -32, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksMultiDimUp90ToInvertedFlatQuarterLoop[] = {
+    { 0, 0, 0, 0, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, 32, 0, 56, 32, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 2, 64, 0, 96, 16, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksMultiDimFlatToDown90QuarterLoop[] = {
+    { 0, 0, 0, -32, 16, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, -32, 0, -72, 32, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 2, -64, 0, -128, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 3, -96, 0, -128, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track TrackBlocksMultiDimInvertedUp90ToFlatQuarterLoop[] = {
+    { 0, 0, 0, 32, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 1, 32, 0, 88, 32, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    { 2, 64, 0, 128, 16, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
+    TRACK_BLOCK_END
+};
+
+// rct2: 0x00994638
+const rct_preview_track *TrackBlocks[TrackElemType::Count] = {
+    TrackBlocksFlat,
+    TrackBlocksEndStation,
+    TrackBlocksBeginStation,
+    TrackBlocksMiddleStation,
+    TrackBlocksUp25,
+    TrackBlocksUp60,
+    TrackBlocksFlatToUp25,
+    TrackBlocksUp25ToUp60,
+    TrackBlocksUp60ToUp25,
+    TrackBlocksUp25ToFlat,
+    TrackBlocksDown25,
+    TrackBlocksDown60,
+    TrackBlocksFlatToDown25,
+    TrackBlocksDown25ToDown60,
+    TrackBlocksDown60ToDown25,
+    TrackBlocksDown25ToFlat,
+    TrackBlocksLeftQuarterTurn5Tiles,
+    TrackBlocksRightQuarterTurn5Tiles,
+    TrackBlocksFlatToLeftBank,
+    TrackBlocksFlatToRightBank,
+    TrackBlocksLeftBankToFlat,
+    TrackBlocksRightBankToFlat,
+    TrackBlocksBankedLeftQuarterTurn5Tiles,
+    TrackBlocksBankedRightQuarterTurn5Tiles,
+    TrackBlocksLeftBankToUp25,
+    TrackBlocksRightBankToUp25,
+    TrackBlocksUp25ToLeftBank,
+    TrackBlocksUp25ToRightBank,
+    TrackBlocksLeftBankToDown25,
+    TrackBlocksRightBankToDown25,
+    TrackBlocksDown25ToLeftBank,
+    TrackBlocksDown25ToRightBank,
+    TrackBlocksLeftBank,
+    TrackBlocksRightBank,
+    TrackBlocksLeftQuarterTurn5TilesUp25,
+    TrackBlocksRightQuarterTurn5TilesUp25,
+    TrackBlocksLeftQuarterTurn5TilesDown25,
+    TrackBlocksRightQuarterTurn5TilesDown25,
+    TrackBlocksSBendLeft,
+    TrackBlocksSBendRight,
+    TrackBlocksLeftVerticalLoop,
+    TrackBlocksRightVerticalLoop,
+    TrackBlocksLeftQuarterTurn3Tiles,
+    TrackBlocksRightQuarterTurn3Tiles,
+    TrackBlocksLeftBankedQuarterTurn3Tiles,
+    TrackBlocksRightBankedQuarterTurn3Tiles,
+    TrackBlocksLeftQuarterTurn3TilesUp25,
+    TrackBlocksRightQuarterTurn3TilesUp25,
+    TrackBlocksLeftQuarterTurn3TilesDown25,
+    TrackBlocksRightQuarterTurn3TilesDown25,
+    TrackBlocksLeftQuarterTurn1Tile,
+    TrackBlocksRightQuarterTurn1Tile,
+    TrackBlocksLeftTwistDownToUp,
+    TrackBlocksRightTwistDownToUp,
+    TrackBlocksLeftTwistUpToDown,
+    TrackBlocksRightTwistUpToDown,
+    TrackBlocksHalfLoopUp,
+    TrackBlocksHalfLoopDown,
+    TrackBlocksLeftCorkscrewUp,
+    TrackBlocksRightCorkscrewUp,
+    TrackBlocksLeftCorkscrewDown,
+    TrackBlocksRightCorkscrewDown,
+    TrackBlocksFlatToUp60,
+    TrackBlocksUp60ToFlat,
+    TrackBlocksFlatToDown60,
+    TrackBlocksDown60ToFlat,
+    TrackBlocksTowerBase,
+    TrackBlocksTowerSection,
+    TrackBlocksFlatCovered,
+    TrackBlocksUp25Covered,
+    TrackBlocksUp60Covered,
+    TrackBlocksFlatToUp25Covered,
+    TrackBlocksUp25ToUp60Covered,
+    TrackBlocksUp60ToUp25Covered,
+    TrackBlocksUp25ToFlatCovered,
+    TrackBlocksDown25Covered,
+    TrackBlocksDown60Covered,
+    TrackBlocksFlatToDown25Covered,
+    TrackBlocksDown25ToDown60Covered,
+    TrackBlocksDown60ToDown25Covered,
+    TrackBlocksDown25ToFlatCovered,
+    TrackBlocksLeftQuarterTurn5TilesCovered,
+    TrackBlocksRightQuarterTurn5TilesCovered,
+    TrackBlocksSBendLeftCovered,
+    TrackBlocksSBendRightCovered,
+    TrackBlocksLeftQuarterTurn3TilesCovered,
+    TrackBlocksRightQuarterTurn3TilesCovered,
+    TrackBlocksLeftHalfBankedHelixUpSmall,
+    TrackBlocksRightHalfBankedHelixUpSmall,
+    TrackBlocksLeftHalfBankedHelixDownSmall,
+    TrackBlocksRightHalfBankedHelixDownSmall,
+    TrackBlocksLeftHalfBankedHelixUpLarge,
+    TrackBlocksRightHalfBankedHelixUpLarge,
+    TrackBlocksLeftHalfBankedHelixDownLarge,
+    TrackBlocksRightHalfBankedHelixDownLarge,
+    TrackBlocksLeftQuarterTurn1TileUp60,
+    TrackBlocksRightQuarterTurn1TileUp60,
+    TrackBlocksLeftQuarterTurn1TileDown60,
+    TrackBlocksLeftRightQuarterTurn1TileDown60,
+    TrackBlocksBrakes,
+    TrackBlocksRotationControlToggle,
+    TrackBlocksMaze,
+    TrackBlocksLeftQuarterBankedHelixLargeUp,
+    TrackBlocksRightQuarterBankedHelixLargeUp,
+    TrackBlocksLeftQuarterBankedHelixLargeDown,
+    TrackBlocksRightQuarterBankedHelixLargeDown,
+    TrackBlocksLeftQuarterHelixLargeUp,
+    TrackBlocksRightQuarterHelixLargeUp,
+    TrackBlocksLeftQuarterHelixLargeDown,
+    TrackBlocksRightQuarterHelixLargeDown,
+    TrackBlocksUp25LeftBanked,
+    TrackBlocksUp25RightBanked,
+    TrackBlocksWaterfall,
+    TrackBlocksRapids,
+    TrackBlocksOnRidePhoto,
+    TrackBlocksDown25LeftBanked,
+    TrackBlocksDown25RightBanked,
+    TrackBlocksWatersplash,
+    TrackBlocksFlatToUp60LongBase,
+    TrackBlocksUp60ToFlatLongBase,
+    TrackBlocksWhirlpool,
+    TrackBlocksDown60ToFlatLongBase,
+    TrackBlocksFlatToDown60LongBase,
+    TrackBlocksCableLiftHill,
+    TrackBlocksReverseFreefallSlope,
+    TrackBlocksReverseFreefallVertical,
+    TrackBlocksUp90,
+    TrackBlocksDown90,
+    TrackBlocksUp60ToUp90,
+    TrackBlocksDown90ToDown60,
+    TrackBlocksUp90ToUp60,
+    TrackBlocksDown60ToDown90,
+    TrackBlocksBrakeForDrop,
+    TrackBlocksLeftEighthToDiag,
+    TrackBlocksRightEighthToDiag,
+    TrackBlocksLeftEighthToOrthogonal,
+    TrackBlocksRightEighthToOrthogonal,
+    TrackBlocksLeftEighthBankToDiag,
+    TrackBlocksRightEighthBankToDiag,
+    TrackBlocksLeftEighthBankToOrthogonal,
+    TrackBlocksRightEighthBankToOrthogonal,
+    TrackBlocksDiagFlat,
+    TrackBlocksDiagUp25,
+    TrackBlocksDiagUp60,
+    TrackBlocksDiagFlatToUp25,
+    TrackBlocksDiagUp25ToUp60,
+    TrackBlocksDiagUp60ToUp25,
+    TrackBlocksDiagUp25ToFlat,
+    TrackBlocksDiagDown25,
+    TrackBlocksDiagDown60,
+    TrackBlocksDiagFlatToDown25,
+    TrackBlocksDiagDown25ToDown60,
+    TrackBlocksDiagDown60ToDown25,
+    TrackBlocksDiagDown25ToFlat,
+    TrackBlocksDiagFlatToUp60,
+    TrackBlocksDiagUp60ToFlat,
+    TrackBlocksDiagFlatToDown60,
+    TrackBlocksDiagDown60ToFlat,
+    TrackBlocksDiagFlatToLeftBank,
+    TrackBlocksDiagFlatToRightBank,
+    TrackBlocksDiagLeftBankToFlat,
+    TrackBlocksDiagRightBankToFlat,
+    TrackBlocksDiagLeftBankToUp25,
+    TrackBlocksDiagRightBankToUp25,
+    TrackBlocksDiagUp25ToLeftBank,
+    TrackBlocksDiagUp25ToRightBank,
+    TrackBlocksDiagLeftBankToDown25,
+    TrackBlocksDiagRightBankToDown25,
+    TrackBlocksDiagDown25ToLeftBank,
+    TrackBlocksDiagDown25ToRightBank,
+    TrackBlocksDiagLeftBank,
+    TrackBlocksDiagRightBank,
+    TrackBlocksLogFlumeReverser,
+    TrackBlocksSpinningTunnel,
+    TrackBlocksLeftBarrelRollUpToDown,
+    TrackBlocksRightBarrelRollUpToDown,
+    TrackBlocksLeftBarrelRollDownToUp,
+    TrackBlocksRightBarrelRollDownToUp,
+    TrackBlocksLeftBankToLeftQuarterTurn3TilesUp25,
+    TrackBlocksRightBankToRightQuarterTurn3TilesUp25,
+    TrackBlocksLeftQuarterTurn3TilesDown25ToLeftBank,
+    TrackBlocksRightQuarterTurn3TilesDown25ToRightBank,
+    TrackBlocksPoweredLift,
+    TrackBlocksLeftLargeHalfLoopUp,
+    TrackBlocksRightLargeHalfLoopUp,
+    TrackBlocksRightLargeHalfLoopDown,
+    TrackBlocksLeftLargeHalfLoopDown,
+    TrackBlocksLeftFlyerTwistUp,
+    TrackBlocksRightFlyerTwistUp,
+    TrackBlocksLeftFlyerTwistDown,
+    TrackBlocksRightFlyerTwistDown,
+    TrackBlocksFlyerHalfLoopUp,
+    TrackBlocksFlyerHalfLoopDown,
+    TrackBlocksLeftFlyerCorkscrewUp,
+    TrackBlocksRightFlyerCorkscrewUp,
+    TrackBlocksLeftFlyerCorkscrewDown,
+    TrackBlocksRightFlyerCorkscrewDown,
+    TrackBlocksHeartLineTransferUp,
+    TrackBlocksHeartLineTransferDown,
+    TrackBlocksLeftHeartLineRoll,
+    TrackBlocksRightHeartLineRoll,
+    TrackBlocksMinigolfHoleA,
+    TrackBlocksMinigolfHoleB,
+    TrackBlocksMinigolfHoleC,
+    TrackBlocksMinigolfHoleD,
+    TrackBlocksMinigolfHoleE,
+    TrackBlocksMultiDimInvertedFlatToDown90QuarterLoop,
+    TrackBlocksUp90ToInvertedFlatQuarterLoop,
+    TrackBlocksInvertedFlatToDown90QuarterLoop,
+    TrackBlocksLeftCurvedLiftHill,
+    TrackBlocksRightCurvedLiftHill,
+    TrackBlocksLeftReverser,
+    TrackBlocksRightReverser,
+    TrackBlocksAirThrustTopCap,
+    TrackBlocksAirThrustVerticalDown,
+    TrackBlocksAirThrustVerticalDownToLevel,
+    TrackBlocksBlockBrakes,
+    TrackBlocksLeftBankedQuarterTurn3TileUp25,
+    TrackBlocksRightBankedQuarterTurn3TileUp25,
+    TrackBlocksLeftBankedQuarterTurn3TileDown25,
+    TrackBlocksRightBankedQuarterTurn3TileDown25,
+    TrackBlocksLeftBankedQuarterTurn5TileUp25,
+    TrackBlocksRightBankedQuarterTurn5TileUp25,
+    TrackBlocksLeftBankedQuarterTurn5TileDown25,
+    TrackBlocksRightBankedQuarterTurn5TileDown25,
+    TrackBlocksUp25ToLeftBankedUp25,
+    TrackBlocksUp25ToRightBankedUp25,
+    TrackBlocksLeftBankedUp25ToUp25,
+    TrackBlocksRightBankedUp25ToUp25,
+    TrackBlocksDown25ToLeftBankedDown25,
+    TrackBlocksDown25ToRightBankedDown25,
+    TrackBlocksLeftBankedDown25ToDown25,
+    TrackBlocksRightBankedDown25ToDown25,
+    TrackBlocksLeftBankedFlatToLeftBankedUp25,
+    TrackBlocksRightBankedFlatToRightBankedUp25,
+    TrackBlocksLeftBankedUp25ToLeftBankedFlat,
+    TrackBlocksRightBankedUp25ToRightBankedFlat,
+    TrackBlocksLeftBankedFlatToLeftBankedDown25,
+    TrackBlocksRightBankedFlatToRightBankedDown25,
+    TrackBlocksLeftBankedDown25ToLeftBankedFlat,
+    TrackBlocksRightBankedDown25ToRightBankedFlat,
+    TrackBlockFlatToLeftBankedUp25,
+    TrackBlockFlatToRightBankedUp25,
+    TrackBlocksLeftBankedUp25ToFlat,
+    TrackBlocksRightBankedUp25ToFlat,
+    TrackBlocksFlatToLeftBankedDown25,
+    TrackBlocksFlatToRightBankedDown25,
+    TrackBlocksLeftBankedDown25ToFlat,
+    TrackBlocksRightBankedDown25ToFlat,
+    TrackBlocksLeftQuarterTurn1TileUp90,
+    TrackBlocksRightQuarterTurn1TileUp90,
+    TrackBlocksLeftQuarterTurn1TileDown90,
+    TrackBlocksRightQuarterTurn1TileDown90,
+    TrackBlocksMultiDimUp90ToInvertedFlatQuarterLoop,
+    TrackBlocksMultiDimFlatToDown90QuarterLoop,
+    TrackBlocksMultiDimInvertedUp90ToFlatQuarterLoop
+};
+
+static constexpr const rct_preview_track FlatRideTrackBlocksLeftQuarterTurn1TileUp60[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, 32, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track FlatRideTrackBlocksUp25LeftBanked[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, 32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, 32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track FlatRideTrackBlocksUp25RightBanked[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, 0, 64, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, 0, 96, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, 32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 5, 32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 6, 32, 64, 0, 0, { 0b1111, 0 }, 0 },
+    { 7, 32, 96, 0, 0, { 0b1111, 0 }, 0 },
+    { 8, 64, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 9, 64, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 10, 64, 64, 0, 0, { 0b1111, 0 }, 0 },
+    { 11, 64, 96, 0, 0, { 0b1111, 0 }, 0 },
+    { 12, 96, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 13, 96, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 14, 96, 64, 0, 0, { 0b1111, 0 }, 0 },
+    { 15, 96, 96, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track FlatRideTrackBlocksDown25LeftBanked[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, 0, 64, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, 0, 96, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, 32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 5, 32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 6, 32, 64, 0, 0, { 0b1111, 0 }, 0 },
+    { 7, 32, 96, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track FlatRideTrackBlocksDown25RightBanked[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, 32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, 64, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track FlatRideTrackBlocksFlatToUp60LongBase[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track FlatRideTrackBlocksUp60ToFlatLongBase[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, 32, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track FlatRideTrackBlocksDown60ToFlatLongBase[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track FlatRideTrackBlocksFlatToDown60LongBase[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, 32, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track FlatRideTrackBlocksCableLiftHill[] = {
+    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 1, -32, -32, 0, 0, { 0b1111, 0 }, 0 },
+    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+    { 3, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 4, 0, -32, 0, 0, { 0b1111, 0 }, 0 },
+    { 5, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 6, 32, -32, 0, 0, { 0b1111, 0 }, 0 },
+    { 7, 32, 32, 0, 0, { 0b1111, 0 }, 0 },
+    { 8, 32, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
+    TRACK_BLOCK_END
+};
+
+static constexpr const rct_preview_track FlatRideTrackBlocksMultiDimInvertedUp90ToFlatQuarterLoop[] = {
+    TRACK_BLOCK_END
+};
+
+// rct2: 0x00994A38
+const rct_preview_track *FlatRideTrackBlocks[TrackElemType::Count] = {
+    TrackBlocksFlat,
+    TrackBlocksEndStation,
+    TrackBlocksBeginStation,
+    TrackBlocksMiddleStation,
+    TrackBlocksUp25,
+    TrackBlocksUp60,
+    TrackBlocksFlatToUp25,
+    TrackBlocksUp25ToUp60,
+    TrackBlocksUp60ToUp25,
+    TrackBlocksUp25ToFlat,
+    TrackBlocksDown25,
+    TrackBlocksDown60,
+    TrackBlocksFlatToDown25,
+    TrackBlocksDown25ToDown60,
+    TrackBlocksDown60ToDown25,
+    TrackBlocksDown25ToFlat,
+    TrackBlocksLeftQuarterTurn5Tiles,
+    TrackBlocksRightQuarterTurn5Tiles,
+    TrackBlocksFlatToLeftBank,
+    TrackBlocksFlatToRightBank,
+    TrackBlocksLeftBankToFlat,
+    TrackBlocksRightBankToFlat,
+    TrackBlocksBankedLeftQuarterTurn5Tiles,
+    TrackBlocksBankedRightQuarterTurn5Tiles,
+    TrackBlocksLeftBankToUp25,
+    TrackBlocksRightBankToUp25,
+    TrackBlocksUp25ToLeftBank,
+    TrackBlocksUp25ToRightBank,
+    TrackBlocksLeftBankToDown25,
+    TrackBlocksRightBankToDown25,
+    TrackBlocksDown25ToLeftBank,
+    TrackBlocksDown25ToRightBank,
+    TrackBlocksLeftBank,
+    TrackBlocksRightBank,
+    TrackBlocksLeftQuarterTurn5TilesUp25,
+    TrackBlocksRightQuarterTurn5TilesUp25,
+    TrackBlocksLeftQuarterTurn5TilesDown25,
+    TrackBlocksRightQuarterTurn5TilesDown25,
+    TrackBlocksSBendLeft,
+    TrackBlocksSBendRight,
+    TrackBlocksLeftVerticalLoop,
+    TrackBlocksRightVerticalLoop,
+    TrackBlocksLeftQuarterTurn3Tiles,
+    TrackBlocksRightQuarterTurn3Tiles,
+    TrackBlocksLeftBankedQuarterTurn3Tiles,
+    TrackBlocksRightBankedQuarterTurn3Tiles,
+    TrackBlocksLeftQuarterTurn3TilesUp25,
+    TrackBlocksRightQuarterTurn3TilesUp25,
+    TrackBlocksLeftQuarterTurn3TilesDown25,
+    TrackBlocksRightQuarterTurn3TilesDown25,
+    TrackBlocksLeftQuarterTurn1Tile,
+    TrackBlocksRightQuarterTurn1Tile,
+    TrackBlocksLeftTwistDownToUp,
+    TrackBlocksRightTwistDownToUp,
+    TrackBlocksLeftTwistUpToDown,
+    TrackBlocksRightTwistUpToDown,
+    TrackBlocksHalfLoopUp,
+    TrackBlocksHalfLoopDown,
+    TrackBlocksLeftCorkscrewUp,
+    TrackBlocksRightCorkscrewUp,
+    TrackBlocksLeftCorkscrewDown,
+    TrackBlocksRightCorkscrewDown,
+    TrackBlocksFlatToUp60,
+    TrackBlocksUp60ToFlat,
+    TrackBlocksFlatToDown60,
+    TrackBlocksDown60ToFlat,
+    TrackBlocksTowerBase,
+    TrackBlocksTowerSection,
+    TrackBlocksFlatCovered,
+    TrackBlocksUp25Covered,
+    TrackBlocksUp60Covered,
+    TrackBlocksFlatToUp25Covered,
+    TrackBlocksUp25ToUp60Covered,
+    TrackBlocksUp60ToUp25Covered,
+    TrackBlocksUp25ToFlatCovered,
+    TrackBlocksDown25Covered,
+    TrackBlocksDown60Covered,
+    TrackBlocksFlatToDown25Covered,
+    TrackBlocksDown25ToDown60Covered,
+    TrackBlocksDown60ToDown25Covered,
+    TrackBlocksDown25ToFlatCovered,
+    TrackBlocksLeftQuarterTurn5TilesCovered,
+    TrackBlocksRightQuarterTurn5TilesCovered,
+    TrackBlocksSBendLeftCovered,
+    TrackBlocksSBendRightCovered,
+    TrackBlocksLeftQuarterTurn3TilesCovered,
+    TrackBlocksRightQuarterTurn3TilesCovered,
+    TrackBlocksLeftHalfBankedHelixUpSmall,
+    TrackBlocksRightHalfBankedHelixUpSmall,
+    TrackBlocksLeftHalfBankedHelixDownSmall,
+    TrackBlocksRightHalfBankedHelixDownSmall,
+    TrackBlocksLeftHalfBankedHelixUpLarge,
+    TrackBlocksRightHalfBankedHelixUpLarge,
+    TrackBlocksLeftHalfBankedHelixDownLarge,
+    TrackBlocksRightHalfBankedHelixDownLarge,
+    FlatRideTrackBlocksLeftQuarterTurn1TileUp60,
+    TrackBlocksRightQuarterTurn1TileUp60,
+    TrackBlocksLeftQuarterTurn1TileDown60,
+    TrackBlocksLeftRightQuarterTurn1TileDown60,
+    TrackBlocksBrakes,
+    TrackBlocksRotationControlToggle,
+    TrackBlocksMaze,
+    TrackBlocksLeftQuarterBankedHelixLargeUp,
+    TrackBlocksRightQuarterBankedHelixLargeUp,
+    TrackBlocksLeftQuarterBankedHelixLargeDown,
+    TrackBlocksRightQuarterBankedHelixLargeDown,
+    TrackBlocksLeftQuarterHelixLargeUp,
+    TrackBlocksRightQuarterHelixLargeUp,
+    TrackBlocksLeftQuarterHelixLargeDown,
+    TrackBlocksRightQuarterHelixLargeDown,
+    FlatRideTrackBlocksUp25LeftBanked,
+    FlatRideTrackBlocksUp25RightBanked,
+    TrackBlocksWaterfall,
+    TrackBlocksRapids,
+    TrackBlocksOnRidePhoto,
+    FlatRideTrackBlocksDown25LeftBanked,
+    FlatRideTrackBlocksDown25RightBanked,
+    TrackBlocksWatersplash,
+    FlatRideTrackBlocksFlatToUp60LongBase,
+    FlatRideTrackBlocksUp60ToFlatLongBase,
+    TrackBlocksWhirlpool,
+    FlatRideTrackBlocksDown60ToFlatLongBase,
+    FlatRideTrackBlocksFlatToDown60LongBase,
+    FlatRideTrackBlocksCableLiftHill,
+    TrackBlocksReverseFreefallSlope,
+    TrackBlocksReverseFreefallVertical,
+    TrackBlocksUp90,
+    TrackBlocksDown90,
+    TrackBlocksUp60ToUp90,
+    TrackBlocksDown90ToDown60,
+    TrackBlocksUp90ToUp60,
+    TrackBlocksDown60ToDown90,
+    TrackBlocksBrakeForDrop,
+    TrackBlocksLeftEighthToDiag,
+    TrackBlocksRightEighthToDiag,
+    TrackBlocksLeftEighthToOrthogonal,
+    TrackBlocksRightEighthToOrthogonal,
+    TrackBlocksLeftEighthBankToDiag,
+    TrackBlocksRightEighthBankToDiag,
+    TrackBlocksLeftEighthBankToOrthogonal,
+    TrackBlocksRightEighthBankToOrthogonal,
+    TrackBlocksDiagFlat,
+    TrackBlocksDiagUp25,
+    TrackBlocksDiagUp60,
+    TrackBlocksDiagFlatToUp25,
+    TrackBlocksDiagUp25ToUp60,
+    TrackBlocksDiagUp60ToUp25,
+    TrackBlocksDiagUp25ToFlat,
+    TrackBlocksDiagDown25,
+    TrackBlocksDiagDown60,
+    TrackBlocksDiagFlatToDown25,
+    TrackBlocksDiagDown25ToDown60,
+    TrackBlocksDiagDown60ToDown25,
+    TrackBlocksDiagDown25ToFlat,
+    TrackBlocksDiagFlatToUp60,
+    TrackBlocksDiagUp60ToFlat,
+    TrackBlocksDiagFlatToDown60,
+    TrackBlocksDiagDown60ToFlat,
+    TrackBlocksDiagFlatToLeftBank,
+    TrackBlocksDiagFlatToRightBank,
+    TrackBlocksDiagLeftBankToFlat,
+    TrackBlocksDiagRightBankToFlat,
+    TrackBlocksDiagLeftBankToUp25,
+    TrackBlocksDiagRightBankToUp25,
+    TrackBlocksDiagUp25ToLeftBank,
+    TrackBlocksDiagUp25ToRightBank,
+    TrackBlocksDiagLeftBankToDown25,
+    TrackBlocksDiagRightBankToDown25,
+    TrackBlocksDiagDown25ToLeftBank,
+    TrackBlocksDiagDown25ToRightBank,
+    TrackBlocksDiagLeftBank,
+    TrackBlocksDiagRightBank,
+    TrackBlocksLogFlumeReverser,
+    TrackBlocksSpinningTunnel,
+    TrackBlocksLeftBarrelRollUpToDown,
+    TrackBlocksRightBarrelRollUpToDown,
+    TrackBlocksLeftBarrelRollDownToUp,
+    TrackBlocksRightBarrelRollDownToUp,
+    TrackBlocksLeftBankToLeftQuarterTurn3TilesUp25,
+    TrackBlocksRightBankToRightQuarterTurn3TilesUp25,
+    TrackBlocksLeftQuarterTurn3TilesDown25ToLeftBank,
+    TrackBlocksRightQuarterTurn3TilesDown25ToRightBank,
+    TrackBlocksPoweredLift,
+    TrackBlocksLeftLargeHalfLoopUp,
+    TrackBlocksRightLargeHalfLoopUp,
+    TrackBlocksRightLargeHalfLoopDown,
+    TrackBlocksLeftLargeHalfLoopDown,
+    TrackBlocksLeftFlyerTwistUp,
+    TrackBlocksRightFlyerTwistUp,
+    TrackBlocksLeftFlyerTwistDown,
+    TrackBlocksRightFlyerTwistDown,
+    TrackBlocksFlyerHalfLoopUp,
+    TrackBlocksFlyerHalfLoopDown,
+    TrackBlocksLeftFlyerCorkscrewUp,
+    TrackBlocksRightFlyerCorkscrewUp,
+    TrackBlocksLeftFlyerCorkscrewDown,
+    TrackBlocksRightFlyerCorkscrewDown,
+    TrackBlocksHeartLineTransferUp,
+    TrackBlocksHeartLineTransferDown,
+    TrackBlocksLeftHeartLineRoll,
+    TrackBlocksRightHeartLineRoll,
+    TrackBlocksMinigolfHoleA,
+    TrackBlocksMinigolfHoleB,
+    TrackBlocksMinigolfHoleC,
+    TrackBlocksMinigolfHoleD,
+    TrackBlocksMinigolfHoleE,
+    TrackBlocksMultiDimInvertedFlatToDown90QuarterLoop,
+    TrackBlocksUp90ToInvertedFlatQuarterLoop,
+    TrackBlocksInvertedFlatToDown90QuarterLoop,
+    TrackBlocksLeftCurvedLiftHill,
+    TrackBlocksRightCurvedLiftHill,
+    TrackBlocksLeftReverser,
+    TrackBlocksRightReverser,
+    TrackBlocksAirThrustTopCap,
+    TrackBlocksAirThrustVerticalDown,
+    TrackBlocksAirThrustVerticalDownToLevel,
+    TrackBlocksBlockBrakes,
+    TrackBlocksLeftBankedQuarterTurn3TileUp25,
+    TrackBlocksRightBankedQuarterTurn3TileUp25,
+    TrackBlocksLeftBankedQuarterTurn3TileDown25,
+    TrackBlocksRightBankedQuarterTurn3TileDown25,
+    TrackBlocksLeftBankedQuarterTurn5TileUp25,
+    TrackBlocksRightBankedQuarterTurn5TileUp25,
+    TrackBlocksLeftBankedQuarterTurn5TileDown25,
+    TrackBlocksRightBankedQuarterTurn5TileDown25,
+    TrackBlocksUp25ToLeftBankedUp25,
+    TrackBlocksUp25ToRightBankedUp25,
+    TrackBlocksLeftBankedUp25ToUp25,
+    TrackBlocksRightBankedUp25ToUp25,
+    TrackBlocksDown25ToLeftBankedDown25,
+    TrackBlocksDown25ToRightBankedDown25,
+    TrackBlocksLeftBankedDown25ToDown25,
+    TrackBlocksRightBankedDown25ToDown25,
+    TrackBlocksLeftBankedFlatToLeftBankedUp25,
+    TrackBlocksRightBankedFlatToRightBankedUp25,
+    TrackBlocksLeftBankedUp25ToLeftBankedFlat,
+    TrackBlocksRightBankedUp25ToRightBankedFlat,
+    TrackBlocksLeftBankedFlatToLeftBankedDown25,
+    TrackBlocksRightBankedFlatToRightBankedDown25,
+    TrackBlocksLeftBankedDown25ToLeftBankedFlat,
+    TrackBlocksRightBankedDown25ToRightBankedFlat,
+    TrackBlockFlatToLeftBankedUp25,
+    TrackBlockFlatToRightBankedUp25,
+    TrackBlocksLeftBankedUp25ToFlat,
+    TrackBlocksRightBankedUp25ToFlat,
+    TrackBlocksFlatToLeftBankedDown25,
+    TrackBlocksFlatToRightBankedDown25,
+    TrackBlocksLeftBankedDown25ToFlat,
+    TrackBlocksRightBankedDown25ToFlat,
+    TrackBlocksLeftQuarterTurn1TileUp90,
+    TrackBlocksRightQuarterTurn1TileUp90,
+    TrackBlocksLeftQuarterTurn1TileDown90,
+    TrackBlocksRightQuarterTurn1TileDown90,
+    TrackBlocksMultiDimUp90ToInvertedFlatQuarterLoop,
+    TrackBlocksMultiDimFlatToDown90QuarterLoop,
+    FlatRideTrackBlocksMultiDimInvertedUp90ToFlatQuarterLoop
+};
+
 const uint8_t TrackPieceLengths[TrackElemType::Count] = {
     32,     // TrackElemType::Flat
     32,     // TrackElemType::EndStation
@@ -4563,2517 +7069,4 @@ const uint16_t TrackFlags[] = {
     /*                                                              */   TRACK_ELEM_FLAG_UP | TRACK_ELEM_FLAG_NORMAL_TO_INVERSION | TRACK_ELEM_FLAG_INVERSION_TO_NORMAL,
 };
 
-
-#define TRACK_BLOCK_END { 255, 255, 255, 255, 255, {255, 255}, 255 }
-
-static constexpr const rct_preview_track TrackBlocksFlat[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksEndStation[] = {
-    { 0, 0, 0, 0, 0,{ 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksBeginStation[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksMiddleStation[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksUp60[] = {
-    { 0, 0, 0, 0, 64, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksFlatToUp25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksUp25ToUp60[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksUp60ToUp25[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksUp25ToFlat[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDown25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDown60[] = {
-    { 0, 0, 0, 0, 64, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksFlatToDown25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDown25ToDown60[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDown60ToDown25[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDown25ToFlat[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn5Tiles[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 0, 0, { 0b0111, 0 }, 0 },
-    { 6, -64, -64, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightQuarterTurn5Tiles[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 0, 0, { 0b1011, 0 }, 0 },
-    { 6, -64, 64, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksFlatToLeftBank[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksFlatToRightBank[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftBankToFlat[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightBankToFlat[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksBankedLeftQuarterTurn5Tiles[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 0, 0, { 0b0111, 0 }, 0 },
-    { 6, -64, -64, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksBankedRightQuarterTurn5Tiles[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 0, 0, { 0b1011, 0 }, 0 },
-    { 6, -64, 64, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftBankToUp25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightBankToUp25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksUp25ToLeftBank[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksUp25ToRightBank[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftBankToDown25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightBankToDown25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDown25ToLeftBank[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDown25ToRightBank[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftBank[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightBank[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn5TilesUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    { 1, 0, -32, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 16, 16, { 0b0111, 0b0100 }, 0 },
-    { 3, -32, -32, 24, 16, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 48, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 32, 16, { 0b0111, 0b0100 }, 0 },
-    { 6, -64, -64, 48, 16, { 0b1111, 0b0110 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightQuarterTurn5TilesUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    { 1, 0, 32, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 16, 16, { 0b1011, 0b1000 }, 0 },
-    { 3, -32, 32, 24, 16, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 48, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 32, 16, { 0b1011, 0b1000 }, 0 },
-    { 6, -64, 64, 48, 16, { 0b1111, 0b1001 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn5TilesDown25[] = {
-    { 0, 0, 0, 48, 16, { 0b1111, 0b0011 }, 0 },
-    { 1, 0, -32, 48, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 32, 16, { 0b0111, 0b0001 }, 0 },
-    { 3, -32, -32, 24, 16, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 16, 16, { 0b0111, 0b0001 }, 0 },
-    { 6, -64, -64, 0, 16, { 0b1111, 0b1001 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightQuarterTurn5TilesDown25[] = {
-    { 0, 0, 0, 48, 16, { 0b1111, 0b0011 }, 0 },
-    { 1, 0, 32, 48, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 32, 16, { 0b1011, 0b0010 }, 0 },
-    { 3, -32, 32, 24, 16, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 16, 16, { 0b1011, 0b0010 }, 0 },
-    { 6, -64, 64, 0, 16, { 0b1111, 0b0110 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksSBendLeft[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 2, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
-    { 3, -64, -32, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksSBendRight[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 2, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
-    { 3, -64, 32, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftVerticalLoop[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    { 1, -32, 0, 16, 16, { 0b1111, 0b1100 }, 0 },
-    { 2, -64, 0, 32, 96, { 0b0010, 0 }, 0 },
-    { 3, -32, 0, 120, 16, { 0b0110, 0 }, 0 },
-    { 4, -32, -32, 120, 0, { 0b0001, 0 }, 0 },
-    { 5, 0, 0, 120, 0, { 0b0100, 0 }, 0 },
-    { 6, 0, -32, 120, 16, { 0b1001, 0 }, 0 },
-    { 7, 32, -32, 32, 96, { 0b1000, 0 }, 0 },
-    { 8, 0, -32, 16, 16, { 0b1111, 0b0011 }, 0 },
-    { 9, -32, -32, 0, 16, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightVerticalLoop[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    { 1, -32, 0, 16, 16, { 0b1111, 0b1100 }, 0 },
-    { 2, -64, 0, 32, 96, { 0b0001, 0 }, 0 },
-    { 3, -32, 0, 120, 16, { 0b1001, 0 }, 0 },
-    { 4, -32, 32, 120, 0, { 0b0010, 0 }, 0 },
-    { 5, 0, 0, 120, 0, { 0b1000, 0 }, 0 },
-    { 6, 0, 32, 120, 16, { 0b0110, 0 }, 0 },
-    { 7, 32, 32, 32, 96, { 0b0100, 0 }, 0 },
-    { 8, 0, 32, 16, 16, { 0b1111, 0b0011 }, 0 },
-    { 9, -32, 32, 0, 16, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn3Tiles[] = {
-    { 0, 0, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0010, 0 }, 0 },
-    { 3, -32, -32, 0, 0, { 0b0111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightQuarterTurn3Tiles[] = {
-    { 0, 0, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0001, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1011, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftBankedQuarterTurn3Tiles[] = {
-    { 0, 0, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0010, 0 }, 0 },
-    { 3, -32, -32, 0, 0, { 0b0111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightBankedQuarterTurn3Tiles[] = {
-    { 0, 0, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0001, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1011, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn3TilesUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b0111, 0b0100 }, 0 },
-    { 1, 0, -32, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 16, 0, { 0b0010, 0 }, 0 },
-    { 3, -32, -32, 16, 16,{ 0b0111, 0b0110 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightQuarterTurn3TilesUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1011, 0b1000 }, 0 },
-    { 1, 0, 32, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 16, 0, { 0b0001, 0 }, 0 },
-    { 3, -32, 32, 16, 16,{ 0b1011, 0b1001 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn3TilesDown25[] = {
-    { 0, 0, 0, 16, 16,{ 0b0111, 0b0011 }, 0 },
-    { 1, 0, -32, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 16, 0, { 0b0010, 0 }, 0 },
-    { 3, -32, -32, 0, 16, { 0b0111, 0b0001 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightQuarterTurn3TilesDown25[] = {
-    { 0, 0, 0, 16, 16, { 0b1011, 0b0011 }, 0 },
-    { 1, 0, 32, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 16, 0, { 0b0001, 0 }, 0 },
-    { 3, -32, 32, 0, 16, { 0b1011, 0b0010 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn1Tile[] = {
-    { 0, 0, 0, 0, 0, { 0b0111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightQuarterTurn1Tile[] = {
-    { 0, 0, 0, 0, 0, { 0b1011, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftTwistDownToUp[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 16, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightTwistDownToUp[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 16, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftTwistUpToDown[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -16, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, -16, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightTwistUpToDown[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -16, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, -16, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksHalfLoopUp[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, 0 },
-    { 1, -32, 0, 16, 16, { 0b1111, 0b1100 }, 0 },
-    { 2, -64, 0, 32, 96,{ 0b0011, 0 }, 0 },
-    { 3, -32, 0, 120, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksHalfLoopDown[] = {
-    { 0, 0, 0, -32, 32, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -120, 96,{ 0b0011, 0 }, 0 },
-    { 2, 0, 0, -136, 16, { 0b1111, 0b1100 }, 0 },
-    { 3, 32, 0, -152, 16, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftCorkscrewUp[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 24, 32, { 0b0111, 0 }, 0 },
-    { 2, -32, -32, 48, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightCorkscrewUp[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 24, 32, { 0b1011, 0 }, 0 },
-    { 2, -32, 32, 48, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftCorkscrewDown[] = {
-    { 0, 0, 0, -32, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -56, 32, { 0b0111, 0 }, 0 },
-    { 2, -32, -32, -80, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightCorkscrewDown[] = {
-    { 0, 0, 0, -32, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -56, 32, { 0b1011, 0 }, 0 },
-    { 2, -32, 32, -80, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksFlatToUp60[] = {
-    { 0, 0, 0, 0, 24, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksUp60ToFlat[] = {
-    { 0, 0, 0, 0, 24, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksFlatToDown60[] = {
-    { 0, 0, 0, 0, 24, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDown60ToFlat[] = {
-    { 0, 0, 0, 0, 24, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksTowerBase[] = {
-    { 0, 0, 0, 0, 64, { 0b1111, 0 }, 0 },
-    { 1, -32, -32, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, 0, -32, 0, 0, { 0b1111, 0 }, 0 },
-    { 5, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 6, 32, -32, 0, 0, { 0b1111, 0 }, 0 },
-    { 7, 32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 8, 32, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksTowerSection[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 32, 0, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_1 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksFlatCovered[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksUp25Covered[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksUp60Covered[] = {
-    { 0, 0, 0, 0, 64, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksFlatToUp25Covered[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksUp25ToUp60Covered[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksUp60ToUp25Covered[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksUp25ToFlatCovered[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDown25Covered[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDown60Covered[] = {
-    { 0, 0, 0, 0, 64, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksFlatToDown25Covered[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDown25ToDown60Covered[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDown60ToDown25Covered[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDown25ToFlatCovered[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn5TilesCovered[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 0, 0, { 0b0111, 0 }, 0 },
-    { 6, -64, -64, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightQuarterTurn5TilesCovered[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 0, 0, { 0b1011, 0 }, 0 },
-    { 6, -64, 64, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksSBendLeftCovered[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 2, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
-    { 3, -64, -32, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksSBendRightCovered[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 2, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
-    { 3, -64, 32, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn3TilesCovered[] = {
-    { 0, 0, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0010, 0 }, 0 },
-    { 3, -32, -32, 0, 0, { 0b0111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightQuarterTurn3TilesCovered[] = {
-    { 0, 0, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0001, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1011, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftHalfBankedHelixUpSmall[] = {
-    { 0, 0, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 4, { 0b0010, 0 }, 0 },
-    { 3, -32, -32, 0, 4, { 0b0111, 0 }, 0 },
-    { 4, -32, -64, 8, 0, { 0b1011, 0 }, 0 },
-    { 5, 0, -64, 8, 0, { 0b0100, 0b0000 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 6, -32, -96, 8, 4, { 0b0001, 0 }, 0 },
-    { 7, 0, -96, 8, 4, { 0b1011, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightHalfBankedHelixUpSmall[] = {
-    { 0, 0, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0b0000 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 4, { 0b0001, 0 }, 0 },
-    { 3, -32, 32, 0, 4, { 0b1011, 0 }, 0 },
-    { 4, -32, 64, 8, 0, { 0b0111, 0 }, 0 },
-    { 5, 0, 64, 8, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 6, -32, 96, 8, 4, { 0b0010, 0 }, 0 },
-    { 7, 0, 96, 8, 4, { 0b0111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftHalfBankedHelixDownSmall[] = {
-    { 0, 0, 0, 8, 4, { 0b0111, 0 }, 0 },
-    { 1, 0, -32, 8, 4, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 8, 0, { 0b0010, 0 }, 0 },
-    { 3, -32, -32, 8, 0, { 0b0111, 0 }, 0 },
-    { 4, -32, -64, 0, 4, { 0b1011, 0 }, 0 },
-    { 5, 0, -64, 0, 4, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 6, -32, -96, 0, 0, { 0b0001, 0 }, 0 },
-    { 7, 0, -96, 0, 0, { 0b1011, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightHalfBankedHelixDownSmall[] = {
-    { 0, 0, 0, 8, 4, { 0b1011, 0 }, 0 },
-    { 1, 0, 32, 8, 4, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 8, 0, { 0b0001, 0 }, 0 },
-    { 3, -32, 32, 8, 0, { 0b1011, 0 }, 0 },
-    { 4, -32, 64, 0, 4, { 0b0111, 0 }, 0 },
-    { 5, 0, 64, 0, 4, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 6, -32, 96, 0, 0, { 0b0010, 0 }, 0 },
-    { 7, 0, 96, 0, 0, { 0b0111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftHalfBankedHelixUpLarge[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 0, 4, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 0, 4, { 0b0111, 0 }, 0 },
-    { 6, -64, -64, 0, 4, { 0b1111, 0 }, 0 },
-    { 7, -64, -96, 8, 0, { 0b1111, 0 }, 0 },
-    { 8, -32, -96, 8, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 9, -64, -128, 8, 0, { 0b1011, 0 }, 0 },
-    { 10, -32, -128, 8, 0, { 0b1110, 0 }, 0 },
-    { 11, 0, -128, 8, 4, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 12, -32, -160, 8, 4, { 0b1011, 0 }, 0 },
-    { 13, 0, -160, 8, 4, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightHalfBankedHelixUpLarge[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 0, 4, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 0, 4, { 0b1011, 0 }, 0 },
-    { 6, -64, 64, 0, 4, { 0b1111, 0 }, 0 },
-    { 7, -64, 96, 8, 0, { 0b1111, 0 }, 0 },
-    { 8, -32, 96, 8, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 9, -64, 128, 8, 0, { 0b0111, 0 }, 0 },
-    { 10, -32, 128, 8, 0, { 0b1101, 0 }, 0 },
-    { 11, 0, 128, 8, 4, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 12, -32, 160, 8, 4, { 0b0111, 0 }, 0 },
-    { 13, 0, 160, 8, 4, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftHalfBankedHelixDownLarge[] = {
-    { 0, 0, 0, 8, 4, { 0b1111, 0 }, 0 },
-    { 1, 0, -32, 8, 4, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 8, 4, { 0b0111, 0 }, 0 },
-    { 3, -32, -32, 8, 0, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 8, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 8, 0, { 0b0111, 0 }, 0 },
-    { 6, -64, -64, 8, 0, { 0b1111, 0 }, 0 },
-    { 7, -64, -96, 0, 4, { 0b1111, 0 }, 0 },
-    { 8, -32, -96, 0, 4, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 9, -64, -128, 0, 4, { 0b1011, 0 }, 0 },
-    { 10, -32, -128, 0, 0, { 0b1110, 0 }, 0 },
-    { 11, 0, -128, 0, 0, { 0b0100, 0b0000 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 12, -32, -160, 0, 0, { 0b1011, 0 }, 0 },
-    { 13, 0, -160, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightHalfBankedHelixDownLarge[] = {
-    { 0, 0, 0, 8, 4, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 8, 4, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 8, 4, { 0b1011, 0 }, 0 },
-    { 3, -32, 32, 8, 0, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 8, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 8, 0, { 0b1011, 0 }, 0 },
-    { 6, -64, 64, 8, 0, { 0b1111, 0 }, 0 },
-    { 7, -64, 96, 0, 4, { 0b1111, 0 }, 0 },
-    { 8, -32, 96, 0, 4, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 9, -64, 128, 0, 4, { 0b0111, 0 }, 0 },
-    { 10, -32, 128, 0, 0, { 0b1101, 0 }, 0 },
-    { 11, 0, 128, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 12, -32, 160, 0, 0, { 0b0111, 0 }, 0 },
-    { 13, 0, 160, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn1TileUp60[] = {
-    { 0, 0, 0, 0, 64, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightQuarterTurn1TileUp60[] = {
-    { 0, 0, 0, 0, 64, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn1TileDown60[] = {
-    { 0, 0, 0, 0, 64, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftRightQuarterTurn1TileDown60[] = {
-    { 0, 0, 0, 0, 64, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksBrakes[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRotationControlToggle[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksMaze[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftQuarterBankedHelixLargeUp[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 0, 12, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 0, 12, { 0b0111, 0 }, 0 },
-    { 6, -64, -64, 0, 12, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightQuarterBankedHelixLargeUp[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 0, 12, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 0, 12, { 0b1011, 0 }, 0 },
-    { 6, -64, 64, 0, 12, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftQuarterBankedHelixLargeDown[] = {
-    { 0, 0, 0, 0, 12, { 0b1111, 0 }, 0 },
-    { 1, 0, -32, 0, 12, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 12, { 0b0111, 0 }, 0 },
-    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 0, 0, { 0b0111, 0 }, 0 },
-    { 6, -64, -64, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightQuarterBankedHelixLargeDown[] = {
-    { 0, 0, 0, 0, 12, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 0, 12, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 12, { 0b1011, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 0, 0, { 0b1011, 0 }, 0 },
-    { 6, -64, 64, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftQuarterHelixLargeUp[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 0, 12, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 0, 12, { 0b0111, 0 }, 0 },
-    { 6, -64, -64, 0, 12, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightQuarterHelixLargeUp[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 0, 12, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 0, 12, { 0b1011, 0 }, 0 },
-    { 6, -64, 64, 0, 12, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftQuarterHelixLargeDown[] = {
-    { 0, 0, 0, 0, 12, { 0b1111, 0 }, 0 },
-    { 1, 0, -32, 0, 12, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 12, { 0b0111, 0 }, 0 },
-    { 3, -32, -32, 0, 0, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 0, 0, { 0b0111, 0 }, 0 },
-    { 6, -64, -64, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightQuarterHelixLargeDown[] = {
-    { 0, 0, 0, 0, 12, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 0, 12, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 12, { 0b1011, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 0, 0, { 0b1011, 0 }, 0 },
-    { 6, -64, 64, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksUp25LeftBanked[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksUp25RightBanked[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksWaterfall[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRapids[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksOnRidePhoto[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDown25LeftBanked[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDown25RightBanked[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksWatersplash[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 3, -96, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 4, -128, 0, 0, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksFlatToUp60LongBase[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 16, 24, { 0b1111, 0 }, 0 },
-    { 3, -96, 0, 40, 48, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksUp60ToFlatLongBase[] = {
-    { 0, 0, 0, 0, 48, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 40, 48, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 64, 24, { 0b1111, 0 }, 0 },
-    { 3, -96, 0, 80, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksWhirlpool[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDown60ToFlatLongBase[] = {
-    { 0, 0, 0, 40, 48, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 16, 24, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 3, -96, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksFlatToDown60LongBase[] = {
-    { 0, 0, 0, 80, 8, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 64, 24, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 40, 48, { 0b1111, 0 }, 0 },
-    { 3, -96, 0, 0, 48, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksCableLiftHill[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
-    { 1, -32, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
-    { 2, -64, 0, -32, 32, { 0b1111, 0b0011 }, 0 },
-    { 3, -96, 0, -96, 64, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksReverseFreefallSlope[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 32, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 0, 48, { 0b1111, 0 }, 0 },
-    { 3, -96, 0, 0, 80, { 0b1111, 0 }, 0 },
-    { 4, -128, 0, 0, 160, { 0b1111, 0 }, 0 },
-    { 5, -192, 0, 0, 208, { 0b1111, 0 }, 0 },
-    { 6, -160, 0, 0, 208, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksReverseFreefallVertical[] = {
-    { 0, 0, 0, 0, 48, { 0b1111, 0 }, 0 },
-    { 1, 32, 0, 0, 48, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksUp90[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, 32, 0, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDown90[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, 32, 0, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksUp60ToUp90[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, 32, 0, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDown90ToDown60[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0b0011 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksUp90ToUp60[] = {
-    { 0, 0, 0, 0, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDown60ToDown90[] = {
-    { 0, 0, 0, 0, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, 32, 0, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksBrakeForDrop[] = {
-    { 0, 0, 0, 0, 24, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftEighthToDiag[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, -32, 0, 0, { 0b1000, 0 }, 0 },
-    { 3, -64, 0, 0, 0, { 0b0010, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 4, -64, -32, 0, 0, { 0b0001, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightEighthToDiag[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, 32, 0, 0, { 0b0100, 0 }, 0 },
-    { 3, -64, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 4, -64, 32, 0, 0, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftEighthToOrthogonal[] = {
-    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b0001, 0 }, 0 },
-    { 2, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, -64, 32, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightEighthToOrthogonal[] = {
-    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, 0 },
-    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, -32, 64, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftEighthBankToDiag[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, -32, 0, 0, { 0b1000, 0 }, 0 },
-    { 3, -64, 0, 0, 0, { 0b0010, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 4, -64, -32, 0, 0, { 0b0001, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightEighthBankToDiag[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, 32, 0, 0, { 0b0100, 0 }, 0 },
-    { 3, -64, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 4, -64, 32, 0, 0, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftEighthBankToOrthogonal[] = {
-    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b0001, 0 }, 0 },
-    { 2, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, -64, 32, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightEighthBankToOrthogonal[] = {
-    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, 0 },
-    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, -32, 64, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagFlat[] = {
-    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 16, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 16, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 16, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagUp60[] = {
-    { 0, 0, 0, 0, 64, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 64, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 64, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 64, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagFlatToUp25[] = {
-    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagUp25ToUp60[] = {
-    { 0, 0, 0, 0, 32, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 32, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 32, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 32, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagUp60ToUp25[] = {
-    { 0, 0, 0, 0, 32, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 32, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 32, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 32, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagUp25ToFlat[] = {
-    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagDown25[] = {
-    { 0, 0, 0, 0, 16, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 16, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 16, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 16, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagDown60[] = {
-    { 0, 0, 0, 0, 64, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 64, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 64, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 64, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagFlatToDown25[] = {
-    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagDown25ToDown60[] = {
-    { 0, 0, 0, 0, 32, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 32, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 32, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 32, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagDown60ToDown25[] = {
-    { 0, 0, 0, 0, 32, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 32, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 32, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 32, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagDown25ToFlat[] = {
-    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagFlatToUp60[] = {
-    { 0, 0, 0, 0, 24, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 24, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 24, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 24, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagUp60ToFlat[] = {
-    { 0, 0, 0, 0, 24, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 24, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 24, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 24, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagFlatToDown60[] = {
-    { 0, 0, 0, 0, 24, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 24, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 24, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 24, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagDown60ToFlat[] = {
-    { 0, 0, 0, 0, 24, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 24, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 24, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 24, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagFlatToLeftBank[] = {
-    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagFlatToRightBank[] = {
-    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagLeftBankToFlat[] = {
-    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagRightBankToFlat[] = {
-    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagLeftBankToUp25[] = {
-    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagRightBankToUp25[] = {
-    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagUp25ToLeftBank[] = {
-    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagUp25ToRightBank[] = {
-    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagLeftBankToDown25[] = {
-    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagRightBankToDown25[] = {
-    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagDown25ToLeftBank[] = {
-    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagDown25ToRightBank[] = {
-    { 0, 0, 0, 0, 8, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 8, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 8, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagLeftBank[] = {
-    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDiagRightBank[] = {
-    { 0, 0, 0, 0, 0, { 0b1101, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 0, { 0b0001, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 3, -32, 32, 0, 0, { 0b0010, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLogFlumeReverser[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksSpinningTunnel[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftBarrelRollUpToDown[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 0, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightBarrelRollUpToDown[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 0, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftBarrelRollDownToUp[] = {
-    { 0, 0, 0, -32, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -32, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, -32, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightBarrelRollDownToUp[] = {
-    { 0, 0, 0, -32, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -32, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, -32, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftBankToLeftQuarterTurn3TilesUp25[] = {
-    { 0, 0, 0, 0, 0, { 0b0111, 0b0100 }, 0 },
-    { 1, 0, -32, 0, 16, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 16, { 0b0010, 0 }, 0 },
-    { 3, -32, -32, 16, 16,{ 0b0111, 0b0110 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightBankToRightQuarterTurn3TilesUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1011, 0b1000 }, 0 },
-    { 1, 0, 32, 0, 16, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 16, { 0b0001, 0 }, 0 },
-    { 3, -32, 32, 16, 16,{ 0b1011, 0b1001 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn3TilesDown25ToLeftBank[] = {
-    { 0, 0, 0, 16, 16,{ 0b0111, 0b0011 }, 0 },
-    { 1, 0, -32, 0, 16, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 16, { 0b0010, 0 }, 0 },
-    { 3, -32, -32, 0, 0, { 0b0111, 0b0001 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightQuarterTurn3TilesDown25ToRightBank[] = {
-    { 0, 0, 0, 16, 16, { 0b1011, 0b0011 }, 0 },
-    { 1, 0, 32, 0, 16, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 16, { 0b0001, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1011, 0b0010 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksPoweredLift[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftLargeHalfLoopUp[] = {
-    { 0, 0, 0, 0, 24, { 0b1111, 0b1100 }, 0 },
-    { 1, -32, 0, 16, 40, { 0b1111, 0b1100 }, 0 },
-    { 2, -64, 0, 32, 56, { 0b1111, 0 }, 0 },
-    { 3, -96, 0, 64, 192, { 0b1111, 0 }, 0 },
-    { 4, -128, -32, 120, 96, { 0b1111, 0 }, 0 },
-    { 5, -96, -32, 64, 192, { 0b1111, 0 }, 0 },
-    { 6, -64, -32, 248, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightLargeHalfLoopUp[] = {
-    { 0, 0, 0, 0, 24, { 0b1111, 0b1100 }, 0 },
-    { 1, -32, 0, 16, 40, { 0b1111, 0b1100 }, 0 },
-    { 2, -64, 0, 32, 56, { 0b1111, 0 }, 0 },
-    { 3, -96, 0, 64, 192, { 0b1111, 0 }, 0 },
-    { 4, -128, 32, 120, 96, { 0b1111, 0 }, 0 },
-    { 5, -96, 32, 64, 192, { 0b1111, 0 }, 0 },
-    { 6, -64, 32, 248, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightLargeHalfLoopDown[] = {
-    { 0, 0, 0, -32, 24, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -216, 192, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, -160, 96, { 0b1111, 0 }, 0 },
-    { 3, -32, -32, -216, 192, { 0b1111, 0 }, 0 },
-    { 4, 0, -32, -248, 56, { 0b1111, 0 }, 0 },
-    { 5, 32, -32, -264, 40, { 0b1111, 0b1100 }, 0 },
-    { 6, 64, -32, -280, 24, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftLargeHalfLoopDown[] = {
-    { 0, 0, 0, -32, 24, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -216, 192, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, -160, 96, { 0b1111, 0 }, 0 },
-    { 3, -32, 32, -216, 192, { 0b1111, 0 }, 0 },
-    { 4, 0, 32, -248, 56, { 0b1111, 0 }, 0 },
-    { 5, 32, 32, -264, 40, { 0b1111, 0b1100 }, 0 },
-    { 6, 64, 32, -280, 24, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftFlyerTwistUp[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -16, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, -16, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightFlyerTwistUp[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -16, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, -16, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftFlyerTwistDown[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 16, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightFlyerTwistDown[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 16, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksFlyerHalfLoopUp[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0b1100 }, 0 },
-    { 1, -32, 0, 16, 16, { 0b1111, 0b1100 }, 0 },
-    { 2, -64, 0, 32, 96,{ 0b0011, 0 }, 0 },
-    { 3, -32, 0, 120, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksFlyerHalfLoopDown[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -88, 96,{ 0b0011, 0 }, 0 },
-    { 2, 0, 0, -104, 16, { 0b1111, 0b1100 }, 0 },
-    { 3, 32, 0, -120, 16, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftFlyerCorkscrewUp[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 24, 32, { 0b0111, 0 }, 0 },
-    { 2, -32, -32, 48, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightFlyerCorkscrewUp[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 24, 32, { 0b1011, 0 }, 0 },
-    { 2, -32, 32, 48, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftFlyerCorkscrewDown[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -24, 32, { 0b0111, 0 }, 0 },
-    { 2, -32, -32, -48, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightFlyerCorkscrewDown[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -24, 32, { 0b1011, 0 }, 0 },
-    { 2, -32, 32, -48, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksHeartLineTransferUp[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 32, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 16, 0, { 0b1111, 0 }, 0 },
-    { 3, 0, 0, 32, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksHeartLineTransferDown[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, -32, 32, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, -16, 0, { 0b1111, 0 }, 0 },
-    { 3, 0, 0, -32, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftHeartLineRoll[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, -96, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, -128, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 5, -160, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightHeartLineRoll[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, -96, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, -128, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 5, -160, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksMinigolfHoleA[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksMinigolfHoleB[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksMinigolfHoleC[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksMinigolfHoleD[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksMinigolfHoleE[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, -32, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksMultiDimInvertedFlatToDown90QuarterLoop[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, -32, 0, -40, 32, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 2, -64, 0, -96, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 3, -96, 0, -96, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksUp90ToInvertedFlatQuarterLoop[] = {
-    { 0, 0, 0, 0, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, 32, 0, 56, 32, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 2, 64, 0, 96, 16, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksInvertedFlatToDown90QuarterLoop[] = {
-    { 0, 0, 0, -32, 16, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, -32, 0, -72, 32, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 2, -64, 0, -128, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 3, -96, 0, -128, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftCurvedLiftHill[] = {
-    { 0, 0, 0, 0, 0, { 0b0111, 0 }, 0 },
-    { 1, 0, -32, 0, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0010, 0 }, 0 },
-    { 3, -32, -32, 0, 8, { 0b0111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightCurvedLiftHill[] = {
-    { 0, 0, 0, 0, 0, { 0b1011, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 0, 8, { 0b0001, 0 }, 0 },
-    { 3, -32, 32, 0, 8, { 0b1011, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftReverser[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, -32, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, -32, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, -64, -32, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 5, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightReverser[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, -64, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 5, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksAirThrustTopCap[] = {
-    { 0, 0, 0, 0, 32, { 0b1111, 0 }, 0 },
-    { 1, 32, 0, 0, 32, { 0b1111, 0 }, 0 },
-    { 2, -64, 0, 0, 32, { 0b1111, 0 }, 0 },
-    { 3, -32, 0, 0, 32, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksAirThrustVerticalDown[] = {
-    { 0, 0, 0, 0, 48, { 0b1111, 0 }, 0 },
-    { 1, 32, 0, 0, 48, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksAirThrustVerticalDownToLevel[] = {
-    { 0, 0, 0, 0, 208, { 0b1111, 0 }, 0 },
-    { 1, 32, 0, 0, 208, { 0b1111, 0 }, 0 },
-    { 2, -32, 0, 0, 160, { 0b1111, 0 }, 0 },
-    { 3, -64, 0, 0, 80, { 0b1111, 0 }, 0 },
-    { 4, -96, 0, 0, 48, { 0b1111, 0 }, 0 },
-    { 5, -128, 0, 0, 32, { 0b1111, 0 }, 0 },
-    { 6, -160, 0, 0, 16, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksBlockBrakes[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftBankedQuarterTurn3TileUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b0111, 0b0100 }, 0 },
-    { 1, 0, -32, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 16, 0, { 0b0010, 0 }, 0 },
-    { 3, -32, -32, 16, 16,{ 0b0111, 0b0110 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightBankedQuarterTurn3TileUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1011, 0b1000 }, 0 },
-    { 1, 0, 32, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 16, 0, { 0b0001, 0 }, 0 },
-    { 3, -32, 32, 16, 16,{ 0b1011, 0b1001 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftBankedQuarterTurn3TileDown25[] = {
-    { 0, 0, 0, 16, 16,{ 0b0111, 0b0011 }, 0 },
-    { 1, 0, -32, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 16, 0, { 0b0010, 0 }, 0 },
-    { 3, -32, -32, 0, 16, { 0b0111, 0b0001 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightBankedQuarterTurn3TileDown25[] = {
-    { 0, 0, 0, 16, 16, { 0b1011, 0b0011 }, 0 },
-    { 1, 0, 32, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 16, 0, { 0b0001, 0 }, 0 },
-    { 3, -32, 32, 0, 16, { 0b1011, 0b0010 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftBankedQuarterTurn5TileUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    { 1, 0, -32, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 16, 16, { 0b0111, 0b0100 }, 0 },
-    { 3, -32, -32, 24, 16, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 48, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 32, 16, { 0b0111, 0b0100 }, 0 },
-    { 6, -64, -64, 48, 16, { 0b1111, 0b0110 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightBankedQuarterTurn5TileUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    { 1, 0, 32, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 16, 16, { 0b1011, 0b1000 }, 0 },
-    { 3, -32, 32, 24, 16, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 48, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 32, 16, { 0b1011, 0b1000 }, 0 },
-    { 6, -64, 64, 48, 16, { 0b1111, 0b1001 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftBankedQuarterTurn5TileDown25[] = {
-    { 0, 0, 0, 48, 16, { 0b1111, 0b0011 }, 0 },
-    { 1, 0, -32, 48, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 32, 16, { 0b0111, 0b0001 }, 0 },
-    { 3, -32, -32, 24, 16, { 0b1101, 0 }, 0 },
-    { 4, -32, -64, 16, 0, { 0b1000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, -32, 16, 16, { 0b0111, 0b0001 }, 0 },
-    { 6, -64, -64, 0, 16, { 0b1111, 0b1001 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightBankedQuarterTurn5TileDown25[] = {
-    { 0, 0, 0, 48, 16, { 0b1111, 0b0011 }, 0 },
-    { 1, 0, 32, 48, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 2, -32, 0, 32, 16, { 0b1011, 0b0010 }, 0 },
-    { 3, -32, 32, 24, 16, { 0b1110, 0 }, 0 },
-    { 4, -32, 64, 16, 0, { 0b0100, 0 }, RCT_PREVIEW_TRACK_FLAG_0 },
-    { 5, -64, 32, 16, 16, { 0b1011, 0b0010 }, 0 },
-    { 6, -64, 64, 0, 16, { 0b1111, 0b0110 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksUp25ToLeftBankedUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksUp25ToRightBankedUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftBankedUp25ToUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightBankedUp25ToUp25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDown25ToLeftBankedDown25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksDown25ToRightBankedDown25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftBankedDown25ToDown25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightBankedDown25ToDown25[] = {
-    { 0, 0, 0, 0, 16, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftBankedFlatToLeftBankedUp25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightBankedFlatToRightBankedUp25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftBankedUp25ToLeftBankedFlat[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightBankedUp25ToRightBankedFlat[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftBankedFlatToLeftBankedDown25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightBankedFlatToRightBankedDown25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftBankedDown25ToLeftBankedFlat[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightBankedDown25ToRightBankedFlat[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlockFlatToLeftBankedUp25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlockFlatToRightBankedUp25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftBankedUp25ToFlat[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightBankedUp25ToFlat[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b1100 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksFlatToLeftBankedDown25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksFlatToRightBankedDown25[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0b0011 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftBankedDown25ToFlat[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightBankedDown25ToFlat[] = {
-    { 0, 0, 0, 0, 8, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn1TileUp90[] = {
-    { 0, 0, 0, 0, 72, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, 0, 32, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightQuarterTurn1TileUp90[] = {
-    { 0, 0, 0, 0, 72, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, 0, -32, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksLeftQuarterTurn1TileDown90[] = {
-    { 0, 0, 0, 0, 72, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, 0, 32, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksRightQuarterTurn1TileDown90[] = {
-    { 0, 0, 0, 0, 72, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, 0, -32, 0, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksMultiDimUp90ToInvertedFlatQuarterLoop[] = {
-    { 0, 0, 0, 0, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, 32, 0, 56, 32, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 2, 64, 0, 96, 16, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksMultiDimFlatToDown90QuarterLoop[] = {
-    { 0, 0, 0, -32, 16, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, -32, 0, -72, 32, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 2, -64, 0, -128, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 3, -96, 0, -128, 0, { 0b0000, 0 }, RCT_PREVIEW_TRACK_FLAG_0 | RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksMultiDimInvertedUp90ToFlatQuarterLoop[] = {
-    { 0, 0, 0, 32, 56, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 1, 32, 0, 88, 32, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    { 2, 64, 0, 128, 16, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track TrackBlocksBooster[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-// rct2: 0x00994638
-const rct_preview_track *TrackBlocks[TrackElemType::Count] = {
-    TrackBlocksFlat,
-    TrackBlocksEndStation,
-    TrackBlocksBeginStation,
-    TrackBlocksMiddleStation,
-    TrackBlocksUp25,
-    TrackBlocksUp60,
-    TrackBlocksFlatToUp25,
-    TrackBlocksUp25ToUp60,
-    TrackBlocksUp60ToUp25,
-    TrackBlocksUp25ToFlat,
-    TrackBlocksDown25,
-    TrackBlocksDown60,
-    TrackBlocksFlatToDown25,
-    TrackBlocksDown25ToDown60,
-    TrackBlocksDown60ToDown25,
-    TrackBlocksDown25ToFlat,
-    TrackBlocksLeftQuarterTurn5Tiles,
-    TrackBlocksRightQuarterTurn5Tiles,
-    TrackBlocksFlatToLeftBank,
-    TrackBlocksFlatToRightBank,
-    TrackBlocksLeftBankToFlat,
-    TrackBlocksRightBankToFlat,
-    TrackBlocksBankedLeftQuarterTurn5Tiles,
-    TrackBlocksBankedRightQuarterTurn5Tiles,
-    TrackBlocksLeftBankToUp25,
-    TrackBlocksRightBankToUp25,
-    TrackBlocksUp25ToLeftBank,
-    TrackBlocksUp25ToRightBank,
-    TrackBlocksLeftBankToDown25,
-    TrackBlocksRightBankToDown25,
-    TrackBlocksDown25ToLeftBank,
-    TrackBlocksDown25ToRightBank,
-    TrackBlocksLeftBank,
-    TrackBlocksRightBank,
-    TrackBlocksLeftQuarterTurn5TilesUp25,
-    TrackBlocksRightQuarterTurn5TilesUp25,
-    TrackBlocksLeftQuarterTurn5TilesDown25,
-    TrackBlocksRightQuarterTurn5TilesDown25,
-    TrackBlocksSBendLeft,
-    TrackBlocksSBendRight,
-    TrackBlocksLeftVerticalLoop,
-    TrackBlocksRightVerticalLoop,
-    TrackBlocksLeftQuarterTurn3Tiles,
-    TrackBlocksRightQuarterTurn3Tiles,
-    TrackBlocksLeftBankedQuarterTurn3Tiles,
-    TrackBlocksRightBankedQuarterTurn3Tiles,
-    TrackBlocksLeftQuarterTurn3TilesUp25,
-    TrackBlocksRightQuarterTurn3TilesUp25,
-    TrackBlocksLeftQuarterTurn3TilesDown25,
-    TrackBlocksRightQuarterTurn3TilesDown25,
-    TrackBlocksLeftQuarterTurn1Tile,
-    TrackBlocksRightQuarterTurn1Tile,
-    TrackBlocksLeftTwistDownToUp,
-    TrackBlocksRightTwistDownToUp,
-    TrackBlocksLeftTwistUpToDown,
-    TrackBlocksRightTwistUpToDown,
-    TrackBlocksHalfLoopUp,
-    TrackBlocksHalfLoopDown,
-    TrackBlocksLeftCorkscrewUp,
-    TrackBlocksRightCorkscrewUp,
-    TrackBlocksLeftCorkscrewDown,
-    TrackBlocksRightCorkscrewDown,
-    TrackBlocksFlatToUp60,
-    TrackBlocksUp60ToFlat,
-    TrackBlocksFlatToDown60,
-    TrackBlocksDown60ToFlat,
-    TrackBlocksTowerBase,
-    TrackBlocksTowerSection,
-    TrackBlocksFlatCovered,
-    TrackBlocksUp25Covered,
-    TrackBlocksUp60Covered,
-    TrackBlocksFlatToUp25Covered,
-    TrackBlocksUp25ToUp60Covered,
-    TrackBlocksUp60ToUp25Covered,
-    TrackBlocksUp25ToFlatCovered,
-    TrackBlocksDown25Covered,
-    TrackBlocksDown60Covered,
-    TrackBlocksFlatToDown25Covered,
-    TrackBlocksDown25ToDown60Covered,
-    TrackBlocksDown60ToDown25Covered,
-    TrackBlocksDown25ToFlatCovered,
-    TrackBlocksLeftQuarterTurn5TilesCovered,
-    TrackBlocksRightQuarterTurn5TilesCovered,
-    TrackBlocksSBendLeftCovered,
-    TrackBlocksSBendRightCovered,
-    TrackBlocksLeftQuarterTurn3TilesCovered,
-    TrackBlocksRightQuarterTurn3TilesCovered,
-    TrackBlocksLeftHalfBankedHelixUpSmall,
-    TrackBlocksRightHalfBankedHelixUpSmall,
-    TrackBlocksLeftHalfBankedHelixDownSmall,
-    TrackBlocksRightHalfBankedHelixDownSmall,
-    TrackBlocksLeftHalfBankedHelixUpLarge,
-    TrackBlocksRightHalfBankedHelixUpLarge,
-    TrackBlocksLeftHalfBankedHelixDownLarge,
-    TrackBlocksRightHalfBankedHelixDownLarge,
-    TrackBlocksLeftQuarterTurn1TileUp60,
-    TrackBlocksRightQuarterTurn1TileUp60,
-    TrackBlocksLeftQuarterTurn1TileDown60,
-    TrackBlocksLeftRightQuarterTurn1TileDown60,
-    TrackBlocksBrakes,
-    TrackBlocksRotationControlToggle,
-    TrackBlocksMaze,
-    TrackBlocksLeftQuarterBankedHelixLargeUp,
-    TrackBlocksRightQuarterBankedHelixLargeUp,
-    TrackBlocksLeftQuarterBankedHelixLargeDown,
-    TrackBlocksRightQuarterBankedHelixLargeDown,
-    TrackBlocksLeftQuarterHelixLargeUp,
-    TrackBlocksRightQuarterHelixLargeUp,
-    TrackBlocksLeftQuarterHelixLargeDown,
-    TrackBlocksRightQuarterHelixLargeDown,
-    TrackBlocksUp25LeftBanked,
-    TrackBlocksUp25RightBanked,
-    TrackBlocksWaterfall,
-    TrackBlocksRapids,
-    TrackBlocksOnRidePhoto,
-    TrackBlocksDown25LeftBanked,
-    TrackBlocksDown25RightBanked,
-    TrackBlocksWatersplash,
-    TrackBlocksFlatToUp60LongBase,
-    TrackBlocksUp60ToFlatLongBase,
-    TrackBlocksWhirlpool,
-    TrackBlocksDown60ToFlatLongBase,
-    TrackBlocksFlatToDown60LongBase,
-    TrackBlocksCableLiftHill,
-    TrackBlocksReverseFreefallSlope,
-    TrackBlocksReverseFreefallVertical,
-    TrackBlocksUp90,
-    TrackBlocksDown90,
-    TrackBlocksUp60ToUp90,
-    TrackBlocksDown90ToDown60,
-    TrackBlocksUp90ToUp60,
-    TrackBlocksDown60ToDown90,
-    TrackBlocksBrakeForDrop,
-    TrackBlocksLeftEighthToDiag,
-    TrackBlocksRightEighthToDiag,
-    TrackBlocksLeftEighthToOrthogonal,
-    TrackBlocksRightEighthToOrthogonal,
-    TrackBlocksLeftEighthBankToDiag,
-    TrackBlocksRightEighthBankToDiag,
-    TrackBlocksLeftEighthBankToOrthogonal,
-    TrackBlocksRightEighthBankToOrthogonal,
-    TrackBlocksDiagFlat,
-    TrackBlocksDiagUp25,
-    TrackBlocksDiagUp60,
-    TrackBlocksDiagFlatToUp25,
-    TrackBlocksDiagUp25ToUp60,
-    TrackBlocksDiagUp60ToUp25,
-    TrackBlocksDiagUp25ToFlat,
-    TrackBlocksDiagDown25,
-    TrackBlocksDiagDown60,
-    TrackBlocksDiagFlatToDown25,
-    TrackBlocksDiagDown25ToDown60,
-    TrackBlocksDiagDown60ToDown25,
-    TrackBlocksDiagDown25ToFlat,
-    TrackBlocksDiagFlatToUp60,
-    TrackBlocksDiagUp60ToFlat,
-    TrackBlocksDiagFlatToDown60,
-    TrackBlocksDiagDown60ToFlat,
-    TrackBlocksDiagFlatToLeftBank,
-    TrackBlocksDiagFlatToRightBank,
-    TrackBlocksDiagLeftBankToFlat,
-    TrackBlocksDiagRightBankToFlat,
-    TrackBlocksDiagLeftBankToUp25,
-    TrackBlocksDiagRightBankToUp25,
-    TrackBlocksDiagUp25ToLeftBank,
-    TrackBlocksDiagUp25ToRightBank,
-    TrackBlocksDiagLeftBankToDown25,
-    TrackBlocksDiagRightBankToDown25,
-    TrackBlocksDiagDown25ToLeftBank,
-    TrackBlocksDiagDown25ToRightBank,
-    TrackBlocksDiagLeftBank,
-    TrackBlocksDiagRightBank,
-    TrackBlocksLogFlumeReverser,
-    TrackBlocksSpinningTunnel,
-    TrackBlocksLeftBarrelRollUpToDown,
-    TrackBlocksRightBarrelRollUpToDown,
-    TrackBlocksLeftBarrelRollDownToUp,
-    TrackBlocksRightBarrelRollDownToUp,
-    TrackBlocksLeftBankToLeftQuarterTurn3TilesUp25,
-    TrackBlocksRightBankToRightQuarterTurn3TilesUp25,
-    TrackBlocksLeftQuarterTurn3TilesDown25ToLeftBank,
-    TrackBlocksRightQuarterTurn3TilesDown25ToRightBank,
-    TrackBlocksPoweredLift,
-    TrackBlocksLeftLargeHalfLoopUp,
-    TrackBlocksRightLargeHalfLoopUp,
-    TrackBlocksRightLargeHalfLoopDown,
-    TrackBlocksLeftLargeHalfLoopDown,
-    TrackBlocksLeftFlyerTwistUp,
-    TrackBlocksRightFlyerTwistUp,
-    TrackBlocksLeftFlyerTwistDown,
-    TrackBlocksRightFlyerTwistDown,
-    TrackBlocksFlyerHalfLoopUp,
-    TrackBlocksFlyerHalfLoopDown,
-    TrackBlocksLeftFlyerCorkscrewUp,
-    TrackBlocksRightFlyerCorkscrewUp,
-    TrackBlocksLeftFlyerCorkscrewDown,
-    TrackBlocksRightFlyerCorkscrewDown,
-    TrackBlocksHeartLineTransferUp,
-    TrackBlocksHeartLineTransferDown,
-    TrackBlocksLeftHeartLineRoll,
-    TrackBlocksRightHeartLineRoll,
-    TrackBlocksMinigolfHoleA,
-    TrackBlocksMinigolfHoleB,
-    TrackBlocksMinigolfHoleC,
-    TrackBlocksMinigolfHoleD,
-    TrackBlocksMinigolfHoleE,
-    TrackBlocksMultiDimInvertedFlatToDown90QuarterLoop,
-    TrackBlocksUp90ToInvertedFlatQuarterLoop,
-    TrackBlocksInvertedFlatToDown90QuarterLoop,
-    TrackBlocksLeftCurvedLiftHill,
-    TrackBlocksRightCurvedLiftHill,
-    TrackBlocksLeftReverser,
-    TrackBlocksRightReverser,
-    TrackBlocksAirThrustTopCap,
-    TrackBlocksAirThrustVerticalDown,
-    TrackBlocksAirThrustVerticalDownToLevel,
-    TrackBlocksBlockBrakes,
-    TrackBlocksLeftBankedQuarterTurn3TileUp25,
-    TrackBlocksRightBankedQuarterTurn3TileUp25,
-    TrackBlocksLeftBankedQuarterTurn3TileDown25,
-    TrackBlocksRightBankedQuarterTurn3TileDown25,
-    TrackBlocksLeftBankedQuarterTurn5TileUp25,
-    TrackBlocksRightBankedQuarterTurn5TileUp25,
-    TrackBlocksLeftBankedQuarterTurn5TileDown25,
-    TrackBlocksRightBankedQuarterTurn5TileDown25,
-    TrackBlocksUp25ToLeftBankedUp25,
-    TrackBlocksUp25ToRightBankedUp25,
-    TrackBlocksLeftBankedUp25ToUp25,
-    TrackBlocksRightBankedUp25ToUp25,
-    TrackBlocksDown25ToLeftBankedDown25,
-    TrackBlocksDown25ToRightBankedDown25,
-    TrackBlocksLeftBankedDown25ToDown25,
-    TrackBlocksRightBankedDown25ToDown25,
-    TrackBlocksLeftBankedFlatToLeftBankedUp25,
-    TrackBlocksRightBankedFlatToRightBankedUp25,
-    TrackBlocksLeftBankedUp25ToLeftBankedFlat,
-    TrackBlocksRightBankedUp25ToRightBankedFlat,
-    TrackBlocksLeftBankedFlatToLeftBankedDown25,
-    TrackBlocksRightBankedFlatToRightBankedDown25,
-    TrackBlocksLeftBankedDown25ToLeftBankedFlat,
-    TrackBlocksRightBankedDown25ToRightBankedFlat,
-    TrackBlockFlatToLeftBankedUp25,
-    TrackBlockFlatToRightBankedUp25,
-    TrackBlocksLeftBankedUp25ToFlat,
-    TrackBlocksRightBankedUp25ToFlat,
-    TrackBlocksFlatToLeftBankedDown25,
-    TrackBlocksFlatToRightBankedDown25,
-    TrackBlocksLeftBankedDown25ToFlat,
-    TrackBlocksRightBankedDown25ToFlat,
-    TrackBlocksLeftQuarterTurn1TileUp90,
-    TrackBlocksRightQuarterTurn1TileUp90,
-    TrackBlocksLeftQuarterTurn1TileDown90,
-    TrackBlocksRightQuarterTurn1TileDown90,
-    TrackBlocksMultiDimUp90ToInvertedFlatQuarterLoop,
-    TrackBlocksMultiDimFlatToDown90QuarterLoop,
-    TrackBlocksMultiDimInvertedUp90ToFlatQuarterLoop,
-    TrackBlocksBooster
-};
-
-static constexpr const rct_preview_track FlatRideTrackBlocksMagicCarpet[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, 32, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track FlatRideTrackBlocksFlat2x2[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, 32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, 32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track FlatRideTrackBlocksFlat4x4[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, 0, 64, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, 0, 96, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, 32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 5, 32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 6, 32, 64, 0, 0, { 0b1111, 0 }, 0 },
-    { 7, 32, 96, 0, 0, { 0b1111, 0 }, 0 },
-    { 8, 64, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 9, 64, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 10, 64, 64, 0, 0, { 0b1111, 0 }, 0 },
-    { 11, 64, 96, 0, 0, { 0b1111, 0 }, 0 },
-    { 12, 96, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 13, 96, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 14, 96, 64, 0, 0, { 0b1111, 0 }, 0 },
-    { 15, 96, 96, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track FlatRideTrackBlocksFlat2x4[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, 0, 64, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, 0, 96, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, 32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 5, 32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 6, 32, 64, 0, 0, { 0b1111, 0 }, 0 },
-    { 7, 32, 96, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track FlatRideTrackBlocksSwingingShip[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, 32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, 64, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track FlatRideTrackBlocksShopOneEntrance[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track FlatRideTrackBlocksSwingingInvertingShip[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, 32, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track FlatRideTrackBlocksShopFourEntrances[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track FlatRideTrackBlocksFerrisWheel[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -64, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, 32, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track FlatRideTrackBlocksFlat3x3[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, -32, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, 0, -32, 0, 0, { 0b1111, 0 }, 0 },
-    { 5, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 6, 32, -32, 0, 0, { 0b1111, 0 }, 0 },
-    { 7, 32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 8, 32, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
-    TRACK_BLOCK_END
-};
-
-static constexpr const rct_preview_track FlatRideTrackBlocks255[] = {
-    TRACK_BLOCK_END
-};
-
-// rct2: 0x00994A38
-const rct_preview_track *FlatRideTrackBlocks[TrackElemType::Count] = {
-    TrackBlocksFlat,
-    TrackBlocksEndStation,
-    TrackBlocksBeginStation,
-    TrackBlocksMiddleStation,
-    TrackBlocksUp25,
-    TrackBlocksUp60,
-    TrackBlocksFlatToUp25,
-    TrackBlocksUp25ToUp60,
-    TrackBlocksUp60ToUp25,
-    TrackBlocksUp25ToFlat,
-    TrackBlocksDown25,
-    TrackBlocksDown60,
-    TrackBlocksFlatToDown25,
-    TrackBlocksDown25ToDown60,
-    TrackBlocksDown60ToDown25,
-    TrackBlocksDown25ToFlat,
-    TrackBlocksLeftQuarterTurn5Tiles,
-    TrackBlocksRightQuarterTurn5Tiles,
-    TrackBlocksFlatToLeftBank,
-    TrackBlocksFlatToRightBank,
-    TrackBlocksLeftBankToFlat,
-    TrackBlocksRightBankToFlat,
-    TrackBlocksBankedLeftQuarterTurn5Tiles,
-    TrackBlocksBankedRightQuarterTurn5Tiles,
-    TrackBlocksLeftBankToUp25,
-    TrackBlocksRightBankToUp25,
-    TrackBlocksUp25ToLeftBank,
-    TrackBlocksUp25ToRightBank,
-    TrackBlocksLeftBankToDown25,
-    TrackBlocksRightBankToDown25,
-    TrackBlocksDown25ToLeftBank,
-    TrackBlocksDown25ToRightBank,
-    TrackBlocksLeftBank,
-    TrackBlocksRightBank,
-    TrackBlocksLeftQuarterTurn5TilesUp25,
-    TrackBlocksRightQuarterTurn5TilesUp25,
-    TrackBlocksLeftQuarterTurn5TilesDown25,
-    TrackBlocksRightQuarterTurn5TilesDown25,
-    TrackBlocksSBendLeft,
-    TrackBlocksSBendRight,
-    TrackBlocksLeftVerticalLoop,
-    TrackBlocksRightVerticalLoop,
-    TrackBlocksLeftQuarterTurn3Tiles,
-    TrackBlocksRightQuarterTurn3Tiles,
-    TrackBlocksLeftBankedQuarterTurn3Tiles,
-    TrackBlocksRightBankedQuarterTurn3Tiles,
-    TrackBlocksLeftQuarterTurn3TilesUp25,
-    TrackBlocksRightQuarterTurn3TilesUp25,
-    TrackBlocksLeftQuarterTurn3TilesDown25,
-    TrackBlocksRightQuarterTurn3TilesDown25,
-    TrackBlocksLeftQuarterTurn1Tile,
-    TrackBlocksRightQuarterTurn1Tile,
-    TrackBlocksLeftTwistDownToUp,
-    TrackBlocksRightTwistDownToUp,
-    TrackBlocksLeftTwistUpToDown,
-    TrackBlocksRightTwistUpToDown,
-    TrackBlocksHalfLoopUp,
-    TrackBlocksHalfLoopDown,
-    TrackBlocksLeftCorkscrewUp,
-    TrackBlocksRightCorkscrewUp,
-    TrackBlocksLeftCorkscrewDown,
-    TrackBlocksRightCorkscrewDown,
-    TrackBlocksFlatToUp60,
-    TrackBlocksUp60ToFlat,
-    TrackBlocksFlatToDown60,
-    TrackBlocksDown60ToFlat,
-    TrackBlocksTowerBase,
-    TrackBlocksTowerSection,
-    TrackBlocksFlatCovered,
-    TrackBlocksUp25Covered,
-    TrackBlocksUp60Covered,
-    TrackBlocksFlatToUp25Covered,
-    TrackBlocksUp25ToUp60Covered,
-    TrackBlocksUp60ToUp25Covered,
-    TrackBlocksUp25ToFlatCovered,
-    TrackBlocksDown25Covered,
-    TrackBlocksDown60Covered,
-    TrackBlocksFlatToDown25Covered,
-    TrackBlocksDown25ToDown60Covered,
-    TrackBlocksDown60ToDown25Covered,
-    TrackBlocksDown25ToFlatCovered,
-    TrackBlocksLeftQuarterTurn5TilesCovered,
-    TrackBlocksRightQuarterTurn5TilesCovered,
-    TrackBlocksSBendLeftCovered,
-    TrackBlocksSBendRightCovered,
-    TrackBlocksLeftQuarterTurn3TilesCovered,
-    TrackBlocksRightQuarterTurn3TilesCovered,
-    TrackBlocksLeftHalfBankedHelixUpSmall,
-    TrackBlocksRightHalfBankedHelixUpSmall,
-    TrackBlocksLeftHalfBankedHelixDownSmall,
-    TrackBlocksRightHalfBankedHelixDownSmall,
-    TrackBlocksLeftHalfBankedHelixUpLarge,
-    TrackBlocksRightHalfBankedHelixUpLarge,
-    TrackBlocksLeftHalfBankedHelixDownLarge,
-    TrackBlocksRightHalfBankedHelixDownLarge,
-    FlatRideTrackBlocksMagicCarpet,
-    TrackBlocksRightQuarterTurn1TileUp60,
-    TrackBlocksLeftQuarterTurn1TileDown60,
-    TrackBlocksLeftRightQuarterTurn1TileDown60,
-    TrackBlocksBrakes,
-    TrackBlocksRotationControlToggle,
-    TrackBlocksMaze,
-    TrackBlocksLeftQuarterBankedHelixLargeUp,
-    TrackBlocksRightQuarterBankedHelixLargeUp,
-    TrackBlocksLeftQuarterBankedHelixLargeDown,
-    TrackBlocksRightQuarterBankedHelixLargeDown,
-    TrackBlocksLeftQuarterHelixLargeUp,
-    TrackBlocksRightQuarterHelixLargeUp,
-    TrackBlocksLeftQuarterHelixLargeDown,
-    TrackBlocksRightQuarterHelixLargeDown,
-    FlatRideTrackBlocksFlat2x2,
-    FlatRideTrackBlocksFlat4x4,
-    TrackBlocksWaterfall,
-    TrackBlocksRapids,
-    TrackBlocksOnRidePhoto,
-    FlatRideTrackBlocksFlat2x4,
-    FlatRideTrackBlocksSwingingShip,
-    TrackBlocksWatersplash,
-    FlatRideTrackBlocksShopOneEntrance,
-    FlatRideTrackBlocksSwingingInvertingShip,
-    TrackBlocksWhirlpool,
-    FlatRideTrackBlocksShopFourEntrances,
-    FlatRideTrackBlocksFerrisWheel,
-    FlatRideTrackBlocksFlat3x3,
-    TrackBlocksReverseFreefallSlope,
-    TrackBlocksReverseFreefallVertical,
-    TrackBlocksUp90,
-    TrackBlocksDown90,
-    TrackBlocksUp60ToUp90,
-    TrackBlocksDown90ToDown60,
-    TrackBlocksUp90ToUp60,
-    TrackBlocksDown60ToDown90,
-    TrackBlocksBrakeForDrop,
-    TrackBlocksLeftEighthToDiag,
-    TrackBlocksRightEighthToDiag,
-    TrackBlocksLeftEighthToOrthogonal,
-    TrackBlocksRightEighthToOrthogonal,
-    TrackBlocksLeftEighthBankToDiag,
-    TrackBlocksRightEighthBankToDiag,
-    TrackBlocksLeftEighthBankToOrthogonal,
-    TrackBlocksRightEighthBankToOrthogonal,
-    TrackBlocksDiagFlat,
-    TrackBlocksDiagUp25,
-    TrackBlocksDiagUp60,
-    TrackBlocksDiagFlatToUp25,
-    TrackBlocksDiagUp25ToUp60,
-    TrackBlocksDiagUp60ToUp25,
-    TrackBlocksDiagUp25ToFlat,
-    TrackBlocksDiagDown25,
-    TrackBlocksDiagDown60,
-    TrackBlocksDiagFlatToDown25,
-    TrackBlocksDiagDown25ToDown60,
-    TrackBlocksDiagDown60ToDown25,
-    TrackBlocksDiagDown25ToFlat,
-    TrackBlocksDiagFlatToUp60,
-    TrackBlocksDiagUp60ToFlat,
-    TrackBlocksDiagFlatToDown60,
-    TrackBlocksDiagDown60ToFlat,
-    TrackBlocksDiagFlatToLeftBank,
-    TrackBlocksDiagFlatToRightBank,
-    TrackBlocksDiagLeftBankToFlat,
-    TrackBlocksDiagRightBankToFlat,
-    TrackBlocksDiagLeftBankToUp25,
-    TrackBlocksDiagRightBankToUp25,
-    TrackBlocksDiagUp25ToLeftBank,
-    TrackBlocksDiagUp25ToRightBank,
-    TrackBlocksDiagLeftBankToDown25,
-    TrackBlocksDiagRightBankToDown25,
-    TrackBlocksDiagDown25ToLeftBank,
-    TrackBlocksDiagDown25ToRightBank,
-    TrackBlocksDiagLeftBank,
-    TrackBlocksDiagRightBank,
-    TrackBlocksLogFlumeReverser,
-    TrackBlocksSpinningTunnel,
-    TrackBlocksLeftBarrelRollUpToDown,
-    TrackBlocksRightBarrelRollUpToDown,
-    TrackBlocksLeftBarrelRollDownToUp,
-    TrackBlocksRightBarrelRollDownToUp,
-    TrackBlocksLeftBankToLeftQuarterTurn3TilesUp25,
-    TrackBlocksRightBankToRightQuarterTurn3TilesUp25,
-    TrackBlocksLeftQuarterTurn3TilesDown25ToLeftBank,
-    TrackBlocksRightQuarterTurn3TilesDown25ToRightBank,
-    TrackBlocksPoweredLift,
-    TrackBlocksLeftLargeHalfLoopUp,
-    TrackBlocksRightLargeHalfLoopUp,
-    TrackBlocksRightLargeHalfLoopDown,
-    TrackBlocksLeftLargeHalfLoopDown,
-    TrackBlocksLeftFlyerTwistUp,
-    TrackBlocksRightFlyerTwistUp,
-    TrackBlocksLeftFlyerTwistDown,
-    TrackBlocksRightFlyerTwistDown,
-    TrackBlocksFlyerHalfLoopUp,
-    TrackBlocksFlyerHalfLoopDown,
-    TrackBlocksLeftFlyerCorkscrewUp,
-    TrackBlocksRightFlyerCorkscrewUp,
-    TrackBlocksLeftFlyerCorkscrewDown,
-    TrackBlocksRightFlyerCorkscrewDown,
-    TrackBlocksHeartLineTransferUp,
-    TrackBlocksHeartLineTransferDown,
-    TrackBlocksLeftHeartLineRoll,
-    TrackBlocksRightHeartLineRoll,
-    TrackBlocksMinigolfHoleA,
-    TrackBlocksMinigolfHoleB,
-    TrackBlocksMinigolfHoleC,
-    TrackBlocksMinigolfHoleD,
-    TrackBlocksMinigolfHoleE,
-    TrackBlocksMultiDimInvertedFlatToDown90QuarterLoop,
-    TrackBlocksUp90ToInvertedFlatQuarterLoop,
-    TrackBlocksInvertedFlatToDown90QuarterLoop,
-    TrackBlocksLeftCurvedLiftHill,
-    TrackBlocksRightCurvedLiftHill,
-    TrackBlocksLeftReverser,
-    TrackBlocksRightReverser,
-    TrackBlocksAirThrustTopCap,
-    TrackBlocksAirThrustVerticalDown,
-    TrackBlocksAirThrustVerticalDownToLevel,
-    TrackBlocksBlockBrakes,
-    TrackBlocksLeftBankedQuarterTurn3TileUp25,
-    TrackBlocksRightBankedQuarterTurn3TileUp25,
-    TrackBlocksLeftBankedQuarterTurn3TileDown25,
-    TrackBlocksRightBankedQuarterTurn3TileDown25,
-    TrackBlocksLeftBankedQuarterTurn5TileUp25,
-    TrackBlocksRightBankedQuarterTurn5TileUp25,
-    TrackBlocksLeftBankedQuarterTurn5TileDown25,
-    TrackBlocksRightBankedQuarterTurn5TileDown25,
-    TrackBlocksUp25ToLeftBankedUp25,
-    TrackBlocksUp25ToRightBankedUp25,
-    TrackBlocksLeftBankedUp25ToUp25,
-    TrackBlocksRightBankedUp25ToUp25,
-    TrackBlocksDown25ToLeftBankedDown25,
-    TrackBlocksDown25ToRightBankedDown25,
-    TrackBlocksLeftBankedDown25ToDown25,
-    TrackBlocksRightBankedDown25ToDown25,
-    TrackBlocksLeftBankedFlatToLeftBankedUp25,
-    TrackBlocksRightBankedFlatToRightBankedUp25,
-    TrackBlocksLeftBankedUp25ToLeftBankedFlat,
-    TrackBlocksRightBankedUp25ToRightBankedFlat,
-    TrackBlocksLeftBankedFlatToLeftBankedDown25,
-    TrackBlocksRightBankedFlatToRightBankedDown25,
-    TrackBlocksLeftBankedDown25ToLeftBankedFlat,
-    TrackBlocksRightBankedDown25ToRightBankedFlat,
-    TrackBlockFlatToLeftBankedUp25,
-    TrackBlockFlatToRightBankedUp25,
-    TrackBlocksLeftBankedUp25ToFlat,
-    TrackBlocksRightBankedUp25ToFlat,
-    TrackBlocksFlatToLeftBankedDown25,
-    TrackBlocksFlatToRightBankedDown25,
-    TrackBlocksLeftBankedDown25ToFlat,
-    TrackBlocksRightBankedDown25ToFlat,
-    TrackBlocksLeftQuarterTurn1TileUp90,
-    TrackBlocksRightQuarterTurn1TileUp90,
-    TrackBlocksLeftQuarterTurn1TileDown90,
-    TrackBlocksRightQuarterTurn1TileDown90,
-    TrackBlocksMultiDimUp90ToInvertedFlatQuarterLoop,
-    TrackBlocksMultiDimFlatToDown90QuarterLoop,
-    FlatRideTrackBlocks255,
-    TrackBlocksBooster
-};
 // clang-format on
