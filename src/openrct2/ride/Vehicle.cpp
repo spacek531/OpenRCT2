@@ -746,7 +746,7 @@ static bool vehicle_move_info_valid(VehicleTrackSubposition trackSubposition, in
     switch (trackSubposition)
     {
         case VehicleTrackSubposition::Default:
-            size = 1024;
+            size = 1028;
             break;
         case VehicleTrackSubposition::ChairliftGoingOut:
             size = 692;
