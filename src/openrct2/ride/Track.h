@@ -561,8 +561,8 @@ struct track_circuit_iterator
     bool looped;
 };
 
-extern const rct_trackdefinition FlatRideTrackDefinitions[256];
-extern const rct_trackdefinition TrackDefinitions[256];
+extern const rct_trackdefinition FlatRideTrackDefinitions[TrackElemType::Count];
+extern const rct_trackdefinition TrackDefinitions[TrackElemType::Count];
 
 PitchAndRoll TrackPitchAndRollStart(track_type_t trackType);
 PitchAndRoll TrackPitchAndRollEnd(track_type_t trackType);
