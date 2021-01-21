@@ -260,16 +260,6 @@ uint8_t RCT12TrackElement::GetBrakeBoosterSpeed() const
     return 0;
 }
 
-bool RCT12TrackElement::GetBrakeClosed() const
-{
-    if (trackType == TrackElemType::Brakes)
-    {
-        // brakes have the opposite polarity of block brake: closed is 0, open is 1
-        return !((flags & RCT12_TILE_ELEMENT_FLAG_BRAKE_OPEN) != 0);
-    }
-    return (flags & RCT12_TILE_ELEMENT_FLAG_BLOCK_BRAKE_CLOSED) != 0;
-}
-
 bool RCT12TrackElement::HasGreenLight() const
 {
     if (track_type_is_station(trackType))
@@ -824,6 +814,16 @@ void RCT12TrackElement::SetBrakeBoosterSpeed(uint8_t speed)
         sequence &= ~0b11110000;
         sequence |= ((speed >> 1) << 4);
     }
+}
+
+bool RCT12TrackElement::GetBrakeClosed() const
+{
+    if (trackType == TrackElemType::Brakes)
+    {
+        // brakes have the opposite polarity of block brake: closed is 0, open is 1
+        return !((flags & RCT12_TILE_ELEMENT_FLAG_BRAKE_OPEN) != 0);
+    }
+    return (flags & RCT12_TILE_ELEMENT_FLAG_BLOCK_BRAKE_CLOSED) != 0;
 }
 
 void RCT12TrackElement::SetBrakeClosed(bool isClosed)

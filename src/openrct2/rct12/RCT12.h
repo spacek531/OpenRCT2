@@ -508,7 +508,6 @@ public:
     bool HasCableLift() const;
     bool IsInverted() const;
     uint8_t GetBrakeBoosterSpeed() const;
-    bool GetBrakeClosed() const;
     bool HasGreenLight() const;
     uint8_t GetSeatRotation() const;
     uint16_t GetMazeEntry() const;
@@ -527,8 +526,9 @@ public:
     void SetHasChain(bool on);
     void SetHasCableLift(bool on);
     void SetInverted(bool inverted);
-    void SetBrakeBoosterSpeed(uint8_t speed);
+    bool GetBrakeClosed() const;
     void SetBrakeClosed(bool isClosed);
+    void SetBrakeBoosterSpeed(uint8_t speed);
     void SetHasGreenLight(uint8_t greenLight);
     void SetSeatRotation(uint8_t newSeatRotation);
     void SetMazeEntry(uint16_t newMazeEntry);
