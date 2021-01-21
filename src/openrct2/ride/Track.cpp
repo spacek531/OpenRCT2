@@ -1206,7 +1206,7 @@ bool TrackTypeHasSpeedSetting(track_type_t trackType)
 {
     // This does not check if the element is really a Spinning Control track instead of a booster,
     // but this does not cause problems.
-    return trackType == TrackElemType::Brakes || trackType == TrackElemType::Booster;
+    return trackType == TrackElemType::Brakes || trackType == TrackElemType::Booster || trackType == TrackElemType::BlockBrakes;
 }
 
 uint8_t TrackElement::GetSeatRotation() const
