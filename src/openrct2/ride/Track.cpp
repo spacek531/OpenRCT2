@@ -1371,6 +1371,20 @@ void TrackElement::SetInverted(bool inverted)
     }
 }
 
+bool TrackElement::GetBrakeClosed() const
+{
+    return (Flags2 & TRACK_ELEMENT_FLAGS2_BRAKE_CLOSED) != 0;
+}
+
+void TrackElement::SetBrakeClosed(bool isOpen)
+{
+    Flags2 &= ~TRACK_ELEMENT_FLAGS2_BRAKE_CLOSED;
+    if (isOpen)
+    {
+        Flags2 |= TRACK_ELEMENT_FLAGS2_BRAKE_CLOSED;
+    }
+}
+
 bool TrackElement::IsIndestructible() const
 {
     return (Flags2 & TRACK_ELEMENT_FLAGS2_INDESTRUCTIBLE_TRACK_PIECE) != 0;
@@ -1396,20 +1410,6 @@ uint8_t TrackElement::GetBrakeBoosterSpeed() const
 void TrackElement::SetBrakeBoosterSpeed(uint8_t speed)
 {
     BrakeBoosterSpeed = (speed >> 1);
-}
-
-bool TrackElement::GetBrakeClosed() const
-{
-    return (Flags2 & TRACK_ELEMENT_FLAGS2_BRAKE_CLOSED) != 0;
-}
-
-void TrackElement::SetBrakeClosed(bool isOpen)
-{
-    Flags2 &= ~TRACK_ELEMENT_FLAGS2_BRAKE_CLOSED;
-    if (isOpen)
-    {
-        Flags2 |= TRACK_ELEMENT_FLAGS2_BRAKE_CLOSED;
-    }
 }
 
 bool TrackElement::HasGreenLight() const
