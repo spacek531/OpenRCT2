@@ -1376,12 +1376,15 @@ bool TrackElement::GetBrakeClosed() const
     return (Flags2 & TRACK_ELEMENT_FLAGS2_BRAKE_CLOSED) != 0;
 }
 
-void TrackElement::SetBrakeClosed(bool isOpen)
+void TrackElement::SetBrakeClosed(bool isClosed)
 {
-    Flags2 &= ~TRACK_ELEMENT_FLAGS2_BRAKE_CLOSED;
-    if (isOpen)
+    if (isClosed)
     {
         Flags2 |= TRACK_ELEMENT_FLAGS2_BRAKE_CLOSED;
+    }
+    else
+    {
+        Flags2 &= ~TRACK_ELEMENT_FLAGS2_BRAKE_CLOSED;
     }
 }
 
