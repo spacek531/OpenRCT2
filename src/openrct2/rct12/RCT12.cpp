@@ -274,7 +274,7 @@ bool RCT12TrackElement::HasGreenLight() const
 {
     if (track_type_is_station(trackType))
     {
-        return (sequence & RCT12_TILE_ELEMENT_SEQUENCE_GREEN_LIGHT) != 0;
+        return (sequence & MAP_ELEM_TRACK_SEQUENCE_GREEN_LIGHT) != 0;
     }
     return false;
 }
@@ -821,7 +821,7 @@ void RCT12TrackElement::SetBrakeBoosterSpeed(uint8_t speed)
 {
     if (TrackTypeHasSpeedSetting(GetTrackType()))
     {
-        sequence &= ~RCT12_TRACK_ELEMENT_SEQUENCE_BRAKESPEED_MASK;
+        sequence &= ~0b11110000;
         sequence |= ((speed >> 1) << 4);
     }
 }
@@ -857,10 +857,10 @@ void RCT12TrackElement::SetHasGreenLight(uint8_t greenLight)
 {
     if (track_type_is_station(trackType))
     {
-        sequence &= ~RCT12_TILE_ELEMENT_SEQUENCE_GREEN_LIGHT;
+        sequence &= ~MAP_ELEM_TRACK_SEQUENCE_GREEN_LIGHT;
         if (greenLight)
         {
-            sequence |= RCT12_TILE_ELEMENT_SEQUENCE_GREEN_LIGHT;
+            sequence |= MAP_ELEM_TRACK_SEQUENCE_GREEN_LIGHT;
         }
     }
 }
