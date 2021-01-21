@@ -8595,7 +8595,7 @@ loc_6DBA33:;
     if (trackType == TrackElemType::Brakes)
     {
         TrackElement* trackElement = map_get_track_element_at_of_type_seq(TrackLocation, trackType, 0)->AsTrack();
-        if (((trackElement != nullptr && !trackElement->BrakeOpen()) || trackElement == nullptr)
+        if (((trackElement != nullptr && trackElement->GetBrakeClosed()) || trackElement == nullptr)
             && -(brake_speed << 16) > _vehicleVelocityF64E08)
         {
             acceleration = _vehicleVelocityF64E08 * -16;
