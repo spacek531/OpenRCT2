@@ -212,7 +212,6 @@ rct_string_id TrackDesign::CreateTrackDesignTrack(const Ride& ride)
     {
         TrackDesignTrackElement track{};
         track.type = trackElement.element->AsTrack()->GetTrackType();
-        // TODO move to RCT2 limit
 
         uint8_t trackFlags;
         if (TrackTypeHasSpeedSetting(track.type))
