@@ -441,7 +441,6 @@ static money32 _trackPlaceCost;
 static bool _autoOpeningShop;
 static bool _autoRotatingShop;
 static uint8_t _currentlyShowingBrakeOrBoosterSpeed;
-static bool _boosterTrackSelected;
 
 static uint32_t _currentDisabledSpecialTrackPieces;
 
@@ -2263,7 +2262,7 @@ static void window_ride_construction_invalidate(rct_window* w)
     if (_currentlyShowingBrakeOrBoosterSpeed)
     {
         uint16_t brakeSpeed2 = ((_currentBrakeSpeed2 * 9) >> 2) & 0xFFFF;
-        if (_boosterTrackSelected)
+        if (_selectedTrackType == TrackElemType::Booster)
         {
             brakeSpeed2 = get_booster_speed(ride->type, brakeSpeed2);
         }
@@ -3063,11 +3062,10 @@ static void window_ride_construction_update_widgets(rct_window* w)
 
     bool brakesSelected = _selectedTrackType == TrackElemType::Brakes
         || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Brakes);
-    _boosterTrackSelected = TrackTypeIsBooster(ride->type, _selectedTrackType)
-        || (ride->type != RIDE_TYPE_SPINNING_WILD_MOUSE && ride->type != RIDE_TYPE_STEEL_WILD_MOUSE
-            && _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster));
+    bool boosterTrackSelected = _selectedTrackType == TrackElemType::Booster
+        || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster);
 
-    if (!brakesSelected && !_boosterTrackSelected)
+    if (!brakesSelected && ! boosterTrackSelected)
     {
         if (is_track_enabled(TRACK_FLAT_ROLL_BANKING))
         {
