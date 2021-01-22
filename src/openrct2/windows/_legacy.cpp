@@ -308,7 +308,7 @@ bool window_ride_construction_update_state(
         auto alternativeType = AlternativeTrackTypes[trackType];
         if (alternativeType != -1 && availablePieces & (1ULL << trackType))
         {
-            trackType = static_cast<track_type_t>(alternativeType);
+            trackType = alternativeType;
             liftHillAndInvertedState &= ~CONSTRUCTION_LIFT_HILL_SELECTED;
         }
     }

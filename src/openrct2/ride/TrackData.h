@@ -50,7 +50,7 @@ struct track_descriptor
 
 extern const track_descriptor gTrackDescriptors[142];
 
-extern const int16_t AlternativeTrackTypes[TrackElemType::Count];
+extern const track_type_t AlternativeTrackTypes[TrackElemType::Count];
 
 extern const money32 TrackPricing[TrackElemType::Count];
 extern const money32 FlatRideTrackPricing[TrackElemType::Count];
