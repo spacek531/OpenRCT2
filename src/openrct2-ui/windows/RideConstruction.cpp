@@ -2262,7 +2262,8 @@ static void window_ride_construction_invalidate(rct_window* w)
     if (_currentlyShowingBrakeOrBoosterSpeed)
     {
         uint16_t brakeSpeed2 = ((_currentBrakeSpeed2 * 9) >> 2) & 0xFFFF;
-        if (_selectedTrackType == TrackElemType::Booster)
+        if (_selectedTrackType == TrackElemType::Booster
+            || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster))
         {
             brakeSpeed2 = get_booster_speed(ride->type, brakeSpeed2);
         }
@@ -3065,7 +3066,7 @@ static void window_ride_construction_update_widgets(rct_window* w)
     bool boosterTrackSelected = _selectedTrackType == TrackElemType::Booster
         || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster);
 
-    if (!brakesSelected && ! boosterTrackSelected)
+    if (!brakesSelected && !boosterTrackSelected)
     {
         if (is_track_enabled(TRACK_FLAT_ROLL_BANKING))
         {
