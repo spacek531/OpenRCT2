@@ -21,7 +21,6 @@ using track_type_t = uint16_t;
 using roll_type_t = uint8_t;
 using pitch_type_t = uint8_t;
 
-#pragma pack(push, 1)
 struct rct_trackdefinition
 {
     track_type_t type;
@@ -30,10 +29,7 @@ struct rct_trackdefinition
     roll_type_t bank_end;
     roll_type_t bank_start;
     int8_t preview_z_offset;
-    uint8_t pad[1] = {};
 };
-assert_struct_size(rct_trackdefinition, 8);
-#pragma pack(pop)
 
 struct PitchAndRoll
 {
