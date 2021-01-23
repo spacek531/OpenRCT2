@@ -539,6 +539,7 @@ GameActions::Result::Ptr TrackPlaceAction::Execute() const
                     ride->CableLiftLoc = mapLoc;
                     break;
                 case TrackElemType::BlockBrakes:
+                case TrackElemType::DiagBlockBrakes:
                 {
                     ride->num_block_brakes++;
                     ride->window_invalidate_flags |= RIDE_INVALIDATE_RIDE_OPERATING;

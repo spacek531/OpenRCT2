@@ -6791,7 +6791,7 @@ static void block_brakes_open_previous_section(Ride& ride, const CoordsXYZ& vehi
 
     // Get the start of the track block instead of the end
     location = { trackBeginEnd.begin_x, trackBeginEnd.begin_y, trackBeginEnd.begin_z };
-    auto trackElement = map_get_track_element_at(location);
+    auto trackElement = map_get_track_element_at_of_type(location,tileElement->AsTrack()->GetTrackType())->AsTrack();
     if (trackElement == nullptr)
     {
         return;
@@ -6802,7 +6802,14 @@ static void block_brakes_open_previous_section(Ride& ride, const CoordsXYZ& vehi
     }
     else
     {
-        trackElement->SetBrakeClosed(false);
+        if (trackElement->GetTrackType() == TrackElemType::DiagBlockBrakes)
+        {
+            SetTrackElementBrakeFlag(reinterpret_cast<TileElement*>(trackElement), location, false);
+        }
+        else
+        {
+            trackElement->SetBrakeClosed(false);
+        }
         map_invalidate_element(location, reinterpret_cast<TileElement*>(trackElement));
     }
     block_brakes_set_linked_brakes_closed(location, reinterpret_cast<TileElement*>(trackElement), false);
@@ -8164,7 +8171,7 @@ bool Vehicle::UpdateTrackMotionForwardsGetNewTrack(uint16_t trackType, Ride* cur
     }
 
     trackType = tileElement->AsTrack()->GetTrackType();
-    if (TrackTypeIsBrakesOrBlockBrakes(trackType))
+    if (!TrackTypeIsBrakesOrBlockBrakes(trackType))
     {
         target_seat_rotation = tileElement->AsTrack()->GetSeatRotation();
     }
@@ -8574,7 +8581,7 @@ bool Vehicle::UpdateTrackMotionBackwardsGetNewTrack(uint16_t trackType, Ride* cu
     }
 
     trackType = tileElement->AsTrack()->GetTrackType();
-    if (TrackTypeIsBrakesOrBlockBrakes(trackType))
+    if (!TrackTypeIsBrakesOrBlockBrakes(trackType))
     {
         target_seat_rotation = tileElement->AsTrack()->GetSeatRotation();
     }
