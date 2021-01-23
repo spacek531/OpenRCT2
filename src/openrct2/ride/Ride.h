@@ -1133,6 +1133,7 @@ void ride_breakdown_add_news_item(Ride* ride);
 Peep* ride_find_closest_mechanic(Ride* ride, int32_t forInspection);
 int32_t ride_initialise_construction_window(Ride* ride);
 void ride_construction_invalidate_current_track();
+bool CanBuildTrackType(uint8_t direction, uint8_t slope, uint8_t bank, track_type_t* trackType);
 std::optional<CoordsXYZ> sub_6C683D(
     const CoordsXYZD& location, track_type_t type, uint16_t extra_params, TileElement** output_element, uint16_t flags);
 void ride_set_map_tooltip(TileElement* tileElement);

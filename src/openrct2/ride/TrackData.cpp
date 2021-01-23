@@ -4114,7 +4114,7 @@ const track_curve_chain gTrackCurveChain[TrackElemType::Count] = {
     { TRACK_CURVE_NONE, TRACK_CURVE_NONE },
     { TRACK_CURVE_NONE, TRACK_CURVE_NONE },
     { TRACK_CURVE_NONE, TRACK_CURVE_NONE },
-    { RideConstructionSpecialPieceSelected | TrackElemType::Brakes, RideConstructionSpecialPieceSelected | TrackElemType::Brakes }, // TrackElemType::DiagBrakes
+    { RideConstructionSpecialPieceSelected | TrackElemType::DiagBrakes, RideConstructionSpecialPieceSelected | TrackElemType::DiagBrakes }, // TrackElemType::DiagBrakes
     { TRACK_CURVE_NONE, TRACK_CURVE_NONE }, // TrackElemType::DiagBlockBrakes
 };
 

@@ -426,6 +426,8 @@ static constexpr const rct_string_id RideConfigurationStringIds[] = {
     STR_QUARTER_LOOP,                       // 254
     STR_QUARTER_LOOP,                       // 255
     STR_SPINNING_CONTROL_TOGGLE_TRACK,      // 256
+    STR_BRAKES,                             // 257
+    STR_BLOCK_BRAKES,                       // 258
 };
 // clang-format on
 
@@ -2701,7 +2703,8 @@ static void window_ride_construction_update_map_selection()
  */
 static void window_ride_construction_update_possible_ride_configurations()
 {
-    int32_t trackType;
+    uint32_t trackTypeIndex;
+    track_type_t trackType;
 
     auto ride = get_ride(_currentRideIndex);
     if (ride == nullptr)
@@ -2711,11 +2714,12 @@ static void window_ride_construction_update_possible_ride_configurations()
 
     int32_t currentPossibleRideConfigurationIndex = 0;
     _numCurrentPossibleSpecialTrackPieces = 0;
-    for (trackType = 0; trackType < TrackElemType::Count; trackType++)
+    for (trackTypeIndex = 0; trackTypeIndex < TrackElemType::Count; trackTypeIndex++)
     {
+        trackType = static_cast<track_type_t>(trackTypeIndex);
         int32_t trackTypeCategory = ride_type_has_flag(ride->type, RIDE_TYPE_FLAG_FLAT_RIDE)
-            ? FlatRideTrackDefinitions[trackType].type
-            : TrackDefinitions[trackType].type;
+            ? FlatRideTrackDefinitions[trackTypeIndex].type
+            : TrackDefinitions[trackTypeIndex].type;
 
         if (trackTypeCategory == TRACK_NONE)
             continue;
@@ -2775,15 +2779,13 @@ static void window_ride_construction_update_possible_ride_configurations()
         if (bank == TRACK_BANK_UPSIDE_DOWN && bank != _previousTrackBankEnd)
             continue;
 
-        _currentPossibleRideConfigurations[currentPossibleRideConfigurationIndex] = trackType;
         _currentDisabledSpecialTrackPieces |= (1 << currentPossibleRideConfigurationIndex);
-        if (_currentTrackPieceDirection < 4 && slope == _previousTrackSlopeEnd && bank == _previousTrackBankEnd
-            && (trackType != TrackElemType::TowerBase
-                || ride_type_has_flag(ride->type, RIDE_TYPE_FLAG_ALLOW_EXTRA_TOWER_BASES)))
+        if (CanBuildTrackType(_currentTrackPieceDirection, slope, bank, &trackType))
         {
             _currentDisabledSpecialTrackPieces &= ~(1 << currentPossibleRideConfigurationIndex);
             _numCurrentPossibleSpecialTrackPieces++;
         }
+        _currentPossibleRideConfigurations[currentPossibleRideConfigurationIndex] = trackType;
         currentPossibleRideConfigurationIndex++;
     }
     _numCurrentPossibleRideConfigurations = currentPossibleRideConfigurationIndex;

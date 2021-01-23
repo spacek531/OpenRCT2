@@ -2001,6 +2001,31 @@ int32_t ride_initialise_construction_window(Ride* ride)
     return 1;
 }
 
+bool CanBuildTrackType(uint8_t direction, uint8_t slope, uint8_t bank, track_type_t* trackType)
+{
+    if (direction < 4 && slope == _previousTrackSlopeEnd && bank == _previousTrackBankEnd)
+    {
+        return *trackType != TrackElemType::TowerBase;
+    }
+    else if (slope == _previousTrackSlopeEnd && bank == _previousTrackBankEnd)
+    {
+        // if the track is diagonal, and brakes or block brakes are available, list the regular brakes and block brakes, but
+        // when the user selects them, select the diagonal version
+        switch (*trackType)
+        {
+            case TrackElemType::DiagBrakesBuildAlias:
+                *trackType = TrackElemType::DiagBrakes;
+                return true;
+            case TrackElemType::DiagBlockBrakesBuildAlias:
+                *trackType = TrackElemType::DiagBlockBrakes;
+                return true;
+            default:
+                return false;
+        }
+    }
+    return false;
+}
+
 #pragma endregion
 
 #pragma region Update functions

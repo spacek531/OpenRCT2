@@ -498,8 +498,13 @@ namespace TrackElemType
     constexpr track_type_t MultiDimFlatToDown90QuarterLoop = 254;
     constexpr track_type_t MultiDimInvertedUp90ToFlatQuarterLoop = 255;
     constexpr track_type_t RotationControlToggle = 256;
+
     constexpr track_type_t DiagBrakes = 257;
+    constexpr track_type_t DiagBrakesSaveAlias = 141;
+    constexpr track_type_t DiagBrakesBuildAlias = 99;
     constexpr track_type_t DiagBlockBrakes = 258;
+    constexpr track_type_t DiagBlockBrakesSaveAlias = 141;
+    constexpr track_type_t DiagBlockBrakesBuildAlias = 216;
 
     constexpr track_type_t Count = 259;
     constexpr track_type_t None = 65535;
@@ -569,9 +574,6 @@ void track_get_front(CoordsXYE* input, CoordsXYE* output);
 
 bool track_element_is_covered(track_type_t trackElementType);
 bool track_type_is_station(track_type_t trackType);
-bool TrackTypeIsBrakes(track_type_t trackType);
-bool TrackTypeIsBlockBrakes(track_type_t trackType);
-bool TrackTypeIsBrakesOrBlockBrakes(track_type_t trackType);
 
 roll_type_t track_get_actual_bank(TileElement* tileElement, roll_type_t bank);
 roll_type_t track_get_actual_bank_2(int32_t rideType, bool isInverted, roll_type_t bank);
@@ -586,3 +588,6 @@ money32 maze_set_track(
 
 bool TrackTypeIsBooster(uint8_t rideType, track_type_t trackType);
 bool TrackTypeHasSpeedSetting(track_type_t trackType);
+bool TrackTypeIsBrakes(track_type_t trackType);
+bool TrackTypeIsBlockBrakes(track_type_t trackType);
+bool TrackTypeIsBrakesOrBlockBrakes(track_type_t trackType);
