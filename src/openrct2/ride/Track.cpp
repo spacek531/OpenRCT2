@@ -1175,7 +1175,7 @@ bool track_type_is_station(track_type_t trackType)
 
 bool TrackTypeIsBrakes(track_type_t trackType)
 {
-    return trackType == TrackElemType::Brakes || trackType == TrackElemType::BlockBrakes;
+    return trackType == TrackElemType::Brakes || trackType == TrackElemType::DiagBrakes;
 }
 
 bool TrackTypeIsBlockBrakes(track_type_t trackType)

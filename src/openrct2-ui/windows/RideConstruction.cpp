@@ -1660,6 +1660,7 @@ static void window_ride_construction_dropdown(rct_window* w, rct_widgetindex wid
             _currentTrackLiftHill &= ~CONSTRUCTION_LIFT_HILL_SELECTED;
             break;
         case TrackElemType::BlockBrakes:
+        case TrackElemType::DiagBlockBrakes:
             _currentBrakeSpeed2 = 2;
             break;
     }
@@ -3066,9 +3067,8 @@ static void window_ride_construction_update_widgets(rct_window* w)
     window_ride_construction_widgets[WIDX_U_TRACK].type = WindowWidgetType::Empty;
     window_ride_construction_widgets[WIDX_O_TRACK].type = WindowWidgetType::Empty;
 
-    bool brakesSelected = _selectedTrackType == TrackElemType::Brakes || _selectedTrackType == TrackElemType::BlockBrakes
-        || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Brakes)
-        || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::BlockBrakes);
+    bool brakesSelected = TrackTypeIsBrakesOrBlockBrakes(_selectedTrackType)
+        || TrackTypeIsBrakesOrBlockBrakes(_currentTrackCurve & ~RideConstructionSpecialPieceSelected);
     bool boosterTrackSelected = _selectedTrackType == TrackElemType::Booster
         || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster);
 
@@ -3112,8 +3112,8 @@ static void window_ride_construction_update_widgets(rct_window* w)
     }
     else
     {
-        if (brakesSelected && _selectedTrackType == TrackElemType::BlockBrakes
-            ||  _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::BlockBrakes))
+        if (TrackTypeIsBlockBrakes(_selectedTrackType)
+            || TrackTypeIsBlockBrakes(_currentTrackCurve & ~RideConstructionSpecialPieceSelected))
         {
             window_ride_construction_widgets[WIDX_BANKING_GROUPBOX].text = STR_RIDE_CONSTRUCTION_BLOCK_BRAKE_SPEED_LIMIT_TIP;
             window_ride_construction_widgets[WIDX_BANK_LEFT].tooltip = STR_RIDE_CONSTRUCTION_BLOCK_BRAKE_SPEED_LIMIT_TIP;
