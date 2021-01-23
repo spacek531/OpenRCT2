@@ -8211,7 +8211,7 @@ loc_6DAEB9:
             auto brakeSpeed = brake_speed << 16;
             if (brakeSpeed < _vehicleVelocityF64E08)
             {
-                TrackElement* trackElement = map_get_track_element_at_of_type_seq(TrackLocation, trackType, 0)->AsTrack();
+                TrackElement* trackElement = map_get_track_element_at_of_type(TrackLocation, trackType)->AsTrack();
                 if ((trackElement != nullptr && trackElement->GetBrakeClosed()) || trackElement == nullptr)
                     acceleration = -_vehicleVelocityF64E08 * 16;
             }
@@ -8594,7 +8594,7 @@ loc_6DBA33:;
 
     if (trackType == TrackElemType::Brakes)
     {
-        TrackElement* trackElement = map_get_track_element_at_of_type_seq(TrackLocation, trackType, 0)->AsTrack();
+        TrackElement* trackElement = map_get_track_element_at_of_type(TrackLocation, trackType)->AsTrack();
         if (((trackElement != nullptr && trackElement->GetBrakeClosed()) || trackElement == nullptr)
             && -(brake_speed << 16) > _vehicleVelocityF64E08)
         {
