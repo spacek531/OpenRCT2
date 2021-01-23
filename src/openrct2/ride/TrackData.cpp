@@ -3753,75 +3753,76 @@ const uint8_t TrackPieceLengths[TrackElemType::Count] = {
     100,    // TrackElemType::RightLargeHalfLoopUp
     100,    // TrackElemType::RightLargeHalfLoopDown
     100,    // TrackElemType::LeftLargeHalfLoopDown
-    96,     //
-    96,     //
-    96,     //
-    96,     //
-    64,     //
-    64,     //
-    64,     //
-    64,     //
-    64,     //
-    64,     //
-    16,     //
-    16,     //
-    64,     //
-    64,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    80,     //
-    80,     //
-    80,     //
-    64,     //
-    64,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    32,     //
-    80,     //
-    80,     //
-    80,     //
+    96,     // TrackElemType::LeftFlyerTwistUp
+    96,     // TrackElemType::RightFlyerTwistUp
+    96,     // TrackElemType::LeftFlyerTwistDown
+    96,     // TrackElemType::RightFlyerTwistDown
+    64,     // TrackElemType::FlyerHalfLoopUp
+    64,     // TrackElemType::FlyerHalfLoopDown
+    64,     // TrackElemType::LeftFlyerCorkscrewUp
+    64,     // TrackElemType::RightFlyerCorkscrewUp
+    64,     // TrackElemType::LeftFlyerCorkscrewDown
+    64,     // TrackElemType::RightFlyerCorkscrewDown
+    16,     // TrackElemType::HeartLineTransferUp
+    16,     // TrackElemType::HeartLineTransferDown
+    64,     // TrackElemType::LeftHeartLineRoll
+    64,     // TrackElemType::RightHeartLineRoll
+    32,     // TrackElemType::MinigolfHoleA
+    32,     // TrackElemType::MinigolfHoleB
+    32,     // TrackElemType::MinigolfHoleC
+    32,     // TrackElemType::MinigolfHoleD
+    32,     // TrackElemType::MinigolfHoleE
+    80,     // TrackElemType::MultiDimInvertedFlatToDown90QuarterLoop
+    80,     // TrackElemType::Up90ToInvertedFlatQuarterLoop
+    80,     // TrackElemType::InvertedFlatToDown90QuarterLoop
+    64,     // TrackElemType::LeftCurvedLiftHill
+    64,     // TrackElemType::RightCurvedLiftHill
+    32,     // TrackElemType::LeftReverser
+    32,     // TrackElemType::RightReverser
+    32,     // TrackElemType::AirThrustTopCap
+    32,     // TrackElemType::AirThrustVerticalDown
+    32,     // TrackElemType::AirThrustVerticalDownToLevel
+    32,     // TrackElemType::BlockBrakes
+    32,     // TrackElemType::LeftBankedQuarterTurn3TileUp25
+    32,     // TrackElemType::RightBankedQuarterTurn3TileUp25
+    32,     // TrackElemType::LeftBankedQuarterTurn3TileDown25
+    32,     // TrackElemType::RightBankedQuarterTurn3TileDown25
+    32,     // TrackElemType::LeftBankedQuarterTurn5TileUp25
+    32,     // TrackElemType::RightBankedQuarterTurn5TileUp25
+    32,     // TrackElemType::LeftBankedQuarterTurn5TileDown25
+    32,     // TrackElemType::RightBankedQuarterTurn5TileDown25
+    32,     // TrackElemType::Up25ToLeftBankedUp25
+    32,     // TrackElemType::Up25ToRightBankedUp25
+    32,     // TrackElemType::LeftBankedUp25ToUp25
+    32,     // TrackElemType::RightBankedUp25ToUp25
+    32,     // TrackElemType::Down25ToLeftBankedDown25
+    32,     // TrackElemType::Down25ToRightBankedDown25
+    32,     // TrackElemType::LeftBankedDown25ToDown25
+    32,     // TrackElemType::RightBankedDown25ToDown25
+    32,     // TrackElemType::LeftBankedFlatToLeftBankedUp25
+    32,     // TrackElemType::RightBankedFlatToRightBankedUp25
+    32,     // TrackElemType::LeftBankedUp25ToLeftBankedFlat
+    32,     // TrackElemType::RightBankedUp25ToRightBankedFlat
+    32,     // TrackElemType::LeftBankedFlatToLeftBankedDown25
+    32,     // TrackElemType::RightBankedFlatToRightBankedDown25
+    32,     // TrackElemType::LeftBankedDown25ToLeftBankedFlat
+    32,     // TrackElemType::RightBankedDown25ToRightBankedFlat
+    32,     // TrackElemType::FlatToLeftBankedUp25
+    32,     // TrackElemType::FlatToLeftBankedUp25
+    32,     // TrackElemType::FlatToRightBankedUp25
+    32,     // TrackElemType::LeftBankedUp25ToFlat
+    32,     // TrackElemType::RightBankedUp25ToFlat
+    32,     // TrackElemType::FlatToLeftBankedDown25
+    32,     // TrackElemType::FlatToRightBankedDown25
+    32,     // TrackElemType::LeftBankedDown25ToFlat
+    32,     // TrackElemType::RightBankedDown25ToFlat
+    32,     // TrackElemType::LeftQuarterTurn1TileUp90
+    32,     // TrackElemType::RightQuarterTurn1TileUp90
+    32,     // TrackElemType::LeftQuarterTurn1TileDown90
+    32,     // TrackElemType::RightQuarterTurn1TileDown90
+    80,     // TrackElemType::MultiDimUp90ToInvertedFlatQuarterLoop
+    80,     // TrackElemType::MultiDimFlatToDown90QuarterLoop
+    80,     // TrackElemType::MultiDimInvertedUp90ToFlatQuarterLoop
     32,     // TrackElemType::RotationControlToggle
 };
 
