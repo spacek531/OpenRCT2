@@ -3110,7 +3110,15 @@ static void window_ride_construction_update_widgets(rct_window* w)
     }
     else
     {
-        if (brakesSelected)
+        if (brakesSelected && _selectedTrackType == TrackElemType::BlockBrakes
+            ||  _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::BlockBrakes))
+        {
+            window_ride_construction_widgets[WIDX_BANKING_GROUPBOX].text = STR_RIDE_CONSTRUCTION_BLOCK_BRAKE_SPEED_LIMIT_TIP;
+            window_ride_construction_widgets[WIDX_BANK_LEFT].tooltip = STR_RIDE_CONSTRUCTION_BLOCK_BRAKE_SPEED_LIMIT_TIP;
+            window_ride_construction_widgets[WIDX_BANK_STRAIGHT].tooltip = STR_RIDE_CONSTRUCTION_BLOCK_BRAKE_SPEED_LIMIT_TIP;
+            window_ride_construction_widgets[WIDX_BANK_RIGHT].tooltip = STR_RIDE_CONSTRUCTION_BLOCK_BRAKE_SPEED_LIMIT_TIP;
+        }
+        else if (brakesSelected)
         {
             window_ride_construction_widgets[WIDX_BANKING_GROUPBOX].text = STR_RIDE_CONSTRUCTION_BRAKE_SPEED;
             window_ride_construction_widgets[WIDX_BANK_LEFT].tooltip = STR_RIDE_CONSTRUCTION_BRAKE_SPEED_LIMIT_TIP;
