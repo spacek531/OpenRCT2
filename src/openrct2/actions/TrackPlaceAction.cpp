@@ -538,8 +538,12 @@ GameActions::Result::Ptr TrackPlaceAction::Execute() const
                     ride->lifecycle_flags |= RIDE_LIFECYCLE_CABLE_LIFT_HILL_COMPONENT_USED;
                     ride->CableLiftLoc = mapLoc;
                     break;
-                case TrackElemType::BlockBrakes:
                 case TrackElemType::DiagBlockBrakes:
+                    if (trackBlock->index != 0)
+                    {
+                        break;
+                    }
+                case TrackElemType::BlockBrakes:
                 {
                     ride->num_block_brakes++;
                     ride->window_invalidate_flags |= RIDE_INVALIDATE_RIDE_OPERATING;

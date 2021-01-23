@@ -6689,9 +6689,13 @@ void Vehicle::CheckAndApplyBlockSectionStopSite()
         case TrackElemType::BlockBrakes:
         case TrackElemType::DiagBlockBrakes:
             if (curRide->IsBlockSectioned() && trackElement->AsTrack()->GetBrakeClosed())
+            {
                 ApplyStopBlockBrake();
+            }
             else
+            {
                 ApplyNonStopBlockBrake();
+            }
 
             break;
         case TrackElemType::EndStation:
@@ -8232,6 +8236,7 @@ loc_6DAEB9:
             && curRide->breakdown_reason_pending == BREAKDOWN_BRAKES_FAILURE;
         if (!hasBrakesFailure || curRide->mechanic_status == RIDE_MECHANIC_STATUS_HAS_FIXED_STATION_BRAKES)
         {
+            // todo: figure out why diagonal brakes are so much slower
             auto brakeSpeed = brake_speed << 16;
             if (brakeSpeed < _vehicleVelocityF64E08)
             {
