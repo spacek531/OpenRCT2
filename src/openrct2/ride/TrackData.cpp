@@ -3808,7 +3808,6 @@ const uint8_t TrackPieceLengths[TrackElemType::Count] = {
     32,     // TrackElemType::LeftBankedDown25ToLeftBankedFlat
     32,     // TrackElemType::RightBankedDown25ToRightBankedFlat
     32,     // TrackElemType::FlatToLeftBankedUp25
-    32,     // TrackElemType::FlatToLeftBankedUp25
     32,     // TrackElemType::FlatToRightBankedUp25
     32,     // TrackElemType::LeftBankedUp25ToFlat
     32,     // TrackElemType::RightBankedUp25ToFlat
