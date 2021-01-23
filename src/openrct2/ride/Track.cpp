@@ -296,6 +296,8 @@ const rct_trackdefinition TrackDefinitions[TrackElemType::Count] =
     { TRACK_QUARTER_LOOP_UNINVERTED,TRACK_SLOPE_DOWN_90,        TRACK_SLOPE_NONE,           TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                  },  // ELEM_MULTIDIM_FLAT_TO_90_DEG_DOWN_QUARTER_LOOP
     { TRACK_QUARTER_LOOP_INVERTED,  TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_90,          TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                  }, // 255
     { TRACK_ROTATION_CONTROL_TOGGLE,TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // ELEM_ROTATION_CONTROL_TOGGLE
+    { TRACK_BRAKES,                 TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // TrackElemType::DiagBrakes
+    { TRACK_BLOCK_BRAKES,           TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // TrackElemType::DiagBlockBrakes
 };
 
 /**　rct2: 0x0099849D */
@@ -558,6 +560,8 @@ const rct_trackdefinition FlatRideTrackDefinitions[TrackElemType::Count] =
     { TRACK_QUARTER_LOOP_UNINVERTED,TRACK_SLOPE_NONE,           TRACK_SLOPE_UP_90,          TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                           },  // 253
     { TRACK_QUARTER_LOOP_UNINVERTED,TRACK_SLOPE_DOWN_90,        TRACK_SLOPE_NONE,           TRACK_BANK_UPSIDE_DOWN, TRACK_BANK_NONE,        0                           },  // 254
     { TRACK_ROTATION_CONTROL_TOGGLE,TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 256
+    { TRACK_BRAKES,                 TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 257
+    { TRACK_BLOCK_BRAKES,           TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                           },  // 258
 };
 // clang-format on
 
@@ -1094,6 +1098,7 @@ bool TrackElement::IsBlockStart() const
         case TrackElemType::EndStation:
         case TrackElemType::CableLiftHill:
         case TrackElemType::BlockBrakes:
+        case TrackElemType::DiagBlockBrakes:
             return true;
         case TrackElemType::Up25ToFlat:
         case TrackElemType::Up60ToFlat:
@@ -1168,6 +1173,23 @@ bool track_type_is_station(track_type_t trackType)
     }
 }
 
+bool TrackTypeIsBrakes(track_type_t trackType)
+{
+    return trackType == TrackElemType::Brakes || trackType == TrackElemType::BlockBrakes;
+}
+
+bool TrackTypeIsBlockBrakes(track_type_t trackType)
+{
+    return trackType == TrackElemType::BlockBrakes || trackType == TrackElemType::DiagBlockBrakes;
+}
+
+bool TrackTypeIsBrakesOrBlockBrakes(track_type_t trackType)
+{
+    return TrackTypeIsBrakes(trackType) || TrackTypeIsBlockBrakes(trackType);
+}
+
+
+
 bool track_element_is_covered(track_type_t trackElementType)
 {
     switch (trackElementType)
@@ -1208,7 +1230,7 @@ bool TrackTypeHasSpeedSetting(track_type_t trackType)
 {
     // This does not check if the element is really a Spinning Control track instead of a booster,
     // but this does not cause problems.
-    return trackType == TrackElemType::Brakes || trackType == TrackElemType::Booster || trackType == TrackElemType::BlockBrakes;
+    return trackType == TrackElemType::Booster || TrackTypeIsBrakesOrBlockBrakes(trackType);
 }
 
 uint8_t TrackElement::GetSeatRotation() const
