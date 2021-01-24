@@ -709,6 +709,7 @@ static void window_tile_inspector_track_block_set_lift(int32_t elementIndex, boo
 
 static void window_tile_inspector_track_set_block_brake(int32_t elementIndex, bool blockBrake)
 {
+    // todo: find 0th sequence and call action
     auto modifyTile = TileModifyAction(
         windowTileInspectorToolMap, TileModifyType::TrackSetBlockBrake, elementIndex, blockBrake);
     GameActions::Execute(&modifyTile);
@@ -1573,6 +1574,7 @@ static void window_tile_inspector_invalidate(rct_window* w)
             {
                 WidgetSetDisabled(w, WIDX_TRACK_CHECK_BLOCK_BRAKE_CLOSED, true);
             }
+            // todo: get value from 0th sequence
             WidgetSetCheckboxValue(w, WIDX_TRACK_CHECK_BLOCK_BRAKE_CLOSED, tileElement->AsTrack()->GetBrakeClosed());
             WidgetSetCheckboxValue(w, WIDX_TRACK_CHECK_IS_INDESTRUCTIBLE, tileElement->AsTrack()->IsIndestructible());
             break;

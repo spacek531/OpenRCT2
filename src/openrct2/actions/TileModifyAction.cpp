@@ -175,7 +175,7 @@ GameActions::Result::Ptr TileModifyAction::QueryExecute(bool isExecuting) const
         }
         case TileModifyType::TrackSetBlockBrake:
         {
-            // todo: apply to entire sequence
+            // todo: apply to 0th sequence only
             const auto elementIndex = _value1;
             const bool isClosed = _value2;
             res = tile_inspector_track_set_brake(_loc, elementIndex, isClosed, isExecuting);
