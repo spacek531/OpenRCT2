@@ -1202,7 +1202,7 @@ void ride_clear_blocked_tiles(Ride* ride)
                 {
                     if (element->GetType() == TILE_ELEMENT_TYPE_TRACK && element->AsTrack()->GetRideIndex() == ride->id)
                     {
-                        if (TrackTypeIsBrakes(element->AsTrack()->GetTrackType()))
+                        if (TrackTypeIsBrakes(element->AsTrack()->GetTrackType()) && element->AsTrack()->GetSequenceIndex() == 0)
                             element->AsTrack()->SetBrakeClosed(true);
                         // Unblock footpath element that is at same position
                         auto footpathElement = map_get_footpath_element(
@@ -4361,11 +4361,6 @@ static void RideOpenBlockBrakes(CoordsXYE* startElement)
         switch (trackType)
         {
             case TrackElemType::BlockBrakes:
-                SetTrackElementBrakeFlag(currentElement.element, currentElement, false);
-                block_brakes_set_linked_brakes_closed(
-                    CoordsXYZ(currentElement.x, currentElement.y, currentElement.element->GetBaseZ()), currentElement.element,
-                    false);
-                break;
             case TrackElemType::DiagBlockBrakes:
                 block_brakes_set_linked_brakes_closed(
                     CoordsXYZ(currentElement.x, currentElement.y, currentElement.element->GetBaseZ()), currentElement.element,
@@ -4395,20 +4390,15 @@ void brakes_link_to_block_brake(const CoordsXYZ& vehicleTrackLocation, TileEleme
     int32_t outputZ = vehicleTrackLocation.z;
     do
     {
+        if (output.element->AsTrack()->GetSequenceIndex() != 0)
+        {
+            continue;
+        }
         if (TrackTypeIsBlockBrakes(output.element->AsTrack()->GetTrackType()))
         {
-            if (brake->GetTrackType() == TrackElemType::DiagBrakes) {
-                SetTrackElementBrakeFlag(
-                    reinterpret_cast<TileElement*>(brake), vehicleTrackLocation,
-                    !(brake->GetBrakeBoosterSpeed() < output.element->AsTrack()->GetBrakeBoosterSpeed()
-                      || output.element->AsTrack()->GetBrakeClosed()));
-            }
-            else
-            {
-                brake->SetBrakeClosed(
-                    !(brake->GetBrakeBoosterSpeed() < output.element->AsTrack()->GetBrakeBoosterSpeed()
-                      || output.element->AsTrack()->GetBrakeClosed()));
-            }
+            brake->SetBrakeClosed(
+                !(brake->GetBrakeBoosterSpeed() < output.element->AsTrack()->GetBrakeBoosterSpeed()
+                    || output.element->AsTrack()->GetBrakeClosed()));
             break;
         }
         else if (TrackTypeIsBrakes(output.element->AsTrack()->GetTrackType()))
@@ -4452,12 +4442,17 @@ void block_brakes_set_linked_brakes_closed(const CoordsXYZ& vehicleTrackLocation
         location.y = trackBeginEnd.end_y;
         location.z = trackBeginEnd.begin_z;
         tileElement = trackBeginEnd.begin_element;
-
         if (TrackTypeIsBrakes(trackBeginEnd.begin_element->AsTrack()->GetTrackType()))
         {
-            trackBeginEnd.begin_element->AsTrack()->SetBrakeClosed(
-                (trackBeginEnd.begin_element->AsTrack()->GetBrakeBoosterSpeed() >= blockBrake->GetBrakeBoosterSpeed())
-                || isClosed);
+            TileElement* trackElement = tileElement;
+            if (trackBeginEnd.begin_element->AsTrack()->GetTrackType() == TrackElemType::DiagBrakes)
+                trackElement = map_get_track_element_at_of_type_seq(location, trackBeginEnd.begin_element->AsTrack()->GetTrackType(), 0);
+            if (trackElement == nullptr)
+            {
+                continue;
+            }
+            trackElement->AsTrack()->SetBrakeClosed(
+                (trackElement->AsTrack()->GetBrakeBoosterSpeed() >= blockBrake->GetBrakeBoosterSpeed()) || isClosed);
         }
 
         // prevent infinite loop

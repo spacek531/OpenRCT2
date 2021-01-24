@@ -6795,27 +6795,13 @@ static void block_brakes_open_previous_section(Ride& ride, const CoordsXYZ& vehi
 
     // Get the start of the track block instead of the end
     location = { trackBeginEnd.begin_x, trackBeginEnd.begin_y, trackBeginEnd.begin_z };
-    auto trackElement = map_get_track_element_at_of_type(location,tileElement->AsTrack()->GetTrackType())->AsTrack();
+    auto trackElement = map_get_track_element_at_of_type_seq(location,tileElement->AsTrack()->GetTrackType(), 0)->AsTrack();
     if (trackElement == nullptr)
     {
         return;
     }
-    if (trackElement->GetTrackType() == TrackElemType::DiagBlockBrakes)
-    {
-        SetTrackElementBrakeFlag(reinterpret_cast<TileElement*>(trackElement), location, false);
-    }
-    else
-    {
-        if (trackElement->GetTrackType() == TrackElemType::DiagBlockBrakes)
-        {
-            SetTrackElementBrakeFlag(reinterpret_cast<TileElement*>(trackElement), location, false);
-        }
-        else
-        {
-            trackElement->SetBrakeClosed(false);
-        }
-        map_invalidate_element(location, reinterpret_cast<TileElement*>(trackElement));
-    }
+    trackElement->SetBrakeClosed(false);
+    map_invalidate_element(location, reinterpret_cast<TileElement*>(trackElement));
     block_brakes_set_linked_brakes_closed(location, reinterpret_cast<TileElement*>(trackElement), false);
 
     auto trackType = trackElement->GetTrackType();
@@ -8032,15 +8018,7 @@ bool Vehicle::UpdateTrackMotionForwardsGetNewTrack(uint16_t trackType, Ride* cur
     {
         if (next_vehicle_on_train == SPRITE_INDEX_NULL)
         {
-            if (tileElement->AsTrack()->GetTrackType() == TrackElemType::DiagBlockBrakes)
-            {
-                SetTrackElementBrakeFlag(tileElement, TrackLocation, true);
-            }
-            else
-            {
-                tileElement->AsTrack()->SetBrakeClosed(true);
-            }
-
+            tileElement->AsTrack()->SetBrakeClosed(true);
             if (TrackTypeIsBlockBrakes(trackType) || trackType == TrackElemType::EndStation)
             {
                 if (!(rideEntry->vehicles[0].flags & VEHICLE_ENTRY_FLAG_POWERED))

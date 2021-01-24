@@ -1192,6 +1192,14 @@ bool TrackTypeIsBrakesOrBlockBrakes(track_type_t trackType)
 // sets the brake flag on all TileElements for multi-element track pieces
 void SetTrackElementBrakeFlag(TileElement* trackElement, CoordsXY loc, bool isClosed)
 {
+    // cba to remove SetTrackElementBrakeFlat w/o the delta
+    if (trackElement->AsTrack()->GetSequenceIndex() == 0)
+    {
+        trackElement->AsTrack()->SetBrakeClosed(isClosed);
+        return;
+    }
+    assert("Attempted to SetTrackElementBrakeFlag with a tile that is not the 0 sequence");
+    /*
     auto type = trackElement->AsTrack()->GetTrackType();
     int16_t originX = loc.x;
     int16_t originY = loc.y;
@@ -1258,6 +1266,7 @@ void SetTrackElementBrakeFlag(TileElement* trackElement, CoordsXY loc, bool isCl
         }
         tileElement->AsTrack()->SetBrakeClosed(isClosed);
     }
+    */
 }
 
 bool track_element_is_covered(track_type_t trackElementType)

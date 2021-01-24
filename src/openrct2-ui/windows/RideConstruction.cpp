@@ -3436,12 +3436,10 @@ static void ride_construction_set_brakes_speed(int32_t brakesSpeed)
             &tileElement, 0)
         != std::nullopt)
     {
-        auto trackSetBrakeSpeed = TrackSetBrakeSpeedAction(
-            _currentTrackBegin, tileElement->AsTrack()->GetTrackType(), brakesSpeed);
+        auto trackSetBrakeSpeed = TrackSetBrakeSpeedAction(_currentTrackBegin, tileElement->AsTrack()->GetTrackType(), brakesSpeed);
         trackSetBrakeSpeed.SetCallback(
             [](const GameAction* ga, const GameActions::Result* result) { window_ride_construction_update_active_elements(); });
         GameActions::Execute(&trackSetBrakeSpeed);
-        return;
     }
     window_ride_construction_update_active_elements();
 }

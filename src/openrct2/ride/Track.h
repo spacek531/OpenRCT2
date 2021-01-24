@@ -591,4 +591,4 @@ bool TrackTypeHasSpeedSetting(track_type_t trackType);
 bool TrackTypeIsBrakes(track_type_t trackType);
 bool TrackTypeIsBlockBrakes(track_type_t trackType);
 bool TrackTypeIsBrakesOrBlockBrakes(track_type_t trackType);
-void SetTrackElementBrakeFlag(TileElement* trackElement, CoordsXY loc, bool isClosed);
+//void SetTrackElementBrakeFlag(TileElement* trackElement, CoordsXY loc, bool isClosed);

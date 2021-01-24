@@ -60,8 +60,8 @@ GameActions::Result::Ptr TrackSetBrakeSpeedAction::QueryExecute(bool isExecuting
     {
         return MakeResult(GameActions::Status::NotOwned, STR_NONE);
     }
-
-    TileElement* tileElement = map_get_track_element_at_of_type(_loc, _trackType);
+    // what are the consequences of setting this to be sequence 0?
+    TileElement* tileElement = map_get_track_element_at_of_type_seq(_loc, _trackType, 0);
     if (tileElement == nullptr)
     {
         log_warning("Invalid game command for setting brakes speed. x = %d, y = %d", _loc.x, _loc.y);
