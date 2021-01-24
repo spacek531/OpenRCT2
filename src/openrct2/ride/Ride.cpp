@@ -1202,7 +1202,8 @@ void ride_clear_blocked_tiles(Ride* ride)
                 {
                     if (element->GetType() == TILE_ELEMENT_TYPE_TRACK && element->AsTrack()->GetRideIndex() == ride->id)
                     {
-                        if (TrackTypeIsBrakes(element->AsTrack()->GetTrackType()) && element->AsTrack()->GetSequenceIndex() == 0)
+                        if (TrackTypeIsBrakes(element->AsTrack()->GetTrackType())
+                            && element->AsTrack()->GetSequenceIndex() == 0)
                             element->AsTrack()->SetBrakeClosed(true);
                         // Unblock footpath element that is at same position
                         auto footpathElement = map_get_footpath_element(
@@ -4398,7 +4399,7 @@ void brakes_link_to_block_brake(const CoordsXYZ& vehicleTrackLocation, TileEleme
         {
             brake->SetBrakeClosed(
                 !(brake->GetBrakeBoosterSpeed() < output.element->AsTrack()->GetBrakeBoosterSpeed()
-                    || output.element->AsTrack()->GetBrakeClosed()));
+                  || output.element->AsTrack()->GetBrakeClosed()));
             break;
         }
         else if (TrackTypeIsBrakes(output.element->AsTrack()->GetTrackType()))
@@ -4446,7 +4447,8 @@ void block_brakes_set_linked_brakes_closed(const CoordsXYZ& vehicleTrackLocation
         {
             TileElement* trackElement = tileElement;
             if (trackBeginEnd.begin_element->AsTrack()->GetTrackType() == TrackElemType::DiagBrakes)
-                trackElement = map_get_track_element_at_of_type_seq(location, trackBeginEnd.begin_element->AsTrack()->GetTrackType(), 0);
+                trackElement = map_get_track_element_at_of_type_seq(
+                    location, trackBeginEnd.begin_element->AsTrack()->GetTrackType(), 0);
             if (trackElement == nullptr)
             {
                 continue;
