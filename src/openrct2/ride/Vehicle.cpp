@@ -8148,7 +8148,7 @@ bool Vehicle::UpdateTrackMotionForwardsGetNewTrack(uint16_t trackType, Ride* cur
     }
 
     trackType = tileElement->AsTrack()->GetTrackType();
-    if (trackType != TrackElemType::Brakes)
+    if (trackType != TrackElemType::Brakes && trackType != TrackElemType::BlockBrakes)
     {
         target_seat_rotation = tileElement->AsTrack()->GetSeatRotation();
     }
@@ -8550,7 +8550,7 @@ bool Vehicle::UpdateTrackMotionBackwardsGetNewTrack(uint16_t trackType, Ride* cu
     }
 
     trackType = tileElement->AsTrack()->GetTrackType();
-    if (trackType != TrackElemType::Brakes)
+    if (trackType != TrackElemType::Brakes && trackType != TrackElemType::BlockBrakes)
     {
         target_seat_rotation = tileElement->AsTrack()->GetSeatRotation();
     }
