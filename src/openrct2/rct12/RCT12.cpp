@@ -816,7 +816,7 @@ void RCT12TrackElement::SetBrakeBoosterSpeed(uint8_t speed)
     }
 }
 
-bool RCT12TrackElement::GetBrakeClosed() const
+bool RCT12TrackElement::IsBrakeClosed() const
 {
     if (trackType == TrackElemType::Brakes)
     {

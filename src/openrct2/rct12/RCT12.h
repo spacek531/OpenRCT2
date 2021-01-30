@@ -526,7 +526,7 @@ public:
     void SetHasChain(bool on);
     void SetHasCableLift(bool on);
     void SetInverted(bool inverted);
-    bool GetBrakeClosed() const;
+    bool IsBrakeClosed() const;
     void SetBrakeClosed(bool isClosed);
     void SetBrakeBoosterSpeed(uint8_t speed);
     void SetHasGreenLight(uint8_t greenLight);
