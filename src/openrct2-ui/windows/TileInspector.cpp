@@ -882,7 +882,7 @@ static void window_tile_inspector_mouseup(rct_window* w, rct_widgetindex widgetI
                 }
                 case WIDX_TRACK_CHECK_BLOCK_BRAKE_CLOSED:
                     window_tile_inspector_track_set_block_brake(
-                        windowTileInspectorSelectedIndex, !tileElement->AsTrack()->GetBrakeClosed());
+                        windowTileInspectorSelectedIndex, !tileElement->AsTrack()->IsBrakeClosed());
                     break;
                 case WIDX_TRACK_CHECK_IS_INDESTRUCTIBLE:
                     window_tile_inspector_track_set_indestructible(

@@ -6685,14 +6685,14 @@ void Vehicle::CheckAndApplyBlockSectionStopSite()
     switch (trackType)
     {
         case TrackElemType::BlockBrakes:
-            if (curRide->IsBlockSectioned() && trackElement->AsTrack()->GetBrakeClosed())
+            if (curRide->IsBlockSectioned() && trackElement->AsTrack()->IsBrakeClosed())
                 ApplyStopBlockBrake();
             else
                 ApplyNonStopBlockBrake();
 
             break;
         case TrackElemType::EndStation:
-            if (trackElement->AsTrack()->GetBrakeClosed())
+            if (trackElement->AsTrack()->IsBrakeClosed())
                 _vehicleMotionTrackFlags |= VEHICLE_UPDATE_MOTION_TRACK_FLAG_VEHICLE_AT_BLOCK_BRAKE;
 
             break;
@@ -6705,7 +6705,7 @@ void Vehicle::CheckAndApplyBlockSectionStopSite()
             {
                 if (trackType == TrackElemType::CableLiftHill || trackElement->AsTrack()->HasChain())
                 {
-                    if (trackElement->AsTrack()->GetBrakeClosed())
+                    if (trackElement->AsTrack()->IsBrakeClosed())
                     {
                         ApplyStopBlockBrake();
                     }
@@ -8205,7 +8205,7 @@ loc_6DAEB9:
             if (brakeSpeed < _vehicleVelocityF64E08)
             {
                 auto trackElement = map_get_track_element_at_of_type_seq(TrackLocation, trackType, 0);
-                if ((trackElement != nullptr && trackElement->AsTrack()->GetBrakeClosed()) || trackElement == nullptr)
+                if ((trackElement != nullptr && trackElement->AsTrack()->IsBrakeClosed()) || trackElement == nullptr)
                     acceleration = -_vehicleVelocityF64E08 * 16;
             }
             else if (!(gCurrentTicks & 0x0F))
@@ -8588,7 +8588,7 @@ loc_6DBA33:;
     if (trackType == TrackElemType::Brakes)
     {
         auto trackElement = map_get_track_element_at_of_type_seq(TrackLocation, trackType, 0);
-        if (((trackElement != nullptr && trackElement->AsTrack()->GetBrakeClosed()) || trackElement == nullptr)
+        if (((trackElement != nullptr && trackElement->AsTrack()->IsBrakeClosed()) || trackElement == nullptr)
             && -(brake_speed << 16) > _vehicleVelocityF64E08)
         {
             acceleration = _vehicleVelocityF64E08 * -16;

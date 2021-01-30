@@ -1366,7 +1366,7 @@ void TrackElement::SetInverted(bool inverted)
     }
 }
 
-bool TrackElement::GetBrakeClosed() const
+bool TrackElement::IsBrakeClosed() const
 {
     return (Flags2 & TRACK_ELEMENT_FLAGS2_BRAKE_CLOSED) != 0;
 }

@@ -4070,7 +4070,7 @@ void brakes_link_to_block_brake(const CoordsXYZ& vehicleTrackLocation, TileEleme
         {
             brake->SetBrakeClosed(
                 !(brake->GetBrakeBoosterSpeed() < output.element->AsTrack()->GetBrakeBoosterSpeed()
-                  || output.element->AsTrack()->GetBrakeClosed()));
+                  || output.element->AsTrack()->IsBrakeClosed()));
             break;
         }
         else if (output.element->AsTrack()->GetTrackType() == TrackElemType::Brakes)
