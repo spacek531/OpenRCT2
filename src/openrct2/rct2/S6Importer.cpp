@@ -1138,10 +1138,7 @@ public:
                 auto src2 = src->AsTrack();
 
                 auto rideType = _s6.rides[src2->GetRideIndex()].type;
-                track_type_t trackType = static_cast<track_type_t>(src2->GetTrackType());
-
-                if (trackType == TrackElemType::RotationControlToggleAlias && !TrackTypeIsBooster(rideType, trackType))
-                    trackType = TrackElemType::RotationControlToggle;
+                auto trackType = src2->ReadTrackType(rideType);
                 dst2->SetTrackType(trackType);
                 dst2->SetSequenceIndex(src2->GetSequenceIndex());
                 dst2->SetRideIndex(src2->GetRideIndex());

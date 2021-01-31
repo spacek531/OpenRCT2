@@ -1555,18 +1555,14 @@ void S6Exporter::ExportTileElement(RCT12TileElement* dst, TileElement* src)
             auto dst2 = dst->AsTrack();
             auto src2 = src->AsTrack();
 
-            auto trackType = src2->GetTrackType();
-            if (trackType == TrackElemType::RotationControlToggle)
-                trackType = TrackElemType::RotationControlToggleAlias;
-            // SV6 track type is uint8_t; we have aliased Rotation Control (256) to Booster (100) to allow this
-            dst2->SetTrackType(static_cast<uint8_t>(trackType));
+            dst2->SetHasCableLift(src2->HasCableLift());
+            dst2->WriteTrackType(src2->GetTrackType());
             dst2->SetSequenceIndex(src2->GetSequenceIndex());
             dst2->SetRideIndex(src2->GetRideIndex());
             dst2->SetColourScheme(src2->GetColourScheme());
             dst2->SetStationIndex(src2->GetStationIndex());
             dst2->SetHasGreenLight(src2->HasGreenLight());
             dst2->SetHasChain(src2->HasChain());
-            dst2->SetHasCableLift(src2->HasCableLift());
             dst2->SetInverted(src2->IsInverted());
             dst2->SetBrakeBoosterSpeed(src2->GetBrakeBoosterSpeed());
             dst2->SetPhotoTimeout(src2->GetPhotoTimeout());

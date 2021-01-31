@@ -502,7 +502,7 @@ namespace TrackElemType
     constexpr track_type_t DiagBrakesSaveAlias = 141;
     constexpr track_type_t DiagBrakesBuildAlias = 99;
     constexpr track_type_t DiagBlockBrakes = 258;
-    constexpr track_type_t DiagBlockBrakesSaveAlias = 141;
+    constexpr track_type_t DiagBlockBrakesSaveAlias = 142;
     constexpr track_type_t DiagBlockBrakesBuildAlias = 216;
 
     constexpr track_type_t Count = 259;
