@@ -2014,10 +2014,10 @@ bool CanBuildTrackType(uint8_t direction, uint8_t slope, uint8_t bank, track_typ
         // when the user selects them, select the diagonal version
         switch (*trackType)
         {
-            case TrackElemType::DiagBrakesBuildAlias:
+            case TrackElemType::Brakes:
                 *trackType = TrackElemType::DiagBrakes;
                 return true;
-            case TrackElemType::DiagBlockBrakesBuildAlias:
+            case TrackElemType::BlockBrakes:
                 *trackType = TrackElemType::DiagBlockBrakes;
                 return true;
             default:

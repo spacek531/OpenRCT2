@@ -354,7 +354,9 @@ namespace TrackElemType
     constexpr track_type_t Up25RightBanked = 111;
     constexpr track_type_t Waterfall = 112;
     constexpr track_type_t Rapids = 113;
+    constexpr track_type_t DiagBrakesAlias = 113;
     constexpr track_type_t OnRidePhoto = 114;
+    constexpr track_type_t DiagBlockBrakesAlias = 114;
     constexpr track_type_t Down25LeftBanked = 115;
     constexpr track_type_t Down25RightBanked = 116;
     constexpr track_type_t Watersplash = 117;
@@ -499,11 +501,7 @@ namespace TrackElemType
     constexpr track_type_t RotationControlToggle = 256;
 
     constexpr track_type_t DiagBrakes = 257;
-    constexpr track_type_t DiagBrakesSaveAlias = 141;
-    constexpr track_type_t DiagBrakesBuildAlias = 99;
     constexpr track_type_t DiagBlockBrakes = 258;
-    constexpr track_type_t DiagBlockBrakesSaveAlias = 142;
-    constexpr track_type_t DiagBlockBrakesBuildAlias = 216;
 
     constexpr track_type_t Count = 259;
     constexpr track_type_t None = 65535;

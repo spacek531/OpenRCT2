@@ -749,13 +749,13 @@ uint16_t RCT12TrackElement::ReadTrackType(uint8_t rideType) const
         _trackType = TrackElemType::RotationControlToggle;
     }
     // determine if the track element is a diagonal brake
-    else if (_trackType == TrackElemType::DiagBrakesSaveAlias && (colour & RCT12_TRACK_ELEMENT_COLOUR_ADDITIONAL_TRACK_ELEMENT))
+    else if (_trackType == TrackElemType::DiagBrakesAlias && (colour & RCT12_TRACK_ELEMENT_COLOUR_ADDITIONAL_TRACK_ELEMENT))
     {
         _trackType = TrackElemType::DiagBrakes;
     }
     // determine if the track element is a diagonal block brake
     else if (
-        _trackType == TrackElemType::DiagBlockBrakesSaveAlias && (colour & RCT12_TRACK_ELEMENT_COLOUR_ADDITIONAL_TRACK_ELEMENT))
+        _trackType == TrackElemType::DiagBlockBrakesAlias && (colour & RCT12_TRACK_ELEMENT_COLOUR_ADDITIONAL_TRACK_ELEMENT))
     {
         _trackType = TrackElemType::DiagBlockBrakes;
     }
@@ -773,13 +773,13 @@ void RCT12TrackElement::WriteTrackType(uint16_t _trackType)
     else if (_trackType == TrackElemType::DiagBrakes)
     {
         // Diagonal Brakes (257) aliases to Diagonal Flat (141) and color bit 4 (cable lift hill)
-        trackType = static_cast<uint8_t>(TrackElemType::DiagBrakesSaveAlias);
+        trackType = static_cast<uint8_t>(TrackElemType::DiagBrakesAlias);
         colour |= RCT12_TRACK_ELEMENT_COLOUR_ADDITIONAL_TRACK_ELEMENT;
     }
     else if (_trackType == TrackElemType::DiagBlockBrakes)
     {
         // Diagonal Brakes (258) aliases to Diagonal FlatToUp25 (142) and color bit 4 (cable lift hill)
-        trackType = static_cast<uint8_t>(TrackElemType::DiagBlockBrakesSaveAlias);
+        trackType = static_cast<uint8_t>(TrackElemType::DiagBlockBrakesAlias);
         colour |= RCT12_TRACK_ELEMENT_COLOUR_ADDITIONAL_TRACK_ELEMENT;
     }
     else

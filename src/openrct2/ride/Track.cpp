@@ -1226,10 +1226,9 @@ bool TrackTypeIsBooster(uint8_t rideType, track_type_t trackType)
 
 bool TrackTypeHasSpeedSetting(track_type_t trackType)
 {
-    // This does not check if the element is really a Spinning Control track instead of a booster,
-    // but this does not cause problems.
+    // This will write speed to the element types aliased, but this does not cause any problems.
     return trackType == TrackElemType::Booster || TrackTypeIsBrakesOrBlockBrakes(trackType)
-        || trackType == TrackElemType::DiagBrakesSaveAlias || trackType == TrackElemType::DiagBlockBrakesSaveAlias;
+        || trackType == TrackElemType::DiagBrakesAlias || trackType == TrackElemType::DiagBlockBrakesAlias;
 }
 
 uint8_t TrackElement::GetSeatRotation() const
