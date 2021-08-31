@@ -577,7 +577,7 @@ GameActions::Result TrackPlaceAction::Execute() const
                 trackElement->SetBrakeClosed(true);
                 break;
             case TrackElemType::Brakes:
-                tileElement->AsTrack()->SetBrakeClosed(true);
+                trackElement->SetBrakeClosed(true);
                 break;
         }
 
