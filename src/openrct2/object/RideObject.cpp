@@ -71,6 +71,8 @@ void RideObject::ReadLegacy(IReadObjectContext* context, IStream* stream)
 {
     stream->Seek(8, STREAM_SEEK_CURRENT);
     _legacyType.flags = stream->ReadValue<uint32_t>();
+    _legacyType.OperatingModeSubtype = (_legacyType.flags & RIDE_ENTRY_FLAG_ALTERNATIVE_ROTATION_MODES) >> 5;
+
     for (auto& rideType : _legacyType.ride_type)
     {
         rideType = stream->ReadValue<uint8_t>();
@@ -529,15 +531,7 @@ void RideObject::ReadJson(IReadObjectContext* context, json_t& root)
                 _legacyType.flags |= RIDE_ENTRY_FLAG_ALTERNATIVE_SWING_MODE_2;
             }
 
-            auto rotationMode = Json::GetNumber<int32_t>(properties["rotationMode"]);
-            if (rotationMode == 1)
-            {
-                _legacyType.flags |= RIDE_ENTRY_FLAG_ALTERNATIVE_ROTATION_MODE_1;
-            }
-            else if (rotationMode == 2)
-            {
-                _legacyType.flags |= RIDE_ENTRY_FLAG_ALTERNATIVE_ROTATION_MODE_2;
-            }
+            _legacyType.OperatingModeSubtype = Json::GetNumber<int32_t>(properties["rotationMode"]);
 
             auto ratingMultiplier = properties["ratingMultipler"];
             if (ratingMultiplier.is_object())

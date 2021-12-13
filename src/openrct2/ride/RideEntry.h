@@ -72,6 +72,7 @@ struct rct_ride_entry
     uint8_t max_height;
     ShopItem shop_item[RCT2::ObjectLimits::MaxShopItemsPerRideEntry];
     StringId capacity;
+    uint8_t OperatingModeSubtype;
     void* obj;
 
     const CarEntry* GetCar(size_t id) const

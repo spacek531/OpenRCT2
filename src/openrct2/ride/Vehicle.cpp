@@ -4863,19 +4863,7 @@ void Vehicle::UpdateRotating()
         return;
     }
 
-    const uint8_t* timeToSpriteMap;
-    if (rideEntry->flags & RIDE_ENTRY_FLAG_ALTERNATIVE_ROTATION_MODE_1)
-    {
-        timeToSpriteMap = Rotation1TimeToSpriteMaps[sub_state];
-    }
-    else if (rideEntry->flags & RIDE_ENTRY_FLAG_ALTERNATIVE_ROTATION_MODE_2)
-    {
-        timeToSpriteMap = Rotation2TimeToSpriteMaps[sub_state];
-    }
-    else
-    {
-        timeToSpriteMap = Rotation3TimeToSpriteMaps[sub_state];
-    }
+    const uint8_t * timeToSpriteMap = RotationSubtypeMaps[rideEntry->OperatingModeSubtype].GetAnimation(sub_state);
 
     int32_t time = current_time;
     if (_vehicleBreakdown == BREAKDOWN_CONTROL_FAILURE)

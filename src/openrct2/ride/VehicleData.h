@@ -11,9 +11,23 @@
 
 #include "../common.h"
 
-extern const uint8_t* Rotation1TimeToSpriteMaps[];
-extern const uint8_t* Rotation2TimeToSpriteMaps[];
-extern const uint8_t* Rotation3TimeToSpriteMaps[];
+struct RotationSubtypeSpriteMap
+{
+    const uint8_t* Animations[3] = { 0, 0, 0 };
+    constexpr RotationSubtypeSpriteMap(
+        const uint8_t* accelerationAnimation, const uint8_t* continuousAnimation, const uint8_t* decelerationAnimation)
+    {
+        Animations[0] = accelerationAnimation;
+        Animations[1] = continuousAnimation;
+        Animations[2] = decelerationAnimation;
+    }
+    const uint8_t* GetAnimation(uint8_t sub_state) const
+    {
+        return Animations[sub_state];
+    }
+};
+
+extern const RotationSubtypeSpriteMap RotationSubtypeMaps[];
 
 struct top_spin_time_to_sprite_map
 {

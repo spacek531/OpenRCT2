@@ -13,7 +13,7 @@
 
 // clang-format off
 /** rct2: 0x0099F100 */
-static constexpr const uint8_t Rotation1TimeToSpriteMap_0[] = {
+static constexpr const uint8_t RotationSubtypeTwistAccelerationMap[] = {
     0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
     0,   0,   0,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,
     1,   1,   1,   1,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,
@@ -66,7 +66,7 @@ static constexpr const uint8_t Rotation1TimeToSpriteMap_0[] = {
 };
 
 /** rct2: 0x0099F422 */
-static constexpr const uint8_t Rotation1TimeToSpriteMap_1[] = {
+static constexpr const uint8_t RotationSubtypeTwistContinuousMap[] = {
     0,   0,   0,   1,   1,   1,   2,   2,   2,   3,   3,   3,   4,   4,   4,   5,   5,
     5,   6,   6,   6,   7,   7,   7,   8,   8,   8,   9,   9,   9,  10,  10,  10,  11,
     11,  11,  12,  12,  12,  13,  13,  13,  14,  14,  14,  15,  15,  15,  16,  16,  16,
@@ -110,7 +110,7 @@ static constexpr const uint8_t Rotation1TimeToSpriteMap_1[] = {
 };
 
 /** rct2: 0x0099F6AB */
-static constexpr const uint8_t Rotation1TimeToSpriteMap_2[] = {
+static constexpr const uint8_t RotationSubtypeTwistDecelerationAnimationMap[] = {
     0,   0,   0,   1,   1,   1,   2,   2,   2,   3,   3,   3,   4,   4,   4,   5,   5,
     5,   6,   6,   6,   7,   7,   7,   8,   8,   8,   9,   9,   9,  10,  10,  10,  11,
     11,  11,  12,  12,  12,  13,  13,  13,  14,  14,  14,  15,  15,  15,  16,  16,  16,
@@ -163,14 +163,14 @@ static constexpr const uint8_t Rotation1TimeToSpriteMap_2[] = {
 };
 
 /** rct2: 0x0099F0F4 */
-const uint8_t * Rotation1TimeToSpriteMaps[] = {
-    Rotation1TimeToSpriteMap_0,
-    Rotation1TimeToSpriteMap_1,
-    Rotation1TimeToSpriteMap_2,
-};
+constexpr RotationSubtypeSpriteMap RotationSubtypeTwist = RotationSubtypeSpriteMap(
+    RotationSubtypeTwistAccelerationMap,
+    RotationSubtypeTwistContinuousMap,
+    RotationSubtypeTwistDecelerationAnimationMap
+);
 
 /** rct2: 0x009A2434 */
-static constexpr const uint8_t Rotation2TimeToSpriteMap_0[] = {
+static const uint8_t RotationSubtypeEnterpriseAccelerationMap[] = {
     0,   0,   0,   0,   0,   0,   0,   0,   1,   1,   1,   1,   1,   1,   1,   1,   2,
     2,   2,   2,   2,   2,   2,   2,   3,   3,   3,   3,   3,   3,   3,   3,   4,   4,
     4,   4,   4,   4,   4,   4,   5,   5,   5,   5,   5,   5,   5,   5,   6,   6,   6,
@@ -212,7 +212,7 @@ static constexpr const uint8_t Rotation2TimeToSpriteMap_0[] = {
 };
 
 /** rct2: 0x009A26A6 */
-static constexpr const uint8_t Rotation2TimeToSpriteMap_1[] = {
+static const uint8_t RotationSubtypeEnterpriseContinuousMap[] = {
     46,  46,  47,  47,  48,  48,  46,  46,  47,  47,  48,  48,  46,  46,  47,  47,  48,
     48,  46,  46,  47,  47,  48,  48,  46,  46,  47,  47,  48,  48,  46,  46,  47,  47,
     48,  48,  46,  46,  47,  47,  48,  48,  46,  46,  47,  47,  48,  48,  46,  46,  47,
@@ -223,7 +223,7 @@ static constexpr const uint8_t Rotation2TimeToSpriteMap_1[] = {
 };
 
 /** rct2: 0x009A270E */
-static constexpr const uint8_t Rotation2TimeToSpriteMap_2[] = {
+static const uint8_t RotationSubtypeEnterpriseDecelerationMap[] = {
     43,  43,  44,  44,  45,  45,  43,  43,  44,  44,  45,  45,  43,  43,  44,  44,  45,
     45,  40,  40,  41,  41,  42,  42,  40,  40,  41,  41,  42,  42,  40,  40,  41,  41,
     42,  42,  37,  37,  38,  38,  39,  39,  37,  37,  38,  38,  39,  39,  37,  37,  38,
@@ -256,14 +256,14 @@ static constexpr const uint8_t Rotation2TimeToSpriteMap_2[] = {
 };
 
 /** rct2: 0x009A2428 */
-const uint8_t * Rotation2TimeToSpriteMaps[] = {
-    Rotation2TimeToSpriteMap_0,
-    Rotation2TimeToSpriteMap_1,
-    Rotation2TimeToSpriteMap_2,
-};
+constexpr RotationSubtypeSpriteMap RotationSubtypeEnterprise = RotationSubtypeSpriteMap(
+    RotationSubtypeEnterpriseAccelerationMap,
+    RotationSubtypeEnterpriseContinuousMap,
+    RotationSubtypeEnterpriseDecelerationMap
+);
 
 /** rct2: 0x0099EB28 */
-static constexpr const uint8_t Rotation3TimeToSpriteMap_0[] = {
+static constexpr const uint8_t RotationSubtypeMerryGoRoundAccelerationMap[] = {
     0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
     0,   0,   0,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,
     1,   1,   1,   1,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,
@@ -300,7 +300,7 @@ static constexpr const uint8_t Rotation3TimeToSpriteMap_0[] = {
 };
 
 /** rct2: 0x0099ED49 */
-static constexpr const uint8_t Rotation3TimeToSpriteMap_1[] = {
+static constexpr const uint8_t RotationSubtypeMerryGoRoundContinuousMap[] = {
     0,   0,   0,   1,   1,   1,   2,   2,   2,   3,   3,   3,   4,   4,   4,   5,   5,
     5,   6,   6,   6,   7,   7,   7,   8,   8,   8,   9,   9,   9,  10,  10,  10,  11,
     11,  11,  12,  12,  12,  13,  13,  13,  14,  14,  14,  15,  15,  15,  16,  16,  16,
@@ -328,7 +328,7 @@ static constexpr const uint8_t Rotation3TimeToSpriteMap_1[] = {
 };
 
 /** rct2: 0x0099EED1 */
-static constexpr const uint8_t Rotation3TimeToSpriteMap_2[] = {
+static constexpr const uint8_t RotationSubtypeMerryGoRoundDecelerationMap[] = {
     0,   0,   0,   1,   1,   1,   2,   2,   2,   3,   3,   3,   4,   4,   4,   5,   5,
     5,   6,   6,   6,   7,   7,   7,   8,   8,   8,   9,   9,   9,  10,  10,  10,  11,
     11,  11,  12,  12,  12,  13,  13,  13,  14,  14,  14,  15,  15,  15,  16,  16,  16,
@@ -365,10 +365,16 @@ static constexpr const uint8_t Rotation3TimeToSpriteMap_2[] = {
 };
 
 /** rct2: 0x0099EB1C */
-const uint8_t * Rotation3TimeToSpriteMaps[] = {
-    Rotation3TimeToSpriteMap_0,
-    Rotation3TimeToSpriteMap_1,
-    Rotation3TimeToSpriteMap_2,
+constexpr RotationSubtypeSpriteMap RotationSubtypeMerryGoRound = RotationSubtypeSpriteMap(
+    RotationSubtypeMerryGoRoundAccelerationMap,
+    RotationSubtypeMerryGoRoundContinuousMap,
+    RotationSubtypeMerryGoRoundDecelerationMap
+);
+
+extern const RotationSubtypeSpriteMap RotationSubtypeMaps[] = {
+    RotationSubtypeMerryGoRound,
+    RotationSubtypeTwist,
+    RotationSubtypeEnterprise
 };
 
 /** rct2: 0x009A12EC */
