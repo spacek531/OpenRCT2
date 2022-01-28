@@ -6587,6 +6587,7 @@ void Vehicle::CheckAndApplyBlockSectionStopSite()
     switch (trackType)
     {
         case TrackElemType::BlockBrakes:
+        case TrackElemType::DiagBlockBrakes:
             if (curRide->IsBlockSectioned() && trackElement->AsTrack()->GetBrakeClosed())
                 ApplyStopBlockBrake();
             else
