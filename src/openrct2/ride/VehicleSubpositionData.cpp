@@ -27802,6 +27802,8 @@ static constexpr const rct_vehicle_info_list *TrackVehicleInfoListDefault[] = {
     &TrackVehicleInfo_LeftFlyerLargeHalfLoopUninvertedDown0, &TrackVehicleInfo_LeftFlyerLargeHalfLoopUninvertedDown1, &TrackVehicleInfo_LeftFlyerLargeHalfLoopUninvertedDown2, &TrackVehicleInfo_LeftFlyerLargeHalfLoopUninvertedDown3,  // LeftFlyerLargeHalfLoopUninvertedDown
      &TrackVehicleInfo_8E644E, &TrackVehicleInfo_8E69F9, &TrackVehicleInfo_8E6FA4, &TrackVehicleInfo_8E754F,  // FlyerHalfLoopInvertedUp
      &TrackVehicleInfo_FlyerHalfLoopUninvertedDown0, &TrackVehicleInfo_FlyerHalfLoopUninvertedDown1, &TrackVehicleInfo_FlyerHalfLoopUninvertedDown2, &TrackVehicleInfo_FlyerHalfLoopUninvertedDown3,  // FlyerHalfLoopUninvertedDown
+    &TrackVehicleInfo_9162E6, &TrackVehicleInfo_916408, &TrackVehicleInfo_91652A, &TrackVehicleInfo_91664C,  // DiagBrakes
+    &TrackVehicleInfo_9162E6, &TrackVehicleInfo_916408, &TrackVehicleInfo_91652A, &TrackVehicleInfo_91664C,  // DiagBlockBrakes
 };
 static_assert(std::size(TrackVehicleInfoListDefault) == VehicleTrackSubpositionSizeDefault);
 

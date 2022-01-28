@@ -33,6 +33,8 @@ struct rct_trackdefinition
     pitch_type_t vangle_start;
     roll_type_t bank_end;
     roll_type_t bank_start;
+    bool diagonal_end;
+    bool diagonal_start;
     int8_t preview_z_offset;
 };
 
@@ -624,6 +626,11 @@ void track_get_front(CoordsXYE* input, CoordsXYE* output);
 
 bool track_element_is_covered(track_type_t trackElementType);
 bool track_type_is_station(track_type_t trackType);
+bool TrackIsBrakes(track_type_t trackType);
+bool TrackIsBlockBrakes(track_type_t trackType);
+
+std::optional<CoordsXYZ> GetTrackElementOriginAndApplyChanges(
+    const CoordsXYZD& location, track_type_t type, uint16_t extra_params, TileElement** output_element, uint16_t flags);
 
 roll_type_t track_get_actual_bank(TileElement* tileElement, roll_type_t bank);
 roll_type_t track_get_actual_bank_2(int32_t rideType, bool isInverted, roll_type_t bank);

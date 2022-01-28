@@ -1812,6 +1812,28 @@ static constexpr const uint32_t junior_rc_track_pieces_diag_60_deg_down_to_25_de
     },
 };
 
+static constexpr const uint32_t junior_rc_track_pieces_diag_brakes[4] = {
+    SPR_JUNIOR_RC_DIAG_BRAKES_E_W,
+    SPR_JUNIOR_RC_DIAG_BRAKES_N_S,
+    SPR_JUNIOR_RC_DIAG_BRAKES_E_W,
+    SPR_JUNIOR_RC_DIAG_BRAKES_N_S,
+};
+
+static constexpr const uint32_t junior_rc_track_pieces_diag_blockbrakes[2][4] = {
+    {
+        SPR_JUNIOR_RC_DIAG_BLOCKBRAKES_E_W_OPEN,
+        SPR_JUNIOR_RC_DIAG_BLOCKBRAKES_N_S_OPEN,
+        SPR_JUNIOR_RC_DIAG_BLOCKBRAKES_E_W_OPEN,
+        SPR_JUNIOR_RC_DIAG_BLOCKBRAKES_N_S_OPEN,
+    },
+    {
+        SPR_JUNIOR_RC_DIAG_BLOCKBRAKES_E_W_CLOSED,
+        SPR_JUNIOR_RC_DIAG_BLOCKBRAKES_N_S_CLOSED,
+        SPR_JUNIOR_RC_DIAG_BLOCKBRAKES_E_W_CLOSED,
+        SPR_JUNIOR_RC_DIAG_BLOCKBRAKES_N_S_CLOSED,
+    },
+};
+
 void junior_rc_paint_track_flat(
     PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, uint16_t height,
     const TrackElement& trackElement, JuniorRcChainType chainType)
@@ -4354,20 +4376,6 @@ static void junior_rc_right_eighth_to_orthogonal_bank_paint_setup(
     junior_rc_left_eighth_to_diag_bank_paint_setup(session, ride, trackSequence, (direction + 3) % 4, height, trackElement);
 }
 
-static constexpr const int32_t junior_rc_diag_blocked_segments[] = {
-    SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4 | SEGMENT_BC,
-    SEGMENT_C4 | SEGMENT_CC | SEGMENT_C8 | SEGMENT_B4,
-    SEGMENT_D0 | SEGMENT_C4 | SEGMENT_C0 | SEGMENT_D4,
-    SEGMENT_D0 | SEGMENT_C4 | SEGMENT_B8 | SEGMENT_C8,
-};
-
-static constexpr const uint8_t junior_rc_diag_support_segment[] = {
-    1,
-    0,
-    2,
-    3,
-};
-
 void junior_rc_paint_track_diag_flat(
     PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, uint16_t height,
     const TrackElement& trackElement, JuniorRcChainType chainType)
@@ -4386,6 +4394,47 @@ void junior_rc_paint_track_diag_flat(
     int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
     PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(blockedSegments, direction), 0xFFFF, 0);
     PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+}
+
+void junior_rc_paint_track_diag_brakes(
+    paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
+    const TrackElement& trackElement)
+{
+    track_paint_util_diag_tiles_paint(
+        session, 1, height, direction, trackSequence, session.TrackColours[SCHEME_TRACK], junior_rc_track_pieces_diag_brakes,
+        defaultDiagTileOffsets, defaultDiagBoundLengths, nullptr);
+
+    if (trackSequence == 3)
+    {
+        metal_a_supports_paint_setup(
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
+            0, height, session.TrackColours[SCHEME_SUPPORTS]);
+    }
+
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
+    paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
+    paint_util_set_general_support_height(session, height + 32, 0x20);
+}
+
+void junior_rc_paint_track_diag_block_brakes(
+    paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
+    const TrackElement& trackElement)
+{
+    track_paint_util_diag_tiles_paint(
+        session, 1, height, direction, trackSequence, session.TrackColours[SCHEME_TRACK],
+        junior_rc_track_pieces_diag_blockbrakes[trackElement.GetBrakeClosed()], defaultDiagTileOffsets, defaultDiagBoundLengths,
+        nullptr);
+
+    if (trackSequence == 3)
+    {
+        metal_a_supports_paint_setup(
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
+            0, height, session.TrackColours[SCHEME_SUPPORTS]);
+    }
+
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
+    paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
+    paint_util_set_general_support_height(session, height + 32, 0x20);
 }
 
 void junior_rc_paint_track_diag_25_deg_up(
@@ -6108,6 +6157,10 @@ TRACK_PAINT_FUNCTION get_track_paint_function_junior_rc(int32_t trackType)
 
         case TrackElemType::OnRidePhoto:
             return junior_rc_track_on_ride_photo;
+        case TrackElemType::DiagBrakes:
+            return junior_rc_paint_track_diag_brakes;
+        case TrackElemType::DiagBlockBrakes:
+            return junior_rc_paint_track_diag_block_brakes;
     }
     return nullptr;
 }
