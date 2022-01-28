@@ -2472,12 +2472,13 @@ static void WindowRideConstructionUpdatePossibleRideConfigurations()
         {
             slope = ted.Definition.vangle_start;
             bank = ted.Definition.bank_start;
-            diag = ted.Definition.starts_diagonal;
+            diag = ted.Definition.diagonal_start;
         }
         else if (_rideConstructionState == RideConstructionState::Back)
         {
             slope = ted.Definition.vangle_end;
             bank = ted.Definition.bank_end;
+            diag = ted.Definition.diagonal_end;
         }
         else
         {
@@ -2505,6 +2506,7 @@ static void WindowRideConstructionUpdatePossibleRideConfigurations()
         _currentPossibleRideConfigurations[currentPossibleRideConfigurationIndex] = trackType;
         _currentDisabledSpecialTrackPieces |= (1 << currentPossibleRideConfigurationIndex);
         if (_currentTrackPieceDirection < 4 && slope == _previousTrackSlopeEnd && bank == _previousTrackBankEnd
+            && (diag == (_currentTrackPieceDirection >= 4))
             && (trackType != TrackElemType::TowerBase
                 || ride->GetRideTypeDescriptor().HasFlag(RIDE_TYPE_FLAG_ALLOW_EXTRA_TOWER_BASES)))
         {
@@ -2839,7 +2841,7 @@ static void WindowRideConstructionUpdateWidgets(rct_window* w)
     {
         // Block brakes selected
         if ((brakesSelected && TrackIsBlockBrakes(_selectedTrackType)
-        || TrackIsBlockBrakes(_selectedTrackType & ~RideConstructionSpecialPieceSelected)))
+             || TrackIsBlockBrakes(_selectedTrackType & ~RideConstructionSpecialPieceSelected)))
         {
             window_ride_construction_widgets[WIDX_BANKING_GROUPBOX].text = STR_RIDE_CONSTRUCTION_BLOCK_BRAKE_SPEED;
             window_ride_construction_widgets[WIDX_BANK_LEFT].tooltip = STR_RIDE_CONSTRUCTION_BLOCK_BRAKE_SPEED_LIMIT_TIP;
