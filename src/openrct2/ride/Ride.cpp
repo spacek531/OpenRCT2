@@ -2654,7 +2654,7 @@ static int32_t ride_check_block_brakes(CoordsXYE* input, CoordsXYE* output)
     track_circuit_iterator_begin(&it, *input);
     while (track_circuit_iterator_next(&it))
     {
-        if (it.current.element->AsTrack()->GetTrackType() == TrackElemType::BlockBrakes)
+        if (TrackIsBlockBrakes(it.current.element->AsTrack()->GetTrackType()))
         {
             auto type = it.last.element->AsTrack()->GetTrackType();
             if (type == TrackElemType::EndStation)
@@ -2663,7 +2663,7 @@ static int32_t ride_check_block_brakes(CoordsXYE* input, CoordsXYE* output)
                 *output = it.current;
                 return 0;
             }
-            if (type == TrackElemType::BlockBrakes)
+            if (TrackIsBlockBrakes(type))
             {
                 gGameCommandErrorText = STR_BLOCK_BRAKES_CANNOT_BE_USED_DIRECTLY_AFTER_EACH_OTHER;
                 *output = it.current;
