@@ -510,7 +510,10 @@ namespace TrackElemType
     constexpr track_type_t FlatTrack1x4C = 265;
     constexpr track_type_t FlatTrack3x3 = 266;
 
-    constexpr track_type_t Count = 267;
+    constexpr track_type_t DiagBrakes = 267;
+    constexpr track_type_t DiagBlockBrakes = 268;
+
+    constexpr track_type_t Count = 269;
     constexpr track_type_t None = 65535;
 
     constexpr track_type_t FlatTrack1x4A_Alias = 95;

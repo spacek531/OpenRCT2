@@ -285,6 +285,8 @@ static constexpr rct_track_coordinates TrackCoordinates[TrackElemType::Count] = 
         {    0,    2,    0,    0,    0,   32 }, // TrackElemType::FlatTrack1x1B
         {    0,    2,    0,    0,    0,   32 }, // TrackElemType::FlatTrack1x4C
         {    0,    0,    0,   96,   32,    0 }, // TrackElemType::FlatTrack3x3
+        { 4, 4, 0, 0, -32, 32 },    // TrackElemType::DiagBrakes
+        { 4, 4, 0, 0, -32, 32 },    // TrackElemType::DiagBlockBrakes
 };
 
 /** rct2: 0x0099BA64 */
@@ -556,6 +558,8 @@ static constexpr uint8_t TrackSequenceProperties[][MaxSequencesPerPiece] = {
     /* TrackElemType::FlatTrack1x1B    */ { TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN | TRACK_SEQUENCE_FLAG_CONNECTS_TO_PATH, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     /* TrackElemType::FlatTrack1x4C    */ { TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     /* TrackElemType::FlatTrack3x3     */ { TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_0, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1, TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1, TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2, TRACK_SEQUENCE_FLAG_DIRECTION_2, 0, 0, 0, 0, 0, 0, 0 },
+    { 0 },
+    { 0 },
 };
 
 #define TRACK_BLOCK_END { 255, 255, 255, 255, 255, {255, 255}, 255 }
@@ -2815,6 +2819,9 @@ static constexpr std::array<const rct_preview_track*, TrackElemType::Count> Trac
     TrackBlocksFlatTrack1x1B,
     TrackBlocksFlatTrack1x4C,
     TrackBlocksFlatTrack3x3,
+
+    TrackBlocks141,
+    TrackBlocks141,
 };
 
 static constexpr uint8_t TrackPieceLengths[TrackElemType::Count] = {
@@ -3085,6 +3092,8 @@ static constexpr uint8_t TrackPieceLengths[TrackElemType::Count] = {
     0,      // TrackElemType::FlatTrack1x1B
     0,      // TrackElemType::FlatTrack1x4C
     0,      // TrackElemType::FlatTrack3x3
+    45,     // TrackElemType::DiagBrakes
+    45,     // TrackElemType::DiagBlockBrakes
 };
 
 // rct2: 0x00998C95
@@ -3356,6 +3365,8 @@ static constexpr track_curve_chain gTrackCurveChain[TrackElemType::Count] = {
     { 65535, 65535 },                       // TrackElemType::FlatTrack1x1B
     { 65535, 65535 },                       // TrackElemType::FlatTrack1x4C
     { 65535, 65535 },                       // TrackElemType::FlatTrack3x3
+    { RideConstructionSpecialPieceSelected | TrackElemType::DiagBrakes, RideConstructionSpecialPieceSelected | TrackElemType::DiagBrakes },
+    { TRACK_CURVE_NONE, TRACK_CURVE_NONE },
 };
 
 const track_descriptor gTrackDescriptors[142] = {
@@ -3772,6 +3783,8 @@ static constexpr track_type_t AlternativeTrackTypes[TrackElemType::Count] = {
     TrackElemType::None, // TrackElemType::FlatTrack1x1B
     TrackElemType::None, // TrackElemType::FlatTrack1x4C
     TrackElemType::None, // TrackElemType::FlatTrack3x3
+    TrackElemType::None,
+    TrackElemType::None,
 };
 
 /** rct2: 0x0099DA34 */
@@ -4043,6 +4056,8 @@ static constexpr money32 TrackPricing[TrackElemType::Count] = {
     65536,  // TrackElemType::FlatTrack1x1B
     262144, // TrackElemType::FlatTrack1x4C
     524288, // TrackElemType::FlatTrack3x3
+    123456, // TrackElemType::DiagBrakes
+    123456, // TrackElemType::DiagBlockBrakes
 };
 
 /** rct2: 0x0099EA1C */
@@ -4314,6 +4329,8 @@ static constexpr track_type_t TrackElementMirrorMap[TrackElemType::Count] = {
     TrackElemType::FlatTrack1x1B, // TrackElemType::FlatTrack1x1B
     TrackElemType::FlatTrack1x4C, // TrackElemType::FlatTrack1x4C
     TrackElemType::FlatTrack3x3, // TrackElemType::FlatTrack3x3
+    TrackElemType::DiagBrakes,
+    TrackElemType::DiagBlockBrakes,
 };
 
 /** rct2: 0x00999694 */
@@ -4585,6 +4602,8 @@ static constexpr uint32_t TrackHeightMarkerPositions[TrackElemType::Count] = {
     (1 << 0), // TrackElemType::FlatTrack1x1B
     (1 << 0), // TrackElemType::FlatTrack1x4C
     (1 << 0), // TrackElemType::FlatTrack3x3
+    (1 << 0), // TrackElemType::DiagBrakes
+    (1 << 0), // TrackElemType::DiagBlockBrakes
 };
 
 /** rct2: 0x00999A94 */
@@ -4856,6 +4875,8 @@ static constexpr uint8_t TrackSequenceElementAllowedWallEdges[TrackElemType::Cou
     {      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0 }, // TrackElemType::FlatTrack1x1B
     {      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0 }, // TrackElemType::FlatTrack1x4C
     {      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0 }, // TrackElemType::FlatTrack3x3
+    {      0, 0b0110, 0b1001,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0 }, // TrackElemType::DiagBrakes
+    {      0, 0b0110, 0b1001,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0 }, // TrackElemType::DiagBlockBrakes
 };
 
 /** rct2: 0x0099423C */
@@ -5127,6 +5148,8 @@ static constexpr uint16_t TrackFlags[TrackElemType::Count] = {
     /* TrackElemType::FlatTrack1x1B                                 */   0,
     /* TrackElemType::FlatTrack1x4C                                 */   0,
     /* TrackElemType::FlatTrack3x3                                  */   0,
+    /* TrackElemType::DiagBrakes                                    */   0,
+    /* TrackElemType::DiagBlockBrakes                               */   0,
 };
 // clang-format on
 
@@ -5402,6 +5425,8 @@ static constexpr rct_trackdefinition TrackDefinitions[TrackElemType::Count] =
     { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // TrackElemType::FlatTrack1x1B
     { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        -40                },  // TrackElemType::FlatTrack1x4C
     { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // TrackElemType::FlatTrack3x3
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // TrackElemType::DiagBrakes
+    { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // TrackElemType::DiagBlockBrakes
 };
 // clang-format on
 
@@ -5424,6 +5449,7 @@ constexpr static uint8_t TrackTypeToSpinFunction[TrackElemType::Count] = {
     NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN,
     NO_SPIN, L7_SPIN, R7_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, L7_SPIN, R7_SPIN, L7_SPIN, R7_SPIN,
     L8_SPIN, R8_SPIN, L8_SPIN, R8_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN,
+    NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN,
     NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN,
     NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN
 };
@@ -5696,6 +5722,8 @@ static constexpr const rct_string_id RideConfigurationStringIds[] = {
     STR_EMPTY,                         // 264
     STR_EMPTY,                         // 265
     STR_EMPTY,                         // 266
+    STR_BRAKES,                        // TrackElemType::DiagBrakes
+    STR_BLOCK_BRAKES                   // TrackElemType::DiagBlockBrakes
 };
 
 namespace OpenRCT2
