@@ -5691,6 +5691,8 @@ GForces Vehicle::GetGForces() const
         case TrackElemType::RightQuarterTurn1TileUp90:
         case TrackElemType::LeftQuarterTurn1TileDown90:
         case TrackElemType::RightQuarterTurn1TileDown90:
+        case TrackElemType::DiagBrakes:
+        case TrackElemType::DiagBlockBrakes:
             // 6d73FF
             // Do nothing
             break;
