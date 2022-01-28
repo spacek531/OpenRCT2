@@ -177,6 +177,7 @@ GameActions::Result TileModifyAction::QueryExecute(bool isExecuting) const
         }
         case TileModifyType::TrackSetBlockBrake:
         {
+            // TODO: find 0th sequence and set
             const auto elementIndex = _value1;
             const bool blockBrake = _value2;
             res = TileInspector::TrackSetBlockBrake(_loc, elementIndex, blockBrake, isExecuting);
