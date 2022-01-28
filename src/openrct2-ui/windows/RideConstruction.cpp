@@ -1387,6 +1387,7 @@ static void WindowRideConstructionDropdown(rct_window* w, rct_widgetindex widget
             _currentTrackLiftHill &= ~CONSTRUCTION_LIFT_HILL_SELECTED;
             break;
         case TrackElemType::BlockBrakes:
+        case TrackElemType::DiagBlockBrakes:
             _currentBrakeSpeed2 = 2;
             break;
     }
@@ -2789,9 +2790,11 @@ static void WindowRideConstructionUpdateWidgets(rct_window* w)
     window_ride_construction_widgets[WIDX_U_TRACK].type = WindowWidgetType::Empty;
     window_ride_construction_widgets[WIDX_O_TRACK].type = WindowWidgetType::Empty;
 
-    bool brakesSelected = _selectedTrackType == TrackElemType::Brakes || _selectedTrackType == TrackElemType::BlockBrakes
+    bool brakesSelected = _selectedTrackType == TrackElemType::Brakes || _selectedTrackType == TrackElemType::BlockBrakes || _selectedTrackType == TrackElemType::DiagBrakes || _selectedTrackType == TrackElemType::DiagBlockBrakes
         || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Brakes)
-        || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::BlockBrakes);
+        || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::BlockBrakes)
+        || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::DiagBrakes)
+        || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::DiagBlockBrakes);
     bool boosterTrackSelected = _selectedTrackType == TrackElemType::Booster
         || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster);
 
