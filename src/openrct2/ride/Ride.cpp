@@ -3528,6 +3528,17 @@ static void ride_create_vehicles_find_first_block(Ride* ride, CoordsXYE* outXYEl
             case TrackElemType::BlockBrakes:
                 *outXYElement = { trackPos, reinterpret_cast<TileElement*>(trackElement) };
                 return;
+            case TrackElemType::DiagBlockBrakes:
+                TileElement* tileElement = map_get_track_element_at_of_type_seq(
+                    { trackBeginEnd.begin_x, trackBeginEnd.begin_y, trackBeginEnd.begin_z }, trackType, 0);
+                if (tileElement != nullptr)
+                {
+                    outXYElement->x = trackBeginEnd.begin_x;
+                    outXYElement->y = trackBeginEnd.begin_y;
+                    outXYElement->element = tileElement;
+                    return;
+                }
+                break;
         }
     }
 
