@@ -2467,11 +2467,12 @@ static void WindowRideConstructionUpdatePossibleRideConfigurations()
             continue;
         }
 
-        int32_t slope, bank;
+        int32_t slope, bank, diag;
         if (_rideConstructionState == RideConstructionState::Front || _rideConstructionState == RideConstructionState::Place)
         {
             slope = ted.Definition.vangle_start;
             bank = ted.Definition.bank_start;
+            diag = ted.Definition.starts_diagonal;
         }
         else if (_rideConstructionState == RideConstructionState::Back)
         {
