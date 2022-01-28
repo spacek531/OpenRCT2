@@ -3054,7 +3054,7 @@ void brakeLinkToBlockBrake(const CoordsXYZ& vehicleTrackLocation, TileElement* t
 void blockBrakeSetLinkedBrakesClosed(const CoordsXYZ& vehicleTrackLocation, TileElement* tileElement, bool isClosed)
 {
     TrackElement* blockBrake = tileElement->AsTrack();
-    if (blockBrake->GetTrackType() != TrackElemType::BlockBrakes)
+    if (!TrackIsBlockBrakes(blockBrake->GetTrackType()))
     {
         return;
     }
@@ -3081,11 +3081,21 @@ void blockBrakeSetLinkedBrakesClosed(const CoordsXYZ& vehicleTrackLocation, Tile
         location.z = trackBeginEnd.begin_z;
         tileElement = trackBeginEnd.begin_element;
 
-        if (trackBeginEnd.begin_element->AsTrack()->GetTrackType() == TrackElemType::Brakes)
+        if (TrackIsBrakes(trackBeginEnd.begin_element->AsTrack()->GetTrackType()))
         {
-            trackBeginEnd.begin_element->AsTrack()->SetBrakeClosed(
-                (trackBeginEnd.begin_element->AsTrack()->GetBrakeBoosterSpeed() >= blockBrake->GetBrakeBoosterSpeed())
-                || isClosed);
+            TileElement* trackElement = tileElement;
+            if (trackBeginEnd.begin_element->AsTrack()->GetTrackType() == TrackElemType::DiagBrakes)
+            {
+                trackElement = map_get_track_element_at_of_type_seq(
+                    location, trackBeginEnd.begin_element->AsTrack()->GetTrackType(), 0);
+            }
+            if (trackElement == nullptr)
+            {
+                continue;
+            }
+            trackElement->AsTrack()->SetBrakeClosed(
+                (trackElement->AsTrack()->GetBrakeBoosterSpeed() >= blockBrake->GetBrakeBoosterSpeed() || isClosed));
+
         }
 
         // prevent infinite loop
@@ -3103,7 +3113,7 @@ void blockBrakeSetLinkedBrakesClosed(const CoordsXYZ& vehicleTrackLocation, Tile
                 return;
             }
         }
-    } while (trackBeginEnd.begin_element->AsTrack()->GetTrackType() == TrackElemType::Brakes);
+    } while (TrackIsBrakes(trackBeginEnd.begin_element->AsTrack()->GetTrackType()));
 }
 
 /**
