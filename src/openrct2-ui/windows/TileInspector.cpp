@@ -734,6 +734,7 @@ static void WindowTileInspectorTrackBlockSetLift(int32_t elementIndex, bool enti
 
 static void WindowTileInspectorTrackSetBlockBrake(int32_t elementIndex, bool blockBrake)
 {
+    // TODO: find 0th sequence and execute on that tile
     auto modifyTile = TileModifyAction(
         windowTileInspectorToolMap, TileModifyType::TrackSetBlockBrake, elementIndex, blockBrake);
     GameActions::Execute(&modifyTile);
@@ -1585,10 +1586,11 @@ static void WindowTileInspectorInvalidate(rct_window* w)
             WidgetSetCheckboxValue(w, WIDX_TRACK_CHECK_CHAIN_LIFT, tileElement->AsTrack()->HasChain());
             WidgetSetDisabled(
                 w, WIDX_TRACK_CHECK_BLOCK_BRAKE_CLOSED,
-                !tileElement->AsTrack()->IsBlockStart() && tileElement->AsTrack()->GetTrackType() != TrackElemType::Brakes);
+                !tileElement->AsTrack()->IsBlockStart() && !TrackIsBrakes(tileElement->AsTrack()->GetTrackType()));
             w->widgets[WIDX_TRACK_CHECK_BLOCK_BRAKE_CLOSED].text = tileElement->AsTrack()->IsBlockStart()
                 ? STR_TILE_INSPECTOR_TRACK_BLOCK_BRAKE
                 : STR_TILE_INSPECTOR_TRACK_BRAKE;
+            // TODO: get value from 0th sequence
             WidgetSetCheckboxValue(w, WIDX_TRACK_CHECK_BLOCK_BRAKE_CLOSED, tileElement->AsTrack()->GetBrakeClosed());
             WidgetSetCheckboxValue(w, WIDX_TRACK_CHECK_IS_INDESTRUCTIBLE, tileElement->AsTrack()->IsIndestructible());
             break;
