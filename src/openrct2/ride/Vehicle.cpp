@@ -7871,7 +7871,7 @@ bool Vehicle::UpdateTrackMotionForwardsGetNewTrack(uint16_t trackType, Ride* cur
         {
             tileElement->AsTrack()->SetBrakeClosed(true);
 
-            if (trackType == TrackElemType::BlockBrakes || trackType == TrackElemType::EndStation)
+            if (TrackIsBlockBrakes(trackType) || trackType == TrackElemType::EndStation)
             {
                 if (!(rideEntry->vehicles[0].flags & VEHICLE_ENTRY_FLAG_POWERED))
                 {
@@ -8052,7 +8052,7 @@ loc_6DAEB9:
             acceleration = 0x50000;
         }
     }
-    else if (trackType == TrackElemType::Brakes)
+    else if (TrackIsBrakes(trackType))
     {
         bool hasBrakesFailure = curRide->lifecycle_flags & RIDE_LIFECYCLE_BROKEN_DOWN
             && curRide->breakdown_reason_pending == BREAKDOWN_BRAKES_FAILURE;
@@ -8061,7 +8061,8 @@ loc_6DAEB9:
             auto brakeSpeed = brake_speed << 16;
             if (brakeSpeed < _vehicleVelocityF64E08)
             {
-                auto trackElement = map_get_track_element_at_of_type_seq(TrackLocation, trackType, 0);
+                // TODO: why does the branch remove the sequence
+                auto trackElement = map_get_track_element_at_of_type(TrackLocation, trackType)->AsTrack();
                 if ((trackElement != nullptr && trackElement->AsTrack()->GetBrakeClosed()) || trackElement == nullptr)
                     acceleration = -_vehicleVelocityF64E08 * 16;
             }
