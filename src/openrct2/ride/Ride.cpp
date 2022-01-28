@@ -3020,7 +3020,7 @@ static void RideOpenBlockBrakes(CoordsXYE* startElement)
 void brakeLinkToBlockBrake(const CoordsXYZ& vehicleTrackLocation, TileElement* tileElement)
 {
     TrackElement* brake = tileElement->AsTrack();
-    if (brake->GetTrackType() != TrackElemType::Brakes)
+    if (!TrackIsBrakes(brake->GetTrackType()))
     {
         return;
     }
@@ -3029,14 +3029,17 @@ void brakeLinkToBlockBrake(const CoordsXYZ& vehicleTrackLocation, TileElement* t
     int32_t outputZ = vehicleTrackLocation.z;
     do
     {
-        if (output.element->AsTrack()->GetTrackType() == TrackElemType::BlockBrakes)
+        if (output.element->AsTrack()->GetSequenceIndex() != 0)
+            continue;
+
+        if (TrackIsBlockBrakes(output.element->AsTrack()->GetTrackType()))
         {
             brake->SetBrakeClosed(
                 !(brake->GetBrakeBoosterSpeed() < output.element->AsTrack()->GetBrakeBoosterSpeed()
                   || output.element->AsTrack()->GetBrakeClosed()));
             break;
         }
-        else if (output.element->AsTrack()->GetTrackType() == TrackElemType::Brakes)
+        else if (TrackIsBrakes(output.element->AsTrack()->GetTrackType()))
         {
             continue;
         }
