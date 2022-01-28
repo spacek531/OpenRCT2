@@ -29,6 +29,7 @@ struct rct_trackdefinition
     pitch_type_t vangle_start;
     roll_type_t bank_end;
     roll_type_t bank_start;
+    bool starts_diagonal;
     int8_t preview_z_offset;
 };
 
