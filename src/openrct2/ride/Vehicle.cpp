@@ -6916,7 +6916,7 @@ void Vehicle::UpdateSwingingCar()
                 break;
         }
 
-        if (track_type_is_station(trackType) || trackType == TrackElemType::Brakes || trackType == TrackElemType::BlockBrakes)
+        if (track_type_is_station(trackType) || TrackIsBrakes(trackType) || TrackIsBlockBrakes(trackType))
         {
             dx = 0;
             cx = 0;
