@@ -6691,18 +6691,18 @@ static void block_brakes_open_previous_section(Ride& ride, const CoordsXYZ& vehi
 
     // Get the start of the track block instead of the end
     location = { trackBeginEnd.begin_x, trackBeginEnd.begin_y, trackBeginEnd.begin_z };
-    auto trackElement = map_get_track_element_at(location);
+    auto trackElement = map_get_track_element_at_of_type_seq(location, tileElement->AsTrack()->GetTrackType(), 0);
     if (trackElement == nullptr)
     {
         return;
     }
-    trackElement->SetBrakeClosed(false);
+    trackElement->AsTrack()->SetBrakeClosed(false);
     map_invalidate_element(location, reinterpret_cast<TileElement*>(trackElement));
     if (ride.mode == RideMode::ContinuousCircuitBlockSectioned || ride.mode == RideMode::PoweredLaunchBlockSectioned)
         blockBrakeSetLinkedBrakesClosed(location, reinterpret_cast<TileElement*>(trackElement), false);
 
-    auto trackType = trackElement->GetTrackType();
-    if (trackType == TrackElemType::BlockBrakes || trackType == TrackElemType::EndStation)
+    auto trackType = trackElement->AsTrack()->GetTrackType();
+    if (TrackIsBlockBrakes(trackType) || trackType == TrackElemType::EndStation)
     {
         if (ride.IsBlockSectioned())
         {
