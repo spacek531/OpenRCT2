@@ -8445,9 +8445,10 @@ bool Vehicle::UpdateTrackMotionBackwards(rct_ride_entry_vehicle* vehicleEntry, R
             }
         }
 
-        if (trackType == TrackElemType::Brakes)
+        if (TrackIsBrakes(trackType))
         {
-            auto trackElement = map_get_track_element_at_of_type_seq(TrackLocation, trackType, 0);
+            // TODO: why does the branch remove the sequence number?
+            auto trackElement = map_get_track_element_at_of_type(TrackLocation, trackType);
             if (((trackElement != nullptr && trackElement->AsTrack()->GetBrakeClosed()) || trackElement == nullptr)
                 && -(brake_speed << 16) > _vehicleVelocityF64E08)
             {
