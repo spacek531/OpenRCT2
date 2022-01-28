@@ -625,6 +625,16 @@ bool track_type_is_station(track_type_t trackType)
     }
 }
 
+bool TrackIsBrakes(track_type_t trackType)
+{
+    return (trackType == TrackElemType::Brakes) || (trackType == TrackElemType::DiagBrakes);
+}
+
+bool TrackIsBlockBrakes(track_type_t trackType)
+{
+    return (trackType == TrackElemType::BlockBrakes) || (trackType == TrackElemType::DiagBlockBrakes);
+}
+
 bool track_element_is_covered(track_type_t trackElementType)
 {
     switch (trackElementType)

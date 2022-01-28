@@ -572,6 +572,8 @@ void track_get_front(CoordsXYE* input, CoordsXYE* output);
 
 bool track_element_is_covered(track_type_t trackElementType);
 bool track_type_is_station(track_type_t trackType);
+bool TrackIsBrakes(track_type_t trackType);
+bool TrackIsBlockBrakes(track_type_t trackType);
 
 roll_type_t track_get_actual_bank(TileElement* tileElement, roll_type_t bank);
 roll_type_t track_get_actual_bank_2(int32_t rideType, bool isInverted, roll_type_t bank);
@@ -583,3 +585,4 @@ bool track_remove_station_element(const CoordsXYZD& loc, RideId rideIndex, int32
 money32 maze_set_track(const CoordsXYZD& coords, uint8_t flags, bool initialPlacement, RideId rideIndex, uint8_t mode);
 
 bool TrackTypeHasSpeedSetting(track_type_t trackType);
+
