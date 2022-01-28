@@ -3095,7 +3095,6 @@ void blockBrakeSetLinkedBrakesClosed(const CoordsXYZ& vehicleTrackLocation, Tile
             }
             trackElement->AsTrack()->SetBrakeClosed(
                 (trackElement->AsTrack()->GetBrakeBoosterSpeed() >= blockBrake->GetBrakeBoosterSpeed() || isClosed));
-
         }
 
         // prevent infinite loop
