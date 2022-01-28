@@ -2790,11 +2790,9 @@ static void WindowRideConstructionUpdateWidgets(rct_window* w)
     window_ride_construction_widgets[WIDX_U_TRACK].type = WindowWidgetType::Empty;
     window_ride_construction_widgets[WIDX_O_TRACK].type = WindowWidgetType::Empty;
 
-    bool brakesSelected = _selectedTrackType == TrackElemType::Brakes || _selectedTrackType == TrackElemType::BlockBrakes || _selectedTrackType == TrackElemType::DiagBrakes || _selectedTrackType == TrackElemType::DiagBlockBrakes
-        || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Brakes)
-        || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::BlockBrakes)
-        || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::DiagBrakes)
-        || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::DiagBlockBrakes);
+    bool brakesSelected = TrackIsBrakes(_selectedTrackType)
+        || TrackIsBrakes(_selectedTrackType & ~RideConstructionSpecialPieceSelected) || TrackIsBlockBrakes(_selectedTrackType)
+        || TrackIsBlockBrakes(_selectedTrackType & ~RideConstructionSpecialPieceSelected);
     bool boosterTrackSelected = _selectedTrackType == TrackElemType::Booster
         || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster);
 
@@ -2839,8 +2837,8 @@ static void WindowRideConstructionUpdateWidgets(rct_window* w)
     else
     {
         // Block brakes selected
-        if ((brakesSelected && _selectedTrackType == TrackElemType::BlockBrakes)
-            || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::BlockBrakes))
+        if ((brakesSelected && TrackIsBlockBrakes(_selectedTrackType)
+        || TrackIsBlockBrakes(_selectedTrackType & ~RideConstructionSpecialPieceSelected)))
         {
             window_ride_construction_widgets[WIDX_BANKING_GROUPBOX].text = STR_RIDE_CONSTRUCTION_BLOCK_BRAKE_SPEED;
             window_ride_construction_widgets[WIDX_BANK_LEFT].tooltip = STR_RIDE_CONSTRUCTION_BLOCK_BRAKE_SPEED_LIMIT_TIP;
@@ -3173,6 +3171,7 @@ static void RideConstructionSetBrakesSpeed(int32_t brakesSpeed)
         trackSetBrakeSpeed.SetCallback(
             [](const GameAction* ga, const GameActions::Result* result) { window_ride_construction_update_active_elements(); });
         GameActions::Execute(&trackSetBrakeSpeed);
+        // TODO: why did I remove this in the original branch?
         return;
     }
     window_ride_construction_update_active_elements();
