@@ -11751,31 +11751,31 @@
         "y_offset": -30
     },
     {
-        "path": "track/junior/brake_horizontal",
+        "path": "track/junior/brake_horizontal.png",
         "x_offset": -32,
-        "y_offset": 8,
-        "remap": "green"
+        "y_offset": 7,
+        "remapColour": "green"
     },
     {
-        "path": "track/junior/brake_vertical",
+        "path": "track/junior/brake_vertical.png",
         "x_offset": -9,
         "y_offset": -4,
-        "remap": "green"
+        "remapColour": "green"
     },
     {
-        "path": "track/junior/blockbrake_horizontal_closed",
-        "remap": "green"
+        "path": "track/junior/blockbrake_horizontal_closed.png",
+        "remapColour": "green"
     },
     {
-        "path": "track/junior/blockbrake_horizontal_open",
-        "remap": "green"
+        "path": "track/junior/blockbrake_horizontal_open.png",
+        "remapColour": "green"
     },
     {
-        "path": "track/junior/blockbrake_vertical_closed",
-        "remap": "green"
+        "path": "track/junior/blockbrake_vertical_closed.png",
+        "remapColour": "green"
     },
     {
-        "path": "track/junior/blockbrake_vertical_open",
-        "remap": "green"
+        "path": "track/junior/blockbrake_vertical_open.png",
+        "remapColour": "green"
     }
 ]
