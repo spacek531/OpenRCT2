@@ -641,8 +641,8 @@ enum
     SPR_JUNIOR_RC_DIAG_BRAKES_N_S = SPR_G2_JUNIOR_DIAG_BRAKES_START + 1,
     SPR_JUNIOR_RC_DIAG_BLOCKBRAKES_E_W_OPEN = SPR_G2_JUNIOR_DIAG_BRAKES_START + 2,
     SPR_JUNIOR_RC_DIAG_BLOCKBRAKES_E_W_CLOSED = SPR_G2_JUNIOR_DIAG_BRAKES_START + 3,
-    SPR_JUNIOR_RC_DIAG_BLOCKBRAKES_E_W_OPEN = SPR_G2_JUNIOR_DIAG_BRAKES_START + 4,
-    SPR_JUNIOR_RC_DIAG_BLOCKBRAKES_E_W_CLOSED = SPR_G2_JUNIOR_DIAG_BRAKES_START + 5
+    SPR_JUNIOR_RC_DIAG_BLOCKBRAKES_N_S_OPEN = SPR_G2_JUNIOR_DIAG_BRAKES_START + 4,
+    SPR_JUNIOR_RC_DIAG_BLOCKBRAKES_N_S_CLOSED = SPR_G2_JUNIOR_DIAG_BRAKES_START + 5
 };
 
 static constexpr const uint32_t junior_rc_track_pieces_flat[3][4] = {
@@ -1851,10 +1851,10 @@ static constexpr const uint32_t junior_rc_track_pieces_diag_60_deg_down_to_25_de
 };
 
 static constexpr const uint32_t junior_rc_track_pieces_diag_brakes[4] = {
-    SPR_JUNIOR_RC_DIAG_BRAKES_N_S,
     SPR_JUNIOR_RC_DIAG_BRAKES_E_W,
     SPR_JUNIOR_RC_DIAG_BRAKES_N_S,
     SPR_JUNIOR_RC_DIAG_BRAKES_E_W,
+    SPR_JUNIOR_RC_DIAG_BRAKES_N_S,
 };
 
 void junior_rc_paint_track_flat(
@@ -4439,7 +4439,7 @@ static constexpr const uint8_t junior_rc_diag_support_segment[] = {
     3,
 };
 
-void junior_rc_paint_track_diag_flat_setup(
+void junior_rc_paint_track_diag_flat(
     paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, uint16_t height,
     const TrackElement& trackElement, JuniorRcChainType chainType)
 {
@@ -4463,9 +4463,22 @@ void junior_rc_paint_track_diag_brakes(
     paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
     const TrackElement& trackElement)
 {
+    CoordsXY tileOffsets[4] = {
+        { -16, -16 },
+        { -16, -16 },
+        { -16, -16 },
+        { -16, -16 },
+    };
+    CoordsXY diagBoundLengths[4] = {
+        { 32, 32 },
+        { 32, 32 },
+        { 32, 32 },
+        { 32, 32 },
+    };
+
     track_paint_util_diag_tiles_paint(
-        session, 1, height, direction, trackSequence, session.TrackColours[SCHEME_TRACK],
-        junior_rc_track_pieces_diag_brakes, defaultDiagTileOffsets, defaultDiagBoundLengths, nullptr);
+        session, 1, height, direction, trackSequence, session.TrackColours[SCHEME_TRACK], junior_rc_track_pieces_diag_brakes,
+        tileOffsets, diagBoundLengths, nullptr);
 
     if (trackSequence == 3)
     {
