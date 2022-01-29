@@ -2467,7 +2467,8 @@ static void WindowRideConstructionUpdatePossibleRideConfigurations()
             continue;
         }
 
-        int32_t slope, bank, diag;
+        int32_t slope, bank;
+        bool diag;
         if (_rideConstructionState == RideConstructionState::Front || _rideConstructionState == RideConstructionState::Place)
         {
             slope = ted.Definition.vangle_start;
@@ -2505,8 +2506,7 @@ static void WindowRideConstructionUpdatePossibleRideConfigurations()
 
         _currentPossibleRideConfigurations[currentPossibleRideConfigurationIndex] = trackType;
         _currentDisabledSpecialTrackPieces |= (1 << currentPossibleRideConfigurationIndex);
-        if (_currentTrackPieceDirection < 4 && slope == _previousTrackSlopeEnd && bank == _previousTrackBankEnd
-            && (diag == (_currentTrackPieceDirection >= 4))
+        if (slope == _previousTrackSlopeEnd && bank == _previousTrackBankEnd && diag == (_currentTrackPieceDirection >= 4)
             && (trackType != TrackElemType::TowerBase
                 || ride->GetRideTypeDescriptor().HasFlag(RIDE_TYPE_FLAG_ALLOW_EXTRA_TOWER_BASES)))
         {
