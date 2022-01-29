@@ -4463,22 +4463,9 @@ void junior_rc_paint_track_diag_brakes(
     paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
     const TrackElement& trackElement)
 {
-    CoordsXY tileOffsets[4] = {
-        { -16, -16 },
-        { -16, -16 },
-        { -16, -16 },
-        { -16, -16 },
-    };
-    CoordsXY diagBoundLengths[4] = {
-        { 32, 32 },
-        { 32, 32 },
-        { 32, 32 },
-        { 32, 32 },
-    };
-
     track_paint_util_diag_tiles_paint(
-        session, 1, height, direction, trackSequence, session.TrackColours[SCHEME_TRACK], junior_rc_track_pieces_diag_brakes,
-        tileOffsets, diagBoundLengths, nullptr);
+        session, 1, height, direction, trackSequence, session.TrackColours[SCHEME_TRACK],
+        junior_rc_track_pieces_diag_brakes, defaultDiagTileOffsets, defaultDiagBoundLengths, nullptr);
 
     if (trackSequence == 3)
     {

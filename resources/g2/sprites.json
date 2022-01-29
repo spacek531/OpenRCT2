@@ -11753,10 +11753,14 @@
     {
         "path": "track/junior/brake_horizontal",
         "remap": "green"
+        "x_offset":-32,
+        "y_offset":8,
     },
     {
         "path": "track/junior/brake_vertical",
         "remap": "green"
+        "x_offset":-9,
+        "y_offset":-4,
     },
     {
         "path": "track/junior/blockbrake_horizontal_closed",
