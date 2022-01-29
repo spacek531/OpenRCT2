@@ -11764,18 +11764,26 @@
     },
     {
         "path": "track/junior/blockbrake_horizontal_closed.png",
+        "x_offset": -32,
+        "y_offset": 7,
         "remapColour": "green"
     },
     {
         "path": "track/junior/blockbrake_horizontal_open.png",
+        "x_offset": -32,
+        "y_offset": 7,
         "remapColour": "green"
     },
     {
         "path": "track/junior/blockbrake_vertical_closed.png",
+        "x_offset": -9,
+        "y_offset": -4,
         "remapColour": "green"
     },
     {
         "path": "track/junior/blockbrake_vertical_open.png",
+        "x_offset": -9,
+        "y_offset": -4,
         "remapColour": "green"
     }
 ]
