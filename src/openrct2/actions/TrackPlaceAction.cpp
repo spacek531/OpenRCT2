@@ -541,6 +541,8 @@ GameActions::Result TrackPlaceAction::Execute() const
                 case TrackElemType::BlockBrakes:
                 case TrackElemType::DiagBlockBrakes:
                 {
+                    if (trackBlock->index != 0)
+                        break;
                     ride->num_block_brakes++;
                     ride->window_invalidate_flags |= RIDE_INVALIDATE_RIDE_OPERATING;
 
