@@ -1416,6 +1416,8 @@ namespace RCT2
                     dst2->SetBrakeClosed(src2->GetBrakeClosed() || (trackType == TrackElemType::Brakes));
                     dst2->SetIsIndestructible(src2->IsIndestructible());
                     // Skipping IsHighlighted()
+                    if (trackType == TrackElemType::Brakes)
+                        dst2->SetBrakeClosed(true);
 
                     // Import block brakes to keep legacy behaviour
                     if (trackType == TrackElemType::BlockBrakes)
