@@ -8061,8 +8061,7 @@ loc_6DAEB9:
             auto brakeSpeed = brake_speed << 16;
             if (brakeSpeed < _vehicleVelocityF64E08)
             {
-                // TODO: why does the branch remove the sequence
-                auto trackElement = map_get_track_element_at_of_type(TrackLocation, trackType)->AsTrack();
+                auto trackElement = map_get_track_element_at_of_type_seq(TrackLocation, trackType, 0);
                 if ((trackElement != nullptr && trackElement->AsTrack()->GetBrakeClosed()) || trackElement == nullptr)
                     acceleration = -_vehicleVelocityF64E08 * 16;
             }
@@ -8447,8 +8446,7 @@ bool Vehicle::UpdateTrackMotionBackwards(rct_ride_entry_vehicle* vehicleEntry, R
 
         if (TrackIsBrakes(trackType))
         {
-            // TODO: why does the branch remove the sequence number?
-            auto trackElement = map_get_track_element_at_of_type(TrackLocation, trackType);
+            auto trackElement = map_get_track_element_at_of_type_seq(TrackLocation, trackType, 0);
             if (((trackElement != nullptr && trackElement->AsTrack()->GetBrakeClosed()) || trackElement == nullptr)
                 && -(brake_speed << 16) > _vehicleVelocityF64E08)
             {
