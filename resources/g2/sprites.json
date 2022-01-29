@@ -11749,5 +11749,29 @@
         "path": "track/raptor/small_steep_to_flat_up_diag_lift_4.png",
         "x_offset": -3,
         "y_offset": -30
+    },
+    {
+        "path": "track/junior/brake_horizontal",
+        "remap": "green"
+    },
+    {
+        "path": "track/junior/brake_vertical",
+        "remap": "green"
+    },
+    {
+        "path": "track/junior/blockbrake_horizontal_closed",
+        "remap": "green"
+    },
+    {
+        "path": "track/junior/blockbrake_horizontal_open",
+        "remap": "green"
+    },
+    {
+        "path": "track/junior/blockbrake_vertical_closed",
+        "remap": "green"
+    },
+    {
+        "path": "track/junior/blockbrake_vertical_open",
+        "remap": "green"
     }
 ]
