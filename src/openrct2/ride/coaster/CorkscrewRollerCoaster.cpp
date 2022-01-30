@@ -30,6 +30,28 @@ static constexpr const uint32_t _CorkscrewRCBlockBrakeImages[NumOrthogonalDirect
     { CORKSCREW_RC_BLOCK_BRAKE_NW_SE_OPEN, CORKSCREW_RC_BLOCK_BRAKE_NW_SE_CLOSED },
 };
 
+static constexpr const uint32_t CorkscrewRCDiagBrakeImages[NumOrthogonalDirections] = {
+    SPR_G2_CORKSCREW_DIAG_BRAKES_START,
+    SPR_G2_CORKSCREW_DIAG_BRAKES_START + 1,
+    SPR_G2_CORKSCREW_DIAG_BRAKES_START,
+    SPR_G2_CORKSCREW_DIAG_BRAKES_START + 1,
+};
+
+static constexpr const uint32_t CorkscrewRCDiagBlockBrakeImages[2][NumOrthogonalDirections] = {
+    {
+        SPR_G2_CORKSCREW_DIAG_BRAKES_START + 3,
+        SPR_G2_CORKSCREW_DIAG_BRAKES_START + 5,
+        SPR_G2_CORKSCREW_DIAG_BRAKES_START + 3,
+        SPR_G2_CORKSCREW_DIAG_BRAKES_START + 5,
+    },
+    {
+        SPR_G2_CORKSCREW_DIAG_BRAKES_START + 2,
+        SPR_G2_CORKSCREW_DIAG_BRAKES_START + 4,
+        SPR_G2_CORKSCREW_DIAG_BRAKES_START + 2,
+        SPR_G2_CORKSCREW_DIAG_BRAKES_START + 4,
+    },
+};
+
 /** rct2: 0x008A7AF8 */
 static void corkscrew_rc_track_flat(
     paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
@@ -5537,6 +5559,76 @@ static void corkscrew_rc_track_diag_flat(
     }
 }
 
+void corkscrew_rc_track_diag_brakes(
+    paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
+    const TrackElement& trackElement)
+{
+    track_paint_util_diag_tiles_paint(
+        session, 1, height, direction, trackSequence, session.TrackColours[SCHEME_TRACK], CorkscrewRCDiagBrakeImages,
+        defaultDiagTileOffsets, defaultDiagBoundLengths, nullptr);
+
+    if (trackSequence == 3)
+    {
+        switch (direction)
+        {
+            case 0:
+                metal_a_supports_paint_setup(
+                    session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                break;
+            case 1:
+                metal_a_supports_paint_setup(
+                    session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                break;
+            case 2:
+                metal_a_supports_paint_setup(
+                    session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                break;
+            case 3:
+                metal_a_supports_paint_setup(
+                    session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                break;
+        }
+        paint_util_set_segment_support_height(
+            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        paint_util_set_general_support_height(session, height + 32, 0x20);
+    }
+}
+
+void corkscrew_rc_track_diag_block_brakes(
+    paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
+    const TrackElement& trackElement)
+{
+    track_paint_util_diag_tiles_paint(
+        session, 1, height, direction, trackSequence, session.TrackColours[SCHEME_TRACK], CorkscrewRCDiagBlockBrakeImages[trackElement.GetBrakeClosed()],
+        defaultDiagTileOffsets, defaultDiagBoundLengths, nullptr);
+
+    if (trackSequence == 3)
+    {
+        switch (direction)
+        {
+            case 0:
+                metal_a_supports_paint_setup(
+                    session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                break;
+            case 1:
+                metal_a_supports_paint_setup(
+                    session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                break;
+            case 2:
+                metal_a_supports_paint_setup(
+                    session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                break;
+            case 3:
+                metal_a_supports_paint_setup(
+                    session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                break;
+        }
+        paint_util_set_segment_support_height(
+            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        paint_util_set_general_support_height(session, height + 32, 0x20);
+    }
+}
+
 /** rct2: 0x008A8008 */
 static void corkscrew_rc_track_diag_25_deg_up(
     paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
@@ -9110,6 +9202,11 @@ TRACK_PAINT_FUNCTION get_track_paint_function_corkscrew_rc(int32_t trackType)
             return corkscrew_rc_track_left_twist_up_to_down;
         case TrackElemType::RightTwistUpToDown:
             return corkscrew_rc_track_right_twist_up_to_down;
+
+        case TrackElemType::DiagBrakes:
+            return corkscrew_rc_track_diag_brakes;
+        case TrackElemType::DiagBlockBrakes:
+            return corkscrew_rc_track_diag_block_brakes;
     }
     return nullptr;
 }

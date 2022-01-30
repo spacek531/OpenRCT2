@@ -4494,7 +4494,7 @@ void junior_rc_paint_track_diag_brakes(
     paint_util_set_general_support_height(session, height + 32, 0x20);
 }
 
-void junior_rc_paint_track_diag_blockbrakes(
+void junior_rc_paint_track_diag_block_brakes(
     paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
     const TrackElement& trackElement)
 {
@@ -6239,7 +6239,7 @@ TRACK_PAINT_FUNCTION get_track_paint_function_junior_rc(int32_t trackType)
         case TrackElemType::DiagBrakes:
             return junior_rc_paint_track_diag_brakes;
         case TrackElemType::DiagBlockBrakes:
-            return junior_rc_paint_track_diag_blockbrakes;
+            return junior_rc_paint_track_diag_block_brakes;
     }
     return nullptr;
 }
