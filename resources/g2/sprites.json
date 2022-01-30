@@ -11823,21 +11823,15 @@
         "remapColour": "green"
     },
     {
-        "path": "track/junior/blockbrake_vertical_closed.png",
-        "x_offset": -9,
-        "y_offset": -4,
+        "path": "track/slc/brake_horizontal.png",
         "remapColour": "green"
     },
     {
-        "path": "track/junior/blockbrake_vertical_closed.png",
-        "x_offset": -9,
-        "y_offset": -4,
+        "path": "track/slc/brake_vertical.png",
         "remapColour": "green"
     },
     {
-        "path": "track/junior/blockbrake_vertical_closed.png",
-        "x_offset": -32,
-        "y_offset": 3,
+        "path": "track/slc/block_brake_vertical_open.png",
         "remapColour": "green"
     }
 ]
