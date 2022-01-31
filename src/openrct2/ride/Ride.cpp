@@ -3041,9 +3041,12 @@ void brakeLinkToBlockBrake(const CoordsXYZ& vehicleTrackLocation, TileElement* t
 
         if (TrackIsBlockBrakes(output.element->AsTrack()->GetTrackType()))
         {
-            brake->SetBrakeClosed(
+
+            GetTrackElementOriginAndApplyChanges(
+                { output.x, output.y, output.element->GetBaseZ(), output.element->GetDirection() },
+                output.element->AsTrack()->GetTrackType(), 0, nullptr,
                 !(brake->GetBrakeBoosterSpeed() < output.element->AsTrack()->GetBrakeBoosterSpeed()
-                  || output.element->AsTrack()->GetBrakeClosed()));
+                  || output.element->AsTrack()->GetBrakeClosed()) ? TRACK_ELEMENT_SET_BRAKE_CLOSED_TRUE : TRACK_ELEMENT_SET_BRAKE_CLOSED_FALSE);
             break;
         }
         else if (TrackIsBrakes(output.element->AsTrack()->GetTrackType()))
