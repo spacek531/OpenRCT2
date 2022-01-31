@@ -11821,17 +11821,5 @@
         "x_offset": -13,
         "y_offset": -8,
         "remapColour": "green"
-    },
-    {
-        "path": "track/slc/brake_horizontal.png",
-        "remapColour": "green"
-    },
-    {
-        "path": "track/slc/brake_vertical.png",
-        "remapColour": "green"
-    },
-    {
-        "path": "track/slc/block_brake_vertical_open.png",
-        "remapColour": "green"
     }
 ]

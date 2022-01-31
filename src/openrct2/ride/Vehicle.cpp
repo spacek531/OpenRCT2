@@ -6696,7 +6696,9 @@ static void block_brakes_open_previous_section(Ride& ride, const CoordsXYZ& vehi
     {
         return;
     }
-    trackElement->AsTrack()->SetBrakeClosed(false);
+    GetTrackElementOriginAndApplyChanges(
+        { location, trackElement->GetDirection()},
+        trackElement->AsTrack()->GetTrackType(), 0, nullptr, TRACK_ELEMENT_SET_BRAKE_CLOSED_FALSE);
     map_invalidate_element(location, reinterpret_cast<TileElement*>(trackElement));
     if (ride.mode == RideMode::ContinuousCircuitBlockSectioned || ride.mode == RideMode::PoweredLaunchBlockSectioned)
         blockBrakeSetLinkedBrakesClosed(location, reinterpret_cast<TileElement*>(trackElement), false);

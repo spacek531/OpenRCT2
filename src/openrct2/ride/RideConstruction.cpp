@@ -463,6 +463,10 @@ std::optional<CoordsXYZ> GetTrackElementOriginAndApplyChanges(
         {
             trackElement->SetBrakeClosed(false);
         }
+        if (flags & TRACK_ELEMENT_SET_BRAKE_BOOSTER_SPEED)
+        {
+            trackElement->SetBrakeBoosterSpeed(static_cast<uint8_t>(extra_params & 0xFF));
+        }
     }
     return retCoordsXYZ;
 }
