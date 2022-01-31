@@ -621,6 +621,9 @@ GameActions::Result TrackPlaceAction::Execute() const
                 map_animation_create(MAP_ANIMATION_TYPE_TRACK_SPINNINGTUNNEL, CoordsXYZ{ mapLoc, trackElement->GetBaseZ() });
                 break;
             case TrackElemType::Brakes:
+            case TrackElemType::BlockBrakes:
+            case TrackElemType::DiagBrakes:
+            case TrackElemType::DiagBlockBrakes:
                 trackElement->SetBrakeClosed(true);
                 break;
         }
