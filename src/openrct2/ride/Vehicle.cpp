@@ -7869,9 +7869,11 @@ bool Vehicle::UpdateTrackMotionForwardsGetNewTrack(uint16_t trackType, Ride* cur
     {
         if (next_vehicle_on_train == SPRITE_INDEX_NULL)
         {
-            tileElement->AsTrack()->SetBrakeClosed(true);
+            //tileElement->AsTrack()->SetBrakeClosed(true);
+            GetTrackElementOriginAndApplyChanges(
+                { TrackLocation, GetTrackDirection() }, GetTrackType(), 0, nullptr, TRACK_ELEMENT_SET_BRAKE_CLOSED_TRUE);
 
-            if (TrackIsBlockBrakes(trackType) || trackType == TrackElemType::EndStation)
+                if (TrackIsBlockBrakes(trackType) || trackType == TrackElemType::EndStation)
             {
                 if (!(rideEntry->vehicles[0].flags & VEHICLE_ENTRY_FLAG_POWERED))
                 {

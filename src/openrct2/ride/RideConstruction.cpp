@@ -455,6 +455,14 @@ std::optional<CoordsXYZ> GetTrackElementOriginAndApplyChanges(
         {
             trackElement->SetHasCableLift(false);
         }
+        if (flags & TRACK_ELEMENT_SET_BRAKE_CLOSED_TRUE)
+        {
+            trackElement->SetBrakeClosed(true);
+        }
+        if (flags & TRACK_ELEMENT_SET_BRAKE_CLOSED_FALSE)
+        {
+            trackElement->SetBrakeClosed(false);
+        }
     }
     return retCoordsXYZ;
 }
