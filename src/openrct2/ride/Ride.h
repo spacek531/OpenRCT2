@@ -1075,3 +1075,6 @@ void ride_clear_leftover_entrances(Ride* ride);
 std::vector<RideId> GetTracklessRides();
 
 void ride_remove_vehicles(Ride* ride);
+
+std::optional<CoordsXYZ> GetTrackElementOriginAndApplyChanges(
+    const CoordsXYZD& location, track_type_t type, uint16_t extra_params, TileElement** output_element, uint16_t flags);

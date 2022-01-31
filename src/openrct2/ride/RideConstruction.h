@@ -74,9 +74,6 @@ extern StationIndex gRideEntranceExitPlaceStationIndex;
 extern RideConstructionState gRideEntranceExitPlacePreviousRideConstructionState;
 extern uint8_t gRideEntranceExitPlaceDirection;
 
-std::optional<CoordsXYZ> GetTrackElementOriginAndApplyChanges(
-    const CoordsXYZD& location, track_type_t type, uint16_t extra_params, TileElement** output_element, uint16_t flags);
-
 void ride_entrance_exit_place_provisional_ghost();
 void ride_entrance_exit_remove_ghost();
 void ride_restore_provisional_track_piece();
