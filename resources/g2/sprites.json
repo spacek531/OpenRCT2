@@ -11921,37 +11921,37 @@
     {
         "path": "track/standup/brake_horizontal.png",
         "x_offset": -32,
-        "y_offset": 0,
+        "y_offset": 1,
         "palette": "green"
     },
     {
         "path": "track/standup/brake_vertical.png",
         "x_offset": -13,
-        "y_offset": 0,
+        "y_offset": -9,
         "palette": "green"
     },
     {
         "path": "track/standup/blockbrake_horizontal_open.png",
         "x_offset": -32,
-        "y_offset": 0,
+        "y_offset": 1,
         "palette": "green"
     },
     {
         "path": "track/standup/blockbrake_horizontal_closed.png",
         "x_offset": -32,
-        "y_offset": 0,
+        "y_offset": 1,
         "palette": "green"
     },
     {
         "path": "track/standup/blockbrake_vertical_open.png",
-        "x_offset": 0,
-        "y_offset": 0,
+        "x_offset": -13,
+        "y_offset": -9,
         "palette": "green"
     },
     {
         "path": "track/standup/blockbrake_vertical_closed.png",
-        "x_offset": 0,
-        "y_offset": 0,
+        "x_offset": -13,
+        "y_offset": -9,
         "palette": "green"
     },
     {
