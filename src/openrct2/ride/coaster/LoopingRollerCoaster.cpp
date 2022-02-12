@@ -5002,7 +5002,7 @@ void looping_rc_track_diag_brakes(
     const TrackElement& trackElement)
 {
     track_paint_util_diag_tiles_paint(
-        session, 1, height, direction, trackSequence, session.TrackColours[SCHEME_TRACK], LoopingRCDiagBrakeImages,
+        session, 3, height, direction, trackSequence, session.TrackColours[SCHEME_TRACK], LoopingRCDiagBrakeImages,
         defaultDiagTileOffsets, defaultDiagBoundLengths, nullptr);
 
     // TODO: draw brake sprite layers
