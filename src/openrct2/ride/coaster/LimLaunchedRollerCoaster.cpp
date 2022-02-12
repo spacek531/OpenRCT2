@@ -30,6 +30,28 @@ static constexpr const uint32_t _LimLauncherBlockBrakeImages[NumOrthogonalDirect
     { LIM_LAUNCHED_RC_BLOCK_BRAKE_NW_SE_OPEN, LIM_LAUNCHED_RC_BLOCK_BRAKE_NW_SE_CLOSED },
 };
 
+static constexpr const uint32_t LimLaunchedRCDiagBrakeImages[NumOrthogonalDirections] = {
+    SPR_G2_LIM_LAUNCHED_DIAG_BRAKES,
+    SPR_G2_LIM_LAUNCHED_DIAG_BRAKES + 1,
+    SPR_G2_LIM_LAUNCHED_DIAG_BRAKES,
+    SPR_G2_LIM_LAUNCHED_DIAG_BRAKES + 1,
+};
+
+static constexpr const uint32_t LimLaunchedRCDiagBlockBrakeImages[2][NumOrthogonalDirections] = {
+    {
+        SPR_G2_LIM_LAUNCHED_DIAG_BRAKES + 3,
+        SPR_G2_LIM_LAUNCHED_DIAG_BRAKES + 5,
+        SPR_G2_LIM_LAUNCHED_DIAG_BRAKES + 3,
+        SPR_G2_LIM_LAUNCHED_DIAG_BRAKES + 5,
+    },
+    {
+        SPR_G2_LIM_LAUNCHED_DIAG_BRAKES + 2,
+        SPR_G2_LIM_LAUNCHED_DIAG_BRAKES + 4,
+        SPR_G2_LIM_LAUNCHED_DIAG_BRAKES + 2,
+        SPR_G2_LIM_LAUNCHED_DIAG_BRAKES + 4,
+    },
+};
+
 /** rct2: 0x008A6D50, 0x008A6D60, 0x008A6D70 */
 static void lim_launched_rc_track_station(
     paint_session& session, const Ride& ride, [[maybe_unused]] uint8_t trackSequence, uint8_t direction, int32_t height,
@@ -1777,6 +1799,45 @@ static void lim_launched_rc_track_right_quarter_turn_1_90_deg_down(
         session, ride, trackSequence, (direction - 1) & 3, height, trackElement);
 }
 
+void lim_launched_rc_track_diag_brakes(
+    paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
+    const TrackElement& trackElement)
+{
+    track_paint_util_diag_tiles_paint(
+        session, 3, height, direction, trackSequence, session.TrackColours[SCHEME_TRACK], LimLaunchedRCDiagBrakeImages,
+        defaultDiagTileOffsets, defaultDiagBoundLengths, nullptr);
+
+    if (trackSequence == 3)
+    {
+        metal_a_supports_paint_setup(
+            session, METAL_SUPPORTS_TUBES, DiagSupportSegments[direction], 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+    }
+
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
+    paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
+    paint_util_set_general_support_height(session, height + 32, 0x20);
+}
+
+void lim_launched_rc_track_diag_block_brakes(
+    paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
+    const TrackElement& trackElement)
+{
+    track_paint_util_diag_tiles_paint(
+        session, 3, height, direction, trackSequence, session.TrackColours[SCHEME_TRACK],
+        LimLaunchedRCDiagBlockBrakeImages[trackElement.GetBrakeClosed()], defaultDiagTileOffsets, defaultDiagBoundLengths,
+        nullptr);
+
+    if (trackSequence == 3)
+    {
+        metal_a_supports_paint_setup(
+            session, METAL_SUPPORTS_TUBES, DiagSupportSegments[direction], 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+    }
+
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
+    paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
+    paint_util_set_general_support_height(session, height + 32, 0x20);
+}
+
 TRACK_PAINT_FUNCTION get_track_paint_function_lim_launched_rc(int32_t trackType)
 {
     switch (trackType)
@@ -1965,6 +2026,10 @@ TRACK_PAINT_FUNCTION get_track_paint_function_lim_launched_rc(int32_t trackType)
             return lim_launched_rc_track_left_quarter_turn_1_90_deg_down;
         case TrackElemType::RightQuarterTurn1TileDown90:
             return lim_launched_rc_track_right_quarter_turn_1_90_deg_down;
+        case TrackElemType::DiagBrakes:
+            return lim_launched_rc_track_diag_brakes;
+        case TrackElemType::DiagBlockBrakes:
+            return lim_launched_rc_track_diag_block_brakes;
     }
     return nullptr;
 }
