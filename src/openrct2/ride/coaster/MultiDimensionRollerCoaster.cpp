@@ -6911,7 +6911,7 @@ void multi_dimension_rc_track_diag_brakes(
     if (trackElement.IsInverted())
     {
         track_paint_util_diag_tiles_paint(
-            session, 3, height + 22, direction, trackSequence, session.TrackColours[SCHEME_TRACK], MultidimDiagBrakeImages[1],
+            session, -3, height + 24, direction, trackSequence, session.TrackColours[SCHEME_TRACK], MultidimDiagBrakeImages[1],
             defaultDiagTileOffsets, defaultDiagBoundLengths, nullptr);
 
         paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
@@ -6950,7 +6950,7 @@ void multi_dimension_rc_track_diag_block_brakes(
     if (trackElement.IsInverted())
     {
         track_paint_util_diag_tiles_paint(
-            session, 3, height + 24, direction, trackSequence, session.TrackColours[SCHEME_TRACK],
+            session, -3, height + 24, direction, trackSequence, session.TrackColours[SCHEME_TRACK],
             MultidimDiagBlockBrakeImages[1][trackElement.GetBrakeClosed()], defaultDiagTileOffsets, defaultDiagBoundLengths,
             nullptr);
 

@@ -11879,13 +11879,13 @@
     {
         "path": "track/multidim/inverted_brake_horizontal.png",
         "x_offset": -32,
-        "y_offset": 0,
+        "y_offset": 2,
         "palette": "green"
     },
     {
         "path": "track/multidim/inverted_brake_vertical.png",
         "x_offset": -11,
-        "y_offset": -14,
+        "y_offset": -12,
         "palette": "green"
     },
     {
