@@ -11879,13 +11879,13 @@
     {
         "path": "track/multidim/inverted_brake_horizontal.png",
         "x_offset": -32,
-        "y_offset": 2,
+        "y_offset": 0,
         "palette": "green"
     },
     {
         "path": "track/multidim/inverted_brake_vertical.png",
         "x_offset": -11,
-        "y_offset": -10,
+        "y_offset": -14,
         "palette": "green"
     },
     {
@@ -11897,25 +11897,25 @@
     {
         "path": "track/multidim/inverted_blockbrake_vertical_open.png",
         "x_offset": -11,
-        "y_offset": -10,
+        "y_offset": -12,
         "palette": "green"
     },
     {
         "path": "track/multidim/inverted_blockbrake_vertical_closed.png",
         "x_offset": -11,
-        "y_offset": -10,
+        "y_offset": -12,
         "palette": "green"
     },
     {
         "path": "track/steeplechase/brake_horizontal.png",
-        "x_offset": 0,
-        "y_offset": 0,
+        "x_offset": -32,
+        "y_offset": 9,
         "palette": "green"
     },
     {
         "path": "track/steeplechase/brake_vertical.png",
-        "x_offset": -32,
-        "y_offset": 0,
+        "x_offset": -4,
+        "y_offset": -6,
         "palette": "green"
     },
     {
