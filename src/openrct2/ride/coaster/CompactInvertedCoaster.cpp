@@ -27,7 +27,7 @@ static constexpr const uint32_t CompactInvertedDiagBrakeImages[NumOrthogonalDire
     SPR_G2_SLC_DIAG_BRAKES + 2,
 };
 
-static constexpr const uint32_t CompactInvertedBlockBrakeImages[2][NumOrthogonalDirections] = {
+static constexpr const uint32_t CompactInvertedDiagBlockBrakeImages[2][NumOrthogonalDirections] = {
     {
         SPR_G2_SLC_DIAG_BRAKES,
         SPR_G2_SLC_DIAG_BRAKES + 2,
@@ -6283,14 +6283,49 @@ static void compact_inverted_rc_track_diag_flat(
     }
 }
 
-
-
 void compact_inverted_rc_track_diag_brakes(
     paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
     const TrackElement& trackElement)
 {
     track_paint_util_diag_tiles_paint(
-        session, 1, height, direction, trackSequence, session.TrackColours[SCHEME_TRACK], CompactInvertedDiagBrakeImages,
+        session, 3, height + 29, direction, trackSequence, session.TrackColours[SCHEME_TRACK], CompactInvertedDiagBrakeImages,
+        defaultDiagTileOffsets, defaultDiagBoundLengths, nullptr);
+
+    if (trackSequence == 3)
+    {
+        paint_util_set_segment_support_height(
+            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        switch (direction)
+        {
+            case 0:
+                metal_a_supports_paint_setup(
+                    session, METAL_SUPPORTS_TUBES_INVERTED, 1, 0, height + 38, session.TrackColours[SCHEME_SUPPORTS]);
+                break;
+            case 1:
+                metal_a_supports_paint_setup(
+                    session, METAL_SUPPORTS_TUBES_INVERTED, 0, 0, height + 38, session.TrackColours[SCHEME_SUPPORTS]);
+                break;
+            case 2:
+                metal_a_supports_paint_setup(
+                    session, METAL_SUPPORTS_TUBES_INVERTED, 2, 0, height + 38, session.TrackColours[SCHEME_SUPPORTS]);
+                break;
+            case 3:
+                metal_a_supports_paint_setup(
+                    session, METAL_SUPPORTS_TUBES_INVERTED, 3, 0, height + 38, session.TrackColours[SCHEME_SUPPORTS]);
+                break;
+        }
+
+        paint_util_set_general_support_height(session, height + 48, 0x20);
+    }
+}
+
+void compact_inverted_rc_track_diag_block_brakes(
+    paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
+    const TrackElement& trackElement)
+{
+    track_paint_util_diag_tiles_paint(
+        session, 3, height + 29, direction, trackSequence, session.TrackColours[SCHEME_TRACK],
+        CompactInvertedDiagBlockBrakeImages[trackElement.GetBrakeClosed()],
         defaultDiagTileOffsets, defaultDiagBoundLengths, nullptr);
 
     if (trackSequence == 3)
@@ -9074,6 +9109,8 @@ TRACK_PAINT_FUNCTION get_track_paint_function_compact_inverted_rc(int32_t trackT
 
         case TrackElemType::DiagBrakes:
             return compact_inverted_rc_track_diag_brakes;
+        case TrackElemType::DiagBlockBrakes:
+            return compact_inverted_rc_track_diag_block_brakes;
     }
     return nullptr;
 }

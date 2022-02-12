@@ -11789,7 +11789,7 @@
     {
         "path": "track/corkscrew/brake_horizontal.png",
         "x_offset": -32,
-        "y_offset": 3,
+        "y_offset": 2,
         "palette": "green"
     },
     {
@@ -11801,13 +11801,13 @@
     {
         "path": "track/corkscrew/blockbrake_horizontal_closed.png",
         "x_offset": -32,
-        "y_offset": 3,
+        "y_offset": 2,
         "palette": "green"
     },
     {
         "path": "track/corkscrew/blockbrake_horizontal_open.png",
         "x_offset": -32,
-        "y_offset": 3,
+        "y_offset": 2,
         "palette": "green"
     },
     {
@@ -11825,19 +11825,19 @@
     {
         "path": "track/slc/brake_horizontal.png",
         "x_offset": -32,
-        "y_offset": 0,
+        "y_offset": 4,
         "palette": "green"
     },
     {
         "path": "track/slc/brake_vertical.png",
-        "x_offset": 0,
-        "y_offset": 0,
+        "x_offset": -13,
+        "y_offset": -9,
         "palette": "green"
     },
     {
         "path": "track/slc/blockbrake_vertical_open.png",
-        "x_offset": 0,
-        "y_offset": 0,
+        "x_offset": -13,
+        "y_offset": -9,
         "palette": "green"
     },
     {
@@ -12034,6 +12034,18 @@
     },
     {
         "path": "track/limlaunched/blockbrake_vertical_closed.png",
+        "x_offset": 0,
+        "y_offset": 0,
+        "palette": "green"
+    },
+    {
+        "path": "track/bm/brake_horizontal.png",
+        "x_offset": 0,
+        "y_offset": 0,
+        "palette": "green"
+    },
+    {
+        "path": "track/bm/brake_vertical.png",
         "x_offset": 0,
         "y_offset": 0,
         "palette": "green"
