@@ -5564,34 +5564,18 @@ void corkscrew_rc_track_diag_brakes(
     const TrackElement& trackElement)
 {
     track_paint_util_diag_tiles_paint(
-        session, 1, height, direction, trackSequence, session.TrackColours[SCHEME_TRACK], CorkscrewRCDiagBrakeImages,
+        session, 3, height, direction, trackSequence, session.TrackColours[SCHEME_TRACK], CorkscrewRCDiagBrakeImages,
         defaultDiagTileOffsets, defaultDiagBoundLengths, nullptr);
 
     if (trackSequence == 3)
     {
-        switch (direction)
-        {
-            case 0:
-                metal_a_supports_paint_setup(
-                    session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
-                break;
-            case 1:
-                metal_a_supports_paint_setup(
-                    session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
-                break;
-            case 2:
-                metal_a_supports_paint_setup(
-                    session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
-                break;
-            case 3:
-                metal_a_supports_paint_setup(
-                    session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
-                break;
-        }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        metal_a_supports_paint_setup(
+            session, METAL_SUPPORTS_TUBES, DiagSupportSegments[direction], 0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
+
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
+    paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
+    paint_util_set_general_support_height(session, height + 32, 0x20);
 }
 
 void corkscrew_rc_track_diag_block_brakes(
@@ -5599,34 +5583,19 @@ void corkscrew_rc_track_diag_block_brakes(
     const TrackElement& trackElement)
 {
     track_paint_util_diag_tiles_paint(
-        session, 1, height, direction, trackSequence, session.TrackColours[SCHEME_TRACK], CorkscrewRCDiagBlockBrakeImages[trackElement.GetBrakeClosed()],
-        defaultDiagTileOffsets, defaultDiagBoundLengths, nullptr);
+        session, 3, height, direction, trackSequence, session.TrackColours[SCHEME_TRACK],
+        CorkscrewRCDiagBlockBrakeImages[trackElement.GetBrakeClosed()], defaultDiagTileOffsets, defaultDiagBoundLengths,
+        nullptr);
 
     if (trackSequence == 3)
     {
-        switch (direction)
-        {
-            case 0:
-                metal_a_supports_paint_setup(
-                    session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
-                break;
-            case 1:
-                metal_a_supports_paint_setup(
-                    session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
-                break;
-            case 2:
-                metal_a_supports_paint_setup(
-                    session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
-                break;
-            case 3:
-                metal_a_supports_paint_setup(
-                    session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
-                break;
-        }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        metal_a_supports_paint_setup(
+            session, METAL_SUPPORTS_TUBES, DiagSupportSegments[direction], 0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
+
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
+    paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
+    paint_util_set_general_support_height(session, height + 32, 0x20);
 }
 
 /** rct2: 0x008A8008 */

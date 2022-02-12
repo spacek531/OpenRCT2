@@ -4440,20 +4440,6 @@ static void junior_rc_right_eighth_to_orthogonal_bank_paint_setup(
     junior_rc_left_eighth_to_diag_bank_paint_setup(session, ride, trackSequence, (direction + 3) % 4, height, trackElement);
 }
 
-static constexpr const int32_t junior_rc_diag_blocked_segments[] = {
-    SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4 | SEGMENT_BC,
-    SEGMENT_C4 | SEGMENT_CC | SEGMENT_C8 | SEGMENT_B4,
-    SEGMENT_D0 | SEGMENT_C4 | SEGMENT_C0 | SEGMENT_D4,
-    SEGMENT_D0 | SEGMENT_C4 | SEGMENT_B8 | SEGMENT_C8,
-};
-
-static constexpr const uint8_t junior_rc_diag_support_segment[] = {
-    1,
-    0,
-    2,
-    3,
-};
-
 void junior_rc_paint_track_diag_flat(
     paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, uint16_t height,
     const TrackElement& trackElement, JuniorRcChainType chainType)
@@ -4465,11 +4451,11 @@ void junior_rc_paint_track_diag_flat(
     if (trackSequence == 3)
     {
         metal_a_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 32, 0x20);
 }
@@ -4485,11 +4471,11 @@ void junior_rc_paint_track_diag_brakes(
     if (trackSequence == 3)
     {
         metal_a_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 32, 0x20);
 }
@@ -4506,11 +4492,11 @@ void junior_rc_paint_track_diag_block_brakes(
     if (trackSequence == 3)
     {
         metal_a_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 32, 0x20);
 }
@@ -4526,11 +4512,11 @@ void junior_rc_paint_track_diag_25_deg_up(
     if (trackSequence == 3)
     {
         metal_b_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             8, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 56, 0x20);
 }
@@ -4547,11 +4533,11 @@ void junior_rc_paint_track_diag_flat_to_25_deg_up(
     if (trackSequence == 3)
     {
         metal_b_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 48, 0x20);
 }
@@ -4571,11 +4557,11 @@ void junior_rc_paint_track_diag_flat_to_60_deg_up(
     if (trackSequence == 3)
     {
         metal_b_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             0, height + 6, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 64, 0x20);
 }
@@ -4592,11 +4578,11 @@ void junior_rc_paint_track_diag_25_deg_up_to_flat(
     if (trackSequence == 3)
     {
         metal_b_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             4, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 56, 0x20);
 }
@@ -4616,11 +4602,11 @@ void junior_rc_paint_track_diag_60_deg_up_to_flat(
     if (trackSequence == 3)
     {
         metal_b_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             4, height + 13, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 64, 0x20);
 }
@@ -4637,11 +4623,11 @@ void junior_rc_paint_track_diag_25_deg_down(
     if (trackSequence == 3)
     {
         metal_b_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             8, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 56, 0x20);
 }
@@ -4658,11 +4644,11 @@ void junior_rc_paint_track_diag_flat_to_25_deg_down(
     if (trackSequence == 3)
     {
         metal_b_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             4, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 56, 0x20);
 }
@@ -4682,11 +4668,11 @@ void junior_rc_paint_track_diag_flat_to_60_deg_down(
     if (trackSequence == 3)
     {
         metal_b_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             4, height + 7, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 48, 0x20);
 }
@@ -4703,11 +4689,11 @@ void junior_rc_paint_track_diag_25_deg_down_to_flat(
     if (trackSequence == 3)
     {
         metal_b_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 48, 0x20);
 }
@@ -4727,11 +4713,11 @@ void junior_rc_paint_track_diag_60_deg_down_to_flat(
     if (trackSequence == 3)
     {
         metal_b_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 56, 0x20);
 }
@@ -4871,11 +4857,11 @@ static void junior_rc_diag_flat_to_left_bank_paint_setup(
     if (trackSequence == 3)
     {
         metal_a_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 32, 0x20);
 }
@@ -4898,11 +4884,11 @@ static void junior_rc_diag_flat_to_right_bank_paint_setup(
     if (trackSequence == 3)
     {
         metal_a_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 32, 0x20);
 }
@@ -4925,11 +4911,11 @@ static void junior_rc_diag_left_bank_to_flat_paint_setup(
     if (trackSequence == 3)
     {
         metal_a_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 32, 0x20);
 }
@@ -4952,11 +4938,11 @@ static void junior_rc_diag_right_bank_to_flat_paint_setup(
     if (trackSequence == 3)
     {
         metal_a_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 32, 0x20);
 }
@@ -4979,11 +4965,11 @@ static void junior_rc_diag_left_bank_to_25_deg_up_paint_setup(
     if (trackSequence == 3)
     {
         metal_b_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 48, 0x20);
 }
@@ -5006,11 +4992,11 @@ static void junior_rc_diag_right_bank_to_25_deg_up_paint_setup(
     if (trackSequence == 3)
     {
         metal_b_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 48, 0x20);
 }
@@ -5033,11 +5019,11 @@ static void junior_rc_diag_25_deg_up_to_left_bank_paint_setup(
     if (trackSequence == 3)
     {
         metal_b_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             4, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 56, 0x20);
 }
@@ -5060,11 +5046,11 @@ static void junior_rc_diag_25_deg_up_to_right_bank_paint_setup(
     if (trackSequence == 3)
     {
         metal_b_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             4, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 56, 0x20);
 }
@@ -5087,11 +5073,11 @@ static void junior_rc_diag_left_bank_to_25_deg_down_paint_setup(
     if (trackSequence == 3)
     {
         metal_b_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             4, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 56, 0x20);
 }
@@ -5114,11 +5100,11 @@ static void junior_rc_diag_right_bank_to_25_deg_down_paint_setup(
     if (trackSequence == 3)
     {
         metal_b_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             4, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 56, 0x20);
 }
@@ -5141,11 +5127,11 @@ static void junior_rc_diag_25_deg_down_to_left_bank_paint_setup(
     if (trackSequence == 3)
     {
         metal_b_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 48, 0x20);
 }
@@ -5168,11 +5154,11 @@ static void junior_rc_diag_25_deg_down_to_right_bank_paint_setup(
     if (trackSequence == 3)
     {
         metal_b_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 48, 0x20);
 }
@@ -5205,11 +5191,11 @@ static void junior_rc_diag_left_bank_paint_setup(
     if (trackSequence == 3)
     {
         metal_a_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 32, 0x20);
 }
@@ -5228,11 +5214,11 @@ static void junior_rc_diag_right_bank_paint_setup(
     if (trackSequence == 3)
     {
         metal_a_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 32, 0x20);
 }
@@ -5501,11 +5487,11 @@ void junior_rc_paint_track_diag_60_deg_up(
     if (trackSequence == 3)
     {
         metal_b_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             36, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 104, 0x20);
 }
@@ -5522,11 +5508,11 @@ void junior_rc_paint_track_diag_60_deg_down(
     if (trackSequence == 3)
     {
         metal_b_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             28, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 104, 0x20);
 }
@@ -5543,11 +5529,11 @@ void junior_rc_paint_track_diag_25_deg_up_to_60_deg_up(
     if (trackSequence == 3)
     {
         metal_b_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             16, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 72, 0x20);
 }
@@ -5575,11 +5561,11 @@ void junior_rc_paint_track_diag_60_deg_up_to_25_deg_up(
     if (trackSequence == 3)
     {
         metal_b_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             21, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 72, 0x20);
 }
@@ -5607,11 +5593,11 @@ void junior_rc_paint_track_diag_25_deg_down_to_60_deg_down(
     if (trackSequence == 3)
     {
         metal_b_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             17, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 72, 0x20);
 }
@@ -5628,11 +5614,11 @@ void junior_rc_paint_track_diag_60_deg_down_to_25_deg_down(
     if (trackSequence == 3)
     {
         metal_b_supports_paint_setup(
-            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
+            session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, DiagSupportSegments[direction],
             8, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
     paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
     paint_util_set_general_support_height(session, height + 72, 0x20);
 }

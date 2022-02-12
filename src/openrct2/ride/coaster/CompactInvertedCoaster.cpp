@@ -6291,32 +6291,16 @@ void compact_inverted_rc_track_diag_brakes(
         session, 3, height + 29, direction, trackSequence, session.TrackColours[SCHEME_TRACK], CompactInvertedDiagBrakeImages,
         defaultDiagTileOffsets, defaultDiagBoundLengths, nullptr);
 
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
+    paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
+
     if (trackSequence == 3)
     {
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        switch (direction)
-        {
-            case 0:
-                metal_a_supports_paint_setup(
-                    session, METAL_SUPPORTS_TUBES_INVERTED, 1, 0, height + 38, session.TrackColours[SCHEME_SUPPORTS]);
-                break;
-            case 1:
-                metal_a_supports_paint_setup(
-                    session, METAL_SUPPORTS_TUBES_INVERTED, 0, 0, height + 38, session.TrackColours[SCHEME_SUPPORTS]);
-                break;
-            case 2:
-                metal_a_supports_paint_setup(
-                    session, METAL_SUPPORTS_TUBES_INVERTED, 2, 0, height + 38, session.TrackColours[SCHEME_SUPPORTS]);
-                break;
-            case 3:
-                metal_a_supports_paint_setup(
-                    session, METAL_SUPPORTS_TUBES_INVERTED, 3, 0, height + 38, session.TrackColours[SCHEME_SUPPORTS]);
-                break;
-        }
-
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        metal_a_supports_paint_setup(
+            session, METAL_SUPPORTS_TUBES_INVERTED, DiagSupportSegments[direction], 0, height + 38,
+            session.TrackColours[SCHEME_SUPPORTS]);
     }
+    paint_util_set_general_support_height(session, height + 48, 0x20);
 }
 
 void compact_inverted_rc_track_diag_block_brakes(
@@ -6328,32 +6312,16 @@ void compact_inverted_rc_track_diag_block_brakes(
         CompactInvertedDiagBlockBrakeImages[trackElement.GetBrakeClosed()],
         defaultDiagTileOffsets, defaultDiagBoundLengths, nullptr);
 
+    int32_t blockedSegments = DiagBlockedSegments[trackSequence];
+    paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
+
     if (trackSequence == 3)
     {
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        switch (direction)
-        {
-            case 0:
-                metal_a_supports_paint_setup(
-                    session, METAL_SUPPORTS_TUBES_INVERTED, 1, 0, height + 38, session.TrackColours[SCHEME_SUPPORTS]);
-                break;
-            case 1:
-                metal_a_supports_paint_setup(
-                    session, METAL_SUPPORTS_TUBES_INVERTED, 0, 0, height + 38, session.TrackColours[SCHEME_SUPPORTS]);
-                break;
-            case 2:
-                metal_a_supports_paint_setup(
-                    session, METAL_SUPPORTS_TUBES_INVERTED, 2, 0, height + 38, session.TrackColours[SCHEME_SUPPORTS]);
-                break;
-            case 3:
-                metal_a_supports_paint_setup(
-                    session, METAL_SUPPORTS_TUBES_INVERTED, 3, 0, height + 38, session.TrackColours[SCHEME_SUPPORTS]);
-                break;
-        }
-
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        metal_a_supports_paint_setup(
+            session, METAL_SUPPORTS_TUBES_INVERTED, DiagSupportSegments[direction], 0, height + 38,
+            session.TrackColours[SCHEME_SUPPORTS]);
     }
+    paint_util_set_general_support_height(session, height + 48, 0x20);
 }
 
 /** rct2: 0x008AEBB0 */
