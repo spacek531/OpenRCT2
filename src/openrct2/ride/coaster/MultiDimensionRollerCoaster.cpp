@@ -6919,19 +6919,19 @@ void multi_dimension_rc_track_diag_brakes(
             {
                 case 0:
                     metal_a_supports_paint_setup(
-                        session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                        session, METAL_SUPPORTS_TUBES_INVERTED, 1, 0, height + 36, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
                 case 1:
                     metal_a_supports_paint_setup(
-                        session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                        session, METAL_SUPPORTS_TUBES_INVERTED, 0, 0, height + 36, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
                 case 2:
                     metal_a_supports_paint_setup(
-                        session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                        session, METAL_SUPPORTS_TUBES_INVERTED, 2, 0, height + 36, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
                 case 3:
                     metal_a_supports_paint_setup(
-                        session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                        session, METAL_SUPPORTS_TUBES_INVERTED, 3, 0, height + 36, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
             }
             paint_util_set_segment_support_height(
@@ -6951,24 +6951,24 @@ void multi_dimension_rc_track_diag_brakes(
             {
                 case 0:
                     metal_a_supports_paint_setup(
-                        session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                        session, METAL_SUPPORTS_TUBES_INVERTED, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
                 case 1:
                     metal_a_supports_paint_setup(
-                        session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                        session, METAL_SUPPORTS_TUBES_INVERTED, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
                 case 2:
                     metal_a_supports_paint_setup(
-                        session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                        session, METAL_SUPPORTS_TUBES_INVERTED, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
                 case 3:
                     metal_a_supports_paint_setup(
-                        session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                        session, METAL_SUPPORTS_TUBES_INVERTED, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
             }
             paint_util_set_segment_support_height(
                 session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-            paint_util_set_general_support_height(session, height + 32, 0x20);
+            paint_util_set_general_support_height(session, height, 0x20);
         }
     }
     
@@ -6990,19 +6990,19 @@ void multi_dimension_rc_track_diag_block_brakes(
             {
                 case 0:
                     metal_a_supports_paint_setup(
-                        session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                        session, METAL_SUPPORTS_TUBES_INVERTED, 1, 0, height + 36, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
                 case 1:
                     metal_a_supports_paint_setup(
-                        session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                        session, METAL_SUPPORTS_TUBES_INVERTED, 0, 0, height + 36, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
                 case 2:
                     metal_a_supports_paint_setup(
-                        session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                        session, METAL_SUPPORTS_TUBES_INVERTED, 2, 0, height + 36, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
                 case 3:
                     metal_a_supports_paint_setup(
-                        session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                        session, METAL_SUPPORTS_TUBES_INVERTED, 3, 0, height + 36, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
             }
             paint_util_set_segment_support_height(
@@ -7022,24 +7022,24 @@ void multi_dimension_rc_track_diag_block_brakes(
             {
                 case 0:
                     metal_a_supports_paint_setup(
-                        session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                        session, METAL_SUPPORTS_TUBES_INVERTED, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
                 case 1:
                     metal_a_supports_paint_setup(
-                        session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                        session, METAL_SUPPORTS_TUBES_INVERTED, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
                 case 2:
                     metal_a_supports_paint_setup(
-                        session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                        session, METAL_SUPPORTS_TUBES_INVERTED, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
                 case 3:
                     metal_a_supports_paint_setup(
-                        session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                        session, METAL_SUPPORTS_TUBES_INVERTED, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
             }
             paint_util_set_segment_support_height(
                 session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-            paint_util_set_general_support_height(session, height + 32, 0x20);
+            paint_util_set_general_support_height(session, height, 0x20);
         }
     }
     
