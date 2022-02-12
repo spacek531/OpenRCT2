@@ -11957,37 +11957,37 @@
     {
         "path": "track/minetrain/brake_horizontal.png",
         "x_offset": -32,
-        "y_offset": 0,
+        "y_offset": 6,
         "palette": "green"
     },
     {
         "path": "track/minetrain/brake_vertical.png",
-        "x_offset": -13,
-        "y_offset": 0,
+        "x_offset": -17,
+        "y_offset": -3,
         "palette": "green"
     },
     {
         "path": "track/minetrain/blockbrake_horizontal_open.png",
         "x_offset": -32,
-        "y_offset": 0,
+        "y_offset": 6,
         "palette": "green"
     },
     {
         "path": "track/minetrain/blockbrake_horizontal_closed.png",
         "x_offset": -32,
-        "y_offset": 0,
+        "y_offset": 6,
         "palette": "green"
     },
     {
         "path": "track/minetrain/blockbrake_vertical_open.png",
-        "x_offset": 0,
-        "y_offset": 0,
+        "x_offset": -17,
+        "y_offset": -3,
         "palette": "green"
     },
     {
         "path": "track/minetrain/blockbrake_vertical_closed.png",
-        "x_offset": 0,
-        "y_offset": 0,
+        "x_offset": -17,
+        "y_offset": -3,
         "palette": "green"
     },
     {
