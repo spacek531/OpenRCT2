@@ -21,24 +21,24 @@
 
 
 static constexpr const uint32_t CompactInvertedDiagBrakeImages[NumOrthogonalDirections] = {
-    SPR_G2_SLC_DIAG_BRAKES_START + 0,
-    SPR_G2_SLC_DIAG_BRAKES_START + 2,
-    SPR_G2_SLC_DIAG_BRAKES_START + 1,
-    SPR_G2_SLC_DIAG_BRAKES_START + 2,
+    SPR_G2_SLC_DIAG_BRAKES,
+    SPR_G2_SLC_DIAG_BRAKES + 2,
+    SPR_G2_SLC_DIAG_BRAKES,
+    SPR_G2_SLC_DIAG_BRAKES + 2,
 };
 
 static constexpr const uint32_t CompactInvertedBlockBrakeImages[2][NumOrthogonalDirections] = {
     {
-        SPR_G2_SLC_DIAG_BRAKES_START,
-        SPR_G2_SLC_DIAG_BRAKES_START + 2,
-        SPR_G2_SLC_DIAG_BRAKES_START,
-        SPR_G2_SLC_DIAG_BRAKES_START + 2,
+        SPR_G2_SLC_DIAG_BRAKES,
+        SPR_G2_SLC_DIAG_BRAKES + 2,
+        SPR_G2_SLC_DIAG_BRAKES,
+        SPR_G2_SLC_DIAG_BRAKES + 2,
     },
     {
-        SPR_G2_SLC_DIAG_BRAKES_START,
-        SPR_G2_SLC_DIAG_BRAKES_START + 1,
-        SPR_G2_SLC_DIAG_BRAKES_START,
-        SPR_G2_SLC_DIAG_BRAKES_START + 1,
+        SPR_G2_SLC_DIAG_BRAKES,
+        SPR_G2_SLC_DIAG_BRAKES + 1,
+        SPR_G2_SLC_DIAG_BRAKES,
+        SPR_G2_SLC_DIAG_BRAKES + 1,
     },
 };
 

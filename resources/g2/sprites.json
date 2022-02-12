@@ -11821,5 +11821,221 @@
         "x_offset": -13,
         "y_offset": -8,
         "remapColour": "green"
+    },
+    {
+        "path": "track/slc/brake_horizontal.png",
+        "x_offset": -32,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/slc/brake_vertical.png",
+        "x_offset": 0,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/slc/blockbrake_vertical_open.png",
+        "x_offset": 0,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/multidim/upright_brake_horizontal.png",
+        "x_offset": 0,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/multidim/upright_brake_vertical.png",
+        "x_offset": 0,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/multidim/upright_blockbrake_horizontal_open.png",
+        "x_offset": -32,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/multidim/upright_blockbrake_horizontal_closed.png",
+        "x_offset": -32,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/multidim/upright_blockbrake_vertical_open.png",
+        "x_offset": 0,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/multidim/upright_blockbrake_vertical_closed.png",
+        "x_offset": 0,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/multidim/inverted_brake_horizontal.png",
+        "x_offset": 0,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/multidim/inverted_brake_vertical.png",
+        "x_offset": -32,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/multidim/inverted_blockbrake_horizontal.png",
+        "x_offset": -32,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/multidim/inverted_blockbrake_vertical_open.png",
+        "x_offset": 0,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/multidim/inverted_blockbrake_vertical_closed.png",
+        "x_offset": 0,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/steeplechase/brake_horizontal.png",
+        "x_offset": 0,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/steeplechase/brake_vertical.png",
+        "x_offset": -32,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/standup/brake_horizontal.png",
+        "x_offset": -32,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/standup/brake_vertical.png",
+        "x_offset": -13,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/standup/blockbrake_horizontal_open.png",
+        "x_offset": -32,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/standup/blockbrake_horizontal_closed.png",
+        "x_offset": -32,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/standup/blockbrake_vertical_open.png",
+        "x_offset": 0,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/standup/blockbrake_vertical_closed.png",
+        "x_offset": 0,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/minetrain/brake_horizontal.png",
+        "x_offset": -32,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/minetrain/brake_vertical.png",
+        "x_offset": -13,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/minetrain/blockbrake_horizontal_open.png",
+        "x_offset": -32,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/minetrain/blockbrake_horizontal_closed.png",
+        "x_offset": -32,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/minetrain/blockbrake_vertical_open.png",
+        "x_offset": 0,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/minetrain/blockbrake_vertical_closed.png",
+        "x_offset": 0,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/looping/brake_horizontal.png",
+        "x_offset": 0,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/looping/brake_vertical.png",
+        "x_offset": 0,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/limlaunched/brake_horizontal.png",
+        "x_offset": -32,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/limlaunched/brake_vertical.png",
+        "x_offset": 0,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/limlaunched/blockbrake_horizontal_closed.png",
+        "x_offset": -32,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/limlaunched/blockbrake_horizontal_open.png",
+        "x_offset": -32,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/limlaunched/blockbrake_vertical_open.png",
+        "x_offset": 0,
+        "y_offset": 0,
+        "remapColour": "green"
+    },
+    {
+        "path": "track/limlaunched/blockbrake_vertical_closed.png",
+        "x_offset": 0,
+        "y_offset": 0,
+        "remapColour": "green"
     }
 ]
