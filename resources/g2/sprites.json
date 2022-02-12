@@ -11992,14 +11992,14 @@
     },
     {
         "path": "track/looping/brake_horizontal.png",
-        "x_offset": 0,
+        "x_offset": -32,
         "y_offset": 0,
         "palette": "green"
     },
     {
         "path": "track/looping/brake_vertical.png",
-        "x_offset": 0,
-        "y_offset": 0,
+        "x_offset": -15,
+        "y_offset": -8,
         "palette": "green"
     },
     {
