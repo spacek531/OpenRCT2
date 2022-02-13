@@ -3526,9 +3526,12 @@ static void ride_create_vehicles_find_first_block(Ride* ride, CoordsXYE* outXYEl
             case TrackElemType::DiagUp25ToFlat:
             case TrackElemType::DiagUp60ToFlat:
                 if (!trackElement->HasChain())
+                {
                     break;
+                }
                 [[fallthrough]];
             case TrackElemType::DiagBlockBrakes:
+            {
                 TileElement* tileElement = map_get_track_element_at_of_type_seq(
                     { trackBeginEnd.begin_x, trackBeginEnd.begin_y, trackBeginEnd.begin_z }, trackType, 0);
 
@@ -3540,6 +3543,7 @@ static void ride_create_vehicles_find_first_block(Ride* ride, CoordsXYE* outXYEl
                     return;
                 }
                 break;
+            }
             case TrackElemType::EndStation:
             case TrackElemType::CableLiftHill:
             case TrackElemType::BlockBrakes:
