@@ -3000,20 +3000,25 @@ static void RideOpenBlockBrakes(CoordsXYE* startElement)
         switch (trackType)
         {
             case TrackElemType::BlockBrakes:
+                currentElement.element->AsTrack()->SetBrakeClosed(false);
                 blockBrakeSetLinkedBrakesClosed(
                     CoordsXYZ(currentElement.x, currentElement.y, currentElement.element->GetBaseZ()), currentElement.element,
                     false);
-                [[fallthrough]];
+                break;
             case TrackElemType::EndStation:
             case TrackElemType::Up25ToFlat:
             case TrackElemType::Up60ToFlat:
                 currentElement.element->AsTrack()->SetBrakeClosed(false);
                 break;
             case TrackElemType::DiagBlockBrakes:
+                GetTrackElementOriginAndApplyChanges(
+                    { currentElement.x, currentElement.y, currentElement.element->GetBaseZ(),
+                      currentElement.element->GetDirection() },
+                    trackType, 0, nullptr, TRACK_ELEMENT_SET_BRAKE_CLOSED_FALSE);
                 blockBrakeSetLinkedBrakesClosed(
                     CoordsXYZ(currentElement.x, currentElement.y, currentElement.element->GetBaseZ()), currentElement.element,
                     false);
-                [[fallthrough]];
+                break;
             case TrackElemType::DiagUp25ToFlat:
             case TrackElemType::DiagUp60ToFlat:
             case TrackElemType::CableLiftHill:
