@@ -22,23 +22,23 @@
 
 static constexpr const uint32_t CompactInvertedDiagBrakeImages[NumOrthogonalDirections] = {
     SPR_G2_SLC_DIAG_BRAKES,
-    SPR_G2_SLC_DIAG_BRAKES + 2,
+    SPR_G2_SLC_DIAG_BRAKES + 1,
     SPR_G2_SLC_DIAG_BRAKES,
-    SPR_G2_SLC_DIAG_BRAKES + 2,
+    SPR_G2_SLC_DIAG_BRAKES + 1,
 };
 
 static constexpr const uint32_t CompactInvertedDiagBlockBrakeImages[2][NumOrthogonalDirections] = {
     {
         SPR_G2_SLC_DIAG_BRAKES,
-        SPR_G2_SLC_DIAG_BRAKES + 2,
+        SPR_G2_SLC_DIAG_BRAKES + 1,
         SPR_G2_SLC_DIAG_BRAKES,
-        SPR_G2_SLC_DIAG_BRAKES + 2,
+        SPR_G2_SLC_DIAG_BRAKES + 1,
     },
     {
         SPR_G2_SLC_DIAG_BRAKES,
-        SPR_G2_SLC_DIAG_BRAKES + 1,
+        SPR_G2_SLC_DIAG_BRAKES + 2,
         SPR_G2_SLC_DIAG_BRAKES,
-        SPR_G2_SLC_DIAG_BRAKES + 1,
+        SPR_G2_SLC_DIAG_BRAKES + 2,
     },
 };
 
