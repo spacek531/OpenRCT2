@@ -577,6 +577,9 @@ bool track_type_is_station(track_type_t trackType);
 bool TrackIsBrakes(track_type_t trackType);
 bool TrackIsBlockBrakes(track_type_t trackType);
 
+std::optional<CoordsXYZ> GetTrackElementOriginAndApplyChanges(
+    const CoordsXYZD& location, track_type_t type, uint16_t extra_params, TileElement** output_element, uint16_t flags);
+
 roll_type_t track_get_actual_bank(TileElement* tileElement, roll_type_t bank);
 roll_type_t track_get_actual_bank_2(int32_t rideType, bool isInverted, roll_type_t bank);
 roll_type_t track_get_actual_bank_3(bool useInvertedSprites, TileElement* tileElement);

@@ -3106,7 +3106,7 @@ void blockBrakeSetLinkedBrakesClosed(const CoordsXYZ& vehicleTrackLocation, Tile
             {
                 continue;
             }
-
+            // TODO: maybe make a function that accepts the current sequence and finds the tile from that?
             GetTrackElementOriginAndApplyChanges(
                 { location, tileElement->GetDirection() }, trackElement->AsTrack()->GetTrackType(), 0, nullptr,
                 trackElement->AsTrack()->GetBrakeBoosterSpeed() >= blockBrake->GetBrakeBoosterSpeed() || isClosed
