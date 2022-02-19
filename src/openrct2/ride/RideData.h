@@ -344,6 +344,7 @@ struct RideTypeDescriptor
     bool SupportsTrackPiece(const uint64_t trackPiece) const;
     ResearchCategory GetResearchCategory() const;
     bool SupportsRideMode(RideMode rideMode) const;
+    uint8_t GetBoosterSpeed(uint8_t rawSpeed) const;
 };
 
 #ifdef _WIN32

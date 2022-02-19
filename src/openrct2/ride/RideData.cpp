@@ -413,3 +413,21 @@ void UpdateDisabledRidePieces(const RideTrackGroup& res)
 {
     _disabledRidePieces = res;
 }
+
+
+uint8_t RideTypeDescriptor::GetBoosterSpeed(uint8_t rawSpeed) const
+{
+    int8_t shiftFactor = OperatingSettings.BoosterSpeedFactor;
+    if (shiftFactor == 0)
+    {
+        return rawSpeed;
+    }
+    if (shiftFactor > 0)
+    {
+        return (rawSpeed << shiftFactor);
+    }
+
+    // Workaround for an issue with older compilers (GCC 6, Clang 4) which would fail the build
+    int8_t shiftFactorAbs = std::abs(shiftFactor);
+    return (rawSpeed >> shiftFactorAbs);
+}

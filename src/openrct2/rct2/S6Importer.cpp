@@ -1452,7 +1452,15 @@ namespace RCT2
                     }
                     else if (TrackTypeHasSpeedSetting(trackType))
                     {
-                        dst2->SetBrakeBoosterSpeed(src2->GetBrakeBoosterSpeed());
+                        auto brakeSpeed = src2->GetBrakeBoosterSpeed() * LEGACY_BRAKE_SPEED_MULTIPLIER;
+                        if (dst2->GetTrackType() != TrackElemType::Booster)
+                        {
+                            dst2->SetBrakeBoosterSpeed(brakeSpeed);
+                        }
+                        else
+                        {
+                            dst2->SetBrakeBoosterSpeed(GetBoosterSpeed(rideType, brakeSpeed));
+                        }
                     }
                     else if (trackType == TrackElemType::OnRidePhoto)
                     {
@@ -2072,7 +2080,17 @@ namespace RCT2
         dst->scream_sound_id = static_cast<OpenRCT2::Audio::SoundId>(src->ScreamSoundId);
         dst->TrackSubposition = VehicleTrackSubposition{ src->TrackSubposition };
         dst->NumLaps = src->NumLaps;
-        dst->brake_speed = src->BrakeSpeed;
+
+        if (dst->GetTrackType() == TrackElemType::Booster)
+        {
+            // TODO: why is brake speed multiplied by 2 here? Spacek 23/10/2023
+            dst->brake_speed = GetBoosterSpeed(dst->GetRide()->type, src->BrakeSpeed * 2);
+        }
+        else
+        {
+            dst->brake_speed = src->BrakeSpeed * 2;
+        }
+
         dst->lost_time_out = src->LostTimeOut;
         dst->vertical_drop_countdown = src->VerticalDropCountdown;
         dst->var_D3 = src->VarD3;

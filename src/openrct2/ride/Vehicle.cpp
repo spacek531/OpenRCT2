@@ -60,6 +60,8 @@ using namespace OpenRCT2::TrackMetaData;
 using namespace OpenRCT2::Math::Trigonometry;
 static bool vehicle_boat_is_location_accessible(const CoordsXYZ& location);
 
+constexpr uint8_t const BRAKE_SPEED_SHIFT_AMOUNT = 16;
+
 constexpr int16_t VEHICLE_MAX_SPIN_SPEED = 1536;
 constexpr int16_t VEHICLE_MIN_SPIN_SPEED = -VEHICLE_MAX_SPIN_SPEED;
 constexpr int16_t VEHICLE_MAX_SPIN_SPEED_FOR_STOPPING = 700;
@@ -7665,7 +7667,7 @@ Loc6DAEB9:
         {
             auto brakeSpeed = ChooseBrakeSpeed();
 
-            if ((brakeSpeed << 16) < _vehicleVelocityF64E08)
+            if ((brakeSpeed << BRAKE_SPEED_SHIFT_AMOUNT) < _vehicleVelocityF64E08)
             {
                 acceleration = -_vehicleVelocityF64E08 * 16;
             }
@@ -7681,7 +7683,7 @@ Loc6DAEB9:
     }
     else if (trackType == TrackElemType::Booster)
     {
-        auto boosterSpeed = GetBoosterSpeed(curRide.type, (brake_speed << 16));
+        auto boosterSpeed = GetBoosterSpeed(curRide.type, (brake_speed << BRAKE_SPEED_SHIFT_AMOUNT));
         if (boosterSpeed > _vehicleVelocityF64E08)
         {
             acceleration = GetRideTypeDescriptor(curRide.type).OperatingSettings.BoosterAcceleration
@@ -8055,7 +8057,7 @@ bool Vehicle::UpdateTrackMotionBackwards(const CarEntry* carEntry, const Ride& c
         {
             auto brakeSpeed = ChooseBrakeSpeed();
 
-            if (-(brakeSpeed << 16) > _vehicleVelocityF64E08)
+            if (-(brakeSpeed << BRAKE_SPEED_SHIFT_AMOUNT) > _vehicleVelocityF64E08)
             {
                 acceleration = _vehicleVelocityF64E08 * -16;
             }
@@ -8063,7 +8065,7 @@ bool Vehicle::UpdateTrackMotionBackwards(const CarEntry* carEntry, const Ride& c
 
         if (trackType == TrackElemType::Booster)
         {
-            auto boosterSpeed = GetBoosterSpeed(curRide.type, (brake_speed << 16));
+            auto boosterSpeed = GetBoosterSpeed(curRide.type, (brake_speed << BRAKE_SPEED_SHIFT_AMOUNT));
             if (boosterSpeed < _vehicleVelocityF64E08)
             {
                 acceleration = GetRideTypeDescriptor(curRide.type).OperatingSettings.BoosterAcceleration << 16;

@@ -211,6 +211,7 @@ struct Vehicle : EntityBase
     uint8_t target_seat_rotation;
     CoordsXY BoatLocation;
     uint8_t BlockBrakeSpeed;
+    uint8_t BoosterAcceleration;
 
     constexpr bool IsHead() const
     {
@@ -447,10 +448,11 @@ namespace VehicleFlags
     constexpr uint32_t ReverseInclineCompletedLap = (1 << 12); // Set when the vehicle travels backwards through the station for
                                                                // the first time
     constexpr uint32_t SpinningIsLocked = (1 << 13);           // After passing a rotation toggle track piece this will enable
-    constexpr uint32_t MoveSingleCar = (1 << 14); // OpenRCT2 Flag: Used to override UpdateMotion to move the position of
-                                                  // an individual car on a train
-    constexpr uint32_t Crashed = (1 << 15);       // Car displays as smoke plume
-    constexpr uint32_t CarIsReversed = (1 << 16); // Car is displayed running backwards
+    constexpr uint32_t MoveSingleCar = (1 << 14);      // OpenRCT2 Flag: Used to override UpdateMotion to move the position of
+                                                       // an individual car on a train
+    constexpr uint32_t Crashed = (1 << 15);            // Car displays as smoke plume
+    constexpr uint32_t CarIsReversed = (1 << 16);      // Car is displayed running backwards
+    constexpr uint32_t LegacyBoosterSpeed = (1 << 17); // Car uses its own ride to determine booster speed and acceleration
 } // namespace VehicleFlags
 
 enum

@@ -65,6 +65,7 @@
 #include <vector>
 
 constexpr uint32_t BlockBrakeImprovementsVersion = 27;
+constexpr uint32_t UnifyBoosterSpeedVersion = 33;
 
 using namespace OpenRCT2;
 
@@ -1167,6 +1168,44 @@ namespace OpenRCT2
             }
         }
 
+        void UpdateTrackBrakeSpeed()
+        {
+            for (int32_t y = 0; y < MAXIMUM_MAP_SIZE_TECHNICAL; y++)
+            {
+                for (int32_t x = 0; x < MAXIMUM_MAP_SIZE_TECHNICAL; x++)
+                {
+                    TileElement* tileElement = MapGetFirstElementAt(TileCoordsXY{ x, y });
+                    if (tileElement == nullptr)
+                        continue;
+                    do
+                    {
+                        if (tileElement->GetType() != TileElementType::Track)
+                            continue;
+
+                        auto* trackElement = tileElement->AsTrack();
+
+                        if (!TrackTypeHasSpeedSetting(trackElement->GetTrackType()))
+                            continue;
+
+                        auto brakeSpeed = trackElement->GetBrakeBoosterSpeed() * LEGACY_BRAKE_SPEED_MULTIPLIER;
+
+                        if (trackElement->GetTrackType() != TrackElemType::Booster)
+                        {
+                            trackElement->SetBrakeBoosterSpeed(brakeSpeed);
+                        }
+                        else
+                        {
+                            const auto* ride = GetRide(trackElement->GetRideIndex());
+                            if (ride != nullptr)
+                            {
+                                trackElement->SetBrakeBoosterSpeed(GetBoosterSpeed(ride->type, brakeSpeed));
+                            }
+                        }
+                    } while (!(tileElement++)->IsLastForTile());
+                }
+            }
+        }
+
         void ReadWriteBannersChunk(OrcaStream& os)
         {
             os.ReadWriteChunk(ParkFileChunkType::BANNERS, [&os](OrcaStream::ChunkStream& cs) {
@@ -2103,7 +2142,24 @@ namespace OpenRCT2
             cs.ReadWrite(brakeSpeed);
             if (entity.GetTrackType() == TrackElemType::BlockBrakes)
                 brakeSpeed = kRCT2DefaultBlockBrakeSpeed;
-            entity.brake_speed = brakeSpeed;
+            else
+                entity.brake_speed = brakeSpeed * LEGACY_BRAKE_SPEED_MULTIPLIER;
+        }
+        else if (cs.GetMode() == OrcaStream::Mode::READING && os.GetHeader().TargetVersion < UnifyBoosterSpeedVersion)
+        {
+            uint8_t brakeSpeed;
+            cs.ReadWrite(brakeSpeed);
+            auto ride = entity.GetRide();
+            if (ride != nullptr && entity.GetTrackType() == TrackElemType::Booster)
+            {
+                entity.brake_speed = GetBoosterSpeed(ride->type, brakeSpeed * LEGACY_BRAKE_SPEED_MULTIPLIER);
+                
+            }
+            else
+            {
+                entity.brake_speed = brakeSpeed * LEGACY_BRAKE_SPEED_MULTIPLIER;
+                entity.BoosterAcceleration = 0;
+            }
         }
         else
         {
@@ -2135,382 +2191,392 @@ namespace OpenRCT2
         {
             cs.ReadWrite(entity.BlockBrakeSpeed);
         }
+
+        if (cs.GetMode() == OrcaStream::Mode::READING && os.GetHeader().TargetVersion < UnifyBoosterSpeedVersion)
+        {
+            entity.SetFlag(VehicleFlags::LegacyBoosterSpeed);
+        }
+        else
+        {
+            cs.ReadWrite(entity.BoosterAcceleration);
+        }
+    }
+}
+
+template<> void ParkFile::ReadWriteEntity(OrcaStream& os, OrcaStream::ChunkStream& cs, Guest& guest)
+{
+    ReadWritePeep(os, cs, guest);
+    auto version = os.GetHeader().TargetVersion;
+
+    if (version <= 1)
+    {
+        return;
     }
 
-    template<> void ParkFile::ReadWriteEntity(OrcaStream& os, OrcaStream::ChunkStream& cs, Guest& guest)
+    cs.ReadWrite(guest.GuestNumRides);
+    cs.ReadWrite(guest.GuestNextInQueue);
+    cs.ReadWrite(guest.ParkEntryTime);
+    cs.ReadWrite(guest.GuestHeadingToRideId);
+    cs.ReadWrite(guest.GuestIsLostCountdown);
+    cs.ReadWrite(guest.GuestTimeOnRide);
+
+    if (version <= 18)
     {
-        ReadWritePeep(os, cs, guest);
-        auto version = os.GetHeader().TargetVersion;
+        money16 expenditures[5]{};
+        cs.ReadWrite(expenditures[0]);
+        cs.ReadWrite(expenditures[1]);
+        cs.ReadWrite(expenditures[2]);
+        cs.ReadWrite(expenditures[3]);
+        cs.ReadWrite(expenditures[4]);
+        guest.PaidToEnter = ToMoney64(expenditures[0]);
+        guest.PaidOnRides = ToMoney64(expenditures[1]);
+        guest.PaidOnFood = ToMoney64(expenditures[2]);
+        guest.PaidOnDrink = ToMoney64(expenditures[3]);
+        guest.PaidOnSouvenirs = ToMoney64(expenditures[4]);
+    }
+    else
+    {
+        cs.ReadWrite(guest.PaidToEnter);
+        cs.ReadWrite(guest.PaidOnRides);
+        cs.ReadWrite(guest.PaidOnFood);
+        cs.ReadWrite(guest.PaidOnDrink);
+        cs.ReadWrite(guest.PaidOnSouvenirs);
+    }
 
-        if (version <= 1)
-        {
-            return;
-        }
+    cs.ReadWrite(guest.OutsideOfPark);
+    cs.ReadWrite(guest.Happiness);
+    cs.ReadWrite(guest.HappinessTarget);
+    cs.ReadWrite(guest.Nausea);
+    cs.ReadWrite(guest.NauseaTarget);
+    cs.ReadWrite(guest.Hunger);
+    cs.ReadWrite(guest.Thirst);
+    cs.ReadWrite(guest.Toilet);
+    cs.ReadWrite(guest.TimeToConsume);
+    if (cs.GetMode() == OrcaStream::Mode::READING)
+    {
+        guest.Intensity = IntensityRange(cs.Read<uint8_t>());
+    }
+    else
+    {
+        cs.Write(static_cast<uint8_t>(guest.Intensity));
+    }
+    cs.ReadWrite(guest.NauseaTolerance);
 
-        cs.ReadWrite(guest.GuestNumRides);
-        cs.ReadWrite(guest.GuestNextInQueue);
-        cs.ReadWrite(guest.ParkEntryTime);
-        cs.ReadWrite(guest.GuestHeadingToRideId);
-        cs.ReadWrite(guest.GuestIsLostCountdown);
-        cs.ReadWrite(guest.GuestTimeOnRide);
-
-        if (version <= 18)
-        {
-            money16 expenditures[5]{};
-            cs.ReadWrite(expenditures[0]);
-            cs.ReadWrite(expenditures[1]);
-            cs.ReadWrite(expenditures[2]);
-            cs.ReadWrite(expenditures[3]);
-            cs.ReadWrite(expenditures[4]);
-            guest.PaidToEnter = ToMoney64(expenditures[0]);
-            guest.PaidOnRides = ToMoney64(expenditures[1]);
-            guest.PaidOnFood = ToMoney64(expenditures[2]);
-            guest.PaidOnDrink = ToMoney64(expenditures[3]);
-            guest.PaidOnSouvenirs = ToMoney64(expenditures[4]);
-        }
-        else
-        {
-            cs.ReadWrite(guest.PaidToEnter);
-            cs.ReadWrite(guest.PaidOnRides);
-            cs.ReadWrite(guest.PaidOnFood);
-            cs.ReadWrite(guest.PaidOnDrink);
-            cs.ReadWrite(guest.PaidOnSouvenirs);
-        }
-
-        cs.ReadWrite(guest.OutsideOfPark);
-        cs.ReadWrite(guest.Happiness);
-        cs.ReadWrite(guest.HappinessTarget);
-        cs.ReadWrite(guest.Nausea);
-        cs.ReadWrite(guest.NauseaTarget);
-        cs.ReadWrite(guest.Hunger);
-        cs.ReadWrite(guest.Thirst);
-        cs.ReadWrite(guest.Toilet);
-        cs.ReadWrite(guest.TimeToConsume);
-        if (cs.GetMode() == OrcaStream::Mode::READING)
-        {
-            guest.Intensity = IntensityRange(cs.Read<uint8_t>());
-        }
-        else
-        {
-            cs.Write(static_cast<uint8_t>(guest.Intensity));
-        }
-        cs.ReadWrite(guest.NauseaTolerance);
-
-        if (os.GetHeader().TargetVersion < 3)
-        {
-            std::array<uint8_t, 16> rideTypeBeenOn;
-            cs.ReadWriteArray(rideTypeBeenOn, [&cs](uint8_t& rideType) {
-                cs.ReadWrite(rideType);
-                return true;
-            });
-            OpenRCT2::RideUse::GetTypeHistory().Set(guest.Id, LegacyGetRideTypesBeenOn(rideTypeBeenOn));
-        }
-
-        cs.ReadWrite(guest.TimeInQueue);
-        if (os.GetHeader().TargetVersion < 3)
-        {
-            std::array<uint8_t, 32> ridesBeenOn;
-            cs.ReadWriteArray(ridesBeenOn, [&cs](uint8_t& rideType) {
-                cs.ReadWrite(rideType);
-                return true;
-            });
-            OpenRCT2::RideUse::GetHistory().Set(guest.Id, LegacyGetRidesBeenOn(ridesBeenOn));
-        }
-        else
-        {
-            if (cs.GetMode() == OrcaStream::Mode::READING)
-            {
-                std::vector<RideId> rideUse;
-                cs.ReadWriteVector(rideUse, [&cs](RideId& rideId) { cs.ReadWrite(rideId); });
-                OpenRCT2::RideUse::GetHistory().Set(guest.Id, std::move(rideUse));
-                std::vector<ObjectEntryIndex> rideTypeUse;
-                cs.ReadWriteVector(rideTypeUse, [&cs](ObjectEntryIndex& rideType) { cs.ReadWrite(rideType); });
-                OpenRCT2::RideUse::GetTypeHistory().Set(guest.Id, std::move(rideTypeUse));
-            }
-            else
-            {
-                auto* rideUse = OpenRCT2::RideUse::GetHistory().GetAll(guest.Id);
-                if (rideUse == nullptr)
-                {
-                    std::vector<RideId> empty;
-                    cs.ReadWriteVector(empty, [&cs](RideId& rideId) { cs.ReadWrite(rideId); });
-                }
-                else
-                {
-                    cs.ReadWriteVector(*rideUse, [&cs](RideId& rideId) { cs.ReadWrite(rideId); });
-                }
-                auto* rideTypeUse = OpenRCT2::RideUse::GetTypeHistory().GetAll(guest.Id);
-                if (rideTypeUse == nullptr)
-                {
-                    std::vector<ObjectEntryIndex> empty;
-                    cs.ReadWriteVector(empty, [&cs](ObjectEntryIndex& rideId) { cs.ReadWrite(rideId); });
-                }
-                else
-                {
-                    cs.ReadWriteVector(*rideTypeUse, [&cs](ObjectEntryIndex& rideId) { cs.ReadWrite(rideId); });
-                }
-            }
-        }
-        if (version <= 18)
-        {
-            money32 tempCashInPocket{};
-            money32 tempCashSpent{};
-            cs.ReadWrite(tempCashInPocket);
-            cs.ReadWrite(tempCashSpent);
-            guest.CashInPocket = ToMoney64(tempCashInPocket);
-            guest.CashSpent = ToMoney64(tempCashSpent);
-        }
-        else
-        {
-            cs.ReadWrite(guest.CashInPocket);
-            cs.ReadWrite(guest.CashSpent);
-        }
-
-        cs.ReadWrite(guest.Photo1RideRef);
-        cs.ReadWrite(guest.Photo2RideRef);
-        cs.ReadWrite(guest.Photo3RideRef);
-        cs.ReadWrite(guest.Photo4RideRef);
-        cs.ReadWrite(guest.RejoinQueueTimeout);
-        cs.ReadWrite(guest.PreviousRide);
-        cs.ReadWrite(guest.PreviousRideTimeOut);
-        cs.ReadWriteArray(guest.Thoughts, [version = os.GetHeader().TargetVersion, &cs](PeepThought& thought) {
-            cs.ReadWrite(thought.type);
-            if (version <= 2)
-            {
-                int16_t item{};
-                cs.ReadWrite(item);
-                thought.item = item;
-            }
-            else
-            {
-                cs.ReadWrite(thought.item);
-            }
-            cs.ReadWrite(thought.freshness);
-            cs.ReadWrite(thought.fresh_timeout);
+    if (os.GetHeader().TargetVersion < 3)
+    {
+        std::array<uint8_t, 16> rideTypeBeenOn;
+        cs.ReadWriteArray(rideTypeBeenOn, [&cs](uint8_t& rideType) {
+            cs.ReadWrite(rideType);
             return true;
         });
-        cs.ReadWrite(guest.LitterCount);
-        cs.ReadWrite(guest.DisgustingCount);
-        cs.ReadWrite(guest.AmountOfFood);
-        cs.ReadWrite(guest.AmountOfDrinks);
-        cs.ReadWrite(guest.AmountOfSouvenirs);
-        cs.ReadWrite(guest.VandalismSeen);
-        cs.ReadWrite(guest.VoucherType);
-        cs.ReadWrite(guest.VoucherRideId);
-        cs.ReadWrite(guest.SurroundingsThoughtTimeout);
-        cs.ReadWrite(guest.Angriness);
-        cs.ReadWrite(guest.TimeLost);
-        cs.ReadWrite(guest.DaysInQueue);
-        cs.ReadWrite(guest.BalloonColour);
-        cs.ReadWrite(guest.UmbrellaColour);
-        cs.ReadWrite(guest.HatColour);
-        cs.ReadWrite(guest.FavouriteRide);
-        cs.ReadWrite(guest.FavouriteRideRating);
-        cs.ReadWrite(guest.ItemFlags);
+        OpenRCT2::RideUse::GetTypeHistory().Set(guest.Id, LegacyGetRideTypesBeenOn(rideTypeBeenOn));
     }
 
-    template<> void ParkFile::ReadWriteEntity(OrcaStream& os, OrcaStream::ChunkStream& cs, Staff& entity)
+    cs.ReadWrite(guest.TimeInQueue);
+    if (os.GetHeader().TargetVersion < 3)
     {
-        ReadWritePeep(os, cs, entity);
-
-        std::vector<TileCoordsXY> patrolArea;
-        if (cs.GetMode() == OrcaStream::Mode::WRITING && entity.PatrolInfo != nullptr)
-        {
-            patrolArea = entity.PatrolInfo->ToVector();
-        }
-        cs.ReadWriteVector(patrolArea, [&cs](TileCoordsXY& value) { cs.ReadWrite(value); });
+        std::array<uint8_t, 32> ridesBeenOn;
+        cs.ReadWriteArray(ridesBeenOn, [&cs](uint8_t& rideType) {
+            cs.ReadWrite(rideType);
+            return true;
+        });
+        OpenRCT2::RideUse::GetHistory().Set(guest.Id, LegacyGetRidesBeenOn(ridesBeenOn));
+    }
+    else
+    {
         if (cs.GetMode() == OrcaStream::Mode::READING)
         {
-            if (patrolArea.empty())
+            std::vector<RideId> rideUse;
+            cs.ReadWriteVector(rideUse, [&cs](RideId& rideId) { cs.ReadWrite(rideId); });
+            OpenRCT2::RideUse::GetHistory().Set(guest.Id, std::move(rideUse));
+            std::vector<ObjectEntryIndex> rideTypeUse;
+            cs.ReadWriteVector(rideTypeUse, [&cs](ObjectEntryIndex& rideType) { cs.ReadWrite(rideType); });
+            OpenRCT2::RideUse::GetTypeHistory().Set(guest.Id, std::move(rideTypeUse));
+        }
+        else
+        {
+            auto* rideUse = OpenRCT2::RideUse::GetHistory().GetAll(guest.Id);
+            if (rideUse == nullptr)
             {
-                entity.ClearPatrolArea();
+                std::vector<RideId> empty;
+                cs.ReadWriteVector(empty, [&cs](RideId& rideId) { cs.ReadWrite(rideId); });
             }
             else
             {
-                if (entity.PatrolInfo == nullptr)
-                    entity.PatrolInfo = new PatrolArea();
-                else
-                    entity.PatrolInfo->Clear();
-                entity.PatrolInfo->Union(patrolArea);
+                cs.ReadWriteVector(*rideUse, [&cs](RideId& rideId) { cs.ReadWrite(rideId); });
             }
-        }
-
-        if (os.GetHeader().TargetVersion <= 1)
-        {
-            return;
-        }
-
-        cs.ReadWrite(entity.AssignedStaffType);
-        cs.ReadWrite(entity.MechanicTimeSinceCall);
-        cs.ReadWrite(entity.HireDate);
-        if (os.GetHeader().TargetVersion <= 4)
-        {
-            cs.Ignore<uint8_t>();
-        }
-        cs.ReadWrite(entity.StaffOrders);
-        cs.ReadWrite(entity.StaffMowingTimeout);
-        cs.ReadWrite(entity.StaffLawnsMown);
-        cs.ReadWrite(entity.StaffGardensWatered);
-        cs.ReadWrite(entity.StaffLitterSwept);
-        cs.ReadWrite(entity.StaffBinsEmptied);
-    }
-
-    template<> void ParkFile::ReadWriteEntity(OrcaStream& os, OrcaStream::ChunkStream& cs, SteamParticle& steamParticle)
-    {
-        ReadWriteEntityCommon(cs, steamParticle);
-        cs.ReadWrite(steamParticle.time_to_move);
-        cs.ReadWrite(steamParticle.frame);
-    }
-
-    template<> void ParkFile::ReadWriteEntity(OrcaStream& os, OrcaStream::ChunkStream& cs, MoneyEffect& moneyEffect)
-    {
-        ReadWriteEntityCommon(cs, moneyEffect);
-        cs.ReadWrite(moneyEffect.MoveDelay);
-        cs.ReadWrite(moneyEffect.NumMovements);
-        cs.ReadWrite(moneyEffect.GuestPurchase);
-        cs.ReadWrite(moneyEffect.Value);
-        cs.ReadWrite(moneyEffect.OffsetX);
-        cs.ReadWrite(moneyEffect.Wiggle);
-    }
-
-    template<>
-    void ParkFile::ReadWriteEntity(OrcaStream& os, OrcaStream::ChunkStream& cs, VehicleCrashParticle& vehicleCrashParticle)
-    {
-        ReadWriteEntityCommon(cs, vehicleCrashParticle);
-        cs.ReadWrite(vehicleCrashParticle.frame);
-        cs.ReadWrite(vehicleCrashParticle.time_to_live);
-        cs.ReadWrite(vehicleCrashParticle.frame);
-        cs.ReadWrite(vehicleCrashParticle.colour[0]);
-        cs.ReadWrite(vehicleCrashParticle.colour[1]);
-        cs.ReadWrite(vehicleCrashParticle.crashed_sprite_base);
-        cs.ReadWrite(vehicleCrashParticle.velocity_x);
-        cs.ReadWrite(vehicleCrashParticle.velocity_y);
-        cs.ReadWrite(vehicleCrashParticle.velocity_z);
-        cs.ReadWrite(vehicleCrashParticle.acceleration_x);
-        cs.ReadWrite(vehicleCrashParticle.acceleration_y);
-        cs.ReadWrite(vehicleCrashParticle.acceleration_z);
-    }
-
-    template<> void ParkFile::ReadWriteEntity(OrcaStream& os, OrcaStream::ChunkStream& cs, ExplosionCloud& entity)
-    {
-        ReadWriteEntityCommon(cs, entity);
-        cs.ReadWrite(entity.frame);
-    }
-
-    template<> void ParkFile::ReadWriteEntity(OrcaStream& os, OrcaStream::ChunkStream& cs, CrashSplashParticle& entity)
-    {
-        ReadWriteEntityCommon(cs, entity);
-        cs.ReadWrite(entity.frame);
-    }
-
-    template<> void ParkFile::ReadWriteEntity(OrcaStream& os, OrcaStream::ChunkStream& cs, ExplosionFlare& entity)
-    {
-        ReadWriteEntityCommon(cs, entity);
-        cs.ReadWrite(entity.frame);
-    }
-
-    template<> void ParkFile::ReadWriteEntity(OrcaStream& os, OrcaStream::ChunkStream& cs, JumpingFountain& fountain)
-    {
-        ReadWriteEntityCommon(cs, fountain);
-        cs.ReadWrite(fountain.NumTicksAlive);
-        cs.ReadWrite(fountain.frame);
-        cs.ReadWrite(fountain.FountainFlags);
-        cs.ReadWrite(fountain.TargetX);
-        cs.ReadWrite(fountain.TargetY);
-        cs.ReadWrite(fountain.TargetY);
-        cs.ReadWrite(fountain.Iteration);
-    }
-
-    template<> void ParkFile::ReadWriteEntity(OrcaStream& os, OrcaStream::ChunkStream& cs, Balloon& balloon)
-    {
-        ReadWriteEntityCommon(cs, balloon);
-        cs.ReadWrite(balloon.popped);
-        cs.ReadWrite(balloon.time_to_move);
-        cs.ReadWrite(balloon.frame);
-        cs.ReadWrite(balloon.colour);
-    }
-
-    template<> void ParkFile::ReadWriteEntity(OrcaStream& os, OrcaStream::ChunkStream& cs, Duck& duck)
-    {
-        ReadWriteEntityCommon(cs, duck);
-        cs.ReadWrite(duck.frame);
-        cs.ReadWrite(duck.target_x);
-        cs.ReadWrite(duck.target_y);
-        cs.ReadWrite(duck.state);
-    }
-
-    template<> void ParkFile::ReadWriteEntity(OrcaStream& os, OrcaStream::ChunkStream& cs, Litter& entity)
-    {
-        ReadWriteEntityCommon(cs, entity);
-        cs.ReadWrite(entity.SubType);
-        cs.ReadWrite(entity.creationTick);
-    }
-
-    template<typename T> void ParkFile::WriteEntitiesOfType(OrcaStream& os, OrcaStream::ChunkStream& cs)
-    {
-        uint16_t count = GetEntityListCount(T::cEntityType);
-        cs.Write(T::cEntityType);
-        cs.Write(count);
-        for (auto* ent : EntityList<T>())
-        {
-            cs.Write(ent->Id);
-            ReadWriteEntity(os, cs, *ent);
-        }
-    }
-
-    template<typename... T> void ParkFile::WriteEntitiesOfTypes(OrcaStream& os, OrcaStream::ChunkStream& cs)
-    {
-        (WriteEntitiesOfType<T>(os, cs), ...);
-    }
-
-    template<typename T> void ParkFile::ReadEntitiesOfType(OrcaStream& os, OrcaStream::ChunkStream& cs)
-    {
-        [[maybe_unused]] auto t = cs.Read<EntityType>();
-        assert(t == T::cEntityType);
-        auto count = cs.Read<uint16_t>();
-        for (auto i = 0; i < count; ++i)
-        {
-            T placeholder{};
-
-            auto index = cs.Read<EntityId>();
-            auto* ent = CreateEntityAt<T>(index);
-            if (ent == nullptr)
+            auto* rideTypeUse = OpenRCT2::RideUse::GetTypeHistory().GetAll(guest.Id);
+            if (rideTypeUse == nullptr)
             {
-                // Unable to allocate entity
-                ent = &placeholder;
-            }
-            ReadWriteEntity(os, cs, *ent);
-        }
-    }
-
-    template<typename... T> void ParkFile::ReadEntitiesOfTypes(OrcaStream& os, OrcaStream::ChunkStream& cs)
-    {
-        (ReadEntitiesOfType<T>(os, cs), ...);
-    }
-
-    void ParkFile::ReadWriteEntitiesChunk(OrcaStream& os)
-    {
-        os.ReadWriteChunk(ParkFileChunkType::ENTITIES, [this, &os](OrcaStream::ChunkStream& cs) {
-            if (cs.GetMode() == OrcaStream::Mode::READING)
-            {
-                ResetAllEntities();
-            }
-
-            std::vector<uint16_t> entityIndices;
-            if (cs.GetMode() == OrcaStream::Mode::READING)
-            {
-                ReadEntitiesOfTypes<
-                    Vehicle, Guest, Staff, Litter, SteamParticle, MoneyEffect, VehicleCrashParticle, ExplosionCloud,
-                    CrashSplashParticle, ExplosionFlare, JumpingFountain, Balloon, Duck>(os, cs);
+                std::vector<ObjectEntryIndex> empty;
+                cs.ReadWriteVector(empty, [&cs](ObjectEntryIndex& rideId) { cs.ReadWrite(rideId); });
             }
             else
             {
-                WriteEntitiesOfTypes<
-                    Vehicle, Guest, Staff, Litter, SteamParticle, MoneyEffect, VehicleCrashParticle, ExplosionCloud,
-                    CrashSplashParticle, ExplosionFlare, JumpingFountain, Balloon, Duck>(os, cs);
+                cs.ReadWriteVector(*rideTypeUse, [&cs](ObjectEntryIndex& rideId) { cs.ReadWrite(rideId); });
             }
-        });
+        }
     }
+    if (version <= 18)
+    {
+        money32 tempCashInPocket{};
+        money32 tempCashSpent{};
+        cs.ReadWrite(tempCashInPocket);
+        cs.ReadWrite(tempCashSpent);
+        guest.CashInPocket = ToMoney64(tempCashInPocket);
+        guest.CashSpent = ToMoney64(tempCashSpent);
+    }
+    else
+    {
+        cs.ReadWrite(guest.CashInPocket);
+        cs.ReadWrite(guest.CashSpent);
+    }
+
+    cs.ReadWrite(guest.Photo1RideRef);
+    cs.ReadWrite(guest.Photo2RideRef);
+    cs.ReadWrite(guest.Photo3RideRef);
+    cs.ReadWrite(guest.Photo4RideRef);
+    cs.ReadWrite(guest.RejoinQueueTimeout);
+    cs.ReadWrite(guest.PreviousRide);
+    cs.ReadWrite(guest.PreviousRideTimeOut);
+    cs.ReadWriteArray(guest.Thoughts, [version = os.GetHeader().TargetVersion, &cs](PeepThought& thought) {
+        cs.ReadWrite(thought.type);
+        if (version <= 2)
+        {
+            int16_t item{};
+            cs.ReadWrite(item);
+            thought.item = item;
+        }
+        else
+        {
+            cs.ReadWrite(thought.item);
+        }
+        cs.ReadWrite(thought.freshness);
+        cs.ReadWrite(thought.fresh_timeout);
+        return true;
+    });
+    cs.ReadWrite(guest.LitterCount);
+    cs.ReadWrite(guest.DisgustingCount);
+    cs.ReadWrite(guest.AmountOfFood);
+    cs.ReadWrite(guest.AmountOfDrinks);
+    cs.ReadWrite(guest.AmountOfSouvenirs);
+    cs.ReadWrite(guest.VandalismSeen);
+    cs.ReadWrite(guest.VoucherType);
+    cs.ReadWrite(guest.VoucherRideId);
+    cs.ReadWrite(guest.SurroundingsThoughtTimeout);
+    cs.ReadWrite(guest.Angriness);
+    cs.ReadWrite(guest.TimeLost);
+    cs.ReadWrite(guest.DaysInQueue);
+    cs.ReadWrite(guest.BalloonColour);
+    cs.ReadWrite(guest.UmbrellaColour);
+    cs.ReadWrite(guest.HatColour);
+    cs.ReadWrite(guest.FavouriteRide);
+    cs.ReadWrite(guest.FavouriteRideRating);
+    cs.ReadWrite(guest.ItemFlags);
+}
+
+template<> void ParkFile::ReadWriteEntity(OrcaStream& os, OrcaStream::ChunkStream& cs, Staff& entity)
+{
+    ReadWritePeep(os, cs, entity);
+
+    std::vector<TileCoordsXY> patrolArea;
+    if (cs.GetMode() == OrcaStream::Mode::WRITING && entity.PatrolInfo != nullptr)
+    {
+        patrolArea = entity.PatrolInfo->ToVector();
+    }
+    cs.ReadWriteVector(patrolArea, [&cs](TileCoordsXY& value) { cs.ReadWrite(value); });
+    if (cs.GetMode() == OrcaStream::Mode::READING)
+    {
+        if (patrolArea.empty())
+        {
+            entity.ClearPatrolArea();
+        }
+        else
+        {
+            if (entity.PatrolInfo == nullptr)
+                entity.PatrolInfo = new PatrolArea();
+            else
+                entity.PatrolInfo->Clear();
+            entity.PatrolInfo->Union(patrolArea);
+        }
+    }
+
+    if (os.GetHeader().TargetVersion <= 1)
+    {
+        return;
+    }
+
+    cs.ReadWrite(entity.AssignedStaffType);
+    cs.ReadWrite(entity.MechanicTimeSinceCall);
+    cs.ReadWrite(entity.HireDate);
+    if (os.GetHeader().TargetVersion <= 4)
+    {
+        cs.Ignore<uint8_t>();
+    }
+    cs.ReadWrite(entity.StaffOrders);
+    cs.ReadWrite(entity.StaffMowingTimeout);
+    cs.ReadWrite(entity.StaffLawnsMown);
+    cs.ReadWrite(entity.StaffGardensWatered);
+    cs.ReadWrite(entity.StaffLitterSwept);
+    cs.ReadWrite(entity.StaffBinsEmptied);
+}
+
+template<> void ParkFile::ReadWriteEntity(OrcaStream& os, OrcaStream::ChunkStream& cs, SteamParticle& steamParticle)
+{
+    ReadWriteEntityCommon(cs, steamParticle);
+    cs.ReadWrite(steamParticle.time_to_move);
+    cs.ReadWrite(steamParticle.frame);
+}
+
+template<> void ParkFile::ReadWriteEntity(OrcaStream& os, OrcaStream::ChunkStream& cs, MoneyEffect& moneyEffect)
+{
+    ReadWriteEntityCommon(cs, moneyEffect);
+    cs.ReadWrite(moneyEffect.MoveDelay);
+    cs.ReadWrite(moneyEffect.NumMovements);
+    cs.ReadWrite(moneyEffect.GuestPurchase);
+    cs.ReadWrite(moneyEffect.Value);
+    cs.ReadWrite(moneyEffect.OffsetX);
+    cs.ReadWrite(moneyEffect.Wiggle);
+}
+
+template<>
+void ParkFile::ReadWriteEntity(OrcaStream& os, OrcaStream::ChunkStream& cs, VehicleCrashParticle& vehicleCrashParticle)
+{
+    ReadWriteEntityCommon(cs, vehicleCrashParticle);
+    cs.ReadWrite(vehicleCrashParticle.frame);
+    cs.ReadWrite(vehicleCrashParticle.time_to_live);
+    cs.ReadWrite(vehicleCrashParticle.frame);
+    cs.ReadWrite(vehicleCrashParticle.colour[0]);
+    cs.ReadWrite(vehicleCrashParticle.colour[1]);
+    cs.ReadWrite(vehicleCrashParticle.crashed_sprite_base);
+    cs.ReadWrite(vehicleCrashParticle.velocity_x);
+    cs.ReadWrite(vehicleCrashParticle.velocity_y);
+    cs.ReadWrite(vehicleCrashParticle.velocity_z);
+    cs.ReadWrite(vehicleCrashParticle.acceleration_x);
+    cs.ReadWrite(vehicleCrashParticle.acceleration_y);
+    cs.ReadWrite(vehicleCrashParticle.acceleration_z);
+}
+
+template<> void ParkFile::ReadWriteEntity(OrcaStream& os, OrcaStream::ChunkStream& cs, ExplosionCloud& entity)
+{
+    ReadWriteEntityCommon(cs, entity);
+    cs.ReadWrite(entity.frame);
+}
+
+template<> void ParkFile::ReadWriteEntity(OrcaStream& os, OrcaStream::ChunkStream& cs, CrashSplashParticle& entity)
+{
+    ReadWriteEntityCommon(cs, entity);
+    cs.ReadWrite(entity.frame);
+}
+
+template<> void ParkFile::ReadWriteEntity(OrcaStream& os, OrcaStream::ChunkStream& cs, ExplosionFlare& entity)
+{
+    ReadWriteEntityCommon(cs, entity);
+    cs.ReadWrite(entity.frame);
+}
+
+template<> void ParkFile::ReadWriteEntity(OrcaStream& os, OrcaStream::ChunkStream& cs, JumpingFountain& fountain)
+{
+    ReadWriteEntityCommon(cs, fountain);
+    cs.ReadWrite(fountain.NumTicksAlive);
+    cs.ReadWrite(fountain.frame);
+    cs.ReadWrite(fountain.FountainFlags);
+    cs.ReadWrite(fountain.TargetX);
+    cs.ReadWrite(fountain.TargetY);
+    cs.ReadWrite(fountain.TargetY);
+    cs.ReadWrite(fountain.Iteration);
+}
+
+template<> void ParkFile::ReadWriteEntity(OrcaStream& os, OrcaStream::ChunkStream& cs, Balloon& balloon)
+{
+    ReadWriteEntityCommon(cs, balloon);
+    cs.ReadWrite(balloon.popped);
+    cs.ReadWrite(balloon.time_to_move);
+    cs.ReadWrite(balloon.frame);
+    cs.ReadWrite(balloon.colour);
+}
+
+template<> void ParkFile::ReadWriteEntity(OrcaStream& os, OrcaStream::ChunkStream& cs, Duck& duck)
+{
+    ReadWriteEntityCommon(cs, duck);
+    cs.ReadWrite(duck.frame);
+    cs.ReadWrite(duck.target_x);
+    cs.ReadWrite(duck.target_y);
+    cs.ReadWrite(duck.state);
+}
+
+template<> void ParkFile::ReadWriteEntity(OrcaStream& os, OrcaStream::ChunkStream& cs, Litter& entity)
+{
+    ReadWriteEntityCommon(cs, entity);
+    cs.ReadWrite(entity.SubType);
+    cs.ReadWrite(entity.creationTick);
+}
+
+template<typename T> void ParkFile::WriteEntitiesOfType(OrcaStream& os, OrcaStream::ChunkStream& cs)
+{
+    uint16_t count = GetEntityListCount(T::cEntityType);
+    cs.Write(T::cEntityType);
+    cs.Write(count);
+    for (auto* ent : EntityList<T>())
+    {
+        cs.Write(ent->Id);
+        ReadWriteEntity(os, cs, *ent);
+    }
+}
+
+template<typename... T> void ParkFile::WriteEntitiesOfTypes(OrcaStream& os, OrcaStream::ChunkStream& cs)
+{
+    (WriteEntitiesOfType<T>(os, cs), ...);
+}
+
+template<typename T> void ParkFile::ReadEntitiesOfType(OrcaStream& os, OrcaStream::ChunkStream& cs)
+{
+    [[maybe_unused]] auto t = cs.Read<EntityType>();
+    assert(t == T::cEntityType);
+    auto count = cs.Read<uint16_t>();
+    for (auto i = 0; i < count; ++i)
+    {
+        T placeholder{};
+
+        auto index = cs.Read<EntityId>();
+        auto* ent = CreateEntityAt<T>(index);
+        if (ent == nullptr)
+        {
+            // Unable to allocate entity
+            ent = &placeholder;
+        }
+        ReadWriteEntity(os, cs, *ent);
+    }
+}
+
+template<typename... T> void ParkFile::ReadEntitiesOfTypes(OrcaStream& os, OrcaStream::ChunkStream& cs)
+{
+    (ReadEntitiesOfType<T>(os, cs), ...);
+}
+
+void ParkFile::ReadWriteEntitiesChunk(OrcaStream& os)
+{
+    os.ReadWriteChunk(ParkFileChunkType::ENTITIES, [this, &os](OrcaStream::ChunkStream& cs) {
+        if (cs.GetMode() == OrcaStream::Mode::READING)
+        {
+            ResetAllEntities();
+        }
+
+        std::vector<uint16_t> entityIndices;
+        if (cs.GetMode() == OrcaStream::Mode::READING)
+        {
+            ReadEntitiesOfTypes<
+                Vehicle, Guest, Staff, Litter, SteamParticle, MoneyEffect, VehicleCrashParticle, ExplosionCloud,
+                CrashSplashParticle, ExplosionFlare, JumpingFountain, Balloon, Duck>(os, cs);
+        }
+        else
+        {
+            WriteEntitiesOfTypes<
+                Vehicle, Guest, Staff, Litter, SteamParticle, MoneyEffect, VehicleCrashParticle, ExplosionCloud,
+                CrashSplashParticle, ExplosionFlare, JumpingFountain, Balloon, Duck>(os, cs);
+        }
+    });
+}
 } // namespace OpenRCT2
 
 void ParkFileExporter::Export(std::string_view path)

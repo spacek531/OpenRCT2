@@ -227,7 +227,30 @@ ResultWithMessage TrackDesign::CreateTrackDesignTrack(TrackDesignState& tds, con
         // This if-else block only applies to td6. New track design format will always encode speed and seat rotation.
         if (TrackTypeHasSpeedSetting(track.type) && track.type != TrackElemType::BlockBrakes)
         {
-            trackFlags = trackElement.element->AsTrack()->GetBrakeBoosterSpeed() >> 1;
+            trackFlags = trackElement.element->AsTrack()->GetBrakeBoosterSpeed();
+            if (track.type == TrackElemType::Booster)
+            {
+                auto shiftFactor = ride.GetRideTypeDescriptor().OperatingSettings.BoosterSpeedFactor;
+                if (shiftFactor > 0)
+                {
+                    trackFlags >>= shiftFactor;
+                    trackFlags /= LEGACY_BRAKE_SPEED_MULTIPLIER;
+                    trackFlags &= 0xF;
+                }
+                else if (shiftFactor < 0)
+                {
+                    // Workaround for an issue with older compilers (GCC 6, Clang 4) which would fail the build
+                    int8_t shiftFactorAbs = std::abs(shiftFactor);
+                    trackFlags <<= shiftFactorAbs;
+                    trackFlags /= LEGACY_BRAKE_SPEED_MULTIPLIER;
+                    trackFlags &= 0xF;
+                }
+            }
+            else
+            {
+                trackFlags /= LEGACY_BRAKE_SPEED_MULTIPLIER;
+                trackFlags &= 0xF;
+            }
         }
         else
         {
@@ -1633,16 +1656,16 @@ static GameActions::Result TrackDesignPlaceRide(TrackDesignState& tds, TrackDesi
                 // di
                 int16_t tempZ = newCoords.z - trackCoordinates->z_begin;
                 uint32_t trackColour = (track.flags >> 4) & 0x3;
-                uint32_t brakeSpeed;
+                uint32_t brakeSpeed = (track.flags & 0x0F)* LEGACY_BRAKE_SPEED_MULTIPLIER; //TODO: why do I not use this in other places? Spacek 23/10/2023
                 // RCT2-created track designs write brake speed to all tracks; block brake speed must be treated as
                 // garbage data.
                 if (trackType == TrackElemType::BlockBrakes)
                 {
                     brakeSpeed = kRCT2DefaultBlockBrakeSpeed;
                 }
-                else
+                else if (trackType == TrackElemType::Booster)
                 {
-                    brakeSpeed = (track.flags & 0x0F) * 2;
+                    brakeSpeed = GetBoosterSpeed(ride.type, brakeSpeed);
                 }
                 uint32_t seatRotation = track.flags & 0x0F;
 
