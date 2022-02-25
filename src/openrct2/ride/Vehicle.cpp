@@ -7461,8 +7461,7 @@ static void vehicle_update_play_water_splash_sound()
         return;
     }
 
-    OpenRCT2::Audio::Play3D(
-        OpenRCT2::Audio::SoundId::WaterSplash, { _vehicleCurPosition.x, _vehicleCurPosition.y, _vehicleCurPosition.z });
+    OpenRCT2::Audio::Play3D(OpenRCT2::Audio::SoundId::WaterSplash, _vehicleCurPosition);
 }
 
 /**
