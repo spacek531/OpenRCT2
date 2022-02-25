@@ -278,9 +278,7 @@ bool Vehicle::CableLiftUpdateTrackMotionForwards()
             remainingDistanceFlags |= (1 << 2);
 
         remaining_distance -= SubpositionTranslationDistances[remainingDistanceFlags];
-        _vehicleCurPosition.x = nextVehiclePosition.x;
-        _vehicleCurPosition.y = nextVehiclePosition.y;
-        _vehicleCurPosition.z = nextVehiclePosition.z;
+        _vehicleCurPosition = nextVehiclePosition;
 
         sprite_direction = moveInfo->direction;
         bank_rotation = moveInfo->bank_rotation;
@@ -332,21 +330,19 @@ bool Vehicle::CableLiftUpdateTrackMotionBackwards()
         }
         track_progress = trackProgress;
         const auto moveInfo = GetMoveInfo();
-        auto unk = CoordsXYZ{ moveInfo->x, moveInfo->y, moveInfo->z } + TrackLocation;
+        auto nextVehiclePosition = CoordsXYZ{ moveInfo->x, moveInfo->y, moveInfo->z } + TrackLocation;
 
         uint8_t remainingDistanceFlags = 0;
-        unk.z += GetRideTypeDescriptor(curRide->type).Heights.VehicleZOffset;
-        if (unk.x != _vehicleCurPosition.x)
+        nextVehiclePosition.z += GetRideTypeDescriptor(curRide->type).Heights.VehicleZOffset;
+        if (nextVehiclePosition.x != _vehicleCurPosition.x)
             remainingDistanceFlags |= (1 << 0);
-        if (unk.y != _vehicleCurPosition.y)
+        if (nextVehiclePosition.y != _vehicleCurPosition.y)
             remainingDistanceFlags |= (1 << 1);
-        if (unk.z != _vehicleCurPosition.z)
+        if (nextVehiclePosition.z != _vehicleCurPosition.z)
             remainingDistanceFlags |= (1 << 2);
 
         remaining_distance += SubpositionTranslationDistances[remainingDistanceFlags];
-        _vehicleCurPosition.x = unk.x;
-        _vehicleCurPosition.y = unk.y;
-        _vehicleCurPosition.z = unk.z;
+        _vehicleCurPosition = nextVehiclePosition;
 
         sprite_direction = moveInfo->direction;
         bank_rotation = moveInfo->bank_rotation;
