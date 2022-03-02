@@ -6286,9 +6286,7 @@ int32_t Vehicle::UpdateMotionDodgems()
     if (remaining_distance >= 13962)
     {
         sound2_flags &= ~VEHICLE_SOUND2_FLAGS_LIFT_HILL;
-        _vehicleCurPosition.x = x;
-        _vehicleCurPosition.y = y;
-        _vehicleCurPosition.z = z;
+        _vehicleCurPosition = { x, y, z };
 
         while (true)
         {
@@ -8590,9 +8588,7 @@ void Vehicle::UpdateTrackMotionMiniGolfVehicle(Ride* curRide, rct_ride_entry* ri
         goto loc_6DCE02;
     }
     sound2_flags &= ~VEHICLE_SOUND2_FLAGS_LIFT_HILL;
-    _vehicleCurPosition.x = x;
-    _vehicleCurPosition.y = y;
-    _vehicleCurPosition.z = z;
+    _vehicleCurPosition = { x, y, z};
     Invalidate();
     if (remaining_distance < 0)
         goto loc_6DCA9A;
@@ -9421,9 +9417,7 @@ int32_t Vehicle::UpdateTrackMotion(int32_t* outStation)
         }
 
         car->sound2_flags &= ~VEHICLE_SOUND2_FLAGS_LIFT_HILL;
-        _vehicleCurPosition.x = car->x;
-        _vehicleCurPosition.y = car->y;
-        _vehicleCurPosition.z = car->z;
+        _vehicleCurPosition = { car->x, car->y, car->z };
         car->Invalidate();
 
         while (true)
