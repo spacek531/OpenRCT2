@@ -371,6 +371,7 @@ private:
     void UpdateSceneryDoorBackwards() const;
     void UpdateLandscapeDoor() const;
     void UpdateLandscapeDoorBackwards() const;
+    int32_t GetSubpositionDistance(CoordsXYZ nextVehiclePosition, bool reverserBogie = false);
 };
 static_assert(sizeof(Vehicle) <= 512);
 

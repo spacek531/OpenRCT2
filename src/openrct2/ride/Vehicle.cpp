@@ -8148,26 +8148,13 @@ loc_6DAEB9:
     {
         auto nextVehiclePosition = TrackLocation
             + CoordsXYZ{ moveInfo->x, moveInfo->y, moveInfo->z + GetRideTypeDescriptor(curRide->type).Heights.VehicleZOffset };
-
-        uint8_t remainingDistanceFlags = 0;
-        if (nextVehiclePosition.x != _vehicleCurPosition.x)
-        {
-            remainingDistanceFlags |= 1;
-        }
-        if (nextVehiclePosition.y != _vehicleCurPosition.y)
-        {
-            remainingDistanceFlags |= 2;
-        }
-        if (nextVehiclePosition.z != _vehicleCurPosition.z)
-        {
-            remainingDistanceFlags |= 4;
-        }
+        bool reverserBogie = false;
 
         if (TrackSubposition == VehicleTrackSubposition::ReverserRCFrontBogie
             && (trackType == TrackElemType::LeftReverser || trackType == TrackElemType::RightReverser) && track_progress >= 30
             && track_progress <= 66)
         {
-            remainingDistanceFlags |= 8;
+            reverserBogie = true;
         }
 
         if (TrackSubposition == VehicleTrackSubposition::ReverserRCRearBogie
@@ -8181,7 +8168,7 @@ loc_6DAEB9:
         }
 
         // loc_6DB8A5
-        remaining_distance -= SubpositionTranslationDistances[remainingDistanceFlags];
+        remaining_distance -= GetSubpositionDistance(nextVehiclePosition, reverserBogie);
         _vehicleCurPosition = nextVehiclePosition;
         sprite_direction = moveInfo->direction;
         bank_rotation = moveInfo->bank_rotation;
@@ -8480,20 +8467,7 @@ bool Vehicle::UpdateTrackMotionBackwards(rct_ride_entry_vehicle* vehicleEntry, R
                 + CoordsXYZ{ moveInfo->x, moveInfo->y,
                              moveInfo->z + GetRideTypeDescriptor(curRide->type).Heights.VehicleZOffset };
 
-            uint8_t remainingDistanceFlags = 0;
-            if (nextVehiclePosition.x != _vehicleCurPosition.x)
-            {
-                remainingDistanceFlags |= 1;
-            }
-            if (nextVehiclePosition.y != _vehicleCurPosition.y)
-            {
-                remainingDistanceFlags |= 2;
-            }
-            if (nextVehiclePosition.z != _vehicleCurPosition.z)
-            {
-                remainingDistanceFlags |= 4;
-            }
-            remaining_distance += SubpositionTranslationDistances[remainingDistanceFlags];
+            remaining_distance += GetSubpositionDistance(nextVehiclePosition);
 
             _vehicleCurPosition = nextVehiclePosition;
             sprite_direction = moveInfo->direction;
@@ -8588,7 +8562,7 @@ void Vehicle::UpdateTrackMotionMiniGolfVehicle(Ride* curRide, rct_ride_entry* ri
         goto loc_6DCE02;
     }
     sound2_flags &= ~VEHICLE_SOUND2_FLAGS_LIFT_HILL;
-    _vehicleCurPosition = { x, y, z};
+    _vehicleCurPosition = { x, y, z };
     Invalidate();
     if (remaining_distance < 0)
         goto loc_6DCA9A;
@@ -9795,6 +9769,21 @@ void Vehicle::EnableCollisionsForTrain()
     {
         vehicle->ClearUpdateFlag(VEHICLE_UPDATE_FLAG_COLLISION_DISABLED);
     }
+}
+
+int32_t GetSubpositionDistance(CoordsXYZ nextVehiclePosition, bool reverserBogie)
+{
+    uint8_t remainingDistanceFlags = 0;
+    if (nextVehiclePosition.x != _vehicleCurPosition.x)
+        remainingDistanceFlags |= (1 << 0);
+    if (nextVehiclePosition.y != _vehicleCurPosition.y)
+        remainingDistanceFlags |= (1 << 1);
+    if (nextVehiclePosition.z != _vehicleCurPosition.z)
+        remainingDistanceFlags |= (1 << 2);
+    if (reverserBogie)
+        remainingDistanceFlags |= (1 << 3);
+
+    return SubpositionTranslationDistances[remainingDistanceFlags];
 }
 
 void Vehicle::Serialise(DataSerialiser& stream)

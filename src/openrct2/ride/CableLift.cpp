@@ -266,18 +266,10 @@ bool Vehicle::CableLiftUpdateTrackMotionForwards()
 
         track_progress = trackProgress;
         const auto moveInfo = GetMoveInfo();
-        auto nextVehiclePosition = CoordsXYZ{ moveInfo->x, moveInfo->y, moveInfo->z } + TrackLocation;
+        auto nextVehiclePosition = TrackLocation
+            + CoordsXYZ{ moveInfo->x, moveInfo->y, moveInfo->z + GetRideTypeDescriptor(curRide->type).Heights.VehicleZOffset };
 
-        uint8_t remainingDistanceFlags = 0;
-        nextVehiclePosition.z += GetRideTypeDescriptor(curRide->type).Heights.VehicleZOffset;
-        if (nextVehiclePosition.x != _vehicleCurPosition.x)
-            remainingDistanceFlags |= (1 << 0);
-        if (nextVehiclePosition.y != _vehicleCurPosition.y)
-            remainingDistanceFlags |= (1 << 1);
-        if (nextVehiclePosition.z != _vehicleCurPosition.z)
-            remainingDistanceFlags |= (1 << 2);
-
-        remaining_distance -= SubpositionTranslationDistances[remainingDistanceFlags];
+        remaining_distance -= GetSubpositionDistance(nextVehiclePosition);
         _vehicleCurPosition = nextVehiclePosition;
 
         sprite_direction = moveInfo->direction;
@@ -330,18 +322,10 @@ bool Vehicle::CableLiftUpdateTrackMotionBackwards()
         }
         track_progress = trackProgress;
         const auto moveInfo = GetMoveInfo();
-        auto nextVehiclePosition = CoordsXYZ{ moveInfo->x, moveInfo->y, moveInfo->z } + TrackLocation;
+        auto nextVehiclePosition = TrackLocation
+            + CoordsXYZ{ moveInfo->x, moveInfo->y, moveInfo->z + GetRideTypeDescriptor(curRide->type).Heights.VehicleZOffset };
 
-        uint8_t remainingDistanceFlags = 0;
-        nextVehiclePosition.z += GetRideTypeDescriptor(curRide->type).Heights.VehicleZOffset;
-        if (nextVehiclePosition.x != _vehicleCurPosition.x)
-            remainingDistanceFlags |= (1 << 0);
-        if (nextVehiclePosition.y != _vehicleCurPosition.y)
-            remainingDistanceFlags |= (1 << 1);
-        if (nextVehiclePosition.z != _vehicleCurPosition.z)
-            remainingDistanceFlags |= (1 << 2);
-
-        remaining_distance += SubpositionTranslationDistances[remainingDistanceFlags];
+        remaining_distance += GetSubpositionDistance(nextVehiclePosition);
         _vehicleCurPosition = nextVehiclePosition;
 
         sprite_direction = moveInfo->direction;
