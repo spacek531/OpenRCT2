@@ -9771,7 +9771,7 @@ void Vehicle::EnableCollisionsForTrain()
     }
 }
 
-int32_t GetSubpositionDistance(CoordsXYZ nextVehiclePosition, bool reverserBogie)
+int32_t Vehicle::GetSubpositionDistance(CoordsXYZ nextVehiclePosition, bool reverserBogie)
 {
     uint8_t remainingDistanceFlags = 0;
     if (nextVehiclePosition.x != _vehicleCurPosition.x)
