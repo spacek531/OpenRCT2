@@ -74,6 +74,8 @@ enum
     RCT_PREVIEW_TRACK_FLAG_0 = (1 << 0),
     RCT_PREVIEW_TRACK_FLAG_1 = (1 << 1),
     RCT_PREVIEW_TRACK_FLAG_IS_VERTICAL = (1 << 2),
+    RCT_PREVIEW_TRACK_FLAG_SWITCH_FORWARD_ALTERNATE = (1 << 4),
+    RCT_PREVIEW_TRACK_FLAG_SWITCH_REVERSE_ALTERNATE = (1 << 5),
 };
 
 enum
@@ -234,6 +236,9 @@ enum
     TRACK_ELEM_FLAG_CURVE_ALLOWS_LIFT = (1 << 13),
     TRACK_ELEM_FLAG_INVERSION_TO_NORMAL = (1 << 14),
     TRACK_ELEM_FLAG_BANKED = (1 << 15), // Also set on Spinning Tunnel and Log Flume reverser, probably to save a flag.
+    TRACK_ELEM_FLAG_SWITCH_FORWARDS = (1 << 16),
+    TRACK_ELEM_FLAG_SWITCH_REVERSE = (1 << 17),
+    TRACK_ELEM_FLAG_SWITCH = (3 << 16),
 };
 
 namespace TrackElemType
@@ -510,7 +515,13 @@ namespace TrackElemType
     constexpr track_type_t FlatTrack1x4C = 265;
     constexpr track_type_t FlatTrack3x3 = 266;
 
-    constexpr track_type_t Count = 267;
+    constexpr track_type_t BlockBrakesReverse = 267;
+    constexpr track_type_t TrackSwitchForwardsSBendWyeLeft = 268;
+    constexpr track_type_t TrackSwitchForwardsSBendWyeRight = 269;
+    constexpr track_type_t TrackSwitchReverseSBendWyeRight = 270;
+    constexpr track_type_t TrackSwitchReverseSBendWyeLeft = 271;
+
+    constexpr track_type_t Count = 272;
     constexpr track_type_t None = 65535;
 
     constexpr track_type_t FlatTrack1x4A_Alias = 95;
@@ -580,3 +591,8 @@ bool track_remove_station_element(const CoordsXYZD& loc, RideId rideIndex, int32
 money32 maze_set_track(const CoordsXYZD& coords, uint8_t flags, bool initialPlacement, RideId rideIndex, uint8_t mode);
 
 bool TrackTypeHasSpeedSetting(track_type_t trackType);
+
+bool TrackTypeIsSwitchTrack(track_type_t trackType);
+track_type_t TrackSwitchGetOppositeTrack(track_type_t trackType);
+
+bool TrackSwitchChangeState(const CoordsXYZD& coords, RideId rideIndex, track_type_t trackType);

@@ -664,6 +664,88 @@ bool TrackTypeHasSpeedSetting(track_type_t trackType)
     return trackType == TrackElemType::Brakes || trackType == TrackElemType::Booster;
 }
 
+bool TrackTypeIsSwitchTrack(track_type_t trackType)
+{
+    switch (trackType)
+    {
+        case TrackElemType::TrackSwitchForwardsSBendWyeLeft:
+        case TrackElemType::TrackSwitchForwardsSBendWyeRight:
+        case TrackElemType::TrackSwitchReverseSBendWyeLeft:
+        case TrackElemType::TrackSwitchReverseSBendWyeRight:
+            return true;
+        default:
+            return false;
+    }
+}
+
+track_type_t TrackSwitchGetOppositeTrack(track_type_t trackType)
+{
+    if (!TrackTypeIsSwitchTrack(trackType))
+        return TrackElemType::None;
+    return static_cast<track_type_t>(static_cast<uint16_t>(trackType) ^ 1);
+}
+
+// TODO: test this
+bool TrackSwitchChangeState(const CoordsXYZD& location, RideId rideIndex, track_type_t trackType)
+{
+    // find the 0th index of the track switch
+    auto trackElement = map_get_track_element_at_of_type_seq(location, trackType, 0);
+    if (trackElement == nullptr)
+    {
+        trackElement = map_get_track_element_at_of_type(location, trackType);
+        if (trackElement == nullptr)
+        {
+            return false;
+        }
+    }
+    track_type_t oppositeTrackType = TrackSwitchGetOppositeTrack(trackType);
+
+    // Possibly z should be & 0xF8
+    const auto& ted = GetTrackElementDescriptor(trackType);
+    const auto* trackBlock = ted.Block;
+    if (trackBlock == nullptr)
+        return false;
+
+    // Now find all the elements that belong to this track piece
+    int32_t sequence = trackElement->GetSequenceIndex();
+    uint8_t mapDirection = trackElement->GetDirection();
+
+    CoordsXY offsets = { trackBlock[sequence].x, trackBlock[sequence].y };
+    CoordsXY newCoords = location;
+    newCoords += offsets.Rotate(direction_reverse(mapDirection));
+
+    auto retCoordsXYZ = CoordsXYZ{ newCoords.x, newCoords.y, location.z - trackBlock[sequence].z };
+
+    int32_t start_z = retCoordsXYZ.z;
+    retCoordsXYZ.z += trackBlock[0].z;
+    for (int32_t i = 0; trackBlock[i].index != 0xFF; ++i)
+    {
+        CoordsXY cur = { retCoordsXYZ };
+        offsets = { trackBlock[i].x, trackBlock[i].y };
+        cur += offsets.Rotate(mapDirection);
+        int32_t cur_z = start_z + trackBlock[i].z;
+
+        map_invalidate_tile_full(cur);
+
+        trackElement = map_get_track_element_at_of_type_seq(
+            { cur, cur_z, static_cast<Direction>(location.direction) }, trackType, trackBlock[i].index);
+        if (trackElement == nullptr)
+        {
+            return false;
+        }
+        trackElement->SetTrackType(oppositeTrackType);
+        if ((trackBlock[i].flags
+             & (RCT_PREVIEW_TRACK_FLAG_SWITCH_REVERSE_ALTERNATE | RCT_PREVIEW_TRACK_FLAG_SWITCH_FORWARD_ALTERNATE))
+            != 0)
+        {
+            trackElement->SetSequenceIndex(trackBlock[i].index ^ 1);
+        }
+        // invalidate please?
+        // map_invalidate_tile({ cur , cur_z, cur_z + 1});
+    }
+    return true;
+}
+
 uint8_t TrackElement::GetSeatRotation() const
 {
     const auto* ride = get_ride(GetRideIndex());

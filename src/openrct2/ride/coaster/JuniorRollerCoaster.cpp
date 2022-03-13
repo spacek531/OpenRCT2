@@ -5945,6 +5945,65 @@ static void junior_rc_track_on_ride_photo(
     paint_util_set_general_support_height(session, height + 48 + photoCameraOffset, 0x20);
 }
 
+static void junior_rc_track_switch_forwards_wye_left(
+    paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
+    const TrackElement& trackElement)
+{
+    uint32_t imageId;
+    switch (trackSequence)
+    {
+        case 0:
+        case 1:
+        case 2:
+        case 4:
+        case 5:
+        case 6:
+            if (direction & 1)
+            {
+                metal_a_supports_paint_setup(
+                    session, METAL_SUPPORTS_TUBES, 5, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                metal_a_supports_paint_setup(
+                    session, METAL_SUPPORTS_TUBES, 8, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            }
+            else
+            {
+                metal_a_supports_paint_setup(
+                    session, METAL_SUPPORTS_TUBES, 6, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                metal_a_supports_paint_setup(
+                    session, METAL_SUPPORTS_TUBES, 7, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            }
+            imageId = SPR_STATION_BASE_D | session.TrackColours[SCHEME_SUPPORTS];
+            PaintAddImageAsParent(session, imageId, { 0, 0, height }, { 32, 32, 1 });
+            break;
+        case 3:
+        case 7:
+        case 8:
+        case 9:
+            break;
+    }
+    // metal_a_supports_paint_setup(session, METAL_SUPPORTS_FORK_ALT, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+
+    int32_t blockedSegments = 0;
+    switch (trackSequence)
+    {
+        case 0:
+            blockedSegments = SEGMENT_D0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_B4;
+            break;
+        case 1:
+            blockedSegments = SEGMENT_D0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_B8 | SEGMENT_C8 | SEGMENT_B4;
+            break;
+        case 2:
+            blockedSegments = SEGMENT_D0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_C0 | SEGMENT_D4 | SEGMENT_BC;
+            break;
+        case 3:
+            blockedSegments = SEGMENT_D0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_C0;
+            break;
+    }
+    // paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, (direction & 1)), 0xFFFF, 0);
+
+    // paint_util_set_general_support_height(session, height + 32, 0x20);
+}
+
 /* 0x008AAA0C */
 TRACK_PAINT_FUNCTION get_track_paint_function_junior_rc(int32_t trackType)
 {
@@ -6150,6 +6209,7 @@ TRACK_PAINT_FUNCTION get_track_paint_function_junior_rc(int32_t trackType)
             return junior_rc_diag_right_bank_paint_setup;
 
         case TrackElemType::BlockBrakes:
+        case TrackElemType::BlockBrakesReverse:
             return junior_rc_block_brake_paint_setup;
 
         case TrackElemType::Booster:
@@ -6166,6 +6226,13 @@ TRACK_PAINT_FUNCTION get_track_paint_function_junior_rc(int32_t trackType)
 
         case TrackElemType::OnRidePhoto:
             return junior_rc_track_on_ride_photo;
+
+        case TrackElemType::TrackSwitchForwardsSBendWyeLeft:
+            return junior_rc_track_switch_forwards_wye_left;
+        case TrackElemType::TrackSwitchForwardsSBendWyeRight:
+        case TrackElemType::TrackSwitchReverseSBendWyeRight:
+        case TrackElemType::TrackSwitchReverseSBendWyeLeft:
+            return nullptr;
     }
     return nullptr;
 }

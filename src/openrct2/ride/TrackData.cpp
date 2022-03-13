@@ -285,6 +285,11 @@ static constexpr rct_track_coordinates TrackCoordinates[TrackElemType::Count] = 
         {    0,    2,    0,    0,    0,   32 }, // TrackElemType::FlatTrack1x1B
         {    0,    2,    0,    0,    0,   32 }, // TrackElemType::FlatTrack1x4C
         {    0,    0,    0,   96,   32,    0 }, // TrackElemType::FlatTrack3x3
+        { 0, 0, 0, 0, 0, 0 },       // TrackElemType::BlockBrakesReverse
+        { 0, 0, 8, 8, -64, -32 },   // TrackElemType::TrackSwitchForwardsSBendWyeLeft
+        { 0, 0, 8, 8, -64, 32 },    // TrackElemType::TrackSwitchForwardsSBendWyeRight
+        { 0, 0, 8, 8, -64, 32 },    // TrackElemType::TrackSwitchReverseSBendWyeRight
+        { 0, 0, 8, 8, -64, -32 },   // TrackElemType::TrackSwitchReverseSBendWyeLeft
 };
 
 /** rct2: 0x0099BA64 */
@@ -556,6 +561,11 @@ static constexpr uint8_t TrackSequenceProperties[][MaxSequencesPerPiece] = {
     /* TrackElemType::FlatTrack1x1B    */ { TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN | TRACK_SEQUENCE_FLAG_CONNECTS_TO_PATH, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     /* TrackElemType::FlatTrack1x4C    */ { TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3 | TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     /* TrackElemType::FlatTrack3x3     */ { TRACK_SEQUENCE_FLAG_ORIGIN, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_0, TRACK_SEQUENCE_FLAG_DIRECTION_0 | TRACK_SEQUENCE_FLAG_DIRECTION_1, TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1, TRACK_SEQUENCE_FLAG_DIRECTION_2 | TRACK_SEQUENCE_FLAG_DIRECTION_3, TRACK_SEQUENCE_FLAG_DIRECTION_1 | TRACK_SEQUENCE_FLAG_DIRECTION_2, TRACK_SEQUENCE_FLAG_DIRECTION_2, 0, 0, 0, 0, 0, 0, 0 },
+    /* TrackElemType::BlockBrakesReverse */ { 0 },
+    /* TrackElemType:: */ { 0 },
+    /* TrackElemType:: */ { 0 },
+    /* TrackElemType:: */ { 0 },
+    /* TrackElemType:: */ { 0 },
 };
 
 #define TRACK_BLOCK_END { 255, 255, 255, 255, 255, {255, 255}, 255 }
@@ -2533,15 +2543,71 @@ static constexpr const rct_preview_track TrackBlocksFlatTrack1x4C[] = {
 };
 
 static constexpr const rct_preview_track TrackBlocksFlatTrack3x3[] = {
-    { 0, 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 1, -32, -32, 0, 0, { 0b1111, 0 }, 0 },
-    { 2, -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-    { 3, -32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 4, 0, -32, 0, 0, { 0b1111, 0 }, 0 },
-    { 5, 0, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 6, 32, -32, 0, 0, { 0b1111, 0 }, 0 },
-    { 7, 32, 32, 0, 0, { 0b1111, 0 }, 0 },
-    { 8, 32, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
+    { 0, 0, 0, -8, 8, { 0b1111, 0 }, 0 },
+    { 1, -32, -32, -8, 8, { 0b1111, 0 }, 0 },
+    { 2, -32, 0, -8, 8, { 0b1111, 0 }, 0 },
+    { 3, -32, 32, -8, 8, { 0b1111, 0 }, 0 },
+    { 4, 0, -32, -8, 8, { 0b1111, 0 }, 0 },
+    { 5, 0, 32, -8, 8, { 0b1111, 0 }, 0 },
+    { 6, 32, -32, -8, 8, { 0b1111, 0 }, 0 },
+    { 7, 32, 32, -8, 8, { 0b1111, 0 }, 0 },
+    { 8, 32, 0, -8, 8, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
+    TRACK_BLOCK_END
+};
+
+static constexpr rct_preview_track TrackBlocksTrackSwitchForwardsSBendWyeLeft[] = {
+    { 0, 0, 0, -8, 8, { 0b1111, 0 }, 0 },
+    { 1, 0, -32, -8, 8, { 0b1111, 0 }, 0 },
+    { 2, 0, 32, -8, 8, { 0b1111, 0 }, 0 },
+    { 3, -32, -64, -8, 8, { 0b1111, 0 }, 0 },
+    { 4, -32, -32, -8, 8, { 0b1111, 0 }, 0 },
+    { 5, -32, 0, -8, 8, { 0b1111, 0 }, 0 },
+    { 6, -32, 32, -8, 8, { 0b1111, 0 }, 0 },
+    { 7, -32, 64, -8, 8, { 0b1111, 0 }, 0 },
+    { 8, -64, 32, -8, 8, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_SWITCH_FORWARD_ALTERNATE },
+    { 9, -64, -32, -8, 8, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_SWITCH_FORWARD_ALTERNATE },
+    TRACK_BLOCK_END
+};
+
+static constexpr rct_preview_track TrackBlocksTrackSwitchForwardsSBendWyeRight[] = {
+    { 0, 0, 0, -8, 8, { 0b1111, 0 }, 0 },
+    { 1, 0, -32, -8, 8, { 0b1111, 0 }, 0 },
+    { 2, 0, 32, -8, 8, { 0b1111, 0 }, 0 },
+    { 3, -32, -64, -8, 8, { 0b1111, 0 }, 0 },
+    { 4, -32, -32, -8, 8, { 0b1111, 0 }, 0 },
+    { 5, -32, 0, -8, 8, { 0b1111, 0 }, 0 },
+    { 6, -32, 32, -8, 8, { 0b1111, 0 }, 0 },
+    { 7, -32, 64, -8, 8, { 0b1111, 0 }, 0 },
+    { 8, -64, -32, -8, 8, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_SWITCH_FORWARD_ALTERNATE },
+    { 9, -64, 32, -8, 8, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_SWITCH_FORWARD_ALTERNATE },
+    TRACK_BLOCK_END
+};
+
+static constexpr rct_preview_track TrackBlocksTrackSwitchReverseSBendWyeRight[] = {
+    { 0, 0, 0, -8, 8, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_SWITCH_REVERSE_ALTERNATE },
+    { 1, 0, 64, -8, 8, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_SWITCH_REVERSE_ALTERNATE },
+    { 2, -32, 96, -8, 8, { 0b1111, 0 }, 0 },
+    { 3, -32, 64, -8, 8, { 0b1111, 0 }, 0 },
+    { 4, -32, 32, -8, 8, { 0b1111, 0 }, 0 },
+    { 5, -32, 0, -8, 8, { 0b1111, 0 }, 0 },
+    { 6, -32, -32, -8, 8, { 0b1111, 0 }, 0 },
+    { 7, -64, 64, -8, 8, { 0b1111, 0 }, 0 },
+    { 8, -64, 0, -8, 8, { 0b1111, 0 }, 0 },
+    { 9, -64, 32, -8, 8, { 0b1111, 0 }, 0 },
+    TRACK_BLOCK_END
+};
+
+static constexpr rct_preview_track TrackBlocksTrackSwitchReverseSBendWyeLeft[] = {
+    { 0, 0, 0, -8, 8, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_SWITCH_REVERSE_ALTERNATE },
+    { 1, 0, -64, -8, 8, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_SWITCH_REVERSE_ALTERNATE },
+    { 2, -32, 32, -8, 8, { 0b1111, 0 }, 0 },
+    { 3, -32, 0, -8, 8, { 0b1111, 0 }, 0 },
+    { 4, -32, -32, -8, 8, { 0b1111, 0 }, 0 },
+    { 5, -32, -64, -8, 8, { 0b1111, 0 }, 0 },
+    { 6, -32, -96, -8, 8, { 0b1111, 0 }, 0 },
+    { 7, -64, 0, -8, 8, { 0b1111, 0 }, 0 },
+    { 8, -64, -64, -8, 8, { 0b1111, 0 }, 0 },
+    { 9, -64, -32, -8, 8, { 0b1111, 0 }, 0 },
     TRACK_BLOCK_END
 };
 
@@ -2815,6 +2881,12 @@ static constexpr std::array<const rct_preview_track*, TrackElemType::Count> Trac
     TrackBlocksFlatTrack1x1B,
     TrackBlocksFlatTrack1x4C,
     TrackBlocksFlatTrack3x3,
+
+    TrackBlocks000,
+    TrackBlocksTrackSwitchForwardsSBendWyeLeft,
+    TrackBlocksTrackSwitchForwardsSBendWyeRight,
+    TrackBlocksTrackSwitchReverseSBendWyeRight,
+    TrackBlocksTrackSwitchReverseSBendWyeLeft,
 };
 
 static constexpr uint8_t TrackPieceLengths[TrackElemType::Count] = {
@@ -3085,6 +3157,11 @@ static constexpr uint8_t TrackPieceLengths[TrackElemType::Count] = {
     0,      // TrackElemType::FlatTrack1x1B
     0,      // TrackElemType::FlatTrack1x4C
     0,      // TrackElemType::FlatTrack3x3
+    32,     // TrackElemType::BlockBrakesReverse
+    96,     // TrackElemType::TrackSwitchForwardsSBendWyeLeft
+    96,     // TrackElemType::TrackSwitchForwardsSBendWyeRight
+    96,     // TrackElemType::TrackSwitchReverseSBendWyeRight
+    96,     // TrackElemType::TrackSwitchReverseSBendWyeLeft
 };
 
 // rct2: 0x00998C95
@@ -3356,6 +3433,11 @@ static constexpr track_curve_chain gTrackCurveChain[TrackElemType::Count] = {
     { 65535, 65535 },                       // TrackElemType::FlatTrack1x1B
     { 65535, 65535 },                       // TrackElemType::FlatTrack1x4C
     { 65535, 65535 },                       // TrackElemType::FlatTrack3x3
+    { TRACK_CURVE_NONE, TRACK_CURVE_NONE },
+    { TRACK_CURVE_NONE, TRACK_CURVE_NONE },
+    { TRACK_CURVE_NONE, TRACK_CURVE_NONE },
+    { TRACK_CURVE_NONE, TRACK_CURVE_NONE },
+    { TRACK_CURVE_NONE, TRACK_CURVE_NONE },
 };
 
 const track_descriptor gTrackDescriptors[142] = {
@@ -3772,6 +3854,11 @@ static constexpr track_type_t AlternativeTrackTypes[TrackElemType::Count] = {
     TrackElemType::None, // TrackElemType::FlatTrack1x1B
     TrackElemType::None, // TrackElemType::FlatTrack1x4C
     TrackElemType::None, // TrackElemType::FlatTrack3x3
+    TrackElemType::None,
+    TrackElemType::None,
+    TrackElemType::None,
+    TrackElemType::None,
+    TrackElemType::None,
 };
 
 /** rct2: 0x0099DA34 */
@@ -4043,6 +4130,11 @@ static constexpr money32 TrackPricing[TrackElemType::Count] = {
     65536,  // TrackElemType::FlatTrack1x1B
     262144, // TrackElemType::FlatTrack1x4C
     524288, // TrackElemType::FlatTrack3x3
+    77824,  // TrackElemType::BlockBrakesReverse
+    77824,  // TrackElemType::TrackSwitchForwardsSBendWyeLeft
+    77824,  // TrackElemType::TrackSwitchForwardsSBendWyeRight
+    77824,  // TrackElemType::TrackSwitchReverseSBendWyeRight
+    77824,  // TrackElemType::TrackSwitchReverseSBendWyeLeft
 };
 
 /** rct2: 0x0099EA1C */
@@ -4314,6 +4406,11 @@ static constexpr track_type_t TrackElementMirrorMap[TrackElemType::Count] = {
     TrackElemType::FlatTrack1x1B, // TrackElemType::FlatTrack1x1B
     TrackElemType::FlatTrack1x4C, // TrackElemType::FlatTrack1x4C
     TrackElemType::FlatTrack3x3, // TrackElemType::FlatTrack3x3
+    TrackElemType::BlockBrakesReverse,
+    TrackElemType::TrackSwitchForwardsSBendWyeRight,
+    TrackElemType::TrackSwitchForwardsSBendWyeLeft,
+    TrackElemType::TrackSwitchReverseSBendWyeLeft,
+    TrackElemType::TrackSwitchReverseSBendWyeRight,
 };
 
 /** rct2: 0x00999694 */
@@ -4585,6 +4682,11 @@ static constexpr uint32_t TrackHeightMarkerPositions[TrackElemType::Count] = {
     (1 << 0), // TrackElemType::FlatTrack1x1B
     (1 << 0), // TrackElemType::FlatTrack1x4C
     (1 << 0), // TrackElemType::FlatTrack3x3
+    (1 << 0), // TrackElemType::ReverseBlockBrakes
+    (1 << 0) | (1 << 3) | (1 << 7) | (1 << 8) | (1 << 9), // TrackElemType::TrackSwitchForwardsSBendWyeLeft
+    (1 << 0) | (1 << 3) | (1 << 7) | (1 << 8) | (1 << 9), // TrackElemType::TrackSwitchForwardsSBendWyeRight
+    (1 << 0) | (1 << 1) | (1 << 2) | (1 << 6) | (1 << 9), // TrackElemType::TrackSwitchReverseSBendWyeRight
+    (1 << 0) | (1 << 1) | (1 << 2) | (1 << 6) | (1 << 9), // TrackElemType::TrackSwitchReverseSBendWyeLeft
 };
 
 /** rct2: 0x00999A94 */
@@ -4856,10 +4958,15 @@ static constexpr uint8_t TrackSequenceElementAllowedWallEdges[TrackElemType::Cou
     {      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0 }, // TrackElemType::FlatTrack1x1B
     {      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0 }, // TrackElemType::FlatTrack1x4C
     {      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0 }, // TrackElemType::FlatTrack3x3
+    { 0b1010,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0 }, // TrackElemType::BlockBrakesReverse
+    { 0b1010, 0b1010,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0 }, // TrackElemType::TrackSwitchForwardsSBendWyeLeft
+    { 0b1010, 0b1010,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0 }, // TrackElemType::TrackSwitchForwardsSBendWyeRight
+    { 0b1010, 0b1010,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0 }, // TrackElemType::TrackSwitchReverseSBendWyeRight
+    { 0b1010, 0b1010,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0 }, // TrackElemType::TrackSwitchReverseSBendWyeLeft
 };
 
 /** rct2: 0x0099423C */
-static constexpr uint16_t TrackFlags[TrackElemType::Count] = {
+static constexpr uint32_t TrackFlags[TrackElemType::Count] = {
     /* TrackElemType::Flat                                          */   TRACK_ELEM_FLAG_ALLOW_LIFT_HILL,
     /* TrackElemType::EndStation                                    */   0,
     /* TrackElemType::BeginStation                                  */   0,
@@ -5127,6 +5234,11 @@ static constexpr uint16_t TrackFlags[TrackElemType::Count] = {
     /* TrackElemType::FlatTrack1x1B                                 */   0,
     /* TrackElemType::FlatTrack1x4C                                 */   0,
     /* TrackElemType::FlatTrack3x3                                  */   0,
+    /* TrackElemType::BlockBrakesReverse                            */   0,
+    /* TrackElemType::TrackSwitchForwardsSBendWyeLeft               */   TRACK_ELEM_FLAG_SWITCH_FORWARDS | TRACK_ELEM_FLAG_STARTS_AT_HALF_HEIGHT,
+    /* TrackElemType::TrackSwitchForwardsSBendWyeRight              */   TRACK_ELEM_FLAG_SWITCH_FORWARDS | TRACK_ELEM_FLAG_STARTS_AT_HALF_HEIGHT,
+    /* TrackElemType::TrackSwitchReverseSBendWyeRight               */   TRACK_ELEM_FLAG_SWITCH_REVERSE | TRACK_ELEM_FLAG_STARTS_AT_HALF_HEIGHT,
+    /* TrackElemType::TrackSwitchReverseSBendWyeLeft                */   TRACK_ELEM_FLAG_SWITCH_REVERSE | TRACK_ELEM_FLAG_STARTS_AT_HALF_HEIGHT,
 };
 // clang-format on
 
@@ -5402,6 +5514,11 @@ static constexpr rct_trackdefinition TrackDefinitions[TrackElemType::Count] =
     { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // TrackElemType::FlatTrack1x1B
     { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        -40                },  // TrackElemType::FlatTrack1x4C
     { TRACK_FLAT,                   TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // TrackElemType::FlatTrack3x3
+    { TRACK_BLOCK_BRAKES,           TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // TrackElemType::BlockBrakesReverse
+    { TRACK_S_BEND,                 TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // TrackElemType::TrackSwitchForwardsSBendWyeLeft
+    { TRACK_S_BEND,                 TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // TrackElemType::TrackSwitchForwardsSBendWyeRight
+    { TRACK_S_BEND,                 TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // TrackElemType::TrackSwitchReverseSBendWyeRight
+    { TRACK_S_BEND,                 TRACK_SLOPE_NONE,           TRACK_SLOPE_NONE,           TRACK_BANK_NONE,        TRACK_BANK_NONE,        0                  },  // TrackElemType::TrackSwitchReverseSBendWyeLeft
 };
 // clang-format on
 
@@ -5425,7 +5542,8 @@ constexpr static uint8_t TrackTypeToSpinFunction[TrackElemType::Count] = {
     NO_SPIN, L7_SPIN, R7_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, L7_SPIN, R7_SPIN, L7_SPIN, R7_SPIN,
     L8_SPIN, R8_SPIN, L8_SPIN, R8_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN,
     NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN,
-    NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN
+    NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN,
+    NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, NO_SPIN, L7_SPIN, R7_SPIN, R7_SPIN, L7_SPIN
 };
 
 static constexpr const rct_string_id RideConfigurationStringIds[] = {
@@ -5696,6 +5814,11 @@ static constexpr const rct_string_id RideConfigurationStringIds[] = {
     STR_EMPTY,                         // 264
     STR_EMPTY,                         // 265
     STR_EMPTY,                         // 266
+    STR_BLOCK_BRAKES_CANNOT_BE_USED_DIRECTLY_AFTER_EACH_OTHER,
+    STR_GOLF_HOLE_A, // 201
+    STR_GOLF_HOLE_B, // 202
+    STR_GOLF_HOLE_C, // 203
+    STR_GOLF_HOLE_D, // 204
 };
 
 namespace OpenRCT2
