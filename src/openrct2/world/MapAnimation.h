@@ -36,10 +36,11 @@ enum
     MAP_ANIMATION_TYPE_LARGE_SCENERY,
     MAP_ANIMATION_TYPE_WALL_DOOR,
     MAP_ANIMATION_TYPE_WALL,
+    MAP_ANIMATION_TYPE_TRACK_SWITCH,
     MAP_ANIMATION_TYPE_COUNT
 };
 
-void map_animation_create(int32_t type, const CoordsXYZ& loc);
+bool map_animation_create(int32_t type, const CoordsXYZ& loc);
 void map_animation_invalidate_all();
 const std::vector<MapAnimation>& GetMapAnimations();
 void AutoCreateMapAnimations();

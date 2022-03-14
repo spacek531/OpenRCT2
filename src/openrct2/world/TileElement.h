@@ -342,7 +342,11 @@ private:
                 // Contains the brake/booster speed, divided by 2.
                 uint8_t BrakeBoosterSpeed;
             };
-            StationIndex stationIndex;
+            union
+            {
+                StationIndex stationIndex;
+                uint8_t switchState;
+            };
         } URide;
         struct
         {
@@ -419,6 +423,11 @@ public:
 
     bool IsStation() const;
     bool IsBlockStart() const;
+
+    bool SwitchIsSwitching() const;
+    void SetSwitchState(uint8_t newValue);
+    uint8_t GetSwitchState() const;
+    void SwitchFullyThrown();
 };
 assert_struct_size(TrackElement, 16);
 

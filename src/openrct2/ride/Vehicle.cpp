@@ -7857,6 +7857,8 @@ bool Vehicle::UpdateTrackMotionForwardsGetNewTrack(uint16_t trackType, Ride* cur
 
     auto pitchAndRollEnd = TrackPitchAndRollEnd(trackType);
     TileElement* tileElement = map_get_track_element_at_of_type_seq(TrackLocation, trackType, 0);
+    auto previousTileElement = tileElement;
+    CoordsXYZD previousTrackLocation = { TrackLocation, previousTileElement->GetDirection() };
 
     if (tileElement == nullptr)
     {
@@ -8024,6 +8026,16 @@ bool Vehicle::UpdateTrackMotionForwardsGetNewTrack(uint16_t trackType, Ride* cur
     // Change from original: this used to check if the vehicle allowed doors.
     UpdateSceneryDoorBackwards();
     UpdateLandscapeDoorBackwards();
+
+    if (TrackTypeIsSwitchTrack(previousTileElement->AsTrack()->GetTrackType()))
+    {
+        if (next_vehicle_on_train.IsNull())
+        {
+            TrackSwitchChangeState(
+                previousTrackLocation, previousTileElement->GetRideIndex(),
+                previousTileElement->AsTrack()->GetTrackType());
+        }
+    }
 
     return true;
 }
@@ -8275,6 +8287,8 @@ bool Vehicle::UpdateTrackMotionBackwardsGetNewTrack(uint16_t trackType, Ride* cu
 {
     auto pitchAndRollStart = TrackPitchAndRollStart(trackType);
     TileElement* tileElement = map_get_track_element_at_of_type_seq(TrackLocation, trackType, 0);
+    auto previousTileElement = tileElement;
+    CoordsXYZD previousTrackLocation = { TrackLocation, previousTileElement->GetDirection() };
 
     if (tileElement == nullptr)
         return false;
@@ -8419,6 +8433,17 @@ bool Vehicle::UpdateTrackMotionBackwardsGetNewTrack(uint16_t trackType, Ride* cu
     // There are two bytes before the move info list
     uint16_t trackTotalProgress = GetTrackProgress();
     *progress = trackTotalProgress - 1;
+
+    if (TrackTypeIsSwitchTrack(previousTileElement->AsTrack()->GetTrackType()))
+    {
+        if (IsHead())
+        {
+            TrackSwitchChangeState(
+                previousTrackLocation, previousTileElement->GetRideIndex(),
+                previousTileElement->AsTrack()->GetTrackType());
+        }
+    }
+
     return true;
 }
 

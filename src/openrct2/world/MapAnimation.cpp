@@ -48,7 +48,7 @@ static bool DoesAnimationExist(int32_t type, const CoordsXYZ& location)
     return false;
 }
 
-void map_animation_create(int32_t type, const CoordsXYZ& loc)
+bool map_animation_create(int32_t type, const CoordsXYZ& loc)
 {
     if (!DoesAnimationExist(type, loc))
     {
@@ -56,12 +56,15 @@ void map_animation_create(int32_t type, const CoordsXYZ& loc)
         {
             // Create new animation
             _mapAnimations.push_back({ static_cast<uint8_t>(type), loc });
+            return true;
         }
         else
         {
             log_error("Exceeded the maximum number of animations");
+            return false;
         }
     }
+    return true;
 }
 
 /**
@@ -567,6 +570,51 @@ static bool map_animation_invalidate_wall(const CoordsXYZ& loc)
     return !wasInvalidated;
 }
 
+static bool map_animation_invalidate_track_switch(const CoordsXYZ& loc)
+{
+    TileCoordsXYZ tileLoc{ loc };
+    TileElement* tileElement;
+
+    tileElement = map_get_first_element_at(loc);
+    if (tileElement == nullptr)
+        return true;
+    do
+    {
+        if (tileElement->base_height != tileLoc.z)
+            continue;
+        if (tileElement->GetType() != TileElementType::Track)
+            continue;
+
+        if (game_is_paused())
+        {
+            return false;
+        }
+        TrackElement* trackElement = tileElement->AsTrack();
+        auto switchState = trackElement->GetSwitchState();
+
+        if (switchState > 0)
+        {
+            trackElement->SetSwitchState(--switchState);
+            if ((switchState & 1) == 0)
+            {
+                map_invalidate_tile_zoom1({ loc, loc.z + 14, loc.z + 32 });
+                if (switchState == 0)
+                {
+                    trackElement->SwitchFullyThrown();
+                    return true;
+                }
+            }
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    } while (!(tileElement++)->IsLastForTile());
+
+    return true;
+}
+
 /**
  *
  *  rct2: 0x009819DC
@@ -586,6 +634,7 @@ static constexpr const map_animation_invalidate_event_handler _animatedObjectEve
     map_animation_invalidate_large_scenery,
     map_animation_invalidate_wall_door,
     map_animation_invalidate_wall,
+    map_animation_invalidate_track_switch,
 };
 
 /**
@@ -699,6 +748,10 @@ void AutoCreateMapAnimations()
                     case TrackElemType::SpinningTunnel:
                         map_animation_create(MAP_ANIMATION_TYPE_TRACK_SPINNINGTUNNEL, loc);
                         break;
+                }
+                if (TrackTypeIsSwitchTrack(track->GetTrackType()) && track->GetSwitchState() > 0)
+                {
+                    map_animation_create(MAP_ANIMATION_TYPE_TRACK_SWITCH, loc);
                 }
                 break;
             }

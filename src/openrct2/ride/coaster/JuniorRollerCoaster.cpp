@@ -5945,11 +5945,314 @@ static void junior_rc_track_on_ride_photo(
     paint_util_set_general_support_height(session, height + 48 + photoCameraOffset, 0x20);
 }
 
-static void junior_rc_track_switch_forwards_wye_left(
+static uint32_t junior_rc_wye_elements[3][4][10] = {
+    {
+        // left-hand switch
+        {
+            // direction 0
+            junior_rc_track_pieces_s_bend_left[0][0],  // s-bend left 0
+            0,                                         // vacated s-bend left 0
+            junior_rc_track_pieces_s_bend_right[0][0], // s-bend right 0
+            0,                                         // vacated s-bend left 1
+            junior_rc_track_pieces_s_bend_left[0][2],  // s-bend left 2
+            junior_rc_track_pieces_s_bend_left[0][1],  // s-bend left 1, vacated s-bend right 1
+            junior_rc_track_pieces_s_bend_right[0][1], // s-bend right 1, vacated s-bend right 2
+            junior_rc_track_pieces_s_bend_right[0][2], // s-bend right 2
+            junior_rc_track_pieces_s_bend_right[0][3],
+            junior_rc_track_pieces_s_bend_left[0][3],
+        },
+        {
+            // direction 1
+            junior_rc_track_pieces_s_bend_left[1][0],  // s-bend left 0
+            0,                                         // vacated s-bend left 0
+            junior_rc_track_pieces_s_bend_right[1][0], // s-bend right 0
+            0,                                         // vacated s-bend left 1
+            junior_rc_track_pieces_s_bend_left[1][2],  // s-bend left 2
+            junior_rc_track_pieces_s_bend_left[1][1],  // s-bend left 1, vacated s-bend right 1
+            junior_rc_track_pieces_s_bend_right[1][1], // s-bend right 1, vacated s-bend right 2
+            junior_rc_track_pieces_s_bend_right[1][2], // s-bend right 2
+            junior_rc_track_pieces_s_bend_right[1][3],
+            junior_rc_track_pieces_s_bend_left[1][3],
+        },
+        {
+            // direction 2
+            junior_rc_track_pieces_s_bend_left[0][3],
+            0,
+            junior_rc_track_pieces_s_bend_right[0][3],
+            0,
+            junior_rc_track_pieces_s_bend_left[0][1],
+            junior_rc_track_pieces_s_bend_left[0][2],
+            junior_rc_track_pieces_s_bend_right[0][2],
+            junior_rc_track_pieces_s_bend_right[0][1],
+            junior_rc_track_pieces_s_bend_right[0][0],
+            junior_rc_track_pieces_s_bend_left[0][0],
+        },
+        {
+            // direction 3
+            junior_rc_track_pieces_s_bend_left[1][3],
+            0,
+            junior_rc_track_pieces_s_bend_right[1][3],
+            0,
+            junior_rc_track_pieces_s_bend_left[1][1],
+            junior_rc_track_pieces_s_bend_left[1][2],
+            junior_rc_track_pieces_s_bend_right[1][2],
+            junior_rc_track_pieces_s_bend_right[1][1],
+            junior_rc_track_pieces_s_bend_right[1][0],
+            junior_rc_track_pieces_s_bend_left[1][0],
+        },
+    },
+    {}, // unused, but important
+    {
+        // right-hand switch
+        {
+            // direction 0
+            junior_rc_track_pieces_s_bend_right[0][0],
+            junior_rc_track_pieces_s_bend_left[0][0],
+            0,
+            junior_rc_track_pieces_s_bend_left[0][2],
+            junior_rc_track_pieces_s_bend_left[0][1],
+            junior_rc_track_pieces_s_bend_right[0][1],
+            junior_rc_track_pieces_s_bend_right[0][2],
+            0,
+            junior_rc_track_pieces_s_bend_left[0][3],
+            junior_rc_track_pieces_s_bend_right[0][3],
+        },
+        {
+            // direction 1
+            junior_rc_track_pieces_s_bend_right[1][0],
+            junior_rc_track_pieces_s_bend_left[1][0],
+            0,
+            junior_rc_track_pieces_s_bend_left[1][2],
+            junior_rc_track_pieces_s_bend_left[1][1],
+            junior_rc_track_pieces_s_bend_right[1][1],
+            junior_rc_track_pieces_s_bend_right[1][2],
+            0,
+            junior_rc_track_pieces_s_bend_left[1][3],
+            junior_rc_track_pieces_s_bend_right[1][3],
+        },
+        {
+            // direction 2
+            junior_rc_track_pieces_s_bend_right[0][3],
+            junior_rc_track_pieces_s_bend_left[0][3],
+            0,
+            junior_rc_track_pieces_s_bend_left[0][1],
+            junior_rc_track_pieces_s_bend_left[0][2],
+            junior_rc_track_pieces_s_bend_right[0][2],
+            junior_rc_track_pieces_s_bend_right[0][1],
+            0,
+            junior_rc_track_pieces_s_bend_left[0][0],
+            junior_rc_track_pieces_s_bend_right[0][0],
+        },
+        {
+            // direction 3
+            junior_rc_track_pieces_s_bend_right[1][3],
+            junior_rc_track_pieces_s_bend_left[1][3],
+            0,
+            junior_rc_track_pieces_s_bend_left[1][1],
+            junior_rc_track_pieces_s_bend_left[1][2],
+            junior_rc_track_pieces_s_bend_right[1][2],
+            junior_rc_track_pieces_s_bend_right[1][1],
+            0,
+            junior_rc_track_pieces_s_bend_left[1][0],
+            junior_rc_track_pieces_s_bend_right[1][0],
+        },
+    },
+};
+
+static void junior_rc_track_switch_forwards_wye(
     paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
-    const TrackElement& trackElement)
+    const TrackElement& trackElement, int8_t mirrored)
 {
-    uint32_t imageId;
+    // draw track
+    static CoordsXY offsetList[3][2][10] = {
+        { // left switch
+          {
+              // even direction
+              { 0, 6 }, // s-bend left 0
+              { 0, 0 }, // vacated s-bend left 0
+              { 0, 6 }, // s-bend right 0
+              { 0, 0 }, // vacated s-bend left 1
+              { 0, 6 }, // s-bend left 2
+              { 0, 0 }, // s-bend left 1, vacated s-bend right 1
+              { 0, 6 }, // s-bend right 1, vacated s-bend right 2
+              { 0, 0 }, // s-bend right 2
+              { 0, 6 },
+              { 0, 6 },
+          },
+          {
+              // even odd direction
+              { 0, 6 }, // s-bend left 0
+              { 0, 0 }, // vacated s-bend left 0
+              { 0, 6 }, // s-bend right 0
+              { 0, 6 }, // vacated s-bend left 1
+              { 0, 0 }, // s-bend left 2
+              { 0, 6 }, // s-bend left 1, vacated s-bend right 1
+              { 0, 0 }, // s-bend right 1, vacated s-bend right 2
+              { 0, 6 }, // s-bend right 2
+              { 0, 6 },
+              { 0, 6 },
+          } },
+        {},
+        {
+            // right switch
+            {
+                // even direction
+                { 0, 6 }, // s-bend right 0
+                { 0, 6 }, // s-bend left 0
+                { 0, 0 }, // vacated s-bend right 0
+                { 0, 6 }, // s-bend left 2
+                { 0, 0 }, // s-bend left 1, vacated s-bend left 2
+                { 0, 6 }, // s-bend right 1, vacated s-bend left 1
+                { 0, 0 }, // s-bend right 2, vacated s-bend right 1
+                { 0, 0 }, // vacated s-bend right 2
+                { 0, 6 },
+                { 0, 6 },
+            },
+            {
+                // odd direction
+                { 0, 6 }, // s-bend right 0
+                { 0, 6 }, // s-bend left 0
+                { 0, 0 }, // vacated s-bend right 0
+                { 0, 0 }, // s-bend left 2
+                { 0, 6 }, // s-bend left 1, vacated s-bend left 2
+                { 0, 0 }, // s-bend right 1, vacated s-bend left 1
+                { 0, 6 }, // s-bend right 2, vacated s-bend right 1
+                { 0, 6 }, // vacated s-bend right 2
+                { 0, 6 },
+                { 0, 6 },
+            },
+        },
+    };
+
+    constexpr static CoordsXY boundsList[10] = {
+        { 32, 20 }, // s-bend left 0
+        { 32, 20 }, // vacated s-bend 0
+        { 32, 20 }, // s-bend 0
+        { 32, 26 }, // vacated s-bend 1
+        { 32, 26 }, // s-bend 2
+        { 32, 26 }, // s-bend 1, vacated s-bend 1
+        { 32, 26 }, // s-bend 1, vacated s-bend 2
+        { 32, 26 }, // s-bend 2
+        { 32, 20 }, // s-bend 3
+        { 32, 20 }, // s-bend 3
+    };
+
+    constexpr static uint8_t switchMap[3][10] = {
+        { 2, 0, 255, 4, 5, 6, 7, 255, 255, 255 },
+        {},
+        { 1, 255, 0, 255, 3, 4, 5, 6, 255, 255 },
+    };
+
+    uint32_t imageId = junior_rc_wye_elements[1 + mirrored][direction][trackSequence];
+
+    CoordsXY offset = offsetList[1 + mirrored][(direction >> 1)][trackSequence];
+    CoordsXY bounds = boundsList[trackSequence];
+    auto switchState = trackElement.GetSwitchState();
+    auto trackHeight = (trackSequence < 8 && trackSequence != 3 && trackSequence != 7) * 8;
+
+    if (switchState && trackSequence < 8)
+    {
+        auto secondSpriteSequence = switchMap[1 + mirrored][trackSequence];
+        auto switchMovementAmount = mirrored * (direction < 2 ? 1 : -1) * switchState;
+        auto secondSpriteOffset = mirrored * (direction < 2 ? 1 : -1) * -32;
+        switch (direction)
+        {
+            case 0:
+                if (imageId)
+                {
+                    PaintAddImageAsParent(
+                        session, imageId | session.TrackColours[SCHEME_TRACK],
+                        { 0, offset.y + switchMovementAmount, height + trackHeight }, { 32, 32, 1 },
+                        { 0, 0, height + trackHeight });
+                }
+                if (secondSpriteSequence < 255)
+                {
+                    imageId = junior_rc_wye_elements[1 + mirrored][direction][secondSpriteSequence];
+                    offset = offsetList[1 + mirrored][direction & 1][secondSpriteSequence];
+                    bounds = boundsList[secondSpriteSequence];
+                    PaintAddImageAsParent(
+                        session, imageId | session.TrackColours[SCHEME_TRACK],
+                        { 0, offset.y + switchMovementAmount + secondSpriteOffset, height + trackHeight }, { 32, 32, 1 },
+                        { 0, 0, height + trackHeight });
+                }
+                break;
+            case 3:
+                if (imageId)
+                {
+                    PaintAddImageAsParent(
+                        session, imageId | session.TrackColours[SCHEME_TRACK],
+                        { offset.y + switchMovementAmount, 0, height + trackHeight }, { 32, 32, 1 },
+                        { 0, 0, height + trackHeight });
+                }
+                if (secondSpriteSequence < 255)
+                {
+                    imageId = junior_rc_wye_elements[1 + mirrored][direction][secondSpriteSequence];
+                    offset = offsetList[1 + mirrored][direction & 1][secondSpriteSequence];
+                    bounds = boundsList[secondSpriteSequence];
+                    PaintAddImageAsParent(
+                        session, imageId | session.TrackColours[SCHEME_TRACK],
+                        { offset.y + switchMovementAmount + secondSpriteOffset, 0, height + trackHeight }, { 32, 32, 1 },
+                        { 0, 0, height + trackHeight });
+                }
+                break;
+            case 2:
+                if (imageId)
+                {
+                    PaintAddImageAsParent(
+                        session, imageId | session.TrackColours[SCHEME_TRACK],
+                        { 0, offset.y + switchMovementAmount, height + trackHeight }, { 32, 32, 1 },
+                        { 0, 0, height + trackHeight });
+                }
+                if (secondSpriteSequence < 255)
+                {
+                    imageId = junior_rc_wye_elements[1 + mirrored][direction][secondSpriteSequence];
+                    offset = offsetList[1 + mirrored][direction & 1][secondSpriteSequence];
+                    bounds = boundsList[secondSpriteSequence];
+                    PaintAddImageAsParent(
+                        session, imageId | session.TrackColours[SCHEME_TRACK],
+                        { 0, switchMovementAmount + secondSpriteOffset + (32 - offset.y - bounds.y), height + trackHeight },
+                        { 32, 32, 1 },
+                        { 0, 0, height + trackHeight });
+                }
+                break;
+            case 1:
+                if (imageId)
+                {
+                    PaintAddImageAsParent(
+                        session, imageId | session.TrackColours[SCHEME_TRACK],
+                        { offset.y + switchMovementAmount, 0, height + trackHeight }, { 32, 32, 1 },
+                        { 0, 0, height + trackHeight });
+                }
+                if (secondSpriteSequence < 255)
+                {
+                    imageId = junior_rc_wye_elements[1 + mirrored][direction][secondSpriteSequence];
+                    offset = offsetList[1 + mirrored][direction & 1][secondSpriteSequence];
+                    bounds = boundsList[secondSpriteSequence];
+                    PaintAddImageAsParent(
+                        session, imageId | session.TrackColours[SCHEME_TRACK],
+                        { switchMovementAmount + secondSpriteOffset + (32 - offset.y - bounds.y), 0, height + trackHeight }, { 32, 32, 1 },
+                        { 0, 0, height + trackHeight });
+                }
+                break;
+        }
+    }
+    else if (imageId)
+    {
+        if (direction == 0 || direction == 2)
+        {
+            PaintAddImageAsParent(
+                session, imageId | session.TrackColours[SCHEME_TRACK], { offset.x, offset.y, height + trackHeight },
+                { bounds.x, bounds.y, 1 });
+        }
+        else
+        {
+            PaintAddImageAsParent(
+                session, imageId | session.TrackColours[SCHEME_TRACK], { offset.y, offset.x, height + trackHeight },
+                { bounds.y, bounds.x, 1 });
+        }
+    }
+    // draw supports
+
     switch (trackSequence)
     {
         case 0:
@@ -5974,34 +6277,55 @@ static void junior_rc_track_switch_forwards_wye_left(
             }
             imageId = SPR_STATION_BASE_D | session.TrackColours[SCHEME_SUPPORTS];
             PaintAddImageAsParent(session, imageId, { 0, 0, height }, { 32, 32, 1 });
+            paint_util_set_general_support_height(session, height + 40, 0x20);
             break;
         case 3:
         case 7:
+            paint_util_set_general_support_height(session, height + 32, 0x20);
+            break;
         case 8:
         case 9:
+            uint8_t supportType = (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK;
+            metal_a_supports_paint_setup(session, supportType, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            paint_util_set_general_support_height(session, height + 32, 0x20);
             break;
     }
-    // metal_a_supports_paint_setup(session, METAL_SUPPORTS_FORK_ALT, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+    /**/
+    //  block supports
+    int32_t blockedSegments = 511; // all segments
+    paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, (direction & 1)), 0xFFFF, 0);
+}
 
-    int32_t blockedSegments = 0;
-    switch (trackSequence)
-    {
-        case 0:
-            blockedSegments = SEGMENT_D0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_B4;
-            break;
-        case 1:
-            blockedSegments = SEGMENT_D0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_B8 | SEGMENT_C8 | SEGMENT_B4;
-            break;
-        case 2:
-            blockedSegments = SEGMENT_D0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_C0 | SEGMENT_D4 | SEGMENT_BC;
-            break;
-        case 3:
-            blockedSegments = SEGMENT_D0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_C0;
-            break;
-    }
-    // paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, (direction & 1)), 0xFFFF, 0);
+static void junior_rc_track_switch_forwards_wye_left_setup(
+    paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
+    const TrackElement& trackElement)
+{
+    junior_rc_track_switch_forwards_wye(session, ride, trackSequence, direction, height, trackElement, -1);
+}
 
-    // paint_util_set_general_support_height(session, height + 32, 0x20);
+static void junior_rc_track_switch_forwards_wye_right_setup(
+    paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
+    const TrackElement& trackElement)
+{
+    junior_rc_track_switch_forwards_wye(session, ride, trackSequence, direction, height, trackElement, 1);
+}
+
+constexpr static uint8_t junior_rc_track_reverse_wye_map[10] = { 9, 8, 3, 4, 5, 6, 7, 1, 2, 0 };
+
+static void junior_rc_track_switch_reverse_wye_left_setup(
+    paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
+    const TrackElement& trackElement)
+{
+    junior_rc_track_switch_forwards_wye(
+        session, ride, junior_rc_track_reverse_wye_map[trackSequence], (direction + 2) & 3, height, trackElement, 1);
+}
+
+static void junior_rc_track_switch_reverse_wye_right_setup(
+    paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
+    const TrackElement& trackElement)
+{
+    junior_rc_track_switch_forwards_wye(
+        session, ride, junior_rc_track_reverse_wye_map[trackSequence], (direction + 2) & 3, height, trackElement, -1);
 }
 
 /* 0x008AAA0C */
@@ -6228,11 +6552,13 @@ TRACK_PAINT_FUNCTION get_track_paint_function_junior_rc(int32_t trackType)
             return junior_rc_track_on_ride_photo;
 
         case TrackElemType::TrackSwitchForwardsSBendWyeLeft:
-            return junior_rc_track_switch_forwards_wye_left;
+            return junior_rc_track_switch_forwards_wye_left_setup;
         case TrackElemType::TrackSwitchForwardsSBendWyeRight:
+            return junior_rc_track_switch_forwards_wye_right_setup;
         case TrackElemType::TrackSwitchReverseSBendWyeRight:
+            return junior_rc_track_switch_reverse_wye_left_setup;
         case TrackElemType::TrackSwitchReverseSBendWyeLeft:
-            return nullptr;
+            return junior_rc_track_switch_reverse_wye_right_setup;
     }
     return nullptr;
 }

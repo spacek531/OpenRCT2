@@ -628,6 +628,23 @@ bool track_type_is_station(track_type_t trackType)
     }
 }
 
+bool TrackElement::SwitchIsSwitching() const
+{
+    return GetSwitchState() > 0;
+}
+void TrackElement::SetSwitchState(uint8_t newValue)
+{
+    URide.switchState = newValue;
+}
+uint8_t TrackElement::GetSwitchState() const
+{
+    return URide.switchState;
+}
+void TrackElement::SwitchFullyThrown()
+{
+
+}
+
 bool track_element_is_covered(track_type_t trackElementType)
 {
     switch (trackElementType)
@@ -725,7 +742,6 @@ bool TrackSwitchChangeState(const CoordsXYZD& location, RideId rideIndex, track_
         cur += offsets.Rotate(mapDirection);
         int32_t cur_z = start_z + trackBlock[i].z;
 
-        map_invalidate_tile_full(cur);
 
         trackElement = map_get_track_element_at_of_type_seq(
             { cur, cur_z, static_cast<Direction>(location.direction) }, trackType, trackBlock[i].index);
@@ -734,14 +750,20 @@ bool TrackSwitchChangeState(const CoordsXYZD& location, RideId rideIndex, track_
             return false;
         }
         trackElement->SetTrackType(oppositeTrackType);
+        if (map_animation_create(MAP_ANIMATION_TYPE_TRACK_SWITCH, { cur, cur_z }))
+        {
+            trackElement->SetSwitchState(TRACK_SWITCH_THROW_LENGTH);
+        }
+        else
+        {
+            trackElement->SetSwitchState(0);
+        }
         if ((trackBlock[i].flags
              & (RCT_PREVIEW_TRACK_FLAG_SWITCH_REVERSE_ALTERNATE | RCT_PREVIEW_TRACK_FLAG_SWITCH_FORWARD_ALTERNATE))
             != 0)
         {
             trackElement->SetSequenceIndex(trackBlock[i].index ^ 1);
         }
-        // invalidate please?
-        // map_invalidate_tile({ cur , cur_z, cur_z + 1});
     }
     return true;
 }
