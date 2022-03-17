@@ -14,7 +14,6 @@
 #include "../ride/Station.h"
 #include "Banner.h"
 #include "Footpath.h"
-#include "TrackP.h"
 #include "tile_element/TileElementType.h"
 
 struct Banner;
@@ -182,10 +181,6 @@ struct TileElement : public TileElementBase
     void SetBannerIndex(BannerIndex newIndex);
     void RemoveBannerEntry();
     BannerIndex GetBannerIndex() const;
-
-    void SetTrackIndex(TrackIndex newIndex);
-    void RemoveTrackEntry();
-    TrackIndex GetTrackIndex() const;
 };
 assert_struct_size(TileElement, 16);
 
@@ -336,15 +331,18 @@ private:
     {
         struct
         {
+            uint8_t Sequence;
+            uint8_t ColourScheme;
             union
             {
-                uint8_t Sequence;
                 // - Bits 3 and 4 are never set
                 // - Bits 1 and 2 are set when a vehicle triggers the on-ride photo and act like a countdown from 3.
                 // - If any of the bits 1-4 are set, the game counts it as a photo being taken.
                 uint8_t OnridePhotoBits;
+                // Contains the brake/booster speed, divided by 2.
+                uint8_t BrakeBoosterSpeed;
             };
-            uint8_t ColourScheme;
+            StationIndex stationIndex;
         } URide;
         struct
         {
@@ -352,8 +350,8 @@ private:
         } UMaze;
     };
     uint8_t Flags2;
+    RideId RideIndex;
     ride_type_t RideType;
-    TrackIndex index = TrackIndex::GetNull();
 
 public:
     track_type_t GetTrackType() const;
@@ -421,13 +419,6 @@ public:
 
     bool IsStation() const;
     bool IsBlockStart() const;
-
-    Track* CreateTrack();
-    void RefactorTrackData();
-
-    Track* GetTrack() const;
-    void SetIndex(TrackIndex newTrackIndex);
-    TrackIndex GetIndex() const;
 };
 assert_struct_size(TrackElement, 16);
 
