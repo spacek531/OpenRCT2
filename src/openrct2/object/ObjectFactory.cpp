@@ -498,24 +498,12 @@ namespace ObjectFactory
         if (objectType != ObjectType::None)
         {
             auto id = Json::GetString(jRoot["id"]);
+            ObjectEntryDescriptor descriptor(objectType, id);
 
-            ObjectEntryDescriptor descriptor;
             auto originalId = Json::GetString(jRoot["originalId"]);
             if (originalId.length() == 8 + 1 + 8 + 1 + 8)
             {
-                auto originalName = originalId.substr(9, 8);
-
-                rct_object_entry entry = {};
-                entry.flags = std::stoul(originalId.substr(0, 8), nullptr, 16);
-                entry.checksum = std::stoul(originalId.substr(18, 8), nullptr, 16);
-                entry.SetType(objectType);
-                auto minLength = std::min<size_t>(8, originalName.length());
-                std::memcpy(entry.name, originalName.c_str(), minLength);
-                descriptor = ObjectEntryDescriptor(entry);
-            }
-            else
-            {
-                descriptor = ObjectEntryDescriptor(objectType, id);
+                rct_object_entry entry(originalId);
             }
 
             result = CreateObject(objectType);
