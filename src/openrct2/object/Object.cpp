@@ -33,6 +33,15 @@ ObjectType& operator++(ObjectType& d, int)
     return d = (d == ObjectType::Count) ? ObjectType::Ride : static_cast<ObjectType>(static_cast<uint8_t>(d) + 1);
 }
 
+rct_object_entry::rct_object_entry(std::string& originalId)
+{
+    auto originalName = originalId.substr(9, 8);
+    flags = std::stoul(originalId.substr(0, 8), nullptr, 16);
+    checksum = std::stoul(originalId.substr(18, 8), nullptr, 16);
+    auto minLength = std::min<size_t>(8, originalName.length());
+    std::memcpy(name, originalName.c_str(), minLength);
+}
+
 ObjectEntryDescriptor::ObjectEntryDescriptor(const rct_object_entry& newEntry)
 {
     if (!newEntry.IsEmpty())

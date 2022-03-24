@@ -125,6 +125,9 @@ struct rct_object_entry
     bool IsEmpty() const;
     bool operator==(const rct_object_entry& rhs) const;
     bool operator!=(const rct_object_entry& rhs) const;
+
+    rct_object_entry() = default;
+    explicit rct_object_entry(std::string& originalId);
 };
 assert_struct_size(rct_object_entry, 0x10);
 
