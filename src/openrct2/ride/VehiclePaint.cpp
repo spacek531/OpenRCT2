@@ -933,30 +933,35 @@ static void PaintVehicleRiders(
     paint_session& session, const Vehicle* vehicle, const rct_ride_entry_vehicle* vehicleEntry, uint32_t baseImageId, int32_t z,
     const vehicle_boundbox& bb)
 {
+    // Move the base image id to the first peep sprite set
     baseImageId += vehicleEntry->no_vehicle_images;
-    for (auto i = 0; i < 8; i++)
+
+    auto peepsToDraw = std::min(
+        vehicleEntry->num_seats & VEHICLE_SEAT_PAIR_FLAG ? static_cast<uint8_t>((vehicle->num_peeps + 1) / 2)
+                                                         : vehicle->num_peeps,
+        vehicleEntry->no_seating_rows);
+    for (auto i = 0; i < peepsToDraw; i++)
     {
-        if (vehicle->num_peeps > (i * 2) && vehicleEntry->no_seating_rows > i)
+        auto offsetImageId = baseImageId;
+        // Only boats have animated peeps, and the only one with multiple rows is the swan boat
+        if (i == 0 && (vehicleEntry->flags & VEHICLE_ENTRY_FLAG_RIDER_ANIMATION))
         {
-            auto offsetImageId = baseImageId;
-            if (i == 0 && (vehicleEntry->flags & VEHICLE_ENTRY_FLAG_RIDER_ANIMATION))
-            {
-                offsetImageId += (vehicleEntry->no_vehicle_images * vehicle->animation_frame);
-            }
-
-            auto peepColour0 = vehicle->peep_tshirt_colours[i * 2];
-            auto peepColour1 = vehicle->peep_tshirt_colours[(i * 2) + 1];
-            auto imageId = ImageId(offsetImageId, peepColour0, peepColour1);
-            if (vehicle->IsGhost())
-            {
-                imageId = ImageId(offsetImageId).WithRemap(FilterPaletteID::Palette44);
-            }
-
-            PaintAddImageAsChild(
-                session, imageId, { 0, 0, z }, { bb.length_x, bb.length_y, bb.length_z },
-                { bb.offset_x, bb.offset_y, bb.offset_z + z });
-            baseImageId += vehicleEntry->no_vehicle_images;
+            offsetImageId += (vehicleEntry->no_vehicle_images * vehicle->animation_frame);
         }
+
+        auto peepColour0 = vehicle->peep_tshirt_colours[i * 2];
+        auto peepColour1 = vehicle->peep_tshirt_colours[(i * 2) + 1];
+        auto imageId = ImageId(offsetImageId, peepColour0, peepColour1);
+        if (vehicle->IsGhost())
+        {
+            imageId = ImageId(offsetImageId).WithRemap(FilterPaletteID::Palette44);
+        }
+
+        PaintAddImageAsChild(
+            session, imageId, { 0, 0, z }, { bb.length_x, bb.length_y, bb.length_z },
+            { bb.offset_x, bb.offset_y, bb.offset_z + z });
+        // Move the base image id to the next peep sprite set
+        baseImageId += vehicleEntry->no_vehicle_images;
     }
 }
 
