@@ -519,6 +519,8 @@
     <ClInclude Include="Version.h" />
     <ClInclude Include="windows\Intent.h" />
     <ClInclude Include="windows\tile_inspector.h" />
+    <ClInclude Include="world\tile_component\TileComponent.h" />
+    <ClInclude Include="world\TrackComponent.h" />
     <ClInclude Include="world\tile_element\TileElementType.h" />
     <ClInclude Include="world\Banner.h" />
     <ClInclude Include="world\Climate.h" />
@@ -989,6 +991,7 @@
     <ClCompile Include="world\TileElement.cpp" />
     <ClCompile Include="world/TileElementBase.cpp" />
     <ClCompile Include="world\TileInspector.cpp" />
+    <ClCompile Include="world\tile_component\TileComponent.cpp" />
     <ClCompile Include="world\Wall.cpp" />
     <ClCompile Include="..\thirdparty\duktape\duktape.cpp">
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
