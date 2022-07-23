@@ -17,9 +17,14 @@ template<typename T> class ComponentStore
 {
 private:
     std::vector<T> Store{};
-    uint32_t StoreMax = MAX_STORE;
+    size_t StoreMax = MAX_STORE;
 
 public:
+    ComponentStore();
+    ComponentStore(size_t maxSize){
+        StoreMax = maxSize;
+    };
+
     void init()
     {
         Store.clear();
