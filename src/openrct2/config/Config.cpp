@@ -38,6 +38,8 @@
 using namespace OpenRCT2;
 using namespace OpenRCT2::Ui;
 
+static constexpr const uint32_t DEFAULT_OBJECT_SELECTION_FILTER_FLAGS = 0x3FF8; // all games except RCT1 and its expansions, all rides tab
+
 namespace Config
 {
 #pragma region Enums
@@ -326,7 +328,7 @@ namespace Config
             model->current_theme_preset = reader->GetCString("current_theme", "*RCT2");
             model->current_title_sequence_preset = reader->GetCString("current_title_sequence", "*OPENRCT2");
             model->random_title_sequence = reader->GetBoolean("random_title_sequence", false);
-            model->object_selection_filter_flags = reader->GetInt32("object_selection_filter_flags", 0x3FFF);
+            model->object_selection_filter_flags = reader->GetInt32("object_selection_filter_flags", DEFAULT_OBJECT_SELECTION_FILTER_FLAGS);
             model->scenarioselect_last_tab = reader->GetInt32("scenarioselect_last_tab", 0);
             model->list_ride_vehicles_separately = reader->GetBoolean("list_ride_vehicles_separately", false);
         }
