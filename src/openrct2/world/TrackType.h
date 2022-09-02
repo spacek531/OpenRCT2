@@ -16,7 +16,6 @@
 constexpr const uint8_t MAX_SEQUENCE_PER_TRACKELEMENT = 16;
 constexpr const uint8_t MAX_SPRITEBOX_PER_SEQUENCE = 2;
 constexpr const uint8_t MAX_VARIANTS = 4;
-constexpr const uint16_t NULL_ELEMENT = 65535;
 /**
  * The
  */
@@ -73,7 +72,7 @@ struct TrackTypeEntry
     // The fallback track type entry
     struct TrackTypeEntry* FallbackType;
     // maps TrackElemType to index of TrackTypeElementEntry variant 0 in elements
-    TrackTypeElementEntry* TTElementMap[TrackElemType::Count][MAX_VARIANTS];
+    uint16_t TTElementMap[TrackElemType::Count][MAX_VARIANTS];
     std::vector<TrackTypeElementEntry> TTRawEntries;
 
     TrackTypeElementEntry* GetTrackTypeElementEntry(track_type_t trackType, TrackVariant trackVariant);

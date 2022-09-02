@@ -7,7 +7,7 @@
  * OpenRCT2 is licensed under the GNU General Public License version 3.
  *****************************************************************************/
 
-#include "Track.h"
+#include "TrackType.h"
 
 #include "../drawing/Drawing.h"
 #include "../paint/Paint.h"
@@ -20,6 +20,8 @@
 #include "../sprites.h"
 #include "../world/Map.h"
 
+constexpr const uint16_t NULL_ELEMENT = 65535;
+
 static const uint32_t getColour(paint_session& session, PaintMode paintType)
 {
     return 0;
@@ -27,10 +29,10 @@ static const uint32_t getColour(paint_session& session, PaintMode paintType)
 
 TrackTypeElementEntry* TrackTypeEntry::GetTrackTypeElementEntry(track_type_t trackType, TrackVariant trackVariant)
 {
-    if (TTElementMap[trackType][EnumValue(trackVariant)] != nullptr)
-        return TTElementMap[trackType][EnumValue(trackVariant)];
-    if (TTElementMap[trackType][0] != nullptr)
-        return TTElementMap[trackType][0];
+    if (TTElementMap[trackType][EnumValue(trackVariant)] != NULL_ELEMENT)
+        return &TTRawEntries[TTElementMap[trackType][EnumValue(trackVariant)]];
+    if (TTElementMap[trackType][0] != NULL_ELEMENT)
+        return &TTRawEntries[TTElementMap[trackType][0]];
     if (FallbackType != nullptr)
         return FallbackType->GetTrackTypeElementEntry(trackType, trackVariant);
     return nullptr;
