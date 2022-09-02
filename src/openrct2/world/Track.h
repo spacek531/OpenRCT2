@@ -11,6 +11,7 @@
 
 #include "../common.h"
 #include "../object/Object.h"
+#include "../ride/Track.h"
 
 constexpr const uint8_t MAX_SEQUENCE_PER_TRACKELEMENT = 16;
 constexpr const uint8_t MAX_SPRITEBOX_PER_SEQUENCE = 2;
@@ -20,20 +21,7 @@ constexpr const uint16_t NULL_ELEMENT = 65535;
  */
 enum class TrackFlag : uint8_t
 {
-    SpritesTwoDirections = (1 << 0), // for tracks which are mirrored along their length e.g. flat, brakes (how useful is this
-                                     // truly?)
-    UseMirrorElement = (1 << 1) // for tracks which are mirrored of another track element e.g. flatLeftBanked -> flatRightBanked
-};
-
-enum class TrackVariant : uint8_t
-{
-    Standard = 0,
-    BrakesClosed = 0,
-    ChainLift = 1,
-    BrakesOpen = 2,
-    CableLift = 3,
-
-    Count = 4,
+    UseMirrorElement = (1 << 0) // for tracks which are mirrored of another track element e.g. flatLeftBanked -> flatRightBanked
 };
 
 using SupportData = int16_t[2];
@@ -50,23 +38,25 @@ struct SpriteAndBox
     CoordsXYZ BoxOffset;
     PaintMode ColourParent;
     PaintMode ColourChild;
+
+    void Paint(paint_session& session, int32_t height);
 };
 
 struct TrackTypeSequenceEntry
 {
-    SpriteAndBox sprites[4][MAX_SPRITEBOX_PER_SEQUENCE];
-    SupportData supportHeight[4];
-    SupportType supportType;
+    SpriteAndBox Sprites[4][MAX_SPRITEBOX_PER_SEQUENCE];
+    SupportData SupportHeight[4];
+    SupportType SupportType;
 };
 
 struct TrackTypeElementEntry
 {
-    track_type_t trackElement;
-    uint8_t trackVariant;
-    TunnelType tunnelType;
-    TrackTypeSequenceEntry sequence[MAX_SEQUENCE_PER_TRACKELEMENT];
-    TrackFlag flags;
-    uint8_t maxSequence;
+    track_type_t TrackElement;
+    uint8_t TrackVariant;
+    TunnelType TunnelType;
+    TrackTypeSequenceEntry Sequence[MAX_SEQUENCE_PER_TRACKELEMENT];
+    TrackFlag Flags;
+    uint8_t MaxSequence;
 
     void Paint(paint_session& session, uint8_t trackSequence, uint8_t direction, int32_t height);
 };
@@ -74,36 +64,16 @@ struct TrackTypeElementEntry
 struct TrackTypeEntry
 {
     StringId name;
-    std::string fallbackObjectName;
-    struct TrackTypeEntry* fallbackType;
     uint32_t base_image;
+    std::string FallbackObjectName;
+    struct TrackTypeEntry* FallbackType;
+    uint8_t HighestVariant;
     // maps TrackElemType to index of TrackTypeElementEntry variant 0 in elements
-    uint16_t elementIndices[TrackElemType::Count + 1];
-    std::vector<TrackTypeElementEntry*> elements;
+    uint16_t ElementIndices[TrackElemType::Count + 1];
+    std::vector<TrackTypeElementEntry*> Elements;
 
-    TrackTypeElementEntry* GetTrackTypeElementEntry(track_type_t trackType, uint8_t trackVariant)
-    {
-        if (elementIndices[trackType] != NULL_ELEMENT
-            && elementIndices[trackType + 1] > elementIndices[trackType] + trackVariant)
-        {
-            auto element = elements[elementIndices[trackType] + trackVariant];
-            if (element != nullptr)
-                return element;
-            return elements[elementIndices[trackType]];
-        }
-        if (fallbackType != nullptr)
-            return fallbackType->GetTrackTypeElementEntry(trackType, trackVariant);
-        return nullptr;
-    }
-
+    TrackTypeElementEntry* GetTrackTypeElementEntry(track_type_t trackType, uint8_t trackVariant);
     void Paint(
         paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
-        const TrackElement& trackElement)
-    {
-        uint16_t trackVariant = trackElement.GetVariant();
-        auto element = GetTrackTypeElementEntry(trackElement.GetTrackType(), trackVariant);
-        if (element == nullptr)
-            return;
-        element->Paint(session, trackSequence, direction, height);
-    }
+        const TrackElement& trackElement);
 };

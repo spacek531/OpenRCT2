@@ -33,6 +33,8 @@ class FootpathSurfaceObject;
 class FootpathRailingsObject;
 using track_type_t = uint16_t;
 
+enum class TrackVariant;
+
 constexpr const uint8_t MAX_ELEMENT_HEIGHT = 255;
 constexpr const uint8_t OWNER_MASK = 0b00001111;
 
@@ -421,7 +423,7 @@ public:
     bool IsStation() const;
     bool IsBlockStart() const;
 
-    uint8_t GetVariant() const;
+    TrackVariant GetVariant() const;
 };
 assert_struct_size(TrackElement, 16);
 

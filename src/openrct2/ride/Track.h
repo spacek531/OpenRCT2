@@ -235,6 +235,17 @@ enum
     TRACK_BANK_UPSIDE_DOWN = 15,
 };
 
+enum class TrackVariant : uint8_t
+{
+    Standard = 0,
+    BrakesOpen = 0,
+    ChainLift = 1,
+    CableLift = 2,
+    BrakesClosed = 3,
+
+    Count = 4,
+};
+
 enum
 {
     TRACK_ELEM_FLAG_ONLY_UNDERWATER = (1 << 0),

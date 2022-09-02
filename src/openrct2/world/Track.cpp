@@ -1,36 +1,81 @@
+/*****************************************************************************
+ * Copyright (c) 2014-2022 OpenRCT2 developers
+ *
+ * For a complete list of all authors, please refer to contributors.md
+ * Interested in contributing? Visit https://github.com/OpenRCT2/OpenRCT2
+ *
+ * OpenRCT2 is licensed under the GNU General Public License version 3.
+ *****************************************************************************/
+
 #include "Track.h"
-#include "../ride/Track.h"
+
 #include "../drawing/Drawing.h"
 #include "../paint/Paint.h"
 #include "../paint/Supports.h"
 #include "../paint/tile_element/Paint.TileElement.h"
-#include "../sprites.h"
-#include "../world/Map.h"
 #include "../ride/RideData.h"
+#include "../ride/Track.h"
 #include "../ride/TrackData.h"
 #include "../ride/TrackPaint.h"
-
+#include "../sprites.h"
+#include "../world/Map.h"
 
 static const uint32_t getColour(paint_session& session, PaintMode paintType)
 {
     return 0;
 }
 
-void PaintSpriteAndBox(paint_session& session, const SpriteAndBox& sab, int32_t height)
+TrackTypeElementEntry* TrackTypeEntry::GetTrackTypeElementEntry(track_type_t trackType, uint8_t trackVariant)
 {
-    if (sab.SpriteIdParent == 0)
+    if (ElementIndices[trackType] != NULL_ELEMENT && ElementIndices[trackType + 1] > ElementIndices[trackType] + trackVariant)
+    {
+        auto element = Elements[ElementIndices[trackType] + trackVariant];
+        if (element != nullptr)
+            return element;
+        return Elements[ElementIndices[trackType]];
+    }
+    if (FallbackType != nullptr)
+        return FallbackType->GetTrackTypeElementEntry(trackType, trackVariant);
+    return nullptr;
+}
+
+void TrackTypeEntry::Paint(
+    paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
+    const TrackElement& trackElement)
+{
+    uint16_t trackVariant = EnumValue(trackElement.GetVariant());
+    auto element = GetTrackTypeElementEntry(trackElement.GetTrackType(), trackVariant);
+    if (element == nullptr)
+        return;
+    element->Paint(session, trackSequence, direction, height);
+}
+
+void TrackTypeElementEntry::Paint(paint_session& session, uint8_t trackSequence, uint8_t direction, int32_t height)
+{
+    if (trackSequence > MaxSequence)
+        return;
+    TrackTypeSequenceEntry sequence = Sequence[trackSequence];
+    for (uint8_t i = 0; i < MAX_SPRITEBOX_PER_SEQUENCE && sequence.Sprites[direction][i].SpriteIdParent != 0; i++)
+        sequence.Sprites[direction][i].Paint(session, height);
+    //TODO: tunnels
+    //TODO: supports
+}
+
+void SpriteAndBox::Paint(paint_session& session, int32_t height)
+{
+    if (SpriteIdParent == 0)
         return;
 
-    uint32_t imageIdParent = sab.SpriteIdParent | getColour(session, sab.ColourParent);
+    uint32_t imageIdParent = SpriteIdParent | getColour(session, ColourParent);
     PaintAddImageAsParent(
-        session, imageIdParent, { sab.SpriteOffset.x, sab.SpriteOffset.y, height + sab.SpriteOffset.z }, sab.BoxSize,
-        { sab.BoxOffset.x, sab.BoxOffset.y, height + sab.BoxOffset.z });
+        session, imageIdParent, { SpriteOffset.x, SpriteOffset.y, height + SpriteOffset.z }, BoxSize,
+        { BoxOffset.x, BoxOffset.y, height + BoxOffset.z });
 
-    if (sab.SpriteIdChild != 0)
+    if (SpriteIdChild != 0)
     {
-        uint32_t imageIdChild = sab.SpriteIdChild | getColour(session, sab.ColourChild);
-        PaintAddImageAsParent(
-            session, imageIdChild, { sab.SpriteOffset.x, sab.SpriteOffset.y, height + sab.SpriteOffset.z }, sab.BoxSize,
-            { sab.BoxOffset.x, sab.BoxOffset.y, height + sab.BoxOffset.z });
+        uint32_t imageIdChild = SpriteIdChild | getColour(session, ColourChild);
+        PaintAddImageAsChild(
+            session, imageIdChild, { SpriteOffset.x, SpriteOffset.y, height + SpriteOffset.z }, BoxSize,
+            { BoxOffset.x, BoxOffset.y, height + BoxOffset.z });
     }
 }
