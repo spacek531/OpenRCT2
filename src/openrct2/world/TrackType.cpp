@@ -93,17 +93,21 @@ void TrackTypeEntry::Paint(
     element->Paint(session, trackSequence, direction, height);
 }
 
-void TrackTypeElementEntry::Paint(paint_session& session, uint8_t trackSequence, uint8_t direction, int32_t height)
+void TrackTypeSequenceEntry::Paint(paint_session& session, int32_t height)
 {
-    if (trackSequence > MaxSequence)
-        return;
-    TrackTypeSequenceEntry sequence = Sequence[trackSequence];
-    for (uint8_t i = 0; i < MAX_SPRITEBOX_PER_SEQUENCE && sequence.Sprites[direction][i].SpriteIdParent != 0; i++)
-        sequence.Sprites[direction][i].Paint(session, height);
+    for (uint8_t i = 0; i < MAX_SPRITEBOX_PER_SEQUENCE && Sprites[i].SpriteIdParent != 0; i++)
+        Sprites[i].Paint(session, height);
     // TODO: tunnels
     // TODO: supports
     // TODO: supports blocking
     // TODO: whatever it is that miniature railway track needs
+}
+
+void TrackTypeElementEntry::Paint(paint_session& session, uint8_t trackSequence, uint8_t direction, int32_t height)
+{
+    if (trackSequence > MaxSequence)
+        return;
+    SequenceEntries[direction][trackSequence].Paint(session, height);
 }
 
 void SpriteAndBox::Paint(paint_session& session, int32_t height)

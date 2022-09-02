@@ -47,9 +47,11 @@ struct SpriteAndBox
 
 struct TrackTypeSequenceEntry
 {
-    SpriteAndBox Sprites[4][MAX_SPRITEBOX_PER_SEQUENCE];
-    SupportData SupportHeight[4];
+    SpriteAndBox Sprites[MAX_SPRITEBOX_PER_SEQUENCE];
+    SupportData SupportHeight;
     SupportType SupportType;
+
+    void Paint(paint_session& session, int32_t height);
 };
 
 struct TrackTypeElementEntry
@@ -57,7 +59,7 @@ struct TrackTypeElementEntry
     track_type_t TrackElement;
     uint8_t TrackVariant;
     TunnelType TunnelType;
-    TrackTypeSequenceEntry Sequence[MAX_SEQUENCE_PER_TRACKELEMENT];
+    TrackTypeSequenceEntry SequenceEntries[MAX_SEQUENCE_PER_TRACKELEMENT][4];
     TrackFlag Flags;
     uint8_t MaxSequence;
 
