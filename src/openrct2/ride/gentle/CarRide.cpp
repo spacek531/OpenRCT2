@@ -12,6 +12,7 @@
 #include "../../paint/Paint.h"
 #include "../../paint/Supports.h"
 #include "../../world/Map.h"
+#include "../../world/TrackType.h"
 #include "../RideData.h"
 #include "../Track.h"
 #include "../TrackPaint.h"
@@ -772,3 +773,99 @@ TRACK_PAINT_FUNCTION get_track_paint_function_car_ride(int32_t trackType)
 
     return nullptr;
 }
+
+TrackTypeElementEntry Flat = {
+    TrackElemType::Flat,    // TrackType
+    TrackVariant::Standard, // VariantType
+    0,                      // TunnelType
+    0,                      // Flags
+    1,                      // NumSequence
+    {
+        // SequenceEntries[4][MAX_SEQUENCE_PER_TRACKELEMENT]
+        {
+            0,        // SupportType
+            { 0, 0 }, // SupportHeight
+            {
+                // Sprites[MAX_SPRITEBOX_PER_SEQUENCE]
+                {
+                    SPR_CAR_RIDE_FLAT_SW_NE,      // SpriteIdParent
+                    TrackTypeColourScheme::Track, // ColourParent
+                    NULL_SPRITE,                  // SpriteIdChild
+                    {},                           // ColourChild
+                    { 0, 6, 0 },                  // SpriteOffset (NOT ROTATED)
+                    { 32, 20, 1 },                // BoxSize (NOT ROTATED)
+                    { 0, 6, 0 },                  // BoxOffset (NOT ROTATED)
+                },
+                {},
+            },
+        },
+        {
+            0,        // SupportType
+            { 0, 0 }, // SupportHeight
+            {
+                // Sprites[MAX_SPRITEBOX_PER_SEQUENCE]
+                {
+                    SPR_CAR_RIDE_FLAT_NW_SE,      // SpriteIdParent
+                    TrackTypeColourScheme::Track, // ColourParent
+                    NULL_SPRITE,                  // SpriteIdChild
+                    {},                           // ColourChild
+                    { 0, 6, 0 },                  // SpriteOffset (NOT ROTATED)
+                    { 20, 32, 1 },                // BoxSize (NOT ROTATED)
+                    { 0, 6, 0 },                  // BoxOffset (NOT ROTATED)
+                },
+                {},
+            },
+        },
+        {
+            0,        // SupportType
+            { 0, 0 }, // SupportHeight
+            {
+                // Sprites[MAX_SPRITEBOX_PER_SEQUENCE]
+                {
+                    SPR_CAR_RIDE_FLAT_SW_NE,      // SpriteIdParent
+                    TrackTypeColourScheme::Track, // ColourParent
+                    {},                           // SpriteIdChild
+                    {},                           // ColourChild
+                    { 0, 6, 0 },                  // SpriteOffset (NOT ROTATED)
+                    { 32, 20, 1 },                // BoxSize (NOT ROTATED)
+                    { 0, 6, 0 },                  // BoxOffset (NOT ROTATED)
+                },
+                {},
+            },
+        },
+        {
+            0,        // SupportType
+            { 0, 0 }, // SupportHeight
+            {
+                // Sprites[MAX_SPRITEBOX_PER_SEQUENCE]
+                {
+                    SPR_CAR_RIDE_FLAT_NW_SE,      // SpriteIdParent
+                    TrackTypeColourScheme::Track, // ColourParent
+                    {},                           // SpriteIdChild
+                    {},                           // ColourChild
+                    { 0, 6, 0 },                  // SpriteOffset (NOT ROTATED)
+                    { 20, 32, 1 },                // BoxSize (NOT ROTATED)
+                    { 0, 6, 0 },                  // BoxOffset (NOT ROTATED)
+                },
+                {},
+            },
+        },
+    },
+};
+
+TrackTypeEntry car_ride_track_type_entry = {
+    STR_RIDE_NAME_CAR_RIDE, // object name (does this even matter?)
+    "",                     // fallback object name
+    nullptr,                // fallback object entry
+    {
+        // TTElementMap[TrackElemType::Count][MAX_VARIANTS]
+        { 0, NULL_INDEX, NULL_INDEX, NULL_INDEX }, // TrackElemType::Flat
+        { 0, NULL_INDEX, NULL_INDEX, NULL_INDEX }, // TrackElemType::StationEnd
+        { 0, NULL_INDEX, NULL_INDEX, NULL_INDEX }, // TrackElemType::StationStart
+        { 0, NULL_INDEX, NULL_INDEX, NULL_INDEX }, // TrackElemType::StationMiddle
+    },
+    {
+        // std::vector<TrackTypeElementEntry> TTRawEntries
+        Flat,
+    },
+};

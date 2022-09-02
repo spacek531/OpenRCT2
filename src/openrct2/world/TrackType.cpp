@@ -42,7 +42,6 @@
 #include <algorithm>
 #include <iterator>
 
-constexpr const uint16_t NULL_ELEMENT = 65535;
 using namespace OpenRCT2;
 
 const TrackTypeObject* GetTrackTypeObject(ObjectEntryIndex entryIndex)
@@ -55,28 +54,36 @@ const TrackTypeObject* GetTrackTypeObject(ObjectEntryIndex entryIndex)
     return static_cast<TrackTypeObject*>(obj);
 }
 
-static const uint32_t getColour(paint_session& session, PaintMode paintType)
+static const uint32_t getColour(paint_session& session, TrackTypeColourScheme colourScheme)
 {
-    switch (paintType)
+    switch (colourScheme)
     {
-        case 1: // case 1: LSB colour 2
+        case TrackTypeColourScheme::Track:
+        case TrackTypeColourScheme::GreenIsPrimaryPinkIsSecondary:
+            return session.TrackColours[SCHEME_TRACK];
+        case TrackTypeColourScheme::Supports:
+        case TrackTypeColourScheme::GreenIsTertiary:
             return session.TrackColours[SCHEME_SUPPORTS];
-        case 2: // case 2: MSB colour 1, LSB colour 0
+        case TrackTypeColourScheme::Misc:
+            return session.TrackColours[SCHEME_MISC];
+        case TrackTypeColourScheme::Scheme3:
+            return session.TrackColours[SCHEME_3];
+        case TrackTypeColourScheme::GreenIsTertiaryPinkIsSecondary:
             return (session.TrackColours[SCHEME_TRACK] & ~0xF80000) | session.TrackColours[SCHEME_SUPPORTS];
-        case 3: // case 3: MSB colour 2, LSB colour 1
+        case TrackTypeColourScheme::GreenIsPrimaryPinkIsTertiary:
             // TODO: test this
             return (session.TrackColours[SCHEME_TRACK] & 0x1F000000)
                 | ((session.TrackColours[SCHEME_SUPPORTS] & ~0xF800000) >> 5);
-        default: // case 0: MSB colour 1, LSB colour 0
+        case TrackTypeColourScheme::GreenIsPrimaryPinkIsSecondaryYellowIsTertiary:
             return session.TrackColours[SCHEME_TRACK];
     }
 }
 
 TrackTypeElementEntry* TrackTypeEntry::GetTrackTypeElementEntry(track_type_t trackType, TrackVariant trackVariant)
 {
-    if (TTElementMap[trackType][EnumValue(trackVariant)] != NULL_ELEMENT)
+    if (TTElementMap[trackType][EnumValue(trackVariant)] != NULL_INDEX)
         return &TTRawEntries[TTElementMap[trackType][EnumValue(trackVariant)]];
-    if (TTElementMap[trackType][0] != NULL_ELEMENT)
+    if (TTElementMap[trackType][0] != NULL_INDEX)
         return &TTRawEntries[TTElementMap[trackType][0]];
     if (FallbackType != nullptr)
         return FallbackType->GetTrackTypeElementEntry(trackType, trackVariant);
@@ -93,6 +100,13 @@ void TrackTypeEntry::Paint(
     element->Paint(session, trackSequence, direction, height);
 }
 
+void TrackTypeElementEntry::Paint(paint_session& session, uint8_t trackSequence, uint8_t direction, int32_t height)
+{
+    if (trackSequence >= NumSequence)
+        return;
+    SequenceEntries[direction][trackSequence].Paint(session, height);
+}
+
 void TrackTypeSequenceEntry::Paint(paint_session& session, int32_t height)
 {
     for (uint8_t i = 0; i < MAX_SPRITEBOX_PER_SEQUENCE && Sprites[i].SpriteIdParent != 0; i++)
@@ -103,16 +117,9 @@ void TrackTypeSequenceEntry::Paint(paint_session& session, int32_t height)
     // TODO: whatever it is that miniature railway track needs
 }
 
-void TrackTypeElementEntry::Paint(paint_session& session, uint8_t trackSequence, uint8_t direction, int32_t height)
-{
-    if (trackSequence > MaxSequence)
-        return;
-    SequenceEntries[direction][trackSequence].Paint(session, height);
-}
-
 void SpriteAndBox::Paint(paint_session& session, int32_t height)
 {
-    if (SpriteIdParent == 0)
+    if (SpriteIdParent == NULL_SPRITE)
         return;
 
     uint32_t imageIdParent = SpriteIdParent | getColour(session, ColourParent);
@@ -120,11 +127,19 @@ void SpriteAndBox::Paint(paint_session& session, int32_t height)
         session, imageIdParent, { SpriteOffset.x, SpriteOffset.y, height + SpriteOffset.z }, BoxSize,
         { BoxOffset.x, BoxOffset.y, height + BoxOffset.z });
 
-    if (SpriteIdChild != 0)
+    if (SpriteIdChild != NULL_SPRITE)
     {
         uint32_t imageIdChild = SpriteIdChild | getColour(session, ColourChild);
         PaintAddImageAsChild(
             session, imageIdChild, { SpriteOffset.x, SpriteOffset.y, height + SpriteOffset.z }, BoxSize,
             { BoxOffset.x, BoxOffset.y, height + BoxOffset.z });
     }
+}
+
+TrackTypeEntry CreateNullTrackTypeEntry()
+{
+    TrackTypeEntry entry{};
+    entry.name = STR_UNKNOWN_RIDE;
+    memset(entry.TTElementMap, NULL_INDEX, static_cast<size_t>(TrackElemType::Count * MAX_VARIANTS));
+    return entry;
 }

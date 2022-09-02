@@ -16,40 +16,56 @@
 constexpr const uint8_t MAX_SEQUENCE_PER_TRACKELEMENT = 16;
 constexpr const uint8_t MAX_SPRITEBOX_PER_SEQUENCE = 2;
 constexpr const uint8_t MAX_VARIANTS = 4;
+constexpr const uint32_t NULL_SPRITE = 0xFFFFFFFF;
+constexpr const uint16_t NULL_INDEX = 65535;
 
 class TrackTypeObject;
 
 /**
  * The.
  */
-enum class TrackFlag : uint8_t
+enum TrackTypeFlags : uint8_t
 {
-    UseMirrorElement = (1 << 0) // for tracks which are mirrored of another track element e.g. flatLeftBanked -> flatRightBanked
+    UseMirrorElement = (1 << 0), // for tracks which are mirrored of another track element e.g. flatLeftBanked ->
+                                 // flatRightBanked
+    Animated = (1 << 1),         // For tracks which require map animations (animations applied to all blocks in sequence)
 };
 
-using SupportData = int16_t[2];
-using PaintMode = uint8_t;
+enum class TrackTypeColourScheme : uint8_t
+{
+    Track,
+    Supports,
+    Misc,
+    Scheme3,
+    GreenIsPrimaryPinkIsSecondary,
+    GreenIsTertiary,
+    GreenIsTertiaryPinkIsSecondary,
+    GreenIsPrimaryPinkIsTertiary,
+    GreenIsPrimaryPinkIsSecondaryYellowIsTertiary,
+};
+
+using SupportHeight = int16_t[2];
 using TunnelType = uint8_t;
 using SupportType = uint8_t;
 
 struct SpriteAndBox
 {
     uint32_t SpriteIdParent;
+    TrackTypeColourScheme ColourParent;
     uint32_t SpriteIdChild;
+    TrackTypeColourScheme ColourChild;
     CoordsXYZ SpriteOffset;
     CoordsXYZ BoxSize;
     CoordsXYZ BoxOffset;
-    PaintMode ColourParent;
-    PaintMode ColourChild;
 
     void Paint(paint_session& session, int32_t height);
 };
 
 struct TrackTypeSequenceEntry
 {
-    SpriteAndBox Sprites[MAX_SPRITEBOX_PER_SEQUENCE];
-    SupportData SupportHeight;
     SupportType SupportType;
+    SupportHeight SupportHeight;
+    SpriteAndBox Sprites[MAX_SPRITEBOX_PER_SEQUENCE];
 
     void Paint(paint_session& session, int32_t height);
 };
@@ -57,11 +73,11 @@ struct TrackTypeSequenceEntry
 struct TrackTypeElementEntry
 {
     track_type_t TrackElement;
-    uint8_t TrackVariant;
+    TrackVariant TrackVariant;
     TunnelType TunnelType;
-    TrackTypeSequenceEntry SequenceEntries[MAX_SEQUENCE_PER_TRACKELEMENT][4];
-    TrackFlag Flags;
-    uint8_t MaxSequence;
+    uint8_t Flags;
+    uint8_t NumSequence;
+    TrackTypeSequenceEntry SequenceEntries[4][MAX_SEQUENCE_PER_TRACKELEMENT];
 
     void Paint(paint_session& session, uint8_t trackSequence, uint8_t direction, int32_t height);
 };
@@ -70,8 +86,6 @@ struct TrackTypeEntry
 {
     // The localised name of this object
     StringId name;
-    // The base object of the this object
-    uint32_t base_image;
     // the ID of the fallback track type object
     std::string FallbackObjectName;
     // The fallback track type entry
@@ -86,4 +100,13 @@ struct TrackTypeEntry
         const TrackElement& trackElement);
 };
 
+#ifdef _WIN32
+#    define SET_FIELD(fieldname, ...) __VA_ARGS__
+#else
+#    define SET_FIELD(fieldname, ...) .fieldname = __VA_ARGS__
+#endif
+
+TrackTypeEntry CreateNullTrackTypeEntry();
 const TrackTypeObject* GetTrackTypeObject(ObjectEntryIndex entryIndex);
+
+TrackTypeEntry NullTrackTypeEntry = CreateNullTrackTypeEntry();

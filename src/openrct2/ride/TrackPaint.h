@@ -15,6 +15,7 @@
 #include "../world/Map.h"
 
 class StationObject;
+class TrackTypeEntry;
 
 extern const uint8_t track_map_2x2[][4];
 extern const uint8_t edges_2x2[];
@@ -484,3 +485,5 @@ namespace AlpineRC
     TRACK_PAINT_FUNCTION GetTrackPaintFunction(int32_t trackType);
 }
 TRACK_PAINT_FUNCTION get_track_paint_function_classic_wooden_rc(int32_t trackType);
+
+TrackTypeEntry car_ride_track_type_entry;
