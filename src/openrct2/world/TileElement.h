@@ -33,7 +33,7 @@ class FootpathSurfaceObject;
 class FootpathRailingsObject;
 using track_type_t = uint16_t;
 
-enum class TrackVariant;
+enum class TrackVariant : uint8_t;
 
 constexpr const uint8_t MAX_ELEMENT_HEIGHT = 255;
 constexpr const uint8_t OWNER_MASK = 0b00001111;

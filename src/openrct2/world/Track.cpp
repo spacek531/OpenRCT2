@@ -25,15 +25,12 @@ static const uint32_t getColour(paint_session& session, PaintMode paintType)
     return 0;
 }
 
-TrackTypeElementEntry* TrackTypeEntry::GetTrackTypeElementEntry(track_type_t trackType, uint8_t trackVariant)
+TrackTypeElementEntry* TrackTypeEntry::GetTrackTypeElementEntry(track_type_t trackType, TrackVariant trackVariant)
 {
-    if (ElementIndices[trackType] != NULL_ELEMENT && ElementIndices[trackType + 1] > ElementIndices[trackType] + trackVariant)
-    {
-        auto element = Elements[ElementIndices[trackType] + trackVariant];
-        if (element != nullptr)
-            return element;
-        return Elements[ElementIndices[trackType]];
-    }
+    if (TTElementMap[trackType][EnumValue(trackVariant)] != nullptr)
+        return TTElementMap[trackType][EnumValue(trackVariant)];
+    if (TTElementMap[trackType][0] != nullptr)
+        return TTElementMap[trackType][0];
     if (FallbackType != nullptr)
         return FallbackType->GetTrackTypeElementEntry(trackType, trackVariant);
     return nullptr;
@@ -43,8 +40,7 @@ void TrackTypeEntry::Paint(
     paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
     const TrackElement& trackElement)
 {
-    uint16_t trackVariant = EnumValue(trackElement.GetVariant());
-    auto element = GetTrackTypeElementEntry(trackElement.GetTrackType(), trackVariant);
+    auto element = GetTrackTypeElementEntry(trackElement.GetTrackType(), trackElement.GetVariant());
     if (element == nullptr)
         return;
     element->Paint(session, trackSequence, direction, height);
@@ -57,8 +53,10 @@ void TrackTypeElementEntry::Paint(paint_session& session, uint8_t trackSequence,
     TrackTypeSequenceEntry sequence = Sequence[trackSequence];
     for (uint8_t i = 0; i < MAX_SPRITEBOX_PER_SEQUENCE && sequence.Sprites[direction][i].SpriteIdParent != 0; i++)
         sequence.Sprites[direction][i].Paint(session, height);
-    //TODO: tunnels
-    //TODO: supports
+    // TODO: tunnels
+    // TODO: supports
+    // TODO: supports blocking
+    // TODO: whatever it is that miniature railway track needs
 }
 
 void SpriteAndBox::Paint(paint_session& session, int32_t height)

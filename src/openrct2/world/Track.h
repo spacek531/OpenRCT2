@@ -15,6 +15,7 @@
 
 constexpr const uint8_t MAX_SEQUENCE_PER_TRACKELEMENT = 16;
 constexpr const uint8_t MAX_SPRITEBOX_PER_SEQUENCE = 2;
+constexpr const uint8_t MAX_VARIANTS = 4;
 constexpr const uint16_t NULL_ELEMENT = 65535;
 /**
  * The
@@ -63,16 +64,19 @@ struct TrackTypeElementEntry
 
 struct TrackTypeEntry
 {
+    // The localised name of this object
     StringId name;
+    // The base object of the this object
     uint32_t base_image;
+    // the ID of the fallback track type object
     std::string FallbackObjectName;
+    // The fallback track type entry
     struct TrackTypeEntry* FallbackType;
-    uint8_t HighestVariant;
     // maps TrackElemType to index of TrackTypeElementEntry variant 0 in elements
-    uint16_t ElementIndices[TrackElemType::Count + 1];
-    std::vector<TrackTypeElementEntry*> Elements;
+    TrackTypeElementEntry* TTElementMap[TrackElemType::Count][MAX_VARIANTS];
+    std::vector<TrackTypeElementEntry> TTRawEntries;
 
-    TrackTypeElementEntry* GetTrackTypeElementEntry(track_type_t trackType, uint8_t trackVariant);
+    TrackTypeElementEntry* GetTrackTypeElementEntry(track_type_t trackType, TrackVariant trackVariant);
     void Paint(
         paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
         const TrackElement& trackElement);
