@@ -918,3 +918,14 @@ void TrackElement::SetHighlight(bool on)
     if (on)
         Flags2 |= TRACK_ELEMENT_FLAGS2_HIGHLIGHT;
 }
+
+uint8_t TrackElement::GetVariant() const
+{
+    if (HasCableLift())
+        return 3;
+    if (BlockBrakeClosed())
+        return 2;
+    if (HasChain())
+        return 1;
+    return 0;
+}

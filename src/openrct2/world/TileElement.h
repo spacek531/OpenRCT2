@@ -420,6 +420,8 @@ public:
 
     bool IsStation() const;
     bool IsBlockStart() const;
+
+    uint8_t GetVariant() const;
 };
 assert_struct_size(TrackElement, 16);
 
