@@ -24,7 +24,18 @@ constexpr const uint16_t NULL_ELEMENT = 65535;
 
 static const uint32_t getColour(paint_session& session, PaintMode paintType)
 {
-    return 0;
+    switch (paintType)
+    {
+        case 1: // case 1: LSB colour 2
+            return session.TrackColours[SCHEME_SUPPORTS];
+        case 2: // case 2: MSB colour 1, LSB colour 0
+            return (session.TrackColours[SCHEME_TRACK] & ~0xF80000) | session.TrackColours[SCHEME_SUPPORTS];
+        case 3: // case 3: MSB colour 2, LSB colour 1
+            // TODO: test this
+            return (session.TrackColours[SCHEME_TRACK] & 0x1F000000) | ((session.TrackColours[SCHEME_SUPPORTS] & ~0xF800000 )>> 5);
+        default: // case 0: MSB colour 1, LSB colour 0
+            return session.TrackColours[SCHEME_TRACK];
+    }
 }
 
 TrackTypeElementEntry* TrackTypeEntry::GetTrackTypeElementEntry(track_type_t trackType, TrackVariant trackVariant)

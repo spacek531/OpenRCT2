@@ -71,7 +71,7 @@ struct TrackTypeEntry
     std::string FallbackObjectName;
     // The fallback track type entry
     struct TrackTypeEntry* FallbackType;
-    // maps TrackElemType to index of TrackTypeElementEntry variant 0 in elements
+    // maps TrackElemType and variant to the index in TTRawEntries
     uint16_t TTElementMap[TrackElemType::Count][MAX_VARIANTS];
     std::vector<TrackTypeElementEntry> TTRawEntries;
 
