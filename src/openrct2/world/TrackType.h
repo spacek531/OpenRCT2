@@ -16,8 +16,11 @@
 constexpr const uint8_t MAX_SEQUENCE_PER_TRACKELEMENT = 16;
 constexpr const uint8_t MAX_SPRITEBOX_PER_SEQUENCE = 2;
 constexpr const uint8_t MAX_VARIANTS = 4;
+
+class TrackTypeObject;
+
 /**
- * The
+ * The.
  */
 enum class TrackFlag : uint8_t
 {
@@ -80,3 +83,5 @@ struct TrackTypeEntry
         paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
         const TrackElement& trackElement);
 };
+
+const TrackTypeObject* GetTrackTypeObject(ObjectEntryIndex entryIndex);

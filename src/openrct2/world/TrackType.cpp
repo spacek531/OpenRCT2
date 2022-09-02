@@ -9,18 +9,51 @@
 
 #include "TrackType.h"
 
+#include "../Cheats.h"
+#include "../Context.h"
+#include "../Game.h"
+#include "../Identifiers.h"
+#include "../OpenRCT2.h"
+#include "../core/Guard.hpp"
 #include "../drawing/Drawing.h"
+#include "../entity/EntityList.h"
+#include "../entity/EntityRegistry.h"
+#include "../interface/Window_internal.h"
+#include "../localisation/Localisation.h"
+#include "../network/network.h"
+#include "../object/ObjectList.h"
+#include "../object/ObjectManager.h"
+#include "../object/TrackTypeObject.h"
 #include "../paint/Paint.h"
 #include "../paint/Supports.h"
 #include "../paint/tile_element/Paint.TileElement.h"
-#include "../ride/RideData.h"
 #include "../ride/Track.h"
-#include "../ride/TrackData.h"
 #include "../ride/TrackPaint.h"
 #include "../sprites.h"
+#include "../util/Util.h"
 #include "../world/Map.h"
+#include "Map.h"
+#include "MapAnimation.h"
+#include "Park.h"
+#include "Scenery.h"
+#include "Surface.h"
+#include "TileElement.h"
+
+#include <algorithm>
+#include <iterator>
 
 constexpr const uint16_t NULL_ELEMENT = 65535;
+using namespace OpenRCT2;
+
+const TrackTypeObject* GetTrackTypeObject(ObjectEntryIndex entryIndex)
+{
+    auto& objMgr = OpenRCT2::GetContext()->GetObjectManager();
+    auto obj = objMgr.GetLoadedObject(ObjectType::TrackType, entryIndex);
+    if (obj == nullptr)
+        return nullptr;
+
+    return static_cast<TrackTypeObject*>(obj);
+}
 
 static const uint32_t getColour(paint_session& session, PaintMode paintType)
 {
@@ -32,7 +65,8 @@ static const uint32_t getColour(paint_session& session, PaintMode paintType)
             return (session.TrackColours[SCHEME_TRACK] & ~0xF80000) | session.TrackColours[SCHEME_SUPPORTS];
         case 3: // case 3: MSB colour 2, LSB colour 1
             // TODO: test this
-            return (session.TrackColours[SCHEME_TRACK] & 0x1F000000) | ((session.TrackColours[SCHEME_SUPPORTS] & ~0xF800000 )>> 5);
+            return (session.TrackColours[SCHEME_TRACK] & 0x1F000000)
+                | ((session.TrackColours[SCHEME_SUPPORTS] & ~0xF800000) >> 5);
         default: // case 0: MSB colour 1, LSB colour 0
             return session.TrackColours[SCHEME_TRACK];
     }

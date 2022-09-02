@@ -49,6 +49,7 @@ enum class ObjectType : uint8_t
     FootpathSurface,
     FootpathRailings,
     Audio,
+    TrackType,
 
     Count,
     None = 255
@@ -73,15 +74,17 @@ constexpr std::array ObjectTypes = {
     ObjectType::FootpathSurface,
     ObjectType::FootpathRailings,
     ObjectType::Audio,
+    ObjectType::TrackType,
 };
 static_assert(ObjectTypes.size() == EnumValue(ObjectType::Count));
 
 // Object types that can be saved in a park file.
-constexpr std::array<ObjectType, 16> TransientObjectTypes = {
+constexpr std::array<ObjectType, 17> TransientObjectTypes = {
     ObjectType::Ride,         ObjectType::SmallScenery, ObjectType::LargeScenery,    ObjectType::Walls,
     ObjectType::Banners,      ObjectType::Paths,        ObjectType::PathBits,        ObjectType::SceneryGroup,
     ObjectType::ParkEntrance, ObjectType::Water,        ObjectType::TerrainSurface,  ObjectType::TerrainEdge,
     ObjectType::Station,      ObjectType::Music,        ObjectType::FootpathSurface, ObjectType::FootpathRailings,
+    ObjectType::TrackType,
 };
 
 namespace ObjectSelectionFlags
