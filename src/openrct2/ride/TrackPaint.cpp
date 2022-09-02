@@ -23,6 +23,7 @@
 #include "../scenario/Scenario.h"
 #include "../sprites.h"
 #include "../world/Map.h"
+#include "../world/TrackType.h"
 #include "RideData.h"
 #include "Station.h"
 #include "TrackData.h"
@@ -2272,4 +2273,11 @@ void PaintTrack(paint_session& session, Direction direction, int32_t height, con
             }
         }
     }
+}
+
+TrackTypeEntry CreateNullTrackTypeEntry()
+{
+    TrackTypeEntry entry{};
+    memset(entry.TTElementMap, 255, sizeof(entry.TTElementMap));
+    return entry;
 }

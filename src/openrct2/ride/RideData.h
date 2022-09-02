@@ -188,6 +188,7 @@ struct RideTypeDescriptor
     /** rct2: 0x0097CC68 */
     uint64_t StartTrackPiece;
     TRACK_PAINT_FUNCTION_GETTER TrackPaintFunction;
+    TrackTypeEntry* TrackType;
     uint64_t Flags;
     /** rct2: 0x0097C8AC */
     uint64_t RideModes;
@@ -260,7 +261,7 @@ struct RideTypeDescriptor
 #    define SET_FIELD(fieldname, ...) .fieldname = __VA_ARGS__
 #endif
 
-extern const RideTypeDescriptor RideTypeDescriptors[RIDE_TYPE_COUNT];
+extern RideTypeDescriptor RideTypeDescriptors[RIDE_TYPE_COUNT];
 
 enum
 {
@@ -419,6 +420,7 @@ constexpr const RideTypeDescriptor DummyRTD =
     SET_FIELD(CoveredTrackPieces, {}),
     SET_FIELD(StartTrackPiece, TrackElemType::EndStation),
     SET_FIELD(TrackPaintFunction, nullptr),
+    SET_FIELD(TrackType, nullptr),
     SET_FIELD(Flags, 0),
     SET_FIELD(RideModes, EnumsToFlags(RideMode::ContinuousCircuit)),
     SET_FIELD(DefaultMode, RideMode::ContinuousCircuit),

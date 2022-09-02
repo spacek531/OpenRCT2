@@ -85,7 +85,7 @@ struct TrackTypeElementEntry
 struct TrackTypeEntry
 {
     // The localised name of this object
-    StringId name;
+    StringId name = 0;
     // the ID of the fallback track type object
     std::string FallbackObjectName;
     // The fallback track type entry
@@ -98,15 +98,11 @@ struct TrackTypeEntry
     void Paint(
         paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
         const TrackElement& trackElement);
+
+    bool Exists()
+    {
+        return name != 0;
+    }
 };
 
-#ifdef _WIN32
-#    define SET_FIELD(fieldname, ...) __VA_ARGS__
-#else
-#    define SET_FIELD(fieldname, ...) .fieldname = __VA_ARGS__
-#endif
-
-TrackTypeEntry CreateNullTrackTypeEntry();
 const TrackTypeObject* GetTrackTypeObject(ObjectEntryIndex entryIndex);
-
-TrackTypeEntry NullTrackTypeEntry = CreateNullTrackTypeEntry();

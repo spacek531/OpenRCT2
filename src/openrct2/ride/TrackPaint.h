@@ -13,9 +13,9 @@
 #include "../paint/Paint.h"
 #include "../paint/tile_element/Paint.TileElement.h"
 #include "../world/Map.h"
+#include "../world/TrackType.h"
 
 class StationObject;
-class TrackTypeEntry;
 
 extern const uint8_t track_map_2x2[][4];
 extern const uint8_t edges_2x2[];
@@ -486,4 +486,7 @@ namespace AlpineRC
 }
 TRACK_PAINT_FUNCTION get_track_paint_function_classic_wooden_rc(int32_t trackType);
 
-TrackTypeEntry car_ride_track_type_entry;
+extern TrackTypeEntry car_ride_track_type_entry;
+
+TrackTypeEntry CreateNullTrackTypeEntry();
+static TrackTypeEntry NullTrackTypeEntry = CreateNullTrackTypeEntry();

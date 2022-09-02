@@ -76,6 +76,8 @@ static const uint32_t getColour(paint_session& session, TrackTypeColourScheme co
                 | ((session.TrackColours[SCHEME_SUPPORTS] & ~0xF800000) >> 5);
         case TrackTypeColourScheme::GreenIsPrimaryPinkIsSecondaryYellowIsTertiary:
             return session.TrackColours[SCHEME_TRACK];
+        default:
+            return session.TrackColours[SCHEME_TRACK];
     }
 }
 
@@ -134,12 +136,4 @@ void SpriteAndBox::Paint(paint_session& session, int32_t height)
             session, imageIdChild, { SpriteOffset.x, SpriteOffset.y, height + SpriteOffset.z }, BoxSize,
             { BoxOffset.x, BoxOffset.y, height + BoxOffset.z });
     }
-}
-
-TrackTypeEntry CreateNullTrackTypeEntry()
-{
-    TrackTypeEntry entry{};
-    entry.name = STR_UNKNOWN_RIDE;
-    memset(entry.TTElementMap, NULL_INDEX, static_cast<size_t>(TrackElemType::Count * MAX_VARIANTS));
-    return entry;
 }
