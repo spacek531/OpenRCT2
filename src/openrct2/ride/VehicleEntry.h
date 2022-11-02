@@ -153,6 +153,20 @@ struct VehicleSpriteGroup
     }
 };
 
+enum class VehicleSymmetry : uint8_t
+{
+    Asymmetric = 1,
+    Rotational2,
+    Rotational4,
+    Rotational8,
+    Rotational16,
+    Rotational32,
+};
+
+static const std::string VehicleSymmetryNames[] = {
+    "unused value","asymmetric", "rotational2", "rotational4", "rotational8", "rotational16", "rotational32",
+};
+
 /**
  * Ride type vehicle structure.
  */
@@ -187,6 +201,8 @@ struct CarEntry
     uint8_t num_vertical_frames_override; // A custom number that can be used rather than letting RCT2 determine it.
                                           // Needs the CAR_ENTRY_FLAG_OVERRIDE_NUM_VERTICAL_FRAMES flag to be set.
     uint8_t peep_loading_waypoint_segments;
+    VehicleSymmetry Symmetry;                              // How many axis of symmetry the vehicle has
+    OpenRCT2::Entity::Yaw::SpritePrecision SymmetryFrames; // How many sprites are present per one symmetry
     std::vector<std::array<CoordsXY, 3>> peep_loading_waypoints = {};
     std::vector<int8_t> peep_loading_positions = {};
 

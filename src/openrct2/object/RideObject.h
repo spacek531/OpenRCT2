@@ -62,6 +62,7 @@ private:
     static uint8_t ParseRideCategory(const std::string& s);
     static ShopItem ParseShopItem(const std::string& s);
     static colour_t ParseColour(const std::string& s);
+    static VehicleSymmetry ParseSymmetry(const std::string& s);
 
     void ReadLegacySpriteGroups(CarEntry* vehicle, uint16_t spriteGroups);
 };

@@ -42,12 +42,21 @@ static const uint8_t SpriteGroupMultiplier[EnumValue(SpriteGroupType::Count)] = 
     1, 2, 2, 2, 2, 2, 2, 10, 1, 2, 2, 2, 2, 2, 2, 2, 6, 4, 4, 4, 4, 4, 4, 4, 12, 4, 4, 4, 4, 4, 20, 3, 1,
 };
 
+static const uint8_t SpriteGroupMultiplierWithSymmetry[EnumValue(SpriteGroupType::Count)] = {
+    1, 1, 1, 1, 1, 1, 1, 5, 1, 1, 1, 1, 1, 1, 1, 1, 3, 2, 2, 2, 2, 2, 2, 2, 6, 2, 2, 2, 2, 2, 20, 3, 1,
+};
+
 static constexpr SpritePrecision PrecisionFromNumFrames(uint8_t numRotationFrames)
 {
     if (numRotationFrames == 0)
         return SpritePrecision::None;
     else
         return static_cast<SpritePrecision>(bitscanforward(numRotationFrames) + 1);
+}
+
+static constexpr VehicleSymmetry SymmetryFromName(utf8string precisionType)
+{
+    return VehicleSymmetry::Asymmetric;
 }
 
 static void RideObjectUpdateRideType(rct_ride_entry* rideEntry)
@@ -370,6 +379,8 @@ void RideObject::ReadLegacyCar([[maybe_unused]] IReadObjectContext* context, ISt
     car->effect_visual = stream->ReadValue<uint8_t>();
     car->draw_order = stream->ReadValue<uint8_t>();
     car->num_vertical_frames_override = stream->ReadValue<uint8_t>();
+    car->Symmetry = VehicleSymmetry::Asymmetric;
+    car->SymmetryFrames = SpritePrecision::None;
     stream->Seek(4, STREAM_SEEK_CURRENT);
     ReadLegacySpriteGroups(car, spriteGroups);
 }
@@ -384,7 +395,7 @@ uint8_t RideObject::CalculateNumVerticalFrames(const CarEntry* carEntry)
     }
     else
     {
-        if (!(carEntry->flags & CAR_ENTRY_FLAG_SPINNING_ADDITIONAL_FRAMES))
+        if (!(carEntry->flags & CAR_ENTRY_FLAG_SPINNING))
         {
             if (carEntry->flags & CAR_ENTRY_FLAG_VEHICLE_ANIMATION
                 && carEntry->animation != CAR_ENTRY_ANIMATION_OBSERVATION_TOWER)
@@ -405,7 +416,8 @@ uint8_t RideObject::CalculateNumVerticalFrames(const CarEntry* carEntry)
         }
         else
         {
-            numVerticalFrames = 32;
+            numVerticalFrames = NumSpritesPrecision(carEntry->SymmetryFrames)
+                * NumSpritesPrecision(static_cast<SpritePrecision>(EnumValue(carEntry->SymmetryFrames)));
         }
     }
 
@@ -719,7 +731,6 @@ CarEntry RideObject::ReadJsonCar([[maybe_unused]] IReadObjectContext* context, j
             { "recalculateSpriteBounds", CAR_ENTRY_FLAG_RECALCULATE_SPRITE_BOUNDS },
             { "overrideNumberOfVerticalFrames", CAR_ENTRY_FLAG_OVERRIDE_NUM_VERTICAL_FRAMES },
             { "spriteBoundsIncludeInvertedSet", CAR_ENTRY_FLAG_SPRITE_BOUNDS_INCLUDE_INVERTED_SET },
-            { "hasAdditionalSpinningFrames", CAR_ENTRY_FLAG_SPINNING_ADDITIONAL_FRAMES },
             { "isLift", CAR_ENTRY_FLAG_LIFT },
             { "hasAdditionalColour1", CAR_ENTRY_FLAG_ENABLE_TRIM_COLOUR },
             { "hasSwinging", CAR_ENTRY_FLAG_SWINGING },
@@ -739,6 +750,9 @@ CarEntry RideObject::ReadJsonCar([[maybe_unused]] IReadObjectContext* context, j
 
             // Obsolete flag, only used on Boat Hire. Remaining usages have not yet been updated as of 2022-07-11.
             { "VEHICLE_ENTRY_FLAG_11", CAR_ENTRY_FLAG_USE_16_ROTATION_FRAMES },
+
+            // Obsolete flag, only used on Spinning Wild Mouse. Remaining usages have not yet been updated as of 2022-11-02.
+            { "hasAdditionalSpinningFrames", CAR_ENTRY_FLAG_SPINNING_ADDITIONAL_FRAMES },
         });
 
     // legacy sprite groups
@@ -788,6 +802,13 @@ CarEntry RideObject::ReadJsonCar([[maybe_unused]] IReadObjectContext* context, j
         }
     }
 
+    car.Symmetry = ParseSymmetry(Json::GetString(jCar["vehicleSymmetry"]));
+    auto symmetryFrames = Json::GetNumber<uint8_t>(jCar["symmetryFrames"], 0);
+    if (!is_power_of_2(symmetryFrames))
+    {
+        context->LogError(ObjectError::InvalidProperty, "symmetryFrames values must be powers of 2");
+    }
+    car.SymmetryFrames = PrecisionFromNumFrames(symmetryFrames);
     return car;
 }
 
@@ -937,6 +958,18 @@ ShopItem RideObject::ParseShopItem(const std::string& s)
     return (result != ShopItemLookupTable.end()) ? result->second : ShopItem::None;
 }
 
+static const EnumMap<VehicleSymmetry> PrecisionLookupTable{
+    { "asymmetric", VehicleSymmetry::Asymmetric },     { "rotational2", VehicleSymmetry::Rotational2 },
+    { "rotational4", VehicleSymmetry::Rotational4 },   { "rotational8", VehicleSymmetry::Rotational8 },
+    { "rotational16", VehicleSymmetry::Rotational16 }, { "rotational32", VehicleSymmetry::Rotational32 },
+};
+
+VehicleSymmetry RideObject::ParseSymmetry(const std::string& s)
+{
+    auto result = PrecisionLookupTable.find(s);
+    return (result != PrecisionLookupTable.end()) ? result->second : VehicleSymmetry::Asymmetric;
+}
+
 // Converts legacy sprite groups into OpenRCT2 sprite groups
 void RideObject::ReadLegacySpriteGroups(CarEntry* vehicle, uint16_t spriteGroups)
 {
@@ -945,6 +978,20 @@ void RideObject::ReadLegacySpriteGroups(CarEntry* vehicle, uint16_t spriteGroups
         baseSpritePrecision = SpritePrecision::Sprites16;
     if (vehicle->flags & CAR_SPRITE_FLAG_USE_4_ROTATION_FRAMES)
         baseSpritePrecision = SpritePrecision::Sprites4;
+
+    vehicle->Symmetry = VehicleSymmetry::Asymmetric;
+    if (vehicle->flags & CAR_ENTRY_FLAG_SPINNING)
+    {
+        if (vehicle->flags & CAR_ENTRY_FLAG_SPINNING_ADDITIONAL_FRAMES)
+        {
+            vehicle->SymmetryFrames = SpritePrecision::Sprites32;
+        }
+        else
+        {
+            vehicle->Symmetry = VehicleSymmetry::Rotational4;
+            vehicle->SymmetryFrames = SpritePrecision::Sprites8;
+        }
+    }
 
     if (spriteGroups & CAR_SPRITE_FLAG_FLAT)
     {
