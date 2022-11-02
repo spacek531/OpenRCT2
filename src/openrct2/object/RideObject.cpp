@@ -238,6 +238,10 @@ void RideObject::Load()
             uint32_t imageIndex = baseImageId;
             carEntry->base_image_id = baseImageId;
 
+            const uint8_t* spriteGroupMultiplierForVehicle = SpriteGroupMultiplier;
+            if (carEntry->Symmetry != VehicleSymmetry::Asymmetric)
+                spriteGroupMultiplierForVehicle = SpriteGroupMultiplierWithSymmetry;
+
             for (uint8_t spriteGroup = 0; spriteGroup < EnumValue(SpriteGroupType::Count); spriteGroup++)
             {
                 if (carEntry->SpriteGroups[spriteGroup].Enabled())
@@ -395,7 +399,7 @@ uint8_t RideObject::CalculateNumVerticalFrames(const CarEntry* carEntry)
     }
     else
     {
-        if (!(carEntry->flags & CAR_ENTRY_FLAG_SPINNING))
+        if (!(carEntry->flags & CAR_ENTRY_FLAG_SPINNING_ADDITIONAL_FRAMES))
         {
             if (carEntry->flags & CAR_ENTRY_FLAG_VEHICLE_ANIMATION
                 && carEntry->animation != CAR_ENTRY_ANIMATION_OBSERVATION_TOWER)
@@ -417,7 +421,7 @@ uint8_t RideObject::CalculateNumVerticalFrames(const CarEntry* carEntry)
         else
         {
             numVerticalFrames = NumSpritesPrecision(carEntry->SymmetryFrames)
-                * NumSpritesPrecision(static_cast<SpritePrecision>(EnumValue(carEntry->SymmetryFrames)));
+                * NumSpritesPrecision(static_cast<SpritePrecision>(EnumValue(carEntry->Symmetry)));
         }
     }
 
@@ -804,11 +808,21 @@ CarEntry RideObject::ReadJsonCar([[maybe_unused]] IReadObjectContext* context, j
 
     car.Symmetry = ParseSymmetry(Json::GetString(jCar["vehicleSymmetry"]));
     auto symmetryFrames = Json::GetNumber<uint8_t>(jCar["symmetryFrames"], 0);
-    if (!is_power_of_2(symmetryFrames))
+    if (symmetryFrames != 0)
     {
-        context->LogError(ObjectError::InvalidProperty, "symmetryFrames values must be powers of 2");
+        if (!is_power_of_2(symmetryFrames))
+        {
+            context->LogError(ObjectError::InvalidProperty, "symmetryFrames values must be powers of 2");
+        }
+        else
+        {
+            car.SymmetryFrames = PrecisionFromNumFrames(symmetryFrames);
+        }
     }
-    car.SymmetryFrames = PrecisionFromNumFrames(symmetryFrames);
+    else
+    {
+        car.SymmetryFrames = SpritePrecision::Sprites1;
+    }
     return car;
 }
 
