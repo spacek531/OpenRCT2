@@ -23,6 +23,7 @@
 #include <iterator>
 
 using namespace OpenRCT2::Entity::Yaw;
+using namespace PaintSessionFlags;
 
 #pragma region VehicleBoundboxes
 
@@ -936,6 +937,18 @@ const vehicle_boundbox VehicleBoundboxes[16][224] = {
 
 #pragma endregion
 
+constexpr const uint8_t SymmetryMask[] = { 0xFF, 0x7F, 0x3F, 0x1F };
+
+[[nodiscard]] constexpr uint8_t SpinToPeepShift(uint8_t spin, VehicleSymmetry symmetry)
+{
+    return spin >> (8 - EnumValue(symmetry));
+}
+
+[[nodiscard]] constexpr int32_t SpinPrecisionToPrecision(int32_t spin, VehicleSymmetry symmetryValue, SpritePrecision endPrecision)
+{
+    return spin >> (9 - EnumValue(symmetryValue) - EnumValue(endPrecision));
+}
+
 #pragma region VehiclePaintUtil
 
 static void PaintVehicleRiders(
@@ -972,17 +985,27 @@ static void PaintVehicleRiders(
 // 6D5214
 static void vehicle_sprite_paint(
     PaintSession& session, const Vehicle* vehicle, int32_t spriteNum, const vehicle_boundbox& bb, int32_t z,
-    const CarEntry* carEntry)
+    const CarEntry* carEntry, int32_t imageDirection)
 {
     if (carEntry->draw_order >= std::size(VehicleBoundboxes))
     {
         return;
     }
 
+    uint8_t peepShift;
+    uint8_t spinMasked;
+    uint8_t spinSprite;
+
+
     auto baseImageId = static_cast<uint32_t>(spriteNum);
-    if (carEntry->flags & CAR_ENTRY_FLAG_SPINNING && carEntry->SymmetryFrames > SpritePrecision::Sprites1)
+    if (carEntry->flags & CAR_ENTRY_FLAG_SPINNING)
     {
-        baseImageId += Spin256ToPrecision(vehicle->spin_sprite, carEntry->SymmetryFrames);
+        uint8_t actualSpinAmount = vehicle->spin_sprite + (session.Flags & );
+        spinMasked = vehicle->spin_sprite & SymmetryMask[EnumValue(carEntry->Symmetry)];
+        peepShift = SpinToPeepShift(vehicle->spin_sprite, carEntry->Symmetry);
+        spinSprite = SpinPrecisionToPrecision(spinMasked, carEntry->Symmetry, carEntry->SymmetryFrames);
+
+        baseImageId += spinSprite;
     }
     if (carEntry->flags & CAR_ENTRY_FLAG_VEHICLE_ANIMATION)
     {
@@ -1012,8 +1035,8 @@ static void VehicleSpritePaintWithSwinging(
     const CarEntry* carEntry, int32_t imageDirection)
 {
     vehicle_sprite_paint(
-        session, vehicle, spriteNum + vehicle->SwingSprite,
-        VehicleBoundboxes[carEntry->draw_order][boundingBoxNum], z, carEntry);
+        session, vehicle, spriteNum + vehicle->SwingSprite * NumSpritesPrecision(carEntry->SymmetryFrames),
+        VehicleBoundboxes[carEntry->draw_order][boundingBoxNum], z, carEntry, imageDirection);
 }
 
 static void VehicleSpritePaintRestraints(
@@ -1024,7 +1047,7 @@ static void VehicleSpritePaintRestraints(
     auto spriteNum = (carEntry->SpriteByYaw(imageDirection, SpriteGroupType::RestraintAnimation) + restraintFrame)
             * carEntry->base_num_frames
         + carEntry->GroupImageId(SpriteGroupType::RestraintAnimation);
-    vehicle_sprite_paint(session, vehicle, spriteNum, VehicleBoundboxes[carEntry->draw_order][boundingBoxNum], z, carEntry);
+    vehicle_sprite_paint(session, vehicle, spriteNum, VehicleBoundboxes[carEntry->draw_order][boundingBoxNum], z, carEntry, imageDirection);
 }
 
 #pragma endregion

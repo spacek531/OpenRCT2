@@ -54,6 +54,14 @@ static constexpr SpritePrecision PrecisionFromNumFrames(uint8_t numRotationFrame
         return static_cast<SpritePrecision>(bitscanforward(numRotationFrames) + 1);
 }
 
+static constexpr VehicleSymmetry SymmetryFromNum(uint8_t sumSymmetries)
+{
+    if (sumSymmetries == 0)
+        return VehicleSymmetry::Asymmetric;
+    else
+        return static_cast<VehicleSymmetry>(bitscanforward(sumSymmetries));
+}
+
 static constexpr VehicleSymmetry SymmetryFromName(utf8string precisionType)
 {
     return VehicleSymmetry::Asymmetric;
@@ -805,13 +813,21 @@ CarEntry RideObject::ReadJsonCar([[maybe_unused]] IReadObjectContext* context, j
         }
     }
 
-    car.Symmetry = ParseSymmetry(Json::GetString(jCar["vehicleSymmetry"]));
+    auto symmetryValue = Json::GetNumber<uint8_t>(jCar["vehicleSymmetry"], 1);
+    if (!is_power_of_2(symmetryValue))
+    {
+        context->LogError(ObjectError::InvalidProperty, "vehicleSymmetry values must be power of 2");
+    }
+    else
+    {
+        car.Symmetry = SymmetryFromNum(symmetryValue);
+    }
     auto symmetryFrames = Json::GetNumber<uint8_t>(jCar["symmetryFrames"], 0);
     if (symmetryFrames != 0)
     {
         if (!is_power_of_2(symmetryFrames))
         {
-            context->LogError(ObjectError::InvalidProperty, "symmetryFrames values must be powers of 2");
+            context->LogError(ObjectError::InvalidProperty, "symmetryFrames values must be power of 2");
         }
         else
         {
@@ -821,6 +837,10 @@ CarEntry RideObject::ReadJsonCar([[maybe_unused]] IReadObjectContext* context, j
     else
     {
         car.SymmetryFrames = SpritePrecision::Sprites1;
+    }
+    if (EnumValue(car.SymmetryFrames) + EnumValue(car.Symmetry) > 9)
+    {
+        context->LogError(ObjectError::InvalidProperty, "symmetryFrames * vehicleSymmetry must be 256 or less.");
     }
     return car;
 }
@@ -969,18 +989,6 @@ ShopItem RideObject::ParseShopItem(const std::string& s)
 {
     auto result = ShopItemLookupTable.find(s);
     return (result != ShopItemLookupTable.end()) ? result->second : ShopItem::None;
-}
-
-static const EnumMap<VehicleSymmetry> PrecisionLookupTable{
-    { "asymmetric", VehicleSymmetry::Asymmetric },     { "rotational2", VehicleSymmetry::Rotational2 },
-    { "rotational4", VehicleSymmetry::Rotational4 },   { "rotational8", VehicleSymmetry::Rotational8 },
-    { "rotational16", VehicleSymmetry::Rotational16 }, { "rotational32", VehicleSymmetry::Rotational32 },
-};
-
-VehicleSymmetry RideObject::ParseSymmetry(const std::string& s)
-{
-    auto result = PrecisionLookupTable.find(s);
-    return (result != PrecisionLookupTable.end()) ? result->second : VehicleSymmetry::Asymmetric;
 }
 
 // Converts legacy sprite groups into OpenRCT2 sprite groups

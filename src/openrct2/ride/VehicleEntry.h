@@ -159,12 +159,13 @@ enum class VehicleSymmetry : uint8_t
     Rotational2,
     Rotational4,
     Rotational8,
-    Rotational16,
-    Rotational32,
 };
 
 static const std::string VehicleSymmetryNames[] = {
-    "asymmetric", "rotational2", "rotational4", "rotational8", "rotational16", "rotational32",
+    "asymmetric",
+    "rotational2",
+    "rotational4",
+    "rotational8",
 };
 
 [[nodiscard]] constexpr uint8_t NumSymmetryFrames(VehicleSymmetry symmetry)
