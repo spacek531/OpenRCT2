@@ -155,7 +155,7 @@ struct VehicleSpriteGroup
 
 enum class VehicleSymmetry : uint8_t
 {
-    Asymmetric = 1,
+    Asymmetric = 0,
     Rotational2,
     Rotational4,
     Rotational8,
@@ -164,8 +164,13 @@ enum class VehicleSymmetry : uint8_t
 };
 
 static const std::string VehicleSymmetryNames[] = {
-    "unused value","asymmetric", "rotational2", "rotational4", "rotational8", "rotational16", "rotational32",
+    "asymmetric", "rotational2", "rotational4", "rotational8", "rotational16", "rotational32",
 };
+
+[[nodiscard]] constexpr uint8_t NumSymmetryFrames(VehicleSymmetry symmetry)
+{
+    return (1 << static_cast<uint8_t>(symmetry));
+}
 
 /**
  * Ride type vehicle structure.
@@ -203,6 +208,7 @@ struct CarEntry
     uint8_t peep_loading_waypoint_segments;
     VehicleSymmetry Symmetry;                              // How many axis of symmetry the vehicle has
     OpenRCT2::Entity::Yaw::SpritePrecision SymmetryFrames; // How many sprites are present per one symmetry
+    uint8_t numSwingingAngles;
     std::vector<std::array<CoordsXY, 3>> peep_loading_waypoints = {};
     std::vector<int8_t> peep_loading_positions = {};
 
