@@ -399,7 +399,7 @@ uint8_t RideObject::CalculateNumVerticalFrames(const CarEntry* carEntry)
     }
     else
     {
-        if (!(carEntry->flags & CAR_ENTRY_FLAG_SPINNING_ADDITIONAL_FRAMES))
+        if (!(carEntry->flags & CAR_ENTRY_FLAG_SPINNING))
         {
             if (carEntry->flags & CAR_ENTRY_FLAG_VEHICLE_ANIMATION
                 && carEntry->animation != CAR_ENTRY_ANIMATION_OBSERVATION_TOWER)
@@ -420,8 +420,7 @@ uint8_t RideObject::CalculateNumVerticalFrames(const CarEntry* carEntry)
         }
         else
         {
-            numVerticalFrames = NumSpritesPrecision(carEntry->SymmetryFrames)
-                * NumSpritesPrecision(static_cast<SpritePrecision>(EnumValue(carEntry->Symmetry)));
+            numVerticalFrames = NumSpritesPrecision(carEntry->SymmetryFrames);
         }
     }
 
@@ -994,6 +993,7 @@ void RideObject::ReadLegacySpriteGroups(CarEntry* vehicle, uint16_t spriteGroups
         baseSpritePrecision = SpritePrecision::Sprites4;
 
     vehicle->Symmetry = VehicleSymmetry::Asymmetric;
+    vehicle->SymmetryFrames = SpritePrecision::Sprites1;
     if (vehicle->flags & CAR_ENTRY_FLAG_SPINNING)
     {
         if (vehicle->flags & CAR_ENTRY_FLAG_SPINNING_ADDITIONAL_FRAMES)

@@ -980,9 +980,9 @@ static void vehicle_sprite_paint(
     }
 
     auto baseImageId = static_cast<uint32_t>(spriteNum);
-    if (carEntry->flags & CAR_ENTRY_FLAG_SPINNING_ADDITIONAL_FRAMES)
+    if (carEntry->flags & CAR_ENTRY_FLAG_SPINNING && carEntry->SymmetryFrames > SpritePrecision::Sprites1)
     {
-        baseImageId += (vehicle->spin_sprite / 8) & 31;
+        baseImageId += Spin256ToPrecision(vehicle->spin_sprite, carEntry->SymmetryFrames);
     }
     if (carEntry->flags & CAR_ENTRY_FLAG_VEHICLE_ANIMATION)
     {
@@ -1012,8 +1012,8 @@ static void VehicleSpritePaintWithSwinging(
     const CarEntry* carEntry, int32_t imageDirection)
 {
     vehicle_sprite_paint(
-        session, vehicle, spriteNum + vehicle->SwingSprite, VehicleBoundboxes[carEntry->draw_order][boundingBoxNum], z,
-        carEntry);
+        session, vehicle, spriteNum + vehicle->SwingSprite,
+        VehicleBoundboxes[carEntry->draw_order][boundingBoxNum], z, carEntry);
 }
 
 static void VehicleSpritePaintRestraints(
