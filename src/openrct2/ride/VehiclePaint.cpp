@@ -944,7 +944,8 @@ constexpr const uint8_t SymmetryMask[] = { 0xFF, 0x7F, 0x3F, 0x1F };
     return spin >> (8 - EnumValue(symmetry));
 }
 
-[[nodiscard]] constexpr int32_t SpinPrecisionToPrecision(int32_t spin, VehicleSymmetry symmetryValue, SpritePrecision endPrecision)
+[[nodiscard]] constexpr int32_t SpinPrecisionToPrecision(
+    int32_t spin, VehicleSymmetry symmetryValue, SpritePrecision endPrecision)
 {
     return spin >> (9 - EnumValue(symmetryValue) - EnumValue(endPrecision));
 }
@@ -996,11 +997,10 @@ static void vehicle_sprite_paint(
     uint8_t spinMasked;
     uint8_t spinSprite;
 
-
     auto baseImageId = static_cast<uint32_t>(spriteNum);
     if (carEntry->flags & CAR_ENTRY_FLAG_SPINNING)
     {
-        uint8_t actualSpinAmount = vehicle->spin_sprite + (session.Flags & );
+        uint8_t actualSpinAmount = vehicle->spin_sprite + (session.Flags & PaintSessionFlags::SpinningCarReversed) * 128;
         spinMasked = vehicle->spin_sprite & SymmetryMask[EnumValue(carEntry->Symmetry)];
         peepShift = SpinToPeepShift(vehicle->spin_sprite, carEntry->Symmetry);
         spinSprite = SpinPrecisionToPrecision(spinMasked, carEntry->Symmetry, carEntry->SymmetryFrames);
@@ -1047,7 +1047,8 @@ static void VehicleSpritePaintRestraints(
     auto spriteNum = (carEntry->SpriteByYaw(imageDirection, SpriteGroupType::RestraintAnimation) + restraintFrame)
             * carEntry->base_num_frames
         + carEntry->GroupImageId(SpriteGroupType::RestraintAnimation);
-    vehicle_sprite_paint(session, vehicle, spriteNum, VehicleBoundboxes[carEntry->draw_order][boundingBoxNum], z, carEntry, imageDirection);
+    vehicle_sprite_paint(
+        session, vehicle, spriteNum, VehicleBoundboxes[carEntry->draw_order][boundingBoxNum], z, carEntry, imageDirection);
 }
 
 #pragma endregion
