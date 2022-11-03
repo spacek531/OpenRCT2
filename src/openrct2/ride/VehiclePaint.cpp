@@ -15,6 +15,7 @@
 #include "../entity/EntityRegistry.h"
 #include "../entity/Yaw.hpp"
 #include "../interface/Viewport.h"
+#include "../paint/Paint.SessionFlags.h"
 #include "../paint/Paint.h"
 #include "../ride/RideData.h"
 #include "../ride/Vehicle.h"
@@ -23,7 +24,6 @@
 #include <iterator>
 
 using namespace OpenRCT2::Entity::Yaw;
-using namespace PaintSessionFlags;
 
 #pragma region VehicleBoundboxes
 
@@ -993,17 +993,16 @@ static void vehicle_sprite_paint(
         return;
     }
 
+    uint8_t actualSpinAmount = vehicle->spin_sprite;
     uint8_t peepShift;
     uint8_t spinMasked;
-    uint8_t spinSprite;
 
     auto baseImageId = static_cast<uint32_t>(spriteNum);
     if (carEntry->flags & CAR_ENTRY_FLAG_SPINNING)
     {
-        uint8_t actualSpinAmount = vehicle->spin_sprite + (session.Flags & PaintSessionFlags::SpinningCarReversed) * 128;
-        spinMasked = vehicle->spin_sprite & SymmetryMask[EnumValue(carEntry->Symmetry)];
-        peepShift = SpinToPeepShift(vehicle->spin_sprite, carEntry->Symmetry);
-        spinSprite = SpinPrecisionToPrecision(spinMasked, carEntry->Symmetry, carEntry->SymmetryFrames);
+        spinMasked = actualSpinAmount & SymmetryMask[EnumValue(carEntry->Symmetry)];
+        peepShift = SpinToPeepShift(actualSpinAmount, carEntry->Symmetry);
+        uint8_t spinSprite = SpinPrecisionToPrecision(spinMasked, carEntry->Symmetry, carEntry->SymmetryFrames);
 
         baseImageId += spinSprite;
     }
