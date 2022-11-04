@@ -73,4 +73,10 @@ namespace OpenRCT2::Entity::Yaw
     {
         return (1 << static_cast<uint8_t>(precision)) >> 1;
     }
+
+    [[nodiscard]] constexpr uint8_t YawRotate180(int32_t yaw)
+    {
+        return (yaw += BaseRotation / 2) & 0x1F;
+    }
+
 } // namespace OpenRCT2::Entity::Yaw
