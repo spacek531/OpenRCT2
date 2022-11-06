@@ -949,7 +949,6 @@ static constexpr const uint8_t BankOppositeMap[] = {
     3,  4,  1,  2,                     // inverted to upright rolls
 };
 
-
 [[nodiscard]] constexpr uint8_t SpinToPeepShift(uint8_t spin, VehicleSymmetry symmetry)
 {
     return spin >> (8 - EnumValue(symmetry));
@@ -3872,8 +3871,9 @@ void Vehicle::Paint(PaintSession& session, int32_t imageDirection) const
     switch (carEntry->PaintStyle)
     {
         case VEHICLE_VISUAL_DEFAULT:
-        case 17:
             vehicle_visual_default(session, imageDirection, z + zOffset, this, carEntry);
+        case 17:
+            PaintTypeMirrored(session, imageDirection, z + zOffset, this, carEntry);
             break;
         case VEHICLE_VISUAL_LAUNCHED_FREEFALL:
             vehicle_visual_launched_freefall(session, x, imageDirection, y, z + zOffset, this, carEntry);
