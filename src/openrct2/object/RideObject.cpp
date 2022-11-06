@@ -42,10 +42,6 @@ static const uint8_t SpriteGroupMultiplier[EnumValue(SpriteGroupType::Count)] = 
     1, 2, 2, 2, 2, 2, 2, 10, 1, 2, 2, 2, 2, 2, 2, 2, 6, 4, 4, 4, 4, 4, 4, 4, 12, 4, 4, 4, 4, 4, 20, 3, 1,
 };
 
-static const uint8_t SpriteGroupMultiplierWithSymmetry[EnumValue(SpriteGroupType::Count)] = {
-    1, 1, 1, 1, 1, 1, 1, 5, 1, 1, 1, 1, 1, 1, 1, 1, 3, 2, 2, 2, 2, 2, 2, 2, 6, 2, 2, 2, 2, 2, 20, 3, 1,
-};
-
 static constexpr SpritePrecision PrecisionFromNumFrames(uint8_t numRotationFrames)
 {
     if (numRotationFrames == 0)
@@ -246,10 +242,6 @@ void RideObject::Load()
             uint32_t imageIndex = baseImageId;
             carEntry->base_image_id = baseImageId;
 
-            const uint8_t* spriteGroupMultiplierForVehicle = SpriteGroupMultiplier;
-            if (carEntry->Symmetry != VehicleSymmetry::Asymmetric)
-                spriteGroupMultiplierForVehicle = SpriteGroupMultiplierWithSymmetry;
-
             for (uint8_t spriteGroup = 0; spriteGroup < EnumValue(SpriteGroupType::Count); spriteGroup++)
             {
                 if (carEntry->SpriteGroups[spriteGroup].Enabled())
@@ -258,6 +250,7 @@ void RideObject::Load()
                     const auto spriteCount = carEntry->base_num_frames
                         * carEntry->NumRotationSprites(static_cast<SpriteGroupType>(spriteGroup))
                         * SpriteGroupMultiplier[spriteGroup];
+                    // TODO: halve sprite count when mirrored
                     imageIndex += spriteCount;
                 }
             }
