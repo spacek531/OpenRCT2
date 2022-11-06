@@ -3664,7 +3664,7 @@ static constexpr const vehicle_sprite_func PaintFunctionsByPitch[] = {
     VehiclePitchSpiralLift,
 };
 
-static constexpr const vehicle_sprite_func PaintFunctionsByPitchMirror[] = {
+static constexpr const vehicle_sprite_func PaintFunctionsByPitchMirrored[] = {
     VehiclePitchFlatMirrored,
     VehiclePitchUp12,
     VehiclePitchUp25,
@@ -3899,6 +3899,14 @@ void vehicle_visual_default(
         PaintFunctionsByPitch[vehicle->Pitch](session, vehicle, imageDirection, z, carEntry);
     }
 }
+void PaintTypeMirrored(
+    PaintSession& session, int32_t imageDirection, int32_t z, const Vehicle* vehicle, const CarEntry* carEntry)
+{
+    if (vehicle->Pitch < std::size(PaintFunctionsByPitchMirrored))
+    {
+        PaintFunctionsByPitchMirrored[vehicle->Pitch](session, vehicle, imageDirection, z, carEntry);
+    }
+}
 
 void Vehicle::Paint(PaintSession& session, int32_t imageDirection) const
 {
@@ -3941,6 +3949,7 @@ void Vehicle::Paint(PaintSession& session, int32_t imageDirection) const
     switch (carEntry->PaintStyle)
     {
         case VEHICLE_VISUAL_DEFAULT:
+        case 17:
             vehicle_visual_default(session, imageDirection, z + zOffset, this, carEntry);
             break;
         case VEHICLE_VISUAL_LAUNCHED_FREEFALL:
