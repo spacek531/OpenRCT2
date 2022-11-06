@@ -1574,16 +1574,16 @@ static void VehiclePitchFlatMirrored(
             VehiclePitchFlatUnbanked(session, vehicle, imageDirection, z, carEntry);
             break;
         case 16:
-            VehicleSpriteUninvertedFlatBankedLeft22(session, vehicle, imageDirection, z, carEntry);
+            VehiclePitchUninvertedFlatBankedLeft22(session, vehicle, imageDirection, z, carEntry);
             break;
         case 17:
-            VehicleSpriteUninvertedFlatBankedLeft45(session, vehicle, imageDirection, z, carEntry);
+            VehiclePitchUninvertedFlatBankedLeft45(session, vehicle, imageDirection, z, carEntry);
             break;
         case 18:
-            Mirror<VehicleSpriteUninvertedFlatBankedRight22>(session, vehicle, imageDirection, z, carEntry);
+            Mirror<VehiclePitchUninvertedFlatBankedRight22>(session, vehicle, imageDirection, z, carEntry);
             break;
         case 19:
-            Mirror<VehicleSpriteUninvertedFlatBankedRight45>(session, vehicle, imageDirection, z, carEntry);
+            Mirror<VehiclePitchUninvertedFlatBankedRight45>(session, vehicle, imageDirection, z, carEntry);
             break;
     }
 }
