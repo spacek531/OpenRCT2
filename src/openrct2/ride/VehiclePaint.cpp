@@ -941,21 +941,6 @@ const vehicle_boundbox VehicleBoundboxes[16][224] = {
 
 constexpr const uint8_t SymmetryMask[] = { 0xFF, 0x7F, 0x3F, 0x1F };
 
-// 0x009A3B14:
-using vehicle_sprite_func = void (*)(
-    PaintSession& session, const Vehicle* vehicle, int32_t imageDirection, int32_t z, const CarEntry* carEntry);
-
-template<vehicle_sprite_func function>
-void Mirror(PaintSession& session, const Vehicle* vehicle, int32_t imageDirection, int32_t z, const CarEntry* carEntry)
-{
-    if (!(session.Flags & PaintSessionFlags::VehicleMirroredBackwards))
-    {
-        session.Flags ^= PaintSessionFlags::VehicleMirroredBackwards;
-        imageDirection = YawRotate180(imageDirection);
-    }
-    function(session, vehicle, imageDirection, z, carEntry);
-}
-
 [[nodiscard]] constexpr uint8_t SpinToPeepShift(uint8_t spin, VehicleSymmetry symmetry)
 {
     return spin >> (8 - EnumValue(symmetry));
@@ -1514,77 +1499,6 @@ static void VehiclePitchFlatBankedLeft157Mirror(
     else
     {
         VehiclePitchFlatBankedLeft45(session, vehicle, imageDirection, z, carEntry);
-    }
-}
-
-
-static void VehiclePitchFlatMirrored(
-    PaintSession& session, const Vehicle* vehicle, int32_t imageDirection, int32_t z, const CarEntry* carEntry)
-{
-    // 0x009A3DE4:
-    switch (vehicle->bank_rotation)
-    {
-        case 0:
-            VehiclePitchFlatUnbanked(session, vehicle, imageDirection, z, carEntry);
-            break;
-        case 1:
-            VehiclePitchFlatBankedLeft22(session, vehicle, imageDirection, z, carEntry);
-            break;
-        case 2:
-            VehiclePitchFlatBankedLeft45(session, vehicle, imageDirection, z, carEntry);
-            break;
-        case 3:
-            Mirror<VehiclePitchFlatBankedRight22>(session, vehicle, imageDirection, z, carEntry);
-            break;
-        case 4:
-            Mirror<VehiclePitchFlatBankedRight45>(session, vehicle, imageDirection, z, carEntry);
-            break;
-        case 5:
-            VehiclePitchFlatBankedLeft67(session, vehicle, imageDirection, z, carEntry);
-            break;
-        case 6:
-            VehiclePitchFlatBankedLeft90(session, vehicle, imageDirection, z, carEntry);
-            break;
-        case 7:
-            VehiclePitchFlatBankedLeft112Mirror(session, vehicle, imageDirection, z, carEntry);
-            break;
-        case 8:
-            VehiclePitchFlatBankedLeft135Mirror(session, vehicle, imageDirection, z, carEntry);
-            break;
-        case 9:
-            VehiclePitchFlatBankedLeft157Mirror(session, vehicle, imageDirection, z, carEntry);
-            break;
-        case 10:
-            Mirror<VehiclePitchFlatBankedRight67>(session, vehicle, imageDirection, z, carEntry);
-            break;
-        case 11:
-            Mirror<VehiclePitchFlatBankedRight90>(session, vehicle, imageDirection, z, carEntry);
-            break;
-        case 12:
-            Mirror<VehiclePitchFlatBankedLeft112Mirror>(session, vehicle, imageDirection, z, carEntry);
-            break;
-        case 13:
-            Mirror<VehiclePitchFlatBankedLeft135Mirror>(session, vehicle, imageDirection, z, carEntry);
-            break;
-        case 14:
-            Mirror<VehiclePitchFlatBankedLeft157Mirror>(session, vehicle, imageDirection, z, carEntry);
-            break;
-        case 15:
-            // what is roll 15?
-            VehiclePitchFlatUnbanked(session, vehicle, imageDirection, z, carEntry);
-            break;
-        case 16:
-            VehiclePitchUninvertedFlatBankedLeft22(session, vehicle, imageDirection, z, carEntry);
-            break;
-        case 17:
-            VehiclePitchUninvertedFlatBankedLeft45(session, vehicle, imageDirection, z, carEntry);
-            break;
-        case 18:
-            Mirror<VehiclePitchUninvertedFlatBankedRight22>(session, vehicle, imageDirection, z, carEntry);
-            break;
-        case 19:
-            Mirror<VehiclePitchUninvertedFlatBankedRight45>(session, vehicle, imageDirection, z, carEntry);
-            break;
     }
 }
 
@@ -3600,6 +3514,10 @@ static void VehiclePitchSpiralLift(
 
 #pragma endregion
 
+// 0x009A3B14:
+using vehicle_sprite_func = void (*)(
+    PaintSession& session, const Vehicle* vehicle, int32_t imageDirection, int32_t z, const CarEntry* carEntry);
+
 // clang-format off
 static constexpr const vehicle_sprite_func PaintFunctionsByPitch[] = {
     VehiclePitchFlat,
@@ -3665,15 +3583,15 @@ static constexpr const vehicle_sprite_func PaintFunctionsByPitch[] = {
 };
 
 static constexpr const vehicle_sprite_func PaintFunctionsByPitchMirrored[] = {
-    VehiclePitchFlatMirrored,
+    VehiclePitchFlat,
     VehiclePitchUp12,
     VehiclePitchUp25,
     VehiclePitchUp42,
     VehiclePitchUp60,
-    VehiclePitchUp12,
-    VehiclePitchUp25,
-    VehiclePitchUp42,
-    VehiclePitchUp60,
+    VehiclePitchDown12,
+    VehiclePitchDown25,
+    VehiclePitchDown42,
+    VehiclePitchDown60,
     VehiclePitchUp75,
     VehiclePitchUp90,
     VehiclePitchUp105,
@@ -3682,14 +3600,13 @@ static constexpr const vehicle_sprite_func PaintFunctionsByPitchMirrored[] = {
     VehiclePitchUp150,
     VehiclePitchUp165,
     VehiclePitchInverted,
-    Mirror<VehiclePitchUp75>,
-    Mirror<VehiclePitchUp90>,
-    Mirror<VehiclePitchUp105>,
-    Mirror<VehiclePitchUp120>,
-    Mirror<VehiclePitchUp135>,
-    Mirror<VehiclePitchUp150>,
-    Mirror<VehiclePitchUp165>,
-    VehiclePitchCorkscrew, // TODO: figure out corkscrew
+    VehiclePitchDown75,
+    VehiclePitchDown90,
+    VehiclePitchDown105,
+    VehiclePitchDown120,
+    VehiclePitchDown135,
+    VehiclePitchDown150,
+    VehiclePitchDown165,
     VehiclePitchCorkscrew,
     VehiclePitchCorkscrew,
     VehiclePitchCorkscrew,
@@ -3698,6 +3615,7 @@ static constexpr const vehicle_sprite_func PaintFunctionsByPitchMirrored[] = {
     VehiclePitchCorkscrew,
     VehiclePitchCorkscrew,
     VehiclePitchCorkscrew,
+    VehiclePitchCorkscrew, 
     VehiclePitchCorkscrew,
     VehiclePitchCorkscrew,
     VehiclePitchCorkscrew,
@@ -3719,9 +3637,9 @@ static constexpr const vehicle_sprite_func PaintFunctionsByPitchMirrored[] = {
     VehiclePitchUp16,
     VehiclePitchUp50,
     VehiclePitchDown8,
-    Mirror<VehiclePitchUp16>,
-    Mirror<VehiclePitchUp50>,
-    VehiclePitchInvertingDown25, // TODO: figure this out
+    VehiclePitchDown16,
+    VehiclePitchDown50,
+    VehiclePitchInvertingDown25,
     VehiclePitchInvertingDown42,
     VehiclePitchInvertingDown60,
     VehiclePitchSpiralLift,
@@ -3899,12 +3817,36 @@ void vehicle_visual_default(
         PaintFunctionsByPitch[vehicle->Pitch](session, vehicle, imageDirection, z, carEntry);
     }
 }
+
 void PaintTypeMirrored(
     PaintSession& session, int32_t imageDirection, int32_t z, const Vehicle* vehicle, const CarEntry* carEntry)
 {
+    constexpr const uint8_t PitchOppositeMap[] = {
+        0,  5,  6,  7,  8,  1,  2,  3,  4,  17, 18, 19, 20, 21, 22, 23, 16, 9,  10, 11, 12, 13, 14, 15, // main slopes
+        24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43,                 // corkscrew slopes
+        46, 47, 44, 45, 49, 48,                                                                         // helix slopes
+        53, 54, 55, 50, 51, 52,                                                                         // diagonal slopes
+        56, 57, 58, // inverted-to-upright slopes (no opposite exists)
+        59,         // spiral lift hill slope (no opposite exists)
+    };
+    constexpr const uint8_t BankOppositeMap[] = {
+        0,                                 // unbanked
+        3,  4,  1,  2,                     // 22.5 and 45 degrees
+        10, 11, 12, 13, 14, 5, 6, 7, 8, 9, // 67.5 to 157.5 degrees
+        15,                                // roll 15
+        3,  4,  1,  2,                     // inverted to upright rolls
+    };
+
+    auto imageDirection2 = imageDirection & (BaseRotation / 2 - 1);
+    auto pitch2 = vehicle->Pitch;
+    if (imageDirection2 != imageDirection)
+    {
+        session.Flags |= PaintSessionFlags::VehicleMirroredBackwards;
+        pitch2 = PitchOppositeMap[pitch2];
+    }
     if (vehicle->Pitch < std::size(PaintFunctionsByPitchMirrored))
     {
-        PaintFunctionsByPitchMirrored[vehicle->Pitch](session, vehicle, imageDirection, z, carEntry);
+        PaintFunctionsByPitchMirrored[pitch2](session, vehicle, imageDirection2, z, carEntry);
     }
 }
 
