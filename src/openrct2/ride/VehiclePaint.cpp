@@ -1454,66 +1454,6 @@ static void VehiclePitchFlat(
     }
 }
 
-// 6D5055
-static void VehiclePitchFlatBankedLeft112Mirror(
-    PaintSession& session, const Vehicle* vehicle, int32_t imageDirection, int32_t z, const CarEntry* carEntry)
-{
-    if (vehicle->HasUpdateFlag(VEHICLE_UPDATE_FLAG_USE_INVERTED_SPRITES))
-    {
-        carEntry--;
-    }
-    if (carEntry->GroupEnabled(SpriteGroupType::InlineTwists))
-    {
-        int32_t boundingBoxNum = YawTo4(imageDirection) + 132;
-        int32_t spriteNum = carEntry->SpriteOffset(SpriteGroupType::InlineTwists, imageDirection, 0);
-        VehicleSpritePaintWithSwinging(session, vehicle, spriteNum, boundingBoxNum, z, carEntry, imageDirection);
-    }
-    else
-    {
-        VehiclePitchFlatBankedLeft45(session, vehicle, imageDirection, z, carEntry);
-    }
-}
-
-// 6D50C6
-static void VehiclePitchFlatBankedLeft135Mirror(
-    PaintSession& session, const Vehicle* vehicle, int32_t imageDirection, int32_t z, const CarEntry* carEntry)
-{
-    if (vehicle->HasUpdateFlag(VEHICLE_UPDATE_FLAG_USE_INVERTED_SPRITES))
-    {
-        carEntry--;
-    }
-    if (carEntry->GroupEnabled(SpriteGroupType::InlineTwists))
-    {
-        int32_t boundingBoxNum = YawTo4(imageDirection) + 136;
-        int32_t spriteNum = carEntry->SpriteOffset(SpriteGroupType::InlineTwists, imageDirection, 1);
-        VehicleSpritePaintWithSwinging(session, vehicle, spriteNum, boundingBoxNum, z, carEntry, imageDirection);
-    }
-    else
-    {
-        VehiclePitchFlatBankedLeft45(session, vehicle, imageDirection, z, carEntry);
-    }
-}
-
-// 6D5137
-static void VehiclePitchFlatBankedLeft157Mirror(
-    PaintSession& session, const Vehicle* vehicle, int32_t imageDirection, int32_t z, const CarEntry* carEntry)
-{
-    if (vehicle->HasUpdateFlag(VEHICLE_UPDATE_FLAG_USE_INVERTED_SPRITES))
-    {
-        carEntry--;
-    }
-    if (carEntry->GroupEnabled(SpriteGroupType::InlineTwists))
-    {
-        int32_t boundingBoxNum = YawTo4(imageDirection) + 140;
-        int32_t spriteNum = carEntry->SpriteOffset(SpriteGroupType::InlineTwists, imageDirection, 2);
-        VehicleSpritePaintWithSwinging(session, vehicle, spriteNum, boundingBoxNum, z, carEntry, imageDirection);
-    }
-    else
-    {
-        VehiclePitchFlatBankedLeft45(session, vehicle, imageDirection, z, carEntry);
-    }
-}
-
 #pragma endregion
 
 #pragma region GentleSlopesUp
@@ -3247,7 +3187,8 @@ static void VehiclePitchDown165(
 #pragma region CorkscrewSlopes
 
 // 6D51A5
-static void VehiclePitchCorkscrew(
+template<int32_t corkscrewFrame>
+void VehiclePitchCorkscrew(
     PaintSession& session, const Vehicle* vehicle, int32_t imageDirection, int32_t z, const CarEntry* carEntry)
 {
     if (vehicle->HasUpdateFlag(VEHICLE_UPDATE_FLAG_USE_INVERTED_SPRITES))
@@ -3257,7 +3198,6 @@ static void VehiclePitchCorkscrew(
     if (carEntry->GroupEnabled(SpriteGroupType::Corkscrews))
     {
         // corkscrew slopes begin at pitch 24 and end at pitch 43
-        int32_t corkscrewFrame = vehicle->Pitch - 24;
         int32_t boundingBoxNum = (YawTo4(imageDirection)) + corkscrewFrame * 4 + 144;
         int32_t spriteNum = carEntry->SpriteOffset(SpriteGroupType::Corkscrews, imageDirection, corkscrewFrame);
         VehicleSpritePaintWithSwinging(session, vehicle, spriteNum, boundingBoxNum, z, carEntry, imageDirection);
@@ -3596,26 +3536,26 @@ static constexpr const vehicle_sprite_func PaintFunctionsByPitch[] = {
     VehiclePitchDown135,
     VehiclePitchDown150,
     VehiclePitchDown165,
-    VehiclePitchCorkscrew,
-    VehiclePitchCorkscrew,
-    VehiclePitchCorkscrew,
-    VehiclePitchCorkscrew,
-    VehiclePitchCorkscrew,
-    VehiclePitchCorkscrew,
-    VehiclePitchCorkscrew,
-    VehiclePitchCorkscrew,
-    VehiclePitchCorkscrew, 
-    VehiclePitchCorkscrew,
-    VehiclePitchCorkscrew,
-    VehiclePitchCorkscrew,
-    VehiclePitchCorkscrew,
-    VehiclePitchCorkscrew,
-    VehiclePitchCorkscrew,
-    VehiclePitchCorkscrew,
-    VehiclePitchCorkscrew,
-    VehiclePitchCorkscrew,
-    VehiclePitchCorkscrew,
-    VehiclePitchCorkscrew,
+    VehiclePitchCorkscrew<0>,
+    VehiclePitchCorkscrew<1>,
+    VehiclePitchCorkscrew<2>,
+    VehiclePitchCorkscrew<3>,
+    VehiclePitchCorkscrew<4>,
+    VehiclePitchCorkscrew<5>,
+    VehiclePitchCorkscrew<6>,
+    VehiclePitchCorkscrew<7>,
+    VehiclePitchCorkscrew<8>,
+    VehiclePitchCorkscrew<9>,
+    VehiclePitchCorkscrew<10>,
+    VehiclePitchCorkscrew<11>,
+    VehiclePitchCorkscrew<12>,
+    VehiclePitchCorkscrew<13>,
+    VehiclePitchCorkscrew<14>,
+    VehiclePitchCorkscrew<15>,
+    VehiclePitchCorkscrew<16>,
+    VehiclePitchCorkscrew<17>,
+    VehiclePitchCorkscrew<18>,
+    VehiclePitchCorkscrew<19>,
     VehiclePitchFlat, // Half Helix Up Large
     VehiclePitchFlat, // Half Helix Up Small
     VehiclePitchFlat, // Half Helix Down Large
@@ -3811,7 +3751,7 @@ void PaintTypeMirrored(
 {
     constexpr const uint8_t PitchOppositeMap[] = {
         0,  5,  6,  7,  8,  1,  2,  3,  4,  17, 18, 19, 20, 21, 22, 23, 16, 9,  10, 11, 12, 13, 14, 15, // main slopes
-        24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43,                 // corkscrew slopes (TODO: figure out pattern)
+        29, 30, 32, 32, 33, 24, 25, 26, 27, 28, 39, 40, 41, 42, 43, 34, 35, 36, 37, 38,                 // corkscrew slopes
         46, 47, 44, 45, 49, 48,                                                                         // helix slopes
         53, 54, 55, 50, 51, 52,                                                                         // diagonal slopes
         56, 57, 58, // inverted-to-upright slopes (no opposite exists)
@@ -3821,6 +3761,7 @@ void PaintTypeMirrored(
     auto pitch2 = vehicle->Pitch;
     if (imageDirection2 != imageDirection)
     {
+
         session.Flags |= PaintSessionFlags::VehicleMirroredBackwards;
         pitch2 = PitchOppositeMap[pitch2];
     }
@@ -3872,6 +3813,7 @@ void Vehicle::Paint(PaintSession& session, int32_t imageDirection) const
     {
         case VEHICLE_VISUAL_DEFAULT:
             vehicle_visual_default(session, imageDirection, z + zOffset, this, carEntry);
+            break;
         case 17:
             PaintTypeMirrored(session, imageDirection, z + zOffset, this, carEntry);
             break;
@@ -3910,6 +3852,9 @@ void Vehicle::Paint(PaintSession& session, int32_t imageDirection) const
 
 uint32_t CarEntry::NumRotationSprites(SpriteGroupType spriteGroup) const
 {
+    //if (Symmetry != VehicleSymmetry::Asymmetric)
+        // If the vehicle is symmetric, the number of sprites in each rank is halved from what its Precision value indicates
+        //return NumSpritesPrecision(static_cast<SpritePrecision>(static_cast<uint8_t>(SpriteGroups[static_cast<uint8_t>(spriteGroup)].spritePrecision) - 1));
     return NumSpritesPrecision(SpriteGroups[static_cast<uint8_t>(spriteGroup)].spritePrecision);
 }
 
