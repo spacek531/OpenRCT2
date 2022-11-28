@@ -1614,6 +1614,8 @@ static GameActions::Result TrackDesignPlaceRide(TrackDesignState& tds, TrackDesi
                 int16_t tempZ = newCoords.z - trackCoordinates->z_begin;
                 uint32_t trackColour = (track.flags >> 4) & 0x3;
                 uint32_t brakeSpeed;
+                // RCT2-created track designs include the track speed on all tracks; block brake speed must be treated as
+                // garbage data and set to default.
                 if (trackType == TrackElemType::BlockBrakes)
                 {
                     brakeSpeed = 2;
