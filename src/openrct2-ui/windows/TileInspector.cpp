@@ -2181,6 +2181,9 @@ private:
                 SetCheckboxValue(WIDX_TRACK_CHECK_APPLY_TO_ALL, _applyToAll);
                 SetCheckboxValue(WIDX_TRACK_CHECK_CHAIN_LIFT, tileElement->AsTrack()->HasChain());
                 SetCheckboxValue(WIDX_TRACK_CHECK_BLOCK_BRAKE_CLOSED, tileElement->AsTrack()->GetBrakeClosed());
+                widgets[WIDX_TRACK_CHECK_BLOCK_BRAKE_CLOSED].content = tileElement->AsTrack()->IsBlockStart()
+                    ? STR_TILE_INSPECTOR_TRACK_BLOCK_BRAKE
+                    : STR_TILE_INSPECTOR_TRACK_BRAKE;
                 SetCheckboxValue(WIDX_TRACK_CHECK_IS_INDESTRUCTIBLE, tileElement->AsTrack()->IsIndestructible());
                 break;
 
