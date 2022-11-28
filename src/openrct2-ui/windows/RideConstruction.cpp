@@ -176,17 +176,10 @@ static int32_t RideGetAlternativeType(Ride* ride)
                                                                          : ride->type;
 }
 
-static bool TrackTypeHasSpeedSetting()
+static bool TrackTypeHasBrakeSpeedSetting(track_type_t trackType)
 {
-    return TrackTypeHasSpeedSetting(_currentTrackCurve &= ~RideConstructionSpecialPieceSelected)
-        || TrackTypeHasSpeedSetting(_selectedTrackType);
-}
-
-// Only Block Brakes can have speed and rotation settings due to TD6 limitations
-static bool TrackTypeHasSpeedAndSeatRotationSettings()
-{
-    return (_selectedTrackType == TrackElemType::BlockBrakes)
-        || (_currentTrackCurve &= ~RideConstructionSpecialPieceSelected == TrackElemType::BlockBrakes);
+    trackType &= ~RideConstructionSpecialPieceSelected;
+    return trackType == TrackElemType::Brakes || trackType == TrackElemType::BlockBrakes;
 }
 
 /* move to ride.c */
@@ -1825,12 +1818,12 @@ public:
         widgets[WIDX_U_TRACK].type = WindowWidgetType::Empty;
         widgets[WIDX_O_TRACK].type = WindowWidgetType::Empty;
 
-        bool trackHasSpeedSetting = TrackTypeHasSpeedSetting();
-
-        bool speedSettingIsBooster = _selectedTrackType == TrackElemType::Booster
+        bool brakesSelected = TrackTypeHasBrakeSpeedSetting(_selectedTrackType)
+            || TrackTypeHasBrakeSpeedSetting(_currentTrackCurve);
+        bool boosterTrackSelected = _selectedTrackType == TrackElemType::Booster
             || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster);
 
-        if (!trackHasSpeedSetting)
+        if (!brakesSelected && !boosterTrackSelected)
         {
             if (IsTrackEnabled(TRACK_FLAT_ROLL_BANKING))
             {
@@ -1870,19 +1863,19 @@ public:
         }
         else
         {
-            if (speedSettingIsBooster)
-            {
-                widgets[WIDX_BANKING_GROUPBOX].text = STR_RIDE_CONSTRUCTION_BOOSTER_SPEED;
-                widgets[WIDX_BANK_LEFT].tooltip = STR_RIDE_CONSTRUCTION_BOOSTER_SPEED_LIMIT_TIP;
-                widgets[WIDX_BANK_STRAIGHT].tooltip = STR_RIDE_CONSTRUCTION_BOOSTER_SPEED_LIMIT_TIP;
-                widgets[WIDX_BANK_RIGHT].tooltip = STR_RIDE_CONSTRUCTION_BOOSTER_SPEED_LIMIT_TIP;
-            }
-            else
+            if (brakesSelected)
             {
                 widgets[WIDX_BANKING_GROUPBOX].text = STR_RIDE_CONSTRUCTION_BRAKE_SPEED;
                 widgets[WIDX_BANK_LEFT].tooltip = STR_RIDE_CONSTRUCTION_BRAKE_SPEED_LIMIT_TIP;
                 widgets[WIDX_BANK_STRAIGHT].tooltip = STR_RIDE_CONSTRUCTION_BRAKE_SPEED_LIMIT_TIP;
                 widgets[WIDX_BANK_RIGHT].tooltip = STR_RIDE_CONSTRUCTION_BRAKE_SPEED_LIMIT_TIP;
+            }
+            else
+            {
+                widgets[WIDX_BANKING_GROUPBOX].text = STR_RIDE_CONSTRUCTION_BOOSTER_SPEED;
+                widgets[WIDX_BANK_LEFT].tooltip = STR_RIDE_CONSTRUCTION_BOOSTER_SPEED_LIMIT_TIP;
+                widgets[WIDX_BANK_STRAIGHT].tooltip = STR_RIDE_CONSTRUCTION_BOOSTER_SPEED_LIMIT_TIP;
+                widgets[WIDX_BANK_RIGHT].tooltip = STR_RIDE_CONSTRUCTION_BOOSTER_SPEED_LIMIT_TIP;
             }
 
             _currentlyShowingBrakeOrBoosterSpeed = true;
@@ -1915,8 +1908,8 @@ public:
         widgets[WIDX_SEAT_ROTATION_ANGLE_SPINNER_DOWN].type = WindowWidgetType::Empty;
 
         const auto& rtd = GetRideTypeDescriptor(rideType);
-        if (rtd.HasFlag(RIDE_TYPE_FLAG_HAS_SEAT_ROTATION)
-            && (TrackTypeHasSpeedAndSeatRotationSettings() || !trackHasSpeedSetting))
+        if (rtd.HasFlag(RIDE_TYPE_FLAG_HAS_SEAT_ROTATION) && _selectedTrackType != TrackElemType::Brakes
+            && _currentTrackCurve != (RideConstructionSpecialPieceSelected | TrackElemType::Brakes))
         {
             widgets[WIDX_SEAT_ROTATION_GROUPBOX].type = WindowWidgetType::Groupbox;
             widgets[WIDX_SEAT_ROTATION_ANGLE_SPINNER].type = WindowWidgetType::Spinner;
