@@ -21,6 +21,8 @@
 - Change: [#17998] Show cursor when using inverted mouse dragging.
 - Change: [#18230] Make the large flat to steep pieces available on the corkscrew roller coaster without cheats.
 - Change: [#18381] Convert custom invisible paths to the built-in ones.
+- Change: [#13838] Block brakes now have speed control.
+- Change: [#13838] Brakes adjacent to block brakes with slower speed than block brakes disable when block brake is open.
 - Change: [OpenSFX#11, OpenMusic#19] First implementation of official replacement asset packs for sound effects & music. 
 - Fix: [#1519] “See-through rides” doesn't affect all rides (original bug).
 - Fix: [#14312] Research ride type message incorrect.
@@ -453,13 +455,7 @@
 - Improved: [#14193] [Plugin] Add exact type field to each TileElement, add type field to WidgetBase.
 - Improved: [#14193] [Plugin] Change single quotes to double quotes in openrct2.d.ts.
 - Change: [#13346] [Plugin] Renamed FootpathScenery to FootpathAddition, fix typos.
-<<<<<<< HEAD
 - Change: [#13857] Change Rotation Control Toggle to track element number 256.
-=======
-- Change: [#13838] Block brakes now have speed control.
-- Change: [#13838] Brakes adjacent to block brakes with slower speed than block brakes disable when block brake is open.
-- Change: [#13857] Change Rotation Control Toggle to track element number 256
->>>>>>> 554a80052 (partial implementation block_brakes_set_linked_brakes_open todo)
 - Removed: [#13423] Built-in explode guests cheat (replaced by plug-in).
 - Removed: [#14186] Network traffic window (replaced by plug-in).
 - Fix: [#4605, #11912] Water palettes are not updated properly when selected in Object Selection.
