@@ -176,6 +176,12 @@ static int32_t RideGetAlternativeType(Ride* ride)
                                                                          : ride->type;
 }
 
+static bool TrackTypeHasBrakeSpeedSetting(track_type_t trackType)
+{
+    trackType &= ~RideConstructionSpecialPieceSelected;
+    return trackType == TrackElemType::Brakes || trackType == TrackElemType::BlockBrakes;
+}
+
 /* move to ride.c */
 static void CloseRideWindowForConstruction(RideId rideId)
 {
@@ -1812,8 +1818,8 @@ public:
         widgets[WIDX_U_TRACK].type = WindowWidgetType::Empty;
         widgets[WIDX_O_TRACK].type = WindowWidgetType::Empty;
 
-        bool brakesSelected = _selectedTrackType == TrackElemType::Brakes
-            || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Brakes);
+        bool brakesSelected = TrackTypeHasBrakeSpeedSetting(_selectedTrackType)
+            || TrackTypeHasBrakeSpeedSetting(_currentTrackCurve);
         bool boosterTrackSelected = _selectedTrackType == TrackElemType::Booster
             || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster);
 
