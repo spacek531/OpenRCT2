@@ -644,8 +644,7 @@ public:
                         break;
                     }
                     case WIDX_TRACK_CHECK_BLOCK_BRAKE_CLOSED:
-                        TrackSetBlockBrake(
-                            windowTileInspectorSelectedIndex, !tileElement->AsTrack()->GetBrakeClosed());
+                        TrackSetBlockBrake(windowTileInspectorSelectedIndex, !tileElement->AsTrack()->GetBrakeClosed());
                         break;
                     case WIDX_TRACK_CHECK_IS_INDESTRUCTIBLE:
                         TrackSetIndestructible(windowTileInspectorSelectedIndex, !tileElement->AsTrack()->IsIndestructible());
