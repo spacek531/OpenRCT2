@@ -220,7 +220,8 @@ ResultWithMessage TrackDesign::CreateTrackDesignTrack(TrackDesignState& tds, con
         track.type = trackElement.element->AsTrack()->GetTrackType();
 
         uint8_t trackFlags;
-        if (TrackTypeHasSpeedSetting(track.type))
+        // New track design format will have separate fields for rotation and speed.
+        if (TrackTypeHasSpeedSetting(track.type) && !ride.GetRideTypeDescriptor().HasFlag(RIDE_TYPE_FLAG_HAS_SEAT_ROTATION))
         {
             trackFlags = trackElement.element->AsTrack()->GetBrakeBoosterSpeed() >> 1;
         }
@@ -1614,8 +1615,8 @@ static GameActions::Result TrackDesignPlaceRide(TrackDesignState& tds, TrackDesi
                 int16_t tempZ = newCoords.z - trackCoordinates->z_begin;
                 uint32_t trackColour = (track.flags >> 4) & 0x3;
                 uint32_t brakeSpeed;
-                // RCT2-created track designs include the track speed on all tracks; block brake speed must be treated as
-                // garbage data and set to default.
+                // RCT2-created track designs write brake speed to all tracks; block brake speed must be treated as
+                // garbage data.
                 if (trackType == TrackElemType::BlockBrakes)
                 {
                     brakeSpeed = 2;

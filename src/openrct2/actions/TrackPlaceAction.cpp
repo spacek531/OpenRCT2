@@ -577,11 +577,13 @@ GameActions::Result TrackPlaceAction::Execute() const
                 trackElement->SetBrakeClosed(true);
                 break;
         }
+
         if (TrackTypeHasSpeedSetting(_trackType))
         {
             trackElement->SetBrakeBoosterSpeed(_brakeSpeed);
         }
-        else if (ride->GetRideTypeDescriptor().HasFlag(RIDE_TYPE_FLAG_HAS_LANDSCAPE_DOORS))
+
+        if (ride->GetRideTypeDescriptor().HasFlag(RIDE_TYPE_FLAG_HAS_LANDSCAPE_DOORS))
         {
             trackElement->SetDoorAState(LANDSCAPE_DOOR_CLOSED);
             trackElement->SetDoorBState(LANDSCAPE_DOOR_CLOSED);
