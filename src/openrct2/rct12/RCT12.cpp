@@ -466,10 +466,6 @@ bool RCT12PathElement::IsBlockedByVehicle() const
 
 bool RCT12TrackElement::GetBrakeClosed() const
 {
-    if (trackType == TrackElemType::Brakes)
-    {
-        return true;
-    }
     return (flags & RCT12_TILE_ELEMENT_FLAG_BLOCK_BRAKE_CLOSED) != 0;
 }
 
