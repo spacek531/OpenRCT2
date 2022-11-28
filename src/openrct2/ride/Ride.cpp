@@ -3695,9 +3695,12 @@ void Ride::MoveTrainsToBlockBrakes(CoordsXYE* currentElement)
         } while (!(train->UpdateTrackMotion(nullptr) & VEHICLE_UPDATE_MOTION_TRACK_FLAG_VEHICLE_AT_BLOCK_BRAKE));
 
         firstBlock->SetBrakeClosed(true);
-        blockBrakeSetLinkedBrakesClosed(
-            CoordsXYZ(currentElement->x, currentElement->y, currentElement->element->GetBaseZ()), currentElement->element,
-            true);
+        if (firstBlock->GetTrackType() == TrackElemType::BlockBrakes)
+        {
+            blockBrakeSetLinkedBrakesClosed(
+                CoordsXYZ(currentElement->x, currentElement->y, currentElement->element->GetBaseZ()), currentElement->element,
+                true);
+        }
         for (Vehicle* car = train; car != nullptr; car = GetEntity<Vehicle>(car->next_vehicle_on_train))
         {
             car->ClearUpdateFlag(VEHICLE_UPDATE_FLAG_COLLISION_DISABLED);
