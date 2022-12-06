@@ -2884,7 +2884,6 @@ static void RideConstructPlacedForwardGameActionCallback(const GameAction* ga, c
             _currentTrackBegin.z = trackPos.z;
             _currentTrackPieceDirection = next_track.element->GetDirection();
             _currentTrackPieceType = next_track.element->AsTrack()->GetTrackType();
-
             _currentTrackSelectionFlags = 0;
             _rideConstructionState = RideConstructionState::Selected;
             _rideConstructionNextArrowPulse = 0;
@@ -3565,8 +3564,7 @@ void ride_construction_tooldown_construct(const ScreenCoordsXY& screenCoords)
         } while (trackBlock->index != 255);
         z -= bx;
 
-        // FIX not sure exactly why it starts trial and error place from a lower Z, but it causes issues with
-        // disable clearance
+        // FIX not sure exactly why it starts trial and error place from a lower Z, but it causes issues with disable clearance
         if (!gCheatsDisableClearanceChecks && z > MINIMUM_LAND_HEIGHT_BIG)
         {
             z -= LAND_HEIGHT_STEP;
