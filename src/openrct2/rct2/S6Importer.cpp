@@ -1418,7 +1418,12 @@ namespace RCT2
                     dst2->SetIsIndestructible(src2->IsIndestructible());
                     // Skipping IsHighlighted()
 
-                    if (TrackTypeHasSpeedSetting(trackType))
+                    // Import block brakes to keep legacy behaviour
+                    if (trackType == TrackElemType::BlockBrakes)
+                    {
+                        dst2->SetBrakeBoosterSpeed(RCT2DefaultBlockBrakeSpeed);
+                    }
+                    else if (TrackTypeHasSpeedSetting(trackType))
                     {
                         dst2->SetBrakeBoosterSpeed(src2->GetBrakeBoosterSpeed());
                     }

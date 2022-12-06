@@ -22,6 +22,8 @@ struct rct_ride_entry;
 class ObjectList;
 enum class EditorStep : uint8_t;
 
+constexpr const uint8_t RCT2DefaultBlockBrakeSpeed = 2;
+
 namespace RCT2
 {
     constexpr const StringId RCT2_RIDE_STRING_START = 2;
