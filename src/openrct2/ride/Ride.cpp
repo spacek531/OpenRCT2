@@ -3038,7 +3038,7 @@ static void RideOpenBlockBrakes(CoordsXYE* startElement)
         {
             case TrackElemType::BlockBrakes:
             case TrackElemType::DiagBlockBrakes:
-                blockBrakeSetLinkedBrakesClosed(
+                BlockBrakeSetLinkedBrakesClosed(
                     CoordsXYZ(currentElement.x, currentElement.y, currentElement.element->GetBaseZ()), currentElement.element,
                     false);
                 [[fallthrough]];
@@ -3119,7 +3119,7 @@ void BlockBrakeSetLinkedBrakesClosed(const CoordsXYZ& vehicleTrackLocation, Tile
         {
             TileElement* trackElement = tileElement;
             if (trackBeginEnd.begin_element->AsTrack()->GetTrackType() == TrackElemType::DiagBrakes)
-                trackElement = map_get_track_element_at_of_type_seq(
+                trackElement = MapGetTrackElementAtOfTypeSeq(
                     location, trackBeginEnd.begin_element->AsTrack()->GetTrackType(), 0);
             if (trackElement == nullptr)
             {
@@ -3544,9 +3544,9 @@ static void ride_create_vehicles_find_first_block(Ride* ride, CoordsXYE* outXYEl
                 {
                     break;
                 }
-                [[fallthrough]]
+                [[fallthrough]];
             case TrackElemType::DiagBlockBrakes:
-                TileElement* tileElement = map_get_track_element_at_of_type_seq(
+                TileElement* tileElement = MapGetTrackElementAtOfTypeSeq(
                     { trackBeginEnd.begin_x, trackBeginEnd.begin_y, trackBeginEnd.begin_z }, trackType, 0);
 
                 if (tileElement != nullptr)
