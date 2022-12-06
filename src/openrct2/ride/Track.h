@@ -644,4 +644,5 @@ bool TrackTypeHasSpeedSetting(track_type_t trackType);
 bool TrackTypeIsBrakes(track_type_t trackType);
 bool TrackTypeIsBlockBrakes(track_type_t trackType);
 bool TrackTypeIsBrakesOrBlockBrakes(track_type_t trackType);
+bool TrackTypeIsBooster(track_type_t trackType);
 std::optional<CoordsXYZD> GetTrackSegmentOrigin(const CoordsXYE& posEl);

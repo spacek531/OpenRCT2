@@ -634,13 +634,11 @@ GameActions::Result TrackPlaceAction::Execute() const
                 trackElement->SetBrakeClosed(true);
                 break;
             case TrackElemType::DiagBrakes:
+                // TODO: why is this - Spacek531 2022/12/06
                 if (trackBlock->index != 0)
                 {
                     break;
                 }
-            case TrackElemType::Brakes:
-                tileElement->AsTrack()->SetBrakeClosed(true);
-                break;
         }
 
         if (TrackTypeHasSpeedSetting(_trackType))

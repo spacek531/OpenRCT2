@@ -640,6 +640,16 @@ bool TrackTypeIsBrakesOrBlockBrakes(track_type_t trackType)
     return TrackTypeIsBrakes(trackType) || TrackTypeIsBlockBrakes(trackType);
 }
 
+bool TrackTypeIsBooster(track_type_t trackType)
+{
+    return trackType == TrackElemType::Booster;
+}
+
+bool TrackTypeHasSpeedSetting(track_type_t trackType)
+{
+    return TrackTypeIsBooster(trackType) || TrackTypeIsBrakesOrBlockBrakes(trackType);
+}
+
 bool track_element_is_covered(track_type_t trackElementType)
 {
     switch (trackElementType)
@@ -667,11 +677,6 @@ bool track_element_is_covered(track_type_t trackElementType)
         default:
             return false;
     }
-}
-
-bool TrackTypeHasSpeedSetting(track_type_t trackType)
-{
-    return trackType == TrackElemType::Booster || TrackTypeIsBrakesOrBlockBrakes(trackType)
 }
 
 std::optional<CoordsXYZD> GetTrackSegmentOrigin(const CoordsXYE& posEl)
