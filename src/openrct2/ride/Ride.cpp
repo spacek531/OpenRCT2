@@ -998,9 +998,9 @@ std::unique_ptr<TrackDesign> Ride::SaveToTrackDesign(TrackDesignState& tds) cons
 
     auto td = std::make_unique<TrackDesign>();
     auto errMessage = td->CreateTrackDesign(tds, *this);
-    if (errMessage != STR_NONE)
+    if (!errMessage.Successful)
     {
-        ContextShowError(STR_CANT_SAVE_TRACK_DESIGN, errMessage, {});
+        ContextShowError(STR_CANT_SAVE_TRACK_DESIGN, errMessage.Message, {});
         return nullptr;
     }
 

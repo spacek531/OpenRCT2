@@ -5363,9 +5363,12 @@ static void WindowRideMeasurementsDesignSave(rct_window* w)
     if (gTrackDesignSaveMode)
     {
         auto errMessage = _trackDesign->CreateTrackDesignScenery(tds);
-        if (errMessage != STR_NONE)
+        if (errMessage.Message)
         {
-            ContextShowError(STR_CANT_SAVE_TRACK_DESIGN, errMessage, {});
+            ContextShowError(STR_CANT_SAVE_TRACK_DESIGN, errMessage.Message, {});
+        }
+        if (!errMessage.Successful)
+        {
             return;
         }
     }
