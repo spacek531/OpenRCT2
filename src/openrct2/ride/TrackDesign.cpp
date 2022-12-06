@@ -208,6 +208,8 @@ ResultWithMessage TrackDesign::CreateTrackDesignTrack(TrackDesignState& tds, con
     CoordsXYZ startPos = { trackElement.x, trackElement.y, z + trackCoordinates->z_begin - trackBlock->z };
     tds.Origin = startPos;
 
+    StringId NonFatalErrorMessage{};
+
     do
     {
         // Remove this check for new track design format
@@ -228,6 +230,11 @@ ResultWithMessage TrackDesign::CreateTrackDesignTrack(TrackDesignState& tds, con
         else
         {
             trackFlags = trackElement.element->AsTrack()->GetSeatRotation();
+        }
+
+        if (track.type == TrackElemType::BlockBrakes)
+        {
+            NonFatalErrorMessage = STR_TRACK_DESIGN_BLOCK_BRAKE_SPEED_RESET;
         }
 
         if (trackElement.element->AsTrack()->HasChain())
@@ -348,7 +355,7 @@ ResultWithMessage TrackDesign::CreateTrackDesignTrack(TrackDesignState& tds, con
 
     space_required_x = ((tds.PreviewMax.x - tds.PreviewMin.x) / 32) + 1;
     space_required_y = ((tds.PreviewMax.y - tds.PreviewMin.y) / 32) + 1;
-    return { true };
+    return { true, NonFatalErrorMessage };
 }
 
 ResultWithMessage TrackDesign::CreateTrackDesignMaze(TrackDesignState& tds, const Ride& ride)
