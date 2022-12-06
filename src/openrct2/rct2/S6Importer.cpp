@@ -1421,11 +1421,15 @@ namespace RCT2
                     // Import block brakes to keep legacy behaviour
                     if (trackType == TrackElemType::BlockBrakes)
                     {
+                        dst2->SetBrakeClosed(src2->GetBrakeClosed());
                         dst2->SetBrakeBoosterSpeed(RCT2DefaultBlockBrakeSpeed);
                     }
                     else if (TrackTypeHasSpeedSetting(trackType))
                     {
                         dst2->SetBrakeBoosterSpeed(src2->GetBrakeBoosterSpeed());
+                        // Brakes import as closed to preserve legacy behaviour
+                        if (trackType == TrackElemType::Brakes)
+                            dst2->SetBrakeClosed(true);
                     }
                     else if (trackType == TrackElemType::OnRidePhoto)
                     {
