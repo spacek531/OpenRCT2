@@ -3641,6 +3641,7 @@ STR_6535    :{WINDOW_COLOUR_2}Nausea Factor: {BLACK}-{COMMA16}%
 STR_6536    :Brake Closed
 STR_6537    :Block brake speed
 STR_6538    :Set speed limit for block brakes. In block section mode, adjacent brakes with a slower speed are linked to the block brake
+STR_6539    :Block brakes will be saved at default speed
 
 #############
 # Scenarios #
