@@ -1003,6 +1003,10 @@ std::unique_ptr<TrackDesign> Ride::SaveToTrackDesign(TrackDesignState& tds) cons
         ContextShowError(STR_CANT_SAVE_TRACK_DESIGN, errMessage.Message, {});
         return nullptr;
     }
+    if (errMessage.Message)
+    {
+        ContextShowError(errMessage.Message, STR_EMPTY, {});
+    }
 
     return td;
 }
