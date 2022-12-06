@@ -1619,7 +1619,7 @@ static GameActions::Result TrackDesignPlaceRide(TrackDesignState& tds, TrackDesi
                 // garbage data.
                 if (trackType == TrackElemType::BlockBrakes)
                 {
-                    brakeSpeed = 2;
+                    brakeSpeed = RCT2DefaultBlockBrakeSpeed;
                 }
                 else
                 {

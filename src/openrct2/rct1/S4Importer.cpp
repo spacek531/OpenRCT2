@@ -1661,7 +1661,6 @@ namespace RCT1
                     dst2->SetColourScheme(src2->GetColourScheme());
                     dst2->SetHasChain(src2->HasChain());
                     dst2->SetHasCableLift(false);
-                    dst2->SetBrakeClosed(src2->GetTrackType() == TrackElemType::Brakes);
                     dst2->SetInverted(src2->IsInverted());
                     dst2->SetStationIndex(StationIndex::FromUnderlying(src2->GetStationIndex()));
                     dst2->SetHasGreenLight(src2->HasGreenLight());
