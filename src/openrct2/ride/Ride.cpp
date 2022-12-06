@@ -3526,7 +3526,7 @@ static void ride_create_vehicles_find_first_block(Ride* ride, CoordsXYE* outXYEl
         {
             break;
         }
-
+        TileElement* tileElement;
         auto trackType = trackElement->GetTrackType();
         switch (trackType)
         {
@@ -3546,7 +3546,7 @@ static void ride_create_vehicles_find_first_block(Ride* ride, CoordsXYE* outXYEl
                 }
                 [[fallthrough]];
             case TrackElemType::DiagBlockBrakes:
-                TileElement* tileElement = MapGetTrackElementAtOfTypeSeq(
+                tileElement = MapGetTrackElementAtOfTypeSeq(
                     { trackBeginEnd.begin_x, trackBeginEnd.begin_y, trackBeginEnd.begin_z }, trackType, 0);
 
                 if (tileElement != nullptr)
