@@ -2698,7 +2698,7 @@ static ResultWithMessage RideCheckBlockBrakes(const CoordsXYE& input, CoordsXYE*
     track_circuit_iterator_begin(&it, input);
     while (track_circuit_iterator_next(&it))
     {
-        if (TrackIsBlockBrakes(it.current.element->AsTrack()->GetTrackType()))
+        if (TrackTypeIsBlockBrakes(it.current.element->AsTrack()->GetTrackType()))
         {
             auto type = it.last.element->AsTrack()->GetTrackType();
             if (type == TrackElemType::EndStation)
@@ -2706,7 +2706,7 @@ static ResultWithMessage RideCheckBlockBrakes(const CoordsXYE& input, CoordsXYE*
                 *output = it.current;
                 return { false, STR_BLOCK_BRAKES_CANNOT_BE_USED_DIRECTLY_AFTER_STATION };
             }
-            if (TrackIsBlockBrakes(type))
+            if (TrackTypeIsBlockBrakes(type))
             {
                 *output = it.current;
                 return { false, STR_BLOCK_BRAKES_CANNOT_BE_USED_DIRECTLY_AFTER_EACH_OTHER };
@@ -3066,7 +3066,7 @@ static void RideOpenBlockBrakes(CoordsXYE* startElement)
 void BrakeLinkToBlockBrake(const CoordsXYZ& vehicleTrackLocation, TileElement* tileElement)
 {
     TrackElement* brake = tileElement->AsTrack();
-    if (!TrackIsBrakes(brake->GetTrackType()))
+    if (!TrackTypeIsBrakes(brake->GetTrackType()))
     {
         return;
     }
@@ -3078,7 +3078,7 @@ void BrakeLinkToBlockBrake(const CoordsXYZ& vehicleTrackLocation, TileElement* t
         if (output.element->AsTrack()->GetSequenceIndex() != 0)
             continue;
 
-        if (TrackIsBlockBrakes(output.element->AsTrack()->GetTrackType()))
+        if (TrackTypeIsBlockBrakes(output.element->AsTrack()->GetTrackType()))
         {
             GetTrackElementOriginAndApplyChanges(
                 { output.x, output.y, output.element->GetBaseZ(), output.element->GetDirection() },
@@ -3089,7 +3089,7 @@ void BrakeLinkToBlockBrake(const CoordsXYZ& vehicleTrackLocation, TileElement* t
                     : TRACK_ELEMENT_SET_BRAKE_CLOSED_FALSE);
             break;
         }
-        else if (TrackIsBrakes(output.element->AsTrack()->GetTrackType()))
+        else if (TrackTypeIsBrakes(output.element->AsTrack()->GetTrackType()))
         {
             continue;
         }
@@ -3104,7 +3104,7 @@ void BrakeLinkToBlockBrake(const CoordsXYZ& vehicleTrackLocation, TileElement* t
 void BlockBrakeSetLinkedBrakesClosed(const CoordsXYZ& vehicleTrackLocation, TileElement* tileElement, bool isClosed)
 {
     TrackElement* blockBrake = tileElement->AsTrack();
-    if (!TrackIsBlockBrakes(blockBrake->GetTrackType()))
+    if (!TrackTypeIsBlockBrakes(blockBrake->GetTrackType()))
     {
         return;
     }
@@ -3131,7 +3131,7 @@ void BlockBrakeSetLinkedBrakesClosed(const CoordsXYZ& vehicleTrackLocation, Tile
         location.z = trackBeginEnd.begin_z;
         tileElement = trackBeginEnd.begin_element;
 
-        if (TrackIsBrakes(trackBeginEnd.begin_element->AsTrack()->GetTrackType()))
+        if (TrackTypeIsBrakes(trackBeginEnd.begin_element->AsTrack()->GetTrackType()))
         {
             TileElement* trackElement = tileElement;
             if (trackBeginEnd.begin_element->AsTrack()->GetTrackType() == TrackElemType::DiagBrakes)
@@ -3166,7 +3166,7 @@ void BlockBrakeSetLinkedBrakesClosed(const CoordsXYZ& vehicleTrackLocation, Tile
                 return;
             }
         }
-    } while (TrackIsBrakes(trackBeginEnd.begin_element->AsTrack()->GetTrackType()));
+    } while (TrackTypeIsBrakes(trackBeginEnd.begin_element->AsTrack()->GetTrackType()));
 }
 
 /**
