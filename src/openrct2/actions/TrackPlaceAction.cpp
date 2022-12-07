@@ -576,7 +576,6 @@ GameActions::Result TrackPlaceAction::Execute() const
             case TrackElemType::Brakes:
             case TrackElemType::BlockBrakes:
             case TrackElemType::DiagBrakes:
-            case TrackElemType::DiagBlockBrakes:
                 trackElement->SetBrakeClosed(true);
                 break;
         }

@@ -6035,8 +6035,8 @@ static void inverted_rc_track_diag_flat(
     }
 }
 
-void inverted_rc_track_diag_brakes(
-    paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
+static void inverted_rc_track_diag_brakes(
+    PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
     const TrackElement& trackElement)
 {
     track_paint_util_diag_tiles_paint(
@@ -6044,15 +6044,15 @@ void inverted_rc_track_diag_brakes(
         defaultDiagTileOffsets, defaultDiagBoundLengths, nullptr);
 
     int32_t blockedSegments = DiagBlockedSegments[trackSequence];
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(blockedSegments, direction), 0xFFFF, 0);
 
     if (trackSequence == 3)
     {
-        metal_a_supports_paint_setup(
+        MetalASupportsPaintSetup(
             session, METAL_SUPPORTS_TUBES_INVERTED, DiagSupportSegments[direction], 0, height + 44,
             session.TrackColours[SCHEME_SUPPORTS]);
     }
-    paint_util_set_general_support_height(session, height + 48, 0x20);
+    PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
 }
 
 /** rct2: 0x008A97B8 */

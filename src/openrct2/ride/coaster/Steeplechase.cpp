@@ -1498,7 +1498,7 @@ static void steeplechase_track_diag_flat(
 }
 
 void steeplechase_track_diag_brakes(
-    paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
+    PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
     const TrackElement& trackElement)
 {
     track_paint_util_diag_tiles_paint(
@@ -1507,13 +1507,13 @@ void steeplechase_track_diag_brakes(
 
     if (trackSequence == 3)
     {
-        metal_a_supports_paint_setup(
+        MetalASupportsPaintSetup(
             session, METAL_SUPPORTS_STICK, DiagSupportSegments[direction], 0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
     int32_t blockedSegments = DiagBlockedSegments[trackSequence];
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 32, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(blockedSegments, direction), 0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
 }
 
 /** rct2: 0x008A5B38 */

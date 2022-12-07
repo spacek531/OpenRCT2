@@ -5487,7 +5487,7 @@ static void looping_rc_track_diag_flat(
 }
 
 void looping_rc_track_diag_brakes(
-    paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
+    PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
     const TrackElement& trackElement)
 {
     track_paint_util_diag_tiles_paint(
@@ -5498,12 +5498,12 @@ void looping_rc_track_diag_brakes(
 
     if (trackSequence == 3)
     {
-        metal_a_supports_paint_setup(
+        MetalASupportsPaintSetup(
             session, METAL_SUPPORTS_TUBES, DiagSupportSegments[direction], 0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    paint_util_set_segment_support_height(session, SEGMENTS_ALL, 0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 32, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, SEGMENTS_ALL, 0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
 }
 
 /** rct2: 0x008A67C0 */

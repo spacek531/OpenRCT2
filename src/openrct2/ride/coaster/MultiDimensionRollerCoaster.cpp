@@ -7089,7 +7089,7 @@ static void multi_dimension_rc_track_diag_flat(
 }
 
 void multi_dimension_rc_track_diag_brakes(
-    paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
+    PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
     const TrackElement& trackElement)
 {
     int32_t blockedSegments = DiagBlockedSegments[trackSequence];
@@ -7099,12 +7099,12 @@ void multi_dimension_rc_track_diag_brakes(
             session, -3, height + 24, direction, trackSequence, session.TrackColours[SCHEME_TRACK], MultidimDiagBrakeImages[1],
             defaultDiagTileOffsets, defaultDiagBoundLengths, nullptr);
 
-        paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(blockedSegments, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
 
         if (trackSequence == 3)
         {
-            metal_a_supports_paint_setup(
+            MetalASupportsPaintSetup(
                 session, METAL_SUPPORTS_TUBES_INVERTED, DiagSupportSegments[direction], 0, height + 36,
                 session.TrackColours[SCHEME_SUPPORTS]);
         }
@@ -7117,18 +7117,18 @@ void multi_dimension_rc_track_diag_brakes(
 
         if (trackSequence == 3)
         {
-            metal_a_supports_paint_setup(
+            MetalASupportsPaintSetup(
                 session, METAL_SUPPORTS_TUBES_INVERTED, DiagSupportSegments[direction], 0, height,
                 session.TrackColours[SCHEME_SUPPORTS]);
         }
 
-        paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(blockedSegments, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
     }
 }
 
 void multi_dimension_rc_track_diag_block_brakes(
-    paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
+    PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
     const TrackElement& trackElement)
 {
     int32_t blockedSegments = DiagBlockedSegments[trackSequence];
@@ -7139,12 +7139,12 @@ void multi_dimension_rc_track_diag_block_brakes(
             MultidimDiagBlockBrakeImages[1][trackElement.GetBrakeClosed()], defaultDiagTileOffsets, defaultDiagBoundLengths,
             nullptr);
 
-        paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(blockedSegments, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
 
         if (trackSequence == 3)
         {
-            metal_a_supports_paint_setup(
+            MetalASupportsPaintSetup(
                 session, METAL_SUPPORTS_TUBES_INVERTED, DiagSupportSegments[direction], 0, height + 36,
                 session.TrackColours[SCHEME_SUPPORTS]);
         }
@@ -7158,13 +7158,13 @@ void multi_dimension_rc_track_diag_block_brakes(
 
         if (trackSequence == 3)
         {
-            metal_a_supports_paint_setup(
+            MetalASupportsPaintSetup(
                 session, METAL_SUPPORTS_TUBES_INVERTED, DiagSupportSegments[direction], 0, height,
                 session.TrackColours[SCHEME_SUPPORTS]);
         }
 
-        paint_util_set_segment_support_height(session, paint_util_rotate_segments(blockedSegments, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(blockedSegments, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
     }
 }
 

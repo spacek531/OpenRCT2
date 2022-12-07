@@ -199,6 +199,9 @@ enum
     TRACK_FLYING_HALF_LOOP_UNINVERTED_DOWN,
     TRACK_FLYING_HALF_LOOP_INVERTED_UP,
 
+    TRACK_DIAG_BRAKES,
+    TRACK_DIAG_BLOCK_BRAKES,
+
     TRACK_GROUP_COUNT,
 };
 
@@ -577,7 +580,10 @@ namespace TrackElemType
     constexpr track_type_t FlyerHalfLoopInvertedUp = 291;
     constexpr track_type_t FlyerHalfLoopUninvertedDown = 292;
 
-    constexpr track_type_t Count = 293;
+    constexpr track_type_t DiagBrakes = 293;
+    constexpr track_type_t DiagBlockBrakes = 294;
+
+    constexpr track_type_t Count = 295;
     constexpr track_type_t None = 65535;
 
 }; // namespace TrackElemType

@@ -5006,7 +5006,7 @@ static void mine_train_rc_track_diag_flat(
 }
 
 void mine_train_rc_track_diag_brakes(
-    paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
+    PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
     const TrackElement& trackElement)
 {
     track_paint_util_diag_tiles_paint(
@@ -5016,22 +5016,22 @@ void mine_train_rc_track_diag_brakes(
     if (trackSequence == 1)
     {
         int32_t woodenSupportSegments[] = { 8, 9, 10, 11 };
-        wooden_a_supports_paint_setup(
+        WoodenASupportsPaintSetup(
             session, woodenSupportSegments[direction], 8, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
     if (trackSequence == 2)
     {
         int32_t woodenSupportSegments[] = { 10, 11, 8, 9 };
-        wooden_a_supports_paint_setup(
+        WoodenASupportsPaintSetup(
             session, woodenSupportSegments[direction], 8, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    paint_util_set_segment_support_height(session, SEGMENTS_ALL, 0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 32, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, SEGMENTS_ALL, 0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
 }
 
 void mine_train_rc_track_diag_block_brakes(
-    paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
+    PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
     const TrackElement& trackElement)
 {
     track_paint_util_diag_tiles_paint(
@@ -5042,18 +5042,18 @@ void mine_train_rc_track_diag_block_brakes(
     if (trackSequence == 1)
     {
         int32_t woodenSupportSegments[] = { 8, 9, 10, 11 };
-        wooden_a_supports_paint_setup(
+        WoodenASupportsPaintSetup(
             session, woodenSupportSegments[direction], 8, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
     if (trackSequence == 2)
     {
         int32_t woodenSupportSegments[] = { 10, 11, 8, 9 };
-        wooden_a_supports_paint_setup(
+        WoodenASupportsPaintSetup(
             session, woodenSupportSegments[direction], 8, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
-    paint_util_set_segment_support_height(session, SEGMENTS_ALL, 0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 32, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, SEGMENTS_ALL, 0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
 }
 
 /** rct2: 0x0071C414 */

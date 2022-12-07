@@ -6244,7 +6244,7 @@ static void block_brakes_open_previous_section(Ride& ride, const CoordsXYZ& vehi
         trackElement->AsTrack()->GetTrackType(), 0, nullptr, TRACK_ELEMENT_SET_BRAKE_CLOSED_FALSE);
     MapInvalidateElement(location, reinterpret_cast<TileElement*>(trackElement));
     if (ride.IsBlockSectioned())
-        blockBrakeSetLinkedBrakesClosed(location, reinterpret_cast<TileElement*>(trackElement), false);
+        BlockBrakeSetLinkedBrakesClosed(location, reinterpret_cast<TileElement*>(trackElement), false);
 
     auto trackType = trackElement->AsTrack()->GetTrackType();
     if (TrackIsBlockBrakes(trackType) || trackType == TrackElemType::EndStation)
