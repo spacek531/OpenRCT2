@@ -1346,6 +1346,7 @@ namespace RCT2
                     auto src2 = src->AsSurface();
 
                     dst2->SetSlope(src2->GetSlope());
+
                     dst2->SetSurfaceStyle(src2->GetSurfaceStyle());
                     dst2->SetEdgeStyle(src2->GetEdgeStyle());
 
@@ -1416,8 +1417,6 @@ namespace RCT2
                     dst2->SetBrakeClosed(src2->GetBrakeClosed() || (trackType == TrackElemType::Brakes));
                     dst2->SetIsIndestructible(src2->IsIndestructible());
                     // Skipping IsHighlighted()
-                    if (trackType == TrackElemType::Brakes)
-                        dst2->SetBrakeClosed(true);
 
                     // Import block brakes to keep legacy behaviour
                     if (trackType == TrackElemType::BlockBrakes)
