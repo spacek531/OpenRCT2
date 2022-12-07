@@ -39,20 +39,6 @@ enum
     SEGMENT_C4 = (1 << 8), // 4
 };
 
-static constexpr const int32_t DiagBlockedSegments[] = {
-    SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4 | SEGMENT_BC,
-    SEGMENT_C4 | SEGMENT_CC | SEGMENT_C8 | SEGMENT_B4,
-    SEGMENT_D0 | SEGMENT_C4 | SEGMENT_C0 | SEGMENT_D4,
-    SEGMENT_D0 | SEGMENT_C4 | SEGMENT_B8 | SEGMENT_C8,
-};
-
-static constexpr const uint8_t DiagSupportSegments[] = {
-    1,
-    0,
-    2,
-    3,
-};
-
 enum
 {
     TUNNEL_0 = 0,

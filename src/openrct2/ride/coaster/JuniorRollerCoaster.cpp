@@ -4382,25 +4382,38 @@ static void junior_rc_right_eighth_to_orthogonal_bank_paint_setup(
     junior_rc_left_eighth_to_diag_bank_paint_setup(session, ride, trackSequence, (direction + 3) % 4, height, trackElement);
 }
 
-static void junior_rc_paint_track_diag_flat(
+static constexpr const int32_t junior_rc_diag_blocked_segments[] = {
+    SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4 | SEGMENT_BC,
+    SEGMENT_C4 | SEGMENT_CC | SEGMENT_C8 | SEGMENT_B4,
+    SEGMENT_D0 | SEGMENT_C4 | SEGMENT_C0 | SEGMENT_D4,
+    SEGMENT_D0 | SEGMENT_C4 | SEGMENT_B8 | SEGMENT_C8,
+};
+
+static constexpr const uint8_t junior_rc_diag_support_segment[] = {
+    1,
+    0,
+    2,
+    3,
+};
+
+void junior_rc_paint_track_diag_flat(
     PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, uint16_t height,
     const TrackElement& trackElement, JuniorRcChainType chainType)
 {
     track_paint_util_diag_tiles_paint(
         session, 1, height, direction, trackSequence, session.TrackColours[SCHEME_TRACK],
-        junior_rc_track_pieces_diag_brakes[EnumValue(chainType)], defaultDiagTileOffsets, defaultDiagBoundLengths,
-        nullptr);
+        junior_rc_track_pieces_diag_flat[EnumValue(chainType)], defaultDiagTileOffsets, defaultDiagBoundLengths, nullptr);
 
     if (trackSequence == 3)
     {
-        MetalBSupportsPaintSetup(
+        MetalASupportsPaintSetup(
             session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
-            4, height + 7, session.TrackColours[SCHEME_SUPPORTS]);
+            0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
     int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
     PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(blockedSegments, direction), 0xFFFF, 0);
-    PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
+    PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
 }
 
 static void junior_rc_paint_track_diag_brakes(
@@ -4408,15 +4421,14 @@ static void junior_rc_paint_track_diag_brakes(
     const TrackElement& trackElement)
 {
     track_paint_util_diag_tiles_paint(
-        session, 1, height, direction, trackSequence, session.TrackColours[SCHEME_TRACK],
-        junior_rc_track_pieces_diag_brakes[], defaultDiagTileOffsets, defaultDiagBoundLengths,
-        nullptr);
+        session, 1, height, direction, trackSequence, session.TrackColours[SCHEME_TRACK], junior_rc_track_pieces_diag_brakes[],
+        defaultDiagTileOffsets, defaultDiagBoundLengths, nullptr);
 
     if (trackSequence == 3)
     {
-        MetalBSupportsPaintSetup(
+        MetalASupportsPaintSetup(
             session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
-            4, height + 7, session.TrackColours[SCHEME_SUPPORTS]);
+            0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
     int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
@@ -4435,9 +4447,9 @@ static void junior_rc_paint_track_diag_block_brakes(
 
     if (trackSequence == 3)
     {
-        MetalBSupportsPaintSetup(
+        MetalASupportsPaintSetup(
             session, (direction & 1) ? METAL_SUPPORTS_FORK_ALT : METAL_SUPPORTS_FORK, junior_rc_diag_support_segment[direction],
-            4, height + 7, session.TrackColours[SCHEME_SUPPORTS]);
+            0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
 
     int32_t blockedSegments = junior_rc_diag_blocked_segments[trackSequence];
