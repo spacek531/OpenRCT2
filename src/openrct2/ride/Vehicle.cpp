@@ -7682,7 +7682,10 @@ Loc6DAEB9:
             }
         }
     }
-    else if (trackType == TrackElemType::Booster)
+    else if (
+        (trackType == TrackElemType::Booster)
+        || (trackType == TrackElemType::Flat && curRide->type == RIDE_TYPE_REVERSE_FREEFALL_COASTER)
+        || (trackType == TrackElemType::PoweredLift))
     {
         auto boosterSpeed = GetBoosterSpeed(curRide.type, (brake_speed << BRAKE_SPEED_SHIFT_AMOUNT));
         if (boosterSpeed > _vehicleVelocityF64E08)
@@ -7696,6 +7699,7 @@ Loc6DAEB9:
         acceleration += CalculateRiderBraking();
     }
 
+    // TODO: keep this or not? Spacek 23/10/2023
     if ((trackType == TrackElemType::Flat && curRide.type == RIDE_TYPE_REVERSE_FREEFALL_COASTER)
         || (trackType == TrackElemType::PoweredLift))
     {
@@ -9436,26 +9440,35 @@ void Vehicle::EnableCollisionsForTrain()
 
 void Vehicle::GetSpeedFromTrackElement(TrackElement* trackElement)
 {
-    if (!TrackTypeHasSpeedSetting(trackElement->GetTrackType()))
-    {
-        brake_speed = 0;
-        BoosterAcceleration = 0;
-    }
-
-    auto rawSpeed = trackElement->GetBrakeBoosterSpeed();
-    brake_speed = rawSpeed;
-
-    // using the RTD BoosterAcceleration is temporary until TrackElements can have individual BoosterAcceleration
+    auto trackType = trackElement->GetTrackType();
+    auto useLegacy = HasUpdateFlag(VEHICLE_UPDATE_FLAG_LEGACY_BOOSTER_SPEED);
+    auto vehicleRTD = GetRide()->GetRideTypeDescriptor();
     auto trackRTD = get_ride(trackElement->GetRideIndex())->GetRideTypeDescriptor();
-    BoosterAcceleration = trackRTD.OperatingSettings.BoosterAcceleration;
-
-    if (trackElement->GetTrackType() == TrackElemType::Booster && HasUpdateFlag(VEHICLE_UPDATE_FLAG_LEGACY_BOOSTER_SPEED))
+    if (trackType == TrackElemType::PoweredLift
+        || (trackType == TrackElemType::Flat && GetRide()->type == RIDE_TYPE_REVERSE_FREEFALL_COASTER))
     {
-        auto vehicleRTD = GetRide()->GetRideTypeDescriptor();
-        auto relativeSpeed = trackRTD.GetRelativeSpeed(rawSpeed);
-        brake_speed = vehicleRTD.GetAbsoluteSpeed(relativeSpeed);
-        BoosterAcceleration = vehicleRTD.OperatingSettings.BoosterAcceleration;
+        brake_speed = DefaultPoweredLiftSpeed; // When PoweredLift gets a speed setting, it will have to choose between default
+                                               // and track's speed based on useLegacy
+        BoosterAcceleration = useLegacy ? vehicleRTD.OperatingSettings.PoweredLiftAcceleration
+                                        : trackRTD.OperatingSettings.PoweredLiftAcceleration;
+        return;
     }
+    if (TrackTypeHasSpeedSetting(trackType))
+    {
+        auto rawSpeed = trackElement->GetBrakeBoosterSpeed();
+        if (trackType == TrackElemType::Booster && useLegacy)
+        {
+            auto relativeSpeed = trackRTD.GetRelativeSpeed(rawSpeed);
+            brake_speed = vehicleRTD.GetAbsoluteSpeed(relativeSpeed);
+            BoosterAcceleration = vehicleRTD.OperatingSettings.BoosterAcceleration;
+            return;
+        }
+        BoosterAcceleration = trackRTD.OperatingSettings.BoosterAcceleration;
+        brake_speed = rawSpeed;
+        return;
+    }
+    BoosterAcceleration = 0;
+    brake_speed = 0;
 }
 
 void Vehicle::Serialise(DataSerialiser& stream)

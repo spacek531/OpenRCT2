@@ -889,7 +889,7 @@ void UpdateTrackBrakeSpeed()
                 if (!TrackTypeHasSpeedSetting(trackElement->GetTrackType()))
                     continue;
 
-                auto brakeSpeed = trackElement->GetBrakeBoosterSpeed() * LEGACY_BRAKE_SPEED_MULTIPLIER;
+                auto brakeSpeed = trackElement->GetBrakeBoosterSpeed() * LegacyBrakeSpeedMultiplier;
 
                 if (trackElement->GetTrackType() != TrackElemType::Booster)
                 {

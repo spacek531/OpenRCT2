@@ -112,7 +112,8 @@ enum
 #define MAX_STATION_PLATFORM_LENGTH 32
 constexpr uint16_t const MAX_TRACK_HEIGHT = 254 * COORDS_Z_STEP;
 constexpr uint8_t const DEFAULT_SEAT_ROTATION = 4;
-constexpr uint8_t const LEGACY_BRAKE_SPEED_MULTIPLIER = 2;
+constexpr uint8_t const LegacyBrakeSpeedMultiplier = 2;
+constexpr uint8_t const DefaultPoweredLiftSpeed = 255;
 
 // Vehicle sprite groups required by track groups are defined in ride_entry_get_supported_track_pieces
 enum
