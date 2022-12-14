@@ -60,7 +60,7 @@ using namespace OpenRCT2::TrackMetaData;
 using namespace OpenRCT2::Math::Trigonometry;
 static bool vehicle_boat_is_location_accessible(const CoordsXYZ& location);
 
-constexpr uint8_t const BRAKE_SPEED_SHIFT_AMOUNT = 16;
+constexpr uint8_t const BrakeSpeedShiftAmount = 16;
 
 constexpr int16_t VEHICLE_MAX_SPIN_SPEED = 1536;
 constexpr int16_t VEHICLE_MIN_SPIN_SPEED = -VEHICLE_MAX_SPIN_SPEED;
@@ -7666,9 +7666,8 @@ Loc6DAEB9:
             && curRide.breakdown_reason_pending == BREAKDOWN_BRAKES_FAILURE;
         if (!hasBrakesFailure || curRide.mechanic_status == RIDE_MECHANIC_STATUS_HAS_FIXED_STATION_BRAKES)
         {
-            auto brakeSpeed = ChooseBrakeSpeed();
-
-            if ((brakeSpeed << BRAKE_SPEED_SHIFT_AMOUNT) < _vehicleVelocityF64E08)
+            auto brakeSpeed = brake_speed << BrakeSpeedShiftAmount;
+            if (brakeSpeed < _vehicleVelocityF64E08)
             {
                 acceleration = -_vehicleVelocityF64E08 * 16;
             }
@@ -7687,11 +7686,10 @@ Loc6DAEB9:
         || (trackType == TrackElemType::Flat && curRide->type == RIDE_TYPE_REVERSE_FREEFALL_COASTER)
         || (trackType == TrackElemType::PoweredLift))
     {
-        auto boosterSpeed = GetBoosterSpeed(curRide.type, (brake_speed << BRAKE_SPEED_SHIFT_AMOUNT));
+        auto boosterSpeed = brake_speed << BrakeSpeedShiftAmount;
         if (boosterSpeed > _vehicleVelocityF64E08)
         {
-            acceleration = GetRideTypeDescriptor(curRide.type).OperatingSettings.BoosterAcceleration
-                << 16; //_vehicleVelocityF64E08 * 1.2;
+            acceleration = BoosterAcceleration << 16; //_vehicleVelocityF64E08 * 1.2;
         }
     }
     else if (rideEntry.flags & RIDE_ENTRY_FLAG_RIDER_CONTROLS_SPEED && num_peeps > 0)
@@ -8061,9 +8059,7 @@ bool Vehicle::UpdateTrackMotionBackwards(const CarEntry* carEntry, const Ride& c
 
         if (TrackTypeIsBrakes(trackType))
         {
-            auto brakeSpeed = ChooseBrakeSpeed();
-
-            if (-(brakeSpeed << BRAKE_SPEED_SHIFT_AMOUNT) > _vehicleVelocityF64E08)
+            if (-(brake_speed << BrakeSpeedShiftAmount) > _vehicleVelocityF64E08)
             {
                 acceleration = _vehicleVelocityF64E08 * -16;
             }
@@ -8071,10 +8067,10 @@ bool Vehicle::UpdateTrackMotionBackwards(const CarEntry* carEntry, const Ride& c
 
         if (trackType == TrackElemType::Booster)
         {
-            auto boosterSpeed = GetBoosterSpeed(curRide.type, (brake_speed << BRAKE_SPEED_SHIFT_AMOUNT));
+            auto boosterSpeed = brake_speed << BrakeSpeedShiftAmount;
             if (boosterSpeed < _vehicleVelocityF64E08)
             {
-                acceleration = GetRideTypeDescriptor(curRide.type).OperatingSettings.BoosterAcceleration << 16;
+                acceleration = BoosterAcceleration << 16;
             }
         }
 
