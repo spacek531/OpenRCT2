@@ -230,27 +230,10 @@ ResultWithMessage TrackDesign::CreateTrackDesignTrack(TrackDesignState& tds, con
             trackFlags = trackElement.element->AsTrack()->GetBrakeBoosterSpeed();
             if (track.type == TrackElemType::Booster)
             {
-                auto shiftFactor = ride.GetRideTypeDescriptor().OperatingSettings.BoosterSpeedFactor;
-                if (shiftFactor > 0)
-                {
-                    trackFlags >>= shiftFactor;
-                    trackFlags /= LegacyBrakeSpeedMultiplier;
-                    trackFlags &= 0xF;
-                }
-                else if (shiftFactor < 0)
-                {
-                    // Workaround for an issue with older compilers (GCC 6, Clang 4) which would fail the build
-                    int8_t shiftFactorAbs = std::abs(shiftFactor);
-                    trackFlags <<= shiftFactorAbs;
-                    trackFlags /= LegacyBrakeSpeedMultiplier;
-                    trackFlags &= 0xF;
-                }
+                trackFlags = ride.GetRideTypeDescriptor().GetRelativeBoosterSpeed(trackFlags);
             }
-            else
-            {
-                trackFlags /= LegacyBrakeSpeedMultiplier;
-                trackFlags &= 0xF;
-            }
+            trackFlags /= LegacyBrakeSpeedMultiplier;
+            trackFlags &= 0xF;
         }
         else
         {

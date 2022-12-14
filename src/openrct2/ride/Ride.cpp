@@ -5433,7 +5433,7 @@ bool RideHasRatings(const Ride& ride)
 
 int32_t GetBoosterSpeed(ride_type_t rideType, int32_t rawSpeed)
 {
-    return GetRideTypeDescriptor(rideType).GetAbsoluteSpeed(rawSpeed);
+    return GetRideTypeDescriptor(rideType).GetAbsoluteBoosterSpeed(rawSpeed);
 }
 
 void FixInvalidVehicleSpriteSizes()

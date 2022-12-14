@@ -9454,8 +9454,8 @@ void Vehicle::GetSpeedFromTrackElement(TrackElement* trackElement)
         auto rawSpeed = trackElement->GetBrakeBoosterSpeed();
         if (trackType == TrackElemType::Booster && useLegacy)
         {
-            auto relativeSpeed = trackRTD.GetRelativeSpeed(rawSpeed);
-            brake_speed = vehicleRTD.GetAbsoluteSpeed(relativeSpeed);
+            auto relativeSpeed = trackRTD.GetRelativeBoosterSpeed(rawSpeed);
+            brake_speed = vehicleRTD.GetAbsoluteBoosterSpeed(relativeSpeed);
             BoosterAcceleration = vehicleRTD.OperatingSettings.BoosterAcceleration;
             return;
         }

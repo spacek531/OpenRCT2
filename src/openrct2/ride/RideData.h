@@ -345,8 +345,8 @@ struct RideTypeDescriptor
     ResearchCategory GetResearchCategory() const;
     bool SupportsRideMode(RideMode rideMode) const;
 
-    int32_t GetRelativeSpeed(const int32_t& absoluteSpeed) const;
-    int32_t GetAbsoluteSpeed(const int32_t& relativeSpeed) const;
+    int32_t GetRelativeBoosterSpeed(const int32_t& absoluteSpeed) const;
+    int32_t GetAbsoluteBoosterSpeed(const int32_t& relativeSpeed) const;
 };
 
 #ifdef _WIN32
