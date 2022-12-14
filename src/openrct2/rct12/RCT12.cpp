@@ -876,8 +876,6 @@ void FixBoosterSpeed()
     {
         vehicle->SetUpdateFlag(VEHICLE_UPDATE_FLAG_LEGACY_BOOSTER_SPEED);
         auto trackType = vehicle->GetTrackType();
-        if (trackType != TrackElemType::Booster)
-            continue;
 
         TileElement* tileElement = MapGetTrackElementAtOfTypeSeq(vehicle->TrackLocation, trackType, 0);
 

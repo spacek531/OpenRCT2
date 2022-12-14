@@ -9436,13 +9436,26 @@ void Vehicle::EnableCollisionsForTrain()
 
 void Vehicle::GetSpeedFromTrackElement(TrackElement* trackElement)
 {
-    auto rawSpeed = trackElement->GetBrakeBoosterSpeed();
-    if (HasUpdateFlag(VEHICLE_UPDATE_FLAG_LEGACY_BOOSTER_SPEED) && trackElement->GetTrackType() == TrackElemType::Booster)
+    if (!TrackTypeHasSpeedSetting(trackElement->GetTrackType()))
     {
-        auto relativeSpeed = get_ride(trackElement->GetRideIndex())->GetRideTypeDescriptor().GetRelativeSpeed(rawSpeed);
-        rawSpeed = GetRide()->GetRideTypeDescriptor().GetAbsoluteSpeed(relativeSpeed);
+        brake_speed = 0;
+        BoosterAcceleration = 0;
     }
+
+    auto rawSpeed = trackElement->GetBrakeBoosterSpeed();
     brake_speed = rawSpeed;
+
+    // using the RTD BoosterAcceleration is temporary until TrackElements can have individual BoosterAcceleration
+    auto trackRTD = get_ride(trackElement->GetRideIndex())->GetRideTypeDescriptor();
+    BoosterAcceleration = trackRTD.OperatingSettings.BoosterAcceleration;
+
+    if (trackElement->GetTrackType() == TrackElemType::Booster && HasUpdateFlag(VEHICLE_UPDATE_FLAG_LEGACY_BOOSTER_SPEED))
+    {
+        auto vehicleRTD = GetRide()->GetRideTypeDescriptor();
+        auto relativeSpeed = trackRTD.GetRelativeSpeed(rawSpeed);
+        brake_speed = vehicleRTD.GetAbsoluteSpeed(relativeSpeed);
+        BoosterAcceleration = vehicleRTD.OperatingSettings.BoosterAcceleration;
+    }
 }
 
 void Vehicle::Serialise(DataSerialiser& stream)
