@@ -1478,11 +1478,6 @@ public:
         if (_currentlyShowingBrakeOrBoosterSpeed)
         {
             uint16_t brakeSpeed2 = ((_currentBrakeSpeed * 9) >> 2) & 0xFFFF;
-            if (_selectedTrackType == TrackElemType::Booster
-                || _currentTrackCurve == (RideConstructionSpecialPieceSelected | TrackElemType::Booster))
-            {
-                brakeSpeed2 = GetBoosterSpeed(currentRide->type, brakeSpeed2);
-            }
             ft.Add<uint16_t>(brakeSpeed2);
         }
 

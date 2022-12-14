@@ -414,20 +414,34 @@ void UpdateDisabledRidePieces(const RideTrackGroup& res)
     _disabledRidePieces = res;
 }
 
-
-uint8_t RideTypeDescriptor::GetBoosterSpeed(uint8_t rawSpeed) const
+int32_t RideTypeDescriptor::GetRelativeSpeed(const int32_t& absoluteSpeed) const
 {
-    int8_t shiftFactor = OperatingSettings.BoosterSpeedFactor;
+    auto shiftFactor = OperatingSettings.BoosterSpeedFactor;
     if (shiftFactor == 0)
     {
-        return rawSpeed;
+        return absoluteSpeed;
     }
     if (shiftFactor > 0)
     {
-        return (rawSpeed << shiftFactor);
+        return (absoluteSpeed >> shiftFactor);
     }
-
     // Workaround for an issue with older compilers (GCC 6, Clang 4) which would fail the build
     int8_t shiftFactorAbs = std::abs(shiftFactor);
-    return (rawSpeed >> shiftFactorAbs);
+    return (absoluteSpeed << shiftFactorAbs);
+}
+
+int32_t RideTypeDescriptor::GetAbsoluteSpeed(const int32_t& relativeSpeed) const
+{
+    auto shiftFactor = OperatingSettings.BoosterSpeedFactor;
+    if (shiftFactor == 0)
+    {
+        return relativeSpeed;
+    }
+    if (OperatingSettings.BoosterSpeedFactor > 0)
+    {
+        return (relativeSpeed << shiftFactor);
+    }
+    // Workaround for an issue with older compilers (GCC 6, Clang 4) which would fail the build
+    int8_t shiftFactorAbs = std::abs(shiftFactor);
+    return (relativeSpeed >> shiftFactorAbs);
 }

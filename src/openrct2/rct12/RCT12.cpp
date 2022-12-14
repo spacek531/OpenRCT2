@@ -16,6 +16,7 @@
 #include "../rct2/RCT2.h"
 #include "../ride/Ride.h"
 #include "../ride/Track.h"
+#include "../ride/Vehicle.h"
 #include "../scenario/Scenario.h"
 #include "../world/Banner.h"
 #include "../world/Footpath.h"
@@ -246,7 +247,7 @@ uint8_t RCT12TrackElement::GetBrakeBoosterSpeed() const
 {
     if (TrackTypeHasSpeedSetting(GetTrackType()))
     {
-        return (Sequence >> 4) << 1;
+        return sequence >> 4;
     }
     return 0;
 }
@@ -867,4 +868,22 @@ ResearchItem RCT12ResearchItem::ToResearchItem() const
     }
 
     return newResearchItem;
+}
+
+void FixBoosterSpeed()
+{
+    for (auto* vehicle : EntityList<::Vehicle>())
+    {
+        vehicle->SetUpdateFlag(VEHICLE_UPDATE_FLAG_LEGACY_BOOSTER_SPEED);
+        auto trackType = vehicle->GetTrackType();
+        if (trackType != TrackElemType::Booster)
+            continue;
+
+        TileElement* tileElement = MapGetTrackElementAtOfTypeSeq(vehicle->TrackLocation, trackType, 0);
+
+        if (tileElement == nullptr)
+            continue;
+
+        vehicle->GetSpeedFromTrackElement(tileElement->AsTrack());
+    }
 }

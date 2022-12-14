@@ -281,6 +281,8 @@ struct Vehicle : EntityBase
     friend void UpdateRotatingDefault(Vehicle& vehicle);
     friend void UpdateRotatingEnterprise(Vehicle& vehicle);
 
+    void GetSpeedFromTrackElement(TrackElement* trackElement);
+
 private:
     bool SoundCanPlay() const;
     uint16_t GetSoundPriority() const;

@@ -1204,6 +1204,8 @@ namespace OpenRCT2
                     } while (!(tileElement++)->IsLastForTile());
                 }
             }
+
+            FixBoosterSpeed();
         }
 
         void ReadWriteBannersChunk(OrcaStream& os)

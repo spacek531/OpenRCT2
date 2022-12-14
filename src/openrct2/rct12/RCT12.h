@@ -871,6 +871,7 @@ std::optional<uint8_t> GetStyleFromMusicIdentifier(std::string_view identifier);
 void RCT12AddDefaultObjects(ObjectList& objectList);
 void AppendRequiredObjects(ObjectList& objectList, ObjectType objectType, const RCT12::EntryList& entryList);
 bool IsUserStringID(StringId stringId);
+void FixBoosterSpeed();
 
 static constexpr money32 RCT12_COMPANY_VALUE_ON_FAILED_OBJECTIVE = 0x80000001;
 

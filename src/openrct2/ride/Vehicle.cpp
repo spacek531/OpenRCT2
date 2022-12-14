@@ -7619,6 +7619,7 @@ bool Vehicle::UpdateTrackMotionForwardsGetNewTrack(uint16_t trackType, const Rid
     SetTrackDirection(location.direction);
     SetTrackType(trackType);
     PopulateBrakeSpeed(TrackLocation, *tileElement->AsTrack());
+    GetSpeedFromTrackElement(tileElement->AsTrack());
     if (trackType == TrackElemType::OnRidePhoto)
     {
         trigger_on_ride_photo(TrackLocation, tileElement);
@@ -8025,6 +8026,7 @@ bool Vehicle::UpdateTrackMotionBackwardsGetNewTrack(uint16_t trackType, const Ri
     SetTrackType(trackType);
     SetTrackDirection(direction);
     PopulateBrakeSpeed(TrackLocation, *tileElement->AsTrack());
+    GetSpeedFromTrackElement(tileElement->AsTrack());
 
     // There are two bytes before the move info list
     uint16_t trackTotalProgress = GetTrackProgress();
@@ -9432,6 +9434,17 @@ void Vehicle::EnableCollisionsForTrain()
     }
 }
 
+void Vehicle::GetSpeedFromTrackElement(TrackElement* trackElement)
+{
+    auto rawSpeed = trackElement->GetBrakeBoosterSpeed();
+    if (HasUpdateFlag(VEHICLE_UPDATE_FLAG_LEGACY_BOOSTER_SPEED) && trackElement->GetTrackType() == TrackElemType::Booster)
+    {
+        auto relativeSpeed = get_ride(trackElement->GetRideIndex())->GetRideTypeDescriptor().GetRelativeSpeed(rawSpeed);
+        rawSpeed = GetRide()->GetRideTypeDescriptor().GetAbsoluteSpeed(relativeSpeed);
+    }
+    brake_speed = rawSpeed;
+}
+
 void Vehicle::Serialise(DataSerialiser& stream)
 {
     EntityBase::Serialise(stream);
@@ -9493,4 +9506,5 @@ void Vehicle::Serialise(DataSerialiser& stream)
     stream << target_seat_rotation;
     stream << BoatLocation;
     stream << BlockBrakeSpeed;
+    stream << BoosterAcceleration;
 }
