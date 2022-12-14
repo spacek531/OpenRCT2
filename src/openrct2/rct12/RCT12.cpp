@@ -870,8 +870,43 @@ ResearchItem RCT12ResearchItem::ToResearchItem() const
     return newResearchItem;
 }
 
-void FixBoosterSpeed()
+void UpdateTrackBrakeSpeed()
 {
+    for (int32_t y = 0; y < MAXIMUM_MAP_SIZE_TECHNICAL; y++)
+    {
+        for (int32_t x = 0; x < MAXIMUM_MAP_SIZE_TECHNICAL; x++)
+        {
+            TileElement* tileElement = MapGetFirstElementAt(TileCoordsXY{ x, y });
+            if (tileElement == nullptr)
+                continue;
+            do
+            {
+                if (tileElement->GetType() != TileElementType::Track)
+                    continue;
+
+                auto* trackElement = tileElement->AsTrack();
+
+                if (!TrackTypeHasSpeedSetting(trackElement->GetTrackType()))
+                    continue;
+
+                auto brakeSpeed = trackElement->GetBrakeBoosterSpeed() * LEGACY_BRAKE_SPEED_MULTIPLIER;
+
+                if (trackElement->GetTrackType() != TrackElemType::Booster)
+                {
+                    trackElement->SetBrakeBoosterSpeed(brakeSpeed);
+                }
+                else
+                {
+                    const auto* ride = get_ride(trackElement->GetRideIndex());
+                    if (ride != nullptr)
+                    {
+                        trackElement->SetBrakeBoosterSpeed(get_booster_speed(ride->type, brakeSpeed));
+                    }
+                }
+            } while (!(tileElement++)->IsLastForTile());
+        }
+    }
+
     for (auto* vehicle : EntityList<::Vehicle>())
     {
         vehicle->SetUpdateFlag(VEHICLE_UPDATE_FLAG_LEGACY_BOOSTER_SPEED);

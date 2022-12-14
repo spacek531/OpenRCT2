@@ -196,7 +196,7 @@ namespace RCT1
 
             ResearchDetermineFirstOfType();
 
-            FixBoosterSpeed();
+            UpdateTrackBrakeSpeed();
             CheatsReset();
             ClearRestrictedScenery();
             RestrictAllMiscScenery();

@@ -873,6 +873,7 @@ void AppendRequiredObjects(ObjectList& objectList, ObjectType objectType, const 
 bool IsUserStringID(StringId stringId);
 void FixBoosterSpeed();
 
+void UpdateTrackBrakeSpeed();
 static constexpr money32 RCT12_COMPANY_VALUE_ON_FAILED_OBJECTIVE = 0x80000001;
 
 money64 RCT12CompletedCompanyValueToOpenRCT2(money32 origValue);

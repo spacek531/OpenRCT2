@@ -507,7 +507,7 @@ namespace RCT2
             FixLandOwnership();
             FixWater();
             FixAyersRockScenario();
-            FixBoosterSpeed();
+            UpdateTrackBrakeSpeed();
 
             ResearchDetermineFirstOfType();
             UpdateConsolidatedPatrolAreas();
