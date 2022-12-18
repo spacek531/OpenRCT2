@@ -74,14 +74,6 @@ struct GamePalette
     {
         return reinterpret_cast<uint8_t*>(Colour);
     }
-
-    void SetPaletteColour(uint8_t paletteIndex, uint8_t* src)
-    {
-        Colour[paletteIndex].Red = *src++;
-        Colour[paletteIndex].Green = *src++;
-        Colour[paletteIndex].Blue = *src++;
-        Colour[paletteIndex].Alpha = *src;
-    }
 };
 
 struct rct_g1_element

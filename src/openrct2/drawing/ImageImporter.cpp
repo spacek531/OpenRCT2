@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Copyright (c) 2014-2022 OpenRCT2 developers
+ * Copyright (c) 2014-2020 OpenRCT2 developers
  *
  * For a complete list of all authors, please refer to contributors.md
  * Interested in contributing? Visit https://github.com/OpenRCT2/OpenRCT2
@@ -21,15 +21,14 @@ using ImportResult = ImageImporter::ImportResult;
 constexpr int32_t PALETTE_TRANSPARENT = -1;
 
 ImportResult ImageImporter::Import(
-    const Image& image, int32_t offsetX, int32_t offsetY, Palette palette, ImportFlags flags, ImportMode mode,
-    GamePalette spritePalette) const
+    const Image& image, int32_t offsetX, int32_t offsetY, Palette palette, ImportFlags flags, ImportMode mode) const
 {
-    return Import(image, 0, 0, image.Width, image.Height, offsetX, offsetY, palette, flags, mode, spritePalette);
+    return Import(image, 0, 0, image.Width, image.Height, offsetX, offsetY, palette, flags, mode);
 }
 
 ImportResult ImageImporter::Import(
     const Image& image, int32_t srcX, int32_t srcY, int32_t width, int32_t height, int32_t offsetX, int32_t offsetY,
-    Palette palette, ImportFlags flags, ImportMode mode, GamePalette spritePalette) const
+    Palette palette, ImportFlags flags, ImportMode mode) const
 {
     if (width > 256 || height > 256)
     {
@@ -41,7 +40,7 @@ ImportResult ImageImporter::Import(
         throw std::invalid_argument("Image is not paletted, it has bit depth of " + std::to_string(image.Depth));
     }
 
-    auto pixels = GetPixels(image.Pixels.data(), image.Stride, srcX, srcY, width, height, palette, flags, mode, spritePalette);
+    auto pixels = GetPixels(image.Pixels.data(), image.Stride, srcX, srcY, width, height, palette, flags, mode);
     auto buffer = flags & ImportFlags::RLE ? EncodeRLE(pixels.data(), width, height) : EncodeRaw(pixels.data(), width, height);
 
     rct_g1_element outElement;
@@ -61,7 +60,7 @@ ImportResult ImageImporter::Import(
 
 std::vector<int32_t> ImageImporter::GetPixels(
     const uint8_t* pixels, uint32_t pitch, uint32_t srcX, uint32_t srcY, uint32_t width, uint32_t height, Palette palette,
-    ImportFlags flags, ImportMode mode, GamePalette spritePalette)
+    ImportFlags flags, ImportMode mode)
 {
     std::vector<int32_t> buffer;
     buffer.reserve(width * height);
@@ -116,7 +115,7 @@ std::vector<int32_t> ImageImporter::GetPixels(
         {
             for (uint32_t x = 0; x < width; x++)
             {
-                auto paletteIndex = CalculatePaletteIndex(mode, rgbaSrc, x, y, width, height, spritePalette);
+                auto paletteIndex = CalculatePaletteIndex(mode, rgbaSrc, x, y, width, height);
                 rgbaSrc += 4;
                 buffer.push_back(paletteIndex);
             }
@@ -233,8 +232,9 @@ std::vector<uint8_t> ImageImporter::EncodeRLE(const int32_t* pixels, uint32_t wi
 }
 
 int32_t ImageImporter::CalculatePaletteIndex(
-    ImportMode mode, int16_t* rgbaSrc, int32_t x, int32_t y, int32_t width, int32_t height, GamePalette palette)
+    ImportMode mode, int16_t* rgbaSrc, int32_t x, int32_t y, int32_t width, int32_t height)
 {
+    auto& palette = StandardPalette;
     auto paletteIndex = GetPaletteIndex(palette, rgbaSrc);
     if ((mode == ImportMode::Closest || mode == ImportMode::Dithering) && !IsInPalette(palette, rgbaSrc))
     {
