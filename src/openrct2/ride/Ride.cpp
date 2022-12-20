@@ -3033,7 +3033,7 @@ static void RideOpenBlockBrakes(const CoordsXYE& startElement)
             case TrackElemType::DiagUp25ToFlat:
             case TrackElemType::DiagUp60ToFlat:
             case TrackElemType::BlockBrakes:
-                currentElement.element->AsTrack()->SetBlockBrakeClosed(false);
+                currentElement.element->AsTrack()->SetBrakeClosed(false);
                 break;
         }
     } while (track_block_get_next(&currentElement, &currentElement, nullptr, nullptr)
@@ -3518,7 +3518,8 @@ ResultWithMessage Ride::CreateVehicles(const CoordsXYE& element, bool isApplying
         {
             CoordsXYE firstBlock{};
             ride_create_vehicles_find_first_block(this, &firstBlock);
-            MoveTrainsToBlockBrakes(firstBlock.element->AsTrack());
+            MoveTrainsToBlockBrakes(
+                { firstBlock.x, firstBlock.y, firstBlock.element->GetBaseZ() }, *firstBlock.element->AsTrack());
         }
         else
         {
@@ -3551,7 +3552,7 @@ ResultWithMessage Ride::CreateVehicles(const CoordsXYE& element, bool isApplying
  * preceding that block.
  *  rct2: 0x006DDF9C
  */
-void Ride::MoveTrainsToBlockBrakes(TrackElement* firstBlock)
+void Ride::MoveTrainsToBlockBrakes(const CoordsXYZ& firstBlockPosition, TrackElement& firstBlock)
 {
     for (int32_t i = 0; i < NumTrains; i++)
     {
@@ -3559,6 +3560,11 @@ void Ride::MoveTrainsToBlockBrakes(TrackElement* firstBlock)
         if (train == nullptr)
             continue;
 
+        // At this point, all vehicles have state of MovingToEndOfStation, which slowly moves forward at a constant speed
+        // regardless of incline. The first vehicle stops at the station immediately, while all other vehicles seek forward
+        // until they reach a closed block brake. The block brake directly before the station is set to closed every frame
+        // because the trains will open the block brake when the tail leaves the station. Brakes have no effect at this time, so
+        // do not set linked brakes when closing the first block.
         train->UpdateTrackMotion(nullptr);
 
         if (i == 0)
@@ -3577,7 +3583,7 @@ void Ride::MoveTrainsToBlockBrakes(TrackElement* firstBlock)
                 break;
             }
 
-            firstBlock->SetBlockBrakeClosed(true);
+            firstBlock.SetBrakeClosed(true);
             for (Vehicle* car = train; car != nullptr; car = GetEntity<Vehicle>(car->next_vehicle_on_train))
             {
                 car->velocity = 0;
@@ -3587,7 +3593,9 @@ void Ride::MoveTrainsToBlockBrakes(TrackElement* firstBlock)
             }
         } while (!(train->UpdateTrackMotion(nullptr) & VEHICLE_UPDATE_MOTION_TRACK_FLAG_VEHICLE_AT_BLOCK_BRAKE));
 
-        firstBlock->SetBlockBrakeClosed(true);
+        // All vehicles are in position, set the block brake directly before the station one last time and make sure the brakes
+        // are set appropriately
+        firstBlock.SetBrakeClosed(true);
         for (Vehicle* car = train; car != nullptr; car = GetEntity<Vehicle>(car->next_vehicle_on_train))
         {
             car->ClearUpdateFlag(VEHICLE_UPDATE_FLAG_COLLISION_DISABLED);
