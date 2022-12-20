@@ -655,7 +655,7 @@ bool track_element_is_covered(track_type_t trackElementType)
 
 bool TrackTypeHasSpeedSetting(track_type_t trackType)
 {
-    return trackType == TrackElemType::Brakes || trackType == TrackElemType::Booster;
+    return trackType == TrackElemType::Brakes || trackType == TrackElemType::Booster || trackType == TrackElemType::BlockBrakes;
 }
 
 std::optional<CoordsXYZD> GetTrackSegmentOrigin(const CoordsXYE& posEl)

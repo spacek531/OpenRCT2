@@ -6061,15 +6061,14 @@ void Vehicle::ApplyNonStopBlockBrake()
     if (velocity >= 0)
     {
         // If the vehicle is below the speed limit
-        if (velocity <= BLOCK_BRAKE_BASE_SPEED)
+        if (velocity <= BlockBrakeBaseSpeed)
         {
             // Boost it to the fixed block brake speed
-            velocity = BLOCK_BRAKE_BASE_SPEED;
+            velocity = BlockBrakeBaseSpeed;
             acceleration = 0;
         }
-        else
+        else if (velocity > (brake_speed << 16) + BlockBrakeSpeedOffset)
         {
-            // Slow it down till the fixed block brake speed
             velocity -= velocity >> 4;
             acceleration = 0;
         }
@@ -6991,7 +6990,7 @@ void Vehicle::UpdateLandscapeDoorBackwards() const
 
 static void vehicle_update_play_water_splash_sound()
 {
-    if (_vehicleVelocityF64E08 <= BLOCK_BRAKE_BASE_SPEED)
+    if (_vehicleVelocityF64E08 <= BlockBrakeBaseSpeed)
     {
         return;
     }
