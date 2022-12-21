@@ -1071,6 +1071,9 @@ money32 RideEntranceExitPlaceGhost(
 ResultWithMessage ride_are_all_possible_entrances_and_exits_built(Ride* ride);
 void ride_fix_breakdown(Ride* ride, int32_t reliabilityIncreaseFactor);
 
+void BrakeLinkToBlockBrake(const CoordsXYZ& vehicleTrackLocation, TrackElement& brake);
+void BlockBrakeSetLinkedBrakesClosed(const CoordsXYZ& vehicleTrackLocation, TrackElement& tileElement, bool isOpen);
+
 uint8_t ride_entry_get_vehicle_at_position(int32_t rideEntryIndex, int32_t numCarsPerTrain, int32_t position);
 void ride_update_vehicle_colours(Ride* ride);
 

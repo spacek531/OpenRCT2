@@ -6240,11 +6240,16 @@ static void block_brakes_open_previous_section(Ride& ride, const CoordsXYZ& vehi
     MapInvalidateElement(location, reinterpret_cast<TileElement*>(trackElement));
 
     auto trackType = trackElement->GetTrackType();
-    if (trackType == TrackElemType::BlockBrakes || trackType == TrackElemType::EndStation)
+    if (ride.IsBlockSectioned())
     {
-        if (ride.IsBlockSectioned())
+        if (trackType == TrackElemType::EndStation)
         {
             OpenRCT2::Audio::Play3D(OpenRCT2::Audio::SoundId::BlockBrakeClose, location);
+        }
+        else if (trackType == TrackElemType::BlockBrakes)
+        {
+            OpenRCT2::Audio::Play3D(OpenRCT2::Audio::SoundId::BlockBrakeClose, location);
+            BlockBrakeSetLinkedBrakesClosed(location, *trackElement, false);
         }
     }
 }
@@ -7417,6 +7422,10 @@ bool Vehicle::UpdateTrackMotionForwardsGetNewTrack(uint16_t trackType, Ride* cur
             }
             MapInvalidateElement(TrackLocation, tileElement);
             block_brakes_open_previous_section(*curRide, TrackLocation, tileElement);
+            if (trackType == TrackElemType::BlockBrakes)
+            {
+                BlockBrakeSetLinkedBrakesClosed(TrackLocation, *tileElement->AsTrack(), true);
+            }
         }
     }
 
@@ -7596,7 +7605,9 @@ loc_6DAEB9:
             auto brakeSpeed = brake_speed << 16;
             if (brakeSpeed < _vehicleVelocityF64E08)
             {
-                acceleration = -_vehicleVelocityF64E08 * 16;
+                auto trackElement = MapGetTrackElementAtOfTypeSeq(TrackLocation, trackType, 0);
+                if ((trackElement != nullptr && trackElement->AsTrack()->GetBrakeClosed()) || trackElement == nullptr)
+                    acceleration = -_vehicleVelocityF64E08 * 16;
             }
             else if (!(gCurrentTicks & 0x0F))
             {
@@ -7983,12 +7994,16 @@ bool Vehicle::UpdateTrackMotionBackwards(CarEntry* carEntry, Ride* curRide, rct_
 
         if (trackType == TrackElemType::Brakes)
         {
-            if (-(brake_speed << 16) > _vehicleVelocityF64E08)
+            auto trackElement = MapGetTrackElementAtOfTypeSeq(TrackLocation, trackType, 0);
+            if (((trackElement != nullptr && trackElement->AsTrack()->GetBrakeClosed()) || trackElement == nullptr)
+                && -(brake_speed << 16) > _vehicleVelocityF64E08)
             {
-                acceleration = _vehicleVelocityF64E08 * -16;
+                if (-(brake_speed << 16) > _vehicleVelocityF64E08)
+                {
+                    acceleration = _vehicleVelocityF64E08 * -16;
+                }
             }
         }
-
         if (trackType == TrackElemType::Booster)
         {
             auto boosterSpeed = get_booster_speed(curRide->type, (brake_speed << 16));
