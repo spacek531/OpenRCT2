@@ -3644,6 +3644,7 @@ STR_6538    :Shows regular paths in the queues dropdown of the Footpaths window.
 STR_6539    :Brake Closed
 STR_6540    :Block brake speed
 STR_6541    :Set speed limit for block brakes
+STR_6542    :Block brakes will be set to default speed when saved as track design
 
 #############
 # Scenarios #
