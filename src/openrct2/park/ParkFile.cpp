@@ -1092,6 +1092,9 @@ namespace OpenRCT2
                         if (tileElement->AsTrack()->GetTrackType() == TrackElemType::BlockBrakes)
                             tileElement->AsTrack()->SetBrakeBoosterSpeed(RCT2DefaultBlockBrakeSpeed);
 
+                        if (tileElement->AsTrack()->GetTrackType() == TrackElemType::Brakes)
+                            tileElement->AsTrack()->SetBrakeClosed(true);
+
                     } while (!(tileElement++)->IsLastForTile());
                 }
             }
