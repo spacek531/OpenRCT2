@@ -18,7 +18,20 @@ enum class RideConstructionState : uint8_t;
  * Order of special track elements dropdown
  */
 constexpr std::array DropdownOrder = {
+    // Special behaviour track elements
     TrackElemType::EndStation,
+    TrackElemType::Brakes,
+    TrackElemType::BlockBrakes,
+    TrackElemType::Booster,
+    TrackElemType::RotationControlToggle,
+    TrackElemType::LogFlumeReverser,
+    TrackElemType::BrakeForDrop,
+    TrackElemType::HeartLineTransferUp,
+    TrackElemType::HeartLineTransferDown,
+    TrackElemType::LeftCurvedLiftHill,
+    TrackElemType::RightCurvedLiftHill,
+    TrackElemType::PoweredLift,
+    TrackElemType::CableLiftHill,
 
     // Simple track elements
     TrackElemType::SBendLeft,
@@ -61,27 +74,44 @@ constexpr std::array DropdownOrder = {
     // Simple behavior with special appearance
     TrackElemType::LeftReverser,
     TrackElemType::RightReverser,
-    TrackElemType::Waterfall,
     TrackElemType::Rapids,
+    TrackElemType::Waterfall,
     TrackElemType::Whirlpool,
     TrackElemType::Watersplash,
     TrackElemType::SpinningTunnel,
 
-    // Special behaviour track elements
-    TrackElemType::RotationControlToggle,
-    TrackElemType::LogFlumeReverser,
-    TrackElemType::LeftCurvedLiftHill,
-    TrackElemType::RightCurvedLiftHill,
-    TrackElemType::Brakes,
-    TrackElemType::BlockBrakes,
-    TrackElemType::CableLiftHill,
-    TrackElemType::BrakeForDrop,
-    TrackElemType::Booster,
-    TrackElemType::PoweredLift,
-    TrackElemType::HeartLineTransferUp,
-    TrackElemType::HeartLineTransferDown,
-
     // Inversion track elements
+    TrackElemType::LeftHeartLineRoll,
+    TrackElemType::RightHeartLineRoll,
+
+    TrackElemType::LeftTwistDownToUp,
+    TrackElemType::LeftFlyerTwistUp,
+    TrackElemType::RightTwistDownToUp,
+    TrackElemType::RightFlyerTwistUp,
+    TrackElemType::LeftTwistUpToDown,
+    TrackElemType::LeftFlyerTwistDown,
+    TrackElemType::RightTwistUpToDown,
+    TrackElemType::RightFlyerTwistDown,
+
+    TrackElemType::LeftBarrelRollUpToDown,
+    TrackElemType::LeftBarrelRollDownToUp,
+    TrackElemType::RightBarrelRollUpToDown,
+    TrackElemType::RightBarrelRollDownToUp,
+
+    TrackElemType::LeftCorkscrewUp,
+    TrackElemType::LeftFlyerCorkscrewUp,
+    TrackElemType::LeftCorkscrewDown,
+    TrackElemType::LeftFlyerCorkscrewDown,
+    TrackElemType::RightCorkscrewUp,
+    TrackElemType::RightFlyerCorkscrewUp,
+    TrackElemType::RightCorkscrewDown,
+    TrackElemType::RightFlyerCorkscrewDown,
+
+    TrackElemType::LeftLargeCorkscrewUp,
+    TrackElemType::RightLargeCorkscrewUp,
+    TrackElemType::LeftLargeCorkscrewDown,
+    TrackElemType::RightLargeCorkscrewDown,
+
     TrackElemType::LeftVerticalLoop,
     TrackElemType::RightVerticalLoop,
 
@@ -109,37 +139,6 @@ constexpr std::array DropdownOrder = {
     TrackElemType::RightFlyerLargeHalfLoopInvertedDown,
     TrackElemType::RightFlyerLargeHalfLoopInvertedUp,
     TrackElemType::RightFlyerLargeHalfLoopUninvertedDown,
-
-    TrackElemType::LeftCorkscrewUp,
-    TrackElemType::LeftFlyerCorkscrewUp,
-    TrackElemType::LeftCorkscrewDown,
-    TrackElemType::LeftFlyerCorkscrewDown,
-    TrackElemType::RightCorkscrewUp,
-    TrackElemType::RightFlyerCorkscrewUp,
-    TrackElemType::RightCorkscrewDown,
-    TrackElemType::RightFlyerCorkscrewDown,
-
-    TrackElemType::LeftLargeCorkscrewUp,
-    TrackElemType::RightLargeCorkscrewUp,
-    TrackElemType::LeftLargeCorkscrewDown,
-    TrackElemType::RightLargeCorkscrewDown,
-
-    TrackElemType::LeftTwistDownToUp,
-    TrackElemType::LeftFlyerTwistUp,
-    TrackElemType::RightTwistDownToUp,
-    TrackElemType::RightFlyerTwistUp,
-    TrackElemType::LeftTwistUpToDown,
-    TrackElemType::LeftFlyerTwistDown,
-    TrackElemType::RightTwistUpToDown,
-    TrackElemType::RightFlyerTwistDown,
-
-    TrackElemType::LeftHeartLineRoll,
-    TrackElemType::RightHeartLineRoll,
-
-    TrackElemType::LeftBarrelRollUpToDown,
-    TrackElemType::LeftBarrelRollDownToUp,
-    TrackElemType::RightBarrelRollUpToDown,
-    TrackElemType::RightBarrelRollDownToUp,
 
     TrackElemType::Up90ToInvertedFlatQuarterLoop,
     TrackElemType::InvertedFlatToDown90QuarterLoop,
