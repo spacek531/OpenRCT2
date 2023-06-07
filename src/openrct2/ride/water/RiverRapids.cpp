@@ -151,6 +151,25 @@ static constexpr const uint32_t river_rapids_track_pieces_25_deg_up_to_flat[][2]
     { SPR_RIVER_RAPIDS_25_DEG_UP_TO_FLAT_SE_NW, SPR_RIVER_RAPIDS_25_DEG_UP_TO_FLAT_FRONT_SE_NW },
 };
 
+static constexpr const uint32_t river_rapids_track_pieces_25_deg_up_chain[][2] = {
+    { SPR_RIVER_RAPIDS_25_DEG_UP_SW_NE, SPR_RIVER_RAPIDS_25_DEG_UP_FRONT_SW_NE },
+    { SPR_RIVER_RAPIDS_25_DEG_UP_NW_SE, SPR_RIVER_RAPIDS_25_DEG_UP_FRONT_NW_SE },
+    { SPR_RIVER_RAPIDS_25_DEG_UP_NE_SW, SPR_RIVER_RAPIDS_25_DEG_UP_FRONT_NE_SW },
+    { SPR_RIVER_RAPIDS_25_DEG_UP_SE_NW, SPR_RIVER_RAPIDS_25_DEG_UP_FRONT_SE_NW },
+};
+static constexpr const uint32_t river_rapids_track_pieces_flat_to_25_deg_up_chain[][2] = {
+    { SPR_RIVER_RAPIDS_FLAT_TO_25_DEG_UP_SW_NE, SPR_RIVER_RAPIDS_FLAT_TO_25_DEG_UP_FRONT_SW_NE },
+    { SPR_RIVER_RAPIDS_FLAT_TO_25_DEG_UP_NW_SE, SPR_RIVER_RAPIDS_FLAT_TO_25_DEG_UP_FRONT_NW_SE },
+    { SPR_RIVER_RAPIDS_FLAT_TO_25_DEG_UP_NE_SW, SPR_RIVER_RAPIDS_FLAT_TO_25_DEG_UP_FRONT_NE_SW },
+    { SPR_RIVER_RAPIDS_FLAT_TO_25_DEG_UP_SE_NW, SPR_RIVER_RAPIDS_FLAT_TO_25_DEG_UP_FRONT_SE_NW },
+};
+static constexpr const uint32_t river_rapids_track_pieces_25_deg_up_to_flat_chain[][2] = {
+    { SPR_RIVER_RAPIDS_25_DEG_UP_TO_FLAT_SW_NE, SPR_RIVER_RAPIDS_25_DEG_UP_TO_FLAT_FRONT_SW_NE },
+    { SPR_RIVER_RAPIDS_25_DEG_UP_TO_FLAT_NW_SE, SPR_RIVER_RAPIDS_25_DEG_UP_TO_FLAT_FRONT_NW_SE },
+    { SPR_RIVER_RAPIDS_25_DEG_UP_TO_FLAT_NE_SW, SPR_RIVER_RAPIDS_25_DEG_UP_TO_FLAT_FRONT_NE_SW },
+    { SPR_RIVER_RAPIDS_25_DEG_UP_TO_FLAT_SE_NW, SPR_RIVER_RAPIDS_25_DEG_UP_TO_FLAT_FRONT_SE_NW },
+};
+
 static constexpr const uint32_t river_rapids_track_pieces_25_deg_down[][2] = {
     { SPR_RIVER_RAPIDS_25_DEG_DOWN_SW_NE, SPR_RIVER_RAPIDS_25_DEG_DOWN_FRONT_SW_NE },
     { SPR_RIVER_RAPIDS_25_DEG_DOWN_NW_SE, SPR_RIVER_RAPIDS_25_DEG_DOWN_FRONT_NW_SE },
@@ -502,7 +521,10 @@ static void PaintRiverRapidsTrack25DegUp(
     PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
     const TrackElement& trackElement)
 {
-    PaintRiverRapidsTrack25Deg(session, direction, height, river_rapids_track_pieces_25_deg_up);
+    if (trackElement.HasChain())
+        PaintRiverRapidsTrack25Deg(session, direction, height, river_rapids_track_pieces_25_deg_up_chain);
+    else
+        PaintRiverRapidsTrack25Deg(session, direction, height, river_rapids_track_pieces_25_deg_up);
 }
 
 /** rct2: 0x00757670 */
@@ -510,7 +532,10 @@ static void PaintRiverRapidsTrackFlatTo25DegUp(
     PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
     const TrackElement& trackElement)
 {
-    PaintRiverRapidsTrack25DegToFlatB(session, direction, height, river_rapids_track_pieces_flat_to_25_deg_up);
+    if (trackElement.HasChain())
+        PaintRiverRapidsTrack25DegToFlatB(session, direction, height, river_rapids_track_pieces_flat_to_25_deg_up_chain);
+    else
+        PaintRiverRapidsTrack25DegToFlatB(session, direction, height, river_rapids_track_pieces_flat_to_25_deg_up);
 }
 
 /** rct2: 0x00757680 */
@@ -518,7 +543,10 @@ static void PaintRiverRapidsTrack25DegUpToFlat(
     PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,
     const TrackElement& trackElement)
 {
-    PaintRiverRapidsTrack25DegToFlatA(session, direction, height, river_rapids_track_pieces_25_deg_up_to_flat);
+    if (trackElement.HasChain())
+        PaintRiverRapidsTrack25DegToFlatA(session, direction, height, river_rapids_track_pieces_25_deg_up_to_flat_chain);
+    else
+        PaintRiverRapidsTrack25DegToFlatA(session, direction, height, river_rapids_track_pieces_25_deg_up_to_flat);
 }
 
 /** rct2: 0x00757690 */
