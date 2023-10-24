@@ -21,6 +21,9 @@ constexpr uint32_t RideConstructionSpecialPieceSelected = 0x10000;
 constexpr uint8_t kRCT2DefaultBlockBrakeSpeed = 2;
 constexpr int32_t kBlockBrakeBaseSpeed = 0x20364;
 constexpr int32_t kBlockBrakeSpeedOffset = kBlockBrakeBaseSpeed - (kRCT2DefaultBlockBrakeSpeed << 16);
+constexpr uint8_t const kLegacyBrakeSpeedMultiplier = 2;
+constexpr uint8_t const kMaximumBrakeSpeed = 0b00111111; //2 high bits reserved for potential future behavior
+constexpr uint8_t const kDefaultPoweredLiftSpeed = kMaximumBrakeSpeed;
 
 using track_type_t = uint16_t;
 using roll_type_t = uint8_t;
@@ -112,8 +115,6 @@ enum
 #define MAX_STATION_PLATFORM_LENGTH 32
 constexpr uint16_t const MAX_TRACK_HEIGHT = 254 * COORDS_Z_STEP;
 constexpr uint8_t const DEFAULT_SEAT_ROTATION = 4;
-constexpr uint8_t const LegacyBrakeSpeedMultiplier = 2;
-constexpr uint8_t const DefaultPoweredLiftSpeed = 255;
 
 // Vehicle sprite groups required by track groups are defined in ride_entry_get_supported_track_pieces
 enum

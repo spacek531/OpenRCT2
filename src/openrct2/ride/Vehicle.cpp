@@ -7424,12 +7424,14 @@ void Vehicle::PopulateBoosterSpeed(TrackElement& trackElement)
     if (trackType == TrackElemType::PoweredLift
         || (trackType == TrackElemType::Flat && GetRide()->type == RIDE_TYPE_REVERSE_FREEFALL_COASTER))
     {
-        brake_speed = DefaultPoweredLiftSpeed; // When PoweredLift gets a speed setting, it will have to choose between default
-                                               // and track's speed based on useLegacy
+        SetFlag(VehicleFlags::InfiniteBoosterSpeed);
+        brake_speed = 0; // brake_speed is unused on these track elements
         BoosterAcceleration = useLegacy ? vehicleRTD.OperatingSettings.PoweredLiftAcceleration
                                         : trackRTD.OperatingSettings.PoweredLiftAcceleration;
+        BlockBrakeSpeed = 0;
         return;
     }
+    ClearFlag(VehicleFlags::InfiniteBoosterSpeed);
     if (TrackTypeHasSpeedSetting(trackType))
     {
         auto rawSpeed = trackElement.GetBrakeBoosterSpeed();
@@ -7442,10 +7444,11 @@ void Vehicle::PopulateBoosterSpeed(TrackElement& trackElement)
         }
         BoosterAcceleration = trackRTD.OperatingSettings.BoosterAcceleration;
         brake_speed = rawSpeed;
+        BlockBrakeSpeed = 0;
         return;
     }
-    BoosterAcceleration = 0;
     brake_speed = 0;
+    BoosterAcceleration = 0;
     BlockBrakeSpeed = 0;
 }
 
@@ -7715,13 +7718,10 @@ Loc6DAEB9:
             }
         }
     }
-    else if (
-        (trackType == TrackElemType::Booster)
-        || (trackType == TrackElemType::Flat && curRide.type == RIDE_TYPE_REVERSE_FREEFALL_COASTER)
-        || (trackType == TrackElemType::PoweredLift))
+    else if (BoosterAcceleration != 0)
     {
         auto boosterSpeed = brake_speed << BrakeSpeedShiftAmount;
-        if (boosterSpeed > _vehicleVelocityF64E08)
+        if ((boosterSpeed > _vehicleVelocityF64E08) || HasFlag(VehicleFlags::InfiniteBoosterSpeed))
         {
             acceleration = BoosterAcceleration << 16; //_vehicleVelocityF64E08 * 1.2;
         }
@@ -7731,12 +7731,6 @@ Loc6DAEB9:
         acceleration += CalculateRiderBraking();
     }
 
-    // TODO: keep this or not? Spacek 23/10/2023
-    if ((trackType == TrackElemType::Flat && curRide.type == RIDE_TYPE_REVERSE_FREEFALL_COASTER)
-        || (trackType == TrackElemType::PoweredLift))
-    {
-        acceleration = GetRideTypeDescriptor(curRide.type).OperatingSettings.PoweredLiftAcceleration << 16;
-    }
     if (trackType == TrackElemType::BrakeForDrop)
     {
         if (IsHead())

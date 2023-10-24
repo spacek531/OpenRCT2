@@ -1453,7 +1453,7 @@ namespace RCT2
                     }
                     else if (TrackTypeHasSpeedSetting(trackType))
                     {
-                        auto brakeSpeed = src2->GetBrakeBoosterSpeed() * LegacyBrakeSpeedMultiplier;
+                        auto brakeSpeed = src2->GetBrakeBoosterSpeed() * kLegacyBrakeSpeedMultiplier;
                         if (dst2->GetTrackType() != TrackElemType::Booster)
                         {
                             dst2->SetBrakeBoosterSpeed(brakeSpeed);
@@ -2084,7 +2084,7 @@ namespace RCT2
 
         if (dst->GetTrackType() == TrackElemType::Booster)
         {
-            dst->brake_speed = GetAbsoluteBoosterSpeed(dst->GetRide()->type, src->BrakeSpeed * LegacyBrakeSpeedMultiplier);
+            dst->brake_speed = GetAbsoluteBoosterSpeed(dst->GetRide()->type, src->BrakeSpeed * kLegacyBrakeSpeedMultiplier);
         }
         else
         {

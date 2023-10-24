@@ -234,7 +234,7 @@ ResultWithMessage TrackDesign::CreateTrackDesignTrack(TrackDesignState& tds, con
                 if (shiftFactor > 0)
                 {
                     trackFlags >>= shiftFactor;
-                    trackFlags /= LegacyBrakeSpeedMultiplier;
+                    trackFlags /= kLegacyBrakeSpeedMultiplier;
                     trackFlags &= 0xF;
                 }
                 else if (shiftFactor < 0)
@@ -242,13 +242,13 @@ ResultWithMessage TrackDesign::CreateTrackDesignTrack(TrackDesignState& tds, con
                     // Workaround for an issue with older compilers (GCC 6, Clang 4) which would fail the build
                     int8_t shiftFactorAbs = std::abs(shiftFactor);
                     trackFlags <<= shiftFactorAbs;
-                    trackFlags /= LegacyBrakeSpeedMultiplier;
+                    trackFlags /= kLegacyBrakeSpeedMultiplier;
                     trackFlags &= 0xF;
                 }
             }
             else
             {
-                trackFlags /= LegacyBrakeSpeedMultiplier;
+                trackFlags /= kLegacyBrakeSpeedMultiplier;
                 trackFlags &= 0xF;
             }
         }
@@ -1656,7 +1656,7 @@ static GameActions::Result TrackDesignPlaceRide(TrackDesignState& tds, TrackDesi
                 // di
                 int16_t tempZ = newCoords.z - trackCoordinates->z_begin;
                 uint32_t trackColour = (track.flags >> 4) & 0x3;
-                uint32_t brakeSpeed = (track.flags & 0x0F)* LegacyBrakeSpeedMultiplier;
+                uint32_t brakeSpeed = (track.flags & 0x0F)* kLegacyBrakeSpeedMultiplier;
                 // RCT2-created track designs write brake speed to all tracks; block brake speed must be treated as
                 // garbage data.
                 if (trackType == TrackElemType::BlockBrakes)

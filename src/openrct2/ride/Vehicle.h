@@ -52,6 +52,32 @@ struct VehicleInfo
     uint8_t bank_rotation; // 0x08
 };
 
+/*
+struct BrakeSpeedSetting
+{
+    uint8_t GetSpeed() const
+    {
+        return data & 0b00111111;
+    }
+    bool GetReverse() const
+    {
+        return data & 0b10000000;
+    }
+    void SetSpeed(uint8_t speed)
+    {
+        data &= 0b11000000;
+        data |= speed & 0b00111111;
+    }
+    void SetReverse(bool reverse)
+    {
+        data &= 0b10111111;
+        data |= reverse;
+    }
+
+private:
+    uint8_t data;
+};
+*/
 struct SoundIdVolume;
 
 constexpr uint16_t VehicleTrackDirectionMask = 0b0000000000000011;
@@ -449,11 +475,12 @@ namespace VehicleFlags
     constexpr uint32_t ReverseInclineCompletedLap = (1 << 12); // Set when the vehicle travels backwards through the station for
                                                                // the first time
     constexpr uint32_t SpinningIsLocked = (1 << 13);           // After passing a rotation toggle track piece this will enable
-    constexpr uint32_t MoveSingleCar = (1 << 14);      // OpenRCT2 Flag: Used to override UpdateMotion to move the position of
-                                                       // an individual car on a train
-    constexpr uint32_t Crashed = (1 << 15);            // Car displays as smoke plume
-    constexpr uint32_t CarIsReversed = (1 << 16);      // Car is displayed running backwards
-    constexpr uint32_t LegacyBoosterSpeed = (1 << 17); // Car uses its own ride to determine booster speed and acceleration
+    constexpr uint32_t MoveSingleCar = (1 << 14);        // OpenRCT2 Flag: Used to override UpdateMotion to move the position of
+                                                         // an individual car on a train
+    constexpr uint32_t Crashed = (1 << 15);              // Car displays as smoke plume
+    constexpr uint32_t CarIsReversed = (1 << 16);        // Car is displayed running backwards
+    constexpr uint32_t LegacyBoosterSpeed = (1 << 17);   // Car uses its own ride to determine booster speed and acceleration
+    constexpr uint32_t InfiniteBoosterSpeed = (1 << 18); // Booster has no speed limit - continue accelerating
 } // namespace VehicleFlags
 
 enum

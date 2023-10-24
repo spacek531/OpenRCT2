@@ -1101,21 +1101,21 @@ namespace OpenRCT2
                                     {
                                         it.element->SetInvisible(true);
                                     }
-                                    if (os.GetHeader().TargetVersion < BlockBrakeImprovementsVersion)
-                                    {
-                                        if (trackType == TrackElemType::Brakes)
-                                            trackElement->SetBrakeClosed(true);
-                                        if (trackType == TrackElemType::BlockBrakes)
-                                            trackElement->SetBrakeBoosterSpeed(kRCT2DefaultBlockBrakeSpeed);
-                                    }
                                     if (os.GetHeader().TargetVersion < UnifyBoosterSpeedVersion)
                                     {
-                                        auto brakeSpeed = trackElement->GetBrakeBoosterSpeed() * LegacyBrakeSpeedMultiplier;
+                                        auto brakeSpeed = trackElement->GetBrakeBoosterSpeed() * kLegacyBrakeSpeedMultiplier;
                                         if (trackType == TrackElemType::Booster)
                                         {
                                             const auto* ride = GetRide(trackElement->GetRideIndex());
                                             if (ride != nullptr)
                                                 brakeSpeed = GetAbsoluteBoosterSpeed(ride->type, brakeSpeed);
+                                        }
+                                        if (os.GetHeader().TargetVersion < BlockBrakeImprovementsVersion)
+                                        {
+                                            if (trackType == TrackElemType::Brakes)
+                                                trackElement->SetBrakeClosed(true);
+                                            if (trackType == TrackElemType::BlockBrakes)
+                                               brakeSpeed = kRCT2DefaultBlockBrakeSpeed;
                                         }
                                         trackElement->SetBrakeBoosterSpeed(brakeSpeed);
                                     }
@@ -1198,7 +1198,7 @@ namespace OpenRCT2
                         if (!TrackTypeHasSpeedSetting(trackElement->GetTrackType()))
                             continue;
 
-                        auto brakeSpeed = trackElement->GetBrakeBoosterSpeed() * LegacyBrakeSpeedMultiplier;
+                        auto brakeSpeed = trackElement->GetBrakeBoosterSpeed() * kLegacyBrakeSpeedMultiplier;
 
                         if (trackElement->GetTrackType() != TrackElemType::Booster)
                         {
@@ -2154,17 +2154,19 @@ namespace OpenRCT2
         {
             uint8_t brakeSpeed;
             cs.ReadWrite(brakeSpeed);
-            auto trackElement = MapGetTrackElementAtOfTypeSeq(entity.TrackLocation, entity.GetTrackType(), 0);
-            if (trackElement != nullptr)
+            auto trackType = entity.GetTrackType();
+            if (trackType == TrackElemType::Booster)
             {
-                entity.PopulateBoosterSpeed(*trackElement->AsTrack());
+                brakeSpeed = GetAbsoluteBoosterSpeed(entity.GetRide()->type, brakeSpeed);
             }
-            else
-            {
-                entity.brake_speed = brakeSpeed * LegacyBrakeSpeedMultiplier;
-            }
+            entity.brake_speed = brakeSpeed * kLegacyBrakeSpeedMultiplier;
+
             if (os.GetHeader().TargetVersion < BlockBrakeImprovementsVersion)
             {
+                if (entity.GetTrackType() == TrackElemType::BlockBrakes)
+                {
+                    entity.brake_speed = kRCT2DefaultBlockBrakeSpeed;
+                }
                 entity.BlockBrakeSpeed = entity.brake_speed;
             }
         }
