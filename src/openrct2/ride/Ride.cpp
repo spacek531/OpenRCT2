@@ -5431,7 +5431,7 @@ bool RideHasRatings(const Ride& ride)
     return ride.excitement != RIDE_RATING_UNDEFINED;
 }
 
-int32_t GetBoosterSpeed(ride_type_t rideType, int32_t rawSpeed)
+int32_t GetAbsoluteBoosterSpeed(ride_type_t rideType, int32_t rawSpeed)
 {
     return GetRideTypeDescriptor(rideType).GetAbsoluteBoosterSpeed(rawSpeed);
 }

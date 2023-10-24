@@ -437,7 +437,7 @@ int32_t RideTypeDescriptor::GetAbsoluteBoosterSpeed(const int32_t& relativeSpeed
     {
         return relativeSpeed;
     }
-    if (OperatingSettings.BoosterSpeedFactor > 0)
+    if (shiftFactor > 0)
     {
         return (relativeSpeed << shiftFactor);
     }

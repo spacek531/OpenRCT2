@@ -1679,14 +1679,14 @@ namespace RCT1
                     dst2->SetBrakeClosed(trackType == TrackElemType::Brakes);
                     if (TrackTypeHasSpeedSetting(trackType))
                     {
-                        auto brakeSpeed = src2->GetBrakeBoosterSpeed() * LEGACY_BRAKE_SPEED_MULTIPLIER;
+                        auto brakeSpeed = src2->GetBrakeBoosterSpeed() * LegacyBrakeSpeedMultiplier;
                         if (dst2->GetTrackType() != TrackElemType::Booster)
                         {
                             dst2->SetBrakeBoosterSpeed(brakeSpeed);
                         }
                         else
                         {
-                            dst2->SetBrakeBoosterSpeed(GetBoosterSpeed(rideType, brakeSpeed));
+                            dst2->SetBrakeBoosterSpeed(GetAbsoluteBoosterSpeed(rideType, brakeSpeed));
                         }
                     }
                     else if (trackType == TrackElemType::OnRidePhoto)
@@ -2813,11 +2813,11 @@ namespace RCT1
         if (dst->GetTrackType() == TrackElemType::Booster)
         {
             // TODO: why is this multiplied by 2? Spacek 23/10/2023
-            dst->brake_speed = GetBoosterSpeed(ride->type, src->BrakeSpeed * 2);
+            dst->brake_speed = GetAbsoluteBoosterSpeed(ride->type, src->BrakeSpeed * LegacyBrakeSpeedMultiplier);
         }
         else
         {
-            dst->brake_speed = src->BrakeSpeed * 2;
+            dst->brake_speed = src->BrakeSpeed * LegacyBrakeSpeedMultiplier;
         }
         dst->track_progress = src->TrackProgress;
         dst->vertical_drop_countdown = src->VerticalDropCountdown;

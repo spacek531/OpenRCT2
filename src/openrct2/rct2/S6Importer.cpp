@@ -1453,14 +1453,14 @@ namespace RCT2
                     }
                     else if (TrackTypeHasSpeedSetting(trackType))
                     {
-                        auto brakeSpeed = src2->GetBrakeBoosterSpeed() * LEGACY_BRAKE_SPEED_MULTIPLIER;
+                        auto brakeSpeed = src2->GetBrakeBoosterSpeed() * LegacyBrakeSpeedMultiplier;
                         if (dst2->GetTrackType() != TrackElemType::Booster)
                         {
                             dst2->SetBrakeBoosterSpeed(brakeSpeed);
                         }
                         else
                         {
-                            dst2->SetBrakeBoosterSpeed(GetBoosterSpeed(rideType, brakeSpeed));
+                            dst2->SetBrakeBoosterSpeed(GetAbsoluteBoosterSpeed(rideType, brakeSpeed));
                         }
                     }
                     else if (trackType == TrackElemType::OnRidePhoto)
@@ -2084,8 +2084,7 @@ namespace RCT2
 
         if (dst->GetTrackType() == TrackElemType::Booster)
         {
-            // TODO: why is brake speed multiplied by 2 here? Spacek 23/10/2023
-            dst->brake_speed = GetBoosterSpeed(dst->GetRide()->type, src->BrakeSpeed * 2);
+            dst->brake_speed = GetAbsoluteBoosterSpeed(dst->GetRide()->type, src->BrakeSpeed * LegacyBrakeSpeedMultiplier);
         }
         else
         {

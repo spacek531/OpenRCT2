@@ -7415,16 +7415,51 @@ uint8_t Vehicle::ChooseBrakeSpeed() const
     return brake_speed;
 }
 
+void Vehicle::PopulateBoosterSpeed(TrackElement& trackElement)
+{
+    auto trackType = trackElement.GetTrackType();
+    auto useLegacy = HasFlag(VehicleFlags::LegacyBoosterSpeed);
+    auto vehicleRTD = GetRide()->GetRideTypeDescriptor();
+    auto trackRTD = ::GetRide(trackElement.GetRideIndex())->GetRideTypeDescriptor();
+    if (trackType == TrackElemType::PoweredLift
+        || (trackType == TrackElemType::Flat && GetRide()->type == RIDE_TYPE_REVERSE_FREEFALL_COASTER))
+    {
+        brake_speed = DefaultPoweredLiftSpeed; // When PoweredLift gets a speed setting, it will have to choose between default
+                                               // and track's speed based on useLegacy
+        BoosterAcceleration = useLegacy ? vehicleRTD.OperatingSettings.PoweredLiftAcceleration
+                                        : trackRTD.OperatingSettings.PoweredLiftAcceleration;
+        return;
+    }
+    if (TrackTypeHasSpeedSetting(trackType))
+    {
+        auto rawSpeed = trackElement.GetBrakeBoosterSpeed();
+        if (trackType == TrackElemType::Booster && useLegacy)
+        {
+            auto relativeSpeed = trackRTD.GetRelativeBoosterSpeed(rawSpeed);
+            brake_speed = vehicleRTD.GetAbsoluteBoosterSpeed(relativeSpeed);
+            BoosterAcceleration = vehicleRTD.OperatingSettings.BoosterAcceleration;
+            return;
+        }
+        BoosterAcceleration = trackRTD.OperatingSettings.BoosterAcceleration;
+        brake_speed = rawSpeed;
+        return;
+    }
+    BoosterAcceleration = 0;
+    brake_speed = 0;
+    BlockBrakeSpeed = 0;
+}
+
 /**
  * Populate the vehicle's brake_speed and BlockBrakeSpeed values.
  */
 void Vehicle::PopulateBrakeSpeed(const CoordsXYZ& vehicleTrackLocation, TrackElement& brake)
 {
     auto trackSpeed = brake.GetBrakeBoosterSpeed();
+    auto trackType = GetTrackType();
     brake_speed = trackSpeed;
-    if (!TrackTypeIsBrakes(brake.GetTrackType()))
+    if (!TrackTypeIsBrakes(trackType))
     {
-        BlockBrakeSpeed = trackSpeed;
+        PopulateBoosterSpeed(brake);
         return;
     }
     // As soon as feasible, encode block brake speed into track element so the lookforward can be skipped here.
@@ -7619,7 +7654,6 @@ bool Vehicle::UpdateTrackMotionForwardsGetNewTrack(uint16_t trackType, const Rid
     SetTrackDirection(location.direction);
     SetTrackType(trackType);
     PopulateBrakeSpeed(TrackLocation, *tileElement->AsTrack());
-    GetSpeedFromTrackElement(tileElement->AsTrack());
     if (trackType == TrackElemType::OnRidePhoto)
     {
         trigger_on_ride_photo(TrackLocation, tileElement);
@@ -7683,7 +7717,7 @@ Loc6DAEB9:
     }
     else if (
         (trackType == TrackElemType::Booster)
-        || (trackType == TrackElemType::Flat && curRide->type == RIDE_TYPE_REVERSE_FREEFALL_COASTER)
+        || (trackType == TrackElemType::Flat && curRide.type == RIDE_TYPE_REVERSE_FREEFALL_COASTER)
         || (trackType == TrackElemType::PoweredLift))
     {
         auto boosterSpeed = brake_speed << BrakeSpeedShiftAmount;
@@ -8028,7 +8062,6 @@ bool Vehicle::UpdateTrackMotionBackwardsGetNewTrack(uint16_t trackType, const Ri
     SetTrackType(trackType);
     SetTrackDirection(direction);
     PopulateBrakeSpeed(TrackLocation, *tileElement->AsTrack());
-    GetSpeedFromTrackElement(tileElement->AsTrack());
 
     // There are two bytes before the move info list
     uint16_t trackTotalProgress = GetTrackProgress();
@@ -9432,39 +9465,6 @@ void Vehicle::EnableCollisionsForTrain()
     {
         vehicle->ClearFlag(VehicleFlags::CollisionDisabled);
     }
-}
-
-void Vehicle::GetSpeedFromTrackElement(TrackElement* trackElement)
-{
-    auto trackType = trackElement->GetTrackType();
-    auto useLegacy = HasUpdateFlag(VEHICLE_UPDATE_FLAG_LEGACY_BOOSTER_SPEED);
-    auto vehicleRTD = GetRide()->GetRideTypeDescriptor();
-    auto trackRTD = get_ride(trackElement->GetRideIndex())->GetRideTypeDescriptor();
-    if (trackType == TrackElemType::PoweredLift
-        || (trackType == TrackElemType::Flat && GetRide()->type == RIDE_TYPE_REVERSE_FREEFALL_COASTER))
-    {
-        brake_speed = DefaultPoweredLiftSpeed; // When PoweredLift gets a speed setting, it will have to choose between default
-                                               // and track's speed based on useLegacy
-        BoosterAcceleration = useLegacy ? vehicleRTD.OperatingSettings.PoweredLiftAcceleration
-                                        : trackRTD.OperatingSettings.PoweredLiftAcceleration;
-        return;
-    }
-    if (TrackTypeHasSpeedSetting(trackType))
-    {
-        auto rawSpeed = trackElement->GetBrakeBoosterSpeed();
-        if (trackType == TrackElemType::Booster && useLegacy)
-        {
-            auto relativeSpeed = trackRTD.GetRelativeBoosterSpeed(rawSpeed);
-            brake_speed = vehicleRTD.GetAbsoluteBoosterSpeed(relativeSpeed);
-            BoosterAcceleration = vehicleRTD.OperatingSettings.BoosterAcceleration;
-            return;
-        }
-        BoosterAcceleration = trackRTD.OperatingSettings.BoosterAcceleration;
-        brake_speed = rawSpeed;
-        return;
-    }
-    BoosterAcceleration = 0;
-    brake_speed = 0;
 }
 
 void Vehicle::Serialise(DataSerialiser& stream)

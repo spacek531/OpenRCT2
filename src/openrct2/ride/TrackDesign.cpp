@@ -230,10 +230,27 @@ ResultWithMessage TrackDesign::CreateTrackDesignTrack(TrackDesignState& tds, con
             trackFlags = trackElement.element->AsTrack()->GetBrakeBoosterSpeed();
             if (track.type == TrackElemType::Booster)
             {
-                trackFlags = ride.GetRideTypeDescriptor().GetRelativeBoosterSpeed(trackFlags);
+                auto shiftFactor = ride.GetRideTypeDescriptor().OperatingSettings.BoosterSpeedFactor;
+                if (shiftFactor > 0)
+                {
+                    trackFlags >>= shiftFactor;
+                    trackFlags /= LegacyBrakeSpeedMultiplier;
+                    trackFlags &= 0xF;
+                }
+                else if (shiftFactor < 0)
+                {
+                    // Workaround for an issue with older compilers (GCC 6, Clang 4) which would fail the build
+                    int8_t shiftFactorAbs = std::abs(shiftFactor);
+                    trackFlags <<= shiftFactorAbs;
+                    trackFlags /= LegacyBrakeSpeedMultiplier;
+                    trackFlags &= 0xF;
+                }
             }
-            trackFlags /= LegacyBrakeSpeedMultiplier;
-            trackFlags &= 0xF;
+            else
+            {
+                trackFlags /= LegacyBrakeSpeedMultiplier;
+                trackFlags &= 0xF;
+            }
         }
         else
         {
@@ -1639,7 +1656,7 @@ static GameActions::Result TrackDesignPlaceRide(TrackDesignState& tds, TrackDesi
                 // di
                 int16_t tempZ = newCoords.z - trackCoordinates->z_begin;
                 uint32_t trackColour = (track.flags >> 4) & 0x3;
-                uint32_t brakeSpeed = (track.flags & 0x0F)* LEGACY_BRAKE_SPEED_MULTIPLIER;
+                uint32_t brakeSpeed = (track.flags & 0x0F)* LegacyBrakeSpeedMultiplier;
                 // RCT2-created track designs write brake speed to all tracks; block brake speed must be treated as
                 // garbage data.
                 if (trackType == TrackElemType::BlockBrakes)
@@ -1648,7 +1665,7 @@ static GameActions::Result TrackDesignPlaceRide(TrackDesignState& tds, TrackDesi
                 }
                 else if (trackType == TrackElemType::Booster)
                 {
-                    brakeSpeed = GetBoosterSpeed(ride.type, brakeSpeed);
+                    brakeSpeed = ride.GetRideTypeDescriptor().GetAbsoluteBoosterSpeed(brakeSpeed);
                 }
                 uint32_t seatRotation = track.flags & 0x0F;
 

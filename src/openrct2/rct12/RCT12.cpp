@@ -247,7 +247,7 @@ uint8_t RCT12TrackElement::GetBrakeBoosterSpeed() const
 {
     if (TrackTypeHasSpeedSetting(GetTrackType()))
     {
-        return sequence >> 4;
+        return Sequence >> 4;
     }
     return 0;
 }
@@ -897,10 +897,10 @@ void UpdateTrackBrakeSpeed()
                 }
                 else
                 {
-                    const auto* ride = get_ride(trackElement->GetRideIndex());
+                    const auto* ride = GetRide(trackElement->GetRideIndex());
                     if (ride != nullptr)
                     {
-                        trackElement->SetBrakeBoosterSpeed(get_booster_speed(ride->type, brakeSpeed));
+                        trackElement->SetBrakeBoosterSpeed(GetAbsoluteBoosterSpeed(ride->type, brakeSpeed));
                     }
                 }
             } while (!(tileElement++)->IsLastForTile());
@@ -909,7 +909,7 @@ void UpdateTrackBrakeSpeed()
 
     for (auto* vehicle : EntityList<::Vehicle>())
     {
-        vehicle->SetUpdateFlag(VEHICLE_UPDATE_FLAG_LEGACY_BOOSTER_SPEED);
+        vehicle->SetFlag(VehicleFlags::LegacyBoosterSpeed);
         auto trackType = vehicle->GetTrackType();
 
         TileElement* tileElement = MapGetTrackElementAtOfTypeSeq(vehicle->TrackLocation, trackType, 0);
@@ -917,6 +917,6 @@ void UpdateTrackBrakeSpeed()
         if (tileElement == nullptr)
             continue;
 
-        vehicle->GetSpeedFromTrackElement(tileElement->AsTrack());
+        vehicle->PopulateBoosterSpeed(*tileElement->AsTrack());
     }
 }

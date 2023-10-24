@@ -277,11 +277,10 @@ struct Vehicle : EntityBase
     void Serialise(DataSerialiser& stream);
     void Paint(PaintSession& session, int32_t imageDirection) const;
     bool IsCableLift() const;
+    void PopulateBoosterSpeed(TrackElement& trackElement);
 
     friend void UpdateRotatingDefault(Vehicle& vehicle);
     friend void UpdateRotatingEnterprise(Vehicle& vehicle);
-
-    void GetSpeedFromTrackElement(TrackElement* trackElement);
 
 private:
     bool SoundCanPlay() const;
