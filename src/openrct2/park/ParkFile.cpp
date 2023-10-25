@@ -44,6 +44,7 @@
 #include "../object/ObjectManager.h"
 #include "../object/ObjectRepository.h"
 #include "../peep/RideUseSystem.h"
+#include "../ride/RideData.h"
 #include "../ride/ShopItem.h"
 #include "../ride/Vehicle.h"
 #include "../scenario/Scenario.h"
@@ -1106,16 +1107,14 @@ namespace OpenRCT2
                                         auto brakeSpeed = trackElement->GetBrakeBoosterSpeed() * kLegacyBrakeSpeedMultiplier;
                                         if (trackType == TrackElemType::Booster)
                                         {
-                                            const auto* ride = GetRide(trackElement->GetRideIndex());
-                                            if (ride != nullptr)
-                                                brakeSpeed = GetAbsoluteBoosterSpeed(ride->type, brakeSpeed);
+                                            brakeSpeed = GetAbsoluteBoosterSpeed(trackElement->GetRideType(), brakeSpeed);
                                         }
                                         if (os.GetHeader().TargetVersion < BlockBrakeImprovementsVersion)
                                         {
                                             if (trackType == TrackElemType::Brakes)
                                                 trackElement->SetBrakeClosed(true);
                                             if (trackType == TrackElemType::BlockBrakes)
-                                               brakeSpeed = kRCT2DefaultBlockBrakeSpeed;
+                                                brakeSpeed = kRCT2DefaultBlockBrakeSpeed;
                                         }
                                         trackElement->SetBrakeBoosterSpeed(brakeSpeed);
                                     }
@@ -1177,46 +1176,6 @@ namespace OpenRCT2
                     } while (!(tileElement++)->IsLastForTile());
                 }
             }
-        }
-
-        void UpdateTrackBrakeSpeed()
-        {
-            for (int32_t y = 0; y < MAXIMUM_MAP_SIZE_TECHNICAL; y++)
-            {
-                for (int32_t x = 0; x < MAXIMUM_MAP_SIZE_TECHNICAL; x++)
-                {
-                    TileElement* tileElement = MapGetFirstElementAt(TileCoordsXY{ x, y });
-                    if (tileElement == nullptr)
-                        continue;
-                    do
-                    {
-                        if (tileElement->GetType() != TileElementType::Track)
-                            continue;
-
-                        auto* trackElement = tileElement->AsTrack();
-
-                        if (!TrackTypeHasSpeedSetting(trackElement->GetTrackType()))
-                            continue;
-
-                        auto brakeSpeed = trackElement->GetBrakeBoosterSpeed() * kLegacyBrakeSpeedMultiplier;
-
-                        if (trackElement->GetTrackType() != TrackElemType::Booster)
-                        {
-                            trackElement->SetBrakeBoosterSpeed(brakeSpeed);
-                        }
-                        else
-                        {
-                            const auto* ride = GetRide(trackElement->GetRideIndex());
-                            if (ride != nullptr)
-                            {
-                                trackElement->SetBrakeBoosterSpeed(GetAbsoluteBoosterSpeed(ride->type, brakeSpeed));
-                            }
-                        }
-                    } while (!(tileElement++)->IsLastForTile());
-                }
-            }
-
-            FixBoosterSpeed();
         }
 
         void ReadWriteBannersChunk(OrcaStream& os)
@@ -2152,12 +2111,22 @@ namespace OpenRCT2
 
         if (cs.GetMode() == OrcaStream::Mode::READING && os.GetHeader().TargetVersion < UnifyBoosterSpeedVersion)
         {
+            entity.SetFlag(VehicleFlags::LegacyBoosterSpeed);
             uint8_t brakeSpeed;
             cs.ReadWrite(brakeSpeed);
             auto trackType = entity.GetTrackType();
+            auto rtd = entity.GetRide()->GetRideTypeDescriptor();
             if (trackType == TrackElemType::Booster)
             {
-                brakeSpeed = GetAbsoluteBoosterSpeed(entity.GetRide()->type, brakeSpeed);
+                entity.BoosterAcceleration = rtd.OperatingSettings.BoosterAcceleration;
+                brakeSpeed = rtd.GetAbsoluteBoosterSpeed(brakeSpeed);
+            }
+            else if (
+                (trackType == TrackElemType::PoweredLift)
+                || (trackType == TrackElemType::Flat && entity.GetRide()->type == RIDE_TYPE_REVERSE_FREEFALL_COASTER))
+            {
+                entity.BoosterAcceleration = rtd.OperatingSettings.PoweredLiftAcceleration;
+                entity.SetFlag(VehicleFlags::OnPoweredLift);
             }
             entity.brake_speed = brakeSpeed * kLegacyBrakeSpeedMultiplier;
 
@@ -2192,6 +2161,7 @@ namespace OpenRCT2
                 entity.SetFlag(VehicleFlags::Crashed);
             }
         }
+
         if (cs.GetMode() == OrcaStream::Mode::READING && os.GetHeader().TargetVersion < BlockBrakeImprovementsVersion)
         {
             entity.BlockBrakeSpeed = kRCT2DefaultBlockBrakeSpeed;
@@ -2201,12 +2171,7 @@ namespace OpenRCT2
             cs.ReadWrite(entity.BlockBrakeSpeed);
         }
 
-        if (cs.GetMode() == OrcaStream::Mode::READING && os.GetHeader().TargetVersion < UnifyBoosterSpeedVersion)
-        {
-            // BoosterAcceleration is set at the same time speed is set
-            entity.SetFlag(VehicleFlags::LegacyBoosterSpeed);
-        }
-        else
+        if (os.GetHeader().TargetVersion >= UnifyBoosterSpeedVersion)
         {
             cs.ReadWrite(entity.BoosterAcceleration);
         }

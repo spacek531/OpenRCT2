@@ -196,7 +196,6 @@ namespace RCT1
 
             ResearchDetermineFirstOfType();
 
-            UpdateTrackBrakeSpeed();
             CheatsReset();
             ClearRestrictedScenery();
             RestrictAllMiscScenery();
@@ -2745,7 +2744,6 @@ namespace RCT1
         dst->num_seats = src->NumSeats;
         dst->speed = src->Speed;
         dst->powered_acceleration = src->PoweredAcceleration;
-        dst->brake_speed = src->BrakeSpeed; // TODO: update this for speed? Spacek 23/10/2023
 
         dst->velocity = src->Velocity;
         dst->acceleration = src->Acceleration;
@@ -2810,13 +2808,20 @@ namespace RCT1
             dst->SetTrackDirection(0);
             dst->SetTrackType(0);
         }
-        if (dst->GetTrackType() == TrackElemType::Booster)
+
+        dst->brake_speed = src->BrakeSpeed * kLegacyBrakeSpeedMultiplier;
+        dst->BlockBrakeSpeed = kRCT2DefaultBlockBrakeSpeed;
+
+        if ((dst->GetTrackType() == TrackElemType::PoweredLift)
+            || (dst->GetTrackType() == TrackElemType::Flat && dst->GetRide()->type == RIDE_TYPE_REVERSE_FREEFALL_COASTER))
         {
-            dst->brake_speed = GetAbsoluteBoosterSpeed(ride->type, src->BrakeSpeed * kLegacyBrakeSpeedMultiplier);
+            dst->BoosterAcceleration = ride->GetRideTypeDescriptor().OperatingSettings.PoweredLiftAcceleration;
+            dst->SetFlag(VehicleFlags::OnPoweredLift);
         }
-        else
+        else if (dst->GetTrackType() == TrackElemType::Booster)
         {
-            dst->brake_speed = src->BrakeSpeed * kLegacyBrakeSpeedMultiplier;
+            dst->brake_speed = ride->GetRideTypeDescriptor().GetAbsoluteBoosterSpeed(dst->brake_speed);
+            dst->BoosterAcceleration = ride->GetRideTypeDescriptor().OperatingSettings.BoosterAcceleration;
         }
         dst->track_progress = src->TrackProgress;
         dst->vertical_drop_countdown = src->VerticalDropCountdown;

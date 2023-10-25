@@ -1307,8 +1307,7 @@ public:
                 else
                 {
                     // Increase brake speed
-                    constexpr uint8_t maxBrakesSpeed = std::numeric_limits<int8_t>::max();
-                    if (_currentBrakeSpeed + 1 < maxBrakesSpeed)
+                    if (_currentBrakeSpeed < kMaximumBrakeSpeed)
                     {
                         if (_rideConstructionState == RideConstructionState::Selected)
                         {

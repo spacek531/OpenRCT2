@@ -61,6 +61,7 @@ using namespace OpenRCT2::Math::Trigonometry;
 static bool vehicle_boat_is_location_accessible(const CoordsXYZ& location);
 
 constexpr uint8_t const BrakeSpeedShiftAmount = 16;
+constexpr uint8_t const BoosterAccelerationShiftAmount = 16;
 
 constexpr int16_t VEHICLE_MAX_SPIN_SPEED = 1536;
 constexpr int16_t VEHICLE_MIN_SPIN_SPEED = -VEHICLE_MAX_SPIN_SPEED;
@@ -7396,6 +7397,41 @@ void Vehicle::Sub6DBF3E()
     }
 }
 
+static uint8_t GetLegacyBoosterSpeed(uint8_t rawSpeed, RideTypeDescriptor& vehicleRTD, RideTypeDescriptor& trackRTD)
+{
+    auto relativeSpeed = trackRTD.GetRelativeBoosterSpeed(rawSpeed);
+    relativeSpeed &= 0b00011110; // legacy speeds have only 16 values, offset by 1 bit
+    return vehicleRTD.GetAbsoluteBoosterSpeed(relativeSpeed);
+}
+
+void Vehicle::PopulateBoosterSpeed(TrackElement& trackElement)
+{
+    auto trackType = trackElement.GetTrackType();
+    auto useLegacy = HasFlag(VehicleFlags::LegacyBoosterSpeed);
+    auto vehicleRTD = GetRide()->GetRideTypeDescriptor();
+    auto trackRTD = ::GetRide(trackElement.GetRideIndex())->GetRideTypeDescriptor();
+    auto rawSpeed = trackElement.GetBrakeBoosterSpeed();
+    bool vehicleRideIsReverseFreefall = trackType == TrackElemType::Flat
+        && GetRide()->type == RIDE_TYPE_REVERSE_FREEFALL_COASTER && useLegacy;
+    bool trackRideIsReverseFreefall = trackType == TrackElemType::Flat
+        && trackElement.GetRideType() == RIDE_TYPE_REVERSE_FREEFALL_COASTER && !useLegacy;
+
+    if ((trackType == TrackElemType::PoweredLift) || vehicleRideIsReverseFreefall || trackRideIsReverseFreefall)
+    {
+        SetFlag(VehicleFlags::OnPoweredLift);
+        BoosterAcceleration = useLegacy ? vehicleRTD.OperatingSettings.PoweredLiftAcceleration
+                                        : trackRTD.OperatingSettings.PoweredLiftAcceleration;
+        brake_speed = rawSpeed;
+        BlockBrakeSpeed = rawSpeed;
+        return;
+    }
+    ClearFlag(VehicleFlags::OnPoweredLift);
+    BoosterAcceleration = useLegacy ? vehicleRTD.OperatingSettings.BoosterAcceleration
+                                    : trackRTD.OperatingSettings.BoosterAcceleration;
+    brake_speed = useLegacy ? GetLegacyBoosterSpeed(rawSpeed, vehicleRTD, trackRTD) : rawSpeed;
+    BlockBrakeSpeed = brake_speed;
+}
+
 /**
  * Determine whether to use block brake speed or brake speed. If block brake is closed or no block brake present, use the
  * brake's speed; if block brake is open, use maximum of brake speed or block brake speed.
@@ -7413,43 +7449,6 @@ uint8_t Vehicle::ChooseBrakeSpeed() const
             return std::max<uint8_t>(brake_speed, BlockBrakeSpeed);
     }
     return brake_speed;
-}
-
-void Vehicle::PopulateBoosterSpeed(TrackElement& trackElement)
-{
-    auto trackType = trackElement.GetTrackType();
-    auto useLegacy = HasFlag(VehicleFlags::LegacyBoosterSpeed);
-    auto vehicleRTD = GetRide()->GetRideTypeDescriptor();
-    auto trackRTD = ::GetRide(trackElement.GetRideIndex())->GetRideTypeDescriptor();
-    if (trackType == TrackElemType::PoweredLift
-        || (trackType == TrackElemType::Flat && GetRide()->type == RIDE_TYPE_REVERSE_FREEFALL_COASTER))
-    {
-        SetFlag(VehicleFlags::InfiniteBoosterSpeed);
-        brake_speed = 0; // brake_speed is unused on these track elements
-        BoosterAcceleration = useLegacy ? vehicleRTD.OperatingSettings.PoweredLiftAcceleration
-                                        : trackRTD.OperatingSettings.PoweredLiftAcceleration;
-        BlockBrakeSpeed = 0;
-        return;
-    }
-    ClearFlag(VehicleFlags::InfiniteBoosterSpeed);
-    if (TrackTypeHasSpeedSetting(trackType))
-    {
-        auto rawSpeed = trackElement.GetBrakeBoosterSpeed();
-        if (trackType == TrackElemType::Booster && useLegacy)
-        {
-            auto relativeSpeed = trackRTD.GetRelativeBoosterSpeed(rawSpeed);
-            brake_speed = vehicleRTD.GetAbsoluteBoosterSpeed(relativeSpeed);
-            BoosterAcceleration = vehicleRTD.OperatingSettings.BoosterAcceleration;
-            return;
-        }
-        BoosterAcceleration = trackRTD.OperatingSettings.BoosterAcceleration;
-        brake_speed = rawSpeed;
-        BlockBrakeSpeed = 0;
-        return;
-    }
-    brake_speed = 0;
-    BoosterAcceleration = 0;
-    BlockBrakeSpeed = 0;
 }
 
 /**
@@ -7718,13 +7717,17 @@ Loc6DAEB9:
             }
         }
     }
-    else if (BoosterAcceleration != 0)
+    else if (trackType == TrackElemType::Booster)
     {
         auto boosterSpeed = brake_speed << BrakeSpeedShiftAmount;
-        if ((boosterSpeed > _vehicleVelocityF64E08) || HasFlag(VehicleFlags::InfiniteBoosterSpeed))
+        if (boosterSpeed > _vehicleVelocityF64E08)
         {
-            acceleration = BoosterAcceleration << 16; //_vehicleVelocityF64E08 * 1.2;
+            acceleration = BoosterAcceleration << BoosterAccelerationShiftAmount;
         }
+    }
+    else if (HasFlag(VehicleFlags::OnPoweredLift))
+    {
+        acceleration = BoosterAcceleration << BoosterAccelerationShiftAmount;
     }
     else if (rideEntry.flags & RIDE_ENTRY_FLAG_RIDER_CONTROLS_SPEED && num_peeps > 0)
     {
@@ -8074,7 +8077,8 @@ bool Vehicle::UpdateTrackMotionBackwards(const CarEntry* carEntry, const Ride& c
     while (true)
     {
         auto trackType = GetTrackType();
-        if (trackType == TrackElemType::Flat && curRide.type == RIDE_TYPE_REVERSE_FREEFALL_COASTER)
+        // Reverse Freefall Coaster braking
+        if (HasFlag(VehicleFlags::OnPoweredLift) && trackType == TrackElemType::Flat)
         {
             int32_t unkVelocity = _vehicleVelocityF64E08;
             if (unkVelocity < -524288)

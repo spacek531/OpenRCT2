@@ -230,27 +230,24 @@ ResultWithMessage TrackDesign::CreateTrackDesignTrack(TrackDesignState& tds, con
             trackFlags = trackElement.element->AsTrack()->GetBrakeBoosterSpeed();
             if (track.type == TrackElemType::Booster)
             {
-                auto shiftFactor = ride.GetRideTypeDescriptor().OperatingSettings.BoosterSpeedFactor;
-                if (shiftFactor > 0)
-                {
-                    trackFlags >>= shiftFactor;
-                    trackFlags /= kLegacyBrakeSpeedMultiplier;
-                    trackFlags &= 0xF;
-                }
-                else if (shiftFactor < 0)
-                {
-                    // Workaround for an issue with older compilers (GCC 6, Clang 4) which would fail the build
-                    int8_t shiftFactorAbs = std::abs(shiftFactor);
-                    trackFlags <<= shiftFactorAbs;
-                    trackFlags /= kLegacyBrakeSpeedMultiplier;
-                    trackFlags &= 0xF;
-                }
+                trackFlags = ride.GetRideTypeDescriptor().GetRelativeBoosterSpeed(trackFlags);
             }
-            else
+
+            // check to ensure the value is serializable. This warning will not apply to new track design format
+            bool tooHigh = trackFlags > 0b00011110;
+            bool tooPrecise = trackFlags & 1;
+            if (tooPrecise || tooHigh)
             {
-                trackFlags /= kLegacyBrakeSpeedMultiplier;
-                trackFlags &= 0xF;
+                warningMessage = STR_TRACK_DESIGN_SPEED_UNSERIALIZABLE;
             }
+            if (tooPrecise)
+            {
+                trackFlags += 1;
+            }
+            trackFlags = std::min<uint8_t>(trackFlags, 0b00011111);
+
+            trackFlags /= kLegacyBrakeSpeedMultiplier;
+            trackFlags &= 0xF;
         }
         else
         {
@@ -259,7 +256,8 @@ ResultWithMessage TrackDesign::CreateTrackDesignTrack(TrackDesignState& tds, con
 
         // This warning will not apply to new track design format
         if (track.type == TrackElemType::BlockBrakes
-            && trackElement.element->AsTrack()->GetBrakeBoosterSpeed() != kRCT2DefaultBlockBrakeSpeed)
+            && trackElement.element->AsTrack()->GetBrakeBoosterSpeed() != kRCT2DefaultBlockBrakeSpeed
+            && warningMessage == STR_NONE)
         {
             warningMessage = STR_TRACK_DESIGN_BLOCK_BRAKE_SPEED_RESET;
         }
@@ -1656,7 +1654,7 @@ static GameActions::Result TrackDesignPlaceRide(TrackDesignState& tds, TrackDesi
                 // di
                 int16_t tempZ = newCoords.z - trackCoordinates->z_begin;
                 uint32_t trackColour = (track.flags >> 4) & 0x3;
-                uint32_t brakeSpeed = (track.flags & 0x0F)* kLegacyBrakeSpeedMultiplier;
+                uint32_t brakeSpeed = (track.flags & 0x0F) * kLegacyBrakeSpeedMultiplier;
                 // RCT2-created track designs write brake speed to all tracks; block brake speed must be treated as
                 // garbage data.
                 if (trackType == TrackElemType::BlockBrakes)

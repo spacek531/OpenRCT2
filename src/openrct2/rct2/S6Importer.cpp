@@ -507,7 +507,6 @@ namespace RCT2
             FixLandOwnership();
             FixWater();
             FixAyersRockScenario();
-            UpdateTrackBrakeSpeed();
 
             ResearchDetermineFirstOfType();
             UpdateConsolidatedPatrolAreas();
@@ -1454,13 +1453,13 @@ namespace RCT2
                     else if (TrackTypeHasSpeedSetting(trackType))
                     {
                         auto brakeSpeed = src2->GetBrakeBoosterSpeed() * kLegacyBrakeSpeedMultiplier;
-                        if (dst2->GetTrackType() != TrackElemType::Booster)
+                        if (dst2->GetTrackType() == TrackElemType::Booster)
                         {
-                            dst2->SetBrakeBoosterSpeed(brakeSpeed);
+                            dst2->SetBrakeBoosterSpeed(GetAbsoluteBoosterSpeed(rideType, brakeSpeed));
                         }
                         else
                         {
-                            dst2->SetBrakeBoosterSpeed(GetAbsoluteBoosterSpeed(rideType, brakeSpeed));
+                            dst2->SetBrakeBoosterSpeed(brakeSpeed);
                         }
                     }
                     else if (trackType == TrackElemType::OnRidePhoto)
@@ -2082,13 +2081,18 @@ namespace RCT2
         dst->TrackSubposition = VehicleTrackSubposition{ src->TrackSubposition };
         dst->NumLaps = src->NumLaps;
 
-        if (dst->GetTrackType() == TrackElemType::Booster)
+        dst->brake_speed = src->BrakeSpeed * kLegacyBrakeSpeedMultiplier;
+
+        if ((dst->GetTrackType() == TrackElemType::PoweredLift)
+            || (dst->GetTrackType() == TrackElemType::Flat && dst->GetRide()->type == RIDE_TYPE_REVERSE_FREEFALL_COASTER))
         {
-            dst->brake_speed = GetAbsoluteBoosterSpeed(dst->GetRide()->type, src->BrakeSpeed * kLegacyBrakeSpeedMultiplier);
+            dst->BoosterAcceleration = GetRideTypeDescriptor(ride.Type).OperatingSettings.PoweredLiftAcceleration;
+            dst->SetFlag(VehicleFlags::OnPoweredLift);
         }
-        else
+        else if (dst->GetTrackType() == TrackElemType::Booster)
         {
-            dst->brake_speed = src->BrakeSpeed * 2;
+            dst->brake_speed = GetRideTypeDescriptor(ride.Type).GetAbsoluteBoosterSpeed(dst->brake_speed);
+            dst->BoosterAcceleration = GetRideTypeDescriptor(ride.Type).OperatingSettings.BoosterAcceleration;
         }
 
         dst->lost_time_out = src->LostTimeOut;

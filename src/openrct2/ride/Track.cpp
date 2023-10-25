@@ -910,12 +910,12 @@ void TrackElement::SetIsIndestructible(bool isIndestructible)
 
 uint8_t TrackElement::GetBrakeBoosterSpeed() const
 {
-    return URide.BrakeBoosterSpeed;
+    return URide.BrakeBoosterSpeed & kMaximumBrakeSpeed;
 }
 
 void TrackElement::SetBrakeBoosterSpeed(uint8_t speed)
 {
-    URide.BrakeBoosterSpeed = speed;
+    URide.BrakeBoosterSpeed = speed & kMaximumBrakeSpeed;
 }
 
 bool TrackElement::HasGreenLight() const
