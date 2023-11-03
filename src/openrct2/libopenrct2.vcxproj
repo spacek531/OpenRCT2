@@ -473,6 +473,7 @@
     <ClInclude Include="ride\thrill\meta\GoKarts.h" />
     <ClInclude Include="ride\thrill\meta\LaunchedFreefall.h" />
     <ClInclude Include="ride\thrill\meta\MagicCarpet.h" />
+    <ClInclude Include="ride\thrill\meta\CoasterKart.h" />
     <ClInclude Include="ride\thrill\meta\MotionSimulator.h" />
     <ClInclude Include="ride\thrill\meta\RotoDrop.h" />
     <ClInclude Include="ride\thrill\meta\SwingingInverterShip.h" />

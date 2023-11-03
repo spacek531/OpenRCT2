@@ -25,8 +25,8 @@ constexpr RideTypeDescriptor CoasterKartRTD =
     SET_FIELD(StartTrackPiece, TrackElemType::EndStation),
     SET_FIELD(TrackPaintFunction, GetTrackPaintFunctionMiniRC),
     SET_FIELD(Flags, RIDE_TYPE_FLAGS_TRACK_HAS_3_COLOURS | RIDE_TYPE_FLAG_HAS_LEAVE_WHEN_ANOTHER_VEHICLE_ARRIVES_AT_STATION |
-                     RIDE_TYPE_FLAGS_COMMON_COASTER | RIDE_TYPE_FLAGS_COMMON_COASTER_NON_ALT |
-                     RIDE_TYPE_FLAG_PEEP_CHECK_GFORCES | RIDE_TYPE_FLAG_ALLOW_MULTIPLE_CIRCUITS),
+                     RIDE_TYPE_FLAGS_COMMON_COASTER | RIDE_TYPE_FLAG_SHOW_IN_TRACK_DESIGNER | RIDE_TYPE_FLAG_HAS_ENTRANCE_EXIT |
+                     RIDE_TYPE_FLAG_PEEP_CHECK_GFORCES | RIDE_TYPE_FLAG_ALLOW_MULTIPLE_CIRCUITS | RIDE_TYPE_FLAG_ALL_TRACK_PIECES_HAVE_SPEED | RIDE_TYPE_FLAG_POWERED_VEHICLES_USE_TRACK_SPEED),
     SET_FIELD(RideModes, EnumsToFlags(RideMode::ContinuousCircuit)),
     SET_FIELD(DefaultMode, RideMode::ContinuousCircuit),
     SET_FIELD(OperatingSettings, { 0, 0, 0, 0, 0, 0 }),
@@ -34,8 +34,8 @@ constexpr RideTypeDescriptor CoasterKartRTD =
     SET_FIELD(NameConvention, { RideComponentType::Train, RideComponentType::Track, RideComponentType::Station }),
     SET_FIELD(EnumName, nameof(RIDE_TYPE_MINE_RIDE)), // Update this
     SET_FIELD(AvailableBreakdowns, (1 << BREAKDOWN_SAFETY_CUT_OUT) | (1 << BREAKDOWN_RESTRAINTS_STUCK_CLOSED) | (1 << BREAKDOWN_RESTRAINTS_STUCK_OPEN) | (1 << BREAKDOWN_VEHICLE_MALFUNCTION)),
-    SET_FIELD(Heights, { 13, 24, 9, 11, }), // Update this
-    SET_FIELD(MaxMass, 27), // Update this
+    SET_FIELD(Heights, { 11, 24, 9, 11, }), // Update this
+    SET_FIELD(MaxMass, 27), // Update this?
     SET_FIELD(LiftData, { OpenRCT2::Audio::SoundId::Null, 5, 5 }), // Update this
     SET_FIELD(RatingsMultipliers, { 60, 20, 10 }), // Update this
     SET_FIELD(UpkeepCosts, { 50, 20, 80, 10, 3, 10 }), // Update this

@@ -381,6 +381,7 @@ enum ride_type_flags : uint64_t
                                                                      // track of the water coaster
     RIDE_TYPE_FLAG_NO_VEHICLES = (1uLL << 13),                       // used only by maze, spiral slide and shops
     RIDE_TYPE_FLAG_HAS_LOAD_OPTIONS = (1uLL << 14),
+    RIDE_TYPE_FLAG_ALL_TRACK_PIECES_HAVE_SPEED = (1uLL << 15), // Set by rides where all track pieces of the ride can have a speed value
     RIDE_TYPE_FLAG_VEHICLE_IS_INTEGRAL = (1uLL << 16), // Set by flat rides where the vehicle is integral to the structure, like
     // Merry-go-round and swinging ships. (Contrast with rides like dodgems.)
     RIDE_TYPE_FLAG_IS_SHOP_OR_FACILITY = (1uLL << 17),
@@ -399,6 +400,7 @@ enum ride_type_flags : uint64_t
     RIDE_TYPE_FLAG_CHECK_FOR_STALLING = (1uLL << 27),
     RIDE_TYPE_FLAG_HAS_TRACK = (1uLL << 28),
     RIDE_TYPE_FLAG_ALLOW_EXTRA_TOWER_BASES = (1uLL << 29), // Only set by lift
+    RIDE_TYPE_FLAG_POWERED_VEHICLES_USE_TRACK_SPEED = (1ull << 30), // Powered vehicles use the track speed of pieces they pass over as their powered speed
     RIDE_TYPE_FLAG_SUPPORTS_MULTIPLE_TRACK_COLOUR = (1uLL << 31),
 
     RIDE_TYPE_FLAG_ALLOW_DOORS_ON_TRACK = (1uLL << 32),
