@@ -36,6 +36,8 @@ using track_type_t = uint16_t;
 constexpr uint8_t MAX_ELEMENT_HEIGHT = 255;
 constexpr uint8_t OWNER_MASK = 0b00001111;
 
+enum class TrackVariant : uint16_t;
+
 #pragma pack(push, 1)
 
 struct TileElement;
@@ -425,6 +427,8 @@ public:
 
     bool IsStation() const;
     bool IsBlockStart() const;
+
+    TrackVariant GetVariant() const;
 };
 assert_struct_size(TrackElement, 16);
 

@@ -75,6 +75,20 @@ struct TrackCoordinates
     int16_t y;             // 0x08
 };
 
+enum class TrackVariant : uint16_t
+{
+    Standard = (1 << 0),
+    ChainLift = (1 << 1),
+    BrakesOpen = (1 << 2),
+    BrakesClosed = (1 << 3),
+    CableLift = (1 << 4),
+    LevelCrossing = (1 << 5),
+    TakingPhoto = (1 << 6),
+    Booster = (1 << 7),
+    DriveTires = (1 << 8),
+    Count,
+};
+
 enum
 {
     RCT_PREVIEW_TRACK_FLAG_0 = (1 << 0),

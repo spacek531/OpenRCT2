@@ -14,6 +14,7 @@
 #include "../../paint/Paint.h"
 #include "../../world/Location.hpp"
 #include "../TrackPaint.h"
+#include "../TrackType.h"
 
 #include <cstdint>
 

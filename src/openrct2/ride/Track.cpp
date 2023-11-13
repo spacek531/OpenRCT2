@@ -944,6 +944,20 @@ void TrackElement::SetHighlight(bool on)
         Flags2 |= TRACK_ELEMENT_FLAGS2_HIGHLIGHT;
 }
 
+TrackVariant TrackElement::GetVariant() const
+{
+    if (HasChain())
+        return TrackVariant::ChainLift;
+    if (HasCableLift())
+        return TrackVariant::CableLift;
+    if (IsBrakeClosed())
+        return TrackVariant::BrakesClosed;
+    if (TrackType == TrackElemType::OnRidePhoto && URide.OnridePhotoBits > 0)
+        return TrackVariant::TakingPhoto;
+    // TODO: level crossing
+    return TrackVariant::Standard;
+}
+
 bool TrackTypeMustBeMadeInvisible(ride_type_t rideType, track_type_t trackType, int32_t parkFileVersion)
 {
     // Lots of Log Flumes exist where the downward slopes are simulated by using other track
