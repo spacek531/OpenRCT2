@@ -3418,6 +3418,10 @@ static Vehicle* VehicleCreateCar(
             vehicle->SubType = carIndex == (ride.num_cars_per_train - 1) ? Vehicle::Type::Head : Vehicle::Type::Tail;
             vehicle->SetFlag(VehicleFlags::CarIsReversed);
         }
+        if (ride.HasLifecycleFlag(RIDE_LIFECYCLE_LEGACY_BOOSTER_SPEED))
+        {
+            vehicle->SetFlag(VehicleFlags::LegacyBoosterSpeed);
+        }
     }
 
     // Loc6DDD5E:
@@ -5217,6 +5221,12 @@ void Ride::SetNumCarsPerVehicle(int32_t numCarsPerVehicle)
 void Ride::SetReversedTrains(bool reverseTrains)
 {
     auto rideSetVehicleAction = RideSetVehicleAction(id, RideSetVehicleType::TrainsReversed, reverseTrains);
+    GameActions::Execute(&rideSetVehicleAction);
+}
+
+void Ride::SetLegacyBoosterSpeed(bool useLegacySpeed)
+{
+    auto rideSetVehicleAction = RideSetVehicleAction(id, RideSetVehicleType::LegacyBoosterSpeed, useLegacySpeed);
     GameActions::Execute(&rideSetVehicleAction);
 }
 
