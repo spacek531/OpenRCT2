@@ -218,7 +218,7 @@ static Widget _rideConstructionWidgets[] = {
             ShowGridlines();
 
             _currentTrackPrice = kMoney64Undefined;
-            _currentBrakeSpeed2 = 8;
+            _currentBrakeSpeed = 8;
             _currentSeatRotationAngle = 4;
 
             _currentTrackCurve = currentRide->GetRideTypeDescriptor().StartTrackPiece | RideConstructionSpecialPieceSelected;
@@ -1334,18 +1334,16 @@ static Widget _rideConstructionWidgets[] = {
                     }
                     else
                     {
-                        uint8_t* brakesSpeedPtr = &_currentBrakeSpeed2;
-                        uint8_t maxBrakesSpeed = 30;
-                        uint8_t brakesSpeed = *brakesSpeedPtr + 2;
-                        if (brakesSpeed <= maxBrakesSpeed)
+                        // Increase brake speed
+                        if (_currentBrakeSpeed < kMaximumBrakeSpeed)
                         {
                             if (_rideConstructionState == RideConstructionState::Selected)
                             {
-                                SetBrakeSpeed(brakesSpeed);
+                                SetBrakeSpeed(++_currentBrakeSpeed);
                             }
                             else
                             {
-                                *brakesSpeedPtr = brakesSpeed;
+                                _currentBrakeSpeed++;
                                 WindowRideConstructionUpdateActiveElements();
                             }
                         }
@@ -1361,17 +1359,16 @@ static Widget _rideConstructionWidgets[] = {
                     }
                     else
                     {
-                        uint8_t* brakesSpeedPtr = &_currentBrakeSpeed2;
-                        uint8_t brakesSpeed = *brakesSpeedPtr - 2;
-                        if (brakesSpeed >= 2)
+                        // Decrease brake speed
+                        if (_currentBrakeSpeed - 1 > 0)
                         {
                             if (_rideConstructionState == RideConstructionState::Selected)
                             {
-                                SetBrakeSpeed(brakesSpeed);
+                                SetBrakeSpeed(--_currentBrakeSpeed);
                             }
                             else
                             {
-                                *brakesSpeedPtr = brakesSpeed;
+                                _currentBrakeSpeed--;
                                 WindowRideConstructionUpdateActiveElements();
                             }
                         }
@@ -1449,7 +1446,7 @@ static Widget _rideConstructionWidgets[] = {
                     break;
                 case TrackElemType::BlockBrakes:
                 case TrackElemType::DiagBlockBrakes:
-                    _currentBrakeSpeed2 = kRCT2DefaultBlockBrakeSpeed;
+                    _currentBrakeSpeed = kRCT2DefaultBlockBrakeSpeed;
             }
             _currentTrackCurve = trackPiece | RideConstructionSpecialPieceSelected;
             WindowRideConstructionUpdateActiveElements();
@@ -1507,12 +1504,7 @@ static Widget _rideConstructionWidgets[] = {
 
             if (_currentlyShowingBrakeOrBoosterSpeed)
             {
-                uint16_t brakeSpeed2 = ((_currentBrakeSpeed2 * 9) >> 2) & 0xFFFF;
-                if (TrackTypeIsBooster(_selectedTrackType)
-                    || TrackTypeIsBooster(_currentTrackCurve & ~RideConstructionSpecialPieceSelected))
-                {
-                    brakeSpeed2 = GetBoosterSpeed(currentRide->type, brakeSpeed2);
-                }
+                uint16_t brakeSpeed2 = ((_currentBrakeSpeed * 9) >> 2) & 0xFFFF;
                 ft.Add<uint16_t>(brakeSpeed2);
             }
 
@@ -3048,7 +3040,9 @@ static Widget _rideConstructionWidgets[] = {
             {
                 _selectedTrackType = tileElement->AsTrack()->GetTrackType();
                 if (TrackTypeHasSpeedSetting(tileElement->AsTrack()->GetTrackType()))
-                    _currentBrakeSpeed2 = tileElement->AsTrack()->GetBrakeBoosterSpeed();
+                {
+                    _currentBrakeSpeed = tileElement->AsTrack()->GetBrakeBoosterSpeed();
+                }
                 _currentSeatRotationAngle = tileElement->AsTrack()->GetSeatRotation();
             }
         }
