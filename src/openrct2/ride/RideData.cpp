@@ -454,3 +454,35 @@ TrackDrawerEntry getTrackDrawerEntry(const RideTypeDescriptor& rtd, bool isInver
 
     return descriptor.Regular;
 }
+
+int32_t RideTypeDescriptor::GetRelativeBoosterSpeed(const int32_t& absoluteSpeed) const
+{
+    auto shiftFactor = LegacyBoosterSettings.BoosterSpeedFactor;
+    if (shiftFactor == 0)
+    {
+        return absoluteSpeed;
+    }
+    if (shiftFactor > 0)
+    {
+        return (absoluteSpeed >> shiftFactor);
+    }
+    // Workaround for an issue with older compilers (GCC 6, Clang 4) which would fail the build
+    int8_t shiftFactorAbs = std::abs(shiftFactor);
+    return (absoluteSpeed << shiftFactorAbs);
+}
+
+int32_t RideTypeDescriptor::GetAbsoluteBoosterSpeed(const int32_t& relativeSpeed) const
+{
+    auto shiftFactor = LegacyBoosterSettings.BoosterSpeedFactor;
+    if (shiftFactor == 0)
+    {
+        return relativeSpeed;
+    }
+    if (shiftFactor > 0)
+    {
+        return (relativeSpeed << shiftFactor);
+    }
+    // Workaround for an issue with older compilers (GCC 6, Clang 4) which would fail the build
+    int8_t shiftFactorAbs = std::abs(shiftFactor);
+    return (relativeSpeed >> shiftFactorAbs);
+}
