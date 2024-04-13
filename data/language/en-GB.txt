@@ -3697,6 +3697,10 @@ STR_6622    :Restrict object to the Scenario Editor and Sandbox mode.
 STR_6623    :Type ‘help’ for a list of available commands. Type ‘hide’ to hide the console.
 STR_6624    :Tile Inspector: Sort elements
 STR_6625    :Invalid colour
+STR_6626    :Track speed too high.
+STR_6627    :Track's speed is un-savable in current track design format. Speeds too high are capped to maximum, speeds at invalid intervals are rounded up.
+STR_6628    :Legacy booster speeds
+STR_6629    :Use old methods of getting brake and booster speeds. Not recommended for new work.
 
 #############
 # Scenarios #
