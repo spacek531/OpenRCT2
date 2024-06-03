@@ -55,6 +55,9 @@ namespace OpenRCT2::Scripting
         StationIndex::UnderlyingType currentStation_get() const;
         void currentStation_set(StationIndex::UnderlyingType value);
 
+        uint16_t animation_frame_get() const;
+        void animation_frame_set(uint16_t value);
+
         uint16_t mass_get() const;
         void mass_set(uint16_t value);
 

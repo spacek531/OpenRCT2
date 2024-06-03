@@ -70,6 +70,7 @@ namespace OpenRCT2::Scripting
         dukglue_register_property(ctx, &ScVehicle::mass_get, &ScVehicle::mass_set, "mass");
         dukglue_register_property(ctx, &ScVehicle::acceleration_get, &ScVehicle::acceleration_set, "acceleration");
         dukglue_register_property(ctx, &ScVehicle::velocity_get, &ScVehicle::velocity_set, "velocity");
+        dukglue_register_property(ctx, &ScVehicle::animation_frame_get, &ScVehicle::animation_frame_set, "animationFrame");
         dukglue_register_property(ctx, &ScVehicle::bankRotation_get, &ScVehicle::bankRotation_set, "bankRotation");
         dukglue_register_property(ctx, &ScVehicle::isReversed_get, &ScVehicle::isReversed_set, "isReversed");
         dukglue_register_property(ctx, &ScVehicle::colours_get, &ScVehicle::colours_set, "colours");
@@ -270,6 +271,21 @@ namespace OpenRCT2::Scripting
         if (vehicle != nullptr)
         {
             vehicle->current_station = StationIndex::FromUnderlying(value);
+        }
+    }
+
+    uint16_t ScVehicle::animation_frame_get() const
+    {
+        auto vehicle = GetVehicle();
+        return vehicle != nullptr ? vehicle->animation_frame : 0;
+    }
+    void ScVehicle::animation_frame_set(uint16_t value)
+    {
+        ThrowIfGameStateNotMutable();
+        auto vehicle = GetVehicle();
+        if (vehicle != nullptr)
+        {
+            vehicle->animation_frame = value;
         }
     }
 
