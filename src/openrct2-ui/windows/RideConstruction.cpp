@@ -2351,7 +2351,8 @@ namespace OpenRCT2::Ui::Windows
             Direction currentDirection = _currentTrackPieceDirection;
             OpenRCT2::TrackElemType type = _currentTrackPieceType;
             auto newCoords = GetTrackElementOriginAndApplyChanges(
-                { _currentTrackBegin, static_cast<Direction>(direction & 3) }, type, 0, &tileElement, 0);
+                { _currentTrackBegin, static_cast<Direction>(direction & 3) }, GetSimplifiedTrackType(type),
+                GetTrackArchetype(type), 0, &tileElement, 0);
             if (!newCoords.has_value())
             {
                 WindowRideConstructionUpdateActiveElements();
@@ -2382,7 +2383,8 @@ namespace OpenRCT2::Ui::Windows
                 direction = _currentTrackPieceDirection;
                 type = _currentTrackPieceType;
                 newCoords = GetTrackElementOriginAndApplyChanges(
-                    { _currentTrackBegin, static_cast<Direction>(direction & 3) }, type, 0, &tileElement, 0);
+                    { _currentTrackBegin, static_cast<Direction>(direction & 3) }, GetSimplifiedTrackType(type),
+                    GetTrackArchetype(type), 0, &tileElement, 0);
 
                 if (!newCoords.has_value())
                 {
@@ -2510,8 +2512,9 @@ namespace OpenRCT2::Ui::Windows
             TileElement* tileElement;
 
             if (GetTrackElementOriginAndApplyChanges(
-                    { _currentTrackBegin, static_cast<Direction>(_currentTrackPieceDirection & 3) }, _currentTrackPieceType, 0,
-                    &tileElement, 0)
+                    { _currentTrackBegin, static_cast<Direction>(_currentTrackPieceDirection & 3) },
+                    GetSimplifiedTrackType(_currentTrackPieceType), GetTrackArchetype(_currentTrackPieceType), 0, &tileElement,
+                    0)
                 != std::nullopt)
             {
                 auto trackSetBrakeSpeed = TrackSetBrakeSpeedAction(
@@ -2565,8 +2568,9 @@ namespace OpenRCT2::Ui::Windows
         void RideSelectedTrackSetSeatRotation(int32_t seatRotation)
         {
             GetTrackElementOriginAndApplyChanges(
-                { _currentTrackBegin, static_cast<Direction>(_currentTrackPieceDirection & 3) }, _currentTrackPieceType,
-                seatRotation, nullptr, TRACK_ELEMENT_SET_SEAT_ROTATION);
+                { _currentTrackBegin, static_cast<Direction>(_currentTrackPieceDirection & 3) },
+                GetSimplifiedTrackType(_currentTrackPieceType), GetTrackArchetype(_currentTrackPieceType), seatRotation,
+                nullptr, TRACK_ELEMENT_SET_SEAT_ROTATION);
             WindowRideConstructionUpdateActiveElements();
         }
 
@@ -3089,8 +3093,9 @@ namespace OpenRCT2::Ui::Windows
         {
             TileElement* tileElement;
             if (GetTrackElementOriginAndApplyChanges(
-                    { _currentTrackBegin, static_cast<Direction>(_currentTrackPieceDirection & 3) }, _currentTrackPieceType, 0,
-                    &tileElement, 0)
+                    { _currentTrackBegin, static_cast<Direction>(_currentTrackPieceDirection & 3) },
+                    GetSimplifiedTrackType(_currentTrackPieceType), GetTrackArchetype(_currentTrackPieceType), 0, &tileElement,
+                    0)
                 != std::nullopt)
             {
                 _selectedTrackType = tileElement->AsTrack()->GetTrackType();
@@ -3212,7 +3217,8 @@ namespace OpenRCT2::Ui::Windows
                 uint16_t flags = _currentTrackSelectionFlags & TRACK_SELECTION_FLAG_ARROW ? TRACK_ELEMENT_SET_HIGHLIGHT_TRUE
                                                                                           : TRACK_ELEMENT_SET_HIGHLIGHT_FALSE;
                 auto newCoords = GetTrackElementOriginAndApplyChanges(
-                    { _currentTrackBegin, static_cast<Direction>(direction) }, type, 0, nullptr, flags);
+                    { _currentTrackBegin, static_cast<Direction>(direction) }, GetSimplifiedTrackType(type),
+                    GetTrackArchetype(type), 0, nullptr, flags);
                 if (!newCoords.has_value())
                 {
                     RideConstructionRemoveGhosts();

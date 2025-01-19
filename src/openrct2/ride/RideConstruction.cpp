@@ -377,14 +377,14 @@ void RideClearBlockedTiles(const Ride& ride)
  * bp : flags
  */
 std::optional<CoordsXYZ> GetTrackElementOriginAndApplyChanges(
-    const CoordsXYZD& location, OpenRCT2::TrackElemType type, uint16_t extra_params, TileElement** output_element,
-    uint16_t flags)
+    const CoordsXYZD& location, OpenRCT2::TrackElemType type, OpenRCT2::TrackArchetype archetype, uint16_t extra_params,
+    TileElement** output_element, uint16_t flags)
 {
     // Find the relevant track piece, prefer sequence 0 (this ensures correct behaviour for diagonal track pieces)
-    auto trackElement = MapGetTrackElementAtOfTypeSeq(location, type, 0);
+    auto trackElement = MapGetTrackElementAtOfTypeSeqArchetype(location, type, archetype, 0);
     if (trackElement == nullptr)
     {
-        trackElement = MapGetTrackElementAtOfType(location, type);
+        trackElement = MapGetTrackElementAtOfTypeArchetype(location, type, archetype);
         if (trackElement == nullptr)
         {
             return std::nullopt;
@@ -423,7 +423,8 @@ std::optional<CoordsXYZ> GetTrackElementOriginAndApplyChanges(
 
         MapInvalidateTileFull(cur);
 
-        trackElement = MapGetTrackElementAtOfTypeSeq({ cur, cur_z, static_cast<Direction>(location.direction) }, type, i);
+        trackElement = MapGetTrackElementAtOfTypeSeqArchetype(
+            { cur, cur_z, static_cast<Direction>(location.direction) }, type, archetype, i);
         if (trackElement == nullptr)
         {
             return std::nullopt;
@@ -502,8 +503,9 @@ void RideConstructionInvalidateCurrentTrack()
     {
         case RideConstructionState::Selected:
             GetTrackElementOriginAndApplyChanges(
-                { _currentTrackBegin, static_cast<Direction>(_currentTrackPieceDirection & 3) }, _currentTrackPieceType, 0,
-                nullptr, TRACK_ELEMENT_SET_HIGHLIGHT_FALSE);
+                { _currentTrackBegin, static_cast<Direction>(_currentTrackPieceDirection & 3) },
+                GetSimplifiedTrackType(_currentTrackPieceType), GetTrackArchetype(_currentTrackPieceType), 0, nullptr,
+                TRACK_ELEMENT_SET_HIGHLIGHT_FALSE);
             break;
         case RideConstructionState::MazeBuild:
         case RideConstructionState::MazeMove:
@@ -707,7 +709,8 @@ void RideSelectNextSection()
         auto type = _currentTrackPieceType;
         TileElement* tileElement;
         auto newCoords = GetTrackElementOriginAndApplyChanges(
-            { _currentTrackBegin, static_cast<Direction>(direction & 3) }, type, 0, &tileElement, 0);
+            { _currentTrackBegin, static_cast<Direction>(direction & 3) }, GetSimplifiedTrackType(type),
+            GetTrackArchetype(type), 0, &tileElement, 0);
         if (!newCoords.has_value())
         {
             _rideConstructionState = RideConstructionState::State0;
@@ -765,7 +768,8 @@ void RideSelectPreviousSection()
         auto type = _currentTrackPieceType;
         TileElement* tileElement;
         auto newCoords = GetTrackElementOriginAndApplyChanges(
-            { _currentTrackBegin, static_cast<Direction>(direction & 3) }, type, 0, &tileElement, 0);
+            { _currentTrackBegin, static_cast<Direction>(direction & 3) }, GetSimplifiedTrackType(type),
+            GetTrackArchetype(type), 0, &tileElement, 0);
         if (newCoords == std::nullopt)
         {
             _rideConstructionState = RideConstructionState::State0;
@@ -980,7 +984,8 @@ bool RideModify(const CoordsXYE& input)
     auto tileCoords = CoordsXYZ{ tileElement, tileElement.element->GetBaseZ() };
     auto direction = tileElement.element->GetDirection();
     auto type = tileElement.element->AsTrack()->GetTrackType();
-    auto newCoords = GetTrackElementOriginAndApplyChanges({ tileCoords, direction }, type, 0, nullptr, 0);
+    auto newCoords = GetTrackElementOriginAndApplyChanges(
+        { tileCoords, direction }, GetSimplifiedTrackType(type), GetTrackArchetype(type), 0, nullptr, 0);
     if (!newCoords.has_value())
         return false;
 

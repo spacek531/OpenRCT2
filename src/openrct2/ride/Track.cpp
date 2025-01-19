@@ -566,7 +566,9 @@ TrackElement* TrackGetPreviousBlock(CoordsXYZ& location, TileElement* tileElemen
 
     // Get the start of the track block instead of the end
     location = { trackBeginEnd.begin_x, trackBeginEnd.begin_y, trackBeginEnd.begin_z };
-    auto trackOrigin = MapGetTrackElementAtOfTypeSeq(location, trackBeginEnd.begin_element->AsTrack()->GetTrackType(), 0);
+    auto trackOrigin = MapGetTrackElementAtOfTypeSeqArchetype(
+        location, GetSimplifiedTrackType(trackBeginEnd.begin_element->AsTrack()->GetTrackType()), GetTrackArchetype(trackBeginEnd.begin_element->AsTrack()->GetTrackType()),
+        0);
     if (trackOrigin == nullptr)
     {
         return nullptr;
@@ -777,4 +779,79 @@ std::optional<CoordsXYZD> GetTrackSegmentOrigin(const CoordsXYE& posEl)
     coords.z -= trackBlock.z;
 
     return CoordsXYZD(coords, direction);
+}
+
+TrackArchetype GetTrackArchetype(TrackElemType trackType)
+{
+    TrackArchetype archetype;
+    archetype = TrackArchetype::normal;
+    if (TrackTypeIsBrakes(trackType))
+        archetype = TrackArchetype::brake;
+    if (TrackTypeIsBlockBrakes(trackType))
+        archetype = TrackArchetype::blockBrake;
+    if (TrackTypeIsBooster(trackType))
+        archetype = TrackArchetype::booster;
+    if (TrackElementIsCovered(trackType))
+        archetype = static_cast<TrackArchetype>(EnumValue(archetype) + EnumValue(TrackArchetype::covered));
+
+    return archetype;
+}
+
+TrackElemType GetSimplifiedTrackType(TrackElemType trackType)
+{
+    switch (trackType)
+    {
+        case TrackElemType::Booster:
+        case TrackElemType::Brakes:
+        case TrackElemType::BlockBrakes:
+        case TrackElemType::FlatCovered:
+            return TrackElemType::Flat;
+
+        case TrackElemType::DiagBooster:
+        case TrackElemType::DiagBrakes:
+        case TrackElemType::DiagBlockBrakes:
+            return TrackElemType::DiagFlat;
+
+        case TrackElemType::Down25Brakes:
+        case TrackElemType::Down25Covered:
+            return TrackElemType::Down25;
+
+        case TrackElemType::Up25Covered:
+            return TrackElemType::Up25;
+        case TrackElemType::Up60Covered:
+            return TrackElemType::Up60;
+        case TrackElemType::FlatToUp25Covered:
+            return TrackElemType::FlatToUp25;
+        case TrackElemType::Up25ToUp60Covered:
+            return TrackElemType::Up25ToUp60;
+        case TrackElemType::Up60ToUp25Covered:
+            return TrackElemType::Up60ToUp25;
+        case TrackElemType::Up25ToFlatCovered:
+            return TrackElemType::Up25ToFlat;
+        case TrackElemType::Down60Covered:
+            return TrackElemType::Down60;
+        case TrackElemType::FlatToDown25Covered:
+            return TrackElemType::FlatToDown25;
+        case TrackElemType::Down25ToDown60Covered:
+            return TrackElemType::Down25ToDown60;
+        case TrackElemType::Down60ToDown25Covered:
+            return TrackElemType::Down60ToDown25;
+        case TrackElemType::Down25ToFlatCovered:
+            return TrackElemType::Down25ToFlat;
+        case TrackElemType::LeftQuarterTurn5TilesCovered:
+            return TrackElemType::LeftQuarterTurn5Tiles;
+        case TrackElemType::RightQuarterTurn5TilesCovered:
+            return TrackElemType::RightQuarterTurn5Tiles;
+        case TrackElemType::SBendLeftCovered:
+            return TrackElemType::SBendLeft;
+        case TrackElemType::SBendRightCovered:
+            return TrackElemType::SBendRight;
+        case TrackElemType::LeftQuarterTurn3TilesCovered:
+            return TrackElemType::LeftQuarterTurn3Tiles;
+        case TrackElemType::RightQuarterTurn3TilesCovered:
+            return TrackElemType::RightQuarterTurn3Tiles;
+
+        default:
+            return trackType;
+    }
 }

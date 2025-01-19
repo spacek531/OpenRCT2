@@ -18,7 +18,8 @@ enum class RideColourScheme : uint8_t;
 namespace OpenRCT2
 {
     enum class TrackElemType : uint16_t;
-}
+    enum class TrackArchetype : uint8_t;
+} // namespace OpenRCT2
 
 enum
 {

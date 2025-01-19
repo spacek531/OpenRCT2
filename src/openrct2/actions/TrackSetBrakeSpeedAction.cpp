@@ -64,7 +64,8 @@ GameActions::Result TrackSetBrakeSpeedAction::QueryExecute(bool isExecuting) con
         return GameActions::Result(GameActions::Status::InvalidParameters, STR_CANT_CHANGE_THIS, STR_OFF_EDGE_OF_MAP);
     }
 
-    TileElement* tileElement = MapGetTrackElementAtOfType(_loc, _trackType);
+    TileElement* tileElement = MapGetTrackElementAtOfTypeArchetype(
+        _loc, GetSimplifiedTrackType(_trackType), GetTrackArchetype(_trackType));
     if (tileElement == nullptr)
     {
         LOG_ERROR("Track element of type %u not found at x = %d, y = %d, z = %d", _trackType, _loc.x, _loc.y, _loc.z);
@@ -80,8 +81,10 @@ GameActions::Result TrackSetBrakeSpeedAction::QueryExecute(bool isExecuting) con
 
     if (isExecuting)
     {
+        // TODO: Update this after proof-of-concept
         GetTrackElementOriginAndApplyChanges(
-            { _loc, tileElement->GetDirection() }, tileElement->AsTrack()->GetTrackType(), _brakeSpeed, nullptr,
+            { _loc, tileElement->GetDirection() }, GetSimplifiedTrackType(tileElement->AsTrack()->GetTrackType()),
+            GetTrackArchetype(tileElement->AsTrack()->GetTrackType()), _brakeSpeed, nullptr,
             TRACK_ELEMENT_SET_BRAKE_BOOSTER_SPEED);
     }
     return res;

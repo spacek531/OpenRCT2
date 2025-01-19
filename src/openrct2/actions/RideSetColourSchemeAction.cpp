@@ -54,7 +54,8 @@ GameActions::Result RideSetColourSchemeAction::Query() const
         return GameActions::Result(GameActions::Status::InvalidParameters, STR_CANT_SET_COLOUR_SCHEME, STR_OFF_EDGE_OF_MAP);
     }
     // Find the relevant track piece, prefer sequence 0 (logic copied from GetTrackElementOriginAndApplyChanges)
-    auto trackElement = MapGetTrackElementAtOfTypeSeq(_loc, _trackType, 0);
+    auto trackElement = MapGetTrackElementAtOfTypeSeqArchetype(
+        _loc, GetSimplifiedTrackType(_trackType), GetTrackArchetype(_trackType), 0);
     if (trackElement == nullptr)
     {
         trackElement = MapGetTrackElementAtOfType(_loc, _trackType);
@@ -77,8 +78,10 @@ GameActions::Result RideSetColourSchemeAction::Execute() const
     GameActions::Result res = GameActions::Result();
     res.Expenditure = ExpenditureType::RideConstruction;
     res.ErrorTitle = STR_CANT_SET_COLOUR_SCHEME;
-
-    GetTrackElementOriginAndApplyChanges(_loc, _trackType, _newColourScheme, nullptr, TRACK_ELEMENT_SET_COLOUR_SCHEME);
+    // TODO: Update this after proof-of-concept
+    GetTrackElementOriginAndApplyChanges(
+        _loc, GetSimplifiedTrackType(_trackType), GetTrackArchetype(_trackType), _newColourScheme, nullptr,
+        TRACK_ELEMENT_SET_COLOUR_SCHEME);
 
     return res;
 }

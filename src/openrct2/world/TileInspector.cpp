@@ -42,6 +42,8 @@ TileCoordsXY windowTileInspectorTile;
 int32_t windowTileInspectorElementCount = 0;
 int32_t windowTileInspectorSelectedIndex = -1;
 
+using TrackArchetype = uint8_t;
+
 using namespace OpenRCT2::TrackMetaData;
 
 namespace OpenRCT2::TileInspector
@@ -753,7 +755,8 @@ namespace OpenRCT2::TileInspector
                 offsets.y = trackBlock2.y;
                 elem += offsets.Rotate(originDirection);
 
-                TrackElement* nextTrackElement = MapGetTrackElementAtOfTypeSeq(elem, type, i);
+                TrackElement* nextTrackElement = MapGetTrackElementAtOfTypeSeqArchetype(
+                    elem, GetSimplifiedTrackType(type), GetTrackArchetype(type), i);
                 if (nextTrackElement == nullptr)
                 {
                     LOG_ERROR("Track map element part not found!");
@@ -835,7 +838,8 @@ namespace OpenRCT2::TileInspector
                 offsets.y = trackBlock2.y;
                 elem += offsets.Rotate(originDirection);
 
-                TrackElement* nextTrackElement = MapGetTrackElementAtOfTypeSeq(elem, type, i);
+                TrackElement* nextTrackElement = MapGetTrackElementAtOfTypeSeqArchetype(
+                    elem, GetSimplifiedTrackType(type), GetTrackArchetype(type), i);
                 if (nextTrackElement == nullptr)
                 {
                     LOG_ERROR("Track map element part not found!");

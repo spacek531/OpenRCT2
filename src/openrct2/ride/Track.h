@@ -619,7 +619,16 @@ namespace OpenRCT2
 
         None = 65535,
     };
-}
+
+    enum class TrackArchetype : uint8_t
+    {
+        normal = 0,
+        brake = 1,
+        booster = 2,
+        blockBrake = 3,
+        covered = 8,
+    };
+} // namespace OpenRCT2
 
 enum
 {
@@ -725,8 +734,8 @@ bool TrackTypeIsBlockBrakes(OpenRCT2::TrackElemType trackType);
 bool TrackTypeIsBooster(OpenRCT2::TrackElemType trackType);
 
 std::optional<CoordsXYZ> GetTrackElementOriginAndApplyChanges(
-    const CoordsXYZD& location, OpenRCT2::TrackElemType type, uint16_t extra_params, TileElement** output_element,
-    uint16_t flags);
+    const CoordsXYZD& location, OpenRCT2::TrackElemType type, OpenRCT2::TrackArchetype, uint16_t extra_params,
+    TileElement** output_element, uint16_t flags);
 
 TrackRoll TrackGetActualBank(TileElement* tileElement, TrackRoll bank);
 TrackRoll TrackGetActualBank2(ride_type_t rideType, bool isInverted, TrackRoll bank);
@@ -738,3 +747,6 @@ ResultWithMessage TrackRemoveStationElement(const CoordsXYZD& loc, RideId rideIn
 bool TrackTypeHasSpeedSetting(OpenRCT2::TrackElemType trackType);
 bool TrackTypeIsHelix(OpenRCT2::TrackElemType trackType);
 std::optional<CoordsXYZD> GetTrackSegmentOrigin(const CoordsXYE& posEl);
+
+OpenRCT2::TrackArchetype GetTrackArchetype(OpenRCT2::TrackElemType trackType);
+OpenRCT2::TrackElemType GetSimplifiedTrackType(OpenRCT2::TrackElemType trackType);

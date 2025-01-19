@@ -2397,6 +2397,7 @@ void Vehicle::TestReset()
 // Therefore, it will return true if anything is amiss.
 bool Vehicle::CurrentTowerElementIsTop()
 {
+    // I don't think this check needs updating to archetype. That would be a *very* obscure hack.
     TileElement* tileElement = MapGetTrackElementAtOfType(TrackLocation, GetTrackType());
     if (tileElement == nullptr)
         return true;
@@ -5508,7 +5509,8 @@ void Vehicle::CheckAndApplyBlockSectionStopSite()
 
     auto trackType = GetTrackType();
 
-    TileElement* trackElement = MapGetTrackElementAtOfType(TrackLocation, trackType);
+    TileElement* trackElement = MapGetTrackElementAtOfTypeArchetype(
+        TrackLocation, GetSimplifiedTrackType(trackType), GetTrackArchetype(trackType));
 
     if (trackElement == nullptr)
     {
@@ -5621,7 +5623,9 @@ static void block_brakes_open_previous_section(
 
     // Get the start of the track block instead of the end
     location = { trackBeginEnd.begin_x, trackBeginEnd.begin_y, trackBeginEnd.begin_z };
-    auto trackOrigin = MapGetTrackElementAtOfTypeSeq(location, trackBeginEnd.begin_element->AsTrack()->GetTrackType(), 0);
+    auto trackOrigin = MapGetTrackElementAtOfTypeSeqArchetype(
+        location, GetSimplifiedTrackType(trackBeginEnd.begin_element->AsTrack()->GetTrackType()), GetTrackArchetype(trackBeginEnd.begin_element->AsTrack()->GetTrackType()),
+        0);
     if (trackOrigin == nullptr)
     {
         return;
@@ -6016,9 +6020,7 @@ void Vehicle::UpdateAnimationAnimalFlying()
 
     if (animation_frame == 0)
     {
-        auto trackType = GetTrackType();
-        TileElement* trackElement = MapGetTrackElementAtOfTypeSeq(TrackLocation, trackType, 0);
-        if (trackElement != nullptr && trackElement->AsTrack()->HasChain())
+        if (HasFlag(VehicleFlags::OnLiftHill))
         {
             // start flapping, bird
             animation_frame = 1;
@@ -6764,7 +6766,8 @@ void Vehicle::Sub6DBF3E()
     TileElement* tileElement = nullptr;
     if (MapIsLocationValid(TrackLocation))
     {
-        tileElement = MapGetTrackElementAtOfTypeSeq(TrackLocation, trackType, 0);
+        tileElement = MapGetTrackElementAtOfTypeSeqArchetype(
+            TrackLocation, GetSimplifiedTrackType(trackType), GetTrackArchetype(trackType), 0);
     }
 
     if (tileElement == nullptr)
@@ -6840,7 +6843,8 @@ uint8_t Vehicle::ChooseBrakeSpeed() const
 {
     if (!TrackTypeIsBrakes(GetTrackType()))
         return brake_speed;
-    auto trackElement = MapGetTrackElementAtOfTypeSeq(TrackLocation, GetTrackType(), 0);
+    auto trackElement = MapGetTrackElementAtOfTypeSeqArchetype(
+        TrackLocation, GetSimplifiedTrackType(GetTrackType()), GetTrackArchetype(GetTrackType()), 0);
     if (trackElement != nullptr)
     {
         if (trackElement->AsTrack()->IsBrakeClosed())
@@ -6896,7 +6900,8 @@ bool Vehicle::UpdateTrackMotionForwardsGetNewTrack(
     CoordsXYZD location = {};
 
     auto pitchAndRollEnd = TrackPitchAndRollEnd(trackType);
-    TileElement* tileElement = MapGetTrackElementAtOfTypeSeq(TrackLocation, trackType, 0);
+    TileElement* tileElement = MapGetTrackElementAtOfTypeSeqArchetype(
+        TrackLocation, GetSimplifiedTrackType(trackType), GetTrackArchetype(trackType), 0);
 
     if (tileElement == nullptr)
     {
@@ -7330,7 +7335,8 @@ static PitchAndRoll PitchAndRollEnd(
 bool Vehicle::UpdateTrackMotionBackwardsGetNewTrack(TrackElemType trackType, const Ride& curRide, uint16_t* progress)
 {
     auto pitchAndRollStart = TrackPitchAndRollStart(trackType);
-    TileElement* tileElement = MapGetTrackElementAtOfTypeSeq(TrackLocation, trackType, 0);
+    TileElement* tileElement = MapGetTrackElementAtOfTypeSeqArchetype(
+        TrackLocation, GetSimplifiedTrackType(trackType), GetTrackArchetype(trackType), 0);
 
     if (tileElement == nullptr)
         return false;
@@ -7852,7 +7858,8 @@ Loc6DC462:
         uint16_t trackTotalProgress = GetTrackProgress();
         if (track_progress + 1 >= trackTotalProgress)
         {
-            tileElement = MapGetTrackElementAtOfTypeSeq(TrackLocation, GetTrackType(), 0);
+            tileElement = MapGetTrackElementAtOfTypeSeqArchetype(
+                TrackLocation, GetSimplifiedTrackType(GetTrackType()), GetTrackArchetype(GetTrackType()), 0);
             {
                 CoordsXYE output;
                 int32_t outZ{};
@@ -8047,7 +8054,8 @@ Loc6DC462:
 Loc6DCA9A:
     if (track_progress == 0)
     {
-        tileElement = MapGetTrackElementAtOfTypeSeq(TrackLocation, GetTrackType(), 0);
+        tileElement = MapGetTrackElementAtOfTypeSeqArchetype(
+            TrackLocation, GetSimplifiedTrackType(GetTrackType()), GetTrackArchetype(GetTrackType()), 0);
         {
             TrackBeginEnd trackBeginEnd;
             if (!TrackBlockGetPrevious({ TrackLocation, tileElement }, &trackBeginEnd))
@@ -8744,7 +8752,9 @@ void Vehicle::UpdateCrossings() const
     int32_t direction{};
 
     CoordsXYE xyElement = { frontVehicle->TrackLocation,
-                            MapGetTrackElementAtOfTypeSeq(frontVehicle->TrackLocation, frontVehicle->GetTrackType(), 0) };
+                            MapGetTrackElementAtOfTypeSeqArchetype(
+                                frontVehicle->TrackLocation, GetSimplifiedTrackType(frontVehicle->GetTrackType()), GetTrackArchetype(frontVehicle->GetTrackType()),
+                                0) };
     int32_t curZ = frontVehicle->TrackLocation.z;
 
     if (xyElement.element != nullptr && status != Vehicle::Status::Arriving)
@@ -8812,7 +8822,9 @@ void Vehicle::UpdateCrossings() const
     }
 
     xyElement = { backVehicle->TrackLocation,
-                  MapGetTrackElementAtOfTypeSeq(backVehicle->TrackLocation, backVehicle->GetTrackType(), 0) };
+                  MapGetTrackElementAtOfTypeSeqArchetype(
+                      backVehicle->TrackLocation, GetSimplifiedTrackType(backVehicle->GetTrackType()), GetTrackArchetype(backVehicle->GetTrackType()),
+                      0) };
     if (xyElement.element == nullptr)
     {
         return;

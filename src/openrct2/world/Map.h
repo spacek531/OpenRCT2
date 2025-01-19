@@ -61,7 +61,8 @@ enum class TileElementType : uint8_t;
 namespace OpenRCT2
 {
     enum class TrackElemType : uint16_t;
-}
+    enum class TrackArchetype : uint8_t;
+} // namespace OpenRCT2
 
 struct CoordsXYE : public CoordsXY
 {
@@ -241,9 +242,15 @@ std::optional<CoordsXYZ> MapLargeSceneryGetOrigin(
 
 TrackElement* MapGetTrackElementAt(const CoordsXYZ& trackPos);
 TileElement* MapGetTrackElementAtOfType(const CoordsXYZ& trackPos, OpenRCT2::TrackElemType trackType);
-TileElement* MapGetTrackElementAtOfTypeSeq(const CoordsXYZ& trackPos, OpenRCT2::TrackElemType trackType, int32_t sequence);
+TileElement* MapGetTrackElementAtOfTypeArchetype(
+    const CoordsXYZ& trackPos, OpenRCT2::TrackElemType trackType, OpenRCT2::TrackArchetype archetype);
+TileElement* MapGetTrackElementAtOfTypeSeqArchetype(
+    const CoordsXYZ& trackPos, OpenRCT2::TrackElemType trackType, OpenRCT2::TrackArchetype archetype, int32_t sequence);
 TrackElement* MapGetTrackElementAtOfType(const CoordsXYZD& location, OpenRCT2::TrackElemType trackType);
-TrackElement* MapGetTrackElementAtOfTypeSeq(const CoordsXYZD& location, OpenRCT2::TrackElemType trackType, int32_t sequence);
+TrackElement* MapGetTrackElementAtOfTypeArchetype(
+    const CoordsXYZD& location, OpenRCT2::TrackElemType trackType, OpenRCT2::TrackArchetype archetype);
+TrackElement* MapGetTrackElementAtOfTypeSeqArchetype(
+    const CoordsXYZD& location, OpenRCT2::TrackElemType trackType, OpenRCT2::TrackArchetype archetype, int32_t sequence);
 TileElement* MapGetTrackElementAtOfTypeFromRide(const CoordsXYZ& trackPos, OpenRCT2::TrackElemType trackType, RideId rideIndex);
 TileElement* MapGetTrackElementAtFromRide(const CoordsXYZ& trackPos, RideId rideIndex);
 TileElement* MapGetTrackElementAtWithDirectionFromRide(const CoordsXYZD& trackPos, RideId rideIndex);

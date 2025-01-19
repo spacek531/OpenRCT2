@@ -1930,12 +1930,42 @@ TileElement* MapGetTrackElementAtOfType(const CoordsXYZ& trackPos, OpenRCT2::Tra
 }
 
 /**
+ * Gets the track element at x, y, z that is the given track type.
+ * @param x x units, not tiles.
+ * @param y y units, not tiles.
+ * @param z Base height.
+ */
+TileElement* MapGetTrackElementAtOfTypeArchetype(const CoordsXYZ& trackPos, OpenRCT2::TrackElemType trackType, OpenRCT2::TrackArchetype archetype)
+{
+    TileElement* tileElement = MapGetFirstElementAt(trackPos);
+    if (tileElement == nullptr)
+        return nullptr;
+    auto trackTilePos = TileCoordsXYZ{ trackPos };
+    do
+    {
+        if (tileElement->GetType() != TileElementType::Track)
+            continue;
+        if (tileElement->BaseHeight != trackTilePos.z)
+            continue;
+        if (GetSimplifiedTrackType(tileElement->AsTrack()->GetTrackType()) != trackType)
+            continue;
+        if (GetTrackArchetype(tileElement->AsTrack()->GetTrackType()) != archetype)
+            continue;
+
+        return tileElement;
+    } while (!(tileElement++)->IsLastForTile());
+
+    return nullptr;
+}
+
+/**
  * Gets the track element at x, y, z that is the given track type and sequence.
  * @param x x units, not tiles.
  * @param y y units, not tiles.
  * @param z Base height.
  */
-TileElement* MapGetTrackElementAtOfTypeSeq(const CoordsXYZ& trackPos, OpenRCT2::TrackElemType trackType, int32_t sequence)
+TileElement* MapGetTrackElementAtOfTypeSeqArchetype(
+    const CoordsXYZ& trackPos, OpenRCT2::TrackElemType trackType, OpenRCT2::TrackArchetype archetype, int32_t sequence)
 {
     TileElement* tileElement = MapGetFirstElementAt(trackPos);
     auto trackTilePos = TileCoordsXYZ{ trackPos };
@@ -1947,9 +1977,11 @@ TileElement* MapGetTrackElementAtOfTypeSeq(const CoordsXYZ& trackPos, OpenRCT2::
             continue;
         if (tileElement->BaseHeight != trackTilePos.z)
             continue;
-        if (tileElement->AsTrack()->GetTrackType() != trackType)
+        if (GetSimplifiedTrackType(tileElement->AsTrack()->GetTrackType()) != trackType)
             continue;
         if (tileElement->AsTrack()->GetSequenceIndex() != sequence)
+            continue;
+        if (GetTrackArchetype(tileElement->AsTrack()->GetTrackType()) != archetype)
             continue;
 
         return tileElement;
@@ -1981,7 +2013,7 @@ TrackElement* MapGetTrackElementAtOfType(const CoordsXYZD& location, OpenRCT2::T
     return nullptr;
 }
 
-TrackElement* MapGetTrackElementAtOfTypeSeq(const CoordsXYZD& location, OpenRCT2::TrackElemType trackType, int32_t sequence)
+TrackElement* MapGetTrackElementAtOfTypeArchetype(const CoordsXYZD& location, OpenRCT2::TrackElemType trackType, OpenRCT2::TrackArchetype archetype)
 {
     auto tileElement = MapGetFirstElementAt(location);
     if (tileElement != nullptr)
@@ -1995,9 +2027,37 @@ TrackElement* MapGetTrackElementAtOfTypeSeq(const CoordsXYZD& location, OpenRCT2
                     continue;
                 if (trackElement->GetDirection() != location.direction)
                     continue;
-                if (trackElement->GetTrackType() != trackType)
+                if (GetSimplifiedTrackType(tileElement->AsTrack()->GetTrackType()) != trackType)
+                    continue;
+                if (GetTrackArchetype(tileElement->AsTrack()->GetTrackType()) != archetype)
+                    continue;
+                return trackElement;
+            }
+        } while (!(tileElement++)->IsLastForTile());
+    }
+    return nullptr;
+}
+
+TrackElement* MapGetTrackElementAtOfTypeSeqArchetype(
+    const CoordsXYZD& location, OpenRCT2::TrackElemType trackType, OpenRCT2::TrackArchetype archetype, int32_t sequence)
+{
+    auto tileElement = MapGetFirstElementAt(location);
+    if (tileElement != nullptr)
+    {
+        do
+        {
+            auto trackElement = tileElement->AsTrack();
+            if (trackElement != nullptr)
+            {
+                if (trackElement->GetBaseZ() != location.z)
+                    continue;
+                if (trackElement->GetDirection() != location.direction)
+                    continue;
+                if (GetSimplifiedTrackType(tileElement->AsTrack()->GetTrackType()) != trackType)
                     continue;
                 if (trackElement->GetSequenceIndex() != sequence)
+                    continue;
+                if (GetTrackArchetype(tileElement->AsTrack()->GetTrackType()) != archetype)
                     continue;
                 return trackElement;
             }

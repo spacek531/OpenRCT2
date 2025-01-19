@@ -78,7 +78,7 @@ DukValue ScTrackIterator::previousPosition_get() const
     const auto& seq0 = ted.sequences[0].clearance;
     auto pos = _position + CoordsXYZ(seq0.x, seq0.y, seq0.z);
 
-    auto el = MapGetTrackElementAtOfTypeSeq(pos, _type, 0);
+    auto el = MapGetTrackElementAtOfTypeSeqArchetype(pos, GetSimplifiedTrackType(_type), GetTrackArchetype(_type), 0);
     if (el == nullptr)
         return ToDuk(ctx, nullptr);
 
@@ -98,7 +98,7 @@ DukValue ScTrackIterator::nextPosition_get() const
     const auto& seq0 = ted.sequences[0].clearance;
     auto pos = _position + CoordsXYZ(seq0.x, seq0.y, seq0.z);
 
-    auto el = MapGetTrackElementAtOfTypeSeq(pos, _type, 0);
+    auto el = MapGetTrackElementAtOfTypeSeqArchetype(pos, GetSimplifiedTrackType(_type), GetTrackArchetype(_type), 0);
     if (el == nullptr)
         return ToDuk(ctx, nullptr);
 
@@ -117,7 +117,7 @@ bool ScTrackIterator::previous()
     const auto& seq0 = ted.sequences[0].clearance;
     auto pos = _position + CoordsXYZ(seq0.x, seq0.y, seq0.z);
 
-    auto el = MapGetTrackElementAtOfTypeSeq(pos, _type, 0);
+    auto el = MapGetTrackElementAtOfTypeSeqArchetype(pos, GetSimplifiedTrackType(_type), GetTrackArchetype(_type), 0);
     if (el == nullptr)
         return false;
 
@@ -143,7 +143,7 @@ bool ScTrackIterator::next()
     const auto& seq0 = ted.sequences[0].clearance;
     auto pos = _position + CoordsXYZ(seq0.x, seq0.y, seq0.z);
 
-    auto el = MapGetTrackElementAtOfTypeSeq(pos, _type, 0);
+    auto el = MapGetTrackElementAtOfTypeSeqArchetype(pos, GetSimplifiedTrackType(_type), GetTrackArchetype(_type), 0);
     if (el == nullptr)
         return false;
 
