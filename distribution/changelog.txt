@@ -10,6 +10,7 @@
 - Improved: [#24953] Opening the Scenario Editor, Track Designer or Track Designs Manager now display the progress bar.
 - Improved: [#25027] Land style dropdown now has tooltips with the name of the land types.
 - Improved: [#25057] The progress window now has a Go Karts variant.
+- Improved: [#TBD] Removed jittering from spinning wild mouse cars and allow virginia reel and splash boats to obey rotation control toggle pieces.
 - Change: [#23351] Diagonal sloped Go-Kart track can no longer be built without cheats if the karts do not have sprites for them.
 - Change: [#24606] Increase Misc Entity limit from 1600 to 3200.
 - Change: [#24974] Raise the Go-Karts maximum support height to allow 2 large sloped turns to be built on flat ground.
