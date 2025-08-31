@@ -3394,6 +3394,7 @@ static Vehicle* VehicleCreateCar(
         vehicle->MoveTo(chosenLoc);
         vehicle->SetTrackType(trackElement->GetTrackType());
         vehicle->SetTrackDirection(vehicle->Orientation >> 3);
+        vehicle->spin_sprite = Entity::Yaw::YawTo256(vehicle->Orientation);
         vehicle->track_progress = 31;
         if (carEntry.flags & CAR_ENTRY_FLAG_MINI_GOLF)
         {
@@ -3759,6 +3760,16 @@ void Ride::moveTrainsToBlockBrakes(const CoordsXYZ& firstBlockPosition, TrackEle
             if ((car->GetTrackType()) == TrackElemType::EndStation)
             {
                 car->SetState(Vehicle::Status::MovingToEndOfStation, car->sub_state);
+            }
+            // moving trains to blocks does not update rotation, so spinning vehicles will point the same world direction while
+            // unlocked. Reorient them all to point forward for aesthetics
+            if (car->HasFlag(VehicleFlags::SpinningIsLocked))
+            {
+                car->spin_sprite = 0;
+            }
+            else
+            {
+                car->spin_sprite = Entity::Yaw::YawTo256(car->Orientation);
             }
         }
     }
