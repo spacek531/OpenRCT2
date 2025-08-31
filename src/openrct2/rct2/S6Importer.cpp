@@ -352,6 +352,7 @@ namespace OpenRCT2::RCT2
             ImportTileElements(gameState);
             ImportEntities();
             ConvertPeepAnimationTypeToObjects(gameState);
+            UpdateSpinSprite(gameState);
 
             auto& park = gameState.park;
 
