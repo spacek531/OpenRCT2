@@ -34,7 +34,10 @@ namespace OpenRCT2
     {
         imageDirection = OpenRCT2::Entity::Yaw::YawTo32(imageDirection);
         const uint8_t rotation = session.CurrentRotation;
-        int32_t ecx = ((vehicle->spin_sprite / 8) + (rotation * 8)) & 31;
+        uint8_t spinningOrientationInWorldSpace = vehicle->HasFlag(VehicleFlags::SpinningIsLocked)
+            ? vehicle->spin_sprite + Entity::Yaw::YawTo256(vehicle->Orientation)
+            : vehicle->spin_sprite;
+        int32_t ecx = ((spinningOrientationInWorldSpace / 8) + (rotation * 8)) & 31;
         int32_t baseImage_id = [&] {
             switch (vehicle->Pitch)
             {

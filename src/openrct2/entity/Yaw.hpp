@@ -62,6 +62,10 @@ namespace OpenRCT2::Entity::Yaw
     {
         return yaw << 1;
     }
+    [[nodiscard]] constexpr int32_t YawTo256(int32_t yaw)
+    {
+        return yaw << 3;
+    }
 
     [[nodiscard]] constexpr int32_t YawToPrecision(int32_t yaw, SpritePrecision precision)
     {

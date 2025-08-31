@@ -720,8 +720,13 @@ bool Vehicle::OpenRestraints()
             // If the vehicle is a spinner it must be spinning slow
             // For vehicles without additional frames there are 4 rotations it can unload from
             // For vehicles with additional frames it must be facing forward
-            if (abs(vehicle->spin_speed) <= kVehicleMaxSpinSpeedForStopping && !(vehicle->spin_sprite & 0x30)
-                && (!(carEntry.flags & CAR_ENTRY_FLAG_SPINNING_COMBINED_WITH_NONSPINNING) || !(vehicle->spin_sprite & 0xF8)))
+            uint8_t actualRotation = vehicle->HasFlag(VehicleFlags::SpinningIsLocked)
+                ? vehicle->spin_sprite
+                : vehicle->spin_sprite - Entity::Yaw::YawTo256(vehicle->Orientation);
+
+
+            if (abs(vehicle->spin_speed) <= kVehicleMaxSpinSpeedForStopping && !(actualRotation & 0x30)
+                && !((carEntry.flags & CAR_ENTRY_FLAG_SPINNING_COMBINED_WITH_NONSPINNING) && (actualRotation & 0xF8)))
             {
                 vehicle->spin_speed = 0;
             }
@@ -7137,6 +7142,15 @@ bool Vehicle::UpdateTrackMotionForwardsGetNewTrack(
     }
     if (trackType == TrackElemType::RotationControlToggle)
     {
+        auto vehicleRotation = Entity::Yaw::YawTo256(Orientation);
+        if (HasFlag(VehicleFlags::SpinningIsLocked))
+        {
+            spin_sprite += vehicleRotation;
+        }
+        else
+        {
+            spin_sprite -= vehicleRotation;
+        }
         Flags ^= VehicleFlags::SpinningIsLocked;
     }
     // Change from original: this used to check if the vehicle allowed doors.

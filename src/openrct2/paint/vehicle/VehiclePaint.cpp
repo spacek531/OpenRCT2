@@ -1023,7 +1023,10 @@ static void vehicle_sprite_paint(
     auto baseImageId = static_cast<uint32_t>(spriteIndex);
     if (carEntry->flags & CAR_ENTRY_FLAG_SPINNING_COMBINED_WITH_NONSPINNING)
     {
-        baseImageId += carEntry->spinningNumFrames * vehicle->spin_sprite / 256;
+        uint8_t spinningOrientationInVehicleSpace = vehicle->HasFlag(VehicleFlags::SpinningIsLocked)
+            ? vehicle->spin_sprite
+            : vehicle->spin_sprite - YawTo256(vehicle->Orientation);
+        baseImageId += carEntry->spinningNumFrames * spinningOrientationInVehicleSpace / 256;
     }
     if (carEntry->flags & CAR_ENTRY_FLAG_VEHICLE_ANIMATION)
     {
