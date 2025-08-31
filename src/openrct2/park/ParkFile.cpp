@@ -2702,6 +2702,10 @@ namespace OpenRCT2
                 {
                     ConvertPeepAnimationTypeToObjects(gameState);
                 }
+                if (version < kFixSpinningWildMouseJitterVersion)
+                {
+                    UpdateSpinSprite(gameState);
+                }
             }
             else
             {

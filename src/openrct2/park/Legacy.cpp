@@ -22,6 +22,7 @@
 #include "../rct2/RCT2.h"
 #include "../ride/Ride.h"
 #include "../ride/Track.h"
+#include "../ride/Vehicle.h"
 #include "ParkFile.h"
 
 #include <array>
@@ -3000,4 +3001,17 @@ std::pair<uint8_t, uint8_t> splitCombinedNumDropsPoweredLifts(uint8_t combinedVa
     uint8_t numPoweredLifts = combinedValue >> 6;
 
     return std::make_pair(numDrops, numPoweredLifts);
+}
+
+void UpdateSpinSprite(OpenRCT2::GameState_t& gameState)
+{
+    for (auto vehicle : EntityList<Vehicle>())
+    {
+        const CarEntry& carEntry = *vehicle->Entry();
+        if ((carEntry.flags & CAR_ENTRY_FLAG_SPINNING_COMBINED_WITH_NONSPINNING)
+            && !vehicle->HasFlag(VehicleFlags::SpinningIsLocked))
+        {
+            vehicle->spin_sprite += Entity::Yaw::YawTo256(vehicle->Orientation);
+        }
+    }
 }
