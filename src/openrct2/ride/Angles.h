@@ -74,12 +74,18 @@ enum class VehiclePitch : uint8_t
     down8,
     down16,
     down50,
-    uninvertingDown25, // uninverting pitches are used on inverted-to-upright flyer loops to draw inverted vehicles as upright
-    uninvertingDown42,
-    uninvertingDown60,
     curvedLiftHillUp,
     curvedLiftHillDown,
+    diveLoopCorkUpRight,
+    diveLoopCorkDownLeft,
+    diveLoopCorkUpLeft,
+    diveLoopCorkDownRight,
     pitchCount,
+
+    uninvertingDown25_deprecated,
+    uninvertingDown42_deprecated,
+    uninvertingDown60_deprecated,
+
     nullPitch = 255,
 };
 
@@ -105,6 +111,16 @@ enum class VehicleRoll : uint8_t
     uninvertingLeft45,
     uninvertingRight22,
     uninvertingRight45,
+    uninvertingLeft67,
+    uninvertingLeft90,
+    uninvertingLeft112,
+    uninvertingLeft135,
+    uninvertingLeft157,
+    uninvertingRight67,
+    uninvertingRight90,
+    uninvertingRight112,
+    uninvertingRight135,
+    uninvertingRight157,
     rollCount,
     normalRollCount = 15,
     nullRoll = 255,

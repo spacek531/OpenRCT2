@@ -1508,8 +1508,34 @@ static constexpr VehiclePaintTarget InvertingDown60 = {
     VehicleRoll::unbanked,          VPTFlags::decrementCarIndexIfInverted,
 };
 
-static constexpr VehiclePaintTarget CurvedLiftHillUp = { SpriteGroupType::CurvedLiftHillUp, 0, BoundBoxType::slopeFlat };
-static constexpr VehiclePaintTarget CurvedLiftHillDown = { SpriteGroupType::CurvedLiftHillDown, 0, BoundBoxType::slopeFlat };
+constexpr VehiclePaintTarget DiveLoopCorkUpLeft = {
+    SpriteGroupType::Corkscrews,
+    13,
+    BoundBoxType::corkscrewFrame13,
+    VehiclePitch::up42,
+    VehicleRoll::unbanked,
+    VPTFlags::none,
+    -8,
+};
+constexpr VehiclePaintTarget DiveLoopCorkUpRight = {
+    SpriteGroupType::Corkscrews, 3, BoundBoxType::corkscrewFrame3, VehiclePitch::up42, VehicleRoll::unbanked, VPTFlags::none, 0,
+};
+
+constexpr VehiclePaintTarget DiveLoopCorkDownLeft = {
+    SpriteGroupType::Corkscrews, 8, BoundBoxType::corkscrewFrame8, VehiclePitch::up42, VehicleRoll::unbanked, VPTFlags::none, 0,
+};
+constexpr VehiclePaintTarget DiveLoopCorkDownRight = {
+    SpriteGroupType::Corkscrews,
+    18,
+    BoundBoxType::corkscrewFrame3,
+    VehiclePitch::up42,
+    VehicleRoll::unbanked,
+    VPTFlags::none,
+    -8,
+};
+
+constexpr VehiclePaintTarget CurvedLiftHillUp = { SpriteGroupType::CurvedLiftHillUp, 0, BoundBoxType::slopeFlat };
+constexpr VehiclePaintTarget CurvedLiftHillDown = { SpriteGroupType::CurvedLiftHillDown, 0, BoundBoxType::slopeFlat };
 
 static constexpr VehiclePaintTarget CorkscrewTarget(uint8_t corkscrewFrame)
 {
@@ -1597,15 +1623,18 @@ static constexpr std::array<VehiclePaintTargetPitch, EnumValue(VehiclePitch::pit
     Down16PaintTarget,
     Down50PaintTarget,
 
-    AllSameTarget(InvertingDown25), // 56 inverting down 25
-    AllSameTarget(InvertingDown42), // 57 inverting down 42
-    AllSameTarget(InvertingDown60), // 58 inverting down 60
+    AllSameTarget(DiveLoopCorkUpLeft),
+    AllSameTarget(DiveLoopCorkUpRight),
+    AllSameTarget(DiveLoopCorkDownLeft),
+    AllSameTarget(DiveLoopCorkDownRight),
 
     AllSameTarget(CurvedLiftHillUp),
     AllSameTarget(CurvedLiftHillDown),
 };
 
-static const VehiclePaintTarget& GetTarget(VehiclePitch pitch, VehicleRoll bank)
+static_assert(std::size(VehiclePaintTargets) == EnumValue(VehiclePitch::pitchCount));
+
+static inline const VehiclePaintTarget& GetTarget(VehiclePitch pitch, VehicleRoll bank)
 {
     return VehiclePaintTargets[EnumValue(pitch)][EnumValue(bank)];
 }
@@ -1685,12 +1714,13 @@ static constexpr std::array<VehiclePitch, EnumValue(VehiclePitch::pitchCount)> P
     VehiclePitch::up16,
     VehiclePitch::up50,
 
-    VehiclePitch::up25,
-    VehiclePitch::up42,
-    VehiclePitch::up60,
-
     VehiclePitch::curvedLiftHillDown,
     VehiclePitch::curvedLiftHillUp,
+
+    VehiclePitch::diveLoopCorkDownLeft,
+    VehiclePitch::diveLoopCorkUpRight,
+    VehiclePitch::diveLoopCorkDownRight,
+    VehiclePitch::diveLoopCorkUpLeft,
 };
 
 // Opposite Roll values for reversed cars
@@ -1715,6 +1745,16 @@ static constexpr std::array<VehicleRoll, EnumValue(VehicleRoll::rollCount)> Roll
     VehicleRoll::uninvertingRight45,
     VehicleRoll::uninvertingLeft22,
     VehicleRoll::uninvertingLeft45,
+    VehicleRoll::uninvertingRight67,
+    VehicleRoll::uninvertingRight90,
+    VehicleRoll::uninvertingRight112,
+    VehicleRoll::uninvertingRight135,
+    VehicleRoll::uninvertingRight157,
+    VehicleRoll::uninvertingLeft67,
+    VehicleRoll::uninvertingLeft90,
+    VehicleRoll::uninvertingLeft112,
+    VehicleRoll::uninvertingLeft135,
+    VehicleRoll::uninvertingLeft157,
 };
 
 #pragma endregion
@@ -2001,15 +2041,20 @@ void VehicleVisualDefault(PaintSession& session, int32_t yaw, const int32_t z, c
         return;
     }
 
-    auto maskedRoll = EnumValue(vehicle->roll) % EnumValue(VehicleRoll::normalRollCount);
-    auto roll = static_cast<VehicleRoll>(maskedRoll);
+    auto roll = vehicle->roll;
     auto pitch = vehicle->pitch;
+
+    if (vehicle->roll >= VehicleRoll::uninvertingUnbanked)
+    {
+        roll = static_cast<VehicleRoll>(EnumValue(roll) - EnumValue(VehicleRoll::uninvertingUnbanked));
+        carEntry--;
+    }
     auto selectedPaintTarget = GetTarget(pitch, roll);
 
     if (vehicle->HasFlag(VehicleFlags::CarIsReversed))
     {
-        pitch = PitchInvertTable[EnumValue(vehicle->pitch)];
-        roll = RollInvertTable[maskedRoll];
+        pitch = PitchInvertTable[EnumValue(pitch)];
+        roll = RollInvertTable[EnumValue(roll)];
         yaw = Add(yaw, kBaseRotation / 2);
         selectedPaintTarget = GetTarget(pitch, roll);
     }
