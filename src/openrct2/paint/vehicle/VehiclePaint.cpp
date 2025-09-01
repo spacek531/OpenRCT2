@@ -2006,16 +2006,6 @@ void VehicleVisualDefault(PaintSession& session, int32_t yaw, const int32_t z, c
     auto pitch = vehicle->pitch;
     auto selectedPaintTarget = GetTarget(pitch, roll);
 
-    // special cases introduced by Chris Sawyer. Will be removed by adjusting subposition data in a future PR.
-    auto trackType = vehicle->GetTrackType();
-    if ((vehicle->roll >= VehicleRoll::uninvertingUnbanked)
-        || (vehicle->HasFlag(VehicleFlags::CarIsInverted) && selectedPaintTarget.HasFlag(VPTFlags::decrementCarIndexIfInverted)
-            && trackType != TrackElemType::Down90 && trackType != TrackElemType::Down90ToDown60
-            && trackType != TrackElemType::Down60ToDown90))
-    {
-        carEntry--;
-    }
-
     if (vehicle->HasFlag(VehicleFlags::CarIsReversed))
     {
         pitch = PitchInvertTable[EnumValue(vehicle->pitch)];
@@ -2031,31 +2021,6 @@ void VehicleVisualDefault(PaintSession& session, int32_t yaw, const int32_t z, c
         roll = selectedPaintTarget.fallbackRoll;
         yaw = Add(yaw, selectedPaintTarget.fallbackYawOffset);
         selectedPaintTarget = GetTarget(pitch, roll);
-    }
-
-    // special cases introduced by X123M3-256. Will be removed by adjusting subposition data in a future PR.
-    // up42BankedLeft135 corkscrew frame 13 rotation + 8, fallback up42Unbanked rotation +0 (-8 after adjustment)
-    // up42BankedRight135 corkscrew frame 3, fallback up42Unbanked rotation +0
-    // down42BankedLeft135 corkscrew frame 8, fallback down42Unbanked rotation +0
-    // down42BankedRight135 corkscrew frame 18 rotation + 8, fallback down42Unbanked rotation +0 (-8 after adjustment)
-    if (((pitch == VehiclePitch::up42) || (pitch == VehiclePitch::down42))
-        && ((roll == VehicleRoll::left135) || (roll == VehicleRoll::right135)))
-    {
-        constexpr const VehiclePitch remapTable[4] = {
-            VehiclePitch::corkscrewUpLeft3,
-            VehiclePitch::corkscrewUpRight3,
-            VehiclePitch::corkscrewDownLeft3,
-            VehiclePitch::corkscrewDownRight3,
-        };
-        constexpr const int32_t offsetTable[4] = {
-            8,
-            0,
-            0,
-            8,
-        };
-        uint8_t remapIndex = (roll == VehicleRoll::right135) | ((pitch == VehiclePitch::down42) << 1);
-        selectedPaintTarget = GetTarget(remapTable[remapIndex], VehicleRoll::unbanked);
-        yaw = Add(yaw, offsetTable[remapIndex]);
     }
 
     if (pitch == VehiclePitch::nullPitch)

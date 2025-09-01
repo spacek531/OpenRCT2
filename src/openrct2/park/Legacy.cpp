@@ -22,12 +22,14 @@
 #include "../rct2/RCT2.h"
 #include "../ride/Ride.h"
 #include "../ride/Track.h"
+#include "../ride/Vehicle.h"
 #include "ParkFile.h"
 
 #include <array>
 #include <unordered_map>
 
 using namespace OpenRCT2;
+using namespace OpenRCT2::Entity::Yaw;
 
 static const std::unordered_map<std::string_view, std::string_view> kOldObjectIds = {
     { "official.scgpanda", "rct2dlc.scenery_group.scgpanda" },
@@ -3000,4 +3002,73 @@ std::pair<uint8_t, uint8_t> splitCombinedNumDropsPoweredLifts(uint8_t combinedVa
     uint8_t numPoweredLifts = combinedValue >> 6;
 
     return std::make_pair(numDrops, numPoweredLifts);
+}
+
+void ConsolidatePitchAndBank(OpenRCT2::GameState_t& gameState)
+{
+    for (auto vehicle : EntityList<Vehicle>())
+    {
+        // const CarEntry& carEntry = *vehicle->Entry();
+        auto pitch = vehicle->pitch;
+        auto roll = vehicle->roll;
+        if (((pitch == VehiclePitch::up42) || (pitch == VehiclePitch::down42))
+            && ((roll == VehicleRoll::left135) || (roll == VehicleRoll::right135)))
+        {
+            // up42BankedLeft135 corkscrew frame 13 rotation + 8, fallback up42Unbanked rotation +0 (-8 after adjustment)
+            // up42BankedRight135 corkscrew frame 3, fallback up42Unbanked rotation +0
+            // down42BankedLeft135 corkscrew frame 8, fallback down42Unbanked rotation +0
+            // down42BankedRight135 corkscrew frame 18 rotation + 8, fallback down42Unbanked rotation +0 (-8 after adjustment)
+            if (((pitch == VehiclePitch::up42) || (pitch == VehiclePitch::down42))
+                && ((roll == VehicleRoll::left135) || (roll == VehicleRoll::right135)))
+            {
+                constexpr const VehiclePitch remapTable[4] = {
+                    VehiclePitch::corkscrewUpLeft3,
+                    VehiclePitch::corkscrewUpRight3,
+                    VehiclePitch::corkscrewDownLeft3,
+                    VehiclePitch::corkscrewDownRight3,
+                };
+                constexpr const int32_t offsetTable[4] = {
+                    8,
+                    0,
+                    0,
+                    8,
+                };
+                uint8_t remapIndex = (roll == VehicleRoll::right135) | ((pitch == VehiclePitch::down42) << 1);
+                vehicle->pitch = remapTable[remapIndex];
+                vehicle->roll = VehicleRoll::unbanked;
+                vehicle->Orientation = Add(vehicle->Orientation, offsetTable[remapIndex]);
+            }
+        }
+        else if (vehicle->HasFlag(VehicleFlags::CarIsInverted))
+        {
+            if (roll >= VehicleRoll::left67 && roll <= VehicleRoll::right157)
+            {
+                roll = static_cast<VehicleRoll>(EnumValue(roll) + EnumValue(VehicleRoll::uninvertingUnbanked));
+            }
+            else if (pitch >= VehiclePitch::down75 && pitch <= VehiclePitch::down165)
+            {
+                auto trackType = vehicle->GetTrackType();
+                if (trackType != TrackElemType::Down90 && trackType != TrackElemType::Down90ToDown60
+                    && trackType != TrackElemType::Down60ToDown90)
+                {
+                    roll = VehicleRoll::uninvertingUnbanked;
+                }
+            }
+        }
+        if (pitch >= VehiclePitch::invertingDown25_legacy && pitch <= VehiclePitch::invertingDown60_legacy)
+        {
+            roll = VehicleRoll::uninvertingUnbanked;
+            pitch = static_cast<VehiclePitch>(
+                EnumValue(pitch) - EnumValue(VehiclePitch::invertingDown25_legacy) + EnumValue(VehiclePitch::down25));
+        }
+        else if (pitch >= VehiclePitch::curvedLiftHillUp_legacy && pitch <= VehiclePitch::curvedLiftHillDown_legacy)
+        {
+            pitch = static_cast<VehiclePitch>(
+                EnumValue(pitch) - EnumValue(VehiclePitch::curvedLiftHillUp_legacy)
+                + EnumValue(VehiclePitch::curvedLiftHillUp));
+        }
+
+        vehicle->pitch = pitch;
+        vehicle->roll = roll;
+    }
 }
