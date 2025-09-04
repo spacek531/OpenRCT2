@@ -11,6 +11,7 @@
 
 #include "../audio/Audio.h"
 #include "../entity/EntityList.h"
+#include "../math/Trigonometry.hpp"
 #include "../rct12/RCT12.h"
 #include "../util/Util.h"
 #include "../world/Map.h"
@@ -20,9 +21,9 @@
 #include "RideData.h"
 #include "Track.h"
 #include "Vehicle.h"
-#include "VehicleData.h"
 
 using namespace OpenRCT2;
+using namespace OpenRCT2::Math::Trigonometry;
 
 Vehicle* CableLiftSegmentCreate(
     Ride& ride, int32_t x, int32_t y, int32_t z, int32_t direction, uint16_t var_44, int32_t remaining_distance, bool head)
