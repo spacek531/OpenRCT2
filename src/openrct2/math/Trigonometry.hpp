@@ -42,6 +42,11 @@ namespace OpenRCT2::Math::Trigonometry
     // Currently OpenRCT2::Entity::Yaw::BaseSpritePrecision is 32, but one day it will be 64.
     static_assert(std::size(YawToDirectionVector) == 64);
 
+    constexpr CoordsXY GetYawVector(uint8_t yaw)
+    {
+        return YawToDirectionVector[OpenRCT2::Entity::Yaw::YawTo64(yaw)];
+    }
+
     /** rct2: 0x009A37E4
      *  rct2: 0x009A38D4
      * The cos and sin of vehicle pitch based on vehicle sprite angles
@@ -131,7 +136,7 @@ namespace OpenRCT2::Math::Trigonometry
 
     constexpr CoordsXY ComputeXYVector(int32_t magnitude, uint8_t yaw)
     {
-        return (static_cast<CoordsXY>(YawToDirectionVector[yaw]) * magnitude) / 256;
+        return (GetYawVector(yaw) * magnitude) / 256;
     }
 
     constexpr CoordsXY ComputeXYVector(int32_t length, VehiclePitch pitch, uint8_t yaw)
