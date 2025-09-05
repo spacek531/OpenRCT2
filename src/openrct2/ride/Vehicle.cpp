@@ -3740,7 +3740,7 @@ void Vehicle::UpdateMotionBoatHire()
 
             int32_t edi = (Orientation | (var_35 & 1)) & 0x1F;
             auto movementData = GetFreeRoamMovementData(edi);
-            loc2 = { x + movementData.x, y + movementData.y };
+            loc2 = CoordsXY(x, y) + movementData;
             if (UpdateMotionCollisionDetection({ loc2, z }, nullptr))
             {
                 remaining_distance = 0;
@@ -5179,10 +5179,7 @@ int32_t Vehicle::UpdateMotionDodgems()
 
         auto movementData = GetFreeRoamMovementData(oldCollisionDirection);
         auto movementData1 = GetFreeRoamMovementData(oldCollisionDirection + 1);
-        location.x += movementData.x;
-        location.y += movementData.y;
-        location.x += movementData1.x;
-        location.y += movementData1.y;
+        location += movementData + movementData1;
 
         if (collideSprite = DodgemsCarWouldCollideAt(location); !collideSprite.has_value())
         {
