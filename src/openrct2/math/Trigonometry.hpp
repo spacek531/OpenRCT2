@@ -17,6 +17,10 @@
 
 namespace OpenRCT2::Math::Trigonometry
 {
+
+    // divide by this to convert a value of int32_t::max to 256. Equivalent to >> 23
+    constexpr int32_t kInt32To256 = 8388607;
+
     /**
      * The cos and sin of sprite direction
      * ROUND(COS((32/64+(L1/64))*(2*PI()))*256,0), ROUND(SIN(((L1/64))*(2*PI())) * 256,0)
@@ -38,79 +42,91 @@ namespace OpenRCT2::Math::Trigonometry
     // Currently OpenRCT2::Entity::Yaw::BaseSpritePrecision is 32, but one day it will be 64.
     static_assert(std::size(YawToDirectionVector) == 64);
 
-    /**
+    /** rct2: 0x009A37E4
+     *  rct2: 0x009A38D4
      * The cos and sin of vehicle pitch based on vehicle sprite angles
-     * COS((Y1/360)*2*PI())*256,-SIN((Y1/360)*2*PI())*256
-     * Where Y1 represents the angle of pitch in degrees
+     *  COS((Y1/360)*2*PI())*INT32MAX,SIN((Y1/360)*2*PI())*INT32MAX
+     *  Where Y1 represents the angle of pitch in degrees
+     * Note that some values are not correct. Someone should fix them.
      */
-    constexpr std::array<CoordsXY, EnumValue(VehiclePitch::pitchCount)> PitchToDirectionVectorFromGeometry = {
-        CoordsXY{ 256, 0 }, // flat
-        { 251, 49 },        // slopes up
-        { 236, 97 },        // slopes up
-        { 195, 165 },       // slopes up
-        { 134, 217 },       // slopes up
-        { 251, -49 },       // slopes down
-        { 236, -97 },       // slopes down
-        { 195, -165 },      // slopes down
-        { 135, -217 },      // slopes down
-        { 70, 246 },        // slopes vertical up
-        { 0, 256 },         // slopes vertical up
-        { -66, 247 },       // slopes looping up
-        { -128, 221 },      // slopes looping up
-        { -181, 181 },      // slopes looping up
-        { -221, 128 },      // slopes looping up
-        { -247, 66 },       // slopes looping up
-        { -256, 0 },        // inverted
-        { 70, -246 },       // slopes vertical down
-        { 0, -256 },        // slopes vertical down
-        { -66, -247 },      // slopes looping down
-        { -128, -221 },     // slopes looping down
-        { -181, -181 },     // slopes looping down
-        { -221, -128 },     // slopes looping down
-        { -247, -66 },      // slopes looping down
-        { 221, 128 },       // corkscrew up left
-        { 128, 221 },       // corkscrew up left
-        { 0, 256 },         // corkscrew up left
-        { -128, 221 },      // corkscrew up left
-        { -221, 128 },      // corkscrew up left
-        { -221, -128 },     // corkscrew down left
-        { -128, -221 },     // corkscrew down left
-        { 0, -256 },        // corkscrew down left
-        { 128, -221 },      // corkscrew down left
-        { 221, -128 },      // corkscrew down left
-        { 221, 128 },       // corkscrew up right
-        { 128, 221 },       // corkscrew up right
-        { 0, 256 },         // corkscrew up right
-        { -128, 221 },      // corkscrew up right
-        { -221, 128 },      // corkscrew up right
-        { -221, -128 },     // corkscrew down right
-        { -128, -221 },     // corkscrew down right
-        { 0, -256 },        // corkscrew down right
-        { 128, -221 },      // corkscrew down right
-        { 221, 128 },       // corkscrew down right
-        { 256, 0 },         // half helixes
-        { 256, 0 },         // half helixes
-        { 256, 0 },         // half helixes
-        { 256, 0 },         // half helixes
-        { 256, 0 },         // quarter helixes
-        { 256, 0 },         // quarter helixes
-        { 252, 42 },        // diagonal slopes up
-        { 241, 83 },        // diagonal slopes up
-        { 168, 193 },       // diagonal slopes up
-        { 252, -42 },       // diagonal slopes down
-        { 241, -83 },       // diagonal slopes down
-        { 168, -193 },      // diagonal slopes down
-        { 236, -97 },       // inverting transition slopes down
-        { 195, -165 },      // inverting transition slopes down
-        { 134, -217 },      // inverting transition slopes down
-        { 252, 44 },        // spiral lift hill up
-        { 252, -44 },       // spiral lift hill down
-    };
-    static_assert(std::size(PitchToDirectionVectorFromGeometry) == EnumValue(VehiclePitch::pitchCount));
+    constexpr std::array < CoordsXY, EnumValue(VehiclePitch::pitchCount > PitchToDirectionVectorFromGeometryInt32 = {
+        CoordsXY{ 2147483647, 0 },         // flat
+        { 2106585154, 417115092 }, // up12
+        { 1985590284, 817995863 }, // up25
+        { 1636362342, 1390684831 }, // up42
+        { 1127484953, 1827693544 }, // up60
+        { 2106585154, -417115092 }, // down12
+        { 1985590284, -817995863 }, // down25
+        { 1636362342, -1390684831 }, // down42
+        { 1127484953, -1827693544 }, // down60
+        { 58579923, 2066040965 }, // up75
+        { 0, 2147483647 }, // up90
+        { -555809667, 2074309916 }, // up115
+        { -1073741824, 1859775393 }, // up120
+        { -1518500249, 1518500249 }, // up135
+        { -1859775391, 1073741824 }, // up150
+        { -2074309916, 555809666 }, // up165
+        { -2147483647, 0 },        // inverted
+        { 58579923, -2066040965 }, // down75
+        { 0, -2147483647 }, // down90
+        { -555809667, -2074309916 },// down115
+        { -1073741824, -1859775393 }, // down120
+        { -1518500249, -1518500249 }, // down135
+        { -1859775391, -1073741824 }, // down150
+        { -2074309916, -555809666 }, // down165
+        { 1859775393, 1073741824 }, // corkscrewUpRight0
+        { 1073741824, 1859775393 }, // corkscrewUpRight1
+        { 0, 2147483647 }, // corkscrewUpRight2
+        { -1073741824, 1859775393 }, // corkscrewUpRight3
+        { -1859775393, 1073741824 }, // corkscrewUpRight4
+        { 1859775393, -1073741824 }, // corkscrewDownLeft0
+        { 1073741824, -1859775393 }, // corkscrewDownLeft1
+        { 0, -2147483647 }, // corkscrewDownLeft2
+        { -1073741824, -1859775393 }, // corkscrewDownLeft3
+        { -1859775393, -1073741824 }, // corkscrewDownLeft4
+        { 1859775393, 1073741824 }, // corkscrewUpLeft0
+        { 1073741824, 1859775393 }, // corkscrewUpLeft1
+        { 0, 2147483647 }, // corkscrewUpLeft2
+        { -1073741824, 1859775393 }, // corkscrewUpLeft3
+        { -1859775393, 1073741824 }, // corkscrewUpLeft4
+        { 1859775393, -1073741824 }, // corkscrewDownRight0
+        { 1073741824, -1859775393 }, // corkscrewDownRight1
+        { 0, -2147483647 }, // corkscrewDownRight2
+        { -1073741824, -1859775393 }, // corkscrewDownRight3
+        { -1859775393, -1073741824 }, // corkscrewDownRight4
+        { 2144540595, 112390610 }, // upHalfHelixLarge
+        { 2139311823, 187165532 }, // upHalfHelixSmall
+        { 2144540595, -112390610 }, // downHalfHelixLarge
+        { 2139311823, -187165532 }, // downHalfHelixSmall
+        { 2135719507, 224473165 }, // upQuarterHelix
+        { 2135719507, -224473165 }, // downQuarterHelix
+        { 2125953864, 303325208 }, // up8
+        { 2061796213, 600568389 }, // up16
+        { 1411702590, 1618265062 }, // up50
+        { 2125953864, -303325208 }, // down8
+        { 2061796213, -600568389 }, // down16
+        { 1411702590, -1618265062 }, // down50
+        { 1985590284, -817995863 },  // uninvertingDown25
+        { 1636362342, -1390684831 }, // uninvertingDown42
+        { 1127484953, -1827693544 }, // uninvertingDown60
+        { 2115506168, 369214930 },   // curvedLifthillUp
+        { 2115506168, -369214930 },  // curvedLiftHillDown
+        };
+    static_assert(std::size(PitchToDirectionVectorFromGeometryInt32) == EnumValue(VehiclePitch::pitchCount));
 
-    constexpr int32_t ComputeHorizontalMagnitude(int32_t length, uint8_t pitch)
+    constexpr CoordsXY GetPitchComponents(VehiclePitch pitch)
     {
-        return (-PitchToDirectionVectorFromGeometry[pitch].y * length) / 256;
+        return PitchToDirectionVectorFromGeometryInt32[EnumValue(pitch)];
+    }
+
+    constexpr CoordsXY GetPitchComponents256(VehiclePitch pitch)
+    {
+        return PitchToDirectionVectorFromGeometryInt32[EnumValue(pitch)] / kInt32To256;
+    }
+
+    constexpr int32_t ComputeHorizontalMagnitude(int32_t length, VehiclePitch pitch)
+    {
+        return (-GetPitchComponents256(pitch).y * length) / 256;
     }
 
     constexpr CoordsXY ComputeXYVector(int32_t magnitude, uint8_t yaw)
@@ -118,7 +134,7 @@ namespace OpenRCT2::Math::Trigonometry
         return (static_cast<CoordsXY>(YawToDirectionVector[yaw]) * magnitude) / 256;
     }
 
-    constexpr CoordsXY ComputeXYVector(int32_t length, uint8_t pitch, uint8_t yaw)
+    constexpr CoordsXY ComputeXYVector(int32_t length, VehiclePitch pitch, uint8_t yaw)
     {
         return ComputeXYVector(ComputeHorizontalMagnitude(length, pitch), yaw);
     }
@@ -270,82 +286,6 @@ namespace OpenRCT2::Math::Trigonometry
     constexpr int32_t GetDopplerShift(uint8_t yaw)
     {
         return SpriteDirectionToSoundDirection[yaw];
-    }
-
-    /** rct2: 0x009A37E4
-     *  rct2: 0x009A38D4
-     * The cos and sin of vehicle pitch based on vehicle sprite angles
-     *  COS((Y1/360)*2*PI())*INT32MAX,-SIN((Y1/360)*2*PI())*INT32MAX
-     *  Where Y1 represents the angle of pitch in degrees
-     */
-    static constexpr CoordsXY PitchToDirectionVectorFromGeometryInt32[] = {
-        { 2147483647, 0 },         // flat
-        { 2106585154, 417115092 }, // up12
-        { 1985590284, 817995863 },
-        { 1636362342, 1390684831 },
-        { 1127484953, 1827693544 },
-        { 2106585154, -417115092 }, // down12
-        { 1985590284, -817995863 },
-        { 1636362342, -1390684831 },
-        { 1127484953, -1827693544 },
-        { 58579923, 2066040965 }, // up75
-        { 0, 2147483647 },
-        { -555809667, 2074309916 },
-        { -1073741824, 1859775393 },
-        { -1518500249, 1518500249 },
-        { -1859775391, 1073741824 },
-        { -2074309916, 555809666 },
-        { -2147483647, 0 },        // inverted
-        { 58579923, -2066040965 }, // down75
-        { 0, -2147483647 },
-        { -555809667, -2074309916 },
-        { -1073741824, -1859775393 },
-        { -1518500249, -1518500249 },
-        { -1859775391, -1073741824 },
-        { -2074309916, -555809666 },
-        { 1859775393, 1073741824 }, // corkscrewUpRight0
-        { 1073741824, 1859775393 },
-        { 0, 2147483647 },
-        { -1073741824, 1859775393 },
-        { -1859775393, 1073741824 },
-        { 1859775393, -1073741824 }, // corkscrewDownLeft0
-        { 1073741824, -1859775393 },
-        { 0, -2147483647 },
-        { -1073741824, -1859775393 },
-        { -1859775393, -1073741824 },
-        { 1859775393, 1073741824 }, // corkscrewUpLeft0
-        { 1073741824, 1859775393 },
-        { 0, 2147483647 },
-        { -1073741824, 1859775393 },
-        { -1859775393, 1073741824 },
-        { 1859775393, -1073741824 }, // corkscrewDownRight0
-        { 1073741824, -1859775393 },
-        { 0, -2147483647 },
-        { -1073741824, -1859775393 },
-        { -1859775393, -1073741824 },
-        { 2144540595, 112390610 }, // upHalfHelixLarge
-        { 2139311823, 187165532 },
-        { 2144540595, -112390610 },
-        { 2139311823, -187165532 },
-        { 2135719507, 224473165 },
-        { 2135719507, -224473165 },
-        { 2125953864, 303325208 }, // up8
-        { 2061796213, 600568389 },
-        { 1411702590, 1618265062 },
-        { 2125953864, -303325208 }, // down8
-        { 2061796213, -600568389 },
-        { 1411702590, -1618265062 },
-        { 1985590284, -817995863 },  // uninvertingDown25
-        { 1636362342, -1390684831 }, // uninvertingDown42
-        { 1127484953, -1827693544 }, // uninvertingDown60
-        { 2115506168, 369214930 },   // curvedLifthillUp
-        { 2115506168, -369214930 },  // curvedLiftHillDown
-    };
-    static_assert(std::size(PitchToDirectionVectorFromGeometryInt32) == EnumValue(VehiclePitch::pitchCount));
-
-    constexpr CoordsXY GetPitchComponents(VehiclePitch pitch)
-    {
-        return PitchToDirectionVectorFromGeometryInt32[EnumValue(pitch)];
     }
 
     /** rct2: 0x009A39C4
