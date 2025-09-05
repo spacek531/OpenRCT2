@@ -156,7 +156,7 @@ namespace OpenRCT2::Math::Trigonometry
     }
 
     /** rct2: 0x009A2970 */
-    const int32_t AccelerationFromPitch[] = {
+    static constexpr int32_t AccelerationFromPitch[] = {
         0,       // Flat
                  // The geometric angle of slopes 12.5 and 25 are actually 11.1 and 22.2 respectively.
         -124548, // 1 Slope Up 12.5
@@ -221,6 +221,11 @@ namespace OpenRCT2::Math::Trigonometry
         546342,  // 58 Inverting Loop Down 60
         -110424, // 59 Slope Up Spiral Lift Hill
     };
+
+    constexpr int32_t GetAccelerationFromPitch(VehiclePitch pitch)
+    {
+        return AccelerationFromPitch[EnumValue(pitch)];
+    }
 
     /** rct2: 0x009A3684 */
     constexpr std::array<int32_t, OpenRCT2::Entity::Yaw::kBaseRotation> SpriteDirectionToSoundDirection = {
