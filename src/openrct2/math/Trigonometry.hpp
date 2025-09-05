@@ -258,6 +258,11 @@ namespace OpenRCT2::Math::Trigonometry
         -0x4800, // 31
     };
 
+    constexpr int32_t GetDopplerShift(uint8_t yaw)
+    {
+        return SpriteDirectionToSoundDirection[yaw];
+    }
+
     /** rct2: 0x009A37E4
      *  rct2: 0x009A38D4
      * The cos and sin of vehicle pitch based on vehicle sprite angles
