@@ -3838,7 +3838,7 @@ void Vehicle::UpdateMotionBoatHire()
                 TrackLocation = { flooredLocation, TrackLocation.z };
             }
 
-            remaining_distance -= movementData.distance;
+            remaining_distance -= GetPythagorasDistance(CoordsXYZ(movementData, 0));
             _vehicleCurPosition.x = loc2.x;
             _vehicleCurPosition.y = loc2.y;
             if (remaining_distance < 0x368A)
@@ -5215,7 +5215,7 @@ int32_t Vehicle::UpdateMotionDodgems()
                 break;
             }
 
-            remaining_distance -= movementData.distance;
+            remaining_distance -= GetPythagorasDistance(CoordsXYZ(movementData, 0));
             _vehicleCurPosition.x = location.x;
             _vehicleCurPosition.y = location.y;
             if (remaining_distance < 13962)
