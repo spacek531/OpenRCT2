@@ -5021,7 +5021,7 @@ OpenRCT2::Audio::SoundId Vehicle::ProduceScreamSound(const int32_t totalNumPeeps
 GForces Vehicle::GetGForces() const
 {
     int32_t gForceVert = ((static_cast<int64_t>(0x280000)) * kUnk9A37E4[EnumValue(pitch)]) >> 32;
-    gForceVert = ((static_cast<int64_t>(gForceVert)) * kUnk9A39C4[EnumValue(roll)]) >> 32;
+    gForceVert = ((static_cast<int64_t>(gForceVert)) * GetGravityFromRoll(roll)) >> 32;
 
     const auto& ted = GetTrackElementDescriptor(GetTrackType());
     const int32_t vertFactor = ted.verticalFactor(track_progress);
