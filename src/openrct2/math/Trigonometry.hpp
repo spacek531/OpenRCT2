@@ -280,11 +280,33 @@ namespace OpenRCT2::Math::Trigonometry
         -600568389,  -1618265062, -817995863,  -1390684831, -1827693544, 369214930,   -369214930,
     };
 
-    /** rct2: 0x009A39C4 */
-    constexpr std::array<int32_t, OpenRCT2::Entity::Yaw::kBaseRotation> GravityFromRollDataInt32 = {
-        2147483647,  2096579710,  1946281152,  2096579710, 1946281152, 1380375879, 555809667,
-        -372906620,  -1231746017, -1859775391, 1380375879, 555809667,  -372906620, -1231746017,
-        -1859775391, 0,           2096579710,  1946281152, 2096579710, 1946281152,
+    /** rct2: 0x009A39C4
+     * Used to calculate the vertical component of G-forces. Unfortunately these don't align with the actual geometry of the
+     * track. See comments on the values for the difference between the vehicle's visual angle with the angle used in the
+     * G-force calculation. Calculated ROUND(COS((32/64+(L1/64))*(2*PI()))*256,0), ROUND(COS(L1)*(2*PI())) * 2147483647,0).
+     * where L1 represents the bank angle.
+     */
+    constexpr std::array<int32_t, EnumValue(VehicleRoll::rollCount)> GravityFromRollDataInt32 = {
+        2147483647,  // unbanked
+        2096579710,  // left22  (visually: 22.5 degrees;  actual: 12.5 degrees)
+        1946281152,  // left45  (visually: 45 degrees;    actual: 25 degrees)
+        2096579710,  // right22
+        1946281152,  // right45
+        1380375879,  // left67  (visually: 67.5 degrees;  actual: 50 degrees)
+        555809667,   // left90  (visually: 90 degrees;    actual: 75 degrees)
+        -372906620,  // left112 (visually: 112.5 degrees; actual: 100 degrees)
+        -1231746017, // left135 (visually: 135 degrees;   actual: 120 degrees)
+        -1859775391, // left157 (visually: 157.5 degrees; actual: 150 degrees)
+        1380375879,  // right67
+        555809667,   // right90
+        -372906620,  // right112
+        -1231746017, // right135
+        -1859775391, // right157
+        0,           // uninvertingUnbanked (unused by RCT2)
+        2096579710,  // uninvertingLeft22
+        1946281152,  // uninvertingLeft45
+        2096579710,  // uninvertingRight22
+        1946281152,  // uninvertingRight45
     };
 
     constexpr int32_t GetGravityFromRoll(VehicleRoll roll)
