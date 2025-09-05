@@ -6039,7 +6039,7 @@ static uint8_t GetTargetFrame(const CarEntry& carEntry, uint32_t animationState)
 static constexpr CoordsXYZ ComputeSteamOffset(int32_t height, int32_t length, VehiclePitch pitch, uint8_t yaw)
 {
     uint8_t trueYaw = OpenRCT2::Entity::Yaw::YawTo64(yaw);
-    auto offsets = PitchToDirectionVectorFromGeometry[EnumValue(pitch)];
+    auto offsets = GetPitchComponents256(pitch);
     int32_t projectedRun = (offsets.x * length - offsets.y * height) / 256;
     int32_t projectedHeight = (offsets.x * height + offsets.y * length) / 256;
     return { ComputeXYVector(projectedRun, trueYaw), projectedHeight };
