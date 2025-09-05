@@ -148,6 +148,13 @@ namespace OpenRCT2::Math::Trigonometry
         34902, // XYZ translation
     };
 
+    constexpr int32_t GetPythagorasDistance(CoordsXYZ distance, bool useReverserDistance = false)
+    {
+        uint8_t index = ((distance.x != 0) << 0) | ((distance.y != 0) << 1) | ((distance.z != 0) << 2)
+            | ((useReverserDistance) << 3);
+        return SubpositionTranslationDistances[index];
+    }
+
     /** rct2: 0x009A2970 */
     const int32_t AccelerationFromPitch[] = {
         0,       // Flat

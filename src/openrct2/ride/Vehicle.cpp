@@ -7230,26 +7230,13 @@ bool Vehicle::UpdateTrackMotionForwards(const CarEntry* carEntry, const Ride& cu
                 + CoordsXYZ{ moveInfo->x, moveInfo->y,
                              moveInfo->z + GetRideTypeDescriptor(curRide.type).Heights.VehicleZOffset };
 
-            uint8_t remainingDistanceFlags = 0;
-            if (nextVehiclePosition.x != _vehicleCurPosition.x)
-            {
-                remainingDistanceFlags |= 1;
-            }
-            if (nextVehiclePosition.y != _vehicleCurPosition.y)
-            {
-                remainingDistanceFlags |= 2;
-            }
-            if (nextVehiclePosition.z != _vehicleCurPosition.z)
-            {
-                remainingDistanceFlags |= 4;
-            }
+            bool useReverserDistance
+                = (TrackSubposition == VehicleTrackSubposition::ReverserRCFrontBogie
+                   && (trackType == TrackElemType::LeftReverser || trackType == TrackElemType::RightReverser)
+                   && track_progress >= 30 && track_progress <= 66);
 
-            if (TrackSubposition == VehicleTrackSubposition::ReverserRCFrontBogie
-                && (trackType == TrackElemType::LeftReverser || trackType == TrackElemType::RightReverser)
-                && track_progress >= 30 && track_progress <= 66)
-            {
-                remainingDistanceFlags |= 8;
-            }
+            // Loc6DB8A5
+            remaining_distance -= GetPythagorasDistance(nextVehiclePosition - _vehicleCurPosition, useReverserDistance);
 
             if (TrackSubposition == VehicleTrackSubposition::ReverserRCRearBogie
                 && (trackType == TrackElemType::LeftReverser || trackType == TrackElemType::RightReverser)
@@ -7262,8 +7249,6 @@ bool Vehicle::UpdateTrackMotionForwards(const CarEntry* carEntry, const Ride& cu
                 nextVehiclePosition.y = y + moveInfo2->y;
             }
 
-            // Loc6DB8A5
-            remaining_distance -= SubpositionTranslationDistances[remainingDistanceFlags];
             _vehicleCurPosition = nextVehiclePosition;
             Orientation = moveInfo->direction;
             roll = moveInfo->roll;
@@ -7563,20 +7548,7 @@ bool Vehicle::UpdateTrackMotionBackwards(const CarEntry* carEntry, const Ride& c
                 + CoordsXYZ{ moveInfo->x, moveInfo->y,
                              moveInfo->z + GetRideTypeDescriptor(curRide.type).Heights.VehicleZOffset };
 
-            uint8_t remainingDistanceFlags = 0;
-            if (nextVehiclePosition.x != _vehicleCurPosition.x)
-            {
-                remainingDistanceFlags |= 1;
-            }
-            if (nextVehiclePosition.y != _vehicleCurPosition.y)
-            {
-                remainingDistanceFlags |= 2;
-            }
-            if (nextVehiclePosition.z != _vehicleCurPosition.z)
-            {
-                remainingDistanceFlags |= 4;
-            }
-            remaining_distance += SubpositionTranslationDistances[remainingDistanceFlags];
+            remaining_distance += GetPythagorasDistance(nextVehiclePosition - _vehicleCurPosition);
 
             _vehicleCurPosition = nextVehiclePosition;
             Orientation = moveInfo->direction;

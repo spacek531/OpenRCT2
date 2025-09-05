@@ -274,20 +274,10 @@ bool Vehicle::CableLiftUpdateTrackMotionForwards()
         track_progress = trackProgress;
         const auto moveInfo = GetMoveInfo();
         auto nextVehiclePosition = CoordsXYZ{ moveInfo->x, moveInfo->y, moveInfo->z } + TrackLocation;
-
-        uint8_t remainingDistanceFlags = 0;
         nextVehiclePosition.z += GetRideTypeDescriptor(curRide->type).Heights.VehicleZOffset;
-        if (nextVehiclePosition.x != _vehicleCurPosition.x)
-            remainingDistanceFlags |= (1 << 0);
-        if (nextVehiclePosition.y != _vehicleCurPosition.y)
-            remainingDistanceFlags |= (1 << 1);
-        if (nextVehiclePosition.z != _vehicleCurPosition.z)
-            remainingDistanceFlags |= (1 << 2);
 
-        remaining_distance -= SubpositionTranslationDistances[remainingDistanceFlags];
-        _vehicleCurPosition.x = nextVehiclePosition.x;
-        _vehicleCurPosition.y = nextVehiclePosition.y;
-        _vehicleCurPosition.z = nextVehiclePosition.z;
+        remaining_distance -= GetPythagorasDistance(nextVehiclePosition - _vehicleCurPosition);
+        _vehicleCurPosition = nextVehiclePosition;
 
         Orientation = moveInfo->direction;
         roll = moveInfo->roll;
@@ -342,21 +332,11 @@ bool Vehicle::CableLiftUpdateTrackMotionBackwards()
         }
         track_progress = trackProgress;
         const auto moveInfo = GetMoveInfo();
-        auto unk = CoordsXYZ{ moveInfo->x, moveInfo->y, moveInfo->z } + TrackLocation;
+        auto nextVehiclePosition = CoordsXYZ{ moveInfo->x, moveInfo->y, moveInfo->z } + TrackLocation;
+        nextVehiclePosition.z += GetRideTypeDescriptor(curRide->type).Heights.VehicleZOffset;
 
-        uint8_t remainingDistanceFlags = 0;
-        unk.z += GetRideTypeDescriptor(curRide->type).Heights.VehicleZOffset;
-        if (unk.x != _vehicleCurPosition.x)
-            remainingDistanceFlags |= (1 << 0);
-        if (unk.y != _vehicleCurPosition.y)
-            remainingDistanceFlags |= (1 << 1);
-        if (unk.z != _vehicleCurPosition.z)
-            remainingDistanceFlags |= (1 << 2);
-
-        remaining_distance += SubpositionTranslationDistances[remainingDistanceFlags];
-        _vehicleCurPosition.x = unk.x;
-        _vehicleCurPosition.y = unk.y;
-        _vehicleCurPosition.z = unk.z;
+        remaining_distance += GetPythagorasDistance(nextVehiclePosition - _vehicleCurPosition);
+        _vehicleCurPosition = nextVehiclePosition;
 
         Orientation = moveInfo->direction;
         roll = moveInfo->roll;
