@@ -281,11 +281,16 @@ namespace OpenRCT2::Math::Trigonometry
     };
 
     /** rct2: 0x009A39C4 */
-    constexpr std::array<int32_t, OpenRCT2::Entity::Yaw::kBaseRotation> kUnk9A39C4[] = {
+    constexpr std::array<int32_t, OpenRCT2::Entity::Yaw::kBaseRotation> GravityFromRollDataInt32 = {
         2147483647,  2096579710,  1946281152,  2096579710, 1946281152, 1380375879, 555809667,
         -372906620,  -1231746017, -1859775391, 1380375879, 555809667,  -372906620, -1231746017,
         -1859775391, 0,           2096579710,  1946281152, 2096579710, 1946281152,
     };
+
+    constexpr int32_t GetGravityFromRoll(VehicleRoll roll)
+    {
+        return GravityFromRollDataInt32[EnumValue(roll)];
+    }
 
     /** rct2: 0x009A36C4 */
     constexpr std::array<CoordsXY, OpenRCT2::Entity::Yaw::kBaseRotation> FreeRoamMovementData = {
