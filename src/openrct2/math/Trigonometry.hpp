@@ -155,72 +155,76 @@ namespace OpenRCT2::Math::Trigonometry
         return SubpositionTranslationDistances[index];
     }
 
-    /** rct2: 0x009A2970 */
+    /** rct2: 0x009A2970
+     * The sin of vehicle pitch based on track angles
+     * -SIN((Y1/360)*2*PI())*642000
+     * Where Y1 represents the angle of pitch in degrees
+     * Note that some values are not correct and these incorrect values are preserved for backwards-compatibility.
+     */
     static constexpr int32_t AccelerationFromPitch[] = {
-        0,       // Flat
-                 // The geometric angle of slopes 12.5 and 25 are actually 11.1 and 22.2 respectively.
-        -124548, // 1 Slope Up 12.5
-        -243318, // 2 Slope Up 25
-        -416016, // 3 Slope Up 42.5
-        -546342, // 4 Slope Up 60
-        124548,  // 5 Slope Down 12.5
-        243318,  // 6 Slope Down 25
-        416016,  // 7 Slope Down 42.5
-        546342,  // 8 Slope Down 60
-        -617604, // 9 Slope Up 75
-        -642000, // 10 Slope Up 90
-        -620172, // 11 Slope Up 105
-        -555972, // 12 Slope Up 120
-        -453894, // 13 Slope Up 135
-        -321000, // 14 Slope Up 150
-        -166278, // 15 Slope Up 165
-        0,       // 16 Fully Inverted
-        617604,  // 17 Slope Down 75
-        642000,  // 18 Slope Down 90
-        620172,  // 19 Slope Down 105
-        555972,  // 20 Slope Down 120
-        453894,  // 21 Slope Down 135
-        321000,  // 22 Slope Down 150
-        166278,  // 23 Slope Down 165
-        -321000, // 24 Corkscrew Right Up 0
-        -555972, // 25 Corkscrew Right Up 1
-        -642000, // 26 Corkscrew Right Up 2
-        -555972, // 27 Corkscrew Right Up 3
-        -321000, // 28 Corkscrew Right Up 4
-        321000,  // 29 Corkscrew Right Down 4
-        555972,  // 30 Corkscrew Right Down 3
-        642000,  // 31 Corkscrew Right Down 2
-        555972,  // 32 Corkscrew Right Down 1
-        321000,  // 33 Corkscrew Right Down 0
-        -321000, // 34 Corkscrew Left Up 0
-        -555972, // 35 Corkscrew Left Up 1
-        -642000, // 36 Corkscrew Left Up 2
-        -555972, // 37 Corkscrew Left Up 3
-        -321000, // 38 Corkscrew Left Up 4
-        321000,  // 39 Corkscrew Left Down 4
-        555972,  // 40 Corkscrew Left Down 2
-        642000,  // 41 Corkscrew Left Down 1
-        555972,  // 42 Corkscrew Left Down 1
-        321000,  // 43 Corkscrew Left Down 0
-        -33384,  // 44 Half Helix Up Large
-        -55854,  // 45 Half Helix Up Small
-        33384,   // 46 Half Helix Down Large
-        55854,   // 47 Half Helix Down Small
-        -66768,  // 48 Quarter Helix Up
-        66768,   // 49 Quarter Helix Down
-        // currently only diagonal elements use slopes angles 8, 16, 50. Diagonal gentle-to-steep transition uses
-        // diagonal sprites of slopes 25 and 42.
-        -90522,  // 50 Slope Up 8
-        -179760, // 51 Slope Down 16
-        -484068, // 52 Slope Up 50
-        90522,   // 53 Slope Down 8
-        179760,  // 54 Slope Down 16
-        484068,  // 55 Slope Down 50
-        243318,  // 56 Inverting Loop Down 25
-        416016,  // 57 Inverting Loop Down 42.5
-        546342,  // 58 Inverting Loop Down 60
-        -110424, // 59 Slope Up Spiral Lift Hill
+        0,       // flat
+        -124548, // up12
+        -243318, // up25
+        -416016, // up42
+        -546342, // up60
+        124548,  // down12
+        243318,  // down25
+        416016,  // down42
+        546342,  // down60
+        -617604, // up75
+        -642000, // up90
+        -620172, // up105
+        -555972, // up120
+        -453894, // up135
+        -321000, // up150
+        -166278, // up165
+        0,       // inverted
+        617604,  // down75
+        642000,  // down90
+        620172,  // down105
+        555972,  // down120
+        453894,  // down135
+        321000,  // down150
+        166278,  // down165
+        -321000, // corkscrewUpRight0
+        -555972, // corkscrewUpRight1
+        -642000, // corkscrewUpRight2
+        -555972, // corkscrewUpRight3
+        -321000, // corkscrewUpRight4
+        321000,  // corkscrewDownLeft0
+        555972,  // corkscrewDownLeft1
+        642000,  // corkscrewDownLeft2
+        555972,  // corkscrewDownLeft3
+        321000,  // corkscrewDownLeft4
+        -321000, // corkscrewUpLeft0
+        -555972, // corkscrewUpLeft1
+        -642000, // corkscrewUpLeft2
+        -555972, // corkscrewUpLeft3
+        -321000, // corkscrewUpLeft4
+        321000,  // corkscrewDownRight0
+        555972,  // corkscrewDownRight1
+        642000,  // corkscrewDownRight2
+        555972,  // corkscrewDownRight3
+        321000,  // corkscrewDownRight4
+        -33384,  // upHalfHelixLarge
+        -55854,  // upHalfHelixSmall
+        33384,   // downHalfHelixLarge
+        55854,   // downHalfHelixSmall
+        -66768,  // upQuarterHelix
+        66768,   // downQuarterHelix
+        -90522,  // up8
+        -179760, // up16
+        -484068, // up50
+        90522,   // down8
+        179760,  // down16
+        484068,  // down50
+        243318,  // uninvertingDown25
+        416016,  // uninvertingDown42
+        546342,  // uninvertingDown60
+        -110424, // curvedLiftHillUp
+        110424,  // curvedLiftHillDown
     };
+    static_assert(std::size(AccelerationFromPitch) == EnumValue(VehiclePitch::pitchCount));
 
     constexpr int32_t GetAccelerationFromPitch(VehiclePitch pitch)
     {
