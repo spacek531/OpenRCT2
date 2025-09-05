@@ -285,7 +285,7 @@ bool Vehicle::CableLiftUpdateTrackMotionForwards()
 
         if (remaining_distance >= 13962)
         {
-            acceleration += AccelerationFromPitch[EnumValue(pitch)];
+            acceleration += GetAccelerationFromPitch(pitch);
         }
     }
     return true;
@@ -344,7 +344,7 @@ bool Vehicle::CableLiftUpdateTrackMotionBackwards()
 
         if (remaining_distance < 0)
         {
-            acceleration += AccelerationFromPitch[EnumValue(pitch)];
+            acceleration += GetAccelerationFromPitch(pitch);
         }
     }
     return true;
@@ -375,7 +375,7 @@ int32_t Vehicle::CableLiftUpdateTrackMotion()
 
     for (Vehicle* vehicle = frontVehicle; vehicle != nullptr;)
     {
-        vehicle->acceleration = AccelerationFromPitch[EnumValue(vehicle->pitch)];
+        vehicle->acceleration = GetAccelerationFromPitch(vehicle->pitch);
         _vehicleUnkF64E10 = 1;
         vehicle->remaining_distance += _vehicleVelocityF64E0C;
 
@@ -396,7 +396,7 @@ int32_t Vehicle::CableLiftUpdateTrackMotion()
                     _vehicleMotionTrackFlags |= VEHICLE_UPDATE_MOTION_TRACK_FLAG_5;
                     _vehicleVelocityF64E0C -= vehicle->remaining_distance - 13962;
                     vehicle->remaining_distance = 13962;
-                    vehicle->acceleration += AccelerationFromPitch[EnumValue(vehicle->pitch)];
+                    vehicle->acceleration += GetAccelerationFromPitch(vehicle->pitch);
                     _vehicleUnkF64E10++;
                     continue;
                 }
@@ -409,7 +409,7 @@ int32_t Vehicle::CableLiftUpdateTrackMotion()
                 _vehicleMotionTrackFlags |= VEHICLE_UPDATE_MOTION_TRACK_FLAG_5;
                 _vehicleVelocityF64E0C -= vehicle->remaining_distance + 1;
                 vehicle->remaining_distance = -1;
-                vehicle->acceleration += AccelerationFromPitch[EnumValue(vehicle->pitch)];
+                vehicle->acceleration += GetAccelerationFromPitch(vehicle->pitch);
                 _vehicleUnkF64E10++;
             }
             vehicle->MoveTo(_vehicleCurPosition);
