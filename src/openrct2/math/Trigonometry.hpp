@@ -280,6 +280,11 @@ namespace OpenRCT2::Math::Trigonometry
         -600568389,  -1618265062, -817995863,  -1390684831, -1827693544, 369214930,   -369214930,
     };
 
+    constexpr CoordsXY GetPitchComponents(VehiclePitch pitch)
+    {
+        return { kUnk9A37E4[EnumValue(pitch)], kUnk9A38D4[EnumValue(pitch)] };
+    }
+
     /** rct2: 0x009A39C4
      * Used to calculate the vertical component of G-forces. Unfortunately these don't align with the actual geometry of the
      * track. See comments on the values for the difference between the vehicle's visual angle with the angle used in the
