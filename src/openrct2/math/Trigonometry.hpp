@@ -295,7 +295,7 @@ namespace OpenRCT2::Math::Trigonometry
     };
 
     /** rct2: 0x009A36C4 */
-    constexpr std::array<Unk9A36C4Struct, OpenRCT2::Entity::Yaw::kBaseRotation> kUnk9A36C4 = {
+    constexpr std::array<Unk9A36C4Struct, OpenRCT2::Entity::Yaw::kBaseRotation> FreeRoamMovementData = {
         Unk9A36C4Struct{ -1, 0, 8716 },
         { -1, 0, 8716 },
         { -1, 0, 8716 },
@@ -329,6 +329,11 @@ namespace OpenRCT2::Math::Trigonometry
         { -1, 0, 8716 },
         { -1, -1, 12327 },
     };
+
+    constexpr Unk9A36C4Struct GetFreeRoamMovementData(uint8_t yaw)
+    {
+        return FreeRoamMovementData[yaw];
+    }
 
     /** rct2: 0x009A3AC4, 0x009A3AC6 */
     constexpr std::array<CoordsXY, OpenRCT2::Entity::Yaw::kBaseRotation> stru_9A3AC4[] = {
