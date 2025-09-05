@@ -4912,11 +4912,11 @@ void Vehicle::UpdateSound()
     sound2_volume = soundIdVolume.volume;
 
     // Calculate Sound Vector (used for sound frequency calcs)
-    int32_t soundDirection = GetDopplerShift(Orientation);
-    int32_t soundVector = ((velocity >> 14) * soundDirection) >> 14;
-    soundVector = std::clamp(soundVector, -127, 127);
+    int32_t doppler = GetDopplerShift(Orientation);
+    doppler = ((velocity >> 14) * doppler) >> 14;
+    doppler = std::clamp(doppler, -127, 127);
 
-    sound_vector_factor = soundVector & 0xFF;
+    sound_vector_factor = doppler & 0xFF;
 }
 
 /**
