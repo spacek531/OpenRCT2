@@ -287,50 +287,15 @@ namespace OpenRCT2::Math::Trigonometry
         -1859775391, 0,           2096579710,  1946281152, 2096579710, 1946281152,
     };
 
-    struct Unk9A36C4Struct
-    {
-        int16_t x;
-        int16_t y;
-        uint32_t distance;
-    };
-
     /** rct2: 0x009A36C4 */
-    constexpr std::array<Unk9A36C4Struct, OpenRCT2::Entity::Yaw::kBaseRotation> FreeRoamMovementData = {
-        Unk9A36C4Struct{ -1, 0, 8716 },
-        { -1, 0, 8716 },
-        { -1, 0, 8716 },
-        { -1, 1, 12327 },
-        { -1, 1, 12327 },
-        { -1, 1, 12327 },
-        { 0, 1, 8716 },
-        { -1, 1, 12327 },
-        { 0, 1, 8716 },
-        { 0, 1, 8716 },
-        { 0, 1, 8716 },
-        { 1, 1, 12327 },
-        { 1, 1, 12327 },
-        { 1, 1, 12327 },
-        { 1, 0, 8716 },
-        { 1, 1, 12327 },
-        { 1, 0, 8716 },
-        { 1, 0, 8716 },
-        { 1, 0, 8716 },
-        { 1, -1, 12327 },
-        { 1, -1, 12327 },
-        { 1, -1, 12327 },
-        { 0, -1, 8716 },
-        { 1, -1, 12327 },
-        { 0, -1, 8716 },
-        { 0, -1, 8716 },
-        { 0, -1, 8716 },
-        { -1, -1, 12327 },
-        { -1, -1, 12327 },
-        { -1, -1, 12327 },
-        { -1, 0, 8716 },
-        { -1, -1, 12327 },
+    constexpr std::array<CoordsXY, OpenRCT2::Entity::Yaw::kBaseRotation> FreeRoamMovementData = {
+        CoordsXY{ -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 1 },  { -1, 1 },  { -1, 1 },  { 0, 1 },  { -1, 1 },
+        { 0, 1 },  { 0, 1 },  { 0, 1 },  { 1, 1 },   { 1, 1 },   { 1, 1 },   { 1, 0 },  { 1, 1 },
+        { 1, 0 },  { 1, 0 },  { 1, 0 },  { 1, -1 },  { 1, -1 },  { 1, -1 },  { 0, -1 }, { 1, -1 },
+        { 0, -1 }, { 0, -1 }, { 0, -1 }, { -1, -1 }, { -1, -1 }, { -1, -1 }, { -1, 0 }, { -1, -1 },
     };
 
-    constexpr Unk9A36C4Struct GetFreeRoamMovementData(uint8_t yaw)
+    constexpr CoordsXY GetFreeRoamMovementData(uint8_t yaw)
     {
         return FreeRoamMovementData[yaw];
     }
