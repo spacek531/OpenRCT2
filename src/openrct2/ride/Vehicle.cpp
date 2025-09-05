@@ -3738,7 +3738,8 @@ void Vehicle::UpdateMotionBoatHire()
             }
 
             int32_t edi = (Orientation | (var_35 & 1)) & 0x1F;
-            loc2 = { x + kUnk9A36C4[edi].x, y + kUnk9A36C4[edi].y };
+            auto movementData = GetFreeRoamMovementData(edi);
+            loc2 = { x + movementData.x, y + movementData.y };
             if (UpdateMotionCollisionDetection({ loc2, z }, nullptr))
             {
                 remaining_distance = 0;
@@ -3836,7 +3837,7 @@ void Vehicle::UpdateMotionBoatHire()
                 TrackLocation = { flooredLocation, TrackLocation.z };
             }
 
-            remaining_distance -= kUnk9A36C4[edi].distance;
+            remaining_distance -= movementData.distance;
             _vehicleCurPosition.x = loc2.x;
             _vehicleCurPosition.y = loc2.y;
             if (remaining_distance < 0x368A)
@@ -5175,10 +5176,12 @@ int32_t Vehicle::UpdateMotionDodgems()
 
         CoordsXYZ location = { x, y, z };
 
-        location.x += kUnk9A36C4[oldCollisionDirection].x;
-        location.y += kUnk9A36C4[oldCollisionDirection].y;
-        location.x += kUnk9A36C4[oldCollisionDirection + 1].x;
-        location.y += kUnk9A36C4[oldCollisionDirection + 1].y;
+        auto movementData = GetFreeRoamMovementData(oldCollisionDirection);
+        auto movementData1 = GetFreeRoamMovementData(oldCollisionDirection + 1);
+        location.x += movementData.x;
+        location.y += movementData.y;
+        location.x += movementData1.x;
+        location.y += movementData1.y;
 
         if (collideSprite = DodgemsCarWouldCollideAt(location); !collideSprite.has_value())
         {
@@ -5202,15 +5205,16 @@ int32_t Vehicle::UpdateMotionDodgems()
             direction |= var_35 & 1;
 
             CoordsXY location = _vehicleCurPosition;
-            location.x += kUnk9A36C4[direction].x;
-            location.y += kUnk9A36C4[direction].y;
+            auto movementData = GetFreeRoamMovementData(direction);
+            location.x += movementData.x;
+            location.y += movementData.y;
 
             if (collideSprite = DodgemsCarWouldCollideAt(location); collideSprite.has_value())
             {
                 break;
             }
 
-            remaining_distance -= kUnk9A36C4[direction].distance;
+            remaining_distance -= movementData.distance;
             _vehicleCurPosition.x = location.x;
             _vehicleCurPosition.y = location.y;
             if (remaining_distance < 13962)
