@@ -2913,8 +2913,8 @@ void Vehicle::UpdateCrashSetup()
         lastVehicle = trainVehicle;
 
         trainVehicle->sub_state = 0;
-        int32_t trainX = stru_9A3AC4[trainVehicle->Orientation / 2].x;
-        int32_t trainY = stru_9A3AC4[trainVehicle->Orientation / 2].y;
+        int32_t trainX = CrashDirectionComponents[trainVehicle->Orientation / 2].x;
+        int32_t trainY = CrashDirectionComponents[trainVehicle->Orientation / 2].y;
         auto trainZ = GetPitchComponents(trainVehicle->pitch).y >> 23;
 
         int32_t ecx = GetPitchComponents(trainVehicle->pitch).x >> 15;
