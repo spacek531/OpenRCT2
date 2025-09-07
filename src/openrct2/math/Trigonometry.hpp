@@ -9,8 +9,10 @@
 
 #pragma once
 #include "../entity/Yaw.hpp"
-#include "../ride/Vehicle.h"
+#include "../ride/Angles.h"
 #include "../world/Location.hpp"
+
+#include <cstddef>
 
 namespace OpenRCT2::Math::Trigonometry
 {
