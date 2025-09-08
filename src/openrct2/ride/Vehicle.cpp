@@ -6983,10 +6983,13 @@ bool Vehicle::UpdateTrackMotionForwardsGetNewTrack(
                 }
             }
             MapInvalidateElement(TrackLocation, tileElement);
-            BlockBrakesOpenPreviousSection(curRide, TrackLocation, tileElement);
-            if (TrackTypeIsBlockBrakes(trackType))
+            if (!tileElement->AsTrack()->IsBrakeClosed())
             {
-                BlockBrakeSetLinkedBrakesClosed(TrackLocation, *tileElement->AsTrack(), true);
+                BlockBrakesOpenPreviousSection(curRide, TrackLocation, tileElement);
+                if (TrackTypeIsBlockBrakes(trackType))
+                {
+                    BlockBrakeSetLinkedBrakesClosed(TrackLocation, *tileElement->AsTrack(), true);
+                }
             }
         }
     }
