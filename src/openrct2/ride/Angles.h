@@ -106,6 +106,7 @@ enum class VehicleRoll : uint8_t
     uninvertingRight22,
     uninvertingRight45,
     rollCount,
+    normalRollCount = 15,
     nullRoll = 255,
 };
 
