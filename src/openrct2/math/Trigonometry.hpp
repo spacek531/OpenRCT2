@@ -54,70 +54,69 @@ namespace OpenRCT2::Math::Trigonometry
      *  Where Y1 represents the angle of pitch in degrees
      * Note that some values are not correct. Someone should fix them.
      */
-    constexpr std::array < CoordsXY, EnumValue(VehiclePitch::pitchCount > PitchToDirectionVectorFromGeometryInt32 = {
-        CoordsXY{ 2147483647, 0 },         // flat
-        { 2106585154, 417115092 }, // up12
-        { 1985590284, 817995863 }, // up25
-        { 1636362342, 1390684831 }, // up42
-        { 1127484953, 1827693544 }, // up60
-        { 2106585154, -417115092 }, // down12
-        { 1985590284, -817995863 }, // down25
-        { 1636362342, -1390684831 }, // down42
-        { 1127484953, -1827693544 }, // down60
-        { 58579923, 2066040965 }, // up75
-        { 0, 2147483647 }, // up90
-        { -555809667, 2074309916 }, // up115
-        { -1073741824, 1859775393 }, // up120
-        { -1518500249, 1518500249 }, // up135
-        { -1859775391, 1073741824 }, // up150
-        { -2074309916, 555809666 }, // up165
-        { -2147483647, 0 },        // inverted
-        { 58579923, -2066040965 }, // down75
-        { 0, -2147483647 }, // down90
-        { -555809667, -2074309916 },// down115
+    constexpr std::array<CoordsXY, EnumValue(VehiclePitch::pitchCount)> PitchToDirectionVectorFromGeometryInt32 = {
+        CoordsXY{ 2147483647, 0 },    // flat
+        { 2106585154, 417115092 },    // up12
+        { 1985590284, 817995863 },    // up25
+        { 1636362342, 1390684831 },   // up42
+        { 1127484953, 1827693544 },   // up60
+        { 2106585154, -417115092 },   // down12
+        { 1985590284, -817995863 },   // down25
+        { 1636362342, -1390684831 },  // down42
+        { 1127484953, -1827693544 },  // down60
+        { 58579923, 2066040965 },     // up75
+        { 0, 2147483647 },            // up90
+        { -555809667, 2074309916 },   // up115
+        { -1073741824, 1859775393 },  // up120
+        { -1518500249, 1518500249 },  // up135
+        { -1859775391, 1073741824 },  // up150
+        { -2074309916, 555809666 },   // up165
+        { -2147483647, 0 },           // inverted
+        { 58579923, -2066040965 },    // down75
+        { 0, -2147483647 },           // down90
+        { -555809667, -2074309916 },  // down115
         { -1073741824, -1859775393 }, // down120
         { -1518500249, -1518500249 }, // down135
         { -1859775391, -1073741824 }, // down150
-        { -2074309916, -555809666 }, // down165
-        { 1859775393, 1073741824 }, // corkscrewUpRight0
-        { 1073741824, 1859775393 }, // corkscrewUpRight1
-        { 0, 2147483647 }, // corkscrewUpRight2
-        { -1073741824, 1859775393 }, // corkscrewUpRight3
-        { -1859775393, 1073741824 }, // corkscrewUpRight4
-        { 1859775393, -1073741824 }, // corkscrewDownLeft0
-        { 1073741824, -1859775393 }, // corkscrewDownLeft1
-        { 0, -2147483647 }, // corkscrewDownLeft2
+        { -2074309916, -555809666 },  // down165
+        { 1859775393, 1073741824 },   // corkscrewUpRight0
+        { 1073741824, 1859775393 },   // corkscrewUpRight1
+        { 0, 2147483647 },            // corkscrewUpRight2
+        { -1073741824, 1859775393 },  // corkscrewUpRight3
+        { -1859775393, 1073741824 },  // corkscrewUpRight4
+        { 1859775393, -1073741824 },  // corkscrewDownLeft0
+        { 1073741824, -1859775393 },  // corkscrewDownLeft1
+        { 0, -2147483647 },           // corkscrewDownLeft2
         { -1073741824, -1859775393 }, // corkscrewDownLeft3
         { -1859775393, -1073741824 }, // corkscrewDownLeft4
-        { 1859775393, 1073741824 }, // corkscrewUpLeft0
-        { 1073741824, 1859775393 }, // corkscrewUpLeft1
-        { 0, 2147483647 }, // corkscrewUpLeft2
-        { -1073741824, 1859775393 }, // corkscrewUpLeft3
-        { -1859775393, 1073741824 }, // corkscrewUpLeft4
-        { 1859775393, -1073741824 }, // corkscrewDownRight0
-        { 1073741824, -1859775393 }, // corkscrewDownRight1
-        { 0, -2147483647 }, // corkscrewDownRight2
+        { 1859775393, 1073741824 },   // corkscrewUpLeft0
+        { 1073741824, 1859775393 },   // corkscrewUpLeft1
+        { 0, 2147483647 },            // corkscrewUpLeft2
+        { -1073741824, 1859775393 },  // corkscrewUpLeft3
+        { -1859775393, 1073741824 },  // corkscrewUpLeft4
+        { 1859775393, -1073741824 },  // corkscrewDownRight0
+        { 1073741824, -1859775393 },  // corkscrewDownRight1
+        { 0, -2147483647 },           // corkscrewDownRight2
         { -1073741824, -1859775393 }, // corkscrewDownRight3
         { -1859775393, -1073741824 }, // corkscrewDownRight4
-        { 2144540595, 112390610 }, // upHalfHelixLarge
-        { 2139311823, 187165532 }, // upHalfHelixSmall
-        { 2144540595, -112390610 }, // downHalfHelixLarge
-        { 2139311823, -187165532 }, // downHalfHelixSmall
-        { 2135719507, 224473165 }, // upQuarterHelix
-        { 2135719507, -224473165 }, // downQuarterHelix
-        { 2125953864, 303325208 }, // up8
-        { 2061796213, 600568389 }, // up16
-        { 1411702590, 1618265062 }, // up50
-        { 2125953864, -303325208 }, // down8
-        { 2061796213, -600568389 }, // down16
-        { 1411702590, -1618265062 }, // down50
-        { 1985590284, -817995863 },  // uninvertingDown25
-        { 1636362342, -1390684831 }, // uninvertingDown42
-        { 1127484953, -1827693544 }, // uninvertingDown60
-        { 2115506168, 369214930 },   // curvedLifthillUp
-        { 2115506168, -369214930 },  // curvedLiftHillDown
-        };
-    static_assert(std::size(PitchToDirectionVectorFromGeometryInt32) == EnumValue(VehiclePitch::pitchCount));
+        { 2144540595, 112390610 },    // upHalfHelixLarge
+        { 2139311823, 187165532 },    // upHalfHelixSmall
+        { 2144540595, -112390610 },   // downHalfHelixLarge
+        { 2139311823, -187165532 },   // downHalfHelixSmall
+        { 2135719507, 224473165 },    // upQuarterHelix
+        { 2135719507, -224473165 },   // downQuarterHelix
+        { 2125953864, 303325208 },    // up8
+        { 2061796213, 600568389 },    // up16
+        { 1411702590, 1618265062 },   // up50
+        { 2125953864, -303325208 },   // down8
+        { 2061796213, -600568389 },   // down16
+        { 1411702590, -1618265062 },  // down50
+        { 1985590284, -817995863 },   // uninvertingDown25
+        { 1636362342, -1390684831 },  // uninvertingDown42
+        { 1127484953, -1827693544 },  // uninvertingDown60
+        { 2115506168, 369214930 },    // curvedLifthillUp
+        { 2115506168, -369214930 },   // curvedLiftHillDown
+    };
 
     constexpr CoordsXY GetPitchComponents(VehiclePitch pitch)
     {
@@ -182,7 +181,7 @@ namespace OpenRCT2::Math::Trigonometry
      * Where Y1 represents the angle of pitch in degrees
      * Note that some values are not correct and these incorrect values are preserved for backwards-compatibility.
      */
-    static constexpr int32_t AccelerationFromPitch[] = {
+    constexpr std::array<int32_t, EnumValue(VehiclePitch::pitchCount)> AccelerationFromPitch = {
         0,       // flat
         -124548, // up12
         -243318, // up25
@@ -245,7 +244,6 @@ namespace OpenRCT2::Math::Trigonometry
         -110424, // curvedLiftHillUp
         110424,  // curvedLiftHillDown
     };
-    static_assert(std::size(AccelerationFromPitch) == EnumValue(VehiclePitch::pitchCount));
 
     constexpr int32_t GetAccelerationFromPitch(VehiclePitch pitch)
     {
@@ -330,9 +328,9 @@ namespace OpenRCT2::Math::Trigonometry
     /** rct2: 0x009A36C4 */
     constexpr std::array<CoordsXY, OpenRCT2::Entity::Yaw::kBaseRotation> FreeRoamMovementData = {
         CoordsXY{ -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 1 },  { -1, 1 },  { -1, 1 },  { 0, 1 },  { -1, 1 },
-        { 0, 1 },  { 0, 1 },  { 0, 1 },  { 1, 1 },   { 1, 1 },   { 1, 1 },   { 1, 0 },  { 1, 1 },
-        { 1, 0 },  { 1, 0 },  { 1, 0 },  { 1, -1 },  { 1, -1 },  { 1, -1 },  { 0, -1 }, { 1, -1 },
-        { 0, -1 }, { 0, -1 }, { 0, -1 }, { -1, -1 }, { -1, -1 }, { -1, -1 }, { -1, 0 }, { -1, -1 },
+        { 0, 1 },          { 0, 1 },  { 0, 1 },  { 1, 1 },   { 1, 1 },   { 1, 1 },   { 1, 0 },  { 1, 1 },
+        { 1, 0 },          { 1, 0 },  { 1, 0 },  { 1, -1 },  { 1, -1 },  { 1, -1 },  { 0, -1 }, { 1, -1 },
+        { 0, -1 },         { 0, -1 }, { 0, -1 }, { -1, -1 }, { -1, -1 }, { -1, -1 }, { -1, 0 }, { -1, -1 },
     };
 
     constexpr CoordsXY GetFreeRoamMovementData(uint8_t yaw)
