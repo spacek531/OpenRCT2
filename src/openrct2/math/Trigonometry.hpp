@@ -12,6 +12,7 @@
 #include "../ride/Angles.h"
 #include "../world/Location.hpp"
 
+#include <array>
 #include <cstddef>
 
 namespace OpenRCT2::Math::Trigonometry
@@ -22,16 +23,16 @@ namespace OpenRCT2::Math::Trigonometry
      * Where L1 represents an incrementing column 0 - 63
      * Note: Must be at least 32bit to ensure all users do not overflow
      */
-    static constexpr CoordsXY YawToDirectionVector[64] = {
-        { -256, 0 },    { -255, 25 },   { -251, 50 },   { -245, 74 },   { -237, 98 },   { -226, 121 },  { -213, 142 },
-        { -198, 162 },  { -181, 181 },  { -162, 198 },  { -142, 213 },  { -121, 226 },  { -98, 237 },   { -74, 245 },
-        { -50, 251 },   { -25, 255 },   { 0, 256 },     { 25, 255 },    { 50, 251 },    { 74, 245 },    { 98, 237 },
-        { 121, 226 },   { 142, 213 },   { 162, 198 },   { 181, 181 },   { 198, 162 },   { 213, 142 },   { 226, 121 },
-        { 237, 98 },    { 245, 74 },    { 251, 50 },    { 255, 25 },    { 256, 0 },     { 255, -25 },   { 251, -50 },
-        { 245, -74 },   { 237, -98 },   { 226, -121 },  { 213, -142 },  { 198, -162 },  { 181, -181 },  { 162, -198 },
-        { 142, -213 },  { 121, -226 },  { 98, -237 },   { 74, -245 },   { 50, -251 },   { 25, -255 },   { 0, -256 },
-        { -25, -255 },  { -50, -251 },  { -74, -245 },  { -98, -237 },  { -121, -226 }, { -142, -213 }, { -162, -198 },
-        { -181, -181 }, { -198, -162 }, { -213, -142 }, { -226, -121 }, { -237, -98 },  { -245, -74 },  { -251, -50 },
+    static constexpr std::array<CoordsXY, 64> YawToDirectionVector = {
+        CoordsXY{ -256, 0 }, { -255, 25 },   { -251, 50 },   { -245, 74 },   { -237, 98 },   { -226, 121 },  { -213, 142 },
+        { -198, 162 },       { -181, 181 },  { -162, 198 },  { -142, 213 },  { -121, 226 },  { -98, 237 },   { -74, 245 },
+        { -50, 251 },        { -25, 255 },   { 0, 256 },     { 25, 255 },    { 50, 251 },    { 74, 245 },    { 98, 237 },
+        { 121, 226 },        { 142, 213 },   { 162, 198 },   { 181, 181 },   { 198, 162 },   { 213, 142 },   { 226, 121 },
+        { 237, 98 },         { 245, 74 },    { 251, 50 },    { 255, 25 },    { 256, 0 },     { 255, -25 },   { 251, -50 },
+        { 245, -74 },        { 237, -98 },   { 226, -121 },  { 213, -142 },  { 198, -162 },  { 181, -181 },  { 162, -198 },
+        { 142, -213 },       { 121, -226 },  { 98, -237 },   { 74, -245 },   { 50, -251 },   { 25, -255 },   { 0, -256 },
+        { -25, -255 },       { -50, -251 },  { -74, -245 },  { -98, -237 },  { -121, -226 }, { -142, -213 }, { -162, -198 },
+        { -181, -181 },      { -198, -162 }, { -213, -142 }, { -226, -121 }, { -237, -98 },  { -245, -74 },  { -251, -50 },
         { -255, -25 },
     };
     // Currently OpenRCT2::Entity::Yaw::BaseSpritePrecision is 32, but one day it will be 64.
@@ -42,68 +43,68 @@ namespace OpenRCT2::Math::Trigonometry
      * COS((Y1/360)*2*PI())*256,-SIN((Y1/360)*2*PI())*256
      * Where Y1 represents the angle of pitch in degrees
      */
-    constexpr CoordsXY PitchToDirectionVectorFromGeometry[] = {
-        { 256, 0 },     // flat
-        { 251, 49 },    // slopes up
-        { 236, 97 },    // slopes up
-        { 195, 165 },   // slopes up
-        { 134, 217 },   // slopes up
-        { 251, -49 },   // slopes down
-        { 236, -97 },   // slopes down
-        { 195, -165 },  // slopes down
-        { 135, -217 },  // slopes down
-        { 70, 246 },    // slopes vertical up
-        { 0, 256 },     // slopes vertical up
-        { -66, 247 },   // slopes looping up
-        { -128, 221 },  // slopes looping up
-        { -181, 181 },  // slopes looping up
-        { -221, 128 },  // slopes looping up
-        { -247, 66 },   // slopes looping up
-        { -256, 0 },    // inverted
-        { 70, -246 },   // slopes vertical down
-        { 0, -256 },    // slopes vertical down
-        { -66, -247 },  // slopes looping down
-        { -128, -221 }, // slopes looping down
-        { -181, -181 }, // slopes looping down
-        { -221, -128 }, // slopes looping down
-        { -247, -66 },  // slopes looping down
-        { 221, 128 },   // corkscrew up left
-        { 128, 221 },   // corkscrew up left
-        { 0, 256 },     // corkscrew up left
-        { -128, 221 },  // corkscrew up left
-        { -221, 128 },  // corkscrew up left
-        { -221, -128 }, // corkscrew down left
-        { -128, -221 }, // corkscrew down left
-        { 0, -256 },    // corkscrew down left
-        { 128, -221 },  // corkscrew down left
-        { 221, -128 },  // corkscrew down left
-        { 221, 128 },   // corkscrew up right
-        { 128, 221 },   // corkscrew up right
-        { 0, 256 },     // corkscrew up right
-        { -128, 221 },  // corkscrew up right
-        { -221, 128 },  // corkscrew up right
-        { -221, -128 }, // corkscrew down right
-        { -128, -221 }, // corkscrew down right
-        { 0, -256 },    // corkscrew down right
-        { 128, -221 },  // corkscrew down right
-        { 221, 128 },   // corkscrew down right
-        { 256, 0 },     // half helixes
-        { 256, 0 },     // half helixes
-        { 256, 0 },     // half helixes
-        { 256, 0 },     // half helixes
-        { 256, 0 },     // quarter helixes
-        { 256, 0 },     // quarter helixes
-        { 252, 42 },    // diagonal slopes up
-        { 241, 83 },    // diagonal slopes up
-        { 168, 193 },   // diagonal slopes up
-        { 252, -42 },   // diagonal slopes down
-        { 241, -83 },   // diagonal slopes down
-        { 168, -193 },  // diagonal slopes down
-        { 236, -97 },   // inverting transition slopes down
-        { 195, -165 },  // inverting transition slopes down
-        { 134, -217 },  // inverting transition slopes down
-        { 252, 44 },    // spiral lift hill up
-        { 252, -44 },   // spiral lift hill down
+    constexpr std::array<CoordsXY, EnumValue(VehiclePitch::pitchCount)> PitchToDirectionVectorFromGeometry = {
+        CoordsXY{ 256, 0 }, // flat
+        { 251, 49 },        // slopes up
+        { 236, 97 },        // slopes up
+        { 195, 165 },       // slopes up
+        { 134, 217 },       // slopes up
+        { 251, -49 },       // slopes down
+        { 236, -97 },       // slopes down
+        { 195, -165 },      // slopes down
+        { 135, -217 },      // slopes down
+        { 70, 246 },        // slopes vertical up
+        { 0, 256 },         // slopes vertical up
+        { -66, 247 },       // slopes looping up
+        { -128, 221 },      // slopes looping up
+        { -181, 181 },      // slopes looping up
+        { -221, 128 },      // slopes looping up
+        { -247, 66 },       // slopes looping up
+        { -256, 0 },        // inverted
+        { 70, -246 },       // slopes vertical down
+        { 0, -256 },        // slopes vertical down
+        { -66, -247 },      // slopes looping down
+        { -128, -221 },     // slopes looping down
+        { -181, -181 },     // slopes looping down
+        { -221, -128 },     // slopes looping down
+        { -247, -66 },      // slopes looping down
+        { 221, 128 },       // corkscrew up left
+        { 128, 221 },       // corkscrew up left
+        { 0, 256 },         // corkscrew up left
+        { -128, 221 },      // corkscrew up left
+        { -221, 128 },      // corkscrew up left
+        { -221, -128 },     // corkscrew down left
+        { -128, -221 },     // corkscrew down left
+        { 0, -256 },        // corkscrew down left
+        { 128, -221 },      // corkscrew down left
+        { 221, -128 },      // corkscrew down left
+        { 221, 128 },       // corkscrew up right
+        { 128, 221 },       // corkscrew up right
+        { 0, 256 },         // corkscrew up right
+        { -128, 221 },      // corkscrew up right
+        { -221, 128 },      // corkscrew up right
+        { -221, -128 },     // corkscrew down right
+        { -128, -221 },     // corkscrew down right
+        { 0, -256 },        // corkscrew down right
+        { 128, -221 },      // corkscrew down right
+        { 221, 128 },       // corkscrew down right
+        { 256, 0 },         // half helixes
+        { 256, 0 },         // half helixes
+        { 256, 0 },         // half helixes
+        { 256, 0 },         // half helixes
+        { 256, 0 },         // quarter helixes
+        { 256, 0 },         // quarter helixes
+        { 252, 42 },        // diagonal slopes up
+        { 241, 83 },        // diagonal slopes up
+        { 168, 193 },       // diagonal slopes up
+        { 252, -42 },       // diagonal slopes down
+        { 241, -83 },       // diagonal slopes down
+        { 168, -193 },      // diagonal slopes down
+        { 236, -97 },       // inverting transition slopes down
+        { 195, -165 },      // inverting transition slopes down
+        { 134, -217 },      // inverting transition slopes down
+        { 252, 44 },        // spiral lift hill up
+        { 252, -44 },       // spiral lift hill down
     };
     static_assert(std::size(PitchToDirectionVectorFromGeometry) == EnumValue(VehiclePitch::pitchCount));
 
@@ -125,7 +126,7 @@ namespace OpenRCT2::Math::Trigonometry
     /** rct2: 0x009A2930
         The distance between subposition points in a movement direction (but not distance).
         */
-    const int32_t SubpositionTranslationDistances[] = {
+    constexpr std::array<int32_t, 16> SubpositionTranslationDistances = {
         // For a base length of 8716 (0x220C) on the horizontal and 6554 (0x199A) on the vertical,
         // use the Pythagoras theorem and round up.
         0,     // no movement
@@ -215,7 +216,7 @@ namespace OpenRCT2::Math::Trigonometry
     };
 
     /** rct2: 0x009A3684 */
-    const int32_t SpriteDirectionToSoundDirection[] = {
+    constexpr std::array<int32_t, OpenRCT2::Entity::Yaw::kBaseRotation> SpriteDirectionToSoundDirection = {
         -0x4000, // 0
         -0x3000, // 1
         -0x2000, // 2
@@ -273,7 +274,7 @@ namespace OpenRCT2::Math::Trigonometry
     };
 
     /** rct2: 0x009A39C4 */
-    static constexpr int32_t kUnk9A39C4[] = {
+    constexpr std::array<int32_t, OpenRCT2::Entity::Yaw::kBaseRotation> kUnk9A39C4[] = {
         2147483647,  2096579710,  1946281152,  2096579710, 1946281152, 1380375879, 555809667,
         -372906620,  -1231746017, -1859775391, 1380375879, 555809667,  -372906620, -1231746017,
         -1859775391, 0,           2096579710,  1946281152, 2096579710, 1946281152,
@@ -287,18 +288,45 @@ namespace OpenRCT2::Math::Trigonometry
     };
 
     /** rct2: 0x009A36C4 */
-    static constexpr Unk9A36C4Struct kUnk9A36C4[] = {
-        { -1, 0, 8716 }, { -1, 0, 8716 },   { -1, 0, 8716 },  { -1, 1, 12327 },  { -1, 1, 12327 },  { -1, 1, 12327 },
-        { 0, 1, 8716 },  { -1, 1, 12327 },  { 0, 1, 8716 },   { 0, 1, 8716 },    { 0, 1, 8716 },    { 1, 1, 12327 },
-        { 1, 1, 12327 }, { 1, 1, 12327 },   { 1, 0, 8716 },   { 1, 1, 12327 },   { 1, 0, 8716 },    { 1, 0, 8716 },
-        { 1, 0, 8716 },  { 1, -1, 12327 },  { 1, -1, 12327 }, { 1, -1, 12327 },  { 0, -1, 8716 },   { 1, -1, 12327 },
-        { 0, -1, 8716 }, { 0, -1, 8716 },   { 0, -1, 8716 },  { -1, -1, 12327 }, { -1, -1, 12327 }, { -1, -1, 12327 },
-        { -1, 0, 8716 }, { -1, -1, 12327 },
+    constexpr std::array<Unk9A36C4Struct, OpenRCT2::Entity::Yaw::kBaseRotation> kUnk9A36C4 = {
+        Unk9A36C4Struct{ -1, 0, 8716 },
+        { -1, 0, 8716 },
+        { -1, 0, 8716 },
+        { -1, 1, 12327 },
+        { -1, 1, 12327 },
+        { -1, 1, 12327 },
+        { 0, 1, 8716 },
+        { -1, 1, 12327 },
+        { 0, 1, 8716 },
+        { 0, 1, 8716 },
+        { 0, 1, 8716 },
+        { 1, 1, 12327 },
+        { 1, 1, 12327 },
+        { 1, 1, 12327 },
+        { 1, 0, 8716 },
+        { 1, 1, 12327 },
+        { 1, 0, 8716 },
+        { 1, 0, 8716 },
+        { 1, 0, 8716 },
+        { 1, -1, 12327 },
+        { 1, -1, 12327 },
+        { 1, -1, 12327 },
+        { 0, -1, 8716 },
+        { 1, -1, 12327 },
+        { 0, -1, 8716 },
+        { 0, -1, 8716 },
+        { 0, -1, 8716 },
+        { -1, -1, 12327 },
+        { -1, -1, 12327 },
+        { -1, -1, 12327 },
+        { -1, 0, 8716 },
+        { -1, -1, 12327 },
     };
 
     /** rct2: 0x009A3AC4, 0x009A3AC6 */
-    static constexpr CoordsXY stru_9A3AC4[] = {
-        { -256, 0 }, { -236, 98 }, { -181, 181 }, { -98, 236 }, { 0, 256 },  { 98, 236 },   { 181, 181 },   { 236, 98 },
-        { 256, 0 },  { 236, -98 }, { 181, -181 }, { 98, -236 }, { 0, -256 }, { -98, -236 }, { -181, -181 }, { -236, -98 },
+    constexpr std::array<CoordsXY, OpenRCT2::Entity::Yaw::kBaseRotation> stru_9A3AC4[] = {
+        CoordsXY{ -256, 0 }, { -236, 98 },  { -181, 181 },  { -98, 236 },  { 0, 256 },    { 98, 236 },
+        { 181, 181 },        { 236, 98 },   { 256, 0 },     { 236, -98 },  { 181, -181 }, { 98, -236 },
+        { 0, -256 },         { -98, -236 }, { -181, -181 }, { -236, -98 },
     };
 } // namespace OpenRCT2::Math::Trigonometry
