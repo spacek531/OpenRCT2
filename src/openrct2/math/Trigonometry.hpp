@@ -339,7 +339,7 @@ namespace OpenRCT2::Math::Trigonometry
     }
 
     /** rct2: 0x009A3AC4, 0x009A3AC6 */
-    constexpr std::array<CoordsXY, OpenRCT2::Entity::Yaw::kBaseRotation> CrashDirectionComponents[] = {
+    constexpr std::array<CoordsXY, OpenRCT2::Entity::Yaw::kBaseRotation> CrashDirectionComponents = {
         CoordsXY{ -256, 0 }, { -236, 98 },  { -181, 181 },  { -98, 236 },  { 0, 256 },    { 98, 236 },
         { 181, 181 },        { 236, 98 },   { 256, 0 },     { 236, -98 },  { 181, -181 }, { 98, -236 },
         { 0, -256 },         { -98, -236 }, { -181, -181 }, { -236, -98 },
