@@ -1511,23 +1511,35 @@ static constexpr VehiclePaintTarget InvertingDown60 = {
 constexpr VehiclePaintTarget DiveLoopCorkUpLeft = {
     SpriteGroupType::Corkscrews,
     13,
-    BoundBoxType::corkscrewFrame13,
+    BoundBoxType::corkscrewUpLeft3,
     VehiclePitch::up42,
     VehicleRoll::unbanked,
     VPTFlags::none,
     -8,
 };
 constexpr VehiclePaintTarget DiveLoopCorkUpRight = {
-    SpriteGroupType::Corkscrews, 3, BoundBoxType::corkscrewFrame3, VehiclePitch::up42, VehicleRoll::unbanked, VPTFlags::none, 0,
+    SpriteGroupType::Corkscrews,
+    3,
+    BoundBoxType::corkscrewUpRight3,
+    VehiclePitch::up42,
+    VehicleRoll::unbanked,
+    VPTFlags::none,
+    0,
 };
 
 constexpr VehiclePaintTarget DiveLoopCorkDownLeft = {
-    SpriteGroupType::Corkscrews, 8, BoundBoxType::corkscrewFrame8, VehiclePitch::up42, VehicleRoll::unbanked, VPTFlags::none, 0,
+    SpriteGroupType::Corkscrews,
+    8,
+    BoundBoxType::corkscrewDownLeft3,
+    VehiclePitch::up42,
+    VehicleRoll::unbanked,
+    VPTFlags::none,
+    0,
 };
 constexpr VehiclePaintTarget DiveLoopCorkDownRight = {
     SpriteGroupType::Corkscrews,
     18,
-    BoundBoxType::corkscrewFrame3,
+    BoundBoxType::corkscrewDownRight3,
     VehiclePitch::up42,
     VehicleRoll::unbanked,
     VPTFlags::none,
@@ -2034,21 +2046,15 @@ void VehicleVisualSplashEffect(PaintSession& session, const int32_t z, const Veh
 
 #pragma endregion
 
-void VehicleVisualDefault(PaintSession& session, int32_t yaw, const int32_t z, const Vehicle* vehicle, const CarEntry* carEntry)
+void VehicleVisualDefault(
+    PaintSession& session, int32_t yaw, VehicleRoll roll, const int32_t z, const Vehicle* vehicle, const CarEntry* carEntry)
 {
     if (vehicle->pitch >= VehiclePitch::pitchCount)
     {
         return;
     }
 
-    auto roll = vehicle->roll;
     auto pitch = vehicle->pitch;
-
-    if (vehicle->roll >= VehicleRoll::uninvertingUnbanked)
-    {
-        roll = static_cast<VehicleRoll>(EnumValue(roll) - EnumValue(VehicleRoll::uninvertingUnbanked));
-        carEntry--;
-    }
     auto selectedPaintTarget = GetTarget(pitch, roll);
 
     if (vehicle->HasFlag(VehicleFlags::CarIsReversed))
@@ -2060,7 +2066,7 @@ void VehicleVisualDefault(PaintSession& session, int32_t yaw, const int32_t z, c
     }
     auto boundBoxIndex = GetBoundBoxIndex(selectedPaintTarget.boundBoxOffset, yaw);
 
-    while (!carEntry->GroupEnabled(selectedPaintTarget.spriteGroup) && pitch != VehiclePitch::nullPitch)
+    while (!carEntry->GroupEnabled(selectedPaintTarget.spriteGroup) && pitch != VehiclePitch::nullPitch && roll != VehicleRoll::nullRoll)
     {
         pitch = selectedPaintTarget.fallbackPitch;
         roll = selectedPaintTarget.fallbackRoll;
@@ -2068,7 +2074,7 @@ void VehicleVisualDefault(PaintSession& session, int32_t yaw, const int32_t z, c
         selectedPaintTarget = GetTarget(pitch, roll);
     }
 
-    if (pitch == VehiclePitch::nullPitch)
+    if (pitch == VehiclePitch::nullPitch || roll == VehicleRoll::nullRoll)
     {
         return;
     }
@@ -2093,6 +2099,7 @@ void Vehicle::Paint(PaintSession& session, int32_t imageDirection) const
         return;
     }
 
+    VehicleRoll maskedRoll = static_cast<VehicleRoll>(EnumValue(roll) % EnumValue(VehicleRoll::normalRollCount));
     int32_t zOffset = 0;
     if (IsCableLift())
     {
@@ -2111,6 +2118,10 @@ void Vehicle::Paint(PaintSession& session, int32_t imageDirection) const
         {
             carEntryIndex++;
             zOffset += 16;
+            if (maskedRoll != roll)
+            {
+                carEntryIndex--;
+            }
         }
 
         if (carEntryIndex >= std::size(rideEntry->Cars))
@@ -2123,7 +2134,7 @@ void Vehicle::Paint(PaintSession& session, int32_t imageDirection) const
     switch (carEntry->PaintStyle)
     {
         case VEHICLE_VISUAL_DEFAULT:
-            VehicleVisualDefault(session, imageDirection, z + zOffset, this, carEntry);
+            VehicleVisualDefault(session, imageDirection, maskedRoll, z + zOffset, this, carEntry);
             break;
         case VEHICLE_VISUAL_LAUNCHED_FREEFALL:
             VehicleVisualLaunchedFreefall(session, x, imageDirection, y, z + zOffset, this, carEntry);

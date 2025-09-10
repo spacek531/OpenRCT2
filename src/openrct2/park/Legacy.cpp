@@ -3022,10 +3022,10 @@ void ConsolidatePitchAndBank(OpenRCT2::GameState_t& gameState)
                 && ((roll == VehicleRoll::left135) || (roll == VehicleRoll::right135)))
             {
                 constexpr const VehiclePitch remapTable[4] = {
-                    VehiclePitch::corkscrewUpLeft3,
-                    VehiclePitch::corkscrewUpRight3,
-                    VehiclePitch::corkscrewDownLeft3,
-                    VehiclePitch::corkscrewDownRight3,
+                    VehiclePitch::diveLoopCorkUpLeft,
+                    VehiclePitch::diveLoopCorkUpRight,
+                    VehiclePitch::diveLoopCorkDownLeft,
+                    VehiclePitch::diveLoopCorkDownRight,
                 };
                 constexpr const int32_t offsetTable[4] = {
                     8,
