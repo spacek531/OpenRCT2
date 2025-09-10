@@ -7224,6 +7224,11 @@ bool Vehicle::UpdateTrackMotionForwards(const CarEntry* carEntry, const Ride& cu
         // Loc6DB706
         const auto moveInfo = GetMoveInfo();
         trackType = GetTrackType();
+        auto a = 0;
+        if (trackType == TrackElemType::LeftEighthDiveLoopUpToOrthogonal)
+        {
+            a++;
+        }
         VehiclePitch moveInfovehicleAnimationGroup;
         {
             auto nextVehiclePosition = TrackLocation
@@ -7253,7 +7258,10 @@ bool Vehicle::UpdateTrackMotionForwards(const CarEntry* carEntry, const Ride& cu
             Orientation = moveInfo->direction;
             roll = moveInfo->roll;
             pitch = moveInfo->pitch;
-
+            if (Orientation >= 32)
+            {
+                a++;
+            }
             moveInfovehicleAnimationGroup = moveInfo->pitch;
 
             if ((carEntry->flags & CAR_ENTRY_FLAG_WOODEN_WILD_MOUSE_SWING) && moveInfo->pitch != VehiclePitch::flat)

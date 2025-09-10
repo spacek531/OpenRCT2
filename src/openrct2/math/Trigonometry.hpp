@@ -111,11 +111,12 @@ namespace OpenRCT2::Math::Trigonometry
         { 2125953864, -303325208 },   // down8
         { 2061796213, -600568389 },   // down16
         { 1411702590, -1618265062 },  // down50
-        { 1985590284, -817995863 },   // uninvertingDown25
-        { 1636362342, -1390684831 },  // uninvertingDown42
-        { 1127484953, -1827693544 },  // uninvertingDown60
         { 2115506168, 369214930 },    // curvedLifthillUp
         { 2115506168, -369214930 },   // curvedLiftHillDown
+        { 1636362342, 1390684831 },   // up42
+        { 1636362342, -1390684831 },  // down42
+        { 1636362342, 1390684831 },   // up42
+        { 1636362342, -1390684831 },  // down42
     };
 
     constexpr CoordsXY GetPitchComponents(VehiclePitch pitch)
@@ -238,11 +239,12 @@ namespace OpenRCT2::Math::Trigonometry
         90522,   // down8
         179760,  // down16
         484068,  // down50
-        243318,  // uninvertingDown25
-        416016,  // uninvertingDown42
-        546342,  // uninvertingDown60
         -110424, // curvedLiftHillUp
         110424,  // curvedLiftHillDown
+        -416016, // up42
+        416016,  // down42
+        -416016, // up42
+        416016,  // down42
     };
 
     constexpr int32_t GetAccelerationFromPitch(VehiclePitch pitch)
@@ -318,6 +320,16 @@ namespace OpenRCT2::Math::Trigonometry
         1946281152,  // uninvertingLeft45
         2096579710,  // uninvertingRight22
         1946281152,  // uninvertingRight45
+        1380375879,  // uninvertingLeft67 
+        555809667,   // uninvertingLeft90 
+        -372906620,  // uninvertingLeft112
+        -1231746017, // uninvertingLeft135
+        -1859775391, // uninvertingLeft157
+        1380375879,  // uninvertingRight67
+        555809667,   // uninvertingRight90
+        -372906620,  // uninvertingRight112
+        -1231746017, // uninvertingRight135
+        -1859775391, // uninvertingRight157
     };
 
     constexpr int32_t GetGravityFromRoll(VehicleRoll roll)

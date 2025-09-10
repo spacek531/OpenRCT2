@@ -82,9 +82,11 @@ enum class VehiclePitch : uint8_t
     diveLoopCorkDownRight,
     pitchCount,
 
-    uninvertingDown25_deprecated,
-    uninvertingDown42_deprecated,
-    uninvertingDown60_deprecated,
+    uninvertingDown25_deprecated = 56,
+    uninvertingDown42_deprecated = 57,
+    uninvertingDown60_deprecated = 58,
+    curvedLiftHillUp_deprecated = 59,
+    curvedLiftHillDown_deprecated = 60,
 
     nullPitch = 255,
 };

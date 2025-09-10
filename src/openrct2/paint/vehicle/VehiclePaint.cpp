@@ -1492,22 +1492,6 @@ static constexpr VehiclePaintTargetPitch Down50PaintTarget = {
     Down50,                                       // rightBanked157
 };
 
-static constexpr VehiclePaintTarget InvertingDown25 = {
-    SpriteGroupType::Slopes25,      1,
-    BoundBoxType::slopes25Reversed, VehiclePitch::flat,
-    VehicleRoll::unbanked,          VPTFlags::decrementCarIndexIfInverted,
-};
-static constexpr VehiclePaintTarget InvertingDown42 = {
-    SpriteGroupType::Slopes42,      1,
-    BoundBoxType::slopes42Reversed, VehiclePitch::flat,
-    VehicleRoll::unbanked,          VPTFlags::decrementCarIndexIfInverted,
-};
-static constexpr VehiclePaintTarget InvertingDown60 = {
-    SpriteGroupType::Slopes60,      1,
-    BoundBoxType::slopes60Reversed, VehiclePitch::flat,
-    VehicleRoll::unbanked,          VPTFlags::decrementCarIndexIfInverted,
-};
-
 constexpr VehiclePaintTarget DiveLoopCorkUpLeft = {
     SpriteGroupType::Corkscrews,
     13,
@@ -1635,13 +1619,13 @@ static constexpr std::array<VehiclePaintTargetPitch, EnumValue(VehiclePitch::pit
     Down16PaintTarget,
     Down50PaintTarget,
 
+    AllSameTarget(CurvedLiftHillUp),
+    AllSameTarget(CurvedLiftHillDown),
+
     AllSameTarget(DiveLoopCorkUpLeft),
     AllSameTarget(DiveLoopCorkUpRight),
     AllSameTarget(DiveLoopCorkDownLeft),
     AllSameTarget(DiveLoopCorkDownRight),
-
-    AllSameTarget(CurvedLiftHillUp),
-    AllSameTarget(CurvedLiftHillDown),
 };
 
 static_assert(std::size(VehiclePaintTargets) == EnumValue(VehiclePitch::pitchCount));
@@ -2047,13 +2031,13 @@ void VehicleVisualSplashEffect(PaintSession& session, const int32_t z, const Veh
 #pragma endregion
 
 void VehicleVisualDefault(
-    PaintSession& session, int32_t yaw, VehicleRoll roll, const int32_t z, const Vehicle* vehicle, const CarEntry* carEntry)
+    PaintSession& session, int32_t yaw, const int32_t z, const Vehicle* vehicle, const CarEntry* carEntry)
 {
     if (vehicle->pitch >= VehiclePitch::pitchCount)
     {
         return;
     }
-
+    VehicleRoll roll = static_cast<VehicleRoll>(EnumValue(vehicle->roll) % EnumValue(VehicleRoll::normalRollCount));
     auto pitch = vehicle->pitch;
     auto selectedPaintTarget = GetTarget(pitch, roll);
 
@@ -2099,7 +2083,6 @@ void Vehicle::Paint(PaintSession& session, int32_t imageDirection) const
         return;
     }
 
-    VehicleRoll maskedRoll = static_cast<VehicleRoll>(EnumValue(roll) % EnumValue(VehicleRoll::normalRollCount));
     int32_t zOffset = 0;
     if (IsCableLift())
     {
@@ -2118,7 +2101,7 @@ void Vehicle::Paint(PaintSession& session, int32_t imageDirection) const
         {
             carEntryIndex++;
             zOffset += 16;
-            if (maskedRoll != roll)
+            if (roll >= VehicleRoll::uninvertingUnbanked)
             {
                 carEntryIndex--;
             }
@@ -2134,7 +2117,7 @@ void Vehicle::Paint(PaintSession& session, int32_t imageDirection) const
     switch (carEntry->PaintStyle)
     {
         case VEHICLE_VISUAL_DEFAULT:
-            VehicleVisualDefault(session, imageDirection, maskedRoll, z + zOffset, this, carEntry);
+            VehicleVisualDefault(session, imageDirection, z + zOffset, this, carEntry);
             break;
         case VEHICLE_VISUAL_LAUNCHED_FREEFALL:
             VehicleVisualLaunchedFreefall(session, x, imageDirection, y, z + zOffset, this, carEntry);

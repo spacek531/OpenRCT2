@@ -3055,16 +3055,16 @@ void ConsolidatePitchAndBank(OpenRCT2::GameState_t& gameState)
                 }
             }
         }
-        if (pitch >= VehiclePitch::invertingDown25_legacy && pitch <= VehiclePitch::invertingDown60_legacy)
+        if (pitch >= VehiclePitch::uninvertingDown25_deprecated && pitch <= VehiclePitch::uninvertingDown60_deprecated)
         {
             roll = VehicleRoll::uninvertingUnbanked;
             pitch = static_cast<VehiclePitch>(
-                EnumValue(pitch) - EnumValue(VehiclePitch::invertingDown25_legacy) + EnumValue(VehiclePitch::down25));
+                EnumValue(pitch) - EnumValue(VehiclePitch::uninvertingDown25_deprecated) + EnumValue(VehiclePitch::down25));
         }
-        else if (pitch >= VehiclePitch::curvedLiftHillUp_legacy && pitch <= VehiclePitch::curvedLiftHillDown_legacy)
+        else if (pitch >= VehiclePitch::curvedLiftHillUp_deprecated && pitch <= VehiclePitch::curvedLiftHillDown_deprecated)
         {
             pitch = static_cast<VehiclePitch>(
-                EnumValue(pitch) - EnumValue(VehiclePitch::curvedLiftHillUp_legacy)
+                EnumValue(pitch) - EnumValue(VehiclePitch::curvedLiftHillUp_deprecated)
                 + EnumValue(VehiclePitch::curvedLiftHillUp));
         }
 
