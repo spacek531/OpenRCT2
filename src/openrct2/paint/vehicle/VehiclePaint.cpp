@@ -1622,9 +1622,9 @@ static constexpr std::array<VehiclePaintTargetPitch, EnumValue(VehiclePitch::pit
     AllSameTarget(CurvedLiftHillUp),
     AllSameTarget(CurvedLiftHillDown),
 
-    AllSameTarget(DiveLoopCorkUpLeft),
     AllSameTarget(DiveLoopCorkUpRight),
     AllSameTarget(DiveLoopCorkDownLeft),
+    AllSameTarget(DiveLoopCorkUpLeft),
     AllSameTarget(DiveLoopCorkDownRight),
 };
 
