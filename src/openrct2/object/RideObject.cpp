@@ -440,7 +440,7 @@ namespace OpenRCT2
         {
             car->spinningNumFrames = 8;
         }
-        if (car->flags & CAR_ENTRY_FLAG_SPINNING_COMBINED_WITH_NONSPINNING)
+        if (car->flags & CAR_ENTRY_FLAG_SPINNING_COMBINED_WITH_NONSPINNING_DEPRECATED)
         {
             car->spinningNumFrames = 32;
         }
@@ -457,7 +457,7 @@ namespace OpenRCT2
         }
         else
         {
-            if (!(carEntry.flags & CAR_ENTRY_FLAG_SPINNING_COMBINED_WITH_NONSPINNING))
+            if (!(carEntry.flags & CAR_ENTRY_FLAG_SPINNING_COMBINED_WITH_NONSPINNING_DEPRECATED))
             {
                 if ((carEntry.flags & CAR_ENTRY_FLAG_VEHICLE_ANIMATION)
                     && carEntry.animation != CarEntryAnimation::ObservationTower)
@@ -828,7 +828,7 @@ namespace OpenRCT2
                 { "recalculateSpriteBounds", CAR_ENTRY_FLAG_RECALCULATE_SPRITE_BOUNDS },
                 { "overrideNumberOfVerticalFrames", CAR_ENTRY_FLAG_OVERRIDE_NUM_VERTICAL_FRAMES },
                 { "spriteBoundsIncludeInvertedSet", CAR_ENTRY_FLAG_SPRITE_BOUNDS_INCLUDE_INVERTED_SET },
-                { "hasAdditionalSpinningFrames", CAR_ENTRY_FLAG_SPINNING_COMBINED_WITH_NONSPINNING },
+                { "hasAdditionalSpinningFrames", CAR_ENTRY_FLAG_SPINNING_COMBINED_WITH_NONSPINNING_DEPRECATED },
                 { "isLift", CAR_ENTRY_FLAG_LIFT },
                 { "hasAdditionalColour1", CAR_ENTRY_FLAG_ENABLE_TRIM_COLOUR },
                 { "hasSwinging", CAR_ENTRY_FLAG_SWINGING },
@@ -854,7 +854,7 @@ namespace OpenRCT2
         if (car.flags & CAR_ENTRY_FLAG_SPINNING && car.spinningNumFrames == 0)
         {
             car.spinningNumFrames = 8;
-            if (car.flags & CAR_ENTRY_FLAG_SPINNING_COMBINED_WITH_NONSPINNING)
+            if (car.flags & CAR_ENTRY_FLAG_SPINNING_COMBINED_WITH_NONSPINNING_DEPRECATED)
             {
                 car.spinningNumFrames = 32;
             }
@@ -1074,7 +1074,7 @@ namespace OpenRCT2
         {
             vehicle->SpriteGroups[EnumValue(SpriteGroupType::Slopes12)].spritePrecision = SpritePrecision::Sprites4;
             vehicle->SpriteGroups[EnumValue(SpriteGroupType::Slopes25)].spritePrecision = baseSpritePrecision;
-            if (vehicle->flags & CAR_ENTRY_FLAG_SPINNING_COMBINED_WITH_NONSPINNING)
+            if (vehicle->flags & CAR_ENTRY_FLAG_SPINNING_COMBINED_WITH_NONSPINNING_DEPRECATED)
                 vehicle->SpriteGroups[EnumValue(SpriteGroupType::Slopes25)].spritePrecision = SpritePrecision::Sprites4;
         }
         if (spriteGroups & CAR_SPRITE_FLAG_STEEP_SLOPES)

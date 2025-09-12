@@ -4953,6 +4953,14 @@ OpenRCT2::BitSet<EnumValue(TrackGroup::count)> RideEntryGetSupportedTrackPieces(
             for (auto& group : trackPieceRequiredSprites[i])
             {
                 auto precision = defaultVehicle->SpriteGroups[EnumValue(group.VehicleSpriteGroup)].spritePrecision;
+                if ((defaultVehicle->flags & CAR_ENTRY_FLAG_SPINNING) && defaultVehicle->spinningSymmetries >= 1)
+                {
+                    if (group.VehicleSpriteGroup == SpriteGroupType::SlopeFlat
+                        || group.VehicleSpriteGroup == SpriteGroupType::SlopeInverted)
+                    {
+                        precision = SpritePrecision::Sprites32;
+                    }
+                }
                 if (precision < group.MinPrecision)
                     supportedPieces.set(i, false);
             }
