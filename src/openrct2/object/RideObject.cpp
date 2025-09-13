@@ -32,6 +32,7 @@
 #include "../ride/Vehicle.h"
 #include "ObjectRepository.h"
 
+#include <array>
 #include <iterator>
 #include <unordered_map>
 
@@ -291,15 +292,20 @@ namespace OpenRCT2
                 uint32_t baseImageId = currentCarImagesOffset;
                 uint32_t imageIndex = baseImageId;
                 carEntry.base_image_id = baseImageId;
+                uint32_t symmetryDivisor = (carEntry.spinningSymmetries > 0) + 1;
 
                 for (uint8_t spriteGroup = 0; spriteGroup < EnumValue(SpriteGroupType::Count); spriteGroup++)
                 {
                     if (carEntry.SpriteGroups[spriteGroup].Enabled())
                     {
                         carEntry.SpriteGroups[spriteGroup].imageId = imageIndex;
-                        const auto spriteCount = carEntry.base_num_frames
+                        auto spriteCount = carEntry.base_num_frames
                             * carEntry.NumRotationSprites(static_cast<SpriteGroupType>(spriteGroup))
                             * SpriteGroupMultiplier[spriteGroup];
+
+                        if (carEntry.SpriteGroups[spriteGroup].spritePrecision > SpritePrecision::Sprites1)
+                            spriteCount = spriteCount / symmetryDivisor;
+
                         imageIndex += spriteCount;
                     }
                 }
@@ -447,6 +453,7 @@ namespace OpenRCT2
         ReadLegacySpriteGroups(car, spriteGroups);
     }
 
+    // TODO: rewrite this whole function!!! in a prerequisite PR ideally!!! It's been bad for ages!!!
     uint8_t RideObject::CalculateNumVerticalFrames(const CarEntry& carEntry)
     {
         // 0x6DE90B
@@ -457,34 +464,27 @@ namespace OpenRCT2
         }
         else
         {
-            if (!(carEntry.flags & CAR_ENTRY_FLAG_SPINNING_COMBINED_WITH_NONSPINNING_DEPRECATED))
-            {
-                if ((carEntry.flags & CAR_ENTRY_FLAG_VEHICLE_ANIMATION)
-                    && carEntry.animation != CarEntryAnimation::ObservationTower)
-                {
-                    if (!(carEntry.flags & CAR_ENTRY_FLAG_DODGEM_INUSE_LIGHTS))
-                    {
-                        numVerticalFrames = 4;
-                    }
-                    else
-                    {
-                        numVerticalFrames = 2;
-                    }
-                }
-                else
-                {
-                    numVerticalFrames = 1;
-                }
-            }
-            else
+            if (carEntry.flags & CAR_ENTRY_FLAG_SPINNING)
             {
                 numVerticalFrames = carEntry.spinningNumFrames;
             }
+            else if (carEntry.flags & CAR_ENTRY_FLAG_VEHICLE_ANIMATION)
+            {
+                numVerticalFrames = carEntry.AnimationFrames;
+            }
+            else if (carEntry.flags & CAR_ENTRY_FLAG_DODGEM_INUSE_LIGHTS)
+            {
+                numVerticalFrames = 2;
+            }
+            else
+            {
+                numVerticalFrames = 1;
+            }
         }
-
         return numVerticalFrames;
     }
 
+    // Also refactor swinging so it's understandeable and not this bizarre mess of flags!!!
     uint8_t RideObject::CalculateNumHorizontalFrames(const CarEntry& carEntry)
     {
         uint8_t numHorizontalFrames;
@@ -812,6 +812,9 @@ namespace OpenRCT2
             }
         }
         car.spinningNumFrames = Json::GetNumber<uint8_t>(jCar["spinningNumFrames"]);
+        car.spinningSymmetries = Json::GetNumber<uint8_t>(jCar["spinningSymmetries"]);
+
+        bool hasAdditionalSpinningFrames = Json::GetBoolean("hasAdditionalSpinningFrames");
 
         car.flags |= Json::GetFlags<uint32_t>(
             jCar,
@@ -828,7 +831,7 @@ namespace OpenRCT2
                 { "recalculateSpriteBounds", CAR_ENTRY_FLAG_RECALCULATE_SPRITE_BOUNDS },
                 { "overrideNumberOfVerticalFrames", CAR_ENTRY_FLAG_OVERRIDE_NUM_VERTICAL_FRAMES },
                 { "spriteBoundsIncludeInvertedSet", CAR_ENTRY_FLAG_SPRITE_BOUNDS_INCLUDE_INVERTED_SET },
-                { "hasAdditionalSpinningFrames", CAR_ENTRY_FLAG_SPINNING_COMBINED_WITH_NONSPINNING_DEPRECATED },
+
                 { "isLift", CAR_ENTRY_FLAG_LIFT },
                 { "hasAdditionalColour1", CAR_ENTRY_FLAG_ENABLE_TRIM_COLOUR },
                 { "hasSwinging", CAR_ENTRY_FLAG_SWINGING },
@@ -854,9 +857,11 @@ namespace OpenRCT2
         if (car.flags & CAR_ENTRY_FLAG_SPINNING && car.spinningNumFrames == 0)
         {
             car.spinningNumFrames = 8;
-            if (car.flags & CAR_ENTRY_FLAG_SPINNING_COMBINED_WITH_NONSPINNING_DEPRECATED)
+            car.spinningSymmetries = 4;
+            if (hasAdditionalSpinningFrames)
             {
                 car.spinningNumFrames = 32;
+                car.spinningSymmetries = 0;
             }
         }
 

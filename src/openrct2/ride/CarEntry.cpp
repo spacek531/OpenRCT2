@@ -36,7 +36,11 @@ uint32_t CarEntry::GroupImageId(SpriteGroupType spriteGroup) const
 
 uint32_t CarEntry::SpriteOffset(SpriteGroupType spriteGroup, int32_t imageDirection, uint8_t rankIndex) const
 {
-    return ((SpriteByYaw(imageDirection, spriteGroup) + NumRotationSprites(spriteGroup) * rankIndex) * base_num_frames)
+    // (1 + (spinningSymmetries > 0)) equals 1 if false, 2 if true. Vehicles with symmetry have ranks that are half as long as
+    // normal.
+    return ((SpriteByYaw(imageDirection, spriteGroup)
+             + NumRotationSprites(spriteGroup) * rankIndex / (1 + (spinningSymmetries > 0)))
+            * base_num_frames)
         + GroupImageId(spriteGroup);
 }
 

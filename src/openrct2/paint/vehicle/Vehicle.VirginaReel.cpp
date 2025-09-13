@@ -110,16 +110,25 @@ namespace OpenRCT2
 
     using VehiclePaintOrder = std::array<uint8_t, 8>;
 
-    constexpr std::array<VehiclePaintOrder, 8> kSeatPaintOrder = {
+    constexpr std::array<VehiclePaintOrder, 9> kSeatPaintOrder = {
         VehiclePaintOrder{ 0 },
-        VehiclePaintOrder{ 0, 1 },                   // TODO: determine this
-        VehiclePaintOrder{ 0, 1, 2 },                // TODO: determine this
-        VehiclePaintOrder{ 0, 1, 3, 2 },             // TODO: determine this
+        VehiclePaintOrder{ 0 },
+        VehiclePaintOrder{ 0, 1 },    // TODO: determine this
+        VehiclePaintOrder{ 0, 1, 2 }, // TODO: determine this
+        VehiclePaintOrder{ 0, 1, 3, 2 },
         VehiclePaintOrder{ 0, 1, 3, 4, 2 },          // TODO: determine this
         VehiclePaintOrder{ 0, 1, 2, 3, 4, 5 },       // TODO: determine this
         VehiclePaintOrder{ 0, 1, 2, 3, 4, 5, 6 },    // TODO: determine this
         VehiclePaintOrder{ 0, 1, 2, 3, 4, 5, 6, 7 }, // TODO: determine this
     };
+
+    static constexpr uint8_t rankFromPitch[] = { 0, 0, 0, 0, 0, 1, 1 };
+    static constexpr SpriteGroupType groupFromPitch[] = { SpriteGroupType::SlopeFlat, SpriteGroupType::Slopes12,
+                                                          SpriteGroupType::Slopes25,  SpriteGroupType::SlopeFlat,
+                                                          SpriteGroupType::SlopeFlat, SpriteGroupType::Slopes12,
+                                                          SpriteGroupType::Slopes25 };
+    static_assert(std::size(rankFromPitch) > EnumValue(VehiclePitch::up25));
+    static_assert(std::size(groupFromPitch) > EnumValue(VehiclePitch::up25));
 
     /**
      *
@@ -129,36 +138,35 @@ namespace OpenRCT2
         PaintSession& session, int32_t x, int32_t imageDirection, int32_t y, int32_t z, const Vehicle* vehicle,
         const CarEntry* carEntry)
     {
+        uint8_t numPeepsPerSeat = 1 + ((carEntry->num_seats & kVehicleSeatPairFlag) != 0);
+
+        // TODO: move these checks to RideObject.cpp
         assert(carEntry->spinningSymmetries != 0 && carEntry->spinningSymmetries <= 8);
-
-        uint8_t numPeepsPerSeat = 1 + (carEntry->num_seats & kVehicleSeatPairFlag) != 0;
-
         assert((carEntry->num_seats & kVehicleSeatNumMask) % carEntry->spinningSymmetries == 0);
         assert(((carEntry->num_seats & kVehicleSeatNumMask) / carEntry->spinningSymmetries) % numPeepsPerSeat == 0);
 
+        auto pitch = vehicle->pitch;
+        // auto roll = vehicle->roll;
+        uint8_t vehicleOrientation = imageDirection << 3; // YawTo256
+
+        if (imageDirection >= OpenRCT2::Entity::Yaw::kBaseRotation / 2)
+        {
+            pitch = PitchInvertTable[EnumValue(pitch)];
+            // roll = RollInvertTable[EnumValue(roll)];
+            // mask off the msb so rotation is never more than 180 degrees
+            vehicleOrientation = vehicleOrientation &= 0x7F;
+        }
+
+        // determine how many spots to shift peeps around
         uint8_t relativeSpin = vehicle->spin_sprite + session.CurrentRotation * 64; // converts camera angle to 8-bit
+
+        // if the vehicle is drawing backwards, reverse the angle
+        relativeSpin += vehicle->HasFlag(VehicleFlags::CarIsReversed) * 128;
+
         if (vehicle->HasFlag(VehicleFlags::SpinningIsLocked))
         {
             relativeSpin += vehicle->Orientation << 3; // convert 5-bit orientation to 8-bit
         }
-
-        bool drawVehicleReversed = vehicle->HasFlag(VehicleFlags::CarIsReversed)
-            ^ (imageDirection >= OpenRCT2::Entity::Yaw::kBaseRotation / 2);
-
-        auto pitch = vehicle->pitch;
-        auto roll = vehicle->roll;
-        uint8_t vehicleOrientation = imageDirection << 3; // YawTo256
-
-        // reversed = 128 if reversed, 0 if not.
-        if (drawVehicleReversed)
-        {
-            pitch = PitchInvertTable[EnumValue(pitch)];
-            // roll = RollInvertTable[EnumValue(roll)];
-        }
-        // mask off the msb so rotation is never more than 180 degrees
-        vehicleOrientation = vehicleOrientation &= 0x7F;
-
-        // determine how many spots to shift peeps around
         uint8_t rotationIndex = relativeSpin / kIndexDenominators[carEntry->spinningSymmetries];
 
         // determine which sprite to use
@@ -167,25 +175,18 @@ namespace OpenRCT2
 
         if (pitch == VehiclePitch::up42 || pitch == VehiclePitch::up60 || pitch >= VehiclePitch::down42)
         {
-            pitch == VehiclePitch::flat;
+            pitch = VehiclePitch::flat;
         }
 
-        static constexpr uint8_t rankFromPitch[] = { 0, 0, 0, 0, 0, 1, 1 };
-        static constexpr SpriteGroupType groupFromPitch[] = { SpriteGroupType::SlopeFlat, SpriteGroupType::Slopes12,
-                                                              SpriteGroupType::Slopes25,  SpriteGroupType::SlopeFlat,
-                                                              SpriteGroupType::SlopeFlat, SpriteGroupType::Slopes12,
-                                                              SpriteGroupType::Slopes25 };
-        static_assert(std::size(rankFromPitch) > EnumValue(VehiclePitch::up25));
-        static_assert(std::size(groupFromPitch) > EnumValue(VehiclePitch::up25));
-
         auto vehicleFrame = carEntry->SpriteOffset(
-            groupFromPitch[EnumValue(pitch)], vehicleOrientation >> 3, rankFromPitch[EnumValue(pitch)]) + rotationFrame;
+                                groupFromPitch[EnumValue(pitch)], vehicleOrientation >> 3, rankFromPitch[EnumValue(pitch)])
+            + rotationFrame;
 
         const auto& vehicleBb = _virginiaReelBoundbox[0];
         auto bb = BoundBoxXYZ{ { vehicleBb.offset_x, vehicleBb.offset_y, vehicleBb.offset_z + z },
                                { vehicleBb.length_x, vehicleBb.length_y, vehicleBb.length_z } };
 
-        ImageId vehicleImage = ImageId(vehicleFrame);
+        ImageId vehicleImage = ImageId(vehicleFrame, vehicle->colours.Body, vehicle->colours.Trim);
 
         if (vehicle->IsGhost())
         {
@@ -193,31 +194,39 @@ namespace OpenRCT2
         }
         PaintAddImageAsParent(session, vehicleImage, { 0, 0, z }, bb);
 
+        // Peep paint
+        // Here be dragons!111
         if (session.DPI.zoom_level < ZoomLevel{ 2 } && vehicle->num_peeps > 0 && !vehicle->IsGhost())
         {
             uint8_t ridingPeepShirtColours[33] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
                                                    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
                                                    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
-            auto rowLength = carEntry->spinningSymmetries * numPeepsPerSeat;
-            auto totalLength = carEntry->num_seats * numPeepsPerSeat;
+
+            // If you imagine a vehicle like a gerstlauer spinning coaster, where there are two seat rows, if you rotate the car
+            // 180 degrees it's as if the riders have swapped places, with rider 0 now in seat 1 and rider 1 now in seat 0. Now
+            // imagine a gerstlauer spinning coaster but it has an additional pair of rows beyond the first, so it's like two
+            // 4-seat PTC cars facing each other. The car needs to be set up so that rider 0 and rider 1 swap their seats, and
+            // rider 2 and rider 3 swap their seats.
+
+            auto symmetrySeatCount = carEntry->spinningSymmetries * numPeepsPerSeat;
             auto rowIndex = 0;
             auto spotWithinRow = 0;
             for (int32_t i = 0; i < vehicle->num_peeps; i++)
             {
-                // round i down to the nearest rowLength
-                rowIndex = (i / rowLength) * rowLength;
-                spotWithinRow = (i + rotationIndex * numPeepsPerSeat) % rowLength;
+                // round i down to the nearest symmetrySeatCount
+                rowIndex = (i / symmetrySeatCount) * symmetrySeatCount;
+                spotWithinRow = (i + rotationIndex * numPeepsPerSeat) % symmetrySeatCount;
 
                 // cycle the peeps around in blocks of SpinningSymmetries * numPeepsPerSeat
-                ridingPeepShirtColours[(rowIndex + spotWithinRow) % totalLength] = vehicle->peep_tshirt_colours[i];
+                ridingPeepShirtColours[rowIndex + spotWithinRow] = vehicle->peep_tshirt_colours[i];
             }
             for (int32_t j = 0; j < carEntry->spinningSymmetries; j++)
             {
                 // get the first seat in the row
                 int32_t seatIndex = kSeatPaintOrder[carEntry->spinningSymmetries][j];
 
-                // paint every n peeps where n = carEntry->spinningSymmetries, up to the number of seats
-                for (int32_t i = seatIndex; i < carEntry->num_seats; i += carEntry->spinningSymmetries)
+                // paint every n seats where n = carEntry->spinningSymmetries, up to the number of seats
+                for (int32_t i = seatIndex; i < (carEntry->num_seats & kVehicleSeatNumMask); i += carEntry->spinningSymmetries)
                 {
                     if (ridingPeepShirtColours[i * numPeepsPerSeat] != 0xFF)
                     {
@@ -225,61 +234,12 @@ namespace OpenRCT2
                         // if peeps ride in pairs, this paints everything as expected
                         // if peeps ride singly, then secondary is redundant, but this is faster than branching.
                         ImageId riderImage = ImageId(vehicleFrame + (i + 1) * carEntry->NumCarImages)
-                                        .WithPrimary(ridingPeepShirtColours[i * numPeepsPerSeat])
+                                                 .WithPrimary(ridingPeepShirtColours[i * numPeepsPerSeat])
                                                  .WithSecondary(ridingPeepShirtColours[i * numPeepsPerSeat + 1]);
                         PaintAddImageAsChild(session, riderImage, { 0, 0, z }, bb);
                     }
                 }
             }
         }
-        /*
-
-        const uint8_t rotation = session.CurrentRotation;
-        int32_t ecx = ((vehicle->spin_sprite / 8) + (rotation * 8)) & 31;
-        int32_t baseImage_id = [&] {
-            switch (vehicle->pitch)
-            {
-                case VehiclePitch::up12:
-                    return (imageDirection & 24) + 8;
-                case VehiclePitch::up25:
-                    return (imageDirection & 24) + 40;
-                case VehiclePitch::down12:
-                    return ((imageDirection ^ 16) & 24) + 8;
-                case VehiclePitch::down25:
-                    return ((imageDirection ^ 16) & 24) + 40;
-                default:
-                    return 0;
-            }
-        }();
-        baseImage_id += ecx & 7;
-
-        baseImage_id += carEntry->base_image_id;
-        auto image_id = ImageId(baseImage_id, vehicle->colours.Body, vehicle->colours.Trim);
-        if (vehicle->IsGhost())
-        {
-            image_id = ConstructionMarker.WithIndex(image_id.GetIndex());
-        }
-        PaintAddImageAsParent(session, image_id, { 0, 0, z }, bb);
-
-        if (session.DPI.zoom_level < ZoomLevel{ 2 } && vehicle->num_peeps > 0 && !vehicle->IsGhost())
-        {
-            uint8_t riding_peep_sprites[4] = { 0xFF, 0xFF, 0xFF, 0xFF };
-            for (int32_t i = 0; i < vehicle->num_peeps; i++)
-            {
-                riding_peep_sprites[((ecx / 8) + i) & 3] = vehicle->peep_tshirt_colours[i];
-            }
-            int32_t draw_order[4] = { 0, 1, 3, 2 };
-            for (auto i : draw_order)
-            {
-                if (riding_peep_sprites[i] != 0xFF)
-                {
-                    image_id = ImageId(baseImage_id + ((i + 1) * 72), riding_peep_sprites[i]);
-                    PaintAddImageAsChild(session, image_id, { 0, 0, z }, bb);
-                }
-            }
-        }
-
-        assert(carEntry->effect_visual == 1);
-        */
     }
 } // namespace OpenRCT2
