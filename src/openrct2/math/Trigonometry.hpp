@@ -27,24 +27,24 @@ namespace OpenRCT2::Math::Trigonometry
      * Where L1 represents an incrementing column 0 - 63
      * Note: Must be at least 32bit to ensure all users do not overflow
      */
-    static constexpr std::array<CoordsXY, 64> YawToDirectionVector = {
-        CoordsXY{ -256, 0 }, { -255, 25 },   { -251, 50 },   { -245, 74 },   { -237, 98 },   { -226, 121 },  { -213, 142 },
-        { -198, 162 },       { -181, 181 },  { -162, 198 },  { -142, 213 },  { -121, 226 },  { -98, 237 },   { -74, 245 },
-        { -50, 251 },        { -25, 255 },   { 0, 256 },     { 25, 255 },    { 50, 251 },    { 74, 245 },    { 98, 237 },
-        { 121, 226 },        { 142, 213 },   { 162, 198 },   { 181, 181 },   { 198, 162 },   { 213, 142 },   { 226, 121 },
-        { 237, 98 },         { 245, 74 },    { 251, 50 },    { 255, 25 },    { 256, 0 },     { 255, -25 },   { 251, -50 },
-        { 245, -74 },        { 237, -98 },   { 226, -121 },  { 213, -142 },  { 198, -162 },  { 181, -181 },  { 162, -198 },
-        { 142, -213 },       { 121, -226 },  { 98, -237 },   { 74, -245 },   { 50, -251 },   { 25, -255 },   { 0, -256 },
-        { -25, -255 },       { -50, -251 },  { -74, -245 },  { -98, -237 },  { -121, -226 }, { -142, -213 }, { -162, -198 },
-        { -181, -181 },      { -198, -162 }, { -213, -142 }, { -226, -121 }, { -237, -98 },  { -245, -74 },  { -251, -50 },
+    constexpr auto kYawToDirectionVector = std::to_array<CoordsXY>({
+        { -256, 0 },    { -255, 25 },   { -251, 50 },   { -245, 74 },   { -237, 98 },   { -226, 121 },  { -213, 142 },
+        { -198, 162 },  { -181, 181 },  { -162, 198 },  { -142, 213 },  { -121, 226 },  { -98, 237 },   { -74, 245 },
+        { -50, 251 },   { -25, 255 },   { 0, 256 },     { 25, 255 },    { 50, 251 },    { 74, 245 },    { 98, 237 },
+        { 121, 226 },   { 142, 213 },   { 162, 198 },   { 181, 181 },   { 198, 162 },   { 213, 142 },   { 226, 121 },
+        { 237, 98 },    { 245, 74 },    { 251, 50 },    { 255, 25 },    { 256, 0 },     { 255, -25 },   { 251, -50 },
+        { 245, -74 },   { 237, -98 },   { 226, -121 },  { 213, -142 },  { 198, -162 },  { 181, -181 },  { 162, -198 },
+        { 142, -213 },  { 121, -226 },  { 98, -237 },   { 74, -245 },   { 50, -251 },   { 25, -255 },   { 0, -256 },
+        { -25, -255 },  { -50, -251 },  { -74, -245 },  { -98, -237 },  { -121, -226 }, { -142, -213 }, { -162, -198 },
+        { -181, -181 }, { -198, -162 }, { -213, -142 }, { -226, -121 }, { -237, -98 },  { -245, -74 },  { -251, -50 },
         { -255, -25 },
-    };
-    // Currently OpenRCT2::Entity::Yaw::BaseSpritePrecision is 32, but one day it will be 64.
-    static_assert(std::size(YawToDirectionVector) == 64);
+    });
+    // Currently OpenRCT2::Entity::Yaw::BaseSpritePrecision is 32, but one day it will be 256.
+    static_assert(std::size(kYawToDirectionVector) == OpenRCT2::Entity::Yaw::kBaseRotation * 2);
 
     constexpr CoordsXY GetYawVector(uint8_t yaw)
     {
-        return YawToDirectionVector[OpenRCT2::Entity::Yaw::YawTo64(yaw)];
+        return kYawToDirectionVector[OpenRCT2::Entity::Yaw::YawTo64(yaw)];
     }
 
     /** rct2: 0x009A37E4
@@ -54,8 +54,8 @@ namespace OpenRCT2::Math::Trigonometry
      *  Where Y1 represents the angle of pitch in degrees
      * Note that some values are not correct. Someone should fix them.
      */
-    constexpr std::array<CoordsXY, EnumValue(VehiclePitch::pitchCount)> PitchToDirectionVectorFromGeometryInt32 = {
-        CoordsXY{ 2147483647, 0 },    // flat
+    constexpr auto kPitchToDirectionVectorFromGeometryInt32 = std::to_array<CoordsXY>({
+        { 2147483647, 0 },            // flat
         { 2106585154, 417115092 },    // up12
         { 1985590284, 817995863 },    // up25
         { 1636362342, 1390684831 },   // up42
@@ -116,37 +116,23 @@ namespace OpenRCT2::Math::Trigonometry
         { 1127484953, -1827693544 },  // uninvertingDown60
         { 2115506168, 369214930 },    // curvedLifthillUp
         { 2115506168, -369214930 },   // curvedLiftHillDown
-    };
+    });
+    static_assert(std::size(kPitchToDirectionVectorFromGeometryInt32) == EnumValue(VehiclePitch::pitchCount));
 
     constexpr CoordsXY GetPitchComponents(VehiclePitch pitch)
     {
-        return PitchToDirectionVectorFromGeometryInt32[EnumValue(pitch)];
+        return kPitchToDirectionVectorFromGeometryInt32[EnumValue(pitch)];
     }
 
     constexpr CoordsXY GetPitchComponents256(VehiclePitch pitch)
     {
-        return PitchToDirectionVectorFromGeometryInt32[EnumValue(pitch)] / kInt32To256;
-    }
-
-    constexpr int32_t ComputeHorizontalMagnitude(int32_t length, VehiclePitch pitch)
-    {
-        return (-GetPitchComponents256(pitch).y * length) / 256;
-    }
-
-    constexpr CoordsXY ComputeXYVector(int32_t magnitude, uint8_t yaw)
-    {
-        return (GetYawVector(yaw) * magnitude) / 256;
-    }
-
-    constexpr CoordsXY ComputeXYVector(int32_t length, VehiclePitch pitch, uint8_t yaw)
-    {
-        return ComputeXYVector(ComputeHorizontalMagnitude(length, pitch), yaw);
+        return kPitchToDirectionVectorFromGeometryInt32[EnumValue(pitch)] / kInt32To256;
     }
 
     /** rct2: 0x009A2930
         The distance between subposition points in a movement direction (but not distance).
         */
-    constexpr std::array<int32_t, 16> SubpositionTranslationDistances = {
+    constexpr auto kSubpositionTranslationDistances = std::to_array<int32_t>({
         // For a base length of 8716 (0x220C) on the horizontal and 6554 (0x199A) on the vertical,
         // use the Pythagoras theorem and round up.
         0,     // no movement
@@ -166,13 +152,14 @@ namespace OpenRCT2::Math::Trigonometry
         27262, // XZ translation
         27262, // YZ translation
         34902, // XYZ translation
-    };
+    });
+    static_assert(std::size(kSubpositionTranslationDistances) == 16);
 
     constexpr int32_t GetPythagorasDistance(CoordsXYZ distance, bool useReverserDistance = false)
     {
         uint8_t index = ((distance.x != 0) << 0) | ((distance.y != 0) << 1) | ((distance.z != 0) << 2)
             | ((useReverserDistance) << 3);
-        return SubpositionTranslationDistances[index];
+        return kSubpositionTranslationDistances[index];
     }
 
     /** rct2: 0x009A2970
@@ -181,7 +168,7 @@ namespace OpenRCT2::Math::Trigonometry
      * Where Y1 represents the angle of pitch in degrees
      * Note that some values are not correct and these incorrect values are preserved for backwards-compatibility.
      */
-    constexpr std::array<int32_t, EnumValue(VehiclePitch::pitchCount)> AccelerationFromPitch = {
+    constexpr auto kAccelerationFromPitch = std::to_array<int32_t>({
         0,       // flat
         -124548, // up12
         -243318, // up25
@@ -243,15 +230,16 @@ namespace OpenRCT2::Math::Trigonometry
         546342,  // uninvertingDown60
         -110424, // curvedLiftHillUp
         110424,  // curvedLiftHillDown
-    };
+    });
+    static_assert(std::size(kAccelerationFromPitch) == EnumValue(VehiclePitch::pitchCount));
 
     constexpr int32_t GetAccelerationFromPitch(VehiclePitch pitch)
     {
-        return AccelerationFromPitch[EnumValue(pitch)];
+        return kAccelerationFromPitch[EnumValue(pitch)];
     }
 
     /** rct2: 0x009A3684 */
-    constexpr std::array<int32_t, OpenRCT2::Entity::Yaw::kBaseRotation> SpriteDirectionToSoundDirection = {
+    constexpr auto kSpriteDirectionToSoundDirection = std::to_array<int32_t>({
         -0x4000, // 0
         -0x3000, // 1
         -0x2000, // 2
@@ -284,11 +272,13 @@ namespace OpenRCT2::Math::Trigonometry
         -0x4800, // 29
         -0x4800, // 30
         -0x4800, // 31
-    };
+    });
+
+    static_assert(std::size(kSpriteDirectionToSoundDirection) == OpenRCT2::Entity::Yaw::kBaseRotation);
 
     constexpr int32_t GetDopplerShift(uint8_t yaw)
     {
-        return SpriteDirectionToSoundDirection[yaw];
+        return kSpriteDirectionToSoundDirection[yaw];
     }
 
     /** rct2: 0x009A39C4
@@ -326,22 +316,53 @@ namespace OpenRCT2::Math::Trigonometry
     }
 
     /** rct2: 0x009A36C4 */
-    constexpr std::array<CoordsXY, OpenRCT2::Entity::Yaw::kBaseRotation> FreeRoamMovementData = {
-        CoordsXY{ -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 1 },  { -1, 1 },  { -1, 1 },  { 0, 1 },  { -1, 1 },
-        { 0, 1 },          { 0, 1 },  { 0, 1 },  { 1, 1 },   { 1, 1 },   { 1, 1 },   { 1, 0 },  { 1, 1 },
-        { 1, 0 },          { 1, 0 },  { 1, 0 },  { 1, -1 },  { 1, -1 },  { 1, -1 },  { 0, -1 }, { 1, -1 },
-        { 0, -1 },         { 0, -1 }, { 0, -1 }, { -1, -1 }, { -1, -1 }, { -1, -1 }, { -1, 0 }, { -1, -1 },
-    };
+    constexpr auto kFreeRoamMovementData = std::to_array<CoordsXY>({
+        { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 1 },  { -1, 1 },  { -1, 1 },  { 0, 1 },  { -1, 1 },
+        { 0, 1 },  { 0, 1 },  { 0, 1 },  { 1, 1 },   { 1, 1 },   { 1, 1 },   { 1, 0 },  { 1, 1 },
+        { 1, 0 },  { 1, 0 },  { 1, 0 },  { 1, -1 },  { 1, -1 },  { 1, -1 },  { 0, -1 }, { 1, -1 },
+        { 0, -1 }, { 0, -1 }, { 0, -1 }, { -1, -1 }, { -1, -1 }, { -1, -1 }, { -1, 0 }, { -1, -1 },
+    });
+    static_assert(std::size(kFreeRoamMovementData) == OpenRCT2::Entity::Yaw::kBaseRotation);
 
     constexpr CoordsXY GetFreeRoamMovementData(uint8_t yaw)
     {
-        return FreeRoamMovementData[yaw];
+        return kFreeRoamMovementData[yaw];
     }
 
     /** rct2: 0x009A3AC4, 0x009A3AC6 */
-    constexpr std::array<CoordsXY, OpenRCT2::Entity::Yaw::kBaseRotation> CrashDirectionComponents = {
-        CoordsXY{ -256, 0 }, { -236, 98 },  { -181, 181 },  { -98, 236 },  { 0, 256 },    { 98, 236 },
-        { 181, 181 },        { 236, 98 },   { 256, 0 },     { 236, -98 },  { 181, -181 }, { 98, -236 },
-        { 0, -256 },         { -98, -236 }, { -181, -181 }, { -236, -98 },
-    };
+    constexpr auto kCrashDirectionComponents = std::to_array<CoordsXY>({
+        { -256, 0 },
+        { -236, 98 },
+        { -181, 181 },
+        { -98, 236 },
+        { 0, 256 },
+        { 98, 236 },
+        { 181, 181 },
+        { 236, 98 },
+        { 256, 0 },
+        { 236, -98 },
+        { 181, -181 },
+        { 98, -236 },
+        { 0, -256 },
+        { -98, -236 },
+        { -181, -181 },
+        { -236, -98 },
+    });
+    static_assert(std::size(kCrashDirectionComponents) == OpenRCT2::Entity::Yaw::kBaseRotation / 2);
+
+    constexpr int32_t ComputeHorizontalMagnitude(int32_t length, VehiclePitch pitch)
+    {
+        return (-GetPitchComponents256(pitch).y * length) / 256;
+    }
+
+    constexpr CoordsXY ComputeXYVector(int32_t magnitude, uint8_t yaw)
+    {
+        return (GetYawVector(yaw) * magnitude) / 256;
+    }
+
+    constexpr CoordsXY ComputeXYVector(int32_t length, VehiclePitch pitch, uint8_t yaw)
+    {
+        return ComputeXYVector(ComputeHorizontalMagnitude(length, pitch), yaw);
+    }
+
 } // namespace OpenRCT2::Math::Trigonometry
