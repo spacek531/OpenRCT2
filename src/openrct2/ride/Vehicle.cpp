@@ -6632,7 +6632,7 @@ bool Vehicle::UpdateMotionCollisionDetection(const CoordsXYZ& loc, EntityId* oth
             if (direction < 0x14)
                 continue;
 
-            const CoordsXY directionVector = Math::Trigonometry::YawToDirectionVector[Entity::Yaw::YawTo64(Orientation)];
+            const CoordsXY directionVector = GetYawVector(Orientation);
 
             const CoordsXY directionVectorToVehicle2 = { vehicle2->x - loc.x, vehicle2->y - loc.y };
             const int32_t directionVectorToVehicle2Length = (directionVectorToVehicle2.x * directionVectorToVehicle2.x)
@@ -7614,7 +7614,7 @@ bool Vehicle::UpdateTrackMotionBackwards(const CarEntry* carEntry, const Ride& c
         {
             return true;
         }
-        acceleration += AccelerationFromPitch[EnumValue(moveInfoVehicleAnimationGroup)];
+        acceleration += GetAccelerationFromPitch(moveInfoVehicleAnimationGroup);
         _vehicleUnkF64E10++;
     }
 }
