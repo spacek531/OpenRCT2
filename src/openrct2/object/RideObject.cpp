@@ -632,16 +632,6 @@ namespace OpenRCT2
                     _legacyType.flags |= RIDE_ENTRY_FLAG_MAGIC_CARPET_SWING_MODE;
                 }
 
-                auto rotationMode = Json::GetNumber<int32_t>(properties["rotationMode"]);
-                if (rotationMode == 1)
-                {
-                    _legacyType.flags |= RIDE_ENTRY_FLAG_TWIST_ROTATION_TYPE;
-                }
-                else if (rotationMode == 2)
-                {
-                    _legacyType.flags |= RIDE_ENTRY_FLAG_ENTERPRISE_ROTATION_TYPE;
-                }
-
                 auto ratingMultiplier = properties["ratingMultipler"];
                 if (ratingMultiplier.is_object())
                 {

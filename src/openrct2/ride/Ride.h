@@ -500,8 +500,8 @@ enum
     RIDE_ENTRY_FLAG_NO_BANKED_TRACK = 1 << 2,
     RIDE_ENTRY_FLAG_PLAY_DEPART_SOUND = 1 << 3,
     RIDE_ENTRY_FLAG_INVERTER_SHIP_SWING_MODE = 1 << 4,
-    RIDE_ENTRY_FLAG_TWIST_ROTATION_TYPE = 1 << 5,
-    RIDE_ENTRY_FLAG_ENTERPRISE_ROTATION_TYPE = 1 << 6,
+    RIDE_ENTRY_FLAG_TWIST_ROTATION_TYPE_DEPRECATED = 1 << 5,
+    RIDE_ENTRY_FLAG_ENTERPRISE_ROTATION_TYPE_DEPRECATED = 1 << 6,
     RIDE_ENTRY_FLAG_DISABLE_WANDERING_DEPRECATED = 1 << 7,
     RIDE_ENTRY_FLAG_PLAY_SPLASH_SOUND = 1 << 8,
     RIDE_ENTRY_FLAG_PLAY_SPLASH_SOUND_SLIDE = 1 << 9,
@@ -684,6 +684,15 @@ enum class RideMode : uint8_t
 };
 
 RideMode& operator++(RideMode& d, int);
+
+enum class FlatRideAnimationType : uint8_t
+{
+    nullSubtype = 0,
+    twist = 1,
+    enterprise = 2,
+    merryGoRound = 3,
+    count,
+};
 
 enum class RideCategory : uint8_t
 {

@@ -35,6 +35,7 @@ constexpr RideTypeDescriptor MerryGoRoundRTD =
                      RtdFlag::requireExplicitListingInMusicObjects),
     .RideModes = EnumsToFlags(RideMode::rotation),
     .DefaultMode = RideMode::rotation,
+    .flatRideAnimationType = FlatRideAnimationType::merryGoRound,
     .OperatingSettings = { 4, 25 },
     .Naming = { STR_RIDE_NAME_MERRY_GO_ROUND, STR_RIDE_DESCRIPTION_MERRY_GO_ROUND },
     .NameConvention = { RideComponentType::Car, RideComponentType::Structure, RideComponentType::Station },
