@@ -360,15 +360,15 @@ namespace OpenRCT2::FlatRide
     constexpr RotationModeAnimationSet kMerryGoRoundAnimation = {kMerryGoRoundAnimationStart, kMerryGoRoundAnimationLoop, kMerryGoRoundAnimationEnd, 1};
 
     constexpr auto rotationAnimations = std::to_array<RotationModeAnimationSet>({kNullRotationAnimationSet, kTwistAnimation, kEnterpriseAnimation, kMerryGoRoundAnimation});
-    static_assert(std::size(rotationAnimations) == kNumRotationModes);
+    static_assert(std::size(rotationAnimations) == EnumValue(FlatRideAnimationType::count));
 
-    const RotationModeAnimationSet& getRotationAnimation(uint8_t rotationSubtype)
+    const RotationModeAnimationSet& getRotationAnimation(FlatRideAnimationType animationType)
     {
-        if (rotationSubtype >= kNumRotationModes)
+        if (animationType >= FlatRideAnimationType::count)
         {
-            return rotationAnimations[0];
+            animationType = FlatRideAnimationType::nullSubtype;
         }
-        return rotationAnimations[rotationSubtype];
+        return rotationAnimations[EnumValue(animationType)];
     }
 }
 

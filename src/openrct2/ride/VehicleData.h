@@ -10,6 +10,7 @@
 #pragma once
 
 #include "../core/EnumUtils.hpp"
+#include "Ride.h"
 
 #include <array>
 #include <assert.h>
@@ -44,8 +45,6 @@ namespace OpenRCT2::FlatRide
 
     constexpr FlatRideAnimationFrame kNullFrame{};
 
-    constexpr uint8_t kNumRotationModes = 4;
-
     using RotationAnimationSequence = std::array<FlatRideAnimationFrame, 1024>;
 
     enum class RotationModeSubState : uint8_t
@@ -74,7 +73,7 @@ namespace OpenRCT2::FlatRide
         }
     };
 
-    const RotationModeAnimationSet& getRotationAnimation(uint8_t rotationSubtype);
+    const RotationModeAnimationSet& getRotationAnimation(FlatRideAnimationType animationType);
 } // namespace OpenRCT2::FlatRide
 
 struct TopSpinTimeToSpriteMap

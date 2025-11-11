@@ -3950,24 +3950,10 @@ void Vehicle::UpdateRotating()
     if (curRide == nullptr)
         return;
 
-    auto rideEntry = GetRideEntry();
-    if (rideEntry == nullptr)
-    {
-        return;
-    }
-    uint8_t rotationSubtype = 3;
-    if (rideEntry->flags & RIDE_ENTRY_FLAG_TWIST_ROTATION_TYPE)
-    {
-        rotationSubtype = 1;
-    }
-    else if (rideEntry->flags & RIDE_ENTRY_FLAG_ENTERPRISE_ROTATION_TYPE)
-    {
-        rotationSubtype = 2;
-    }
-
-    auto animationSet = FlatRide::getRotationAnimation(rotationSubtype);
-    auto rotationSubState = static_cast<FlatRide::RotationModeSubState>(sub_state);
-    const FlatRide::RotationAnimationSequence timeToSpriteMap = animationSet.get(rotationSubState);
+    auto rtd = curRide->getRideTypeDescriptor();
+    auto animationSet = FlatRide::getRotationAnimation(rtd.flatRideAnimationType);
+    const FlatRide::RotationAnimationSequence timeToSpriteMap = animationSet.get(
+        static_cast<FlatRide::RotationModeSubState>(sub_state));
 
     uint16_t time = current_time;
     if (_vehicleBreakdown == BREAKDOWN_CONTROL_FAILURE)
@@ -4014,7 +4000,6 @@ void Vehicle::UpdateRotating()
         }
     }
 
-    const auto& rtd = GetRideTypeDescriptor(curRide->type);
     rtd.UpdateRotating(*this);
 }
 

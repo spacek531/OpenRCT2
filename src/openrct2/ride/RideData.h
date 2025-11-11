@@ -485,6 +485,7 @@ struct RideTypeDescriptor
     /** rct2: 0x0097C8AC */
     uint64_t RideModes{};
     RideMode DefaultMode{};
+    FlatRideAnimationType flatRideAnimationType{};
     /** rct2: 0x0097CF40 */
     RideOperatingSettings OperatingSettings{};
     RideTrackSpeedSettings TrackSpeedSettings{};
@@ -624,6 +625,7 @@ constexpr RideTypeDescriptor kDummyRTD =
     .Flags = 0,
     .RideModes = EnumsToFlags(RideMode::continuousCircuit),
     .DefaultMode = RideMode::continuousCircuit,
+    .flatRideAnimationType = FlatRideAnimationType::nullSubtype,
     .OperatingSettings = {},
     .TrackSpeedSettings = {},
     .BoosterSettings = {},
