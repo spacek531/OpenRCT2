@@ -3955,18 +3955,19 @@ void Vehicle::UpdateRotating()
     {
         return;
     }
-    const FlatRide::RotationModeAnimationSet* animationSet = &FlatRide::kMerryGoRoundAnimation;
+    uint8_t rotationSubtype = 3;
     if (rideEntry->flags & RIDE_ENTRY_FLAG_TWIST_ROTATION_TYPE)
     {
-        animationSet = &FlatRide::kTwistAnimation;
+        rotationSubtype = 1;
     }
     else if (rideEntry->flags & RIDE_ENTRY_FLAG_ENTERPRISE_ROTATION_TYPE)
     {
-        animationSet = &FlatRide::kEnterpriseAnimation;
+        rotationSubtype = 2;
     }
 
+    auto animationSet = FlatRide::getRotationAnimation(rotationSubtype);
     auto rotationSubState = static_cast<FlatRide::RotationModeSubState>(sub_state);
-    const FlatRide::RotationAnimationSequence timeToSpriteMap = animationSet->get(rotationSubState);
+    const FlatRide::RotationAnimationSequence timeToSpriteMap = animationSet.get(rotationSubState);
 
     uint16_t time = current_time;
     if (_vehicleBreakdown == BREAKDOWN_CONTROL_FAILURE)
@@ -3993,7 +3994,7 @@ void Vehicle::UpdateRotating()
         bool shouldStop = true;
         if (curRide->status != RideStatus::closed)
         {
-            uint8_t trueNumRotations = NumRotations + animationSet->numRotationsOffset;
+            uint8_t trueNumRotations = NumRotations + animationSet.numRotationsOffset;
 
             if (trueNumRotations < curRide->rotations)
                 shouldStop = false;

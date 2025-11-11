@@ -9,12 +9,19 @@
 
 #include "VehicleData.h"
 
+#include <cstddef>
+
 // clang-format off
 /** rct2: 0x0099F100 */
 
 namespace OpenRCT2::FlatRide
 {
-    constexpr RotationAnimationSequence kTwistAnimationStart = {
+
+    static constexpr RotationAnimationSequence kNullRotationAnimationSequence {};
+
+    constexpr RotationModeAnimationSet kNullRotationAnimationSet = {kNullRotationAnimationSequence, kNullRotationAnimationSequence, kNullRotationAnimationSequence, 0};
+
+    static constexpr RotationAnimationSequence kTwistAnimationStart = {
         0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
         0,   0,   0,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,
         1,   1,   1,   1,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,
@@ -66,7 +73,7 @@ namespace OpenRCT2::FlatRide
     };
 
     /** rct2: 0x0099F422 */
-    constexpr RotationAnimationSequence kTwistAnimationLoop = {
+    static constexpr RotationAnimationSequence kTwistAnimationLoop = {
         0,   0,   0,   1,   1,   1,   2,   2,   2,   3,   3,   3,   4,   4,   4,   5,   5,
         5,   6,   6,   6,   7,   7,   7,   8,   8,   8,   9,   9,   9,  10,  10,  10,  11,
         11,  11,  12,  12,  12,  13,  13,  13,  14,  14,  14,  15,  15,  15,  16,  16,  16,
@@ -109,7 +116,7 @@ namespace OpenRCT2::FlatRide
     };
 
     /** rct2: 0x0099F6AB */
-    constexpr RotationAnimationSequence kTwistAnimationEnd = {
+    static constexpr RotationAnimationSequence kTwistAnimationEnd = {
         0,   0,   0,   1,   1,   1,   2,   2,   2,   3,   3,   3,   4,   4,   4,   5,   5,
         5,   6,   6,   6,   7,   7,   7,   8,   8,   8,   9,   9,   9,  10,  10,  10,  11,
         11,  11,  12,  12,  12,  13,  13,  13,  14,  14,  14,  15,  15,  15,  16,  16,  16,
@@ -161,10 +168,10 @@ namespace OpenRCT2::FlatRide
     };
 
     /** rct2: 0x0099F0F4 */
-    const RotationModeAnimationSet kTwistAnimation = {kTwistAnimationStart, kTwistAnimationLoop, kTwistAnimationEnd, 1};
+    constexpr RotationModeAnimationSet kTwistAnimation = {kTwistAnimationStart, kTwistAnimationLoop, kTwistAnimationEnd, 1};
 
     /** rct2: 0x009A2434 */
-    constexpr RotationAnimationSequence kEnterpriseAnimationStart = {
+    static constexpr RotationAnimationSequence kEnterpriseAnimationStart = {
         0,   0,   0,   0,   0,   0,   0,   0,   1,   1,   1,   1,   1,   1,   1,   1,   2,
         2,   2,   2,   2,   2,   2,   2,   3,   3,   3,   3,   3,   3,   3,   3,   4,   4,
         4,   4,   4,   4,   4,   4,   5,   5,   5,   5,   5,   5,   5,   5,   6,   6,   6,
@@ -206,7 +213,7 @@ namespace OpenRCT2::FlatRide
     };
 
     /** rct2: 0x009A26A6 */
-    constexpr RotationAnimationSequence kEnterpriseAnimationLoop = {
+    static constexpr RotationAnimationSequence kEnterpriseAnimationLoop = {
         46,  46,  47,  47,  48,  48,  46,  46,  47,  47,  48,  48,  46,  46,  47,  47,  48,
         48,  46,  46,  47,  47,  48,  48,  46,  46,  47,  47,  48,  48,  46,  46,  47,  47,
         48,  48,  46,  46,  47,  47,  48,  48,  46,  46,  47,  47,  48,  48,  46,  46,  47,
@@ -216,7 +223,7 @@ namespace OpenRCT2::FlatRide
     };
 
     /** rct2: 0x009A270E */
-    constexpr RotationAnimationSequence kEnterpriseAnimationEnd = {
+    static constexpr RotationAnimationSequence kEnterpriseAnimationEnd = {
         43,  43,  44,  44,  45,  45,  43,  43,  44,  44,  45,  45,  43,  43,  44,  44,  45,
         45,  40,  40,  41,  41,  42,  42,  40,  40,  41,  41,  42,  42,  40,  40,  41,  41,
         42,  42,  37,  37,  38,  38,  39,  39,  37,  37,  38,  38,  39,  39,  37,  37,  38,
@@ -248,10 +255,10 @@ namespace OpenRCT2::FlatRide
     };
 
     /** rct2: 0x009A2428 */
-    const RotationModeAnimationSet kEnterpriseAnimation = {kEnterpriseAnimationStart, kEnterpriseAnimationLoop, kEnterpriseAnimationEnd, 9};
+    constexpr RotationModeAnimationSet kEnterpriseAnimation = {kEnterpriseAnimationStart, kEnterpriseAnimationLoop, kEnterpriseAnimationEnd, 9};
 
     /** rct2: 0x0099EB28 */
-    constexpr RotationAnimationSequence kMerryGoRoundAnimationStart = {
+    static constexpr RotationAnimationSequence kMerryGoRoundAnimationStart = {
         0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
         0,   0,   0,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,
         1,   1,   1,   1,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,   2,
@@ -287,7 +294,7 @@ namespace OpenRCT2::FlatRide
     };
 
     /** rct2: 0x0099ED49 */
-    constexpr RotationAnimationSequence kMerryGoRoundAnimationLoop = {
+    static constexpr RotationAnimationSequence kMerryGoRoundAnimationLoop = {
         0,   0,   0,   1,   1,   1,   2,   2,   2,   3,   3,   3,   4,   4,   4,   5,   5,
         5,   6,   6,   6,   7,   7,   7,   8,   8,   8,   9,   9,   9,  10,  10,  10,  11,
         11,  11,  12,  12,  12,  13,  13,  13,  14,  14,  14,  15,  15,  15,  16,  16,  16,
@@ -314,7 +321,7 @@ namespace OpenRCT2::FlatRide
     };
 
     /** rct2: 0x0099EED1 */
-    constexpr RotationAnimationSequence kMerryGoRoundAnimationEnd = {
+    static constexpr RotationAnimationSequence kMerryGoRoundAnimationEnd = {
         0,   0,   0,   1,   1,   1,   2,   2,   2,   3,   3,   3,   4,   4,   4,   5,   5,
         5,   6,   6,   6,   7,   7,   7,   8,   8,   8,   9,   9,   9,  10,  10,  10,  11,
         11,  11,  12,  12,  12,  13,  13,  13,  14,  14,  14,  15,  15,  15,  16,  16,  16,
@@ -350,7 +357,19 @@ namespace OpenRCT2::FlatRide
     };
 
     /** rct2: 0x0099EB1C */
-    const RotationModeAnimationSet kMerryGoRoundAnimation = {kMerryGoRoundAnimationStart, kMerryGoRoundAnimationLoop, kMerryGoRoundAnimationEnd, 1};
+    constexpr RotationModeAnimationSet kMerryGoRoundAnimation = {kMerryGoRoundAnimationStart, kMerryGoRoundAnimationLoop, kMerryGoRoundAnimationEnd, 1};
+
+    constexpr auto rotationAnimations = std::to_array<RotationModeAnimationSet>({kNullRotationAnimationSet, kTwistAnimation, kEnterpriseAnimation, kMerryGoRoundAnimation});
+    static_assert(std::size(rotationAnimations) == kNumRotationModes);
+
+    const RotationModeAnimationSet& getRotationAnimation(uint8_t rotationSubtype)
+    {
+        if (rotationSubtype >= kNumRotationModes)
+        {
+            return rotationAnimations[0];
+        }
+        return rotationAnimations[rotationSubtype];
+    }
 }
 
 /** rct2: 0x009A12EC */
