@@ -9,11 +9,74 @@
 
 #pragma once
 
+#include "../core/EnumUtils.hpp"
+
+#include <array>
+#include <assert.h>
 #include <cstdint>
 
-extern const uint8_t* kTwistTimeToSpriteMaps[];
-extern const uint8_t* kEnterpriseTimeToSpriteMaps[];
-extern const uint8_t* kMerryGoRoundTimeToSpriteMaps[];
+namespace OpenRCT2::FlatRide
+{
+
+    struct FlatRideAnimationFrame
+    {
+        uint8_t animationFrame{};
+        uint8_t animationFrame2{};
+        constexpr FlatRideAnimationFrame()
+        {
+            animationFrame = 0xFF;
+            animationFrame2 = 0xFF;
+        }
+        constexpr FlatRideAnimationFrame(uint8_t frame1)
+            : animationFrame(frame1)
+        {
+        }
+        constexpr FlatRideAnimationFrame(uint8_t frame1, uint8_t frame2)
+            : animationFrame(frame1)
+            , animationFrame2(frame2)
+        {
+        }
+        constexpr bool operator==(auto& b) const
+        {
+            return animationFrame == b.animationFrame && animationFrame2 == b.animationFrame2;
+        }
+    };
+
+    constexpr FlatRideAnimationFrame kNullFrame{};
+
+    using RotationAnimationSequence = std::array<FlatRideAnimationFrame, 1024>;
+
+    enum class RotationModeSubState : uint8_t
+    {
+        acceleration,
+        continuous,
+        deceleration,
+        count
+    };
+
+    struct RotationModeAnimationSet
+    {
+        const std::array<RotationAnimationSequence, EnumValue(RotationModeSubState::count)> animations;
+        const uint8_t numRotationsOffset;
+        constexpr RotationModeAnimationSet(
+            const RotationAnimationSequence accelerationAnimation, const RotationAnimationSequence continuousAnimation,
+            const RotationAnimationSequence decelerationAnimation, const uint8_t rotationsOffset)
+            : animations(accelerationAnimation, continuousAnimation, decelerationAnimation)
+            , numRotationsOffset(rotationsOffset)
+        {
+        }
+        const RotationAnimationSequence get(RotationModeSubState subState) const
+        {
+            assert(subState < RotationModeSubState::count);
+            return animations[EnumValue(subState)];
+        }
+    };
+
+    extern const RotationModeAnimationSet kTwistAnimation;
+    extern const RotationModeAnimationSet kEnterpriseAnimation;
+    extern const RotationModeAnimationSet kMerryGoRoundAnimation;
+}
+
 
 struct TopSpinTimeToSpriteMap
 {

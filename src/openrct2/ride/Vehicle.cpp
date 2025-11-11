@@ -3955,20 +3955,18 @@ void Vehicle::UpdateRotating()
     {
         return;
     }
-
-    const uint8_t* timeToSpriteMap;
+    const FlatRide::RotationModeAnimationSet* animationSet = &FlatRide::kMerryGoRoundAnimation;
     if (rideEntry->flags & RIDE_ENTRY_FLAG_TWIST_ROTATION_TYPE)
     {
-        timeToSpriteMap = kTwistTimeToSpriteMaps[sub_state];
+        animationSet = &FlatRide::kTwistAnimation;
     }
     else if (rideEntry->flags & RIDE_ENTRY_FLAG_ENTERPRISE_ROTATION_TYPE)
     {
-        timeToSpriteMap = kEnterpriseTimeToSpriteMaps[sub_state];
+        animationSet = &FlatRide::kEnterpriseAnimation;
     }
-    else
-    {
-        timeToSpriteMap = kMerryGoRoundTimeToSpriteMaps[sub_state];
-    }
+
+    auto rotationSubState = static_cast<FlatRide::RotationModeSubState>(sub_state);
+    const FlatRide::RotationAnimationSequence timeToSpriteMap = animationSet->get(rotationSubState);
 
     uint16_t time = current_time;
     if (_vehicleBreakdown == BREAKDOWN_CONTROL_FAILURE)
@@ -3977,13 +3975,13 @@ void Vehicle::UpdateRotating()
     }
     time++;
 
-    uint8_t sprite = timeToSpriteMap[time];
-    if (sprite != 0xFF)
+    FlatRide::FlatRideAnimationFrame sprite = timeToSpriteMap[time];
+    if (sprite != FlatRide::kNullFrame)
     {
         current_time = time;
-        if (sprite == flatRideAnimationFrame)
+        if (sprite.animationFrame == flatRideAnimationFrame)
             return;
-        flatRideAnimationFrame = sprite;
+        flatRideAnimationFrame = sprite.animationFrame;
         Invalidate();
         return;
     }
@@ -3995,11 +3993,9 @@ void Vehicle::UpdateRotating()
         bool shouldStop = true;
         if (curRide->status != RideStatus::closed)
         {
-            sprite = NumRotations + 1;
-            if (curRide->getRideTypeDescriptor().specialType == RtdSpecialType::enterprise)
-                sprite += 9;
+            uint8_t trueNumRotations = NumRotations + animationSet->numRotationsOffset;
 
-            if (sprite < curRide->rotations)
+            if (trueNumRotations < curRide->rotations)
                 shouldStop = false;
         }
 
