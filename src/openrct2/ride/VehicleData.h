@@ -44,6 +44,8 @@ namespace OpenRCT2::FlatRide
 
     constexpr FlatRideAnimationFrame kNullFrame{};
 
+    constexpr uint8_t kNumRotationModes = 4;
+
     using RotationAnimationSequence = std::array<FlatRideAnimationFrame, 1024>;
 
     enum class RotationModeSubState : uint8_t
@@ -56,27 +58,24 @@ namespace OpenRCT2::FlatRide
 
     struct RotationModeAnimationSet
     {
-        const std::array<RotationAnimationSequence, EnumValue(RotationModeSubState::count)> animations;
+        const std::array<const RotationAnimationSequence*, EnumValue(RotationModeSubState::count)> animations;
         const uint8_t numRotationsOffset;
         constexpr RotationModeAnimationSet(
-            const RotationAnimationSequence accelerationAnimation, const RotationAnimationSequence continuousAnimation,
-            const RotationAnimationSequence decelerationAnimation, const uint8_t rotationsOffset)
-            : animations(accelerationAnimation, continuousAnimation, decelerationAnimation)
+            const RotationAnimationSequence& accelerationAnimation, const RotationAnimationSequence& continuousAnimation,
+            const RotationAnimationSequence& decelerationAnimation, const uint8_t rotationsOffset)
+            : animations(&accelerationAnimation, &continuousAnimation, &decelerationAnimation)
             , numRotationsOffset(rotationsOffset)
         {
         }
-        const RotationAnimationSequence get(RotationModeSubState subState) const
+        const RotationAnimationSequence& get(RotationModeSubState subState) const
         {
             assert(subState < RotationModeSubState::count);
-            return animations[EnumValue(subState)];
+            return *animations[EnumValue(subState)];
         }
     };
 
-    extern const RotationModeAnimationSet kTwistAnimation;
-    extern const RotationModeAnimationSet kEnterpriseAnimation;
-    extern const RotationModeAnimationSet kMerryGoRoundAnimation;
-}
-
+    const RotationModeAnimationSet& getRotationAnimation(uint8_t rotationSubtype);
+} // namespace OpenRCT2::FlatRide
 
 struct TopSpinTimeToSpriteMap
 {
