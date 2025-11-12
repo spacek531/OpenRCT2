@@ -81,6 +81,46 @@ constexpr uint8_t kEdges4x4[] = {
 };
 // clang-format on
 
+constexpr uint8_t kTrackMap5x5[][25] = {
+    { 0, 1, 2, 3, 4, 5, 6, 7, 8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 },
+    { 0, 2, 3, 4, 1, 6, 7, 8, 5, 10, 11, 12,  9, 14, 15, 16, 13, 18, 19, 20, 17, 22, 23, 24, 21 },
+    { 0, 3, 4, 1, 2, 7, 8, 5, 6, 11, 12,  9, 10, 15, 16, 13, 14, 19, 20, 17, 18, 23, 24, 21, 22 },
+    { 0, 4, 1, 2, 3, 8, 5, 6, 7, 12,  9, 10, 11, 16, 13, 14, 15, 20, 17, 18, 19, 24, 21, 22, 23 },
+};
+// clang-format off
+constexpr uint8_t kEdges5x5[] = {
+    0,
+    0,
+    0,
+    0,
+    0,
+    EDGE_NE | EDGE_NW,
+    EDGE_NE | EDGE_SE,
+    EDGE_SW | EDGE_SE,
+    EDGE_NW | EDGE_SW,
+    0,
+    0,
+    0,
+    0,
+    EDGE_NE,
+    EDGE_SE,
+    EDGE_SW,
+    EDGE_NW,
+    EDGE_NE,
+    EDGE_SE,
+    EDGE_SW,
+    EDGE_NW,
+    EDGE_NE,
+    EDGE_SE,
+    EDGE_SW,
+    EDGE_NW,
+    EDGE_NE,
+    EDGE_SE,
+    EDGE_SW,
+    EDGE_NW,
+};
+// clang-format on
+
 constexpr uint8_t kTrackMap1x4[][4] = {
     { 0, 1, 2, 3 },
     { 2, 3, 0, 1 },
@@ -658,3 +698,4 @@ namespace OpenRCT2::AlpineRC
 TrackPaintFunction GetTrackPaintFunctionClassicWoodenRC(OpenRCT2::TrackElemType trackType);
 TrackPaintFunction GetTrackPaintFunctionClassicStandUpRC(OpenRCT2::TrackElemType trackType);
 TrackPaintFunction GetTrackPaintFunctionClassicWoodenTwisterRC(OpenRCT2::TrackElemType trackType);
+TrackPaintFunction GetTrackPaintFunctionChainSwing(OpenRCT2::TrackElemType trackType);

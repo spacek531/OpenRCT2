@@ -21,6 +21,7 @@ enum class TrackStyle : uint8_t
     boatHire,
     bobsleighCoaster,
     carRide,
+    chainSwing,
     chairlift,
     circus,
     classicStandUpRollerCoaster,

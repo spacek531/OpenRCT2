@@ -1013,6 +1013,7 @@
     <ClCompile Include="paint\track\shops\Facility.cpp" />
     <ClCompile Include="paint\track\shops\Shop.cpp" />
     <ClCompile Include="paint\track\thrill\3dCinema.cpp" />
+    <ClCompile Include="paint\track\thrill\ChainSwing.cpp" />
     <ClCompile Include="paint\track\thrill\Enterprise.cpp" />
     <ClCompile Include="paint\track\thrill\GoKarts.cpp" />
     <ClCompile Include="paint\track\thrill\LaunchedFreefall.cpp" />

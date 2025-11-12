@@ -24,6 +24,7 @@ static constexpr TrackPaintFunctionGetter kPaintFunctionMap[] = {
     GetTrackPaintFunctionBoatHire,                 // boatHire
     GetTrackPaintFunctionBobsleighRC,              // bobsleighCoaster
     GetTrackPaintFunctionCarRide,                  // carRide
+    GetTrackPaintFunctionChainSwing,               // chainSwing
     GetTrackPaintFunctionChairlift,                // chairlift
     GetTrackPaintFunctionCircus,                   // circus
     GetTrackPaintFunctionClassicStandUpRC,         // classicStandUpRollerCoaster
@@ -100,7 +101,6 @@ static constexpr TrackPaintFunctionGetter kPaintFunctionMap[] = {
     GetTrackPaintFunctionWoodenRC,                 // woodenRollerCoaster
     GetTrackPaintFunctionWoodenWildMouse,          // woodenWildMouse
 
-    DummyGetter,
     DummyGetter,
     DummyGetter,
     DummyGetter,

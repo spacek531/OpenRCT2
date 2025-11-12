@@ -20,7 +20,7 @@ using namespace OpenRCT2;
 
 namespace OpenRCT2::TrackMetaData
 {
-    constexpr uint8_t kMaxSequencesPerPiece = 16;
+    constexpr uint8_t kMaxSequencesPerPiece = 64;
 
     using TrackPieceSequenceFlag = BitSet<kMaxSequencesPerPiece>;
 

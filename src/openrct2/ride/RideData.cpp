@@ -99,6 +99,7 @@
 #include "rtd/shops/Shop.h"
 #include "rtd/shops/Toilets.h"
 #include "rtd/thrill/3DCinema.h"
+#include "rtd/thrill/ChainSwing.h"
 #include "rtd/thrill/Enterprise.h"
 #include "rtd/thrill/GoKarts.h"
 #include "rtd/thrill/LaunchedFreefall.h"
@@ -360,6 +361,7 @@ constexpr RideTypeDescriptor kRideTypeDescriptors[RIDE_TYPE_COUNT] = {
     /* RIDE_TYPE_CLASSIC_STAND_UP_ROLLER_COASTER    */ OpenRCT2::ClassicStandUpRollerCoasterRTD,
     /* RIDE_TYPE_LSM_LAUNCHED_ROLLER_COASTER        */ OpenRCT2::LSMLaunchedRollerCoasterRTD,
     /* RIDE_TYPE_CLASSIC_WOODEN_TWISTER_ROLLER_COASTER */ ClassicWoodenTwisterRollerCoasterRTD,
+    /* RIDE_TYPE_CHAIN_SWING */                        OpenRCT2::ChainSwingRTD,
 };
 
 bool RideTypeDescriptor::HasFlag(RtdFlag flag) const

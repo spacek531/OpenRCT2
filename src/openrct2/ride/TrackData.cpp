@@ -378,7 +378,8 @@ namespace OpenRCT2::TrackMetaData
         { 4, 1, 0,152, -32, 96 },   // TrackElemType::RightEighthDiveLoopUpToOrthogonal
         { 0, 7,152, 0, -96, -32 },   // TrackElemType::LeftEighthDiveLoopDownToDiag 
         { 0, 4,152, 0, -96, 32 },   // TrackElemType::RightEighthDiveLoopDownToDiag
-        { 4, 4, 16, 0, -32, 32 }   // TrackElemType::DiagDown25Brakes
+        { 4, 4, 16, 0, -32, 32 },   // TrackElemType::DiagDown25Brakes
+        { 0, 2,  0, 0,   0, 32 }, // TrackElemType::FlatTrack5x5
     };
     static_assert(std::size(kTrackCoordinates) == EnumValue(TrackElemType::Count));
 
@@ -733,6 +734,7 @@ namespace OpenRCT2::TrackMetaData
         165, // TrackElemType::LeftEighthDiveLoopDownToDiag  
         165, // TrackElemType::RightEighthDiveLoopDownToDiag      
         45, // TrackElemType::DiagDown25Brakes
+        0,  // TrackElemType::FlatTrack5x5
     };
 
     static_assert(std::size(kTrackPieceLengths) == EnumValue(TrackElemType::Count));
@@ -1089,6 +1091,7 @@ namespace OpenRCT2::TrackMetaData
         { TrackCurve::None, TrackElemType::RightEighthDiveLoopUpToOrthogonal  },             // TrackElemType::LeftEighthDiveLoopDownToDiag  
         { TrackCurve::None, TrackElemType::LeftEighthDiveLoopUpToOrthogonal },             // TrackElemType::RightEighthDiveLoopDownToDiag 
         { TrackElemType::DiagDown25Brakes, TrackElemType::DiagDown25Brakes }, // TrackElemType::DiagDown25Brakes
+        { TrackCurve::None, TrackCurve::None }, // TrackElemType::FlatTrack5x5
     };
     static_assert(std::size(kTrackCurveChain) == EnumValue(TrackElemType::Count));
     
@@ -1633,6 +1636,7 @@ namespace OpenRCT2::TrackMetaData
         TrackElemType::None, // TrackElemType::LeftEighthDiveLoopDownToDiag 
         TrackElemType::None, // TrackElemType::RightEighthDiveLoopDownToDiag
         TrackElemType::None, // TrackElemType::DiagDown25Brakes
+        TrackElemType::None, // TrackElemType::FlatTrack5x5
     };
     static_assert(std::size(kAlternativeTrackTypes) == EnumValue(TrackElemType::Count));
     
@@ -1988,6 +1992,7 @@ namespace OpenRCT2::TrackMetaData
         458752, // TrackElemType::LeftEighthDiveLoopDownToDiag 
         458752, // TrackElemType::RightEighthDiveLoopDownToDiag
         109824, // TrackElemType::DiagDown25Brakes
+        1048576,// TrackElemType::FlatTrack4x4 (TEMPORARY VALUE)
     };
     static_assert(std::size(kTrackPricing) == EnumValue(TrackElemType::Count));
     
@@ -2343,6 +2348,7 @@ namespace OpenRCT2::TrackMetaData
         TrackElemType::RightEighthDiveLoopDownToDiag,   // TrackElemType::LeftEighthDiveLoopDownToDiag 
         TrackElemType::LeftEighthDiveLoopDownToDiag,    // TrackElemType::RightEighthDiveLoopDownToDiag
         TrackElemType::DiagDown25Brakes,
+        TrackElemType::FlatTrack5x5,
     };
     static_assert(std::size(kTrackElementMirrorMap) == EnumValue(TrackElemType::Count));
     
@@ -2698,6 +2704,7 @@ namespace OpenRCT2::TrackMetaData
         { 0, 5 }, // TrackElemType::LeftEighthDiveLoopDownToDiag
         { 0, 5 }, // TrackElemType::RightEighthDiveLoopDownToDiag
         { 3 }, // TrackElemType::DiagDown25Brakes
+        { 0, 5, 6, 7, 8 }, // TrackElemType::FlatTrack5x5
     };
     static_assert(std::size(kTrackHeightMarkerPositions) == EnumValue(TrackElemType::Count));
     
@@ -3056,6 +3063,7 @@ namespace OpenRCT2::TrackMetaData
         /* TrackElemType::LeftEighthDiveLoopDownToDiag     */   TRACK_ELEM_FLAG_DOWN | TRACK_ELEM_FLAG_STARTS_AT_HALF_HEIGHT | TRACK_ELEM_FLAG_INVERSION_TO_NORMAL,
         /* TrackElemType::RightEighthDiveLoopDownToDiag    */   TRACK_ELEM_FLAG_DOWN | TRACK_ELEM_FLAG_STARTS_AT_HALF_HEIGHT | TRACK_ELEM_FLAG_INVERSION_TO_NORMAL,
         /* TrackElemType::DiagDown25Brakes                       */   TRACK_ELEM_FLAG_DOWN | TRACK_ELEM_FLAG_STARTS_AT_HALF_HEIGHT,
+        /* TrackElemType::FlatTrack5x5                         */   0,
     };
     static_assert(std::size(kTrackFlags) == EnumValue(TrackElemType::Count));
     // clang-format on
@@ -3415,6 +3423,7 @@ namespace OpenRCT2::TrackMetaData
         { TrackGroup::diveLoop,                          TrackPitch::Down60,           TrackPitch::None,           TrackRoll::None,        TrackRoll::UpsideDown,  -56 }, // TrackElemType::LeftEighthDiveLoopDownToDiag 
         { TrackGroup::diveLoop,                          TrackPitch::Down60,           TrackPitch::None,           TrackRoll::None,        TrackRoll::UpsideDown,  -56 }, // TrackElemType::RightEighthDiveLoopDownToDiag
         { TrackGroup::inclinedBrakes,                    TrackPitch::Down25,           TrackPitch::Down25,         TrackRoll::None,        TrackRoll::None,       0    }, // TrackElemType::DiagDown25
+        { TrackGroup::flatRideBase,                      TrackPitch::None,             TrackPitch::None,           TrackRoll::None,        TrackRoll::None,        0   }, // TrackElemType::FlatTrack5x5
     };
     static_assert(std::size(kTrackDefinitions) == EnumValue(TrackElemType::Count));
 
@@ -3479,7 +3488,7 @@ namespace OpenRCT2::TrackMetaData
         SpinFunction::R9,   SpinFunction::L9,   SpinFunction::R9,   SpinFunction::L9,   SpinFunction::R9,   SpinFunction::L9,
         SpinFunction::R9,   SpinFunction::None, SpinFunction::None, SpinFunction::None, SpinFunction::None, SpinFunction::None,
         SpinFunction::None, SpinFunction::None, SpinFunction::None, SpinFunction::L9,   SpinFunction::R9,   SpinFunction::L9,
-        SpinFunction::R9,   SpinFunction::None
+        SpinFunction::R9,   SpinFunction::None, SpinFunction::None
     };
     static_assert(std::size(kTrackTypeToSpinFunction) == EnumValue(TrackElemType::Count));
 
@@ -4842,6 +4851,7 @@ namespace OpenRCT2::TrackMetaData
         STR_DIVE_LOOP_LEFT,                // TrackElemType::LeftEighthDiveLoopDownToDiag
         STR_DIVE_LOOP_RIGHT,               // TrackElemType::RightEighthDiveLoopDownToDiag
         STR_BRAKES,                        // TrackElemType::DiagDown25Brakes
+        kStringIdEmpty,                    // TrackElemType::FlatTrack5x5
     };
     static_assert(std::size(kRideConfigurationStringIds) == EnumValue(TrackElemType::Count));
 
@@ -4863,8 +4873,7 @@ namespace OpenRCT2::TrackMetaData
 
     static constexpr SequenceDescriptor kEndStationSeq0 = {
         .clearance = { 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin,
+        .flags = { SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin,
                    SequenceFlag::disallowDoors },
         .woodenSupports = { WoodenSupportSubType::neSw },
         .metalSupports = { MetalSupportPlace::centre, true },
@@ -4873,8 +4882,7 @@ namespace OpenRCT2::TrackMetaData
 
     static constexpr SequenceDescriptor kBeginStationSeq0 = {
         .clearance = { 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin,
+        .flags = { SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin,
                    SequenceFlag::disallowDoors },
         .woodenSupports = { WoodenSupportSubType::neSw },
         .metalSupports = { MetalSupportPlace::centre, true },
@@ -4883,8 +4891,7 @@ namespace OpenRCT2::TrackMetaData
 
     static constexpr SequenceDescriptor kMiddleStationSeq0 = {
         .clearance = { 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin,
+        .flags = { SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin,
                    SequenceFlag::disallowDoors },
         .woodenSupports = { WoodenSupportSubType::neSw },
         .metalSupports = { MetalSupportPlace::centre, true },
@@ -6398,8 +6405,7 @@ namespace OpenRCT2::TrackMetaData
 
     static constexpr SequenceDescriptor kTowerBaseSeq1 = {
         .clearance = { -32, -32, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionNW },
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionNW },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
@@ -6411,8 +6417,7 @@ namespace OpenRCT2::TrackMetaData
 
     static constexpr SequenceDescriptor kTowerBaseSeq3 = {
         .clearance = { -32, 32, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionSE },
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionSE },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
@@ -6430,15 +6435,13 @@ namespace OpenRCT2::TrackMetaData
 
     static constexpr SequenceDescriptor kTowerBaseSeq6 = {
         .clearance = { 32, -32, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionSW,
-                   SequenceFlag::entranceConnectionNW },
+        .flags = { SequenceFlag::entranceConnectionSW, SequenceFlag::entranceConnectionNW },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
     static constexpr SequenceDescriptor kTowerBaseSeq7 = {
         .clearance = { 32, 32, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionSW },
+        .flags = { SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionSW },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
@@ -7519,115 +7522,83 @@ namespace OpenRCT2::TrackMetaData
 
     static constexpr SequenceDescriptor kMazeSeq0 = {
         .clearance = { 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionSW,
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionSW,
                    SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
     static constexpr SequenceDescriptor kMazeSeq1 = {
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionSW,
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionSW,
                    SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
     };
 
     static constexpr SequenceDescriptor kMazeSeq2 = {
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionSW,
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionSW,
                    SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
     };
 
     static constexpr SequenceDescriptor kMazeSeq3 = {
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionSW,
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionSW,
                    SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
     };
 
     static constexpr SequenceDescriptor kMazeSeq4 = {
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionSW,
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionSW,
                    SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
     };
 
     static constexpr SequenceDescriptor kMazeSeq5 = {
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionSW,
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionSW,
                    SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
     };
 
     static constexpr SequenceDescriptor kMazeSeq6 = {
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionSW,
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionSW,
                    SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
     };
 
     static constexpr SequenceDescriptor kMazeSeq7 = {
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionSW,
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionSW,
                    SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
     };
 
     static constexpr SequenceDescriptor kMazeSeq8 = {
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionSW,
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionSW,
                    SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
     };
 
     static constexpr SequenceDescriptor kMazeSeq9 = {
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionSW,
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionSW,
                    SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
     };
 
     static constexpr SequenceDescriptor kMazeSeq10 = {
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionSW,
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionSW,
                    SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
     };
 
     static constexpr SequenceDescriptor kMazeSeq11 = {
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionSW,
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionSW,
                    SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
     };
 
     static constexpr SequenceDescriptor kMazeSeq12 = {
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionSW,
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionSW,
                    SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
     };
 
     static constexpr SequenceDescriptor kMazeSeq13 = {
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionSW,
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionSW,
                    SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
     };
 
     static constexpr SequenceDescriptor kMazeSeq14 = {
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionSW,
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionSW,
                    SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
     };
 
     static constexpr SequenceDescriptor kMazeSeq15 = {
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionSW,
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionSW,
                    SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
     };
 
@@ -11879,8 +11850,7 @@ namespace OpenRCT2::TrackMetaData
 
     static constexpr SequenceDescriptor kFlatTrack1x4ASeq0 = {
         .clearance = { 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
+        .flags = { SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
@@ -11891,8 +11861,7 @@ namespace OpenRCT2::TrackMetaData
 
     static constexpr SequenceDescriptor kFlatTrack1x4ASeq2 = {
         .clearance = { -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionNW },
+        .flags = { SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionNW },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
@@ -11903,36 +11872,31 @@ namespace OpenRCT2::TrackMetaData
 
     static constexpr SequenceDescriptor kFlatTrack2x2Seq0 = {
         .clearance = { 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
     static constexpr SequenceDescriptor kFlatTrack2x2Seq1 = {
         .clearance = { 0, 32, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionSE },
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionSE },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
     static constexpr SequenceDescriptor kFlatTrack2x2Seq2 = {
         .clearance = { 32, 0, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionSW,
-                   SequenceFlag::entranceConnectionNW },
+        .flags = { SequenceFlag::entranceConnectionSW, SequenceFlag::entranceConnectionNW },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
     static constexpr SequenceDescriptor kFlatTrack2x2Seq3 = {
         .clearance = { 32, 32, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionSW },
+        .flags = { SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionSW },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
     static constexpr SequenceDescriptor kFlatTrack4x4Seq0 = {
         .clearance = { 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
@@ -11950,8 +11914,7 @@ namespace OpenRCT2::TrackMetaData
 
     static constexpr SequenceDescriptor kFlatTrack4x4Seq3 = {
         .clearance = { 0, 96, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionSE },
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionSE },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
@@ -12001,8 +11964,7 @@ namespace OpenRCT2::TrackMetaData
 
     static constexpr SequenceDescriptor kFlatTrack4x4Seq12 = {
         .clearance = { 96, 0, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionSW,
-                   SequenceFlag::entranceConnectionNW },
+        .flags = { SequenceFlag::entranceConnectionSW, SequenceFlag::entranceConnectionNW },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
@@ -12020,15 +11982,13 @@ namespace OpenRCT2::TrackMetaData
 
     static constexpr SequenceDescriptor kFlatTrack4x4Seq15 = {
         .clearance = { 96, 96, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionSW },
+        .flags = { SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionSW },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
     static constexpr SequenceDescriptor kFlatTrack2x4Seq0 = {
         .clearance = { 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
@@ -12046,15 +12006,13 @@ namespace OpenRCT2::TrackMetaData
 
     static constexpr SequenceDescriptor kFlatTrack2x4Seq3 = {
         .clearance = { 0, 96, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionSE },
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionSE },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
     static constexpr SequenceDescriptor kFlatTrack2x4Seq4 = {
         .clearance = { 32, 0, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionSW,
-                   SequenceFlag::entranceConnectionNW },
+        .flags = { SequenceFlag::entranceConnectionSW, SequenceFlag::entranceConnectionNW },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
@@ -12072,15 +12030,13 @@ namespace OpenRCT2::TrackMetaData
 
     static constexpr SequenceDescriptor kFlatTrack2x4Seq7 = {
         .clearance = { 32, 96, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
-        .flags = { SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionSW },
+        .flags = { SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionSW },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
     static constexpr SequenceDescriptor kFlatTrack1x5Seq0 = {
         .clearance = { 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
+        .flags = { SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
@@ -12091,15 +12047,13 @@ namespace OpenRCT2::TrackMetaData
 
     static constexpr SequenceDescriptor kFlatTrack1x5Seq2 = {
         .clearance = { -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionNW },
+        .flags = { SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionNW },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
     static constexpr SequenceDescriptor kFlatTrack1x5Seq3 = {
         .clearance = { 32, 0, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionNW },
+        .flags = { SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionNW },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
@@ -12110,8 +12064,7 @@ namespace OpenRCT2::TrackMetaData
 
     static constexpr SequenceDescriptor kFlatTrack1x1ASeq0 = {
         .clearance = { 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::trackOrigin,
-                   SequenceFlag::connectsToPath },
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::trackOrigin, SequenceFlag::connectsToPath },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
@@ -12139,41 +12092,32 @@ namespace OpenRCT2::TrackMetaData
 
     static constexpr SequenceDescriptor kFlatTrack1x1BSeq0 = {
         .clearance = { 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionSW,
-                   SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin,
-                   SequenceFlag::connectsToPath },
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionSW,
+                   SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin, SequenceFlag::connectsToPath },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
     static constexpr SequenceDescriptor kFlatTrack1x4CSeq0 = {
         .clearance = { 0, 0, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
+        .flags = { SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionNW, SequenceFlag::trackOrigin },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
     static constexpr SequenceDescriptor kFlatTrack1x4CSeq1 = {
         .clearance = { -64, 0, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionNW },
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionNW },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
     static constexpr SequenceDescriptor kFlatTrack1x4CSeq2 = {
         .clearance = { -32, 0, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionNW },
+        .flags = { SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionNW },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
     static constexpr SequenceDescriptor kFlatTrack1x4CSeq3 = {
         .clearance = { 32, 0, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
-        .flags = { SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionSW,
-                   SequenceFlag::entranceConnectionNW },
+        .flags = { SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionSW, SequenceFlag::entranceConnectionNW },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
@@ -12185,8 +12129,7 @@ namespace OpenRCT2::TrackMetaData
 
     static constexpr SequenceDescriptor kFlatTrack3x3Seq1 = {
         .clearance = { -32, -32, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionNW },
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionNW },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
@@ -12198,8 +12141,7 @@ namespace OpenRCT2::TrackMetaData
 
     static constexpr SequenceDescriptor kFlatTrack3x3Seq3 = {
         .clearance = { -32, 32, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionNE,
-                   SequenceFlag::entranceConnectionSE },
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionSE },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
@@ -12217,15 +12159,13 @@ namespace OpenRCT2::TrackMetaData
 
     static constexpr SequenceDescriptor kFlatTrack3x3Seq6 = {
         .clearance = { 32, -32, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionSW,
-                   SequenceFlag::entranceConnectionNW },
+        .flags = { SequenceFlag::entranceConnectionSW, SequenceFlag::entranceConnectionNW },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
     static constexpr SequenceDescriptor kFlatTrack3x3Seq7 = {
         .clearance = { 32, 32, 0, 0, { 0b1111, 0 }, 0 },
-        .flags = { SequenceFlag::entranceConnectionSE,
-                   SequenceFlag::entranceConnectionSW },
+        .flags = { SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionSW },
         .woodenSupports = { WoodenSupportSubType::neSw },
     };
 
@@ -15042,6 +14982,181 @@ namespace OpenRCT2::TrackMetaData
         .blockedSegments = blockedSegmentsRotate(kLeftEighthDiveLoopUpToOrthogonalSeq0.blockedSegments, 2),
     };
 
+    /** 5x5 track blocks
+     *   5 13 17 21  6
+     *  24  1  9  2 14
+     *  20 12  0 10 18
+     *  16  4 11  3 22
+     *   8 23 19 15  7
+     * 5: connect to side 0 and 3
+     * 6: connect to side 0 and 1
+     * 7: connect to side 1 and 2
+     * 8: connect to side 2 and 3
+     * 13-15: connect to side 0
+     * 16-18: connect to side 1
+     * 19-21: connect to side 2
+     * 22-14: connect to side 3
+     * height markers on 0, 5, 6, 7, 8
+     */
+
+    static constexpr SequenceDescriptor kFlatTrack5x5Seq0 = {
+        .clearance = { 0, 0, 0, 0, { 0b1111, 0 }, 0 },
+        .flags = { SequenceFlag::trackOrigin },
+        .woodenSupports = { WoodenSupportSubType::neSw },
+    };
+
+    // 5x5 inner corners
+
+    static constexpr SequenceDescriptor kFlatTrack5x5Seq1 = {
+        .clearance = { -32, -32, 0, 0, { 0b1111, 0 }, 0 },
+        .woodenSupports = { WoodenSupportSubType::neSw },
+    };
+
+    static constexpr SequenceDescriptor kFlatTrack5x5Seq2 = {
+        .clearance = { -32, 32, 0, 0, { 0b1111, 0 }, 0 },
+        .woodenSupports = { WoodenSupportSubType::neSw },
+    };
+
+    static constexpr SequenceDescriptor kFlatTrack5x5Seq3 = {
+        .clearance = { 32, 32, 0, 0, { 0b1111, 0 }, 0 },
+        .woodenSupports = { WoodenSupportSubType::neSw },
+    };
+
+    static constexpr SequenceDescriptor kFlatTrack5x5Seq4 = {
+        .clearance = { 32, -32, 0, 0, { 0b1111, 0 }, 0 },
+        .woodenSupports = { WoodenSupportSubType::neSw },
+    };
+
+    // 5x5 outer corners
+
+    static constexpr SequenceDescriptor kFlatTrack5x5Seq5 = {
+        .clearance = { -64, -64, 0, 0, { 0b1111, 0 }, 0 },
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionNW },
+        .woodenSupports = { WoodenSupportSubType::neSw },
+    };
+
+    static constexpr SequenceDescriptor kFlatTrack5x5Seq6 = {
+        .clearance = { -64, 64, 0, 0, { 0b1111, 0 }, 0 },
+        .flags = { SequenceFlag::entranceConnectionNE, SequenceFlag::entranceConnectionSE },
+        .woodenSupports = { WoodenSupportSubType::neSw },
+    };
+
+    static constexpr SequenceDescriptor kFlatTrack5x5Seq7 = {
+        .clearance = { 64, 64, 0, 0, { 0b1111, 0 }, 0 },
+        .flags = { SequenceFlag::entranceConnectionSE, SequenceFlag::entranceConnectionSW },
+        .woodenSupports = { WoodenSupportSubType::neSw },
+    };
+
+    static constexpr SequenceDescriptor kFlatTrack5x5Seq8 = {
+        .clearance = { 64, -64, 0, 0, { 0b1111, 0 }, 0 },
+        .flags = { SequenceFlag::entranceConnectionSW, SequenceFlag::entranceConnectionNW },
+        .woodenSupports = { WoodenSupportSubType::neSw },
+    };
+
+    // 5x5 inner sides
+
+    static constexpr SequenceDescriptor kFlatTrack5x5Seq9 = {
+        .clearance = { -32, 0, 0, 0, { 0b1111, 0 }, 0 },
+        .woodenSupports = { WoodenSupportSubType::neSw },
+    };
+
+    static constexpr SequenceDescriptor kFlatTrack5x5Seq10 = {
+        .clearance = { 0, 32, 0, 0, { 0b1111, 0 }, 0 },
+        .woodenSupports = { WoodenSupportSubType::neSw },
+    };
+
+    static constexpr SequenceDescriptor kFlatTrack5x5Seq11 = {
+        .clearance = { 32, 0, 0, 0, { 0b1111, 0 }, 0 },
+        .woodenSupports = { WoodenSupportSubType::neSw },
+    };
+
+    static constexpr SequenceDescriptor kFlatTrack5x5Seq12 = {
+        .clearance = { 0, -32, 0, 0, { 0b1111, 0 }, 0 },
+        .woodenSupports = { WoodenSupportSubType::neSw },
+    };
+
+    // 5x5 NE side
+
+    static constexpr SequenceDescriptor kFlatTrack5x5Seq13 = {
+        .clearance = { -64, -32, 0, 0, { 0b1111, 0 }, 0 },
+        .flags = { SequenceFlag::entranceConnectionNE },
+        .woodenSupports = { WoodenSupportSubType::neSw },
+    };
+
+    static constexpr SequenceDescriptor kFlatTrack5x5Seq17 = {
+        .clearance = { -64, 0, 0, 0, { 0b1111, 0 }, 0 },
+        .flags = { SequenceFlag::entranceConnectionNE },
+        .woodenSupports = { WoodenSupportSubType::neSw },
+    };
+
+    static constexpr SequenceDescriptor kFlatTrack5x5Seq21 = {
+        .clearance = { -64, 32, 0, 0, { 0b1111, 0 }, 0 },
+        .flags = { SequenceFlag::entranceConnectionNE },
+        .woodenSupports = { WoodenSupportSubType::neSw },
+    };
+
+    // 5x5 SE side
+
+    static constexpr SequenceDescriptor kFlatTrack5x5Seq14 = {
+        .clearance = { -32, 64, 0, 0, { 0b1111, 0 }, 0 },
+        .flags = { SequenceFlag::entranceConnectionSE },
+        .woodenSupports = { WoodenSupportSubType::neSw },
+    };
+
+    static constexpr SequenceDescriptor kFlatTrack5x5Seq18 = {
+        .clearance = { 0, 64, 0, 0, { 0b1111, 0 }, 0 },
+        .flags = { SequenceFlag::entranceConnectionSE },
+        .woodenSupports = { WoodenSupportSubType::neSw },
+    };
+
+    static constexpr SequenceDescriptor kFlatTrack5x5Seq22 = {
+        .clearance = { 32, 64, 0, 0, { 0b1111, 0 }, 0 },
+        .flags = { SequenceFlag::entranceConnectionSE },
+        .woodenSupports = { WoodenSupportSubType::neSw },
+    };
+
+    // 5x5 SW side
+
+    static constexpr SequenceDescriptor kFlatTrack5x5Seq15 = {
+        .clearance = { 64, 32, 0, 0, { 0b1111, 0 }, 0 },
+        .flags = { SequenceFlag::entranceConnectionSW },
+        .woodenSupports = { WoodenSupportSubType::neSw },
+    };
+
+    static constexpr SequenceDescriptor kFlatTrack5x5Seq19 = {
+        .clearance = { 64, 0, 0, 0, { 0b1111, 0 }, 0 },
+        .flags = { SequenceFlag::entranceConnectionSW },
+        .woodenSupports = { WoodenSupportSubType::neSw },
+    };
+
+    static constexpr SequenceDescriptor kFlatTrack5x5Seq23 = {
+        .clearance = { 64, -32, 0, 0, { 0b1111, 0 }, 0 },
+        .flags = { SequenceFlag::entranceConnectionSW },
+        .woodenSupports = { WoodenSupportSubType::neSw },
+    };
+
+    // 5x5 NW side
+
+    static constexpr SequenceDescriptor kFlatTrack5x5Seq16 = {
+        .clearance = { 32, -64, 0, 0, { 0b1111, 0 }, 0 },
+        .flags = { SequenceFlag::entranceConnectionNW },
+        .woodenSupports = { WoodenSupportSubType::neSw },
+    };
+
+    static constexpr SequenceDescriptor kFlatTrack5x5Seq20 = {
+        .clearance = { 0, -64, 0, 0, { 0b1111, 0 }, 0 },
+        .flags = { SequenceFlag::entranceConnectionNW },
+        .woodenSupports = { WoodenSupportSubType::neSw },
+    };
+
+    static constexpr SequenceDescriptor kFlatTrack5x5Seq24 = {
+        .clearance = { -32, -64, 0, 0, { 0b1111, 0 }, RCT_PREVIEW_TRACK_FLAG_1 },
+        .flags = { SequenceFlag::entranceConnectionNW },
+        .woodenSupports = { WoodenSupportSubType::neSw },
+    };
+
+    // on 3x3 the last sequence (8) has RCT_PREVIEW_TRACK_FLAG_1 set. Should 5x5 have it on its last sequence (24) too?
+
     static constexpr SequenceData kSequenceDescriptorsByElement[] = {
         /* TrackElemType::Flat */ { 1, { kFlatSeq0 } },
         /* TrackElemType::EndStation */ { 1, { kEndStationSeq0 } },
@@ -15978,7 +16093,14 @@ namespace OpenRCT2::TrackMetaData
         { 6,
           { kRightEighthDiveLoopDownToDiagSeq0, kRightEighthDiveLoopDownToDiagSeq1, kRightEighthDiveLoopDownToDiagSeq2,
             kRightEighthDiveLoopDownToDiagSeq3, kRightEighthDiveLoopDownToDiagSeq4, kRightEighthDiveLoopDownToDiagSeq5 } },
-        /* TrackElemType::DiagDown25Brakes */ { 4, { kDiagDown25Seq0, kDiagDown25Seq1, kDiagDown25Seq2, kDiagDown25Seq3 } }
+        /* TrackElemType::DiagDown25Brakes */
+        { 4, { kDiagDown25Seq0, kDiagDown25Seq1, kDiagDown25Seq2, kDiagDown25Seq3 } },
+        /* TrackElemType::FlatTrack5x5 */
+        { 25, { kFlatTrack5x5Seq0,  kFlatTrack5x5Seq1,  kFlatTrack5x5Seq2,  kFlatTrack5x5Seq3,  kFlatTrack5x5Seq4,
+                kFlatTrack5x5Seq5,  kFlatTrack5x5Seq6,  kFlatTrack5x5Seq7,  kFlatTrack5x5Seq8,  kFlatTrack5x5Seq9,
+                kFlatTrack5x5Seq10, kFlatTrack5x5Seq11, kFlatTrack5x5Seq12, kFlatTrack5x5Seq13, kFlatTrack5x5Seq14,
+                kFlatTrack5x5Seq15, kFlatTrack5x5Seq16, kFlatTrack5x5Seq17, kFlatTrack5x5Seq18, kFlatTrack5x5Seq19,
+                kFlatTrack5x5Seq20, kFlatTrack5x5Seq21, kFlatTrack5x5Seq22, kFlatTrack5x5Seq23, kFlatTrack5x5Seq24 } },
     };
 
 #pragma endregion

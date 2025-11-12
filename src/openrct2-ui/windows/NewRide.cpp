@@ -140,6 +140,7 @@ namespace OpenRCT2::Ui::Windows
         RIDE_TYPE_SWINGING_INVERTER_SHIP,
         RIDE_TYPE_MOTION_SIMULATOR,
         RIDE_TYPE_3D_CINEMA,
+        RIDE_TYPE_CHAIN_SWING,
         RIDE_TYPE_TOP_SPIN,
         RIDE_TYPE_ROTO_DROP,
         RIDE_TYPE_ENTERPRISE,
@@ -166,6 +167,8 @@ namespace OpenRCT2::Ui::Windows
         RIDE_TYPE_CASH_MACHINE,
         RIDE_TYPE_TOILETS,
     };
+
+    static_assert(RIDE_TYPE_COUNT == 104, "Reminder to add your ride type to the new ride window display order");
 
 #pragma endregion
 

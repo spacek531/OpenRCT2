@@ -23,10 +23,11 @@ namespace OpenRCT2::FlatRide
     {
         uint8_t animationFrame{};
         uint8_t animationFrame2{};
+
         constexpr FlatRideAnimationFrame()
+            : animationFrame(0xFF)
+            , animationFrame2(0xFF)
         {
-            animationFrame = 0xFF;
-            animationFrame2 = 0xFF;
         }
         constexpr FlatRideAnimationFrame(uint8_t frame1)
             : animationFrame(frame1)

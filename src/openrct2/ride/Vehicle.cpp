@@ -3966,9 +3966,10 @@ void Vehicle::UpdateRotating()
     if (sprite != FlatRide::kNullFrame)
     {
         current_time = time;
-        if (sprite.animationFrame == flatRideAnimationFrame)
+        if (sprite == FlatRide::FlatRideAnimationFrame(flatRideAnimationFrame, flatRideSecondaryAnimationFrame))
             return;
         flatRideAnimationFrame = sprite.animationFrame;
+        flatRideSecondaryAnimationFrame = sprite.animationFrame2;
         Invalidate();
         return;
     }

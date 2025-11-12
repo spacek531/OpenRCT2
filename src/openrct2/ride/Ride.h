@@ -626,6 +626,7 @@ enum
     RIDE_TYPE_CLASSIC_STAND_UP_ROLLER_COASTER,
     RIDE_TYPE_LSM_LAUNCHED_ROLLER_COASTER,
     RIDE_TYPE_CLASSIC_WOODEN_TWISTER_ROLLER_COASTER,
+    RIDE_TYPE_CHAIN_SWING,
 
     RIDE_TYPE_COUNT
 };
@@ -691,6 +692,7 @@ enum class FlatRideAnimationType : uint8_t
     twist = 1,
     enterprise = 2,
     merryGoRound = 3,
+    chainSwing = 4,
     count,
 };
 

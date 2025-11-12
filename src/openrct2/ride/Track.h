@@ -632,7 +632,9 @@ namespace OpenRCT2
 
         DiagDown25Brakes = 349,
 
-        Count = 350,
+        FlatTrack5x5 = 350,
+
+        Count = 351,
 
         None = 65535,
     };
