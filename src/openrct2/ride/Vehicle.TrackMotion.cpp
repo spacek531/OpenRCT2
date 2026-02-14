@@ -524,13 +524,13 @@ uint8_t Vehicle::ChooseBrakeSpeed() const
         if (trackElement->AsTrack()->IsBrakeClosed())
             return brakeSpeed;
         else
-            return std::max<uint8_t>(brakeSpeed, BlockBrakeSpeed);
+            return std::max<uint8_t>(brakeSpeed, blockBrakeSpeed);
     }
     return brake_speed;
 }
 
 /**
- * Populate the vehicle's brakeSpeed and BlockBrakeSpeed values.
+ * Populate the vehicle's brakeSpeed and blockBrakeSpeed values.
  */
 void Vehicle::PopulateBrakeSpeed(const CoordsXYZ& vehicleTrackLocation, TrackElement& brake)
 {
@@ -538,7 +538,7 @@ void Vehicle::PopulateBrakeSpeed(const CoordsXYZ& vehicleTrackLocation, TrackEle
     brakeSpeed = trackSpeed;
     if (!TrackTypeIsBrakes(brake.GetTrackType()))
     {
-        BlockBrakeSpeed = trackSpeed;
+        blockBrakeSpeed = trackSpeed;
         return;
     }
     // As soon as feasible, encode block brake speed into track element so the lookforward can be skipped here.
@@ -550,7 +550,7 @@ void Vehicle::PopulateBrakeSpeed(const CoordsXYZ& vehicleTrackLocation, TrackEle
     {
         if (TrackTypeIsBlockBrakes(output.element->AsTrack()->GetTrackType()))
         {
-            BlockBrakeSpeed = output.element->AsTrack()->GetBrakeBoosterSpeed();
+            blockBrakeSpeed = output.element->AsTrack()->GetBrakeBoosterSpeed();
             return;
         }
         if (!TrackTypeIsBrakes(output.element->AsTrack()->GetTrackType()))
@@ -561,7 +561,7 @@ void Vehicle::PopulateBrakeSpeed(const CoordsXYZ& vehicleTrackLocation, TrackEle
     } while (TrackBlockGetNext(&output, &output, &outputZ, nullptr) && timeoutCount);
 
     // If block brake is not found, use the track's speed
-    BlockBrakeSpeed = trackSpeed;
+    blockBrakeSpeed = trackSpeed;
 }
 
 /**
