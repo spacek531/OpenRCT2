@@ -50,6 +50,8 @@ constexpr uint8_t kBoosterAccelerationShiftAmount = 16;
 constexpr int16_t kVehicleMaxSpinSpeedWaterRide = 512;
 constexpr int16_t kVehicleMinSpinSpeedWaterRide = -kVehicleMaxSpinSpeedWaterRide;
 constexpr uint8_t kLSMBrakeTargetSpeed = 8;
+constexpr uint8_t kLSMBrakePower = 2;
+constexpr uint8_t kBrakePower = 16;
 
 /**
  *
@@ -803,7 +805,7 @@ bool Vehicle::UpdateTrackMotionForwards(const CarEntry* carEntry, const Ride& cu
 
                 if ((targetSpeed) < _vehicleVelocityF64E08)
                 {
-                    acceleration = -_vehicleVelocityF64E08 * 16;
+                    acceleration = -_vehicleVelocityF64E08 * kBrakePower;
                 }
                 else if (!(getGameState().currentTicks & 0x0F))
                 {
@@ -1176,7 +1178,7 @@ bool Vehicle::UpdateTrackMotionBackwards(const CarEntry* carEntry, const Ride& c
         {
             if (-(kLSMBrakeTargetSpeed << kTrackSpeedShiftAmount) > _vehicleVelocityF64E08)
             {
-                acceleration = _vehicleVelocityF64E08 * -2;
+                acceleration = _vehicleVelocityF64E08 * -kLSMBrakePower;
             }
         }
 
@@ -1186,7 +1188,7 @@ bool Vehicle::UpdateTrackMotionBackwards(const CarEntry* carEntry, const Ride& c
 
             if (-(targetSpeed << kTrackSpeedShiftAmount) > _vehicleVelocityF64E08)
             {
-                acceleration = _vehicleVelocityF64E08 * -16;
+                acceleration = _vehicleVelocityF64E08 * -kBrakePower;
             }
         }
 
