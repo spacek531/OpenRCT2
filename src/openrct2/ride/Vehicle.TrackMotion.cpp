@@ -817,7 +817,7 @@ bool Vehicle::UpdateTrackMotionForwards(const CarEntry* carEntry, const Ride& cu
             auto boosterSpeed = GetUnifiedBoosterSpeed(curRide.type, brake_speed) << kTrackSpeedShiftAmount;
             if (boosterSpeed > _vehicleVelocityF64E08)
             {
-                acceleration = GetRideTypeDescriptor(curRide.type).LegacyBoosterSettings.BoosterAcceleration
+                acceleration = GetRideTypeDescriptor(curRide.type).LegacyBoosterSettings.boosterPower
                     << kBoosterAccelerationShiftAmount;
             }
         }
@@ -829,7 +829,7 @@ bool Vehicle::UpdateTrackMotionForwards(const CarEntry* carEntry, const Ride& cu
         if ((trackType == TrackElemType::flat && curRide.getRideTypeDescriptor().flags.has(RtdFlag::hasLsmBehaviourOnFlat))
             || (trackType == TrackElemType::poweredLift))
         {
-            acceleration = GetRideTypeDescriptor(curRide.type).LegacyBoosterSettings.PoweredLiftAcceleration
+            acceleration = GetRideTypeDescriptor(curRide.type).LegacyBoosterSettings.lsmLaunchPower
                 << kBoosterAccelerationShiftAmount;
         }
         if (trackType == TrackElemType::brakeForDrop)
